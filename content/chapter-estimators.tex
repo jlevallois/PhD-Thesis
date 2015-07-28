@@ -1,0 +1,837 @@
+% !TEX root = ../main.tex
+%
+\chapter{Estimateurs discrets}
+\label{sec:estimators}
+
+\cleanchapterquote{We have seen that computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty.}{Jean-Claude Vandamme}{Ma vie, mon œuvre.}
+
+\setcounter{minitocdepth}{4}
+\minitoc
+
+\newpage
+
+\section{Estimateurs de courbures}
+\subsection{État de l'art}
+
+\subsubsection{Estimation de courbure sur des maillages}
+
+Les données digitales étant discrètes par nature, il semble alors intéressant de
+regarder du côté des techniques d'estimation de courbure sur des maillages
+triangulés. Il existe une vaste famille de techniques en \ComputerGraphics et en
+\GeometryProcessing pour estimer les courbures moyennes et gaussiennes, et
+parfois même le tenseur de courbure entier. La plupart effectuent des analyses
+locales (\cad limité au $1$-voisinage ou $2$-voisinage) de la forme mais
+produisent des résultats corrects pour de « bons » maillages.
+
+\begin{figure}[ht]
+    \begin{center}
+      \includegraphics[width=10cm]{images/Curvature/OneRingNeighborhood}
+    \end{center}
+    \caption[$1$-voisinage et $2$-voisinage.]{$1$-voisinage de valence $6$ et
+    $2$-voisinage de valence $5$ (Figure~1 de \cite{Gatzke2006}).}
+    \label{fig:one-ring-neighborhood}
+\end{figure}
+
+Globalement, nous pouvons les distinguer en trois catégories :
+\begin{itemize}
+  \item Méthode par Correspondance
+  \item Méthodes discrètes
+  \item Estimation du tenseur de courbure
+\end{itemize}
+
+\cauthors{Surazhsky}{Surazhsky2003} et \cauthors{Gatzke}{Gatzke2006} ont par
+ailleurs proposé une comparaison compréhensible de ces estimateurs. Nous nous
+référons à \cauthors{Desbrun}{Desbrun2005} et \cauthors{Bobenko}{Bobenko2008}
+pour une théorie entièrement discrète. Cependant, la plupart n'ont aucunes
+garanties de convergence théorique des valeurs estimées, même sans bruit sur le
+maillage. Nous pouvons citer \cite{Page2002} et \cite{Rusinkiewicz2004} comme
+approches qui essayent de plaquer les perturbations sur la surface à travers un
+moyennage.
+
+\cauthor{Xu}{Xu2006} estime la courbure gaussienne avec une
+approche dérivée de la formule de Gauss-Bonnet (défaut d'angle) et donne un
+théorème de stabilité pour les maillages triangulés dont les sommets épousent la
+variété lisse sous-jacente, de valence $6$, et respectant les conditions d'un
+parallélogramme (tous le $1$-voisinage sont projetés comme un parallélogramme
+sur un plan). En assumant que la densité de l’échantillonnage est $\delta$,
+\nauthor{Xu} propose une propriété de convergence supplémentaire lorsque
+l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
+$\alpha > 2$ (ce qui est inapproprié pour des données discrètes car ce sont des
+outliers). \todoJeremy{détailler plus en détail ($>\_<$), avec formules et
+schéma} Il est à noter que si le maillage triangulé ne satisfait pas ces
+conditions, l'estimation ne converge pas.
+
+Une autre approche notable est l'estimation d'information de
+courbure par intégration de mesures des courbures, basée sur la théorie du cycle
+des normales \cite{CohenSteiner2003,CohenSteiner2006} sur un maillage triangulé.
+Les auteurs (\nauthors{Cohen-Steiner}) mettent en avant des résultats de
+convergence lorsque les sommets épousent le bord de l'objet euclidien
+sous-jacent. Dans ce cas, si le maillage a une distance de Hausdorff avec le
+bord de la forme au dessous de $\epsilon$, la convergence peut être obtenue avec
+une vitesse/erreur en $O(\epsilon)$ sous certaines conditions.
+\todoJeremy{détailler}
+
+Enfin, en \emph{traitement géométrique}, d'intéressants outils
+mathématiques ont été développés pour concevoir des estimateurs différentiels
+sur des surfaces lisses basées sur les invariants par intégration
+(\cauthors{Pottmann}{Pottmann2007,Pottmann2009}). Cela consiste à faire déplacer
+une boule le long de la surface de la forme et calculer des intégrales sur
+l'intersection entre la forme et la boule. Les auteurs ont démontrés que ces
+quantités par intégration apportent d'intéressantes informations de courbure
+lorsque la taille de la boule tend vers zéro. Ils amènent également des preuves
+de stabilité --- dans le cas d'échantillonnage de maillage par exemple ---
+dépendant de la taille de la boule et du $\epsilon$. Nos travaux sur les
+estimateurs digitaux de courbure se basent sur la même idée.
+
+\subsubsection{Estimation de courbure sur des nuages de points}
+
+Lorsque nous avons des données discrètes (par exemple un nuage de points), la
+façon la plus naturelle d'approcher la courbure est de faire correspondre une
+surface polynomiale de degré $2$ ou plus. Le meilleur représentant de cette
+technique est les « \anglais{Osculating jets} » de
+\cauthors{Cazals}{Cazals2005}. Les auteurs proposent des résultats de
+convergence en $O(\delta^2)$ lorsque la donnée d'entrée est un échantillonage de
+la surface, avec $\delta$ la densité de points. Cependant, lorsque les données
+présentent du bruit, aucun résultat théorique n'est apporté malgré qu'en
+pratique la correspondance aux moindres carrés des jets osculatoires est très
+robuste.
+
+Une autre famille de techniques utilisent le diagramme de Voronoi
+\cite{Alliez2007,Merigot2009,Merigot2011}. L'idée principale derrière cette
+approche est qu'au lieu de faire des correspondances dans l'espace tangent à la
+surface, d'estimer au mieux dans l'espace orthogonal. La mesure de covariance
+convoluée introduite par \cauthors{Mérigot}{Merigot2011} est particulièrement
+intéressante car cette mesure apporte de la robustesse même pour des ensembles
+compacts arbitraires, en $O(\sqrt{\epsilon})$. C'est en quelque sorte la mesure
+intégrale de la matrice de covariance du cône de normale autour du point
+d'intérêt. Néanmoins, la convergence des courbures est dépendante de plusieurs
+paramètres $r$ et $R$ qui contribuent de manière contradictoire avec l'erreur de
+Hausdorff. En pratique, cette approche donne des résultats comparables aux jets
+osculatoires pour les courbures.
+
+Récemment, plusieurs auteurs ont développés de nouvelles approches intéressantes
+pour estimer les champs de normales sur des nuages de points bruités, même en
+présence de singularités \cite{Li2010, Boulch2012, Zhang2013}.
+\cauthors{Boulch}{Boulch2012} apportent également des résultats de convergence
+probabilistes. Cependant, ces méthodes ne peuvent pas être utilisées « telles
+quelles » pour le calcul de coubure : ils peuvent être utilisées en parallèle
+avec des techniques d'estimation de coubure pour détecter les singularités sur
+la surface dans un premier temps, et de limiter l'estimation de la courbure aux
+zones lisses.
+
+\subsubsection{Estimation de courbure sur des surfaces digitales}
+
+Comme vu dans le \RefChapitre{sec:notions}, en géométrie digitale nous
+considérons généralement la convergence asymptotique comme un critère essentiel
+pour un estimateur \cite{Coeurjolly_ChapEstimateur}. En dimension 2, des
+résultats de convergence d'estimateurs sans paramètres ont été obtenus pour
+l'estimation de longueur \cite{dcoeurjo_length_PAMI} et des normales
+\cite{deVieilleville2007}.
+
+Basés sur des principes de convolutions binomiales
+\cite{MalgouyresBF08,Esbelin2011}, ou sur la correspondance de surface
+polynomiales \cite{Provot11}, des résultats de convergence peuvent être obtenus
+pour les dérivés d'ordre supérieurs de courbes digitales. Ces algorithmes sont
+paramétrisés par la taille de la convolution ou le support du kernel utilisé
+pour la correspondance, et les théorèmes de convergence \todoJeremy{trouve plus
+les mots, nécessite, a besoin} quand la taille de support est une fonction
+croissante de la résolution de la grille et de quelques caractéristiques de la
+forme à estimer.
+
+Pour l'estimation de courbure le long de courbes 2D, la convergence asymptotique
+d'estimateurs ne nécessitant aucuns paramètres représente toujours un défi
+%
+% For curvature estimation along 2D curves, multigrid convergence of
+% parameter-free \comJeremy{estimators} is still challenging, although accurate
+% experimental results have been obtained with maximal digital circular
+% arcs \cite{Roussillon11} and with global optimization
+% \cite{Kerautret:2009-pr}. In 3D digital space, several empirical
+% methods exist for estimating curvatures, but none achieves multigrid
+% convergence (e.g. see \cite{Lenoir:1997-dgci,Fourey08}). In
+% \cite{dgci2013II}, we recently presented a digital estimator for mean
+% curvature for 2D and 3D digital objects, which achieves multigrid
+% convergence in $O(h^{\frac{1}{3}})$.
+
+\todoInlineJeremy{finir}
+\todoJeremy{J'aurais parlé de la convergence avant, donc inutile de redire ici.}
+\subsection{Estimation de la courbure par intégration volumique de la sphère}
+\label{sec:estimators:volume}
+%
+En \GeometryProcessing, les invariants par intégration ont été largement
+étudiées pour définir des estimateurs de quantités différentielles.
+\cauthors{Pottmann}{Pottmann2007,Pottmann2009} en ont d'ailleurs fait une vue
+d'ensemble complète. L'idée principale est de déplacer un noyau sur les points
+$\vx \in \dS$ et calculer l'intégrale de l'intersection entre $\Shape$ et le
+noyau. Différents noyaux peuvent être considérés (sphère euclidienne, boule
+euclidienne) ainsi que différentes fonctions d'intégration (linéaire,
+gaussienne, etc.). Nous n'utiliserons par la suite que les invariants volumiques
+par intégration définis tels que :
+\begin{definition}\label{def:Volume}
+  Pour une forme $\Shape \in \Shapes$ et un rayon $R \in \R^{+*}$, l'intégrale
+  volumique $V_R(\vx)$ au point $\vx \in \dS$ est donné par :
+  \begin{equation}
+    V_R(\vx) \EqDef \int_{B_R(\vx)}  \chi(p)dp\,,
+  \end{equation}
+  où $B_R(\vx)$ est une boule euclidienne de rayon $R$ et de centre $\vx$, et
+  $\chi(p)$ est la fonction caractéristique de $\Shape$. En dimension 2, nous
+  noterons cette quantité $A_R(\vx)$.
+\end{definition}
+%
+\subsubsection{Analyse euclidienne de l'intégration volumique de la sphère, et relation à la courbure}
+%
+La relation entre $A_R(\vx)$ et la courbure (\resp $V_R(\vx)$ et la courbure
+moyenne ) au point $\vx$ pour des formes de $\R^2$ (\respp $\R^3$) a beaucoup
+été étudiée \cite{Bullard1995,Pottmann2007,Pottmann2009}, ainsi, nous pouvons la
+formaliser de la sorte :
+%
+\begin{lemma}{\textbf{\cite{Pottmann2009}}}\\
+\label{lem:pottmann-2d}
+  Pour une forme suffisamment lisse\footnote{éclaircir} $\Shape$ de $\R^2$, $\vx
+  \in \dS$, nous avons :
+  \begin{equation}
+    \label{eq:volume2d}
+    A_R(\vx) = \frac{\pi}{2} R^2 - \frac{\Curv(\Shape,\vx)}{3}R^3 + O(R^4)\,.
+  \end{equation}
+  où $\Curv(\Shape,\vx)$ est la courbure de $\dS$ au point $\vx$.
+
+  Pour une forme suffisamment lisse\footnote{éclaircir} $\Shape$ de $\R^3$, $\vx
+  \in \dS$, nous avons :
+  \begin{equation}
+    \label{eq:volume3d}
+    V_R(\vx) = \frac{2\pi}{3} R^3 - \frac{\pi \MeanCurv(\Shape,\vx)}{4}R^4 + O(R^5)\,.
+  \end{equation}
+  où $\MeanCurv(\Shape,\vx)$ est la courbure moyenne de $\dS$ au point $\vx$.
+\end{lemma}
+%
+De tels résultats sont obtenus par approximation de Taylor au point $\vx$ de la
+surface $\dS$ approximée par la fonction paramtétrique $z=f(x,y)$ ($y=f(x)$ en
+2D). Alors, des \RefEquations{eq:volume2d}{eq:volume3d}, avec un
+rayon $R$ fixé, nous pouvons définir les estimateurs locaux de coubure 2D
+$\CurvT{R}(\vx)$ et de courbure moyenne 3D $\MeanCurvT{R}(\vx)$.
+%
+\begin{definition}{\textbf{(Estimateurs de courbure 2D $\CurvT{R}(\Shape,\vx)$ et de courbure moyenne 3D $\MeanCurvT{R}(\Shape,\vx)$ \cite{Pottmann2007}).}}
+  \label{def:pottmann-2d-3d-mean}
+  Pour une forme $\Shape \subset \R^2$, l'estimateur de courbure 2D $\CurvT{R}$
+  au point $\vx \in \dS$ est défini par :
+  \begin{equation}
+    \label{eq:pottmann-2d}
+    \CurvT{R}(\Shape,\vx) \EqDef \frac{3\pi}{2 R} - \frac{3 A_R(\vx)}{R^3},
+  \end{equation}
+
+  Pour une forme $\Shape \subset \R^3$, l'estimateur de courbure moyenne 3D
+  $\MeanCurvT{R}$ au point $\vx \in \dS$ est défini par :
+  \begin{equation}
+    \label{eq:pottmann-3d-mean}
+    \MeanCurvT{R}(\Shape,\vx) \EqDef \frac{8}{3 R} - \frac{4 V_R(\vx)}{\pi R^4}.
+  \end{equation}
+\end{definition}
+%
+De plus, lorsque me rayon $R$ tend vers zéro, les valeurs de ces deux
+estimateurs vont converger vers celles espérées. Plus formellement :
+%
+\begin{theorem}{\textbf{(Convergence des estimateurs de courbure 2D $\CurvT{R}(\Shape,\vx)$ et de courbure moyenne 3D $\MeanCurvT{R}(\Shape,\vx)$ \cite{Pottmann2007}).}}
+  \label{theo:pottmann-2d-3d-mean-conv}
+  \begin{equation}
+    \CurvT{R}(\Shape,\vx) = \Curv(\Shape,\vx) + O(R),
+    \quad\MeanCurvT{R}(\Shape,\vx) = \MeanCurv(\Shape,\vx) + O(R).
+  \end{equation}
+\end{theorem}
+%
+De la même manière, des informations directionnelles comme les courbures
+principales (et donc la courbure gaussienne) peuvent être extraitent du calcul
+par intération. En effet, à la place de calculer la mesure de $B_R(\vx)$ dans
+la \RefDefinition{def:pottmann}, nous allons calculer sa matrice de covariance.
+%
+\begin{definition}
+  \label{def:cov-matrix}
+  Pour un ensemble non vide $Y \subset \R^d$, la matrice de covariance de $Y$
+  est définie par :
+  \begin{equation}
+    \Cov(Y) \EqDef \int_Y (\vp-\overline{Y})(\vp-\overline{Y})^T d\vp = \int_Y \vp \vp^T d\vp - \Vol(Y)\overline{Y}\overline{Y}^T,
+  \end{equation}
+  où $\overline{Y}$ est le barycentre de $Y$ et $\Vol(Y)$ son volume.
+\end{definition}
+%
+Pour les entiers $p, q, s \ge 0$, nous pouvons écrire la définition des $
+pqs$-moments $\Mom{pqs}(Y)$ de $Y$ :
+\begin{equation}
+  \label{eq:moments}
+  \Mom{pqs}(Y) \EqDef \iiint_Y x^p y^q z^s dx dy dz\,.
+\end{equation}
+Il apparaît alors clairement que le volume $\Vol(Y)$ est le $0$-moment
+$\Mom{000}(Y)$, et que le barycentre $\overline{Y}$ est le $1$-moment normalisé
+par le $0$-moment, c'est à dire :
+\begin{equation}
+  \overline{Y} \EqDef \frac{( \Mom{100}(Y), \Mom{010}(Y), \Mom{001}(Y) )^T}{\Mom{000}(Y)}
+\end{equation}
+Pour plus de simplicité dans les formules, nous noterons $A$ l'ensemble
+euclidien $\Ball{R}{\vx} \cap \Shape$. La matrice de covariance $\Cov(A)$ de
+$A$ peut alors être réécrite comme :
+\begin{align}
+  \Cov(A) &=  \left\lbrack
+    \begin{array}{ccc}
+      \Mom{200}(A) & \Mom{110}(A) & \Mom{101}(A)\\
+      \Mom{110}(A) & \Mom{020}(A) & \Mom{011}(A)\\
+      \Mom{101}(A) & \Mom{011}(A) & \Mom{002}(A)
+    \end{array}
+    \right\rbrack\quad\quad\quad\quad\quad\quad \nonumber \\
+    &\quad\quad\quad\quad\quad\quad- \frac{1}{\Mom{000}(A)}
+    \left\lbrack
+    \begin{array}{c}
+      \Mom{100}(A) \\
+      \Mom{010}(A) \\
+      \Mom{001}(A) \\
+    \end{array}
+    \right\rbrack
+    \otimes
+    \left\lbrack
+    \begin{array}{c}
+      \Mom{100}(A) \\
+      \Mom{010}(A) \\
+      \Mom{001}(A) \\
+    \end{array}
+    \right\rbrack^T.
+\label{eq:defCov}
+\end{align}
+%
+où $\otimes$ désigne le produit de tensoriel dans l'espace des vecteurs.
+%
+\cauthors{Pottmann}{Pottmann2007} ont démontré que les valeurs propres et les
+vecteurs propres de $\Cov(A)$ fournissaient des informations sur les courbures
+principales et directions principales de courbure :
+\begin{lemma}[\cite{Pottmann2007}, Théorème~2]
+ \label{lem:pottmann-3d}
+ Pour une forme $\Shape \in \Shapes$, les valeurs propres $\lambda_1$,
+ $\lambda_2$, $\lambda_3$ de $\Cov(A)$, où $ A \EqDef \Ball{R}{\vx} \cap
+ \Shape$ et $\vx \in \Bd{\Shape}$, $\lambda_1 \ge \lambda_2 \ge
+ \lambda_3$, nous avons l'expansion de Taylor suivante :
+ \begin{align}
+   \lambda_1& = \frac{2\pi}{15}R^5 - \frac{\pi}{48}(3\PrincCurv{1}(\Shape,\vx) + \PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,\\
+   \lambda_2& = \frac{2\pi}{15}R^5 - \frac{\pi}{48}(\PrincCurv{1}(\Shape,\vx) + 3\PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,\\
+   \lambda_3& = \frac{19\pi}{480}R^5 - \frac{9\pi}{512}(\PrincCurv{1}(\Shape,\vx) + \PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,
+ \end{align}
+ où $\PrincCurv{1}(\Shape,\vx)$ et $\PrincCurv{2}(\Shape,\vx)$ désignent les
+ courbures principales de  $\Bd{\Shape}$ au point $\vx$.\footnote{Il y a une
+ erreur typographique dans l'expression de $\lambda_1$ dans~\cite{Pottmann2007}.}
+\end{lemma}
+%
+De même qu'avec l'\RefEquation{def:pottmann-2d-3d-mean}, nous pouvons définir
+les estimateurs locaux de courbures principales $\PrincCurvT{1}{R}$ et
+$\PrincCurvT{2}{R}$ et de courbure gaussienne $\GaussCurvT{R}$ comme des
+fonctions de $\{\lambda_i\}_{1,2,3}$ et de $R$ :
+%
+\begin{align}
+  \label{eq:pottmann-3d-princ}
+  \PrincCurvT{1}{R}(\Shape,\vx)& \EqDef \frac{6}{\pi R^6}(\lambda_2 - 3\lambda_1) + \frac{8}{5R}\,,\\
+  \PrincCurvT{2}{R}(\Shape,\vx)& \EqDef \frac{6}{\pi R^6}(\lambda_1 - 3\lambda_2) + \frac{8}{5R}\,,\\
+  \GaussCurvT{R}(\Shape,\vx)& \EqDef \PrincCurvT{1}{R} \cdot \PrincCurvT{2}{R}.
+\end{align}
+%
+D'après le \RefLemma{lem:pottmann-3d}, tous ces estimateurs approchent la
+quantité espérée lorsque le rayon $R$ tend vers $0$ :
+%
+\begin{align}
+  \label{eq:pottmann-3d-princ}
+  \PrincCurvT{1}{R}(\Shape,\vx)& = \PrincCurv{1}(\Shape,\vx) + O(R)\,,\\
+  \PrincCurvT{2}{R}(\Shape,\vx)& = \PrincCurv{2}(\Shape,\vx) + O(R)\,,\\
+  \GaussCurvT{R}(\Shape,\vx)& = \GaussCurv(\Shape,\vx) + ???.
+\end{align}
+\todoJeremy{vérifier !!!!}
+%
+Lorsque nous nous intéressons à des formes digitales $\AnyDSh$, l'implémentation
+de ces estimateurs devient direct : choisir un rayon $R$, centrer une boule
+euclidienne (ou digitale) sur des points de $\Bd{\Body{\AnyDigF{\Shape}{h}}{h}}$
+(\cad les barycentres de linels en 2D ou surfels en 3D)\todoJeremy{Confirmer
+surfel = 3D ?}, calculer la quantité (aire, volume ou matrice de covariance) et
+enfin estimer l'information de courbure $\CurvT{R}$, $\MeanCurvT{R}$,
+$\PrincCurvT{1}{R}$, $\PrincCurvT{2}{R}$ or $\GaussCurvT{R}$.
+%
+Cependant, quelques problèmes surviennent dans cette approche : comment bien
+estimer l'aire, le volume ou la matrice de covariance sur des formes digitales,
+pouvons nous conclure à des preuves de convergence des estimateurs sur des
+données digitales et que veut dire « $R$ tend vers zéro » quand la taille de la
+grille digitale influe également dessus ? Dans une premier temps nous allons
+nous intéresser à l'aire et au volume digital, puis dans un second temps aux
+moments digitaux.
+%
+\subsubsection{Analyse digitale de l'aire et du volume de la sphère, et relation à la courbure}
+%
+Nous souhaitons estimer la quantité $A_R(\vx) = \Area(B_R(\vx)\cap\Shape)$ de la
+\RefDefinition{def:Volume} au pas de discrétisation $h$, où $B_R(\vx)$ est une
+boule de rayon $R$ centrée au point $\vx$. Nous ne pouvons pas directement
+utiliser les résultats des
+\RefEquations{eq:AreaByCountingConv}{eq:VolumeByCountingConv} pour estimer cette
+aire : le terme d'erreur en grand « O » cache le fait que la constante impliquée
+dépend de la taille de la forme, son échelle et sa courbure maximale. Un moyen
+simple de comprendre cet effet en estimant l'aire d'une forme $\Shape$ et
+d'estimer l'aire de la même forme doublée en taille (que nous nommerons
+$\Shape'$). Alors, il paraît évident que :
+%
+\begin{equation}
+  2 \cdot \AreaC(\DSh,h) \ne \AreaC(\DigF{\Shape'}{h},h),
+\end{equation}
+%
+la discrétisation de $\Shape'$ le rendant plus détaillé et donc son estimation
+plus précise. C'est un problème génant avec les invariants par intégration car
+les boules impliquées ont un rayon $R$ qui doit tendre vers $0$ lorsque $h$ tend
+également vers $0$. Nous devons alors normaliser notre estimation d'aire et de
+volume pour que le terme d'erreur ne soit plus influencé par l'échelle de la
+boule. Nous estimons alors l'aire de l'intersection entre la forme et la boule
+de rayon $R$ en se ramenant à la boule unité :
+%
+\begin{align}
+  \AreaC(\DigF{B_R(\vx) \cap \Shape}{h}, h) & \EqDef h^2 \MCard( ( \frac{1}{h} \cdot ( B_R(\vx) \cap \Shape ) ) \cap \Z^2 ), \\
+   & = h^2 \MCard( (\frac{R}{h} \cdot ( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
+   & = R^2 \frac{h^2}{R^2} \MCard( (\frac{R}{h} \cdot ( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
+   & = R^2 \AreaC( \DigF{B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape}{h/R}, h/R ), \label{eq:Area_unitary_ball}
+\end{align}
+%
+Alors, en insérant l'\RefEquation{eq:AreaByCountingConv} dans le terme de droite
+de \ref{eq:Area_unitary_ball}\footnote{Le terme $\beta$ est celui défini dans le \RefSection{sec:AreaByCounting}.} :
+\begin{equation}
+  \label{eq:Area_unitary_ball_shape}
+  \AreaC(\DigF{B_R(\vx) \cap \Shape}{h}, h) = R^2 \left(\Area( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape) + O( (h/R)^\beta) \right).
+\end{equation}
+%
+Notons $SB(R)$ l'ensemble $B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot
+\Shape$. La constante $K_1$ associée au terme d'erreur grand « O » dépend
+uniquement de la courbure maximale de $\BT SB(R)$. La courbure n'est pas définie
+aux intersections des deux bords de la forme et de la boule (dans le
+sous-ensemble $\BT B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \dS$) mais
+son influence dans l'estimation d'aire est négligeable car au moins de l'ordre
+de $O(h^2)$. La partie restante de $\BT SB(R)$ a une courbure maximale qui est
+égale à $1$ pour un rayon $R$ suffisamment petit. En effet, puisque $\Shape$ a
+une courbure bornée, son dilaté $\frac{1}{R} \cdot \dS$ devient plat au point
+$\frac{1}{R} \cdot \vx$, alors la courbure maximale est introduite par $\BT
+B_1(\vx)$. Nous pouvons conclure qu'il existe quelques rayons $R_0$ tels que la
+constante $K_1$ intervient pour un rayon arbitraire $R < R_0$. En développant le
+terme d'erreur en grand « O » avec $K_1$, et en insérant dans
+l'\RefEquation{eq:Area_unitary_ball_shape} la relation :
+%
+\begin{equation}
+  A_R(\vx) = \Area( B_R(\vx) \cap \Shape ) = R^2 \Area( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape),
+\end{equation}
+%
+nous obtenons :
+%
+\begin{equation}\label{eq:convergence-area-intersection}
+  | \AreaC(\DigF{B_R(\vx) \cap \Shape}{h}, h) - A_R(\vx) | \le K_1 h^\beta R^{2-\beta}.
+\end{equation}
+%
+La convergence de la précédente relation tient du fait que $h \le R \le R_0$ et
+est valide quand $\vx$ est n'importe quel point de $\R^2$ (pas seulement un
+point de $\dS$). De plus, la constante $K_1$ est indépendante de la forme
+$\Shape$ (mais dépendante de $R_0$).\\
+%
+Le même raisonnement est valide en dimension 3 : la courbure n'est alors pas
+définie dans le sous-ensemble $\BT B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R}
+\cdot \dS$, qui tend vers le cercle unité lorsque $R \rightarrow 0$. L'erreur
+introduite dans l'estimation de volume est alors le nombre de voxels intersectés
+($\approx 2\pi/h$), ce qui est négligeable. La courbure maximale est également
+$1$ pour un rayon $R$ suffisement petit. Nous obtenons alors :
+%
+\begin{equation}\label{eq:convergence-volume-intersection}
+  | \VolC(\DigF{B_R(\vx) \cap \Shape}{h}, h) - V_R(\vx) | \le K_1 h^\gamma R^{3-\gamma}.
+\end{equation}
+%
+\paragraph{Estimateurs digitaux de courbure 2D et de courbure moyenne 3D par intégration}
+%
+Nous allons définir des estimateurs digitaux de courbure 2D $\CurvH{R}$ et de
+courbure moyenne 3D $\MeanCurvH{R}$ dans le même esprit que la
+\RefDefinition{def:pottmann-2d-3d-mean}, auxquels le calcul consiste uniquement à
+compter le nombre de points digitaux dans un voisinage du point d'intérêt :
+%
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/2d-curv-estimator.tikz}
+  \end{center}
+  \caption[Illustration de l'estimateur digital de courbure 2D par intégration
+  $\CurvH{R}$.]{Illustration de l'estimateur digital de courbure 2D par
+  intégration $\CurvH{R}$ avec deux pas de discrétisation de la forme $h$
+  différents.\label{fig:2d-curv-estimator}}
+\end{figure}
+%
+\begin{definition}[Estimateur digital de courbure 2D par intégration.]\label{def:digital-2d-curvature}
+  %
+  Pour tout rayon $R$ positif, nous définissons l'estimateur digital de courbure
+  2D par intégration $\CurvH{R}$ d'une forme digitale $\DigShape \subset \Z^2$
+  en tout point $\vx \in \R^2$ et pour le pas de discrétisation $h > 0$ comme :
+  %
+  \begin{equation}
+    \forall 0 < h < R,\quad \CurvH{R}(\DigShape,\vx,h) \EqDef \frac{3\pi}{2R} - \frac{3\AreaC(B_{R/h}(\vx/h ) \cap \DigShape, h)}{R^3}\,.
+  \end{equation}
+  %
+\end{definition}
+%
+\begin{definition}[Estimateur digital de courbure moyenne 3D par intégration.]
+  %
+  Pour tout rayon $R$ positif, nous définissons l'estimateur digital de courbure
+  moyenne 3D par intégration $\MeanCurvH{R}$ d'une forme digitale $\DigShape
+  \subset \Z^3$ en tout point $\vx \in \R^3$ et pour le pas de discrétisation $h >
+  0$ comme :
+  %
+  \begin{equation}
+    \forall 0 < h < R,\quad \MeanCurvH{R}(\DigShape,\vx,h) \EqDef \frac{8}{3R} - \frac{4\VolC(B_{R/h}(\vx/h ) \cap \DigShape, h)}{\pi R^4}\,.
+  \end{equation}
+  %
+\end{definition}
+%
+Comme le montre la \RefFigure{fig:2d-curv-estimator}, ces estimateurs placent
+une boule de rayon euclidien $R$ autour du point d'intérêt $\vx$ et comptent le
+nombre de points digitaux de $\DigShape$, après mise à l'échelle en $(h\Z)^d$,
+de l'intersection de cette boule et de la forme. Un calcul linéaire simple est
+alors appliqué sur cette quantité afin d'approximer la courbure. De plus, comme
+le montre également la \RefFigure{fig:2d-curv-estimator}, nous pouvons supposer
+que si la discrétisation s'affine nous aurons une meilleure estimation de la
+courbure. Le prochain paragraphe va le démontrer.
+%
+\paragraph{Convergence des estimateurs digitaux de courbure 2D et de courbure moyenne 3D par intégration}
+%
+Nous allons ici montrer que les estimateurs de courbure 2D $\CurvH{R}$ et de
+courbure moyenne 3D $\MeanCurvH{R}$ convergent vers la valeur espérée de
+courbure pour tous les points $\vx$ le long du bord $\dS$ de l'objet $\Shape$ si
+la forme respecte certaines contraintes.\\
+%
+\begin{theorem}[Convergence de l'estimateur digital de courbure 2D $\CurvH{R}$ le long de $\dS$.]
+  \label{thm:convergence-curv-2d}
+  %
+  Soit $\Shape$ un domaine compact de $\R^2$ tel que son bord $\dS$ est $C^2$ et
+  sa courbure bornée. Alors, l'estimateur digital de courbure 2D $\CurvH{R}$ en
+  tout point $\vx$ de $\dS$ converge vers la courbure
+  $\Curv(\Shape,\vx)$ de $\Shape$ au point $\vx$ pour la discrétisation de
+  Gauss, avec une vitesse de convergence d'au moins $O(h^{\frac{1}{3}})$ lorsque
+  $R = O(h^{\frac{1}{3}})$. Plus précisement, nous avons :
+  %
+  \begin{equation}
+    \forall 0 < h < h_0,
+    \quad \left | \CurvH{R}(\DSh, \vx, h) - \Curv(\Shape, \vx) \right|
+                          \le O \left(h^{\frac{1}{3}}\right). %% O(R) + K_1 R h.
+  \end{equation}
+  %
+\end{theorem}
+\begin{proof}
+  %
+  En utilisant les relations sur les invariants par intégration définis
+  précédement (\RefDefinition{def:digital-2d-curvature}), ainsi que la relation
+  $\DigF{B_R(\vx) \cap \Shape}{h}=B_{R/h}(\frac{1}{h} \cdot \vx) \cap
+  \DSh$, nous obtenons pour $R < R_0$ :
+  %
+  \begin{equation}
+    | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
+    = \left|\frac{3\pi}{2R}-\frac{3\AreaC(B_{R/h}(\vx / h) \cap \DSh, h)}{R^3} - \Curv(\Shape,\vx) \right|,
+  \end{equation}
+  %
+  en utilisant la relation entre l'estimation digitale de l'aire et l'aire
+  euclidienne de l'\RefEquation{eq:convergence-area-intersection}, nous obtenons :
+  %
+  \begin{align}\label{eq-curvhat-error-bound-prelim}
+    | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
+    &\le \left|\frac{3\pi}{2R}-\frac{3\Area(B_R(\vx) \cap \Shape)}{R^3} - \Curv(\Shape,\vx) \right| + 3K_1 \frac{h^\beta}{R^{1+\beta}} \nonumber \\
+    &\le \left|\CurvT{R}(\Shape,\vx) - \Curv(\Shape,\vx) \right| + 3K_1 \frac{h^\beta}{R^{1+\beta}},
+  \end{align}
+  %
+  ainsi, en utilisant le \RefTheorem{theo:pottmann-2d-3d-mean-conv}, nous pouvons
+  écrire que :
+  %
+  \begin{equation}\label{eq-curvhat-error-bound-prelim2}
+    | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
+    \le O(R) + 3K_1 \frac{h^\beta}{R^{1+\beta}}.
+  \end{equation}
+  %
+  Nous obtenons alors deux termes d'erreur dépendants du rayon $R$ de la boule
+  qui sont contradictoires : lorsque $R$ diminue, $O(R)$ diminue mais $3K_1
+  \frac{h^\beta}{R^{1+\beta}}$ augmente, et vice-versa. Nous voulons alors
+  guider le rayon $R$ afin d'obtenir un optimal de notre terme d'erreur. Nous
+  proposons alors de définir $R = k h^{\alpha}$ et de choisir $k$ (une
+  constante) et $\alpha$ afin de minimiser les bornes d'erreur. Nous notons
+  $K_2$ la constante derrière le grand « O » de $O(R)$, nous obtenons :
+  %
+  \begin{equation}\label{eq-curvhat-error-bound-prelim3}
+    | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
+    \le K_2kh^\alpha + \frac{3K_1}{k^{1+\beta}}h^{\beta - \alpha(1+\beta)}.
+  \end{equation}
+  %
+  Alors, l'erreur minimale est atteinte lorsque les exposants sont égaux : nous
+  devons résoudre $\alpha = \beta - \alpha(1+\beta)$.
+  L'\RefEquation{eq:AreaByCountingConv} nous informe que $\beta = 1$ dans le cas
+  général\footnote{Il est à noter que si le bord de la forme est $C^3$ sans
+  courbure nulle, $\beta$ est alors égal à $\frac{15}{11} - \epsilon$ et donc
+  $\alpha = \frac{15}{37} - \epsilon \approx 0.405$. Voir
+  \RefSection{sec:AreaByCounting}.}, et donc $\alpha = \frac{1}{3}$. Donc,
+  lorsque $R=kh^{\frac{1}{3}}$ :
+  %
+  \begin{align}\label{eq-curvhat-error-bound-prelim4}
+    | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
+    &\le K_2kh^\frac{1}{3} + \frac{3K_1}{k^2}h^{\frac{1}{3}}\\
+    &\le O(h^\frac{1}{3}).
+  \end{align}
+  %
+\end{proof}
+%
+Nous obtenons des résultats similaires pour l'estimateur digital de courbure
+moyenne sur des formes 3D :
+%
+\begin{theorem}[Convergence de l'estimateur digital de courbure moyenne 3D $\MeanCurvH{R}$ le long de $\dS$.]
+  \label{thm:convergence-curv-3d}
+  %
+  Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\dS$ est $C^3$ et
+  sa courbure bornée. Alors, l'estimateur digital de courbure moyenne 3D
+  $\MeanCurvH{R}$ en tout point $\vx$ de $\dS$ converge vers la
+  courbure $\MeanCurv(\Shape,\vx)$ de $\Shape$ au point $\vx$ pour la
+  discrétisation de Gauss, avec une vitesse de convergence d'au moins
+  $O(h^{\frac{1}{3}})$ lorsque $R = O(h^{\frac{1}{3}})$. Plus précisement, nous
+  avons :
+  %
+  \begin{equation}
+    \forall 0 < h < h_0,
+    \quad \left | \MeanCurvH{R}(\DSh, \vx, h) - \MeanCurv(\Shape, \vx) \right|
+                          \le O \left(h^{\frac{1}{3}}\right). %% O(R) + K_1 R h.
+  \end{equation}
+  %
+\end{theorem}
+\begin{proof}
+  %
+  La preuve suit exactement les mêmes étapes que la preuve du
+  \RefTheorem{thm:convergence-curv-2d}, la
+  \RefDefinition{def:digital-3d-curvature}), ainsi que la relation
+  $\DigF{B_R(\vx) \cap \Shape}{h}=B_{R/h}(\frac{1}{h} \cdot \vx) \cap \DSh$ nous
+  permets d'obtenir pour $R < R_0$ :
+  %
+  \begin{equation}
+    | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
+    = \left|\frac{8}{3R}-\frac{4\VolC(B_{R/h}(\vx / h) \cap \DSh, h)}{\pi R^4} - \MeanCurv(\Shape,\vx) \right|,
+  \end{equation}
+  %
+  en utilisant la relation entre l'estimation digitale du volume et le volume
+  euclidienne de l'\RefEquation{eq:convergence-volume-intersection}, nous obtenons :
+  %
+  \begin{align}\label{eq-meancurvhat-error-bound-prelim}
+    | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
+    &\le \left|\frac{8}{3R}-\frac{4\Vol(B_R(\vx) \cap \Shape)}{\pi R^4} - \MeanCurv(\Shape,\vx) \right| + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}} \nonumber \\
+    &\le \left|\MeanCurvT{R}(\Shape,\vx) - \MeanCurv(\Shape,\vx) \right| + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}},
+  \end{align}
+  %
+  ainsi, en utilisant le \RefTheorem{theo:pottmann-2d-3d-mean-conv}, nous pouvons
+  écrire que :
+  %
+  \begin{equation}\label{eq-meancurvhat-error-bound-prelim2}
+    | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
+    \le O(R) + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}}.
+  \end{equation}
+  %
+  Comme précédemment, Les deux termes d'erreurs sont dépendants du rayon $R$ de
+  la boule et ont un effet opposé, nous proposons de définir $R = k h^{\alpha}$,
+  $k$ étant une constante, afin de trouver le $\alpha$ optimal pour minimiser
+  l'erreur. Nous notons $K_2$ la constante derrière le grand « O » de $O(R)$,
+  nous obtenons :
+  %
+  \begin{equation}\label{eq-meancurvhat-error-bound-prelim3}
+    | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
+    \le K_2kh^\alpha + \frac{3K_1}{k^{1+\gamma}}h^{\gamma - \alpha(1+\gamma)}.
+  \end{equation}
+  %
+  Et comme précedemment, celà revient à résoudre $\alpha = \gamma -
+  \alpha(1+\gamma)$. L'\RefEquation{eq:VolumeByCountingConv} nous informe que
+  $\gamma = 1$ dans le cas général\footnote{Il est à noter que si le bord de la
+  forme est lisse, $\gamma$ est alors égal à $\frac{243}{158}$ et donc $\alpha =
+  \frac{243}{559} \approx 0.435$. Voir \RefSection{sec:AreaByCounting}.}, et
+  donc $\alpha = \frac{1}{3}$, comme en 2D. Donc, lorsque $R=kh^{\frac{1}{3}}$ :
+  %
+  \begin{align}\label{eq-meancurvhat-error-bound-prelim4}
+    | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
+    &\le K_2kh^\frac{1}{3} + \frac{4K_1}{\pi k^2}h^{\frac{1}{3}}\\
+    &\le O(h^\frac{1}{3}).
+  \end{align}
+  %
+\end{proof}
+%
+Cependant, ces théorèmes ne sont valides que pour tous points $\vx$ de $\dS$.
+Lorsque nous traitons des bords des surfaces digitales, une nouvelle
+approximation intervient dû à la discrétisation. Le prochain paragraphe adaptera
+ces estimateurs sur des contours digitaux de surface.
+%
+\paragraph{Convergence asymptotique pour des formes suffisamment lisses}
+%
+Comme nous venons de le dire, nous ne connaissont pas exactement la position de
+$\vx$ lorsque nous considérons des données digitales. Les seules informations
+que nous disposons sont les points digitaux $\vxH$ de $\Bd{\Body{\DSh}{h}}$.
+Nous devons alors considérer l'erreur possible de positionnement de l'endroit où
+est estimé la courbure pour proposer des théorèmes de convergence
+asymptotiques.\\
+%
+Nous devons alors injecter cette approximation dans le calcul d'aire et de
+volume, pour ensuite la diffuser aux calculs de courbures.
+%
+\begin{equation}
+  \label{eq-area-shift-error}
+  | A_r(\vxH) - A_r(\vx) | = 2R \vt(1 + O(R^2)+O(\vt)).
+\end{equation}
+
+
+\todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \todoInlineJeremy{-------------------------------}
+% \vxH \in \Bd{\Body{\DSh}{h}}
+
+\begin{definition}{\textbf{(Estimateurs de courbure discrète 2D $\CurvH{R}(\DigShape,\vp)$ et de courbure discrète moyenne 3D $\MeanCurvH{R}(\DigShape,\vp)$).}}
+  \begin{equation}
+    \CurvH{R}(\DigShape,\vp) \EqDef \frac{1}{h} \left( \frac{3 \pi}{2 R_d}
+     - \frac{3 A_{R_d}(\vp)}{{R_d}^3} \right),
+     \quad \MeanCurvH{R}(\DigShape,\vp) \EqDef \frac{1}{h} \left( \frac{8}{3 R_d}
+      - \frac{4V_{R_d}(\vp)}{{\pi R_d}^4} \right).
+  \end{equation}
+  \label{def:ii-2d-3d-mean}
+\end{definition}
+
+\begin{theorem}{\textbf{(Convergence des estimateurs de courbure discrète 2D $\CurvH{R}(Z,p)$ et de courbure discrète moyenne 3D $\MeanCurvH{R}(Z,p)$).}}
+  \begin{equation}
+    \CurvH{R}(\DSh,p) = \Curv(\Shape,\vx) + O(h^{\frac{1}{3}}),
+    \quad \MeanCurvH{R}(\DSh,p) = \MeanCurv(\Shape,\vx) + O(h^{\frac{1}{3}}).
+  \end{equation}
+  \label{theo:ii-2d-3d-mean-conv}
+\end{theorem}
+
+
+\begin{equation}
+  \hat{m}_{p,q,s}(\DigShape,h) \EqDef h^{3+p+q+s}M_{p,q,s}(Z),
+\end{equation}
+
+\begin{equation}
+  \label{huxleylike}
+  \hat{m}_{p,q,s}(\DigF{Y}{h},h)= m_{p,q,s}(Y) + O(h^{\mu_{{\sigma}}}).
+\end{equation}
+
+\begin{align}
+  \hat{m}_{p,q,s}(&\DigF{A}{h},h) = h^{3+{\sigma}}M_{p,q,s}\left
+  ( (\frac{1}{h} \cdot \Ball{R}{\vx} \cap \Shape) \cap \Z^3 \right) \nonumber \\
+  & = h^{3+{\sigma}} M_{p,q,s}\left( \frac{R}{h}\cdot(
+  \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) \cap \Z^3 \right) \nonumber \\
+  &= R^{3+{\sigma}} \left( \frac{h}{R} \right)^{3+{\sigma}} \hspace{-0.3cm} M_{p,q,s} \left( \DigF{ B_1(\frac{1}{R}\cdot \vx)\cap\frac{1}{R}\cdot \Shape}{h/R} \right) \nonumber\\
+&= R^{3+{\sigma}}\hat{m}_{p,q,s}\left( \DigF{ B_1(\frac{1}{R}\cdot \vx)\cap\frac{1}{R}\cdot \Shape}{h/R}, {\frac{h}{R}} \right).\label{eq:fin}
+\end{align}
+
+\begin{align}
+\hat{m}_{p,q,s}(\DigF{A}{h},h) &= R^{3+{\sigma}}
+m_{p,q,s}\left( \Ball{1}{\frac{1}{R}\cdot \vx} \cap \frac{1}{R}\cdot \Shape
+\right) \nonumber\\&\quad\quad\quad\quad\quad+  R^{3+{\sigma}}
+O \left( \frac{h}{R} \right)^{\mu_{{\sigma}}}  \nonumber \\
+ &= m_{p,q,s}( \Ball{R}{\vx} \cap \Shape ) + O( R^{3+{\sigma}-\mu_{{\sigma}}} h^{\mu_{{\sigma}}}) \nonumber \\
+ &= m_{p,q,s}( A ) + O( R^{3+{\sigma}-\mu_{{\sigma}}} h^{\mu_{{\sigma}}}).\label{eq:conv-digital-moment}
+\end{align}
+
+
+\begin{align}
+  \hat{J}( \DigShape,h )\EqDef & \left [
+    \begin{array}{ccc}
+      \hat{m}_{2,0,0}(\DigShape,h) &       \hat{m}_{1,1,0}(\DigShape,h) &      \hat{m}_{1,0,1}(\DigShape,h)\\
+      \hat{m}_{1,1,0}(\DigShape,h) &   \hat{m}_{0,2,0}(\DigShape,h) &      \hat{m}_{0,1,1}(\DigShape,h)\\
+      \hat{m}_{1,0,1}(\DigShape,h) & \hat{m}_{0,1,1}(\DigShape,h)  & \hat{m}_{0,0,2}(\DigShape,h)
+    \end{array}
+    \right ] \nonumber\\
+  & -\frac{1}{\hat{m}_{0,0,0}(\DigShape,h)}
+  \left [ \begin{array}{c}
+      \hat{m}_{1,0,0}(\DigShape,h) \\ \hat{m}_{0,1,0}(\DigShape,h) \\ \hat{m}_{0,0,1}(\DigShape,h)\\
+    \end{array} \right ]
+  \otimes
+  \left [ \begin{array}{c}
+      \hat{m}_{1,0,0}(\DigShape,h) \\ \hat{m}_{0,1,0}(\DigShape,h) \\ \hat{m}_{0,0,1}(\DigShape,h)\\
+    \end{array} \right ]^T.
+\label{def:digital-covariance-matrix}
+\end{align}
+
+\begin{theorem}{\textbf{(Multigrid convergence of digital covariance matrix).}}
+  \label{thm:conv-cov-matrix}
+  Let $X \in \Shapes$. Then, there exists some constant $h_X$, such
+  that for any grid step $0< h < h_X$, for arbitrary $x \in \R^3$, for
+  arbitrary $R \ge h$, with non-empty $A(R,x) \EqDef \Ball{R}{x} \cap
+  X$, we have:
+  \begin{align*}
+    \| \hat{J}( \DigF{A(R,x)}{h}, h ) - J( A(R,x) ) \|
+    &\le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
+  \end{align*}
+  The constants hidden in the big O do not depend on the shape size or
+  geometry. {$\|\cdot\|$ denotes the spectral norm on matrices. }
+\end{theorem}
+
+\begin{lemma}
+\label{lem:moment-pos-error}
+  For any measurable subset $\Shape \subset \R^3$ and any vector $\mathbf{t}$ with
+  norm $t \EqDef \| \mathbf{t} \|_2 \le R$, we have for $0 \le p+q+s
+  \EqDef {\sigma} \le 2$:
+  \begin{align}
+    m_{p,q,s}(\Ball{R}{x+\mathbf{t}} \cap X ) & = m_{p,q,s}(\Ball{R}{x} \cap X ) \nonumber\\
+    &+ \sum_{i=0}^{{\sigma}} O(\|x\|^i tR^{2+{\sigma}-i}).
+    %% m_{1,0,0}(\Ball{R}{x+\mathbf{t}} \cap X ) &= m_{1,0,0}(\Ball{R}{x} \cap X ) + O(R^3t)\\
+    %% m_{2,0,0}(\Ball{R}{x+\mathbf{t}} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t)\\
+    %% m_{1,1,0}(\Ball{R}{x+\mathbf{t}} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t).
+  \end{align}
+\end{lemma}
+
+% \begin{definition}
+%   \begin{equation}
+%     \hat{\kappa}^{i}(Z,p) \EqDef \frac{1}{h} \left( \frac{6(\hat{\lambda}_2
+%      - 3\hat{\lambda}_1)}{\pi {{R_d}}^6} + \frac{8}{5{{R_d}}} \right).
+%   \end{equation}
+%   \label{}
+% \end{definition}
+\begin{definition}{\textbf{(Estimateurs de courbures principales discrètes 3D $\PrincCurvH{i}{}(Z,p)$).}}
+  \label{def:ii-3d-princ}
+  Let $\DigShape$ be a digital shape, $\vx$ some point of $\R^3$ and $h>0$ a
+  grid step. For $R\ge h$, we define the {\em integral principal
+    curvature estimators $\PrincCurvH{1}{R}$ and $\PrincCurvH{2}{R}$} of
+  $\DigShape$ at point $\vy \in \R^3$ and step $h$ as
+\begin{eqnarray}
+  \PrincCurvH{1}{R}(\DigShape,\vy,h) &=& \frac{6}{\pi R^6}(\hat{\lambda}_2 - 3\hat{\lambda}_1) + \frac{8}{5R},\\
+  \PrincCurvH{2}{R}(\DigShape,\vy,h) &=& \frac{6}{\pi R^6}(\hat{\lambda}_1 - 3\hat{\lambda}_2) + \frac{8}{5R},
+\end{eqnarray}
+where $\hat{\lambda}_1$ and $\hat{\lambda}_2$ are the two greatest
+eigenvalues of $\hat{J}(\Ball{R/h}{\frac{1}{h} \cdot y} \cap \DigShape, h ))$.
+\end{definition}
+
+We recall the following result of matrix perturbation theory %\cite{Bauer:1960,stewart1990matrix,bhatia1997matrix}:
+\begin{theorem}{\textbf{(Lidskii-Weyl inequality).}}
+  \label{thm:lidskii-weyl}
+  If $\lambda_i(B)$ denotes the ordered eigenvalues of some symmetric
+  matrix $B$ and $\lambda_i(B+E)$ the ordered eigenvalues of some
+  symmetric matrix $B+E$, then $\max_{i}| \lambda_i(B) -
+  \lambda_i(B+E)| \le \|E\|$.
+\end{theorem}
+
+
+% Convergence des estimateurs de courbures principales discrètes 3D $\hat{\kappa}^{i}(Z,p)$ :
+% \begin{theorem}
+%   \begin{equation}
+%     \hat{\kappa}^i_{R}(\DSh,p) = \PrincCurv{1}(X,x) + O(h^{\frac{1}{3}}).
+%   \end{equation}
+%   \label{theo:ii-3d-princ-conv}
+% \end{theorem}
+\begin{theorem}{\textbf{(Uniform convergence of principal curvature estimators $\PrincCurvH{1}{R}$ and $\PrincCurvH{2}{R}$ along $\hBd{h} \Shape$).}}
+  \label{theo:ii-3d-princ-conv}
+  Let $\Shape \in \Shapes$. For $i \in \{1,2\}$, recall that
+  $\PrincCurv{i}(\Shape,\vx)$ is the $i$-th principal curvature of $\Bd{\Shape}$ at
+  boundary point $\vx$. Then, there exist  positive constants $h_\Shape,k,K$ such that, for any $h \le
+  h_\Shape$, setting $R=k h^{\frac{1}{3}}$, we have
+  \begin{align*}
+     &\forall \vx \in \partial \Shape, \forall \hat{\vx} \in \hBd{h}\Shape,\nonumber\\
+     &\| \hat{\vx} - \vx\|_\infty \le h \Implies |
+     \PrincCurvH{i}{R}(\DSh,\hat{\vx},h) - \PrincCurv{i}(\Shape,\vx) | \le K
+     h^{\frac{1}{3}}.
+  \end{align*}
+\end{theorem}
+
+
+\subsection{Estimation de la courbure par intégration surfacique de la sphère}
+\subsubsection{Analyse euclidienne de l'intégration surfacique de la sphère, et relation à la courbure}
+\paragraph{Estimation par aire de patch de surface}
+\paragraph{Estimation par aire de surface de sphère}
+
+\section{Estimateurs de normales}
+\subsection{État de l'art}
+\subsection{Estimation par aire/volume de sphère}

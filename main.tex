@@ -1,0 +1,185 @@
+% **************************************************
+% Document Class Definition
+% **************************************************
+\documentclass[%
+	paper=A4,						% paper size --> A4 is default in France
+	twoside=true,				% onesite or twoside printing
+	openright,					% doublepage cleaning ends up right side
+	parskip=full,				% spacing value / method for paragraphs
+	chapterprefix=true,	% prefix for chapter marks
+	11pt,								% font size
+	headings=normal,		% size of headings
+	bibliography=totoc,	% include bib in toc
+	listof=totoc,				% include listof entries in toc
+	titlepage=on,				% own page for each title page
+	captions=tableabove,% display table captions above the float env
+	draft=false,					% value for draft version. Affiche une barre noire quand on mange la marge. DEBUG: change to false. Attention, enlève les liens du document.
+]{scrreprt}%
+
+\input{content/macros}
+
+% **************************************************
+% Debug LaTeX Information
+% **************************************************
+%\listfiles
+
+% **************************************************
+% Information and Commands for Reuse
+% **************************************************
+
+\newcommand{\thesisTitle}{Estimateurs diff\'erentiels en g\'eom\'etrie discr\`ete : applications \`a l'analyse de surfaces digitales\xspace}
+\newcommand{\sayMyName}{J\'er\'emy Levallois\xspace}
+\newcommand{\thesisSubject}{pr\'epar\'ee au sein des laboratoires LIRIS et LAMA\xspace}
+\newcommand{\thesisDate}{1 janvier 2016\xspace}
+\newcommand{\thesisVersion}{version 0.2\xspace}
+
+\newcommand{\thesisFirstReviewer}{Jane Doe}
+\newcommand{\thesisFirstReviewerUniversity}{\protect{Clean Thesis Style University}}
+\newcommand{\thesisFirstReviewerDepartment}{Department of Clean Thesis Style}
+
+\newcommand{\thesisSecondReviewer}{John Doe}
+\newcommand{\thesisSecondReviewerUniversity}{\protect{Clean Thesis Style University}}
+\newcommand{\thesisSecondReviewerDepartment}{Department of Clean Thesis Style}
+
+\newcommand{\thesisFirstSupervisor}{David Coeurjolly}
+\newcommand{\thesisSecondSupervisor}{Jacques-Olivier Lachaud}
+
+\newcommand{\thesisUniversity}{\protect{Clean Thesis Style University}}
+\newcommand{\thesisUniversityDepartment}{Department of Clean Thesis Style}
+\newcommand{\thesisUniversityInstitute}{Institut for Clean Thesis Dev}
+\newcommand{\thesisUniversityGroup}{Clean Thesis Group (CTG)}
+\newcommand{\thesisUniversityCity}{City}
+\newcommand{\thesisUniversityStreetAddress}{Street address}
+\newcommand{\thesisUniversityPostalCode}{Postal Code}
+
+% **************************************************
+% Load and Configure Packages
+% **************************************************
+\usepackage[utf8]{inputenc}		        % defines file's character encoding
+\usepackage[french]{babel}						% babel system, adjust the language of the content
+\usepackage{datetime}									% Add /today and /thistime commands
+\usepackage[													% clean thesis style
+	figuresep=colon,%
+	sansserif=false,%
+	hangfigurecaption=true,							% Place Figure X dans la marge
+	hangsection=true,										% Place Section X dans la marge
+	hangsubsection=true,								% Place Sous-section X dans la marge
+	colorize=full,%
+	colortheme=bluegreen,%
+	bibsys=bibtex,%
+	bibfile=bib-refs,%
+	bibstyle=numeric,%alphabetic,%
+]{cleanthesis}
+
+\hypersetup{																	% setup the hyperref-package options
+	pdftitle					= {\thesisTitle},	        % 	- title (PDF meta)
+	pdfsubject				= {\thesisSubject},     	% 	- subject (PDF meta)
+	pdfauthor					= {\sayMyName},	        	% 	- author (PDF meta)
+	plainpages				= false,									% 	-
+	colorlinks				= true,										% 	- false: boxed links; true: colored links
+	urlcolor       		= truedarkred,						%
+	linkcolor      		= truedarkred,						%
+	citecolor      		= darkgreen,							%
+	pdfborder					= {0 0 0},								% 	-
+	breaklinks				= true,										% 	- allow line break inside links
+	bookmarksnumbered	= true,		        				%
+	bookmarksopen			= true										%
+}
+
+\usepackage[french]{varioref}		% "figure page précédente"
+\usepackage{minitoc}     				% Mini TOC en debut de chapitre
+\usepackage{subfig}      				% subfigures
+\usepackage{overpic}     				% add
+\usepackage{mathdots}    				% idots, etc ...
+\usepackage{booktabs}						% Beautiful tables
+\usepackage{todonotes}					% Todonotes
+\usepackage{xspace}      				% to get the spacing after macros right
+\usepackage{amsmath}						% math environments and more by the AMS (Add [fleqn] to align equation to left)
+\usepackage{amssymb}						% Maths symboles like IR
+% \usepackage{amsthm}							% math environment for \begin{proofs}
+
+\usepackage{tikz}								% Adding tikz to draw figures in LaTeX
+\usepackage{pgfplots}						% Adding PgfPlots to draw plots in LaTeX
+
+\usepackage{lineno}      				% DEBUG : pour afficher les lignes
+
+% **************************************************
+% Document CONTENT
+% **************************************************
+\begin{document}
+
+\dominitoc[l]                           % Activate TOC
+\mtcselectlanguage{french}              % french mini TOC
+
+\linenumbers                            % DEBUG : activate lineno
+
+% --------------------------
+% Front matter
+% --------------------------
+
+% \pagenumbering{roman}			% roman page numbing (invisible for empty page style)
+% \pagestyle{empty}			% no header or footers
+% \input{content/titlepages}		% INCLUDE: all titlepages
+% \cleardoublepage
+%
+% \pagestyle{plain}			% display just page numbers
+% \input{content/abstract}		% INCLUDE: the abstracts (english and german)
+% \cleardoublepage
+% %
+% \input{content/acknowledgement}         % INCLUDE: acknowledgement
+% \cleardoublepage
+% %
+% \setcounter{tocdepth}{2}		% define depth of toc
+% \tableofcontents						% display table of contents
+% \cleardoublepage
+%
+% \listoftodos
+% \cleardoublepage
+
+% --------------------------
+% Body matter
+% --------------------------
+
+\pagenumbering{arabic}							% arabic page numbering
+\setcounter{page}{1}								% set page counter
+\setcounter{secnumdepth}{3}					% set counter to 3 depth (subsubsection)
+\pagestyle{maincontentstyle}				% fancy header and footer
+
+% \input{content/chapter-introduction}    % INCLUDE: Introduction et Contexte -- Géométrie digitale et projet digitalSnow
+\input{content/chapter-notions}         % INCLUDE: Notions et éléments de base de la géométrie digitale
+\input{content/chapter-estimators}      % INCLUDE: Estimateurs discrets
+% \input{content/chapter-applications}    % INCLUDE: Applications
+% \input{content/chapter-conclusion}      % INCLUDE: Conclusions et perspectives
+\cleardoublepage
+
+% --------------------------
+% Back matter
+% --------------------------
+{%
+\setstretch{1.1}
+\renewcommand{\bibfont}{\normalfont\small}
+\setlength{\biblabelsep}{0pt}
+\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+\printbibliography[nottype=online]
+\printbibliography[heading=subbibliography,title={Webseiten},type=online,prefixnumbers={@}]
+}
+\cleardoublepage
+
+% \listoffigures
+% \cleardoublepage
+
+% \listoftables
+% \cleardoublepage
+
+% \input{content/colophon}
+% \cleardoublepage
+
+% \input{content/declaration}
+% \clearpage
+% \newpage
+% \mbox{}
+
+% **************************************************
+% End of Document CONTENT
+% **************************************************
+\end{document}

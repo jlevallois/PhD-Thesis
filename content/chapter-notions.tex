@@ -1,0 +1,116 @@
+% !TEX root = ../thesis-example.tex
+%
+\chapter{Notions et éléments de base de la géométrie digitale}
+\label{sec:notions}
+
+\cleanchapterquote{We have seen that computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty.}{Jean-Claude Vandamme}{Ma vie, mon œuvre.}
+
+\setcounter{minitocdepth}{3}
+\minitoc
+
+\newpage
+
+\section{Discrétisation}
+
+\section{Estimateurs locaux et globaux}
+
+\section{Convergence asymptotique d'estimateurs}
+
+\section{Introduction à la géométrie différentielle}
+
+\section{Droites discrètes, segments discrets}
+
+\begin{definition}[Standard Line and Digital Straight Segment (DSS)]
+  The set of points $(x,y)\in\Z^2$ satisfying $\mu \le ax - by < \mu +
+  |a| + |b|$, with $a$, $b$ and $\mu$ integer numbers, is called the
+  {\em standard digital line} with slope $a/b$ and shift $\mu$.  Any
+  connected subset of pixels of a standard digital line is a
+  \emph{digital straight segment} (DSS for short).
+\end{definition}
+
+\begin{definition}[Segments maximaux et faisceau de segments maximaux \cite{lachaud2007-ivc}]
+  Une séquence de pointels $\{p_i,\ldots,p_j\}\subset\BdZ{Z}$ est un {\em
+    segment maximal} \ssi $\{p_i,\ldots,p_j\}$ est un DSS qui ne peux s'étendre dans aucun sens (en avant ou en arrière) tout en restant DSS.
+    Pour un pointel $p\in\BdZ{Z}$, le \emph{faisceau de segments maximaux} à $p$ est l'ensemble des segments maximaux de $\BdZ{Z}$ contenant $p$.
+\end{definition}
+
+\begin{lemma}[Lois asymptotiques des segments maximaux \cite{lachaud2006-hdr,deVieilleville2007-jmiv}]
+  \label{lem-asymptotic-digital-length-ms}
+   Soit $X$ une forme convexe de $\R^2$, avec \emph{au moins} une
+   bordure $C^3$  et une courbure bornée.  La longueur discrète des
+   segments maximaux de $\BdZ{Z}$ pour $Z=\DSh$ suivent les règles suivantes :
+   \begin{itemize}
+   \item le plus court des segments discrets a une borne inférieure en
+     $\Omega(h^{-\frac{1}{3}})$;
+   \item le plus long des segments discrets a une borne supérieure en
+     $O(h^{-\frac{1}{2}})$;
+   \item leur longueur moyenne, désigné par $L_D({Z})$, est telle que :
+  \begin{equation}
+    \label{eq:lengthMS}
+    \Theta(h^{-\frac{1}{3}}) \le L_D( {Z} ) \le \Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right))\;.
+  \end{equation}
+   \end{itemize}
+\end{lemma}
+%
+\section{Estimateurs d'aire, de volume, de moments, de positionnement de surface}
+%
+\subsection{Aire et volume}
+%
+\subsubsection{Aire et volume en comptant les points digitaux}
+\label{sec:AreaByCounting}
+Une façon simple de calculer l'aire ou le volume d'une forme digitale consiste à
+compter le nombre de points digitaux appartenant à la forme. Plus formellement,
+pour tout sous-ensemble $\DigShape \subset \Z^2$, l'estimateur digital d'aire au pas
+de discrétisation $h$ est défini par :
+%
+\begin{equation}
+  \AreaC(\DigShape, h) \EqDef h^2 \MCard(\DigShape)
+\end{equation}
+%
+En dimension $3$, nous noterons l'estimateur digital de volume au pas de
+discrétisation $h$ :
+%
+\begin{equation}
+  \VolC(\DigShape, h) \EqDef h^3 \MCard(\DigShape)
+\end{equation}
+%
+Maintenant, si ce sous-ensemble digital $\DigShape$ provient de la discrétisation de
+formes euclidiennes $\Shape$, nous voulons que l'estimation du volume devienne
+meilleure lorsque le pas de discrétisation $h$ se raffine (voir
+\RefSection{sec:notion:multigridconvergence}). Il est connu depuis
+\nauthor{Gauss} et \nauthor{Dirichlet} que cette façon d'estimer l'aire donne
+des résultats de convergence asymptotique sur les formes $\Shape$ convexes
+finies de $\R^2$ :
+%
+\begin{equation}
+  \label{eq:AreaByCountingConv}
+  \AreaC(\DigF{\Shape}{h},h) = \Area(\Shape) + O(h^\beta),
+\end{equation}
+%
+avec $\beta = 1$ dans le cas général \cite{Klette2000}, et peut être optimisé à
+$\beta = \frac{15}{11} - \epsilon$ avec $\epsilon > 0$ (arbitrairement petit)
+lorsque le bord de l'objet est $C^3$ à courbure non nulle \cite{Huxley1990}.
+De mêmes résultats ont été proposés en 3D :
+%
+\begin{equation}
+  \label{eq:VolumeByCountingConv}
+  \VolC(\DigF{\Shape}{h},h) = \Vol(\Shape) + O(h^\gamma),
+\end{equation}
+%
+avec $\gamma = 1$ dans le cas général \cite{Kratzel1988}, et peut être amélioré à
+$\gamma=\frac{243}{158}$ lorsque le bord est lisse \cite{Guo2010}.
+
+En dimension 2, les objets non convexes suivent les mêmes règles tant que
+$\Shape$ peut être exprimé comme une somme ou une différence de régions convexes
+bornées par des courbes fermées simples \cite{Huxley1996}. Ces résultats
+précédents restent valides chaque fois que le bord de la forme peut être
+décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
+nulle pour les bornes améliorées).
+
+\section{Enveloppes convexes}
+
+
+
+
+% MODELE DE BRUIT KANUNGO. (These de Louis)
+% Dans le but de valider les resultats theoriques faisant intervenir une hypothese Hausdorff, on definit le modele de bruit Kanungo sur les contours digitaux. Pour une taille de bruit t ∈ N la probabilite qu’un voxel situe a une distance λ de ∂X appartienne au contour bruitee est tλ. Ce n’est pas exactement un bruit Hausdorff, mais la plupart des perturbations se situe dans une bande d’epaisseur 2h/(1−t). Remarquons que le modele Kanungo depend du pas de discretisation h. Plus precisement, plus le pas de discretisation est petit, et plus le bruit est faible. Ce modele est interessant dans la mesure ou il garantit la convergence des contours bruites vers la forme sous-jacente et permet ainsi de faire une etude de convergence multigrille.
