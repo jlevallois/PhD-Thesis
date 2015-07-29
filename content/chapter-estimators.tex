@@ -660,14 +660,67 @@ est estimé la courbure pour proposer des théorèmes de convergence
 asymptotiques.\\
 %
 Nous devons alors injecter cette approximation dans le calcul d'aire et de
-volume, pour ensuite la diffuser aux calculs de courbures.
+volume, pour ensuite la diffuser aux calculs de courbures.\\
+%
+Notons $\vt \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
+$\Bd{\Body{\DSh}{h}}$ à un point $\vx$ de $\dS$. En 3D, le
+\RefTheoremFake{7}{Pottmann2009} permet de quantifier cette erreur :
+%
+\begin{equation}\label{eq-volume-shift-error}
+  | V_r(\vxH) - V_r(\vx) | = R^2 \pi \vt (1 + O(R^2)+O(\vt)).
+\end{equation}
+%
+De la même façon en 2D, nous obtenons :
+%
+\begin{equation}\label{eq-area-shift-error}
+  | A_r(\vxH) - A_r(\vx) | = 2R \vt (1 + O(R^2)+O(\vt)).
+\end{equation}
+%
+Nous pouvons alors réécrire l'\RefEquation{eq:convergence-area-intersection}
+pour $\vxH$ :
 %
 \begin{equation}
-  \label{eq-area-shift-error}
-  | A_r(\vxH) - A_r(\vx) | = 2R \vt(1 + O(R^2)+O(\vt)).
+  | \AreaC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - A_R(\vxH) | \le K_1 h^\beta R^{2-\beta},
 \end{equation}
-
-
+%
+ce qui implique, avec l'\RefEquation{eq-area-shift-error} :
+%
+\begin{equation}\label{eq-shift-B-R-error-bound-2D}
+  | \AreaC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - A_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  2 R \vt (1 + O(R^2) + O(\vt)).
+\end{equation}
+%
+En 3D, nous obtenons :
+%
+\begin{equation}\label{eq-shift-B-R-error-bound-3D}
+  | \VolC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  R^2 \pi \vt (1 + O(R^2) + O(\vt)).
+\end{equation}
+%
+Ensuite, dans le but d'obtenir un estimateur de courbure, nous suivons le même
+raisonnement que pour la preuve du \RefTheorem{thm:convergence-curv-2d} mais en
+utilisant l'\RefEquation{eq-shift-B-R-error-bound-2D}, ce qui nous donne :
+%
+\begin{equation}\label{eq-shift-curvhat-error-bound-2D}
+  | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) | \le O(R) + 3 K_1 \frac{h^\beta}{R^{1+\beta}} + \frac{6 \vt}{R^2}(1 + O(R^2) + O(\vt)).
+\end{equation}
+%
+Puisque nous sommes sur des données digitales, nous savons que $\vt \le
+\frac{\sqrt{2}}{2}h$. Dans certains cas, nous pouvons espérer une meilleure
+localisation de $\vxH$ vers $\vx$ \cite{deVieilleville2006}. Nous noterons alors
+$\vt = O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la
+précédente équation afin d'obtenir une borne d'erreur uniquement dépendante de
+$h$, avec $R=kh^{\alpha}$ :
+%
+\begin{equation} \label{eq-shift-curvhat-error-bound-h-only}
+  | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) | \le O(h^\alpha) + O(h^{\beta-\alpha(1+\beta)}) + O(h^{\alpha'-2\alpha})+ O(h^{\alpha'}) + O(h^{2\alpha'-2\alpha}).
+\end{equation}
+%
+Ainsi, comme pour le \RefTheorem{thm:convergence-curv-2d}, nous devons trouver
+le meilleur $\alpha$ possible, à la différence ici qu'il dépend de $\beta$ et
+$\alpha'$.
+%
+Si $\alpha' \ge \frac{3 \beta}{1 + \beta}$, alors $\alpha = \frac{\beta}{1 +
+\beta}$, sinon $\alpha = \frac{\alpha'}{3}$
+%
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
