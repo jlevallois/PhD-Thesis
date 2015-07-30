@@ -354,7 +354,7 @@ grille digitale influe également dessus ? Dans une premier temps nous allons
 nous intéresser à l'aire et au volume digital, puis dans un second temps aux
 moments digitaux.
 %
-\subsubsection{Analyse digitale de l'aire et du volume de la sphère, et relation à la courbure}
+\subsubsection{Analyse digitale de l'intégration volumique de la sphère, et relation à la courbure}
 %
 Nous souhaitons estimer la quantité $A_R(\vx) = \Area(B_R(\vx)\cap\Shape)$ de la
 \RefDefinition{def:Volume} au pas de discrétisation $h$, où $B_R(\vx)$ est une
@@ -650,7 +650,8 @@ Lorsque nous traitons des bords des surfaces digitales, une nouvelle
 approximation intervient dû à la discrétisation. Le prochain paragraphe adaptera
 ces estimateurs sur des contours digitaux de surface.
 %
-\paragraph{Convergence asymptotique pour des formes suffisamment lisses}
+\paragraph{Convergence asymptotique des estimateurs digitaux de courbure 2D et
+de courbure moyenne 3D par intégration pour des formes suffisamment lisses}
 %
 Comme nous venons de le dire, nous ne connaissons pas exactement la position de
 $\vx$ lorsque nous considérons des données digitales. Les seules informations
@@ -666,7 +667,7 @@ bord digital d'un objet suffisamment lisse.
 %
 \begin{theorem} \label{thm:multigrid-convergence-curv}
 %
-Soit $\Shape$ un domaine compact de $\R^2$ tel que son bord $\dS$ est $C^2$ à
+Soit $\Shape$ un domaine compact de $\R^2$ tel que son bord $\dS$ est $C^3$ à
 courbure bornée. Alors, l'estimateur digital de courbure $\CurvH{R}$ converge
 asymptotiquement vers la courbure $\Curv$ pour la discrétisation de Gauss sur
 des formes $\Shape$, avec une vitesse de convergence d'au moins
@@ -829,9 +830,9 @@ $h$, avec $R=kh^{\alpha}$ :
 \end{equation}
 %
 Ainsi, comme pour le \RefTheorem{thm:convergence-curv-3d}, nous devons trouver
-le meilleur $\alpha$ possible. Les ordres de grandeur étant les mêmes qu'en 2D,
-nous obtenons $\alpha = \frac{\gamma}{2 + \gamma}$ si $\alpha' \ge \frac{3
-\gamma}{1 + \gamma}$, sinon $\alpha = \frac{\alpha'}{3}$
+le meilleur $\alpha$ possible. Les exposants étant les mêmes qu'en 2D, nous
+obtenons $\alpha = \frac{\gamma}{2 + \gamma}$ si $\alpha' \ge \frac{3 \gamma}{1 +
+\gamma}$, sinon $\alpha = \frac{\alpha'}{3}$
 %
 Si le point $\vxH$ est sur le bord digital $\Bd{\Body{\DSh}{h}}$, alors nous
 savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\gamma =
@@ -856,23 +857,6 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\ga
 % \todoInlineJeremy{-------------------------------}
 % \vxH \in \Bd{\Body{\DSh}{h}}
 
-\begin{definition}{\textbf{(Estimateurs de courbure discrète 2D $\CurvH{R}(\DigShape,\vp)$ et de courbure discrète moyenne 3D $\MeanCurvH{R}(\DigShape,\vp)$).}}
-  \begin{equation}
-    \CurvH{R}(\DigShape,\vp) \EqDef \frac{1}{h} \left( \frac{3 \pi}{2 R_d}
-     - \frac{3 A_{R_d}(\vp)}{{R_d}^3} \right),
-     \quad \MeanCurvH{R}(\DigShape,\vp) \EqDef \frac{1}{h} \left( \frac{8}{3 R_d}
-      - \frac{4V_{R_d}(\vp)}{{\pi R_d}^4} \right).
-  \end{equation}
-  \label{def:ii-2d-3d-mean}
-\end{definition}
-
-\begin{theorem}{\textbf{(Convergence des estimateurs de courbure discrète 2D $\CurvH{R}(Z,p)$ et de courbure discrète moyenne 3D $\MeanCurvH{R}(Z,p)$).}}
-  \begin{equation}
-    \CurvH{R}(\DSh,p) = \Curv(\Shape,\vx) + O(h^{\frac{1}{3}}),
-    \quad \MeanCurvH{R}(\DSh,p) = \MeanCurv(\Shape,\vx) + O(h^{\frac{1}{3}}).
-  \end{equation}
-  \label{theo:ii-2d-3d-mean-conv}
-\end{theorem}
 
 
 \begin{equation}

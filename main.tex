@@ -103,6 +103,7 @@
 
 \usepackage{lineno}      				% DEBUG : pour afficher les lignes
 
+
 % **************************************************
 % Document CONTENT
 % **************************************************
@@ -117,24 +118,24 @@
 % Front matter
 % --------------------------
 
-% \pagenumbering{roman}			% roman page numbing (invisible for empty page style)
-% \pagestyle{empty}			% no header or footers
-% \input{content/titlepages}		% INCLUDE: all titlepages
-% \cleardoublepage
+\pagenumbering{roman}			% roman page numbing (invisible for empty page style)
+\pagestyle{empty}			% no header or footers
+\input{content/titlepages}		% INCLUDE: all titlepages
+\cleardoublepage
+
+\pagestyle{plain}			% display just page numbers
+\input{content/abstract}		% INCLUDE: the abstracts (english and german)
+\cleardoublepage
 %
-% \pagestyle{plain}			% display just page numbers
-% \input{content/abstract}		% INCLUDE: the abstracts (english and german)
-% \cleardoublepage
-% %
-% \input{content/acknowledgement}         % INCLUDE: acknowledgement
-% \cleardoublepage
-% %
-% \setcounter{tocdepth}{2}		% define depth of toc
-% \tableofcontents						% display table of contents
-% \cleardoublepage
+\input{content/acknowledgement}         % INCLUDE: acknowledgement
+\cleardoublepage
 %
-% \listoftodos
-% \cleardoublepage
+\setcounter{tocdepth}{2}		% define depth of toc
+\tableofcontents						% display table of contents
+\cleardoublepage
+
+\listoftodos
+\cleardoublepage
 
 % --------------------------
 % Body matter
