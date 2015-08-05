@@ -11,15 +11,15 @@
 \newpage
 
 \section{Discrétisation}
-
+%
 \section{Estimateurs locaux et globaux}
-
+%
 \section{Convergence asymptotique d'estimateurs}
-
+%
 \section{Introduction à la géométrie différentielle}
-
+%
 \section{Droites discrètes, segments discrets}
-
+%
 \begin{definition}[Standard Line and Digital Straight Segment (DSS)]
   The set of points $(x,y)\in\Z^2$ satisfying $\mu \le ax - by < \mu +
   |a| + |b|$, with $a$, $b$ and $\mu$ integer numbers, is called the
@@ -27,13 +27,13 @@
   connected subset of pixels of a standard digital line is a
   \emph{digital straight segment} (DSS for short).
 \end{definition}
-
+%
 \begin{definition}[Segments maximaux et faisceau de segments maximaux \cite{lachaud2007-ivc}]
   Une séquence de pointels $\{p_i,\ldots,p_j\}\subset\BdZ{Z}$ est un {\em
     segment maximal} \ssi $\{p_i,\ldots,p_j\}$ est un DSS qui ne peux s'étendre dans aucun sens (en avant ou en arrière) tout en restant DSS.
     Pour un pointel $p\in\BdZ{Z}$, le \emph{faisceau de segments maximaux} à $p$ est l'ensemble des segments maximaux de $\BdZ{Z}$ contenant $p$.
 \end{definition}
-
+%
 \begin{lemma}[Lois asymptotiques des segments maximaux \cite{lachaud2006-hdr,deVieilleville2007-jmiv}]
   \label{lem-asymptotic-digital-length-ms}
    Soit $X$ une forme convexe de $\R^2$, avec \emph{au moins} une
@@ -52,9 +52,9 @@
    \end{itemize}
 \end{lemma}
 %
-\section{Estimateurs d'aire, de volume, de moments, de positionnement de surface}
+\section{Estimateurs digitaux d'aire, de volume, de moments, de positionnement de surface}
 %
-\subsection{Aire et volume}
+\subsection{Aire et volume digitaux}
 %
 \subsubsection{Aire et volume en comptant les points digitaux}
 \label{sec:AreaByCounting}
@@ -99,18 +99,32 @@ De mêmes résultats ont été proposés en 3D :
 %
 avec $\gamma = 1$ dans le cas général \cite{Kratzel1988}, et peut être amélioré à
 $\gamma=\frac{243}{158}$ lorsque le bord est lisse \cite{Guo2010}.
-
+%
 En dimension 2, les objets non convexes suivent les mêmes règles tant que
 $\Shape$ peut être exprimé comme une somme ou une différence de régions convexes
 bornées par des courbes fermées simples \cite{Huxley1996}. Ces résultats
 précédents restent valides chaque fois que le bord de la forme peut être
 décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
 nulle pour les bornes améliorées).
-
+%
+\subsection{Moments digitaux}
+%
+\subsubsection{Moments en comptant les points digitaux}
+%
+\begin{equation}
+  \hat{m}_{p,q,s}(\DigShape,h) \EqDef h^{3+p+q+s}M_{p,q,s}(Z),
+\end{equation}
+%
+\begin{equation}
+  \label{huxleylike}
+  \hat{m}_{p,q,s}(\DigF{Y}{h},h)= m_{p,q,s}(Y) + O(h^{\mu_{{\sigma}}}).
+\end{equation}
+%
 \section{Enveloppes convexes}
-
+%
 
 
 
 % MODELE DE BRUIT KANUNGO. (These de Louis)
 % Dans le but de valider les resultats theoriques faisant intervenir une hypothese Hausdorff, on definit le modele de bruit Kanungo sur les contours digitaux. Pour une taille de bruit t ∈ N la probabilite qu’un voxel situe a une distance λ de ∂X appartienne au contour bruitee est tλ. Ce n’est pas exactement un bruit Hausdorff, mais la plupart des perturbations se situe dans une bande d’epaisseur 2h/(1−t). Remarquons que le modele Kanungo depend du pas de discretisation h. Plus precisement, plus le pas de discretisation est petit, et plus le bruit est faible. Ce modele est interessant dans la mesure ou il garantit la convergence des contours bruites vers la forme sous-jacente et permet ainsi de faire une etude de convergence multigrille.
+
