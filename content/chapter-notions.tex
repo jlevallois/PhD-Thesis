@@ -107,13 +107,85 @@ précédents restent valides chaque fois que le bord de la forme peut être
 décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
 nulle pour les bornes améliorées).
 %
-\subsection{Moments digitaux}
+\subsection{Moments géométriques digitaux}
+%
+Le concept mathématique des moments a beaucoup été étudié depuis plusieurs
+années et trouve son champ d'application sans cesse augmenté, allant des
+statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
+reconnaissance de formes (\cauthors{Trier}{Trier1996} pour un survey sur la
+reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghorbel2005}.
+La première utilisation des moments en analyse d'images remonte à 1962 par
+\cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
+%
+Les moments ont l'avantage d'être indépendant à l'échelle, la position et l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite nous intéresser à les estimer sur des données digitales.
+%
+\todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
+%
+\subsubsection{Définition et propriétés des moments géométriques}
+%
+Une définition générale du moment géométrique (ou moment cartésien) $\Mom{p_1 \cdots p_d}$ d'ordre $p_1 \cdots p_d$ (aussi appelé le $p_1 \cdots p_d$-moment) de $\Shape$ (de $\R^d$) peut être donnée comme :
+%
+\begin{equation}
+  \Mom{p_1 \cdots p_d}(\Shape) \EqDef \idotsint_{\Shape} x_1^{p_1} \cdots x_d^{p_d} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
+\end{equation}
+%
+\paragraph{Moment d'ordre zéro : aire / volume}
+%
+Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au volume en 3D de $\Shape$ :
+%
+\begin{equation}
+  \Mom{0 \cdots 0}(\Shape) \EqDef \idotsint_{\Shape} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
+\end{equation}
+%
+\paragraph{Moments du premier ordre : barycentre}
+%
+Les $d$ moments du premier ordre ($\Mom{1 0 \cdots 0}(\Shape)$, $\Mom{0 1 0 \cdots 0}(\Shape)$, $\cdots$, $\Mom{0 \cdots 0 1}(\Shape)$) sont généralement utilisés pour déterminer le barycentre de la forme à analyser. Les coordonnées du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont :
+%
+\begin{equation}
+  \overline{x_1} = \frac{\Mom{1 0 \cdots 0}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}, \cdots, \overline{x_p} = \frac{\Mom{0 \cdots 0 1}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}.
+\end{equation}
+%
+\paragraph{Moments du second ordre}
+%
+Les moments du second ordre $\Mom{p_1 \cdots p_d}(\Shape)$ avec $p_1 + \cdots +
+p_2 = 2$ sont connus comme les moments d'inertie, caractérisant la géométrie des
+masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
+1}(\Shape)$ et $\Mom{0 2}(\Shape)$, en 3D il en existe 6 :  $\Mom{2 0
+0}(\Shape)$, $\Mom{0 2 0}(\Shape)$, $\Mom{0 0 2}(\Shape)$, $\Mom{1 1
+0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$
 %
 \subsubsection{Moments en comptant les points digitaux}
 %
+Comme pour l'aire ou le volume précédemment, il est très simple de calculer les
+moments sur des données digitales. En effet, il suffit de sommer les valeurs des
+points digitaux de la forme et de remettre à l'échelle suivant le pas de
+discrétisation $h$. Plus formellement, pour tout sous-ensemble $\DigShape$ de
+$\Z^d$, le $p_1 \cdots p_d$-moment digital de $\DigShape$ au pas de
+discrétisation $h$ est défini par :
+%
 \begin{equation}
-  \hat{m}_{p,q,s}(\DigShape,h) \EqDef h^{3+p+q+s}M_{p,q,s}(Z),
+  \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d} f(z_1^{p_1} \cdots z_d^{p_d}).
 \end{equation}
+%
+Il est à noter que $f(z_1 \cdots z_d)$ est tout le temps égal à $1$ lorsque
+$(z_1,\ldots,z_d) \in \DigShape$, $0$ sinon, nous pouvons alors l'enlever de
+l'équation :
+%
+\begin{equation}
+  \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d}.
+\end{equation}
+% %
+% Ainsi, soit $\vz \in \Z^d$, les moments digitaux sont alors :
+% %
+% \begin{align}
+%   \DMom{0 \cdots 0}{h}(\DigShape, h) &= h^d\\
+%   \DMom{1 0 \cdots 0}{h}(\DigShape, h) &= h^{d+1} z_1\\
+%   \DMom{1 1 0 \cdots 0}{h}(\DigShape, h) &= h^{d+2} z_1 z_2\\
+%   \DMom{2 0 \cdots 0}{h}(\DigShape, h) &= h^{d+2} z_1^2.
+% \end{align}
+%
+%
+\todoInlineJeremy{-----------------------------------------------------------------}
 %
 \begin{equation}
   \label{huxleylike}
@@ -127,4 +199,3 @@ nulle pour les bornes améliorées).
 
 % MODELE DE BRUIT KANUNGO. (These de Louis)
 % Dans le but de valider les resultats theoriques faisant intervenir une hypothese Hausdorff, on definit le modele de bruit Kanungo sur les contours digitaux. Pour une taille de bruit t ∈ N la probabilite qu’un voxel situe a une distance λ de ∂X appartienne au contour bruitee est tλ. Ce n’est pas exactement un bruit Hausdorff, mais la plupart des perturbations se situe dans une bande d’epaisseur 2h/(1−t). Remarquons que le modele Kanungo depend du pas de discretisation h. Plus precisement, plus le pas de discretisation est petit, et plus le bruit est faible. Ce modele est interessant dans la mesure ou il garantit la convergence des contours bruites vers la forme sous-jacente et permet ainsi de faire une etude de convergence multigrille.
-
