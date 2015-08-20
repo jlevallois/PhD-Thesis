@@ -9,7 +9,13 @@
 \minitoc
 
 \newpage
+%
+Notations:
 
+In the sequel, points and vectors of $\R^d$ and $\Z^d$ are written in
+bold, and for some point or vector $\vz \in \Z^d$, its coordinates or
+components are written with subscripts as $\vz=(z_1,\ldots,z_d)$.
+%
 \section{Discrétisation}
 %
 \section{Estimateurs locaux et globaux}
@@ -117,13 +123,18 @@ reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghor
 La première utilisation des moments en analyse d'images remonte à 1962 par
 \cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
 %
-Les moments ont l'avantage d'être indépendant à l'échelle, la position et l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite nous intéresser à les estimer sur des données digitales.
+Les moments ont l'avantage d'être indépendant à l'échelle, la position et
+l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout
+d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite
+nous intéresser à les estimer sur des données digitales.
 %
 \todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
 %
 \subsubsection{Définition et propriétés des moments géométriques}
 %
-Une définition générale du moment géométrique (ou moment cartésien) $\Mom{p_1 \cdots p_d}$ d'ordre $p_1 \cdots p_d$ (aussi appelé le $p_1 \cdots p_d$-moment) de $\Shape$ (de $\R^d$) peut être donnée comme :
+Une définition générale du moment géométrique (ou moment cartésien) $\Mom{p_1
+\cdots p_d}$ d'ordre $p_1 \cdots p_d$ (aussi appelé le $p_1 \cdots p_d$-moment)
+de $\Shape$ (de $\R^d$) peut être donnée comme :
 %
 \begin{equation}
   \Mom{p_1 \cdots p_d}(\Shape) \EqDef \idotsint_{\Shape} x_1^{p_1} \cdots x_d^{p_d} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
@@ -131,7 +142,8 @@ Une définition générale du moment géométrique (ou moment cartésien) $\Mom{
 %
 \paragraph{Moment d'ordre zéro : aire / volume}
 %
-Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au volume en 3D de $\Shape$ :
+Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au
+volume en 3D de $\Shape$ :
 %
 \begin{equation}
   \Mom{0 \cdots 0}(\Shape) \EqDef \idotsint_{\Shape} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
@@ -139,7 +151,10 @@ Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au vol
 %
 \paragraph{Moments du premier ordre : barycentre}
 %
-Les $d$ moments du premier ordre ($\Mom{1 0 \cdots 0}(\Shape)$, $\Mom{0 1 0 \cdots 0}(\Shape)$, $\cdots$, $\Mom{0 \cdots 0 1}(\Shape)$) sont généralement utilisés pour déterminer le barycentre de la forme à analyser. Les coordonnées du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont :
+Les $d$ moments du premier ordre ($\Mom{1 0 \cdots 0}(\Shape)$, $\Mom{0 1 0
+\cdots 0}(\Shape)$, $\cdots$, $\Mom{0 \cdots 0 1}(\Shape)$) sont généralement
+utilisés pour déterminer le barycentre de la forme à analyser. Les coordonnées
+du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont :
 %
 \begin{equation}
   \overline{x_1} = \frac{\Mom{1 0 \cdots 0}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}, \cdots, \overline{x_p} = \frac{\Mom{0 \cdots 0 1}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}.
@@ -174,6 +189,26 @@ l'équation :
 \begin{equation}
   \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d}.
 \end{equation}
+%
+Ainsi, le $0$-moment digital de $\DigShape$ correspond au volume digital de
+$\DigShape$, \cad $\AreaC(\DigShape,h)$ lorsque $d = 2$ et $\VolC(\DigShape,h)$
+lorsque $d \geq 3$.
+%
+Nous souhaitons alors borner l'erreur entre les moments de $\Shape$ et
+l'estimation des moments digitaux de la discrétisation de $\Shape$ comme
+fonction du pas de discrétisation $h$. \cauthors{Klette}{Klette2000} ont
+démontré la convergence de cet estimation des moments avec une vitesse de
+convergence dépendante de l'ordre du moment $\sigma = p_1 + \cdots + p_d$ :
+%
+\begin{equation} \label{huxleylike}
+%
+  \DMom{p_1 \cdots p_d}{h}(\DigF{\Shape}{h},h) = \Mom{p_1 \cdots p_d}(\Shape) + O(h^{\mu_{\sigma}}).
+%
+\end{equation}
+%
+avec $\mu_{\sigma} = 1$ dans le cas général (\todoJeremy{expliciter}). Cette
+borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
+\cauthors{Kraetzel}{Kraetzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et \cauthors{Muller}{Muller1999} obtiennent $\mu_0= \frac{66}{43}-\epsilon$.
 % %
 % Ainsi, soit $\vz \in \Z^d$, les moments digitaux sont alors :
 % %
@@ -187,10 +222,20 @@ l'équation :
 %
 \todoInlineJeremy{-----------------------------------------------------------------}
 %
-\begin{equation}
-  \label{huxleylike}
-  \hat{m}_{p,q,s}(\DigF{Y}{h},h)= m_{p,q,s}(Y) + O(h^{\mu_{{\sigma}}}).
-\end{equation}
+% 38/25 => 1.52
+% -------
+% 37/50
+% -------
+% 43/122 => 0.352459016
+% 130/174 => 0.747126437
+% 103/310 => 0.332258065
+% 318/430 => 0,739534884
+%
+% (a/2)-1+(1-b*(c-2))/(a+1-2*b*(c-1)) with a=3 and b=1/(2^c-2) and c=4
+% (1/2)*(a-1+b*(c-2)-d)-((a-1)/2 +b*(c-1)-d)*((1-b*(c-2))/(a+1-2*b*(c-1))) with a=3 and b=1/(2^c-2) and c=4 and d=4/(2^c)
+% (60*s^2-85*s+33)/(120*s+70) with s=3
+
+
 %
 \section{Enveloppes convexes}
 %
