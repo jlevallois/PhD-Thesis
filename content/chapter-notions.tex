@@ -64,6 +64,7 @@ components are written with subscripts as $\vz=(z_1,\ldots,z_d)$.
 %
 \subsubsection{Aire et volume en comptant les points digitaux}
 \label{sec:AreaByCounting}
+%
 Une façon simple de calculer l'aire ou le volume d'une forme digitale consiste à
 compter le nombre de points digitaux appartenant à la forme. Plus formellement,
 pour tout sous-ensemble $\DigShape \subset \Z^2$, l'estimateur digital d'aire au pas
@@ -170,6 +171,7 @@ masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
 0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$
 %
 \subsubsection{Moments en comptant les points digitaux}
+\label{sec:MomentsByCounting}
 %
 Comme pour l'aire ou le volume précédemment, il est très simple de calculer les
 moments sur des données digitales. En effet, il suffit de sommer les valeurs des
@@ -186,8 +188,10 @@ Il est à noter que $f(z_1 \cdots z_d)$ est tout le temps égal à $1$ lorsque
 $(z_1,\ldots,z_d) \in \DigShape$, $0$ sinon, nous pouvons alors l'enlever de
 l'équation :
 %
-\begin{equation}
+\begin{equation} \label{eq:MomentsByCounting-def}
+%
   \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d}.
+%
 \end{equation}
 %
 Ainsi, le $0$-moment digital de $\DigShape$ correspond au volume digital de
@@ -200,42 +204,17 @@ fonction du pas de discrétisation $h$. \cauthors{Klette}{Klette2000} ont
 démontré la convergence de cet estimation des moments avec une vitesse de
 convergence dépendante de l'ordre du moment $\sigma = p_1 + \cdots + p_d$ :
 %
-\begin{equation} \label{huxleylike}
+\begin{equation} \label{eq:MomentsByCounting-conv}
 %
   \DMom{p_1 \cdots p_d}{h}(\DigF{\Shape}{h},h) = \Mom{p_1 \cdots p_d}(\Shape) + O(h^{\mu_{\sigma}}).
 %
 \end{equation}
 %
-avec $\mu_{\sigma} = 1$ dans le cas général (\todoJeremy{expliciter}). Cette
+avec $\mu_{\sigma} \ge 1$ dans le cas général (\todoJeremy{expliciter}). Cette
 borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
-\cauthors{Kraetzel}{Kraetzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et \cauthors{Muller}{Muller1999} obtiennent $\mu_0= \frac{66}{43}-\epsilon$.
-% %
-% Ainsi, soit $\vz \in \Z^d$, les moments digitaux sont alors :
-% %
-% \begin{align}
-%   \DMom{0 \cdots 0}{h}(\DigShape, h) &= h^d\\
-%   \DMom{1 0 \cdots 0}{h}(\DigShape, h) &= h^{d+1} z_1\\
-%   \DMom{1 1 0 \cdots 0}{h}(\DigShape, h) &= h^{d+2} z_1 z_2\\
-%   \DMom{2 0 \cdots 0}{h}(\DigShape, h) &= h^{d+2} z_1^2.
-% \end{align}
-%
-%
-\todoInlineJeremy{-----------------------------------------------------------------}
-%
-% 38/25 => 1.52
-% -------
-% 37/50
-% -------
-% 43/122 => 0.352459016
-% 130/174 => 0.747126437
-% 103/310 => 0.332258065
-% 318/430 => 0,739534884
-%
-% (a/2)-1+(1-b*(c-2))/(a+1-2*b*(c-1)) with a=3 and b=1/(2^c-2) and c=4
-% (1/2)*(a-1+b*(c-2)-d)-((a-1)/2 +b*(c-1)-d)*((1-b*(c-2))/(a+1-2*b*(c-1))) with a=3 and b=1/(2^c-2) and c=4 and d=4/(2^c)
-% (60*s^2-85*s+33)/(120*s+70) with s=3
-
-
+\cauthors{Kraetzel}{Kraetzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
+\cauthors{Muller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
+\todoInlineJeremy{A verifier}
 %
 \section{Enveloppes convexes}
 %
