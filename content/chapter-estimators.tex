@@ -304,7 +304,7 @@ principales et directions principales de courbure :
  Pour une forme $\Shape \in \Shapes$, les valeurs propres $\lambda_1$,
  $\lambda_2$, $\lambda_3$ de $\Cov(A)$, où $ A \EqDef \Ball{R}{\vx} \cap
  \Shape$ et $\vx \in \Bd{\Shape}$, $\lambda_1 \ge \lambda_2 \ge
- \lambda_3$, nous avons l'expansion de Taylor suivante :
+ \lambda_3$, nous avons l'approximation de Taylor suivante :
  \begin{align}
    \lambda_1& = \frac{2\pi}{15}R^5 - \frac{\pi}{48}(3\PrincCurv{1}(\Shape,\vx) + \PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,\\
    \lambda_2& = \frac{2\pi}{15}R^5 - \frac{\pi}{48}(\PrincCurv{1}(\Shape,\vx) + 3\PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,\\
@@ -891,7 +891,7 @@ Ainsi, l'\RefEquation{eq:MomentsOnUnitaryBall-conv} est le resultat de
 convergence asymptotique des moments digitaux des sous-ensembles $\Ball{R}{\vx}
 \cap \Shape$ lorsque $R$ et $h$ décroient.
 %
-\subsubsection{Approximation digitale de la matrice de covariance autour du point $\vx$}
+\paragraph{Matrice de covariance digitale et estimateurs digitaux de courbures principales}
 %
 De la même façon que pour la matrice de covariance, nous définissons la matrice
 de covariance digitale au pas de discrétisation $h$ pour tout sous-ensemble
@@ -931,6 +931,41 @@ $\DigShape \subset \Z^3$ en fonction des moment digitaux d'ordre $0$, $1$ et $2$
   \end{align}
 %
 \end{definition}
+%
+En suivant l'approximation de Taylor du \RefLemma{lem:pottmann-3d}, nous pouvons
+définir les estimateurs digitaux de courbures principales à partir de la
+diagonalisation de la matrice de covariance digitale :
+%
+\begin{definition}
+  \label{def:principal-curv-estimators}
+%
+  Soit $\DigShape \subset \Z^3$ une forme digitale et $h > 0$ un pas de
+  discrétisation. Pour $R \ge h$, nous définissons les estimateurs digitaux par
+  intégration de courbures principales $\PrincCurvH{1}{R}$ et
+  $\PrincCurvH{2}{R}$ de $\DigShape$ au point $\vy \in \R^3$ et au pas de
+  discrétisation $h$, et les estimateurs digitaux par intégration de leurs
+  directions principales respectives $\PrincDirH{1}{R}$ et $\PrincDirH{2}{R}$,
+  ainsi que l'estimateur digital par intégration de normale $\NormalDirH{R}$
+  comme :
+%
+\begin{align}
+  \PrincCurvH{1}{R}(\DigShape,\vy,h)  &\EqDef \frac{6}{\pi R^6}(\hat{\lambda}_2 - 3\hat{\lambda}_1) + \frac{8}{5R},
+  &\PrincDirH{1}{R}(\DigShape,\vy,h) &\EqDef \hat{\nu}_1 \\
+  \PrincCurvH{2}{R}(\DigShape,\vy,h) &\EqDef \frac{6}{\pi R^6}(\hat{\lambda}_1 - 3\hat{\lambda}_2) + \frac{8}{5R},
+  &\PrincDirH{2}{R}(\DigShape,\vy,h) &\EqDef \hat{\nu}_2\\
+  & &\NormalDirH{R}(\DigShape,\vy,h) &\EqDef\hat{\nu}_3\,,
+\end{align}
+%
+où $\hat{\lambda}_1 \ge \hat{\lambda}_2 \ge \hat{\lambda}_3$ sont les valeurs
+propres de $\DCov{h}(\Ball{R/h}{\vy / h} \cap \DigShape)$, et $\hat{\nu}_1,
+\hat{\nu}_2, \hat{\nu}_3$ sont leurs vecteurs propres correspondants.
+%
+\end{definition}
+%
+Dans les paragraphes suivants nous allons montrer la convergence asymptotique de
+ces estimateurs. La démonstration dépend de la convergence des moments digitaux,
+de la stabilité des moments face à des petits déplacements provoqués par la
+discrétisation, ainsi qu'à la théorie de perturbation de matrice.
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
