@@ -170,9 +170,9 @@ par intégration définis tels que :
   Pour une forme $\Shape \in \Shapes$ et un rayon $R \in \R^{+*}$, l'intégrale
   volumique $V_R(\vx)$ au point $\vx \in \dS$ est donné par :
   \begin{equation}
-    V_R(\vx) \EqDef \int_{B_R(\vx)}  \chi(p)dp\,,
+    V_R(\vx) \EqDef \int_{\Ball{R}{\vx}}  \chi(p)dp\,,
   \end{equation}
-  où $B_R(\vx)$ est une boule euclidienne de rayon $R$ et de centre $\vx$, et
+  où $\Ball{R}{\vx}$ est une boule euclidienne de rayon $R$ et de centre $\vx$, et
   $\chi(p)$ est la fonction caractéristique de $\Shape$. En dimension 2, nous
   noterons cette quantité $A_R(\vx)$.
 \end{definition}
@@ -239,7 +239,7 @@ estimateurs vont converger vers celles espérées. Plus formellement :
 %
 De la même manière, des informations directionnelles comme les courbures
 principales (et donc la courbure gaussienne) peuvent être extraitent du calcul
-par intération. En effet, à la place de calculer la mesure de $B_R(\vx)$ dans
+par intération. En effet, à la place de calculer la mesure de $\Ball{R}{\vx}$ dans
 la \RefDefinition{def:pottmann}, nous allons calculer sa matrice de covariance.
 %
 \begin{definition}
@@ -356,8 +356,8 @@ moments digitaux.
 %
 \subsubsection{Analyse digitale de l'aire et du volume de la sphère, et relation à la courbure}
 %
-Nous souhaitons estimer la quantité $A_R(\vx) = \Area(B_R(\vx)\cap\Shape)$ de la
-\RefDefinition{def:Volume} au pas de discrétisation $h$, où $B_R(\vx)$ est une
+Nous souhaitons estimer la quantité $A_R(\vx) = \Area(\Ball{R}{\vx}\cap\Shape)$ de la
+\RefDefinition{def:Volume} au pas de discrétisation $h$, où $\Ball{R}{\vx}$ est une
 boule de rayon $R$ centrée au point $\vx$. Nous ne pouvons pas directement
 utiliser les résultats des
 \RefEquations{eq:AreaByCountingConv}{eq:VolumeByCountingConv} pour estimer cette
@@ -380,42 +380,42 @@ boule. Nous estimons alors l'aire de l'intersection entre la forme et la boule
 de rayon $R$ en se ramenant à la boule unité :
 %
 \begin{align}
-  \AreaC(\DigF{B_R(\vx) \cap \Shape}{h}, h) & \EqDef h^2 \MCard( ( \frac{1}{h} \cdot ( B_R(\vx) \cap \Shape ) ) \cap \Z^2 ), \\
-   & = h^2 \MCard( (\frac{R}{h} \cdot ( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
-   & = R^2 \frac{h^2}{R^2} \MCard( (\frac{R}{h} \cdot ( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
-   & = R^2 \AreaC( \DigF{B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape}{h/R}, h/R ), \label{eq:Area_unitary_ball}
+  \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) & \EqDef h^2 \MCard( ( \frac{1}{h} \cdot ( \Ball{R}{\vx} \cap \Shape ) ) \cap \Z^2 ), \\
+   & = h^2 \MCard( (\frac{R}{h} \cdot ( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
+   & = R^2 \frac{h^2}{R^2} \MCard( (\frac{R}{h} \cdot ( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
+   & = R^2 \AreaC( \DigF{\Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape}{h/R}, h/R ), \label{eq:Area_unitary_ball}
 \end{align}
 %
 Alors, en insérant l'\RefEquation{eq:AreaByCountingConv} dans le terme de droite
 de \ref{eq:Area_unitary_ball}\footnote{Le terme $\beta$ est celui défini dans le \RefSection{sec:AreaByCounting}.} :
 \begin{equation}
   \label{eq:Area_unitary_ball_shape}
-  \AreaC(\DigF{B_R(\vx) \cap \Shape}{h}, h) = R^2 \left(\Area( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape) + O( (h/R)^\beta) \right).
+  \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) = R^2 \left(\Area( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) + O( (h/R)^\beta) \right).
 \end{equation}
 %
-Notons $SB(R)$ l'ensemble $B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot
+Notons $SB(R)$ l'ensemble $\Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot
 \Shape$. La constante $K_1$ associée au terme d'erreur grand « O » dépend
 uniquement de la courbure maximale de $\BT SB(R)$. La courbure n'est pas définie
 aux intersections des deux bords de la forme et de la boule (dans le
-sous-ensemble $\BT B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \dS$) mais
+sous-ensemble $\BT \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \dS$) mais
 son influence dans l'estimation d'aire est négligeable car au moins de l'ordre
 de $O(h^2)$. La partie restante de $\BT SB(R)$ a une courbure maximale qui est
 égale à $1$ pour un rayon $R$ suffisamment petit. En effet, puisque $\Shape$ a
 une courbure bornée, son dilaté $\frac{1}{R} \cdot \dS$ devient plat au point
 $\frac{1}{R} \cdot \vx$, alors la courbure maximale est introduite par $\BT
-B_1(\vx)$. Nous pouvons conclure qu'il existe quelques rayons $R_0$ tels que la
+\Ball{1}{\vx}$. Nous pouvons conclure qu'il existe quelques rayons $R_0$ tels que la
 constante $K_1$ intervient pour un rayon arbitraire $R < R_0$. En développant le
 terme d'erreur en grand « O » avec $K_1$, et en insérant dans
 l'\RefEquation{eq:Area_unitary_ball_shape} la relation :
 %
 \begin{equation}
-  A_R(\vx) = \Area( B_R(\vx) \cap \Shape ) = R^2 \Area( B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R} \cdot \Shape),
+  A_R(\vx) = \Area( \Ball{R}{\vx} \cap \Shape ) = R^2 \Area( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape),
 \end{equation}
 %
 nous obtenons :
 %
 \begin{equation}\label{eq:convergence-area-intersection}
-  | \AreaC(\DigF{B_R(\vx) \cap \Shape}{h}, h) - A_R(\vx) | \le K_1 h^\beta R^{2-\beta}.
+  | \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - A_R(\vx) | \le K_1 h^\beta R^{2-\beta}.
 \end{equation}
 %
 La convergence de la précédente relation tient du fait que $h \le R \le R_0$ et
@@ -424,14 +424,14 @@ point de $\dS$). De plus, la constante $K_1$ est indépendante de la forme
 $\Shape$ (mais dépendante de $R_0$).\\
 %
 Le même raisonnement est valide en dimension 3 : la courbure n'est alors pas
-définie dans le sous-ensemble $\BT B_1(\frac{1}{R} \cdot \vx) \cap \frac{1}{R}
+définie dans le sous-ensemble $\BT \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R}
 \cdot \dS$, qui tend vers le cercle unité lorsque $R \rightarrow 0$. L'erreur
 introduite dans l'estimation de volume est alors le nombre de voxels intersectés
 ($\approx 2\pi/h$), ce qui est négligeable. La courbure maximale est également
 $1$ pour un rayon $R$ suffisement petit. Nous obtenons alors :
 %
 \begin{equation}\label{eq:convergence-volume-intersection}
-  | \VolC(\DigF{B_R(\vx) \cap \Shape}{h}, h) - V_R(\vx) | \le K_1 h^\gamma R^{3-\gamma}.
+  | \VolC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - V_R(\vx) | \le K_1 h^\gamma R^{3-\gamma}.
 \end{equation}
 %
 \paragraph{Estimateurs digitaux de courbure 2D et de courbure moyenne 3D par intégration}
@@ -458,7 +458,7 @@ compter le nombre de points digitaux dans un voisinage du point d'intérêt :
   en tout point $\vx \in \R^2$ et pour le pas de discrétisation $h > 0$ comme :
   %
   \begin{equation}
-    \forall 0 < h < R,\quad \CurvH{R}(\DigShape,\vx,h) \EqDef \frac{3\pi}{2R} - \frac{3\AreaC(B_{R/h}(\vx/h ) \cap \DigShape, h)}{R^3}\,.
+    \forall 0 < h < R,\quad \CurvH{R}(\DigShape,\vx,h) \EqDef \frac{3\pi}{2R} - \frac{3\AreaC(\Ball{R/h}{\vx/h} \cap \DigShape, h)}{R^3}\,.
   \end{equation}
   %
 \end{definition}
@@ -471,7 +471,7 @@ compter le nombre de points digitaux dans un voisinage du point d'intérêt :
   0$ comme :
   %
   \begin{equation}
-    \forall 0 < h < R,\quad \MeanCurvH{R}(\DigShape,\vx,h) \EqDef \frac{8}{3R} - \frac{4\VolC(B_{R/h}(\vx/h ) \cap \DigShape, h)}{\pi R^4}\,.
+    \forall 0 < h < R,\quad \MeanCurvH{R}(\DigShape,\vx,h) \EqDef \frac{8}{3R} - \frac{4\VolC(\Ball{R/h}{\vx/h} \cap \DigShape, h)}{\pi R^4}\,.
   \end{equation}
   %
 \end{definition}
@@ -513,12 +513,12 @@ la forme respecte certaines contraintes.\\
   %
   En utilisant les relations sur les invariants par intégration définis
   précédement (\RefDefinition{def:digital-2d-curvature}), ainsi que la relation
-  $\DigF{B_R(\vx) \cap \Shape}{h}=B_{R/h}(\frac{1}{h} \cdot \vx) \cap
+  $\DigF{\Ball{R}{\vx} \cap \Shape}{h}=\Ball{R/h}{\frac{1}{h} \cdot \vx} \cap
   \DSh$, nous obtenons pour $R < R_0$ :
   %
   \begin{equation}
     | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
-    = \left|\frac{3\pi}{2R}-\frac{3\AreaC(B_{R/h}(\vx / h) \cap \DSh, h)}{R^3} - \Curv(\Shape,\vx) \right|,
+    = \left|\frac{3\pi}{2R}-\frac{3\AreaC(\Ball{R/h}{\vx / h} \cap \DSh, h)}{R^3} - \Curv(\Shape,\vx) \right|,
   \end{equation}
   %
   en utilisant la relation entre l'estimation digitale de l'aire et l'aire
@@ -526,7 +526,7 @@ la forme respecte certaines contraintes.\\
   %
   \begin{align}\label{eq-curvhat-error-bound-prelim}
     | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
-    &\le \left|\frac{3\pi}{2R}-\frac{3\Area(B_R(\vx) \cap \Shape)}{R^3} - \Curv(\Shape,\vx) \right| + 3K_1 \frac{h^\beta}{R^{1+\beta}} \nonumber \\
+    &\le \left|\frac{3\pi}{2R}-\frac{3\Area(\Ball{R}{\vx} \cap \Shape)}{R^3} - \Curv(\Shape,\vx) \right| + 3K_1 \frac{h^\beta}{R^{1+\beta}} \nonumber \\
     &\le \left|\CurvT{R}(\Shape,\vx) - \Curv(\Shape,\vx) \right| + 3K_1 \frac{h^\beta}{R^{1+\beta}},
   \end{align}
   %
@@ -594,12 +594,12 @@ moyenne sur des formes 3D :
   La preuve suit exactement les mêmes étapes que la preuve du
   \RefTheorem{thm:convergence-curv-2d}, la
   \RefDefinition{def:digital-3d-curvature}), ainsi que la relation
-  $\DigF{B_R(\vx) \cap \Shape}{h}=B_{R/h}(\frac{1}{h} \cdot \vx) \cap \DSh$ nous
+  $\DigF{\Ball{R}{\vx} \cap \Shape}{h}=\Ball{R/h}{\frac{1}{h} \cdot \vx} \cap \DSh$ nous
   permets d'obtenir pour $R < R_0$ :
   %
   \begin{equation}
     | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
-    = \left|\frac{8}{3R}-\frac{4\VolC(B_{R/h}(\vx / h) \cap \DSh, h)}{\pi R^4} - \MeanCurv(\Shape,\vx) \right|,
+    = \left|\frac{8}{3R}-\frac{4\VolC(\Ball{R/h}{\vx / h} \cap \DSh, h)}{\pi R^4} - \MeanCurv(\Shape,\vx) \right|,
   \end{equation}
   %
   en utilisant la relation entre l'estimation digitale du volume et le volume
@@ -607,7 +607,7 @@ moyenne sur des formes 3D :
   %
   \begin{align}\label{eq-meancurvhat-error-bound-prelim}
     | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
-    &\le \left|\frac{8}{3R}-\frac{4\Vol(B_R(\vx) \cap \Shape)}{\pi R^4} - \MeanCurv(\Shape,\vx) \right| + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}} \nonumber \\
+    &\le \left|\frac{8}{3R}-\frac{4\Vol(\Ball{R}{\vx} \cap \Shape)}{\pi R^4} - \MeanCurv(\Shape,\vx) \right| + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}} \nonumber \\
     &\le \left|\MeanCurvT{R}(\Shape,\vx) - \MeanCurv(\Shape,\vx) \right| + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}},
   \end{align}
   %
@@ -700,13 +700,13 @@ Nous pouvons alors réécrire l'\RefEquation{eq:convergence-area-intersection}
 pour $\vxH$ :
 %
 \begin{equation}
-  | \AreaC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - A_R(\vxH) | \le K_1 h^\beta R^{2-\beta},
+  | \AreaC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - A_R(\vxH) | \le K_1 h^\beta R^{2-\beta},
 \end{equation}
 %
 ce qui implique, avec l'\RefEquation{eq-area-shift-error} :
 %
 \begin{equation}\label{eq-shift-B-R-error-bound-2D}
-  | \AreaC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - A_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  2 R \vt (1 + O(R^2) + O(\vt)).
+  | \AreaC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - A_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  2 R \vt (1 + O(R^2) + O(\vt)).
 \end{equation}
 %
 Ensuite, dans le but d'obtenir un estimateur de courbure, nous suivons le même
@@ -722,7 +722,7 @@ Puisque nous sommes sur des données digitales, nous savons que $\vt \le
 localisation de $\vxH$ vers $\vx$ \cite{deVieilleville2006}. Nous noterons alors
 $\vt = O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la
 précédente équation afin d'obtenir une borne d'erreur uniquement dépendante de
-$h$, avec $R=kh^{\alpha}$ :		
+$h$, avec $R=kh^{\alpha}$ :
 %
 \begin{equation} \label{eq-shift-curvhat-error-bound-h-only}
   | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) |
@@ -800,13 +800,13 @@ Nous pouvons alors réécrire l'\RefEquation{eq:convergence-vol-intersection}
 pour $\vxH$ :
 %
 \begin{equation}
-  | \VolC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - V_R(\vxH) | \le K_1 h^\gamma R^{3-\gamma},
+  | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vxH) | \le K_1 h^\gamma R^{3-\gamma},
 \end{equation}
 %
 ce qui implique, avec l'\RefEquation{eq-vol-shift-error} :
 %
 \begin{equation}\label{eq-shift-B-R-error-bound-3D}
-  | \VolC(\DigF{B_R(\vxH) \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\gamma R^{3-\gamma} +  R^2 \pi \vt (1 + O(R^2) + O(\vt)).
+  | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\gamma R^{3-\gamma} +  R^2 \pi \vt (1 + O(R^2) + O(\vt)).
 \end{equation}
 %
 Ensuite, nous suivons le même raisonnement que pour la preuve du
@@ -849,8 +849,89 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\ga
 \subsubsection{Analyse digitale de l'intégration volumique de la sphère, et
 relation aux courbures principales 3D}
 %
-
-
+Nous souhaitons alors calculer les moments sur l'intersection entre la forme
+$\Shape$ et la boule, \cad à $\Ball{R}{\vx} \cap \Shape$, dont la taille décroit
+avec le pas de discrétisation $h$. Nous ne pouvons pas directement les résultats
+de l'\RefEquation{eq:MomentsByCounting-conv} car les constantes cachées dans le
+terme en grand « O » dépendent de la taille de la forme, de son échelle et de la
+courbure maximale. Nous devons normaliser l'estimation des momentsde telle sorte
+que le terme d'erreur ne soit plus influencé par l'échelle. Comme en 2D, cela
+revient à se rapporter à la sphère unité. Pour plus de lisibilité, nous noterons
+$\sigma = p_1 + \cdots + p_3$ :
+%
+\begin{align} \label{eq:MomentsOnUnitaryBall}
+%
+  \DMom{p_1 \cdots p_3}{h}(\DigF{\Ball{R}{\vx} \cap \Shape}{h},h) &= h^{3+\sigma}\Mom{p_1 \cdots p_3}\left
+  ( (\frac{1}{h} \cdot \Ball{R}{\vx} \cap \Shape) \cap \Z^3 \right) \nonumber \\
+  &= h^{3+{\sigma}} \Mom{p_1 \cdots p_3}\left( \frac{R}{h}\cdot(
+  \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) \cap \Z^3 \right) \nonumber \\
+  &= R^{3+{\sigma}} \left( \frac{h}{R} \right)^{3+{\sigma}} \hspace{-0.3cm} \Mom{p_1 \cdots p_3} \left( \DigF{ \Ball{1}{\frac{1}{R}\cdot \vx}\cap\frac{1}{R}\cdot \Shape}{h/R} \right) \nonumber\\
+  &= R^{3+{\sigma}}\DMom{p_1 \cdots p_3}{h}\left( \DigF{ \Ball{1}{\frac{1}{R}\cdot \vx}\cap\frac{1}{R}\cdot \Shape}{h/R}, {\frac{h}{R}} \right).
+%
+\end{align}
+%
+Ainsi, la forme $\Ball{1}{\frac{1}{R} \cdot \vx}\cap\frac{1}{R}\cdot \Shape$
+tend vers la demi-boule de rayon $1$ lorsque $R$ décroit. Par conséquent, nous
+pouvons appliquer l'\RefEquation{eq:MomentsByCounting-conv} à
+l'\RefEquation{eq:MomentsOnUnitaryBall} et considérer à présent que la constante
+impliquée dans le terme d'erreur n'est plus liée à $R$ ni à $h$. Comme $\Mom{p1
+\cdots p_d}(R \cdot Y) = R^{d+p_1+\cdots+p_d} \Mom{p_1 \cdots p_d}(Y)$, nous
+pouvons écrire :
+%
+\begin{align} \label{eq:MomentsOnUnitaryBall-conv}
+%
+  \DMom{p_1 \cdots p_3}{h}(\DigF{\Ball{R}{\vx} \cap \Shape}{h},h) &= R^{3+\sigma}
+  \Mom{p_1 \cdots p_3}\left( \Ball{1}{\frac{1}{R}\cdot \vx} \cap \frac{1}{R}\cdot \Shape
+  \right) + R^{3+\sigma} O \left( \frac{h}{R} \right)^{\mu_{{\sigma}}}  \nonumber \\
+   &= \Mom{p_1 \cdots p_3}( \Ball{R}{\vx} \cap \Shape ) + O( R^{3+{\sigma}-\mu_\sigma} h^{\mu_\sigma}).
+%
+\end{align}
+%
+Ainsi, l'\RefEquation{eq:MomentsOnUnitaryBall-conv} est le resultat de
+convergence asymptotique des moments digitaux des sous-ensembles $\Ball{R}{\vx}
+\cap \Shape$ lorsque $R$ et $h$ décroient.
+%
+\subsubsection{Approximation digitale de la matrice de covariance autour du point $\vx$}
+%
+De la même façon que pour la matrice de covariance, nous définissons la matrice
+de covariance digitale au pas de discrétisation $h$ pour tout sous-ensemble
+$\DigShape \subset \Z^3$ en fonction des moment digitaux d'ordre $0$, $1$ et $2$ :
+%
+\begin{definition}[Matrice de covariance digitale] \label{def:DigCovMatrix-def}
+%
+  Pour tout sous ensemble $\DigShape \subset \Z^3$, sa matrice de covariance
+  digitale $\DCov{h}$ au pas de discrétisation $h$ est :
+%
+  \begin{align}
+%
+    \DCov{h}(Z) \EqDef &\left\lbrack
+        \begin{array}{ccc}
+          \DMom{200}{h}(\DigShape) & \DMom{110}{h}(\DigShape) & \DMom{101}{h}(\DigShape)\\
+          \DMom{110}{h}(\DigShape) & \DMom{020}{h}(\DigShape) & \DMom{011}{h}(\DigShape)\\
+          \DMom{101}{h}(\DigShape) & \DMom{011}{h}(\DigShape) & \DMom{002}{h}(\DigShape)
+        \end{array}
+        \right\rbrack
+        - \frac{1}{\DMom{000}{h}(\DigShape)}
+        \left\lbrack
+        \begin{array}{c}
+          \DMom{100}{h}(\DigShape) \\
+          \DMom{010}{h}(\DigShape) \\
+          \DMom{001}{h}(\DigShape) \\
+        \end{array}
+        \right\rbrack
+        \otimes
+        \left\lbrack
+        \begin{array}{c}
+          \DMom{100}{h}(\DigShape) \\
+          \DMom{010}{h}(\DigShape) \\
+          \DMom{001}{h}(\DigShape) \\
+        \end{array}
+        \right\rbrack^T.
+%
+  \end{align}
+%
+\end{definition}
+%
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
@@ -863,62 +944,6 @@ relation aux courbures principales 3D}
 % \todoInlineJeremy{-------------------------------}
 % \vxH \in \Bd{\Body{\DSh}{h}}
 
-\begin{definition}{\textbf{(Estimateurs de courbure discrète 2D $\CurvH{R}(\DigShape,\vp)$ et de courbure discrète moyenne 3D $\MeanCurvH{R}(\DigShape,\vp)$).}}
-  \begin{equation}
-    \CurvH{R}(\DigShape,\vp) \EqDef \frac{1}{h} \left( \frac{3 \pi}{2 R_d}
-     - \frac{3 A_{R_d}(\vp)}{{R_d}^3} \right),
-     \quad \MeanCurvH{R}(\DigShape,\vp) \EqDef \frac{1}{h} \left( \frac{8}{3 R_d}
-      - \frac{4V_{R_d}(\vp)}{{\pi R_d}^4} \right).
-  \end{equation}
-  \label{def:ii-2d-3d-mean}
-\end{definition}
-
-\begin{theorem}{\textbf{(Convergence des estimateurs de courbure discrète 2D $\CurvH{R}(Z,p)$ et de courbure discrète moyenne 3D $\MeanCurvH{R}(Z,p)$).}}
-  \begin{equation}
-    \CurvH{R}(\DSh,p) = \Curv(\Shape,\vx) + O(h^{\frac{1}{3}}),
-    \quad \MeanCurvH{R}(\DSh,p) = \MeanCurv(\Shape,\vx) + O(h^{\frac{1}{3}}).
-  \end{equation}
-  \label{theo:ii-2d-3d-mean-conv}
-\end{theorem}
-
-
-\begin{align}
-  \hat{m}_{p,q,s}(&\DigF{A}{h},h) = h^{3+{\sigma}}M_{p,q,s}\left
-  ( (\frac{1}{h} \cdot \Ball{R}{\vx} \cap \Shape) \cap \Z^3 \right) \nonumber \\
-  & = h^{3+{\sigma}} M_{p,q,s}\left( \frac{R}{h}\cdot(
-  \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) \cap \Z^3 \right) \nonumber \\
-  &= R^{3+{\sigma}} \left( \frac{h}{R} \right)^{3+{\sigma}} \hspace{-0.3cm} M_{p,q,s} \left( \DigF{ B_1(\frac{1}{R}\cdot \vx)\cap\frac{1}{R}\cdot \Shape}{h/R} \right) \nonumber\\
-&= R^{3+{\sigma}}\hat{m}_{p,q,s}\left( \DigF{ B_1(\frac{1}{R}\cdot \vx)\cap\frac{1}{R}\cdot \Shape}{h/R}, {\frac{h}{R}} \right).\label{eq:fin}
-\end{align}
-
-\begin{align}
-\hat{m}_{p,q,s}(\DigF{A}{h},h) &= R^{3+{\sigma}}
-m_{p,q,s}\left( \Ball{1}{\frac{1}{R}\cdot \vx} \cap \frac{1}{R}\cdot \Shape
-\right) \nonumber\\&\quad\quad\quad\quad\quad+  R^{3+{\sigma}}
-O \left( \frac{h}{R} \right)^{\mu_{{\sigma}}}  \nonumber \\
- &= m_{p,q,s}( \Ball{R}{\vx} \cap \Shape ) + O( R^{3+{\sigma}-\mu_{{\sigma}}} h^{\mu_{{\sigma}}}) \nonumber \\
- &= m_{p,q,s}( A ) + O( R^{3+{\sigma}-\mu_{{\sigma}}} h^{\mu_{{\sigma}}}).\label{eq:conv-digital-moment}
-\end{align}
-
-
-\begin{align}
-  \hat{J}( \DigShape,h )\EqDef & \left [
-    \begin{array}{ccc}
-      \hat{m}_{2,0,0}(\DigShape,h) &       \hat{m}_{1,1,0}(\DigShape,h) &      \hat{m}_{1,0,1}(\DigShape,h)\\
-      \hat{m}_{1,1,0}(\DigShape,h) &   \hat{m}_{0,2,0}(\DigShape,h) &      \hat{m}_{0,1,1}(\DigShape,h)\\
-      \hat{m}_{1,0,1}(\DigShape,h) & \hat{m}_{0,1,1}(\DigShape,h)  & \hat{m}_{0,0,2}(\DigShape,h)
-    \end{array}
-    \right ] \nonumber\\
-  & -\frac{1}{\hat{m}_{0,0,0}(\DigShape,h)}
-  \left [ \begin{array}{c}
-      \hat{m}_{1,0,0}(\DigShape,h) \\ \hat{m}_{0,1,0}(\DigShape,h) \\ \hat{m}_{0,0,1}(\DigShape,h)\\
-    \end{array} \right ]
-  \otimes
-  \left [ \begin{array}{c}
-      \hat{m}_{1,0,0}(\DigShape,h) \\ \hat{m}_{0,1,0}(\DigShape,h) \\ \hat{m}_{0,0,1}(\DigShape,h)\\
-    \end{array} \right ]^T.
-\label{def:digital-covariance-matrix}
-\end{align}
 
 \begin{theorem}{\textbf{(Multigrid convergence of digital covariance matrix).}}
   \label{thm:conv-cov-matrix}
