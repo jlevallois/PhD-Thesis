@@ -967,6 +967,42 @@ ces estimateurs. La démonstration dépend de la convergence des moments digitau
 de la stabilité des moments face à des petits déplacements provoqués par la
 discrétisation, ainsi qu'à la théorie de perturbation de matrice.
 %
+\paragraph{Propriétés des matrices de covariance et de moments}
+%
+Dans un premier temps, nous allons étudier les propriétés des matrices de
+covariance et des moments.
+%
+\begin{lemma} \label{lem:covariance-translation-invariant}
+%
+  Invariance à la translation pour les matrices de covariance :
+%
+  \begin{itemize}
+    \item $\forall Y \subset \R^3$, $\forall \vv \in \R^3$, $\Cov(Y + \vv) = \Cov(Y)$.
+    \item $\forall Z \subset \Z^3$, $\forall \vv \in \Z^3$, $\forall h > 0$, $\DCov{h}(Z + \vv) = \DCov{h}(Z)$.
+  \end{itemize}
+%
+\end{lemma}
+%
+\begin{lemma} \label{lem:moments-ball-position-error}
+%
+  Pour tout point $\vx$, un rayon $R$ positif, pour tout vecteur $\vt$ avec pour
+  norme $t \EqDef \| \vt \|_2 \le R$, nous avons :
+%
+  \begin{align}
+    \left| \Mom{000}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{000}(\Ball{R}{\vx}) \right|
+    & \le O(t R^2), \label{eq-zero-moments-ball-position-error} \\
+    \left| \Mom{100}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{100}(\Ball{R}{\vx}) \right|
+    & \le O(t R^3) + O( \|\vx\|_\infty t R^2 ), \label{eq-first-moments-ball-position-error}\\
+    \left| \Mom{200}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{200}(\Ball{R}{\vx}) \right|
+    & \le O(t R^4) + O( \|\vx\|_\infty t R^3 ) + O( \|\vx\|^2_\infty t R^2 ). \label{eq-second-moments-ball-position-error}
+  \end{align}
+%
+  Les autres moments avec le même ordre ont respectivement les mêmes bornes. De
+  plus, ces relations restent vraies si $\Ball{R}{\vx+\mathbf{t}}$ ou
+  $\Ball{R}{\vx}$ intersectent le même ensemble $\Shape$.
+%
+\end{lemma}
+%
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
