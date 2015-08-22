@@ -970,7 +970,8 @@ discrétisation, ainsi qu'à la théorie de perturbation de matrice.
 \paragraph{Propriétés des matrices de covariance et de moments}
 %
 Dans un premier temps, nous allons étudier les propriétés des matrices de
-covariance et des moments.
+covariance et des moments face aux perturbations. Nous pouvons
+\comJeremy{établir l'invariance} des matrices de covariances :
 %
 \begin{lemma} \label{lem:covariance-translation-invariant}
 %
@@ -983,6 +984,8 @@ covariance et des moments.
 %
 \end{lemma}
 %
+Nous devons également étudier comment les moments sont perturbés par une erreur de positionnement de la boule :
+%
 \begin{lemma} \label{lem:moments-ball-position-error}
 %
   Pour tout point $\vx$, un rayon $R$ positif, pour tout vecteur $\vt$ avec pour
@@ -990,18 +993,23 @@ covariance et des moments.
 %
   \begin{align}
     \left| \Mom{000}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{000}(\Ball{R}{\vx}) \right|
-    & \le O(t R^2), \label{eq-zero-moments-ball-position-error} \\
+    & \le O(t R^2), \label{eq:zero-moments-ball-position-error} \\
     \left| \Mom{100}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{100}(\Ball{R}{\vx}) \right|
-    & \le O(t R^3) + O( \|\vx\|_\infty t R^2 ), \label{eq-first-moments-ball-position-error}\\
+    & \le O(t R^3) + O( \|\vx\|_\infty t R^2 ), \label{eq:first-moments-ball-position-error}\\
     \left| \Mom{200}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{200}(\Ball{R}{\vx}) \right|
-    & \le O(t R^4) + O( \|\vx\|_\infty t R^3 ) + O( \|\vx\|^2_\infty t R^2 ). \label{eq-second-moments-ball-position-error}
+    & \le O(t R^4) + O( \|\vx\|_\infty t R^3 ) + O( \|\vx\|^2_\infty t R^2 ). \label{eq:second-moments-ball-position-error}
   \end{align}
 %
-  Les autres moments avec le même ordre ont respectivement les mêmes bornes. De
-  plus, ces relations restent vraies si $\Ball{R}{\vx+\mathbf{t}}$ ou
+  Les bornes sont valides pour tous les moments ayant respectivement le même
+  ordre. De plus, ces relations restent vraies si $\Ball{R}{\vx+\mathbf{t}}$ ou
   $\Ball{R}{\vx}$ intersectent le même ensemble $\Shape$.
 %
 \end{lemma}
+\begin{proof}
+%
+dejzaopj
+%
+\end{proof}
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
