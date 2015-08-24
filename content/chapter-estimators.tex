@@ -988,15 +988,16 @@ Nous devons également étudier comment les moments sont perturbés par une erre
 %
 \begin{lemma} \label{lem:moments-ball-position-error}
 %
-  Pour tout point $\vx$, un rayon $R$ positif, pour tout vecteur $\vt$ avec pour
-  norme $t \EqDef \| \vt \|_2 \le R$, nous avons :
+  Pour tout point $\vx \in \R^3$, un rayon $R$
+  positif, pour tout vecteur $\vt$ avec pour norme $t \EqDef \| \vt \|_2 \le R$,
+  nous avons :
 %
   \begin{align}
-    \left| \Mom{000}(\Ball{R}{\vx + \vt}) - \Mom{000}(\Ball{R}{\vx}) \right|
+    \left| \Mom{000}(\Ball{R}{\vx + \vt} \cap \Shape) - \Mom{000}(\Ball{R}{\vx} \cap \Shape) \right|
     & \le O(t R^2), \label{eq:zero-moments-ball-position-error} \\
-    \left| \Mom{100}(\Ball{R}{\vx + \vt}) - \Mom{100}(\Ball{R}{\vx}) \right|
+    \left| \Mom{100}(\Ball{R}{\vx + \vt} \cap \Shape) - \Mom{100}(\Ball{R}{\vx} \cap \Shape) \right|
     & \le O(t R^3) + O( \|\vx\|_\infty t R^2 ), \label{eq:first-moments-ball-position-error}\\
-    \left| \Mom{200}(\Ball{R}{\vx + \vt}) - \Mom{200}(\Ball{R}{\vx}) \right|
+    \left| \Mom{200}(\Ball{R}{\vx + \vt} \cap \Shape) - \Mom{200}(\Ball{R}{\vx} \cap \Shape) \right|
     & \le O(t R^4) + O( \|\vx\|_\infty t R^3 ) + O( \|\vx\|^2_\infty t R^2 ). \label{eq:second-moments-ball-position-error}
   \end{align}
 %
@@ -1035,6 +1036,7 @@ Nous devons également étudier comment les moments sont perturbés par une erre
     \caption[Illustration du \RefLemma{lem:moments-ball-position-error}.]{Illustration du \RefLemma{lem:moments-ball-position-error}.}
     \label{fig:moments-perturb}
 \end{figure}
+\todoJeremy{Pb avec la figure}
 %
 En décomposant $\Shape$ en fonction de deux boules de rayon R, centrées en $\vx$
 et $\vx + \vt$ (voir \RefFigure{fig:moments-perturb}), nous avons :
@@ -1060,21 +1062,172 @@ et avec la propriété d'additivité des intégrales, nous avons :
   &\le \sup_{Y \subset \Ball{R+t}{\vx} - \Ball{R-t}{\vx}} |\Mom{p_1 \cdots p_3}(Y)|.
 \end{align}
 %
-Nous couvrons alors la différence entre les deux boules centrées en des points
-différents ($\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}$) par la différence entre
-deux boules de même centre mais de rayons différents ($\Ball{R+t}{\vx} -
-\Ball{R-t}{\vx}$). Ceci est représenté en bleu sur la
-\RefFigure{fig:moments-perturb}, correspond à un anneau en 2D de largeur $2t$.
-Il s'agit évidemment d'une borne supérieure épaisse, mais les ordres de
-perturbations sont les mêmes. Alors, pour le moment d'ordre zéro, nous utilisons
-le volume de la boule :
+Pour une meilleure lisibilité, nous noterons $S_{R,t}(\vx) \EqDef
+\Ball{R+t}{\vx} \setminus \Ball{R-t}{\vx}$. Nous couvrons alors la différence
+entre les deux boules centrées en des points différents ($\Ball{R}{\vx+\vt}
+\ominus \Ball{R}{\vx}$) par la différence entre deux boules de même centre mais
+de rayons différents ($S_{R,t}(\vx)$). Ceci est représenté
+en bleu sur la \RefFigure{fig:moments-perturb}, correspond à un anneau en 2D de
+largeur $2t$. Il s'agit évidemment d'une borne supérieure épaisse, mais les
+ordres de perturbations sont les mêmes.
+%
+\textbf{\\Moment d'ordre zéro.\quad}
+%
+Pour le moment d'ordre zéro, nous utilisons simplement le volume de la boule :
 %
 \begin{align}
-  \sup_{Y \subset \Ball{R+t}{\vx} - \Ball{R-t}{\vx}} |\Mom{000}(Y)| &
-    = \Mom{000}( \Ball{R+t}{\vx} - \Ball{R-t}{\vx} ) \nonumber \\
-    &
-    = \frac{4\pi}{3}(6R^2t+2t^3)=O(tR^2).
+  \sup_{Y \subset S_{R,t}(\vx)} |\Mom{000}(Y)|
+  &= \Mom{000}( S_{R,t}(\vx) ) \\
+  &= \frac{4\pi}{3}(R+t)^3 - \frac{4\pi}{3}(R-t)^3 \\
+  &= \frac{4\pi}{3}(6R^2t+2t^3)=O(tR^2).
 \end{align}
+%
+\textbf{\\Moments du premier ordre.\quad}
+%
+Pour les moments du premier ordre, nous translatons la forme à l'origine du
+repère et nous utilisons le résultat précédent ainsi que le fait que le
+$100$-moment centré est maximisé pour la demi-boule à valeur de $x$ positive
+(que nous noterons $\HalfBall{R}{\vx}$)\footnote{Rappelons que $x_i$ est la
+$i$ème composante de $\vx$.} :
+%
+\begin{align}
+  \sup_{Y \subset S_{R,t}(\vx)} |\Mom{100}(Y)|
+  &\le \sup_{Y \subset S_{R,t}(\mathbf{0})} |\Mom{100}(Y)| + |x_1|\cdot\Mom{000}(Y)\nonumber \\
+  &= \Mom{100}( \HalfBall{R+t}{\mathbf{0}} - \HalfBall{R-t}{\mathbf{0}} ) + O(|x_1|tR^2) \nonumber \\
+  &= 2\pi(R^3t +Rt^3) + O( (\| \vx \|_\infty) tR^2) \nonumber \\
+  &= O(tR^3) + O(\| \vx \|_\infty tR^2).
+\end{align}
+%
+\textbf{\\Moments du second ordre.\quad}
+%
+Pour les moments du second ordre, nous translatons également la forme à
+l'origine du repère, puis nous utilisons les deux résultats précédents ainsi que
+le fait que le $200$-moment est maximisé pour la boule :
+%
+\begin{align}
+  \sup_{Y \subset S_{R,t}(\vx)} |\Mom{200}(Y)| &
+  \le \sup_{Y \subset S_{R,t}(\mathbf{0})} |\Mom{200}(Y)| + 2|x_1|\cdot |\Mom{100}(Y)| + x_1^2\cdot\Mom{000}(Y) \nonumber \\
+  & = \Mom{200}(S_{R,t}(\mathbf{0})) + \|\vx\|_\infty (O(tR^3) + O(\|\vx\|_\infty tR^2))+  \|\vx\|_\infty^2 O(tR^2) \nonumber \\
+  & = O(tR^4) +O(\|\vx\|_\infty tR^3) +O(\|\vx\|_\infty^2 tR^2)
+\end{align}
+%
+Les autres moments sont prouvés de la même façon.
+%
+\end{proof}
+%
+\paragraph{Convergence asymptotique des matrices de covariances digitales}
+%
+Avec le \RefLemma{lem:covariance-translation-invariant} et le
+\RefLemma{lem:moments-ball-position-error}, nous pouvons facilement prouver la
+convergence asymptotique des matrices de covariances digitales. Le théorème
+suivant établie la convergence lorsque la matrice de covariance est calculée sur
+le même point $\vy$, et le suivant établiera sa convergence asymptotique sur le
+bord digital de la forme.
+%
+\begin{theorem}[Convergence de la matrice de covariance digitale.]
+%
+  Soit $\Shape$ un domaine compact de $\R^d$. Alors, il existe une constance
+  $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour tout $\vy
+  \in \R^3$, pour un radius $R \ge h$, nous avons\footnote{$\mu_i \ge 1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+%
+  \begin{equation}
+    \left \| \DCov{h}( \Ball{R/h}{\vy/h} \cap  \DSh ) - \Cov( \Ball{R}{\vy} \cap \Shape )\right \| \le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
+  \end{equation}
+%
+  La constance cachée derrière le terme en grand « O » ne dépend pas de la
+  taille de la forme ni de la géométrie. $\|\cdot\|$ est la norme spectrale des
+  matrices.
+%
+\end{theorem}
+\begin{proof}
+%
+  Afin de faciliter la lecture, nous noterons $A \EqDef \Ball{R}{\vy} \cap
+  \Shape$ et $A_h \EqDef \Ball{R/h}{\vy/h} \cap \DSh = \DigF{\Ball{R}{\vy} \cap
+  \Shape}{h}$ (au sens de la discrétisation de Gauss). Nous commençons par
+  translater les ensembles $A$ et $A_h$ centrés en $\vy$ vers l'origine du
+  repère. Nous devons alors utiliser un vecteur qui prend compte de la
+  discrétisation puisque nous décalons $A_h$ par le vecteur $\Rounded{\vy}{h}$
+  (\comJeremy{vecteur entier} le plus proche de $\frac{\vy}{h}$) et nous
+  décalons $A$ par le vecteur $h\Rounded{\vy}{h}$. Nous noterons alors
+  $\tilde{A} \EqDef A -
+  h\Rounded{\vy}{h}$ et $\tilde{A}_h \EqDef A_h - \Rounded{\vy}{h}$. Avec ces deux définitions et la propriété d'invariance des
+  matrices de covariances digitales
+  (\RefLemma{lem:covariance-translation-invariant}), nous obtenons :
+%
+  \begin{align}
+    \DCov{h}( \Ball{R/h}{\vy/h} \cap \DSh )
+    &= \DCov{h}( A_h )\\
+    &= \DCov{h}\left( \tilde{A}_h + \Rounded{\vy}{h}\right )\\
+    &= \DCov{h}( \tilde{A}_h )\\
+    &= \DCov{h}( \DigF{\tilde{A}}{h} ). \label{eq:DigitalCovarianceMatrix-conv-proof1}
+  \end{align}
+%
+  La dernière égalité vient du fait que $\tilde{A}_h = \DigF{A}{h} -
+  \Rounded{\vy}{h} = \DigF{A - h\Rounded{\vy}{h}}{h} = \DigF{\tilde{A}}{h}$.
+%
+  Nous faisons de même avec la matrice de covariance continue :
+%
+  \begin{align}
+    \Cov( \Ball{R}{\vx} \cap \Shape )
+    &= \Cov( A ) \\
+    &= \Cov\left( \tilde{A} + h\Rounded{\vy}{h} \right) \\
+    &= \Cov( \tilde{A} ). \label{eq:DigitalCovarianceMatrix-conv-proof2}
+  \end{align}
+%
+  Alors, nous pouvons réécrire l'erreur d'estimation de la matrice de covariance
+  digitale comme :
+%
+  \begin{align}
+    \| \DCov{h}( \Ball{R/h}{\vy/h} \cap \DSh ) - \Cov( \Ball{R}{\vx} \cap \Shape ) \|
+    = \| \DCov{h}( \DigF{\tilde{A}}{h} ) - \Cov( \tilde{A} ) \|. \label{eq:DigitalCovarianceMatrix-conv-proof3}
+  \end{align}
+%
+  Détaillons maintenant $\DCov{h}( \DigF{\tilde{A}}{h} )$ :
+%
+  \begin{equation}
+    \DCov{h}( \DigF{\tilde{A}}{h} )
+    = \left [
+    \begin{array}{ccc}
+      \DMom{200}{h}(\tilde{A}_h) & &\\
+      & \ddots & \\
+    \end{array}
+    \right ]% \nonumber \\ &
+    - \frac{1}{\DMom{000}{h}(\tilde{A}_h)}
+    \left [ \begin{array}{c}
+      \DMom{100}{h}(\tilde{A}_h) \\ \vdots
+    \end{array} \right ]
+    \otimes
+    \left [ \begin{array}{c}
+      \DMom{100}{h}(\tilde{A}_h) \\ \vdots
+    \end{array} \right ]^T.
+  \end{equation}
+%
+  En utilisant les résultats de l'\RefEquation{eq:MomentsOnUnitaryBall-conv},
+  nous obtenons :
+%
+\begin{align}
+  \DCov{h}( \DigF{\tilde{A}}{h} )
+  &= \left [
+  \begin{array}{ccc}
+    \Mom{200}(\tilde{A}) + O(R^{5 - \mu_2} h^{\mu_2}) & &\\
+    & \ddots & \\
+  \end{array}
+  \right ] \nonumber \\
+  & \quad- \frac{1}{\Mom{000}(\tilde{A}) + O(R^{3 - \mu_0} h^{\mu_0})}
+  \left [ \begin{array}{c}
+    (\Mom{100}(\tilde{A}) + O(R^{4 - \mu_1} h^{\mu_1}))^2 \\ \vdots
+  \end{array} \right ].
+\end{align}
+%
+  Il est à noter que les constantes dans les termes en grand « O » sont
+  indépendantes de $\Shape$ grâce à la normalisation. La précedente équation
+  nous donne $\Cov( \tilde{A} )$ et des termes d'erreurs sur les moments. Nous
+  allons alors chercher les bornes supérieures de ces moments dans le calcul de
+  $\DCov{h}( \DigF{\tilde{A}}{h} )$ en sachant que :
+  \begin{itemize}
+    \item Le rayon $R$ est supérieur à $h$.
+    \item $\tilde{A}$ n'est pas vide et est proche de l'origine, nous pouvons alors utiliser les %\RefEquations{}{}.
+  \end{itemize}
 %
 \end{proof}
 %
@@ -1090,20 +1243,6 @@ le volume de la boule :
 % \todoInlineJeremy{-------------------------------}
 % \vxH \in \Bd{\Body{\DSh}{h}}
 
-
-\begin{theorem}{\textbf{(Multigrid convergence of digital covariance matrix).}}
-  \label{thm:conv-cov-matrix}
-  Let $X \in \Shapes$. Then, there exists some constant $h_X$, such
-  that for any grid step $0< h < h_X$, for arbitrary $x \in \R^3$, for
-  arbitrary $R \ge h$, with non-empty $A(R,x) \EqDef \Ball{R}{x} \cap
-  X$, we have:
-  \begin{align*}
-    \| \hat{J}( \DigF{A(R,x)}{h}, h ) - J( A(R,x) ) \|
-    &\le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
-  \end{align*}
-  The constants hidden in the big O do not depend on the shape size or
-  geometry. {$\|\cdot\|$ denotes the spectral norm on matrices. }
-\end{theorem}
 
 \begin{lemma}
 \label{lem:moment-pos-error}
