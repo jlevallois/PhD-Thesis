@@ -1,4 +1,4 @@
-figures/*.pdf
+##figures/*.pdf
 figures/*.png
 images/icons/*.pdf
 main.pdf
