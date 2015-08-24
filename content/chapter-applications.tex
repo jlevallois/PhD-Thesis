@@ -384,15 +384,18 @@ covariance des cellules de Voronoi} (\VCMM --- \VCM --- en anglais) associe à t
 fonction intégrale $\chi : \R^d \rightarrow \R^+$ la matrice
 %
 \begin{equation}
-  \mathcal{V}_{K,R}(\chi) \EqDef \int_{K^R} (x - p_K(x)) . (x - p_K(x))^t . \chi(p_K(x))dx \text{.}
+  \mathcal{V}_{K,R}(\chi, \vx) \EqDef \int_{K^R} (\vp - p_K(\vp)) (\vp - p_K(\vp))^t \chi(p_K(\vp) - \vx)dp .
 \end{equation}
+%
+Ici, $\chi(\vx) = max(0, r - ||\vx||^2)$ connue sous le nom de fonction « hat ».
 %
 \cauthors{Cuel}{Cuel2014DGCI} ont d'ailleurs défini une variante digitale du
 \VCM :
 %
 \begin{equation}
-  \hat{\mathcal{V}}_{Z_h,R}(\chi) \EqDef \sum_{p \in \Omega_h^R} h^3 (x - p_{Z_h}(x)) . (x - p_{Z_h}(x))^t . \chi(p_{Z_h}(x)) \text{,}
+  \hat{\mathcal{V}}_{Z_h,R}(\chi) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vp - p_{Z_h}(\vp)) (\vp - p_{Z_h}(\vp))^t \chi(p_{Z_h}(\vp)) ,
 \end{equation}
+\todoInlineJeremy{Reprendre ici}
 %
 où $\Omega_h^R$ est l'ensemble des (centres de) voxels entièrement contenus dans
 $Z_h^R$, la $R$-dilatation de $Z_h$.
@@ -418,11 +421,11 @@ loin de la surface), et le rayon de convolution $r$ qui définit quelles cellule
 de Voronoi vont être intégrées pour lisser la mesure. Ces deux paramètres
 permettent également de limiter l'impact du bruit sur la surface tout en
 préservant les informations géométriques. Un score de point caractéristique
-$r(p)$ est alors calculé à l'aide d'un ratio des valeurs propres de la
-convolution du \VCM pour chaque point $p$ :
+$r(\vx)$ est alors calculé à l'aide d'un ratio des valeurs propres de la
+convolution du \VCM pour chaque point $\vx$ :
 %
 \begin{equation}
-  r(p) \EqDef \frac{\lambda_2(p)}{\lambda_0(p) + \lambda_1(p) + \lambda_2(p)}.
+  r(\vx) \EqDef \frac{\lambda_2(\vx)}{\lambda_0(\vx) + \lambda_1(\vx) + \lambda_2(\vx)}.
 \end{equation}
 %
 Le point est alors considéré comme une singularité si son ratio est supérieur à
