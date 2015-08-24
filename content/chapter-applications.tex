@@ -121,12 +121,49 @@ catégories :
 Nous souhaitons caractériser les discontinuités du bord d'un objet, une méthode
 naturelle est de s'intéresser aux maximas et minimas locaux, nommés \respp «
 \emph{Ridge} » et « \emph{Valley} » (« Crête » et « Vallée » en français, car
-cette notion est assez similaire aux crêtes géographiques). Dans ce contexte,
-les discontinuités sont déduites de quantités différentielles d'ordre $3$ en
-s'intéressant aux variations des directions principales de courbure dans un
-voisinage de la surface \cite{Lai2007,Yang2006}. En seuillant les déviations
-angulaire significatives des directions principales de courbure, nous pouvons
-alors détecter les discontinuités.
+cette notion est assez similaire aux crêtes géographiques).
+%
+\cauthors{Vergne}{Vergne2011} définissent cela plus formellement :
+%
+\begin{equation}
+  \mathcal{S} = \left\{ \vx \in \R^2 |
+  \frac{\delta f(\vx)}{\delta \theta(\vx)} = 0,
+  \frac{\delta^2 f(\vx)}{\delta \theta(\vx)^2} < 0 \right\}
+\end{equation}
+%
+où $\mathcal{S} \subset \R^2$, $f$ une fonction de hauteur $C^2$ et $\theta$ une
+champ de direction $C^1$. Afin de détecter les maximas et minimas locaux, il
+convient de remplacer $f$ et $\theta$ par les valeurs du
+\RefTable{tab:ridges-valleys-fonctions}.
+%
+\begin{table}[h]
+  \begin{center}
+    %
+    \caption[Tableau des fonctions pour détecter les crêtes, les vallées et les
+    points d'inflections d'une surface.]{Tableau des fonctions pour détecter les
+    crêtes, les vallées et les points d'inflections d'une surface.
+    $\PrincCurv{max}$ et $\PrincCurv{min}$ désignent les fonctions donnant les
+    valeurs de la courbure principale maximale et minimale, $\PrincDir{max}$ et
+    $\PrincDir{min}$ les fonctions donnant les directions de courbure maximale
+    et minimale, et $\vv_{max}$ la fonction donnant la valeur du gradiant de
+    courbure.}
+    %
+    \label{tab:ridges-valleys-fonctions}
+    \begin{tabular}{@{}lrr@{}}
+      \toprule
+                                          & $f$                 & $\theta$                \\ \midrule
+      Crêtes de la surface                & $\PrincCurv{max}$   & $\PrincDir{max}$        \\
+      Vallées de la surface               & $-\PrincCurv{min}$  & $\PrincDir{min}$        \\
+      Points d'inflections de la surface  & $|\vv_{max}|$       & $\vv_{max}/|\vv_{max}|$ \\ \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+%
+Dans ce contexte, les discontinuités sont déduites de quantités différentielles
+d'ordre $3$ en s'intéressant aux variations des directions principales de
+courbure dans un voisinage de la surface \cite{Lai2007,Yang2006}. En seuillant
+les déviations angulaire significatives des directions principales de courbure,
+nous pouvons alors détecter les discontinuités.
 %
 \begin{figure}[ht]{
     \begin{center}
@@ -142,7 +179,6 @@ nécessitent d'avoir une estimation robuste de quantités différentielles d'ord
 $3$. Lorsque la forme d'entrée est bruitée, ou dans le cadre de données
 digitales, ces approches ne s'avèrent pas pertinentes.
 %
-\todoJeremy{Maths pour Ridges and Valleys}
 %
 % \subsubsection{Méthodes basées courbure}
 % \label{sec:applications:feature:courbure}
@@ -176,49 +212,61 @@ digitales, ces approches ne s'avèrent pas pertinentes.
 %
 Lorsque nous traitons des maillages ou les nuages de points, beaucoup
 d'approches se basent sur des quantités calculées par intégration sur des patchs
-surfaciques de la surface. Nous allons en détailler quelques-unes
-\cite{Pauly2003,Telea2004} utilisant l'Analyse en Composante Principale
-(\emph{ACP}) sur le voisinage du point d’intérêt. Un score de zone
-caractéristique est alors déterminé grâce à un seuillage, ou grâce au
-comportement du score comme fonction de la taille du voisinage analysé.
-%
-\\
-%
-D'autres \cite{Merigot2011} étendent cette approche pour considérer les matrices
-de covariances de cellules de Voronoi convoluées (\VCMM ou \VCM). En seuillant
-le ratio des valeurs propres du \VCM, nous obtenons une extraction robuste des
-singularités sur un nuage de points ou sur un maillage.
-%
-\\
-%
-Ces approches produisent des résultats intéressants pour une échelle donnée
-(pour une taille de voisinage fixée) ou pour des objets lisses. Toutefois, les
-analyses en espace-échelle ne sont pas totalement intégrées dans ces systèmes.
-De plus, même si les ratios des valeurs propres de la matrice de covariance sont
-liés aux courbures principales, l'interprétation géométrique des scores n'est pas
-évident.
+surfaciques de la surface. La caractéristique est obtenue en fonction d'un score
+évalué sur la géométrie de patchs surfaciques centrés autour du point à
+considérer. Généralement, les patchs sont simplement issus d'un noyau sphérique.
+%  Nous allons en détailler quelques-unes
+% \cite{Pauly2003,Telea2004} utilisant l'Analyse en Composante Principale
+% (\emph{ACP}) sur le voisinage du point d’intérêt. Un score de zone
+% caractéristique est alors déterminé grâce à un seuillage, ou grâce au
+% comportement du score comme fonction de la taille du voisinage analysé.
+% %
+% \\
+% %
+% D'autres \cite{Merigot2011} étendent cette approche pour considérer les matrices
+% de covariances de cellules de Voronoi convoluées (\VCMM ou \VCM). En seuillant
+% le ratio des valeurs propres du \VCM, nous obtenons une extraction robuste des
+% singularités sur un nuage de points ou sur un maillage.
+% %
+% \\
+% %
+% Ces approches produisent des résultats intéressants pour une échelle donnée
+% (pour une taille de voisinage fixée) ou pour des objets lisses. Toutefois, les
+% analyses en espace-échelle ne sont pas totalement intégrées dans ces systèmes.
+% De plus, même si les ratios des valeurs propres de la matrice de covariance sont
+% liées aux courbures principales, l'interprétation géométrique des scores n'est pas
+% évident.
 %
 \paragraph{Valeurs propres de la matrice de covariance}
 %
 \cauthors{Pauly}{Pauly2003} utilisent les valeurs propres de la matrice de
-covariance calculée en chaque point de la surface de la forme pour un voisinage
+covariance $J$ calculée en chaque point de la surface de la forme pour un voisinage
 donné. Ils exploitent les trois valeurs propres $\lambda_0 \leq \lambda_1 \leq
 \lambda_2$ afin d'obtenir une valeur de variation de surface (introduite dans
 \cite{Pauly2002}) en fonction d'un ensemble de rayons $\{ R_i \}_{0 \le i \le n}$:
 %
 \begin{equation}
-  \tau_{R_i}(x) \EqDef \frac{\lambda_0(J_{R_i}(x))}{\lambda_0(J_{R_i}(x)) + \lambda_1(J_{R_i}(x)) + \lambda_2(J_{R_i}(x))} \text{.}
+  \tau_{R_i}(\vx) \EqDef \frac{\lambda_0(J_{R_i}(\vx))}{\lambda_0(J_{R_i}(\vx)) + \lambda_1(J_{R_i}(\vx)) + \lambda_2(J_{R_i}(\vx))}.
 \end{equation}
 %
+\begin{figure}[ht]{
+  \begin{center}
+    \includegraphics[height=6cm]{images/Feature/PaulyTau}
+  \end{center}}
+    \caption[Valeurs retournées par $\tau_{R_i}$.]{Valeurs retournées par $\tau_{R_i}$ (Figure~7 de \cite{Pauly2003}).
+    \label{fig:pauly-tau}}
+\end{figure}
+%
 Puisque les valeurs propres diminuent lorsque la courbure augmente, il apparaît
-que la valeur de $\tau_i$ sera plus grande sur les singularités que sur les parties
+que la valeur de $\tau_{R_i}$ sera plus grande sur les singularités que sur les parties
 plates de la surface. Pour appuyer cette distinction, les auteurs calculent un
 poids sur chaque point : pour tous les rayons, le poids est incrémenté à chaque
-fois que $\tau_i$ est supérieur à un seuil $\tau_{max}$ défini par
+fois que $\tau_{R_i}$ est supérieur à un seuil $\tau_{max}$ défini par
 l'utilisateur. Plus formellement :
 %
 \begin{equation}
-  \omega(x) \EqDef Card \{ \tau_{R_i}(x) \geq \tau_{max}\,|\,0\leq i < n \} \text{.}
+  \label{eq:pauly-omega}
+  \omega(\vx) \EqDef Card \{ \tau_{R_i}(\vx) \geq \tau_{max}\,|\,0\leq i < n \}.
 \end{equation}
 %
 Il est alors évident que le poids sera plus important sur les zones
@@ -229,28 +277,29 @@ tandis qu'il sera faible sur le reste de la forme (en bleu).
   \begin{center}
     \includegraphics[height=6cm]{figures/CubeSpherePlotPauly}
   \end{center}}
-    \caption[.]{.
+    \caption[Résultat de l'\RefEquation{eq:pauly-omega}]{Résultat de l'\RefEquation{eq:pauly-omega} avec comme paramètres $\tau_{max} = 0.01$, $5 \le i \le 25$.
     \label{fig:pauly-cubesphere}}
 \end{figure}
 %
-Puisque ce détecteur est relié à l'information de courbure de la surface, il
-fournit des résultats géométriquement valides. Cependant, cela nécessite que
-l'utilisateur fournisse un paramètre $\tau_{max}$ qui dépend de la
-géométrie de la forme : il peut considérer des petites parties lisses comme des
-zones caractéristiques si $\tau_{max}$ est choisi trop petit. C'est ce que nous
-voyons sur la \RefFigure{fig:pauly-cubesphere} avec la petite sphère sur la face
-verticale. Également, puisque ce détecteur se base sur des informations
-surfaciques, il est assez sensible au bruit comme nous le verrons plus tard dans
-la \RefSection{sec:applications:feature:comparison}.
+Puisque ce détecteur est relié à la variation de la surface, il fournit des
+résultats géométriquement valides. Cependant, cela nécessite que l'utilisateur
+fournisse un paramètre $\tau_{max}$ qui dépend de la géométrie de la forme : il
+peut considérer des petites parties lisses comme des zones caractéristiques si
+$\tau_{max}$ est choisi trop petit. C'est ce que nous voyons sur la
+\RefFigure{fig:pauly-cubesphere} avec la petite sphère sur la face verticale.
+Également, puisque ce détecteur se base sur des informations surfaciques, il est
+assez sensible au bruit comme nous le verrons plus tard dans la
+\RefSection{sec:applications:feature:comparison}.
 %
 \paragraph{Variation de barycentre}
 %
 \cauthors{Clarenz}{Telea2004} définissent quant à eux un critère de
 classification de surface basé sur la variation du barycentre $b$ et de la
-matrice de covariance\footnote{Dans leur papier, ils nomment le barycentre :
-moment d'ordre zéro et la matrice de covariance : moment d'ordre un, ce qui peut
-porter à confusion avec notre définition des moments vue précédemment.} de
-patchs locaux de la surface $B_R(x)\cap \partial X$.
+matrice de covariance\footnote{Dans \cite{Telea2004}, les auteurs nomment le
+moment d'ordre zéro comme le barycentre et le moment d'ordre un comme la matrice
+de covariance, ce qui peut porter à confusion avec notre définition des moments
+vue dans le \RefSection{sec:definitions-moments}.} de patchs surfaciques
+$B_R(x)\cap \partial X$.
 %
 \\
 %
@@ -268,7 +317,7 @@ singularités.
 \end{figure}
 %
 Cependant, ils n'utilisent pas cette propriété dans leur méthode de
-classification et ne l'évaluent pas expérimentalement, probablement à cause de la difficulté à distinguer les deux comportements (linéaire / quadratique) comme le montre la \RefFigure{fig:moment-multiscale}.
+classification et ne l'évaluent pas expérimentalement, probablement à cause de la difficulté à distinguer les deux comportements (linéaire et quadratique) comme le montre la \RefFigure{fig:moment-multiscale}.
 %
 \\
 %
@@ -291,7 +340,7 @@ voisinage fixe qui produisent un score de lissage :
   de la matrice de covariance de $B_R(x)\cap \partial X$ :
   %
   \begin{equation}
-    \mathcal{C}_{R}^{1,2} = \frac{1}{\alpha + \beta
+    \mathcal{C}_{R}^{1,2} \EqDef \frac{1}{\alpha + \beta
     \left( \frac{|n_R|~\lambda_{min}}{R~\lambda_{max}} \right)^2}
     \label{eq:moment-C1}
   \end{equation}
@@ -299,7 +348,8 @@ voisinage fixe qui produisent un score de lissage :
 \end{itemize}
 %
 avec $\alpha$ et $\beta$ deux variables (positives) laissées à la discrétion de
-l'utilisateur, afin de lisser le score de zones caractéristiques. Le second
+l'utilisateur, afin de lisser le score de zones caractéristiques et donc de
+contrôler la précision du calcul par rapport à la robustesse au bruit. Le second
 estimateur, que nous utiliserons dans les expériences, produit de légèrement
 meilleurs résultats sur des données bruitées grâce au renforcement des valeurs
 propres de la matrice de covariance, liées à la normal et à la plus forte des
@@ -311,7 +361,7 @@ courbure principale.
   \centering
   \includegraphics[height=6cm]{images/Feature/CubeSphere_Moments_r_10_c1}
   \includegraphics[height=6cm]{images/Feature/CubeSphere_Moments_r_22_c1}
-  \caption[Résultat de l'\RefEquation{eq:moment-C1}]{Résultat de l'\RefEquation{eq:moment-C1} avec comme paramètre $\alpha = 1$, $\beta = 50$ pour deux tailles de voisinage $R = 10$ et $R = 22$.}\label{fig:moment-C1}
+  \caption[Résultat de l'\RefEquation{eq:moment-C1}]{Résultat de l'\RefEquation{eq:moment-C1} avec comme paramètres $\alpha = 1$, $\beta = 50$ pour deux tailles de voisinage $R = 10$ et $R = 22$.}\label{fig:moment-C1}
 \end{figure}
 %
 Il y a alors trois paramètres à choisir : $\alpha$, $\beta$, ainsi que la
@@ -401,7 +451,7 @@ un paramètre de seuillage $T$.
 %
 Dans un esprit similaire aux méthodes précédentes, certains auteurs
 \cite{Park2012} ont proposé une stratégie de vote de tenseur (\emph{Tensor
-Voting} en anglais) sur des patchs locaux de surface. Ce dernier, défini par
+Voting} en anglais) sur des patchs surfaciques. Ce dernier, défini par
 \cauthors{Medioni}{Medioni2000-2} est l'intégration du tenseur des points d'un
 voisinage, contenant des informations de la surface sous-jacente. Ils utilisent
 alors un comportement en espace-échelle du vote du tenseur lorsque la taille du
