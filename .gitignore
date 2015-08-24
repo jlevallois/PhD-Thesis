@@ -1,6 +1,6 @@
 ##figures/*.pdf
 figures/*.png
-images/icons/*.pdf
+##images/icons/*.pdf
 main.pdf
 *.sublime-workspace
 *.log
