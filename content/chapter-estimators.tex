@@ -992,22 +992,89 @@ Nous devons également étudier comment les moments sont perturbés par une erre
   norme $t \EqDef \| \vt \|_2 \le R$, nous avons :
 %
   \begin{align}
-    \left| \Mom{000}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{000}(\Ball{R}{\vx}) \right|
+    \left| \Mom{000}(\Ball{R}{\vx + \vt}) - \Mom{000}(\Ball{R}{\vx}) \right|
     & \le O(t R^2), \label{eq:zero-moments-ball-position-error} \\
-    \left| \Mom{100}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{100}(\Ball{R}{\vx}) \right|
+    \left| \Mom{100}(\Ball{R}{\vx + \vt}) - \Mom{100}(\Ball{R}{\vx}) \right|
     & \le O(t R^3) + O( \|\vx\|_\infty t R^2 ), \label{eq:first-moments-ball-position-error}\\
-    \left| \Mom{200}(\Ball{R}{\vx + \mathbf{t}}) - \Mom{200}(\Ball{R}{\vx}) \right|
+    \left| \Mom{200}(\Ball{R}{\vx + \vt}) - \Mom{200}(\Ball{R}{\vx}) \right|
     & \le O(t R^4) + O( \|\vx\|_\infty t R^3 ) + O( \|\vx\|^2_\infty t R^2 ). \label{eq:second-moments-ball-position-error}
   \end{align}
 %
   Les bornes sont valides pour tous les moments ayant respectivement le même
-  ordre. De plus, ces relations restent vraies si $\Ball{R}{\vx+\mathbf{t}}$ ou
+  ordre. De plus, ces relations restent vraies si $\Ball{R}{\vx+\vt}$ ou
   $\Ball{R}{\vx}$ intersectent le même ensemble $\Shape$.
 %
 \end{lemma}
 \begin{proof}
 %
-dejzaopj
+% \begin{figure}\small
+%   \begin{center}
+%     \subfig[]{\begin{overpic}[width=5cm]{figures/momentsPerturbation}
+%       \put(51,27){$\vx$}
+%       \put(40,40){$\vx+\vt$}
+%       \put(5,70){$\Ball{R}{\vx+\vt}$}
+%       \put(86,30){$\Ball{R}{\vx}$}
+%       \put(60,0){\tiny $(\Ball{R}{\vx} \setminus \Ball{R}{\vx+\vt} )\cap \Shape$}
+%       \put(22,18){\tiny$(\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx} )\cap \Shape$}
+%       \end{overpic}}
+%       ~~~~~~~~~~\subfig[]{\begin{overpic}[width=5cm]{figures/momentsPerturbation2}
+%       \put(51,32){$\vx$}
+%       \put(40,45){$\vx+\vt$}
+%       \put(5,73){$\Ball{R}{\vx+\vt}$}
+%       \put(90,33){$\Ball{R}{\vx}$}
+%     \end{overpic}}
+%   \end{center}
+%   \caption{[Illustration du \RefLemma{lem:moments-ball-position-error}.]{Illustration du \RefLemma{lem:moments-ball-position-error}.}
+%   \label{fig:moments-perturb}
+% \end{figure}
+\begin{figure}[ht]
+    \begin{center}
+      \includegraphics[width=5cm]{figures/momentsPerturbation}
+      \includegraphics[width=5cm]{figures/momentsPerturbation2}
+    \end{center}
+    \caption[Illustration du \RefLemma{lem:moments-ball-position-error}.]{Illustration du \RefLemma{lem:moments-ball-position-error}.}
+    \label{fig:moments-perturb}
+\end{figure}
+%
+En décomposant $\Shape$ en fonction de deux boules de rayon R, centrées en $\vx$
+et $\vx + \vt$ (voir \RefFigure{fig:moments-perturb}), nous avons :
+%
+\begin{align}
+  \Mom{p_1 \cdots p_3}&(\Ball{R}{\vx+\vt} \cap \Shape ) - \Mom{p_1 \cdots p_3}(\Ball{R}{\vx} \cap \Shape ) \\
+    &= \Mom{p_1 \cdots p_3}( (\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx}) \cap \Shape ) \\
+    & \quad - \Mom{p_1 \cdots p_3}( (\Ball{R}{\vx} \setminus \Ball{R}{\vx+\vt}) \cap \Shape )
+\end{align}
+%
+Comme :
+%
+\begin{equation}
+  \emptyset \neq Y_1 \subset Y_2 \subset \R^3 \Implies \sup_{ Y \subset Y_1} \left | \Mom{p_1 \cdots p_3}(Y) \right| \le \sup_{Y \subset Y_2} \left| \Mom{p_1 \cdots p_3}(Y)\right |,
+\end{equation}
+%
+et avec la propriété d'additivité des intégrales, nous avons :
+%
+\begin{align}
+  |\Delta(\vt)| &= |\Mom{p_1 \cdots p_3}( (\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}) \cap \Shape )| \\
+  &\le \sup_{Y \subset (\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}) \cap \Shape} |\Mom{p_1 \cdots p_3}(Y)|\\
+  &\le \sup_{Y \subset \Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}} |\Mom{p_1 \cdots p_3}(Y)|\\
+  &\le \sup_{Y \subset \Ball{R+t}{\vx} - \Ball{R-t}{\vx}} |\Mom{p_1 \cdots p_3}(Y)|.
+\end{align}
+%
+Nous couvrons alors la différence entre les deux boules centrées en des points
+différents ($\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}$) par la différence entre
+deux boules de même centre mais de rayons différents ($\Ball{R+t}{\vx} -
+\Ball{R-t}{\vx}$). Ceci est représenté en bleu sur la
+\RefFigure{fig:moments-perturb}, correspond à un anneau en 2D de largeur $2t$.
+Il s'agit évidemment d'une borne supérieure épaisse, mais les ordres de
+perturbations sont les mêmes. Alors, pour le moment d'ordre zéro, nous utilisons
+le volume de la boule :
+%
+\begin{align}
+  \sup_{Y \subset \Ball{R+t}{\vx} - \Ball{R-t}{\vx}} |\Mom{000}(Y)| &
+    = \Mom{000}( \Ball{R+t}{\vx} - \Ball{R-t}{\vx} ) \nonumber \\
+    &
+    = \frac{4\pi}{3}(6R^2t+2t^3)=O(tR^2).
+\end{align}
 %
 \end{proof}
 %
@@ -1040,15 +1107,15 @@ dejzaopj
 
 \begin{lemma}
 \label{lem:moment-pos-error}
-  For any measurable subset $\Shape \subset \R^3$ and any vector $\mathbf{t}$ with
-  norm $t \EqDef \| \mathbf{t} \|_2 \le R$, we have for $0 \le p+q+s
+  For any measurable subset $\Shape \subset \R^3$ and any vector $\vt$ with
+  norm $t \EqDef \| \vt \|_2 \le R$, we have for $0 \le p+q+s
   \EqDef {\sigma} \le 2$:
   \begin{align}
-    m_{p,q,s}(\Ball{R}{x+\mathbf{t}} \cap X ) & = m_{p,q,s}(\Ball{R}{x} \cap X ) \nonumber\\
+    m_{p,q,s}(\Ball{R}{x+\vt} \cap X ) & = m_{p,q,s}(\Ball{R}{x} \cap X ) \nonumber\\
     &+ \sum_{i=0}^{{\sigma}} O(\|x\|^i tR^{2+{\sigma}-i}).
-    %% m_{1,0,0}(\Ball{R}{x+\mathbf{t}} \cap X ) &= m_{1,0,0}(\Ball{R}{x} \cap X ) + O(R^3t)\\
-    %% m_{2,0,0}(\Ball{R}{x+\mathbf{t}} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t)\\
-    %% m_{1,1,0}(\Ball{R}{x+\mathbf{t}} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t).
+    %% m_{1,0,0}(\Ball{R}{x+\vt} \cap X ) &= m_{1,0,0}(\Ball{R}{x} \cap X ) + O(R^3t)\\
+    %% m_{2,0,0}(\Ball{R}{x+\vt} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t)\\
+    %% m_{1,1,0}(\Ball{R}{x+\vt} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t).
   \end{align}
 \end{lemma}
 
