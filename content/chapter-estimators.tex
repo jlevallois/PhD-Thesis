@@ -720,7 +720,7 @@ bord digital d'un objet suffisamment lisse.
 %
 \begin{theorem} \label{thm:multigrid-convergence-curv}
 %
-Soit $\Shape$ un domaine compact de $\R^2$ tel que son bord $\dS$ est $C^3$ à
+Soit $\Shape$ une forme convexe de $\R^2$ tel que son bord $\dS$ est $C^3$ à
 courbure bornée. Alors, l'estimateur digital de courbure $\CurvH{R}$ converge
 asymptotiquement vers la courbure $\Curv$ pour la discrétisation de Gauss sur
 des formes $\Shape$, avec une vitesse de convergence d'au moins
@@ -1181,9 +1181,9 @@ bord digital de la forme.
 \begin{theorem}[Convergence de la matrice de covariance digitale.]
   \label{thm:conv-cov-matrix}
 %
-  Soit $\Shape$ un domaine compact de $\R^d$, dont le bord est $C^3$ et peut
+  Soit $\Shape$ un domaine compact de $\R^3$ à reach positif, dont le bord est $C^3$ et peut
   être décomposé en nombre fini de parties monotones. Alors, il existe une
-  constance $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour
+  constante $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour
   tout $\vy \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge
   1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
 %
@@ -1191,7 +1191,7 @@ bord digital de la forme.
     \left \| \DCov{h}( \Ball{R/h}{\vy/h} \cap  \DSh ) - \Cov( \Ball{R}{\vy} \cap \Shape )\right \| \le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
   \end{equation}
 %
-  La constance cachée derrière le terme en grand « O » ne dépend pas de la
+  La constante cachée derrière le terme en grand « O » ne dépend pas de la
   taille de la forme ni de sa géométrie. $\|\cdot\|$ est la norme spectrale des
   matrices.
 %
@@ -1309,11 +1309,12 @@ nous allons nous servir des précédents lemmes.
 \begin{theorem}[Convergence asymptotique de la matrice de covariance digitale]
 \label{thm:multigrid-conv-cov-matrix}
 %
-  Soit $\Shape$ un domaine compact de $\R^3$ dont le bord est $C^3$ et peut
-  être décomposé en nombre fini de parties monotones. Alors, il existe une
-  constance $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour
-  tout $\vx \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge
-  1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+  Soit $\Shape$ un domaine compact de $\R^3$ à reach positif, dont le bord est
+  $C^3$ et peut être décomposé en nombre fini de parties monotones. Alors, il
+  existe une constante $h_0$ telle que pour tout pas de discrétisation $0 < h <
+  h_0$, pour tout $\vx \in \R^3$, pour un rayon $R \ge h$, nous
+  avons\footnote{$\mu_i \ge 1$ d'après
+  l'\RefEquation{eq:MomentsByCounting-conv}} :
 %
   \begin{align}
     &\forall 0 < h < h_0, \quad \forall \vx \in \Bd{\Shape}, \quad
@@ -1321,7 +1322,7 @@ nous allons nous servir des précédents lemmes.
     &\left\| \DCov{h}( \Ball{R/h}{\hat{\vx}/h} \cap  \DSh ) - \Cov( \Ball{R}{\vx} \cap \Shape )\right \|\le O(\|\vx-\hat{\vx}\| R^4) + \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}),
   \end{align}
   %
-  La constance cachée derrière le terme en grand « O » ne dépend pas de la
+  La constante cachée derrière le terme en grand « O » ne dépend pas de la
   taille de la forme ni de sa géométrie. $\|\cdot\|$ est la norme spectrale des
   matrices.
   %
@@ -1486,8 +1487,8 @@ intégration :
 %
 \begin{theorem}[Convergence asymptotique des estimateurs digitaux de courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$]
 %
-  Soit $\Shape$ un domaine compact de $\R^3$ telle que son bord $\Bd{X}$ a une
-  continuité $C^3$ et peut être décomposé en nombre fini de parties monotones.
+  Soit $\Shape$ un domaine compact de $\R^3$ à reach positif tel que son bord
+  $\Bd{X}$ est $C^3$ et peut être décomposé en nombre fini de parties monotones.
   Alors, pour la discrétisation de Gauss, les estimateurs digitaux de courbures
   principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ convergent
   asymptotiquement vers les courbures principales $\PrincCurv{1}$ et
