@@ -482,7 +482,7 @@ définie dans le sous-ensemble $\BT \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1
 \cdot \dS$, qui tend vers le cercle unité lorsque $R \rightarrow 0$. L'erreur
 introduite dans l'estimation de volume est alors le nombre de voxels intersectés
 ($\approx 2\pi/h$), ce qui est négligeable. La courbure maximale est également
-$1$ pour un rayon $R$ suffisement petit. Nous obtenons alors :
+$1$ pour un rayon $R$ suffisamment petit. Nous obtenons alors :
 %
 \begin{equation}\label{eq:convergence-volume-intersection}
   | \VolC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - V_R(\vx) | \le K_1 h^\gamma R^{3-\gamma}.
@@ -1181,9 +1181,11 @@ bord digital de la forme.
 \begin{theorem}[Convergence de la matrice de covariance digitale.]
   \label{thm:conv-cov-matrix}
 %
-  Soit $\Shape$ un domaine compact de $\R^d$. Alors, il existe une constance
-  $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour tout $\vy
-  \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge 1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+  Soit $\Shape$ un domaine compact de $\R^d$, dont le bord est $C^3$ et peut
+  être décomposé en nombre fini de parties monotones. Alors, il existe une
+  constance $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour
+  tout $\vy \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge
+  1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
 %
   \begin{equation}
     \left \| \DCov{h}( \Ball{R/h}{\vy/h} \cap  \DSh ) - \Cov( \Ball{R}{\vy} \cap \Shape )\right \| \le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
@@ -1307,9 +1309,11 @@ nous allons nous servir des précédents lemmes.
 \begin{theorem}[Convergence asymptotique de la matrice de covariance digitale]
 \label{thm:multigrid-conv-cov-matrix}
 %
-  Soit $\Shape$ un domaine compact de $\R^3$. Alors, il existe une constance
-  $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour tout $\vx
-  \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge 1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+  Soit $\Shape$ un domaine compact de $\R^3$ dont le bord est $C^3$ et peut
+  être décomposé en nombre fini de parties monotones. Alors, il existe une
+  constance $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour
+  tout $\vx \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge
+  1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
 %
   \begin{align}
     &\forall 0 < h < h_0, \quad \forall \vx \in \Bd{\Shape}, \quad
@@ -1432,7 +1436,132 @@ nous allons nous servir des précédents lemmes.
   %
   \end{proof}
 %
-
+\paragraph{Théorie de perturbation de matrices}
+%
+Nous venons de montrer que la matrice de covariance digitale tend vers la
+matrice de covariance continue lorsque nous la calculons à partir de
+l'intersection de la forme avec une boule. Nous avons défini des estimateurs de
+courbures principales et de directions principales à partir des valeurs propres
+et des vecteurs propres de la matrice de covariance digitale dans la
+\RefSection{def:principal-curv-estimators}. Afin de pouvoir obtenir des preuves
+de convergence asymtotiques, il est nécessaire de comprendre comment une erreur
+sur une matrice peut perturber sa décomposition. C'est pour cela que nous allons
+dans un premier temps présenter un résultat de la théorie de perturbation de
+matrices \cite{Bauer:1960,stewart1990matrix,bhatia1997matrix}.
+%
+\\
+%
+Soit $M$ et $M'$ deux matrice symétriques, nous voulons alors quantifier la
+différence entre les valeurs propres (\respp les vecteurs propres) de $M$ et les
+valeurs propres (\resp les vecteurs propres) de $M'$ comme des fonctions de la
+norme de $M - M'$. Par exemple, si $M'$ est la matrice de covariance sur des
+données bruitées et $M$ la matrice de covariance sur des données non bruitées,
+les résultats de perturbation de matrice pourront nous indiquer les bornes
+d'erreurs des valeurs propres (et ainsi celles de l'estimation des courbures
+principales).
+%
+\begin{theorem}[Inégalité de Lidskii-Weyl]
+  \label{thm:lidskii-weyl}
+  %
+  Si $\lambda_i(M)$ désigne les valeurs propres ordonnées d'un matrice
+  symétrique $M$ et $\lambda_i(M')$ les valeurs propres ordonnées d'un matrice
+  symétrique $M'$, alors:
+  %
+  \begin{equation}
+    \max_{i}| \lambda_i(M) - \lambda_i(M')| \le \|M-M'\| .
+  \end{equation}
+  %
+\end{theorem}
+%
+Dans notre contexte où les valeurs propres sont utilisées pour estimer les
+courbures principales, nous pouvons espérer une convergence des valeurs de
+courbures principales sur des patches surfaciques plats ou sphériques.
+%
+\paragraph{Convergence asymptotique des estimateurs digitaux de courbures principales}
+%
+La convergence asymptotique des matrices de covariances digitales et les
+résultats de stabilité de la théorie de perturbation des matrices induisent la
+convergence asymptotique des estimateurs de courbures principales par
+intégration :
+%
+\begin{theorem}[Convergence asymptotique des estimateurs digitaux de courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$]
+%
+  Soit $\Shape$ un domaine compact de $\R^3$ telle que son bord $\Bd{X}$ a une
+  continuité $C^3$ et peut être décomposé en nombre fini de parties monotones.
+  Alors, pour la discrétisation de Gauss, les estimateurs digitaux de courbures
+  principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ convergent
+  asymptotiquement vers les courbures principales $\PrincCurv{1}$ et
+  $\PrincCurv{2}$ pour des formes $\Shape$ pour des constantes positives $h_0,
+  k$ telles que, pour tout pas de discrétisation $h \le h_0$, en définissant le
+  rayon de la boule $R = kh^{\frac{1}{3}}$, nous avons :
+  %
+  \begin{align}
+     \forall \vx \in \Bd{\Shape}, \quad \forall \hat{\vx} \in \Bd{\Body{\DSh}{h}}, \text{~avec~} \| \hat{\vx} -\vx\|_\infty \le h,\nonumber\\
+     | \PrincCurvH{1}{R}(\DSh,\hat{\vx},h) - \PrincCurv{1}(\Shape,\vx) | \le O(h^{\frac{1}{3}}) ,\\
+     | \PrincCurvH{2}{R}(\DSh,\hat{\vx},h) - \PrincCurv{2}(\Shape,\vx) | \le O(h^{\frac{1}{3}}) .
+  \end{align}
+  %
+\end{theorem}
+\begin{proof}
+  %
+  Nous allons prouver la convergence asymtotique pour l'estimateur digital de la
+  première courbure principale. Le raisonnement est le même pour la seconde
+  courbure principale. D'après la \RefDefinition{def:principal-curv-estimators},
+  $\hat{\lambda}_1$ et $\hat{\lambda}_2$ sont les deux plus grandes valeurs
+  propres de $\DCov{h}(\Ball{R/h}{\vx / h} \cap \DigShape)$ avec
+  $Z=\DigF{X}{h})$. Nous désignons $M' \EqDef \DCov{h}(\Ball{R/h}{\hat{\vx}/h}
+  \cap \DSh)$ et $M \EqDef \Cov(\Ball{R}{\vx} \cap \Shape )$. Comme $M$ et $M'$
+  sont symétriques par définition, le \RefTheorem{thm:lidskii-weyl} implique que
+  les valeurs propres de $M$ et $M'$ sont proches, avec les mêmes bornes. Il est à
+  noter que puisque les bornes d'erreurs tendent vers zéro lorsque $h$ tend vers
+  zéro, l'ordre des valeurs propres des deux matrices est le même pour un $h$
+  suffisamment petit. Alors, nous pouvons écrire :
+  %
+  \begin{align}
+    &\PrincCurvH{1}{R}(\DSh,\hat{\vx},h) = \frac{6}{\pi R^6}(\hat{\lambda}_2 - 3\hat{\lambda}_1) + \frac{8}{5R} \\
+    &\quad = \frac{6}{\pi R^6} \left( \lambda_2 - 3\lambda_1 + O(\|\vx-\hat{\vx}\| R^4) + \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}) \right) + \frac{8}{5R}.
+  \end{align}
+  %
+  Alors, en substituant avec l'approximation de Taylor du
+  \RefLemma{lem:pottmann-3d}, nous obtenons :
+  %
+  \begin{equation}
+    \PrincCurvH{1}{R}(\DSh,\hat{\vx},h) = \PrincCurv{1}(\Shape,\vx) + O(R) + O( h/R^2) + \sum_{i=0}^2 O(h^{\mu_i}/R^{1+\mu_i}) ,
+  \end{equation}
+  %
+  avec $\mu_i \ge 1$ pour la forme $\Shape$ (voir
+  \RefEquation{eq:MomentsByCounting-conv}). En donnant pour valeur $R = kh^\alpha$, $k$ étant une constante, la valeur optimale pour $\alpha$ minimisant le plus les erreurs est $\frac{1}{3}$. Ainsi, nous obtenons :
+  %
+  \begin{equation}
+    \PrincCurvH{1}{R}(\DSh,\hat{\vx},h) = \PrincCurv{1}(\Shape,\vx) + O(h^{\frac{1}{3}}).
+  \end{equation}
+  %
+\end{proof}
+%
+Il est à noter que ces bornes d'erreurs peuvent être améliorés sur les
+voisinages où la courbure gaussienne n'est pas nulle. Alors, les constantes
+$\mu_i$ se rapprochent de $1.5$. De plus, une meilleure estimation de la
+distance entre $\vx$ et $\hat{\vx}$ permettrait d'améliorer les vitesses de
+convergence.
+%
+\paragraph{Résultats}
+%
+Nous allons maintenant montrer quelques résultats. Une comparaison expérimentale
+complète sera proposée dans le \RefSection{sec:comparaison-courbure}.
+%
+\begin{figure}[ht]
+\begin{center}
+  \includegraphics[width=.34\linewidth]{images/Curvature/octa-256-mean}
+  \includegraphics[width=.34\linewidth]{images/Curvature/octa-256-gaussian}\\
+  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir1}
+  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir2}
+  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-normal} \\
+  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir1-zoom}
+  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir2-zoom}
+\end{center}\vspace{-0.5cm}
+  \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$). \emph{De gauche à droite, de haut en bas}, courbure moyenne, courbure gaussienne, premières directions principales, secondes directions principales et normales (zoom sur la troisième ligne). \label{fig:digital-II}}
+\end{figure}
+%
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
@@ -1443,66 +1572,16 @@ nous allons nous servir des précédents lemmes.
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
-% \vxH \in \Bd{\Body{\DSh}{h}}
 
-
-% \begin{definition}
-%   \begin{equation}
-%     \hat{\kappa}^{i}(Z,p) \EqDef \frac{1}{h} \left( \frac{6(\hat{\lambda}_2
-%      - 3\hat{\lambda}_1)}{\pi {{R_d}}^6} + \frac{8}{5{{R_d}}} \right).
-%   \end{equation}
-%   \label{}
-% \end{definition}
-\begin{definition}{\textbf{(Estimateurs de courbures principales discrètes 3D $\PrincCurvH{i}{}(Z,p)$).}}
-  \label{def:ii-3d-princ}
-  Let $\DigShape$ be a digital shape, $\vx$ some point of $\R^3$ and $h>0$ a
-  grid step. For $R\ge h$, we define the {\em integral principal
-    curvature estimators $\PrincCurvH{1}{R}$ and $\PrincCurvH{2}{R}$} of
-  $\DigShape$ at point $\vy \in \R^3$ and step $h$ as
-\begin{eqnarray}
-  \PrincCurvH{1}{R}(\DigShape,\vy,h) &=& \frac{6}{\pi R^6}(\hat{\lambda}_2 - 3\hat{\lambda}_1) + \frac{8}{5R},\\
-  \PrincCurvH{2}{R}(\DigShape,\vy,h) &=& \frac{6}{\pi R^6}(\hat{\lambda}_1 - 3\hat{\lambda}_2) + \frac{8}{5R},
-\end{eqnarray}
-where $\hat{\lambda}_1$ and $\hat{\lambda}_2$ are the two greatest
-eigenvalues of $\hat{J}(\Ball{R/h}{\frac{1}{h} \cdot y} \cap \DigShape, h ))$.
-\end{definition}
-
-We recall the following result of matrix perturbation theory %\cite{Bauer:1960,stewart1990matrix,bhatia1997matrix}:
-\begin{theorem}{\textbf{(Lidskii-Weyl inequality).}}
-  \label{thm:lidskii-weyl}
-  If $\lambda_i(B)$ denotes the ordered eigenvalues of some symmetric
-  matrix $B$ and $\lambda_i(B+E)$ the ordered eigenvalues of some
-  symmetric matrix $B+E$, then $\max_{i}| \lambda_i(B) -
-  \lambda_i(B+E)| \le \|E\|$.
-\end{theorem}
-
-
-% Convergence des estimateurs de courbures principales discrètes 3D $\hat{\kappa}^{i}(Z,p)$ :
-% \begin{theorem}
-%   \begin{equation}
-%     \hat{\kappa}^i_{R}(\DSh,p) = \PrincCurv{1}(X,x) + O(h^{\frac{1}{3}}).
-%   \end{equation}
-%   \label{theo:ii-3d-princ-conv}
-% \end{theorem}
-\begin{theorem}{\textbf{(Uniform convergence of principal curvature estimators $\PrincCurvH{1}{R}$ and $\PrincCurvH{2}{R}$ along $\hBd{h} \Shape$).}}
-  \label{theo:ii-3d-princ-conv}
-  Let $\Shape \in \Shapes$. For $i \in \{1,2\}$, recall that
-  $\PrincCurv{i}(\Shape,\vx)$ is the $i$-th principal curvature of $\Bd{\Shape}$ at
-  boundary point $\vx$. Then, there exist  positive constants $h_\Shape,k,K$ such that, for any $h \le
-  h_\Shape$, setting $R=k h^{\frac{1}{3}}$, we have
-  \begin{align*}
-     &\forall \vx \in \partial \Shape, \forall \hat{\vx} \in \hBd{h}\Shape,\nonumber\\
-     &\| \hat{\vx} - \vx\|_\infty \le h \Implies |
-     \PrincCurvH{i}{R}(\DSh,\hat{\vx},h) - \PrincCurv{i}(\Shape,\vx) | \le K
-     h^{\frac{1}{3}}.
-  \end{align*}
-\end{theorem}
 
 
 \subsection{Estimation de la courbure par intégration surfacique de la sphère}
 \subsubsection{Analyse euclidienne de l'intégration surfacique de la sphère, et relation à la courbure}
 \paragraph{Estimation par aire de patch de surface}
 \paragraph{Estimation par aire de surface de sphère}
+
+\subsection{Comparaison des estimateurs de courbure}%
+\label{sec:comparaison-courbure}
 
 \section{Estimateurs de normales}
 \subsection{État de l'art}
