@@ -1179,17 +1179,18 @@ le même point $\vy$, et le suivant établiera sa convergence asymptotique sur l
 bord digital de la forme.
 %
 \begin{theorem}[Convergence de la matrice de covariance digitale.]
+  \label{thm:conv-cov-matrix}
 %
   Soit $\Shape$ un domaine compact de $\R^d$. Alors, il existe une constance
   $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour tout $\vy
-  \in \R^3$, pour un radius $R \ge h$, nous avons\footnote{$\mu_i \ge 1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+  \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge 1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
 %
   \begin{equation}
     \left \| \DCov{h}( \Ball{R/h}{\vy/h} \cap  \DSh ) - \Cov( \Ball{R}{\vy} \cap \Shape )\right \| \le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
   \end{equation}
 %
   La constance cachée derrière le terme en grand « O » ne dépend pas de la
-  taille de la forme ni de la géométrie. $\|\cdot\|$ est la norme spectrale des
+  taille de la forme ni de sa géométrie. $\|\cdot\|$ est la norme spectrale des
   matrices.
 %
 \end{theorem}
@@ -1297,6 +1298,141 @@ bord digital de la forme.
 %
 \end{proof}
 %
+Comme pour le calcul de la courbure 2D ou courbure moyenne 3D, afin d'obtenir un
+résultat de convergence asymptotique, nous devons placer notre estimateur
+digital sur le bord digital de la forme, ajoutant une erreur de positionnement.
+Cela équivaut à estimer les moments à une position $\vx + \vt$, et pour cela
+nous allons nous servir des précédents lemmes.
+%
+\begin{theorem}[Convergence asymptotique de la matrice de covariance digitale]
+\label{thm:multigrid-conv-cov-matrix}
+%
+  Soit $\Shape$ un domaine compact de $\R^3$. Alors, il existe une constance
+  $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour tout $\vx
+  \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge 1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+%
+  \begin{align}
+    &\forall 0 < h < h_0, \quad \forall \vx \in \Bd{\Shape}, \quad
+    \forall \hat{\vx} \in \Bd{\Body{\DSh}{h}} \text{~avec~} \| \hat{\vx} -\vx\|_\infty \le h, \nonumber \\
+    &\left\| \DCov{h}( \Ball{R/h}{\hat{\vx}/h} \cap  \DSh ) - \Cov( \Ball{R}{\vx} \cap \Shape )\right \|\le O(\|\vx-\hat{\vx}\| R^4) + \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}),
+  \end{align}
+  %
+  La constance cachée derrière le terme en grand « O » ne dépend pas de la
+  taille de la forme ni de sa géométrie. $\|\cdot\|$ est la norme spectrale des
+  matrices.
+  %
+\end{theorem}
+\begin{proof}
+  %
+  %Pour plus de facilité de lecture, nous allons noter $A \EqDef \Ball{R}{\vx}
+  %\cap \Shape$ et $A_h \EqDef \Ball{R/h}{\hat{\vx}/h} \cap \DSh = \DigF{\Ball{R}{\hat{\vx}}
+  %\cap \Shape}{h}$.
+  Le fait que $\| \vx - \hat{\vx} \|_\infty \le h \le R$ implique que
+  $\Ball{R}{\vx} \cap \Shape$ et $\Ball{R}{\hat{\vx}} \cap \Shape$ ne sont pas
+  vides. Nous séparons alors la différence des matrices en deux parties :
+  %
+  \begin{align}
+  &\| \DCov{h}( \Ball{R/h}{\hat{\vx}/h} \cap  \DigF{\Shape}{h} ) - \Cov( \Ball{R}{\vx} \cap \Shape ) \| \\ \nonumber
+  & \quad \le  \| \DCov{h}( \Ball{R/h}{\hat{\vx}/h} \cap  \DigF{\Shape}{h} ) - \Cov( \Ball{R}{\hat{\vx}} \cap \Shape ) \|
+  + \| \Cov( \Ball{R}{\hat{\vx}} \cap \Shape ) - \Cov( \Ball{R}{\vx} \cap \Shape ) \|.
+ \end{align}
+  %
+  Nous avons borné le premier terme par $\sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i})$
+  dans le \RefTheorem{thm:conv-cov-matrix} si nous l'appliquons au point
+  $\hat{\vx}$. Pour le second terme, nous définissons $\vt \EqDef \hat{\vx} -
+  \vx$, $t \EqDef \| \vt \|_2$, and $\Shape' \EqDef \Shape - \vx$. Nous
+  utilisons alors la propriété d'invariance à la translation des matrices de
+  covariance (\RefLemma{lem:covariance-translation-invariant}) afin de déplacer
+  les matrices à l'origine du repère :
+  %
+  \begin{align}
+    &\| \Cov( \Ball{R}{\hat{\vx}} \cap \Shape ) - \Cov( \Ball{R}{\vx} \cap \Shape )\|
+    = \| \Cov( \Ball{R}{\vx + \vt} \cap \Shape ) - \Cov( \Ball{R}{\vx} \cap \Shape )\| \\
+    & \quad = \| \Cov( \Ball{R}{\vx + \vt} \cap \Shape - \vx ) - \Cov( \Ball{R}{\vx} \cap \Shape - \vx )\| \\
+    & \quad = \| \Cov( (\Ball{R}{\vx + \vt} - \vx) \cap (\Shape - \vx) ) - \Cov( (\Ball{R}{\vx} - \vx) \cap (\Shape - \vx) )\| \\
+    & \quad = \| \Cov( \Ball{R}{\vt} \cap (\Shape - \vx) ) - \Cov( \Ball{R}{\mathbf{0}} \cap (\Shape - \vx) )\| \\
+    & \quad = \| \Cov( \Ball{R}{\vt} \cap \Shape' ) - \Cov( \Ball{R}{\mathbf{0}} \cap \Shape' )\|.
+  \end{align}
+  %
+  Nous appliquons maintenant le \RefLemma{lem:moments-ball-position-error} pour
+  les différents moments qui interviennent dans la matrice de covariance $\Cov$.
+  Pour une facilité de lecture, nous noterons $Y_{\vt}$ l'ensemble
+  $\Ball{R}{\vt} \cap \Shape'$ et $Y_{\mathbf{0}}$ l'ensemble
+  $\Ball{R}{\mathbf{0}} \cap \Shape'$.
+  %
+  \begin{align}
+   \| \Cov( Y_{\vt} ) - \Cov(Y_{\mathbf{0}})\|
+   &= \left\| \left\lbrack \begin{array}{cc}
+       \Mom{200}(Y_{\vt}) - \Mom{200}(Y_{\mathbf{0}}) & \\
+       & \ddots
+     \end{array} \right\rbrack
+   \right. \nonumber\\
+  & - \frac{1}{\Mom{000}(Y_{\vt})}
+   \left\lbrack \begin{array}{c}
+     \Mom{100}(Y_{\vt}) \\
+     \vdots
+   \end{array} \right\rbrack
+   \otimes
+   \left\lbrack \begin{array}{c}
+     \Mom{100}(Y_{\vt}) \\
+     \vdots
+   \end{array} \right\rbrack^T
+   \nonumber\\
+  & \left.
+   + \frac{1}{\Mom{000}(Y_{\mathbf{0}})}
+   \left\lbrack \begin{array}{c}
+     \Mom{100}(Y_{\mathbf{0}}) \\
+     \vdots
+   \end{array} \right\rbrack
+   \otimes
+   \left\lbrack \begin{array}{c}
+     \Mom{100}(Y_{\mathbf{0}}) \\
+     \vdots
+   \end{array} \right\rbrack^T
+   \right\|.
+  \end{align}
+  %
+  La matrice $\Cov( Y_{\vt} ) - \Cov(Y_{\mathbf{0}})$ contient alors la
+  différece des moments géométriques du second ordre comme par exemple $
+  \Mom{200}(Y_{\vt}) - \Mom{200}(Y_{\mathbf{0}})$ et des quantités de la forme
+  de $\Delta \EqDef \frac{\Mom{100}(Y_{\vt})^2}{\Mom{000}(Y_{\vt})} -
+  \frac{\Mom{100}(Y_{\mathbf{0}})^2}{\Mom{000}(Y_{\mathbf{0}})}$ si on décompose
+  les termes de droite. D'après le \RefLemma{lem:moments-ball-position-error},
+  nous savons que les erreurs des moments du second ordre sont bornées en $O(t
+  R^4)$. Pour borner $\Delta$, nous savons déjà $|\Mom{000}(Y_{\mathbf{t}}) -
+  \Mom{000}(Y_{\mathbf{0}})| = \pi R^2(t+O(t^2)+O(tR^2))$ en utilisant le
+  \RefTheoremFake{7}{Pottmann2009}. Alors, nous obtenons :
+  %
+  \begin{align}
+    \Delta &= \frac{\Mom{100}(Y_{\vt})^2}{\Mom{000}(Y_{\mathbf{0}}) + O(tR^2)} -
+    \frac{\Mom{100}(Y_{\mathbf{0}})^2}{\Mom{000}(Y_{\mathbf{0}})}\\
+    &= O(tR^2)\frac{\Mom{100}(Y_{\vt})^2}{\Mom{000}(Y_{\mathbf{0}})^2} +
+    \frac{\Mom{100}(Y_{\vt})^2 - \Mom{100}(Y_{\mathbf{0}})^2}{\Mom{000}(Y_{\mathbf{0}})}\,.
+  \end{align}
+  %
+  Puisque $\frac{a}{b+O(x)}=\frac{a}{b}+\frac{a}{b^2}O(x)$, $a^2-b^2=(a-b)(a+b)$
+  et en utilisant de nouveau le \RefLemma{lem:moments-ball-position-error}, nous
+  avons :
+  %
+  \begin{align*}
+    \Delta
+    &= O(tR^4) + (\Mom{100}(Y_{\vt}) + \Mom{100}(Y_{\mathbf{0}}))\frac{\Mom{100}(Y_{\vt}) - \Mom{100}(Y_{\mathbf{0}})}{\Mom{000}(Y_{\mathbf{0}})} \\
+    &= O(tR^4) + (O(tR^3)+O(R^4))\frac{\Mom{100}(Y_{\vt}) - \Mom{100}(Y_{\mathbf{0}})}{\Mom{000}(Y_{\mathbf{0}})}
+  \end{align*}
+  %
+  Nous utilisons le \RefLemma{lem:moments-ball-position-error} et le fait que
+  puisque $t < R$ nous avons $\Mom{000}(Y_{\mathbf{0}}) = O(R^3)$, nous avons :
+  %
+  \begin{equation}
+    \Delta = O(tR^4) + (O(tR^3)+O(R^4))\frac{O(tR^3)}{\Mom{000}(Y_{\mathbf{0}})} = O(tR^4).
+  \end{equation}
+  %
+  Les mêmes bornes sont trouvés pour tous les termes de la matrice. Lorsqu'on
+  les rassemble toutes, nous obtenons le résultat du théorème.
+  %
+  \end{proof}
+%
+
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
