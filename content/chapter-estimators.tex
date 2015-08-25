@@ -256,14 +256,66 @@ Pour les entiers $p, q, s \ge 0$, nous pouvons écrire la définition des $
 pqs$-moments $\Mom{pqs}(Y)$ de $Y$ :
 \begin{equation}
   \label{eq:moments}
-  \Mom{pqs}(Y) \EqDef \iiint_Y x^p y^q z^s dx dy dz\,.
+  \Mom{pqs}(Y) \EqDef \iiint_Y x_1^p x_2^q x_3^s dx_1 dx_2 dx_3\,.
 \end{equation}
 Il apparaît alors clairement que le volume $\Vol(Y)$ est le $0$-moment
 $\Mom{000}(Y)$, et que le barycentre $\overline{Y}$ est le $1$-moment normalisé
 par le $0$-moment, c'est à dire :
+%
 \begin{equation}
   \overline{Y} \EqDef \frac{( \Mom{100}(Y), \Mom{010}(Y), \Mom{001}(Y) )^T}{\Mom{000}(Y)}
 \end{equation}
+%
+\begin{lemma}\label{lem:moment-ball}
+  %
+  Soit $\Ball{R}{\vx}$ une boule de rayon $R$ et de centre $\vy$. Alors, pour un
+  ensemble non vide $Y \subset \Ball{R}{t}$, nous avons :
+  %
+  \begin{align}
+    \Mom{000}(Y) =& O(R^3), \label{eq:ball-moment-0}\\
+    \Mom{100}(Y) =& O(R^3(\|\vy\|_\infty + R)), \label{eq:ball-moment-1}\\
+    \Mom{200}(Y) =& O(R^3(\|\vy\|^2_\infty + R\|\vy\|_\infty + R^2)), \label{eq:ball-moment-2}\\
+    \Mom{100}(Y)/\Mom{000}(Y) =& O(R+\vy), \label{eq:ball-moment-1bis}
+  \end{align}
+  %
+  Les autres moments du même ordre ont respectivement les mêmes bornes.
+  %
+\end{lemma}
+\begin{proof}
+  %
+  \textbf{Moment d'ordre zéro.\quad}
+  %
+  L'\RefEquation{eq:ball-moment-0} peut être facilement démontré puisque le
+  moment d'ordre zéro est le volume de $Y$, de ce fait ne peut pas dépasser le
+  volume de la boule qui est $\frac{4}{3}\pi R^3$.
+  %
+  \textbf{\\Moments du premier ordre.\quad}
+  %
+  Nous changeons les variables de $(x_1',x_2',x_3')=(x_1,x_2,x_3)-\vy$ dans
+  l'expression suivante :
+  %
+  \begin{align}
+    \Mom{100}(Y) &= \iiint_Y x_1 dx_1 dx_2 dx_3 = \iiint_{Y-\vy} (x_1'+y_1) dx_1'dx_2'dx_3' \\
+                 &= y_1 \Vol(Y) + \Mom{100}(Y-\vy).
+  \end{align}
+  %
+  Dans le premier terme, $\Vol(Y)$ est borné par le volyme de la boule de rayon
+  $R$. Avec la propriété d'additivité des intégrales, le second terme est
+  maximisé par le $100$-moment de la demi-boule $\HalfBall{R}{0}$ centrée en $0$ à
+  valeur de $x_1$ positives. Alors, en utilisant les coordonnées sphériques,
+  nous obtenons :
+  %
+  \begin{align}
+    \Mom{100}(\HalfBall{R}{0})
+    &= \int_{0}^{R} \int_{\frac{-\pi}{2}}^{\frac{\pi}{2}} \int_{\frac{-\pi}{2}}^{\frac{\pi}{2}} (\rho\cos\phi\cos\theta)(\rho^2 \cos\phi)  \, d\theta d\phi d\rho \\
+    &= \left[\frac{\rho^4}{4} \right]_{0}^{R}  \left [\sin\theta\right ]^\frac{\pi}{2}_{-\frac{\pi}{2}}\frac{1}{2} [\phi + \sin(\phi)\cos(\phi)]^\frac{\pi}{2}_{-\frac{\pi}{2}} \\
+    &= \frac{\pi}{4}R^4, \label{eq:exact-half-ball-moment-1}
+  \end{align}
+  %
+  Les autres équations sont prouvées de la même façon.
+  %
+\end{proof}
+%
 Pour plus de simplicité dans les formules, nous noterons $A$ l'ensemble
 euclidien $\Ball{R}{\vx} \cap \Shape$. La matrice de covariance $\Cov(A)$ de
 $A$ peut alors être réécrite comme :
@@ -857,16 +909,16 @@ terme en grand « O » dépendent de la taille de la forme, de son échelle et d
 courbure maximale. Nous devons normaliser l'estimation des momentsde telle sorte
 que le terme d'erreur ne soit plus influencé par l'échelle. Comme en 2D, cela
 revient à se rapporter à la sphère unité. Pour plus de lisibilité, nous noterons
-$\sigma = p_1 + \cdots + p_3$ :
+$\sigma = p + q + s$ :
 %
 \begin{align} \label{eq:MomentsOnUnitaryBall}
 %
-  \DMom{p_1 \cdots p_3}{h}(\DigF{\Ball{R}{\vx} \cap \Shape}{h},h) &= h^{3+\sigma}\Mom{p_1 \cdots p_3}\left
+  \DMom{pqs}{h}(\DigF{\Ball{R}{\vx} \cap \Shape}{h},h) &= h^{3+\sigma}\Mom{pqs}\left
   ( (\frac{1}{h} \cdot \Ball{R}{\vx} \cap \Shape) \cap \Z^3 \right) \nonumber \\
-  &= h^{3+{\sigma}} \Mom{p_1 \cdots p_3}\left( \frac{R}{h}\cdot(
+  &= h^{3+{\sigma}} \Mom{pqs}\left( \frac{R}{h}\cdot(
   \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) \cap \Z^3 \right) \nonumber \\
-  &= R^{3+{\sigma}} \left( \frac{h}{R} \right)^{3+{\sigma}} \hspace{-0.3cm} \Mom{p_1 \cdots p_3} \left( \DigF{ \Ball{1}{\frac{1}{R}\cdot \vx}\cap\frac{1}{R}\cdot \Shape}{h/R} \right) \nonumber\\
-  &= R^{3+{\sigma}}\DMom{p_1 \cdots p_3}{h}\left( \DigF{ \Ball{1}{\frac{1}{R}\cdot \vx}\cap\frac{1}{R}\cdot \Shape}{h/R}, {\frac{h}{R}} \right).
+  &= R^{3+{\sigma}} \left( \frac{h}{R} \right)^{3+{\sigma}} \hspace{-0.3cm} \Mom{pqs} \left( \DigF{ \Ball{1}{\frac{1}{R}\cdot \vx}\cap\frac{1}{R}\cdot \Shape}{h/R} \right) \nonumber\\
+  &= R^{3+{\sigma}}\DMom{pqs}{h}\left( \DigF{ \Ball{1}{\frac{1}{R}\cdot \vx}\cap\frac{1}{R}\cdot \Shape}{h/R}, {\frac{h}{R}} \right).
 %
 \end{align}
 %
@@ -880,10 +932,10 @@ pouvons écrire :
 %
 \begin{align} \label{eq:MomentsOnUnitaryBall-conv}
 %
-  \DMom{p_1 \cdots p_3}{h}(\DigF{\Ball{R}{\vx} \cap \Shape}{h},h) &= R^{3+\sigma}
-  \Mom{p_1 \cdots p_3}\left( \Ball{1}{\frac{1}{R}\cdot \vx} \cap \frac{1}{R}\cdot \Shape
+  \DMom{pqs}{h}(\DigF{\Ball{R}{\vx} \cap \Shape}{h},h) &= R^{3+\sigma}
+  \Mom{pqs}\left( \Ball{1}{\frac{1}{R}\cdot \vx} \cap \frac{1}{R}\cdot \Shape
   \right) + R^{3+\sigma} O \left( \frac{h}{R} \right)^{\mu_{{\sigma}}}  \nonumber \\
-   &= \Mom{p_1 \cdots p_3}( \Ball{R}{\vx} \cap \Shape ) + O( R^{3+{\sigma}-\mu_\sigma} h^{\mu_\sigma}).
+   &= \Mom{pqs}( \Ball{R}{\vx} \cap \Shape ) + O( R^{3+{\sigma}-\mu_\sigma} h^{\mu_\sigma}).
 %
 \end{align}
 %
@@ -1042,24 +1094,24 @@ En décomposant $\Shape$ en fonction de deux boules de rayon R, centrées en $\v
 et $\vx + \vt$ (voir \RefFigure{fig:moments-perturb}), nous avons :
 %
 \begin{align}
-  \Mom{p_1 \cdots p_3}&(\Ball{R}{\vx+\vt} \cap \Shape ) - \Mom{p_1 \cdots p_3}(\Ball{R}{\vx} \cap \Shape ) \\
-    &= \Mom{p_1 \cdots p_3}( (\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx}) \cap \Shape ) \\
-    & \quad - \Mom{p_1 \cdots p_3}( (\Ball{R}{\vx} \setminus \Ball{R}{\vx+\vt}) \cap \Shape )
+  \Mom{pqs}&(\Ball{R}{\vx+\vt} \cap \Shape ) - \Mom{pqs}(\Ball{R}{\vx} \cap \Shape ) \\
+    &= \Mom{pqs}( (\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx}) \cap \Shape ) \\
+    & \quad - \Mom{pqs}( (\Ball{R}{\vx} \setminus \Ball{R}{\vx+\vt}) \cap \Shape )
 \end{align}
 %
 Comme :
 %
 \begin{equation}
-  \emptyset \neq Y_1 \subset Y_2 \subset \R^3 \Implies \sup_{ Y \subset Y_1} \left | \Mom{p_1 \cdots p_3}(Y) \right| \le \sup_{Y \subset Y_2} \left| \Mom{p_1 \cdots p_3}(Y)\right |,
+  \emptyset \neq Y_1 \subset Y_2 \subset \R^3 \Implies \sup_{ Y \subset Y_1} \left | \Mom{pqs}(Y) \right| \le \sup_{Y \subset Y_2} \left| \Mom{pqs}(Y)\right |,
 \end{equation}
 %
 et avec la propriété d'additivité des intégrales, nous avons :
 %
 \begin{align}
-  |\Delta(\vt)| &= |\Mom{p_1 \cdots p_3}( (\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}) \cap \Shape )| \\
-  &\le \sup_{Y \subset (\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}) \cap \Shape} |\Mom{p_1 \cdots p_3}(Y)|\\
-  &\le \sup_{Y \subset \Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}} |\Mom{p_1 \cdots p_3}(Y)|\\
-  &\le \sup_{Y \subset \Ball{R+t}{\vx} - \Ball{R-t}{\vx}} |\Mom{p_1 \cdots p_3}(Y)|.
+  |\Delta(\vt)| &= |\Mom{pqs}( (\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}) \cap \Shape )| \\
+  &\le \sup_{Y \subset (\Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}) \cap \Shape} |\Mom{pqs}(Y)|\\
+  &\le \sup_{Y \subset \Ball{R}{\vx+\vt} \ominus \Ball{R}{\vx}} |\Mom{pqs}(Y)|\\
+  &\le \sup_{Y \subset \Ball{R+t}{\vx} - \Ball{R-t}{\vx}} |\Mom{pqs}(Y)|.
 \end{align}
 %
 Pour une meilleure lisibilité, nous noterons $S_{R,t}(\vx) \EqDef
@@ -1086,7 +1138,7 @@ Pour le moment d'ordre zéro, nous utilisons simplement le volume de la boule :
 %
 Pour les moments du premier ordre, nous translatons la forme à l'origine du
 repère et nous utilisons le résultat précédent ainsi que le fait que le
-$100$-moment centré est maximisé pour la demi-boule à valeur de $x$ positive
+$100$-moment centré est maximisé pour la demi-boule à valeur de $x_1$ positive
 (que nous noterons $\HalfBall{R}{\vx}$)\footnote{Rappelons que $x_i$ est la
 $i$ème composante de $\vx$.} :
 %
