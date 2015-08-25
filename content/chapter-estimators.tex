@@ -253,11 +253,13 @@ la \RefDefinition{def:pottmann}, nous allons calculer sa matrice de covariance.
 \end{definition}
 %
 Pour les entiers $p, q, s \ge 0$, nous pouvons écrire la définition des $
-pqs$-moments $\Mom{pqs}(Y)$ de $Y$ :
+pqs$-moments $\Mom{pqs}(Y)$ de $Y$ ($x_i$ est la $i$ème composante de $\vx$) :
+%
 \begin{equation}
   \label{eq:moments}
   \Mom{pqs}(Y) \EqDef \iiint_Y x_1^p x_2^q x_3^s dx_1 dx_2 dx_3\,.
 \end{equation}
+%
 Il apparaît alors clairement que le volume $\Vol(Y)$ est le $0$-moment
 $\Mom{000}(Y)$, et que le barycentre $\overline{Y}$ est le $1$-moment normalisé
 par le $0$-moment, c'est à dire :
@@ -1220,7 +1222,7 @@ bord digital de la forme.
   Nous faisons de même avec la matrice de covariance continue :
 %
   \begin{align}
-    \Cov( \Ball{R}{\vx} \cap \Shape )
+    \Cov( \Ball{R}{\vy} \cap \Shape )
     &= \Cov( A ) \\
     &= \Cov\left( \tilde{A} + h\Rounded{\vy}{h} \right) \\
     &= \Cov( \tilde{A} ). \label{eq:DigitalCovarianceMatrix-conv-proof2}
@@ -1275,11 +1277,23 @@ bord digital de la forme.
   indépendantes de $\Shape$ grâce à la normalisation. La précedente équation
   nous donne $\Cov( \tilde{A} )$ et des termes d'erreurs sur les moments. Nous
   allons alors chercher les bornes supérieures de ces moments dans le calcul de
-  $\DCov{h}( \DigF{\tilde{A}}{h} )$ en sachant que :
-  \begin{itemize}
-    \item Le rayon $R$ est supérieur à $h$.
-    \item $\tilde{A}$ n'est pas vide et est proche de l'origine, nous pouvons alors utiliser les %\RefEquations{}{}.
-  \end{itemize}
+  $\DCov{h}( \DigF{\tilde{A}}{h} )$ en sachant que le rayon $R$ est supérieur à
+  $h$ et puisque $\tilde{A}$ n'est pas vide et est proche de l'origine, nous
+  pouvons alors utiliser les
+  \RefEquations{eq:ball-moment-1}{eq:ball-moment-1bis} du
+  \RefLemma{lem:moment-ball} pour l'ensemble $\tilde{A} \subset \Ball{R}{t}$,
+  pour les points $\vt = \vx - h\frac{\vx}{h}$, en sachant que $||\vt||_\infty
+  \le \frac{h}{2}$. Nous obtenons alors :
+  %
+  \begin{equation}
+    \DCov{h}( \DigF{\tilde{A}}{h} ) = \Cov(\tilde{A}) + O(R^{5-{\mu_2}}h^{\mu_2}) + O(R^{5-{\mu_0}}h^{\mu_0}) + O(R^{5-{\mu_1}}h^{\mu_1}).
+  \end{equation}
+  %
+  Puisque $\Cov(\tilde{A})=\Cov(A-h\Rounded{x}{h})=\Cov(A)$ grâce à la propriété d'invariance à la translation des matrice de covariance du \RefLemma{lem:covariance-translation-invariant} :
+  %
+  \begin{equation}
+    \DCov{h}( \DigF{\tilde{A}}{h} ) = \Cov(A) + O(R^{5-{\mu_2}}h^{\mu_2}) + O(R^{5-{\mu_0}}h^{\mu_0}) + O(R^{5-{\mu_1}}h^{\mu_1}).
+  \end{equation}
 %
 \end{proof}
 %
@@ -1295,20 +1309,6 @@ bord digital de la forme.
 % \todoInlineJeremy{-------------------------------}
 % \vxH \in \Bd{\Body{\DSh}{h}}
 
-
-\begin{lemma}
-\label{lem:moment-pos-error}
-  For any measurable subset $\Shape \subset \R^3$ and any vector $\vt$ with
-  norm $t \EqDef \| \vt \|_2 \le R$, we have for $0 \le p+q+s
-  \EqDef {\sigma} \le 2$:
-  \begin{align}
-    m_{p,q,s}(\Ball{R}{x+\vt} \cap X ) & = m_{p,q,s}(\Ball{R}{x} \cap X ) \nonumber\\
-    &+ \sum_{i=0}^{{\sigma}} O(\|x\|^i tR^{2+{\sigma}-i}).
-    %% m_{1,0,0}(\Ball{R}{x+\vt} \cap X ) &= m_{1,0,0}(\Ball{R}{x} \cap X ) + O(R^3t)\\
-    %% m_{2,0,0}(\Ball{R}{x+\vt} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t)\\
-    %% m_{1,1,0}(\Ball{R}{x+\vt} \cap X ) &= m_{2,0,0}(\Ball{R}{x} \cap X ) + O(R^4t).
-  \end{align}
-\end{lemma}
 
 % \begin{definition}
 %   \begin{equation}
