@@ -370,13 +370,63 @@ de la forme d'entrée. La \RefSection{sec:applications:feature:comparison} compa
 %
 \paragraph{Voronoi Covariance Measure}
 %
-\cauthors{Mérigot}{Merigot2011} proposent une méthode robuste pour
-extraire, d'une surface lisse, des informations de courbure, des zones caractéristiques
-nettes, et les directions de normales en faisant le produit de la matrice de
-covariance des cellules de Voronoi de la surface de l'objet localement avec un
-noyau de convolution.
+\cauthors{Mérigot}{Merigot2011} proposent une méthode robuste pour extraire
+d'une surface lisse des informations de courbure ainsi que des zones
+caractéristiques nettes. Cette méthode, basée sur les travaux de
+\cauthors{Alliez}{Alliez2007}, associe en chaque point $\vp$ une \emph{mesure de
+covariance des cellules de Voronoi} $\mathcal{V}_{C,R}$ (\VCMM --- \VCM --- en
+anglais) à laquelle ils peuvent extraire des informations sur la géométrie
+sous-jacente (\RefFigure{fig:mellado-VCM}). Il s'agit en fait de calculer un matrice de covariance ($cov$) sur des
+cellules de Voronoi ($Vor_C$) des points du bord de l'objet :
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=4cm]{images/Feature/VCM}
+    \end{center}}
+    \caption[Notations.]{Principe de VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoi, en orange : \comJeremy{longueur des directions des cellules} de Voronoi.
+      \label{fig:mellado-VCM}}
+\end{figure}
+%
+\begin{equation}
+    cov(E,\vp) \EqDef \int_E (\vx - \vp)(\vx - \vp)^T d\vx .
+\end{equation}
+%
+Afin d'avoir une information plus locale de la variation de la forme, ils se
+limitent à un voisinage de rayon $R$ :
+%
+\begin{equation}
+  \mathcal{V}_{C,R}(\{\vp\}) \EqDef cov(Vor_C(\vp) \cap \Ball{R}{\vp}, \vp) .
+\end{equation}
+%
+Enfin, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
+version convolué de \VCM grâce à un \comJeremy{fonction indicatrice} $\chi_r$
+(ayant pour paramètre un rayon $r$) :
+%
+\begin{equation}
+  \mathcal{V}_{C,R} \ast \chi_r(\{\vp\}) \EqDef \int_{E^R} (\vx - \pi(\vx))(\vx - \pi(\vx))^T \chi(\pi(\vx) - \vp) d\vx .
+\end{equation}
+%
+où $\pi$ est la projection de tout point $\vx$ vers le point le plus proche de
+$C$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si $\vx$
+appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction « Hat »
+($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
 %
 \todoJeremy{changer $p_k$ par pi}
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Feature/VCM_notations}
+    \end{center}}
+    \caption[Notations.]{Notations (Figure~5 de \cite{Merigot2011}).
+      \label{fig:mellado-multiscale}}
+\end{figure}
+%
+\todoInlineJeremy{Reprendre ici}
+%
+
+ et les directions de normales en faisant le produit de la matrice de
+covariance des cellules de Voronoi de la surface de l'objet localement avec un
+noyau de convolution.
 %
 Plus précisément, pour $K$ un compact de $\R^d$, $d_K$ la fonction distance à
 $K$ et $p_K : \R^d \rightarrow K$ la projection sur $K$, la \emph{mesure de
@@ -395,7 +445,7 @@ Ici, $\chi(\vx) = max(0, r - ||\vx||^2)$ connue sous le nom de fonction « hat �
 \begin{equation}
   \hat{\mathcal{V}}_{Z_h,R}(\chi) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vp - p_{Z_h}(\vp)) (\vp - p_{Z_h}(\vp))^t \chi(p_{Z_h}(\vp)) ,
 \end{equation}
-\todoInlineJeremy{Reprendre ici}
+
 %
 où $\Omega_h^R$ est l'ensemble des (centres de) voxels entièrement contenus dans
 $Z_h^R$, la $R$-dilatation de $Z_h$.
