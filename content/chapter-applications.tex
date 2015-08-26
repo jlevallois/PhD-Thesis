@@ -288,7 +288,7 @@ peut considérer des petites parties lisses comme des zones caractéristiques si
 $\tau_{max}$ est choisi trop petit. C'est ce que nous voyons sur la
 \RefFigure{fig:pauly-cubesphere} avec la petite sphère sur la face verticale.
 Également, puisque ce détecteur se base sur des informations surfaciques, il est
-assez sensible au bruit comme nous le verrons plus tard dans la
+assez sensible au bruit comme nous le verrons plus tard dans le
 \RefSection{sec:applications:feature:comparison}.
 %
 \paragraph{Variation de barycentre}
@@ -366,7 +366,7 @@ courbure principale.
 %
 Il y a alors trois paramètres à choisir : $\alpha$, $\beta$, ainsi que la
 taille du voisinage, rendant la détection compliquée sans analyse au préalable
-de la forme d'entrée. La \RefSection{sec:applications:feature:comparison} compare le résultat de l'\RefEquation{eq:moment-C1} avec deux rayons différents.
+de la forme d'entrée. Le \RefSection{sec:applications:feature:comparison} compare le résultat de l'\RefEquation{eq:moment-C1} avec deux rayons différents.
 %
 \paragraph{Voronoi Covariance Measure}
 %
@@ -584,7 +584,7 @@ comme \Feature.
 %
 Expérimentalement, $\omega^-$ et $\omega^+$ sont très dépendant de la géométrie
 de la forme à analyser, et de ce que nous voulons extraire comme « zones
-caractéristiques ». Une analyse plus complète est proposée dans la
+caractéristiques ». Une analyse plus complète est proposée dans le
 \RefSection{sec:applications:feature:comparison}.
 %
 \paragraph{Correspondance aux moindres carrés de sphères}%
@@ -663,7 +663,7 @@ effets}}.
 \end{figure}
 %
 Expérimentalement, cette méthode semble moins sensible au bruit, mais des
-artefacts apparaissent sur les singularités (voir la
+artefacts apparaissent sur les singularités (voir le
 \RefSection{sec:applications:feature:comparison} pour une comparaison).
 %
 \\
@@ -772,7 +772,7 @@ courbure}%
 %
 Nous allons décrire un nouvel estimateur de singularités\cite{SMI2015} en
 étudiant les estimateurs de courbures basées sur l'intégration d'invariants vus
-précédemment (\RefSection{sec:ii-volume-sphere}) pour une forme donnée. Nous
+précédemment (\RefSection{sec:estimators:volume}) pour une forme donnée. Nous
 allons, pour une résolution donnée de grille $h$, faire varier la taille de la
 sphère. Cette variation de la taille de la sphère va faire varier le résultat
 obtenu par notre estimateur de courbure (\RefFigure{fig:curvature-scale-3d}).
@@ -787,7 +787,7 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
       \includegraphics[width=2cm]{images/Curvature/MeanAl_30}
       \includegraphics[width=0.1cm,height=2.3cm]{images/YMTB6W}
     \end{center}}
-    \caption{Courbure moyenne en utilisant la \RefDefinition{def:ii-2d-3d-mean}
+    \caption{Courbure moyenne en utilisant la \RefDefinition{def:digital-3d-mean-curvature}
       pour différents rayons de sphères : $4$, $7$, $14$ et $30$.
       \label{fig:curvature-scale-3d}}
 \end{figure}
@@ -844,7 +844,7 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
       \caption[Analyse en espace-échelle de la courbure en fonction du rayon sur la forme discrète 2D de « Flower »]
       {\emph{À gauche :} forme discrète 2D de « Flower ». \emph{À droite :}
       Association des valeurs de courbure sur la bordure discrète de la forme «
-      Flower » en utilisant la définition~\ref{def:ii-2d-3d-mean} (abscisse) pour différentes
+      Flower » en utilisant la \RefDefinition{def:digital-2d-curvature} (abscisse) pour différentes
       tailles de boules $R_d$ (ordonnée, de haut en bas). Les couleurs correspondent
       aux valeurs de courbures: du bleu (courbure la plus petite) au jaune (courbure
       la plus grande).\label{fig:curvature-scale-2d}}
@@ -1081,7 +1081,7 @@ valeurs de $\FeatTD(R)$ sont au dessous de $\MeanCurvMax$ seulement pour de
 petits rayons $R$, ce qui laisse supposer que ces rayons sont \emph{trop petits}
 pour capturer la régularité de la surface. Pour des rayons plus grand, les
 valeurs de $\MeanCurvMax$ sont supérieures à $\FeatTD(R)$ et sont constants, ce
-qui est le comportement attendu pour les régions lisses. Comme décrit dans la
+qui est le comportement attendu pour les régions lisses. Comme décrit dans le
 \RefSection{sec:applications:feature:II:classification}, la classification
 finale ne considérera qu'uniquement les rayons dont les valeurs de $\FeatDD(R)$
 sont supérieures à $\CurvMax$ (ou $\FeatTD(R)$ et $\MeanCurvMax$ en 3D); les
@@ -1118,7 +1118,7 @@ la fonction $\DigFeatDD(R)$ (\cad tous les points dont la valeur de courbure est
 inférieure à \CurvMax). S'il n'y a plus suffisamment de données (trop de valeurs
 sous \CurvMax), nous classifions ce point comme \featflat. Sur toutes les images
 suivantes, la couleur verte sera assignée aux zones classifiées \featflat
-(\RefFigure{fig:curvature_analysis_plot} par exemple). S'il reste assez de
+(\RefFigure{fig:inversion} par exemple). S'il reste assez de
 données, nous calculons une approximation des moindres carrés (\emph{least
 square fitting}) des données, en échelle logarithmique, d'un modèle linéaire de
 valeur de pente de $0$ (droite constance que nous nommerons « modèle \featsmooth »,
@@ -1215,7 +1215,7 @@ définissons notre classification de zones caractéristiques comme suit :
 \label{sec:applications:feature:II:results}
 %
 Nous allons désormais notre classificateur sur un jeu de données, en 2D comme en
-3D. Les comparaisons avec les autres estimateurs sont disponibles dans la
+3D. Les comparaisons avec les autres estimateurs sont disponibles dans le
 \RefSection{sec:applications:feature:comparison}.
 %
 \\
@@ -1271,8 +1271,8 @@ rayons. \todoJeremy{Essayer FeatureEstimator x Segments max}
 Dans cette section, nous allons comparer qualitativement différents estimateurs
 de points caractéristiques les plus représentatifs de l'état de l'art pouvant
 s'adapter sur des données digitales. Dans le cadre de notre comparaison, nous
-avons implémenté les estimateurs décris dans la
-\RefSection{sec:applications:feature:II:SOTA}, (voir \RefTable{tab:feature-est})
+avons implémenté les estimateurs décris dans le
+\RefSection{sec:applications:feature:SOTA}, (voir \RefTable{tab:feature-est})
 %
 \begin{table}[h]
   \begin{center}
@@ -1316,7 +1316,7 @@ comportent en effet plusieurs zones caractéristiques de différentes tailles
 %
 Nous avons fait le choix d'étudier les paramètres des estimateurs en requérant
 afin qu'ils obtiennent de bons résultats sur des formes non bruitées\footnote{Le
-bruit utilisé est un bruit de Kanungo, comme expliqué dans la
+bruit utilisé est un bruit de Kanungo, comme expliqué dans le
 \RefSection{kanungo-noise}}. Afin de montrer l'importance de ces paramètres et
 la nécessiter d'étudier au préalable la forme pour certains estimateurs, nous
 utilisons exactement les mêmes paramètres sur les formes bruitées.
@@ -1569,7 +1569,7 @@ Tous les estimateurs vu précédemment n'arrivent pas à détecter toutes les zo
 caractéristiques à différentes échelles, la principale difficulté est d'adapter
 les paramètres pour détecter les petites régions tout en restant robuste au
 bruit. Notre estimateur, en analysant la distance à tous les modèles linéaires
-comme décrit dans la \RefSection{sec:applications:feature:II:classification},
+comme décrit dans le \RefSection{sec:applications:feature:II:classification},
 permet de détecter et classifier les singularités (\featedge) des régions lisse
 (\featsmooth) et des zones plates (\featflat) indépendamment de leur échelle.
 Ainsi, aucuns autres paramètres mise à part l'ensemble de rayons ne sont requis.

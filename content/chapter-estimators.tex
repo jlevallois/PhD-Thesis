@@ -240,7 +240,7 @@ estimateurs vont converger vers celles espérées. Plus formellement :
 De la même manière, des informations directionnelles comme les courbures
 principales (et donc la courbure gaussienne) peuvent être extraitent du calcul
 par intération. En effet, à la place de calculer la mesure de $\Ball{R}{\vx}$ dans
-la \RefDefinition{def:pottmann}, nous allons calculer sa matrice de covariance.
+la \RefDefinition{def:pottmann-2d-3d-mean}, nous allons calculer sa matrice de covariance.
 %
 \begin{definition}
   \label{def:cov-matrix}
@@ -517,7 +517,7 @@ compter le nombre de points digitaux dans un voisinage du point d'intérêt :
   %
 \end{definition}
 %
-\begin{definition}[Estimateur digital de courbure moyenne 3D par intégration.]
+\begin{definition}[Estimateur digital de courbure moyenne 3D par intégration.]\label{def:digital-3d-mean-curvature}
   %
   Pour tout rayon $R$ positif, nous définissons l'estimateur digital de courbure
   moyenne 3D par intégration $\MeanCurvH{R}$ d'une forme digitale $\DigShape
@@ -647,7 +647,7 @@ moyenne sur des formes 3D :
   %
   La preuve suit exactement les mêmes étapes que la preuve du
   \RefTheorem{thm:convergence-curv-2d}, la
-  \RefDefinition{def:digital-3d-curvature}), ainsi que la relation
+  \RefDefinition{def:digital-3d-mean-curvature}), ainsi que la relation
   $\DigF{\Ball{R}{\vx} \cap \Shape}{h}=\Ball{R/h}{\frac{1}{h} \cdot \vx} \cap \DSh$ nous
   permets d'obtenir pour $R < R_0$ :
   %
@@ -740,13 +740,13 @@ Notons $\vt \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
 $\Bd{\Body{\DSh}{h}}$ à un point $\vx$ de $\dS$. En 3D, le
 \RefTheoremFake{7}{Pottmann2009} permet de quantifier cette erreur :
 %
-\begin{equation}\label{eq-volume-shift-error}
+\begin{equation}\label{eq:volume-shift-error}
   | V_r(\vxH) - V_r(\vx) | = R^2 \pi \vt (1 + O(R^2)+O(\vt)).
 \end{equation}
 %
 De la même façon en 2D, nous obtenons :
 %
-\begin{equation}\label{eq-area-shift-error}
+\begin{equation}\label{eq:area-shift-error}
   | A_r(\vxH) - A_r(\vx) | = 2R \vt (1 + O(R^2)+O(\vt)).
 \end{equation}
 %
@@ -757,17 +757,17 @@ pour $\vxH$ :
   | \AreaC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - A_R(\vxH) | \le K_1 h^\beta R^{2-\beta},
 \end{equation}
 %
-ce qui implique, avec l'\RefEquation{eq-area-shift-error} :
+ce qui implique, avec l'\RefEquation{eq:area-shift-error} :
 %
-\begin{equation}\label{eq-shift-B-R-error-bound-2D}
+\begin{equation}\label{eq:shift-B-R-error-bound-2D}
   | \AreaC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - A_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  2 R \vt (1 + O(R^2) + O(\vt)).
 \end{equation}
 %
 Ensuite, dans le but d'obtenir un estimateur de courbure, nous suivons le même
 raisonnement que pour la preuve du \RefTheorem{thm:convergence-curv-2d} mais en
-utilisant l'\RefEquation{eq-shift-B-R-error-bound-2D}, ce qui nous donne :
+utilisant l'\RefEquation{eq:shift-B-R-error-bound-2D}, ce qui nous donne :
 %
-\begin{equation}\label{eq-shift-curvhat-error-bound-2D}
+\begin{equation}\label{eq:shift-curvhat-error-bound-2D}
   | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) | \le O(R) + 3 K_1 \frac{h^\beta}{R^{1+\beta}} + \frac{6 \vt}{R^2}(1 + O(R^2) + O(\vt)).
 \end{equation}
 %
@@ -778,7 +778,7 @@ $\vt = O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la
 précédente équation afin d'obtenir une borne d'erreur uniquement dépendante de
 $h$, avec $R=kh^{\alpha}$ :
 %
-\begin{equation} \label{eq-shift-curvhat-error-bound-h-only}
+\begin{equation} \label{eq:shift-curvhat-error-bound-h-only}
   | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) |
   \le O(h^\alpha) + O(h^{\beta-\alpha(1+\beta)}) + O(h^{\alpha'-2\alpha})
     + O(h^{\alpha'}) + O(h^{2\alpha'-2\alpha}).
@@ -846,28 +846,28 @@ Notons $\vt \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
 $\Bd{\Body{\DSh}{h}}$ à un point $\vx$ de $\dS$. En 3D, le
 \RefTheoremFake{7}{Pottmann2009} permet de quantifier cette erreur :
 %
-\begin{equation}\label{eq-volume-shift-error}
+\begin{equation}\label{eq:volume-shift-error}
   | V_r(\vxH) - V_r(\vx) | = R^2 \pi \vt (1 + O(R^2)+O(\vt)).
 \end{equation}
 %
-Nous pouvons alors réécrire l'\RefEquation{eq:convergence-vol-intersection}
+Nous pouvons alors réécrire l'\RefEquation{eq:convergence-volume-intersection}
 pour $\vxH$ :
 %
 \begin{equation}
   | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vxH) | \le K_1 h^\gamma R^{3-\gamma},
 \end{equation}
 %
-ce qui implique, avec l'\RefEquation{eq-vol-shift-error} :
+ce qui implique, avec l'\RefEquation{eq:volume-shift-error} :
 %
-\begin{equation}\label{eq-shift-B-R-error-bound-3D}
+\begin{equation}\label{eq:shift-B-R-error-bound-3D}
   | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\gamma R^{3-\gamma} +  R^2 \pi \vt (1 + O(R^2) + O(\vt)).
 \end{equation}
 %
 Ensuite, nous suivons le même raisonnement que pour la preuve du
 \RefTheorem{thm:convergence-curv-3d} mais en utilisant
-l'\RefEquation{eq-shift-B-R-error-bound-3D}, ce qui nous donne :
+l'\RefEquation{eq:shift-B-R-error-bound-3D}, ce qui nous donne :
 %
-\begin{equation}\label{eq-shift-curvhat-error-bound-3D}
+\begin{equation}\label{eq:shift-curvhat-error-bound-3D}
   | \MeanCurvH{R}(\DSh,\vxH,h) - \MeanCurv(\Shape,\vx) | \le O(R) + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}} + \frac{4 \vt}{R^2}(1 + O(R^2) + O(\vt)).
 \end{equation}
 %
@@ -876,7 +876,7 @@ $\vt = O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la
 précédente équation afin d'obtenir une borne d'erreur uniquement dépendante de
 $h$, avec $R=kh^{\alpha}$ :
 %
-\begin{equation} \label{eq-shift-meancurvhat-error-bound-h-only}
+\begin{equation} \label{eq:shift-meancurvhat-error-bound-h-only}
   | \MeanCurvH{R}(\DSh,\vxH,h) - \MeanCurv(\Shape,\vx) |
   \le O(h^\alpha) + O(h^{\gamma-\alpha(1+\gamma)}) + O(h^{\alpha'-2\alpha})
     + O(h^{\alpha'}) + O(h^{2\alpha'-2\alpha}).
@@ -1444,7 +1444,7 @@ matrice de covariance continue lorsque nous la calculons à partir de
 l'intersection de la forme avec une boule. Nous avons défini des estimateurs de
 courbures principales et de directions principales de courbure à partir des
 valeurs propres et des vecteurs propres de la matrice de covariance digitale
-dans la \RefSection{def:principal-curv-estimators}. Afin de pouvoir obtenir des
+dans le \RefSection{def:principal-curv-estimators}. Afin de pouvoir obtenir des
 preuves de convergence asymtotiques, il est nécessaire de comprendre comment une
 erreur sur une matrice peut perturber sa décomposition. C'est pour cela que nous
 allons dans un premier temps présenter un résultat de la théorie de perturbation
