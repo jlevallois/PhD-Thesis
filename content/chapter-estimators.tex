@@ -1531,7 +1531,9 @@ intégration :
   \end{equation}
   %
   avec $\mu_i \ge 1$ pour la forme $\Shape$ (voir
-  \RefEquation{eq:MomentsByCounting-conv}). En donnant pour valeur $R = kh^\alpha$, $k$ étant une constante, la valeur optimale pour $\alpha$ minimisant le plus les erreurs est $\frac{1}{3}$. Ainsi, nous obtenons :
+  \RefEquation{eq:MomentsByCounting-conv}). En donnant pour valeur $R =
+  kh^\alpha$, $k$ étant une constante, la valeur optimale pour $\alpha$
+  minimisant le plus les erreurs est $\frac{1}{3}$. Ainsi, nous obtenons :
   %
   \begin{equation}
     \PrincCurvH{1}{R}(\DSh,\hat{\vx},h) = \PrincCurv{1}(\Shape,\vx) + O(h^{\frac{1}{3}}).
@@ -1545,7 +1547,68 @@ $\mu_i$ se rapprochent de $1.5$. De plus, une meilleure estimation de la
 distance entre $\vx$ et $\hat{\vx}$ permettrait d'améliorer les vitesses de
 convergence.
 %
-\paragraph{Résultats}
+\\
+%
+Des résultats de convergence asymptotique sur l'estimation digitale des
+directions principales et de la normale peuvent être également apportés. Les
+détails sont expliqués dans \cite{ChapterIICurvature}. La preuve est un peu plus
+compliquée que pour les courbures principales car des problèmes interviennent
+aux points ombilic de la surface, \cad lorsque les deux courbures principales
+sont égales. De ce fait, pour tous ces points, les deux valeurs propres de la
+matrice de covariance coïncident et leurs vecteurs propres couvrent un plan.
+Cependant, nous pouvons écrire :
+%
+\begin{theorem}[Convergence asymptotique des estimateurs digitaux de directions principales de courbure par intégration $\PrincDirH{1}{R}$ et $\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration \NormalDirH{R}]
+\label{thm:multigrid-conv-principal-directions-and-normal}
+  %
+  Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\Bd{X}$ a un
+  reach supérieur à $\rho$ et est $C^3$.
+  %
+  \\
+  %
+  Alors, pour la discrétisation de Gauss, les estimateurs digitaux de directions
+  principales de courbure par intégration convergent asymptotiquement vers les
+  directions principales de courbure $\PrincDir{1}$ and $\PrincDir{2}$ sur des
+  formes $\Shape$ pour des pas de discrétisations $h$ et rayon $R$ donnant des
+  courbures principales distinctes. L'estimateur digital des normales par
+  intégration converge également vers la normale $\NormalDir$. Plus précisement,
+  en donnant $R=k h^{\frac{1}{3}}$ avec $k$ une constante positive arbitraire,
+  nous avons :
+  %
+  \begin{align}
+    &\exists h_\Shape \in \R^+,\,\, \forall h \in \R,\,\, 0 < h < h_\Shape,\,\,
+     \,\,\nonumber\quad \quad\quad \quad\\
+    &\forall \vx \in \Bd{\Shape}, \quad \forall \hat{\vx} \in \Bd{\Body{\DSh}{h}}  \text{~avec~} \| \hat{\vx} -\vx\|_\infty
+    \le h, \nonumber\quad \quad\quad \quad \\
+    &\quad \quad\quad \quad\| \PrincDirH{1}{R}( \DSh, \hat{\vx}, h ) - \PrincDir{1}(\Shape, \vx) \|
+    \le \frac{1}{|\PrincCurv{1}(\Shape,\vx)-\PrincCurv{2}(\Shape,\vx)|} O(h^{\frac{1}{3}})\,, \\
+    &\quad \quad\quad \quad\| \PrincDirH{2}{R}( \DSh, \hat{\vx}, h ) - \PrincDir{2}(\Shape, \vx) \|
+    \le \frac{1}{|\PrincCurv{1}(\Shape,\vx)-\PrincCurv{2}(\Shape,\vx)|} O(h^{\frac{1}{3}})\,, \\
+    &\quad \quad\quad \quad\| \NormalDirH{R}( \DSh, \hat{\vx}, h ) - \NormalDir(\Shape, \vx) \|
+    \le O(h^{\frac{2}{3}})\,.
+  \end{align}
+\end{theorem}
+%
+Les vecteurs propres issus de la décomposition de la matrice de covariance ne
+sont pas orientés. Afin de pouvoir comparer les directions principales de
+courbures, celles-ci doivent être orientés dans la même direction afin d'éviter
+les erreurs angulaires provoqués par cette absence d'orientation. La convergence
+asymptotique est alors valide si nous avons au préalable orienté les vecteurs dans
+la même direction.
+%
+\\
+%
+La démonstration complète est donnée dans \cite{ChapterIICurvature}. L'intuition
+de la preuve est d'analyser l'écart entre deux valeurs propres successives («
+\anglais{eigengap} » en anglais) afin de pouvoir borner l'erreur d'estimation
+des vecteurs propres. Cet écart joue un rôle important dans la variation des
+vecteurs propres puisque plus sa valeur est petite, plus il y a de risques en
+cas de perturbation de la surface d'obtenir des rotations. Enfin, l'utilisation
+du \RefTheoremFake{3}{Pottmann2007} sur la proximité des vecteurs propres de la
+matrice de covariance et des directions de courbures principales permet de
+conclure à une convergence asymptotique.
+%
+\subsubsection{Résultats de l'estimation de la courbure par intégration volumique de la sphère}
 %
 Nous allons maintenant montrer quelques résultats. Une comparaison expérimentale
 complète sera proposée dans le \RefSection{sec:comparaison-courbure}.
