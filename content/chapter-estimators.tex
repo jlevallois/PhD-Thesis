@@ -998,9 +998,9 @@ diagonalisation de la matrice de covariance digitale :
   intégration de courbures principales $\PrincCurvH{1}{R}$ et
   $\PrincCurvH{2}{R}$ de $\DigShape$ au point $\vy \in \R^3$ et au pas de
   discrétisation $h$, et les estimateurs digitaux par intégration de leurs
-  directions principales respectives $\PrincDirH{1}{R}$ et $\PrincDirH{2}{R}$,
-  ainsi que l'estimateur digital par intégration de normale $\NormalDirH{R}$
-  comme :
+  directions principales de courbure respectives $\PrincDirH{1}{R}$ et
+  $\PrincDirH{2}{R}$, ainsi que l'estimateur digital par intégration de normale
+  $\NormalDirH{R}$ comme :
 %
 \begin{align}
   \PrincCurvH{1}{R}(\DigShape,\vy,h)  &\EqDef \frac{6}{\pi R^6}(\hat{\lambda}_2 - 3\hat{\lambda}_1) + \frac{8}{5R},
@@ -1442,13 +1442,13 @@ nous allons nous servir des précédents lemmes.
 Nous venons de montrer que la matrice de covariance digitale tend vers la
 matrice de covariance continue lorsque nous la calculons à partir de
 l'intersection de la forme avec une boule. Nous avons défini des estimateurs de
-courbures principales et de directions principales à partir des valeurs propres
-et des vecteurs propres de la matrice de covariance digitale dans la
-\RefSection{def:principal-curv-estimators}. Afin de pouvoir obtenir des preuves
-de convergence asymtotiques, il est nécessaire de comprendre comment une erreur
-sur une matrice peut perturber sa décomposition. C'est pour cela que nous allons
-dans un premier temps présenter un résultat de la théorie de perturbation de
-matrices \cite{Bauer:1960,stewart1990matrix,bhatia1997matrix}.
+courbures principales et de directions principales de courbure à partir des
+valeurs propres et des vecteurs propres de la matrice de covariance digitale
+dans la \RefSection{def:principal-curv-estimators}. Afin de pouvoir obtenir des
+preuves de convergence asymtotiques, il est nécessaire de comprendre comment une
+erreur sur une matrice peut perturber sa décomposition. C'est pour cela que nous
+allons dans un premier temps présenter un résultat de la théorie de perturbation
+de matrices \cite{Bauer:1960,stewart1990matrix,bhatia1997matrix}.
 %
 \\
 %
@@ -1550,13 +1550,13 @@ convergence.
 \\
 %
 Des résultats de convergence asymptotique sur l'estimation digitale des
-directions principales et de la normale peuvent être également apportés. Les
-détails sont expliqués dans \cite{ChapterIICurvature}. La preuve est un peu plus
-compliquée que pour les courbures principales car des problèmes interviennent
-aux points ombilic de la surface, \cad lorsque les deux courbures principales
-sont égales. De ce fait, pour tous ces points, les deux valeurs propres de la
-matrice de covariance coïncident et leurs vecteurs propres couvrent un plan.
-Cependant, nous pouvons écrire :
+directions principales de courbure et de la normale peuvent être également
+apportés. Les détails sont expliqués dans \cite{ChapterIICurvature}. La preuve
+est un peu plus compliquée que pour les courbures principales car des problèmes
+interviennent aux points ombilic de la surface, \cad lorsque les deux courbures
+principales sont égales. De ce fait, pour tous ces points, les deux valeurs
+propres de la matrice de covariance coïncident et leurs vecteurs propres
+couvrent un plan. Cependant, nous pouvons écrire :
 %
 \begin{theorem}[Convergence asymptotique des estimateurs digitaux de directions principales de courbure par intégration $\PrincDirH{1}{R}$ et $\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration \NormalDirH{R}]
 \label{thm:multigrid-conv-principal-directions-and-normal}
@@ -1591,7 +1591,7 @@ Cependant, nous pouvons écrire :
 %
 Les vecteurs propres issus de la décomposition de la matrice de covariance ne
 sont pas orientés. Afin de pouvoir comparer les directions principales de
-courbures, celles-ci doivent être orientés dans la même direction afin d'éviter
+courbure, celles-ci doivent être orientés dans la même direction afin d'éviter
 les erreurs angulaires provoqués par cette absence d'orientation. La convergence
 asymptotique est alors valide si nous avons au préalable orienté les vecteurs dans
 la même direction.
@@ -1623,7 +1623,7 @@ complète sera proposée dans le \RefSection{sec:comparaison-courbure}.
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir1-zoom}
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir2-zoom}
 \end{center}\vspace{-0.5cm}
-  \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$). \emph{De gauche à droite, de haut en bas}, courbure moyenne, courbure gaussienne, premières directions principales, secondes directions principales et normales (zoom sur la troisième ligne). \label{fig:digital-II}}
+  \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$). \emph{De gauche à droite, de haut en bas}, courbure moyenne, courbure gaussienne, premières et secondes directions principales de courbure et normales (zoom sur la troisième ligne). \label{fig:digital-II}}
 \end{figure}
 %
 \todoInlineJeremy{-------------------------------}
