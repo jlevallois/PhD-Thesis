@@ -1608,23 +1608,74 @@ du \RefTheoremFake{3}{Pottmann2007} sur la proximité des vecteurs propres de la
 matrice de covariance et des directions de courbures principales permet de
 conclure à une convergence asymptotique.
 %
-\subsubsection{Résultats de l'estimation de la courbure par intégration volumique de la sphère}
+\subsubsection{Résultats sur l'estimation de la courbure par intégration volumique de la sphère}
 %
-Nous allons maintenant montrer quelques résultats. Une comparaison expérimentale
-complète sera proposée dans le \RefSection{sec:comparaison-courbure}.
+Avons de conclure sur cette méthode, nous allons montrer quelques résultats des
+estimateurs. Une comparaison expérimentale complète sera proposée dans le
+\RefSection{sec:comparaison-courbure}.
+%
+\\
+%
+Nous avons choisi l'objet digital \textsc{OctaFlower} de dimension $256^3$.
+L'unique paramètre de nos estimateurs est le rayon de la boule : nous avons
+choisi $R=10$ pour toutes les images de la \RefFigure{fig:digital-II-octa}. La
+carte des couleurs pour les estimateurs de coubure moyenne et gaussienne va du
+bleu (valeur minimale) au jaune (valeur maximale).
 %
 \begin{figure}[ht]
 \begin{center}
-  \includegraphics[width=.34\linewidth]{images/Curvature/octa-256-mean}
-  \includegraphics[width=.34\linewidth]{images/Curvature/octa-256-gaussian}\\
+  \includegraphics[width=.34\linewidth]{images/Curvature/Octa256_Mean_R_10_0001}
+  \includegraphics[width=.34\linewidth]{images/Curvature/Octa256_Gauss_R_10_0001}\\
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir1}
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir2}
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-normal} \\
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir1-zoom}
   \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir2-zoom}
 \end{center}\vspace{-0.5cm}
-  \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$). \emph{De gauche à droite, de haut en bas}, courbure moyenne, courbure gaussienne, premières et secondes directions principales de courbure et normales (zoom sur la troisième ligne). \label{fig:digital-II}}
+  \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 10$. \emph{De gauche à droite, de haut en bas}, courbure moyenne, courbure gaussienne, premières et secondes directions principales de courbure et normales (zoom sur la troisième ligne). \label{fig:digital-II-octa}}
 \end{figure}
+%
+\subsection{Estimation sans paramètre de la courbure par intégration volumique de la sphère}
+%
+Dans ce paragraphe, nous allons proposer une version sans paramètre des
+estimateurs de courbure du \RefSection{sec:estimators:volume}. Dans le contexte
+de la convergence asymptotique, la notion d'échelle est explicitement donnée
+grâce au paramètre de discrétisation $h$. C'est d'ailleurs pour cela que nos
+rayons de boules doivent être en relation avec $h$ ($R$ est en
+$O(h\frac{1}{3})$). Cependant, pour un objet digital donné, ce choix de rayon
+nécessite d'étudier au préalable la forme dont nous souhaitons estimer la
+courbure, et la qualité d'estimation dépend de ce paramètre. La
+\RefFigure{fig:digital-II-octa-scale} montre le resultat de l'estimation de la
+courbure moyenne et de la courbure gaussienne avec différents rayons $R$ pour la
+forme \textsc{OctaFlower}.
+%
+\begin{figure}[ht]
+\begin{center}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Mean_R_15_0001}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Mean_R_25_0001}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Mean_R_30_0001}\\
+  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Gauss_R_15_0001}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Gauss_R_25_0001}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Gauss_R_30_0001}
+\end{center}\vspace{-0.5cm}
+  \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec trois rayons différents : $R = 15, 25, 30$. \emph{De haut en bas}, courbure moyenne, courbure gaussienne. \label{fig:digital-II-octa-scale}}
+\end{figure}
+%
+Nous voulons alors automatiquement détecter ce paramètre de rayon pour des
+objets digitaux $\DigShape$ de dimension $2$ et $3$ tout en garantissant les
+propriétés de convergence asymptotiques si ceux-ci respectent les conditions de
+convergence des estimateurs de courbure du \RefSection{sec:estimators:volume}.
+La technique est simple, nous devons extraire les informations géométriques de
+la forme afin de pouvoir retrouver quel est le paramètre asymptotique $h$ pour
+la forme donnée. Nous utiliserons alors les segments maximaux digitaux décris
+dans le \RefSection{sec:segments}.
+%
+%\subsubsection{Propriétés sur les segments maximaux}
+%
+\subsubsection{Estimateurs digitaux sans paramètre de courbure}
+%
+Dans le \RefSection{sec:segments} nous avons montré les propriétés des segments
+maximaux sur les bords d'objets digitaux.
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}

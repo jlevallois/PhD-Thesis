@@ -24,38 +24,72 @@ components are written with subscripts as $\vz=(z_1,\ldots,z_d)$.
 %
 \section{Introduction à la géométrie différentielle}
 %
-\section{Droites discrètes, segments discrets}
+\section{Droites digitales standard, segments digitaux}%
+\label{sec:segments}
 %
-\begin{definition}[Standard Line and Digital Straight Segment (DSS)]
-  The set of points $(x,y)\in\Z^2$ satisfying $\mu \le ax - by < \mu +
-  |a| + |b|$, with $a$, $b$ and $\mu$ integer numbers, is called the
-  {\em standard digital line} with slope $a/b$ and shift $\mu$.  Any
-  connected subset of pixels of a standard digital line is a
-  \emph{digital straight segment} (DSS for short).
+\begin{definition}[Droite digitale standard et segment digital (« \anglais{Digital Straight Segment} »)]
+  \label{def:DSS}
+%
+  L'ensemble de points $(x_1,x_2) \in \Z^2$ satisfaisant $\mu \le ax_1 - bx_2 <
+  \mu + |a| + |b|$, avec $a$, $b$ et $\mu$ des nombres entiers, est appelé une
+  \emph{droite digitale standard} avec comme pente $a/b$ et comme ordonnée
+  $\mu$. Tout sous ensemble de pixels connectés d'une droite digitale standard
+  est un \emph{segment digital} (ou « \anglais{DSS} »).
+%
 \end{definition}
 %
 \begin{definition}[Segments maximaux et faisceau de segments maximaux \cite{lachaud2007-ivc}]
-  Une séquence de pointels $\{p_i,\ldots,p_j\}\subset\BdZ{Z}$ est un {\em
-    segment maximal} \ssi $\{p_i,\ldots,p_j\}$ est un DSS qui ne peux s'étendre dans aucun sens (en avant ou en arrière) tout en restant DSS.
-    Pour un pointel $p\in\BdZ{Z}$, le \emph{faisceau de segments maximaux} à $p$ est l'ensemble des segments maximaux de $\BdZ{Z}$ contenant $p$.
+  \label{def:MDSS}
+%
+  Les pointels composant le bord digital $\BdZ{\DigShape}$ d'une forme
+  $\DigShape \subset \Z^2$ forme un contour $4$-connecté. Cela nous permet de
+  les dénombrer consécutivement par $(\vp_i)_{i={0\ldots n-1}}$. Une séquence de
+  pointels $(\vp_i, \ldots, \vp_j)$ (dont l'indice est modulo $n$) est un
+  \emph{segment maximal} sur $\BdZ{\DigShape}$ si c'est un DSS qui ne peut
+  s'étendre dans aucun sens (en avant ou en arrière) en restant un DSS.
+  %
+  \\
+  %
+  Plus formellement, $(\vp_i, \ldots, \vp_j)$ est un segment maximal sur $\BdZ{\DigShape}$ \ssi :
+  \begin{itemize}
+    \item $(\vp_i, \ldots, \vp_j)$ est un DSS sur $\BdZ{\DigShape}$,
+    \item $(\vp_{i-1}, \ldots, \vp_j)$ n'est pas un DSS sur $\BdZ{\DigShape}$,
+    \item $(\vp_i, \ldots, \vp_{j+1})$ n'est pas un DSS sur $\BdZ{\DigShape}$,
+  \end{itemize}
+  %
+  Pour un pointel $\vp \in \BdZ{\DigShape}$ donné, le \emph{faisceau de segments maximaux} à $\vp$ est l'ensemble
+  des segments maximaux de $\BdZ{\DigShape}$ contenant $\vp$.
+%
 \end{definition}
 %
-\begin{lemma}[Lois asymptotiques des segments maximaux \cite{lachaud2006-hdr,deVieilleville2007-jmiv}]
-  \label{lem-asymptotic-digital-length-ms}
-   Soit $X$ une forme convexe de $\R^2$, avec \emph{au moins} une
-   bordure $C^3$  et une courbure bornée.  La longueur discrète des
-   segments maximaux de $\BdZ{Z}$ pour $Z=\DSh$ suivent les règles suivantes :
-   \begin{itemize}
-   \item le plus court des segments discrets a une borne inférieure en
-     $\Omega(h^{-\frac{1}{3}})$;
-   \item le plus long des segments discrets a une borne supérieure en
-     $O(h^{-\frac{1}{2}})$;
-   \item leur longueur moyenne, désigné par $L_D({Z})$, est telle que :
-  \begin{equation}
-    \label{eq:lengthMS}
-    \Theta(h^{-\frac{1}{3}}) \le L_D( {Z} ) \le \Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right))\;.
-  \end{equation}
-   \end{itemize}
+\cauthors{Lachaud}{lachaud2006} et \cauthors{de
+Vieilleville}{deVieilleville2007} se sont intéressés sur les propriétés
+asymptotiques des longueurs des segments maximaux sur des formes convexe
+suffisamment lisse de dimension 2 :
+%
+\begin{lemma}[Lois asymptotiques des segments maximaux]
+  \label{lem:law-length-MDSS}
+  %
+  Soit $\Shape$ une forme convexe de $\R^2$, avec au moins une bord $C^3$ à
+  courbure bornée. La longueur discrète des segments maximaux de
+  $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ suit les règles suivantes :
+  %
+  \begin{itemize}
+    %
+    \item le plus court des segments maximaux a une borne inférieure en
+    $\Omega(h^{-\frac{1}{3}})$;
+    %
+    \item le plus long des segments maximaux a une borne supérieure en
+    $O(h^{-\frac{1}{2}})$;
+    %
+    \item la longueur moyenne des segments maximaux $L_D({Z})$, est bornée par :
+    %
+    \begin{equation}
+      \label{eq:lengthMS}
+      \Theta(h^{-\frac{1}{3}}) \le L_D( {Z} ) \le \Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right))\;.
+    \end{equation}
+  \end{itemize}
+  %
 \end{lemma}
 %
 \section{Estimateurs digitaux d'aire, de volume, de moments, de positionnement de surface}
