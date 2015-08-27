@@ -32,11 +32,13 @@ components are written with subscripts as $\vz=(z_1,\ldots,z_d)$.
 %
   L'ensemble de points $(x_1,x_2) \in \Z^2$ satisfaisant $\mu \le ax_1 - bx_2 <
   \mu + |a| + |b|$, avec $a$, $b$ et $\mu$ des nombres entiers, est appelé une
-  \emph{droite digitale standard} avec comme pente $a/b$ et comme ordonnée
+  \emph{droite digitale standard} avec comme pente $a/b$ et comme décallage
   $\mu$. Tout sous ensemble de pixels connectés d'une droite digitale standard
   est un \emph{segment digital} (ou « \anglais{DSS} »).
 %
 \end{definition}
+%
+Une droite digitale standard est une droite 4-connexe.
 %
 \begin{definition}[Segments maximaux et faisceau de segments maximaux \cite{me}]
   \label{def:MDSS}
@@ -71,7 +73,7 @@ suffisamment lisse de dimension 2 :
   \label{lem:law-length-MDSS}
   %
   Soit $\Shape$ une forme convexe de $\R^2$, avec au moins une bord $C^3$ à
-  courbure bornée. La longueur discrète des segments maximaux de
+  courbure bornée non nulle. La longueur discrète des segments maximaux de
   $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ suit les règles suivantes :
   %
   \begin{itemize}

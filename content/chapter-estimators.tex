@@ -1691,11 +1691,17 @@ paramètre de courbure 2D $\CurvHS$ :
 %
 \begin{definition}
   \label{def:curvature-estimator-2d-pf}
-  Pour une forme $\DigShape \subset \Z^2$, l'estimateur digital sans paramètre de courbure 2D $\CurvHS$ au pointel $\vp \in \BdZ{\DigShape}$ est défini comme :
+  %
+  Soit une forme $\DigShape \subset \Z^2$. L'estimateur digital sans paramètre
+  de courbure 2D $\CurvHS$ au pointel $\vp \in \BdZ{\DigShape}$ est défini comme :
+  %
   \begin{equation}
-  \CurvHS( \DigShape, \vp) \EqDef \frac{3\pi}{2 \rho(\DigShape)} - \frac{3 A(\DigShape,\vp)}{{\rho(\DigShape)}^3}
+    \CurvHS( \DigShape, \vp) \EqDef \frac{3\pi}{2 \rho(\DigShape)} - \frac{3 A(\DigShape,\vp)}{{\rho(\DigShape)}^3}
   \end{equation}
-  où $\rho(\DigShape) =L_D^2(\DigShape)$ and $A(\DigShape,\vp) = Card(\Ball{\rho(\DigShape)}{\vp} \cap \DigShape)$.
+  %
+  où $\rho(\DigShape) =L_D^2(\DigShape)$ and $A(\DigShape,\vp) =
+  Card(\Ball{\rho(\DigShape)}{\vp} \cap \DigShape)$.
+  %
 \end{definition}
 %
 \todoJeremy{Changer A par hat(Area)}
@@ -1734,7 +1740,7 @@ sans paramètre de courbure.
 \label{thm:curvature-estimator-2d-pf-conv}
   %
   Soit $\Shape$ une forme convexe de $\R^2$ telle que son bord $\Bd{\Shape}$ est
-  $C^3$ et sa courbure bornée. Soit $\DigShape = \DSh$. Alors, il existe une
+  $C^3$ et sa courbure bornée non nulle. Soit $\DigShape = \DSh$. Alors, il existe une
   constante positive $h_0$, nous avons :
   %
   \begin{align}
@@ -1821,6 +1827,54 @@ de la taille de la boule s'adapte localement à la géométrie de l'objet ? Le
 paragraphe suivant traîte cette question.
 %
 \subsubsection{Estimateur digital local sans paramètre de courbure 2D}
+%
+Nous allons noter $\rho(\DigShape,\vp)$ la longueur moyenne du faisceau de
+segments maximaux au point $\vp$ élevé au carré. Nous définissons alors une
+version locale de l'estimateur de la
+\RefDefinition{def:curvature-estimator-2d-pf} :
+%
+\begin{definition}
+  %
+  Soit une forme $\DigShape \subset \Z^2$. L'estimateur digital local sans
+  paramètre de courbure 2D au pointel $\vp \in \BdZ{\DigShape}$ est défini par :
+  %
+  \begin{equation}
+    \CurvHSL(\DigShape, \vp) \EqDef \frac{3\pi}{2 \rho(\DigShape,\vp)} - \frac{3 A'(\DigShape,\vp)}{{\rho(\DigShape,\vp)}^3}
+  \end{equation}
+  %
+  où $A'(\DigShape, \vp) = Card(\Ball{\rho(\DigShape,\vp)}{\vp} \cap
+  \DigShape)$.
+  %
+\end{definition}
+%
+Pour résumer, nous calculons le faisceau de segments maximaux en tout point
+$\vp$ du bord de $\DigShape$, puis nous calculons la moyenne de leurs longueurs.
+Cette longueur au carré nous donne la taille à utiliser pour la boule localement
+pour le point $\vp$. Cela a pour conséquence d'avoir une plus grosse boule sur
+les parties à faible courbure et de diminuer la taille de la boule sur les zones
+fortement courbées.
+%
+\begin{figure}[ht]{
+  \begin{center}
+    \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Global}
+    \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local}
+    %\includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local_5}
+  \end{center}}
+  %
+  \caption[.]{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
+  l'objet \textsc{AccFlower} allant du bleu (valeur minimale) au jaune (valeur
+  maximale). \emph{En abscisse :} position sur la surface de l'objet, \emph{en
+  ordonnée :} différents rayons $R$.
+  %
+  \\
+  %
+  \emph{En noir sur l'image du haut :} rayon choisi par l'estimateur $\CurvHS$.
+  \emph{En noir sur l'image du bas :} différents rayons choisis par l'estimateur
+  $\CurvHSL$ en fonction de la géométrie locale de la forme.
+  %
+  \label{fig:curvature-pf-radii}.}
+  %
+\end{figure}
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
