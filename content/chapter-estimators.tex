@@ -1561,7 +1561,7 @@ couvrent un plan. Cependant, nous pouvons écrire :
 \begin{theorem}[Convergence asymptotique des estimateurs digitaux de directions principales de courbure par intégration $\PrincDirH{1}{R}$ et $\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration \NormalDirH{R}]
 \label{thm:multigrid-conv-principal-directions-and-normal}
   %
-  Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\Bd{X}$ a un
+  Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\Bd{\Shape}$ a un
   reach supérieur à $\rho$ et est $C^3$.
   %
   \\
@@ -1635,6 +1635,8 @@ bleu (valeur minimale) au jaune (valeur maximale).
   \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 10$. \emph{De gauche à droite, de haut en bas}, courbure moyenne, courbure gaussienne, premières et secondes directions principales de courbure et normales (zoom sur la troisième ligne). \label{fig:digital-II-octa}}
 \end{figure}
 %
+\todoInlineJeremy{vérifier si j'ai mis convexe partout}
+%
 \subsection{Estimation sans paramètre de la courbure par intégration volumique de la sphère}
 %
 Dans ce paragraphe, nous allons proposer une version sans paramètre des
@@ -1672,11 +1674,153 @@ dans le \RefSection{sec:segments}.
 %
 %\subsubsection{Propriétés sur les segments maximaux}
 %
-\subsubsection{Estimateurs digitaux sans paramètre de courbure}
+\subsubsection{Estimateur digital sans paramètre de courbure 2D}
 %
 Dans le \RefSection{sec:segments} nous avons montré les propriétés des longueurs
-des segments maximaux sur les bords d'objets digitaux (
-\RefLemma{lem:law-length-MDSS} ).
+des segments maximaux sur les bords d'objets digitaux
+(\RefLemma{lem:law-length-MDSS}). Nous allons tirer parti de ces propriétés afin
+de définir notre nouvel estimateur de courbure sur des objets digitaux
+$\DigShape \subset \Z^2$. Pour faire simple, nous allons reprendre l'estimateur
+digital de courbure défini dans la \RefDefinition{def:digital-2d-curvature}.
+Celui-ci nécessite un rayon $R$ qui doit être en $O(h^{\frac{1}{3}})$ afin
+d'avoir une convergence asymptotique dela courbure. Nous allons exploiter les
+longueurs des segments maximaux afin de coller à cette
+borne\footnote{$L_D({\DigShape})$ est la longueur moyenne des segments maximaux
+sur $\DigShape$}. Définissons tout d'abord notre estimateur digital sans
+paramètre de courbure 2D $\CurvHS$ :
+%
+\begin{definition}
+  \label{def:curvature-estimator-2d-pf}
+  Pour une forme $\DigShape \subset \Z^2$, l'estimateur digital sans paramètre de courbure 2D $\CurvHS$ au pointel $\vp \in \BdZ{\DigShape}$ est défini comme :
+  \begin{equation}
+  \CurvHS( \DigShape, \vp) \EqDef \frac{3\pi}{2 \rho(\DigShape)} - \frac{3 A(\DigShape,\vp)}{{\rho(\DigShape)}^3}
+  \end{equation}
+  où $\rho(\DigShape) =L_D^2(\DigShape)$ and $A(\DigShape,\vp) = Card(\Ball{\rho(\DigShape)}{\vp} \cap \DigShape)$.
+\end{definition}
+%
+\todoJeremy{Changer A par hat(Area)}
+%
+Pour paraphraser cette définition, nous devons dans un premier temps calculer la
+moyenne des longueurs des segments discret sur le bord de $\DigShape$. Nous
+élevons au carré cette longueur moyenne afin de donner $\rho$. Ainsi,
+l'estimateur $\CurvHS$ est une fonction du nombre de points digitaux de
+$\DigShape$ intersecté avec une boule de rayon $\rho$ centrée au point digital
+$\vp$. Cette version de l'estimateur de la
+\RefDefinition{def:digital-2d-curvature} est alors indépendant à l'echelle de la
+forme.
+%
+\\
+%
+Si nous souhaitons rendre compatible notre estimateur dans le cadre de la
+convergence asymptotique, afin qu'il puisse se comparer avec des données de
+l'espace euclidien, nous devons y appliquer un facteur d'échelle du pas de
+discrétisation $h$. En effet, comme nous l'avons dit précédemment, notre
+estimateur ne contient pas d'information d'échelle. De plus, pour $\DigShape =
+\DSh$, avec $\rho(\DigShape) = L^2_D(\DigShape)$, nous avons (d'après le
+\RefLemma{lem:law-length-MDSS}) :
+%
+\begin{align}
+  \Theta(h^{-\frac{1}{3}}) \le L_D( \DigShape ) \le \Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right)) \\
+  \Theta(h^{-\frac{2}{3}}) \le L^2_D( \DigShape ) \le \Theta(h^{-\frac{2}{3}} \log^2 \left(\frac{1}{h}\right)) \\
+  \Theta(h^{\frac{1}{3}}) \le hL^2_D( \DigShape ) \le \Theta(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)) \label{eq:bounds-length-MDSS}.
+\end{align}
+%
+Ainsi, à l'exception du terme en $\log^2(\cdot)$, $h \rho(\DigShape)$ semble est
+un canditat parfait comme paramètre de rayon $R$, puisqu'il suit
+approximativement $\Theta(h^\frac{1}{3})$, pour obtenir un estimateur digital
+sans paramètre de courbure.
+%
+\begin{theorem}[Multigrid convergence of curvature estimator $\CurvHS$]
+\label{thm:curvature-estimator-2d-pf-conv}
+  %
+  Soit $\Shape$ une forme convexe de $\R^2$ telle que son bord $\Bd{\Shape}$ est
+  $C^3$ et sa courbure bornée. Soit $\DigShape = \DSh$. Alors, il existe une
+  constante positive $h_0$, nous avons :
+  %
+  \begin{align}
+    &\forall 0 < h \le h_0, \quad \forall \vx \in \partial \Shape, \quad \forall \vp \in \BdZ{\DigShape} \text{~avec~} \| h\vp -\vx\|_\infty \le h, \nonumber\\
+    &\left | \frac{1}{h}\CurvHS(\DigShape,\vp) - \Curv(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) .
+    %
+  \end{align}
+  %
+\end{theorem}
+%
+Il est à noter que $\vp \in \BdZ{\DigShape}$ implique que $h\vp \in
+\Bd{\Body{\DSh}{h}}$.
+%
+\\
+%
+\begin{proof}
+  %
+  Dans un premier temps, nous allons décomposer
+  $\frac{1}{h}\CurvHS(\DigShape,\vp)$ :
+  %
+  \begin{align}
+    \frac{1}{h}\CurvHS(\DigShape,\vp) &= \frac{3\pi}{2 h\rho(\DigShape)} - \frac{3 A(\DigShape,\vp)}{h{\rho(\DigShape)}^3} \\
+    &= \frac{3\pi}{2 h\rho(\DigShape)} - \frac{3~ Card(\Ball{\rho(\DigShape)}{\vp} \cap \DSh)}{h{\rho(\DigShape)}^3} \\
+    &= \frac{3\pi}{2 h\rho(\DigShape)} - \frac{3~ Card( \Ball{(h\rho(\DigShape))/h}{\frac{1}{h} \cdot (h\vp)} \cap \DSh, h)}{h{\rho(\DigShape)}^3} \\
+    &= \CurvH{R}(\DSh,\hat{\vx},h)\quad \text{(avec $R \EqDef h\rho(\DigShape)$ et $\hat{\vx} \EqDef h\vp$)}
+  \end{align}
+  %
+  Il suffit alors de simplement borner $| \CurvH{R}(\DSh,\hat{\vx},h) -
+  \Curv(\DSh,\vx) |$ en tenant compte du comportement asymptotique de $R \EqDef
+  h\rho(\DigShape)$. D'après l'\RefEquation{eq:bounds-length-MDSS}, $r$ est
+  compris entre deux bornes :
+  \begin{itemize}
+    %
+    \item Si $R = \Theta(h^{\frac{1}{3}})$, nous sommes exactement dans les
+    hypothèses du \RefTheorem{thm:convergence-curv-2d}, alors le terme d'erreur
+    est en $O( h^\frac{1}{3} )$.
+    %
+    \item Si $R = \Theta(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right))$, nous
+    décomposons le terme d'erreur du \RefTheorem{thm:convergence-curv-2d} en
+    utilisant l'\RefEquation{eq:shift-curvhat-error-bound-h-only}\footnote{En
+    tenant compte que $\alpha' = 1$ et $\beta = 1$ dans le cas général} :
+    %
+    \begin{align}
+      |\CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx)| & \le O(h\rho(\DigShape)) + O\left(\frac{h}{(h\rho(\DigShape))^{2}}\right) \nonumber\\
+      &\quad + O\left(\frac{h}{(h\rho(\DigShape))^{2}}\right)( 1 + O((h\rho(\DigShape))^2) + O(h)) \\
+      & \le O(h^{\frac{1}{3}} \log^2 (\frac{1}{h})) + O\left(\frac{h^\frac{1}{3}}{\log^4 (\frac{1}{h})}\right) + O( h ) \nonumber\\
+      &\quad + O\left(\frac{h^\frac{4}{3}}{\log^4 (\frac{1}{h})}\right)
+    \end{align}
+    %
+    Alors le terme d'erreur dominant de cette expression est $O(h^{\frac{1}{3}}
+    \log^2 (\frac{1}{h}))$
+    %
+  \end{itemize}
+  %
+  Ainsi, nous allons borner par le terme d'erreur dominant des deux
+  possibilités. Puisque
+  $\frac{1}{h}\CurvHS(\DigShape,\vp)=\CurvH{R}(\DSh,\hat{\vx},h)$, nous pouvons
+  conclure que son erreur est en $O(h^{\frac{1}{3}} \log^2 (\frac{1}{h}))$
+  %
+\end{proof}
+%
+De ce fait, nous avons un estimateur digital de courbure qui convergent, qui ne
+nécessite aucun paramètre de rayon. Le paramètre d'échelle $h$ est présent
+seulement pour déterminer l'unité utilisée pour mesurer les courbures comme
+l'explique la \RefFigure{fig:2d-parameter-free-explained}.
+%
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/2d-parameter-free-explained.tikz}
+  \end{center}
+  \caption[Illustration de la dépendence du paramètre d'échelle $h$.]
+  %
+  {Illustration de la dépendence du paramètre d'échelle $h$. L'objet euclidien
+  de gauche donne le même objet digital que l'objet euclidien de droite alors
+  qu'ils sont à des échelles différentes. La courbure à la surface de l'objet
+  dépend alors $h$.\label{fig:2d-parameter-free-explained}}
+  %
+\end{figure}
+%
+Nous utilisons un unique rayon pour estimer la courbure sur tout le bord de
+l'objet. En sachant que nous pouvons extraire des faisceaux de segments maximaux
+en chaque point du bord de l'objet, pouvons-nous adapter notre estimateur afin
+de la taille de la boule s'adapte localement à la géométrie de l'objet ? Le
+paragraphe suivant traîte cette question.
+%
+\subsubsection{Estimateur digital local sans paramètre de courbure 2D}
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
