@@ -1928,14 +1928,14 @@ Formalisons cela avec une proposition sur les manifolds lisses :
   point $\vx$ est notée $\vec{\NormalDir}(\vx)$. Pour tout $\vx \in \dS$, on
   considère le plan $\pi_{\vec{\ve}}(\vx)$ contenant $\vx$ et perpendiculaire à
   un vecteur canonique $\vec{\ve}$ de la base de $\R^3$ (\emph{i.e.}
-  $\vec{\ve}\in\{ \vec{e}_1, \vec{e}_2, \vec{e}_3 \}$).
+  $\vec{\ve}\in\{ \vec{\vx}_1, \vec{\vx}_2, \vec{\vx}_3 \}$).
   %
   \\
   %
   Soit $\dS_{\vec{\ve}}(\vx)$ l'ensemble de l'intersection $\Shape
   \cap \pi_{\vec{\ve}}(\vx)$. Alors, il y a \textbf{au moins} deux ensembles
-  $\dS_{\vec{e}_1}(\vx)$, $\dS_{\vec{e}_2}(\vx)$ ou
-  $\dS_{\vec{e}_3}(\vx)$ sont localement des courbes auxquelles la
+  $\dS_{\vec{\vx}_1}(\vx)$, $\dS_{\vec{\vx}_2}(\vx)$ ou
+  $\dS_{\vec{\vx}_3}(\vx)$ sont localement des courbes auxquelles la
   courbure est bornée par $\sqrt{2}K$ en valeur absolue.
   %
 \end{proposition}
@@ -1947,9 +1947,9 @@ Formalisons cela avec une proposition sur les manifolds lisses :
   %
   \begin{figure}[ht]
     \begin{center}
-      \begin{overpic}[width=8cm]{figures/Slice_3D}
-      \put(40.5,48){$\pi_{\vec{e}_2}$}
-      \put(95,50){$\pi_{\vec{e}_2}$}
+      \begin{overpic}[width=10cm]{figures/Slice_3D}
+      \put(40.5,48){$\pi_{\vec{\vx}_2}$}
+      \put(95,50){$\pi_{\vec{\vx}_2}$}
 
       \put(53,19.5){$\dS$}
 
@@ -1973,9 +1973,9 @@ Formalisons cela avec une proposition sur les manifolds lisses :
       \put(85,30){$\textcolor{darkgreen}{\vec{\vt}(0)}$}
       \put(80,24){$\textcolor{black}{\vec{\vu}}$}
 
-      \put(52,48){$\textcolor{gray}{\vec{e}_1}$}
-      \put(51.5,44){$\textcolor{gray}{\vec{e}_2}$}
-      \put(47,51.5){$\textcolor{gray}{\vec{e}_3}$}
+      \put(52,48){$\textcolor{gray}{\vec{\vx}_1}$}
+      \put(51.5,44){$\textcolor{gray}{\vec{\vx}_2}$}
+      \put(47,51.5){$\textcolor{gray}{\vec{\vx}_3}$}
       \end{overpic}
     \end{center}
     %
@@ -1984,27 +1984,155 @@ Formalisons cela avec une proposition sur les manifolds lisses :
     \label{fig:slices-3d-proof}
   \end{figure}
   %
-  Tout d'abord, si un des plans $\pi_{\vec{e}_1}$, $\pi_{\vec{e}_2}$ ou
-  $\pi_{\vec{e}_3}$ est le plan tangent à $\vx$, les deux autres sont des plans
-  normaux de $\dS$ au point $\vx$, \cad qu'ils contiennent la
-  normale $\vec{\NormalDir}$. Dans ce cas, le \comJeremy{théorème d'Euler} nous
-  dit que toutes les courbes définies par l'intersection entre le plan normal et
-  la surface $\dS$  ont une courbure $\Curv$ égale à $\PrincCurv{1}
-  \cos^2 \theta + \PrincCurv{2} \sin^2 \theta$, $\theta$ étant un angle. Il est
-  alors immédiat que $|\Curv|$ est contenu entre $\lbrack
-  \min(|\PrincCurv{1}|,|\PrincCurv{2}|), \max(|\PrincCurv{1}|,|\PrincCurv{2}|)
-  \rbrack$, et est de ce fait borné par $K$ sur ces deux plans.
+  Tout d'abord, si un des plans $\pi_{\vec{\vx}_1}$, $\pi_{\vec{\vx}_2}$ ou
+  $\pi_{\vec{\vx}_3}$ est le plan tangent à $\vx$, les deux autres sont des plans
+  normaux de $\dS$ au point $\vx$, \cad qu'ils contiennent la normale
+  $\vec{\NormalDir}$. Dans ce cas, le théorème d'\cauthor{Euler}{Euler1760} sur
+  la courbure des surfaces nous dit que toutes les courbes définies par
+  l'intersection entre le plan normal et la surface $\dS$ ont une courbure
+  $\Curv$ égale à :
   %
-  Ensuite, pour tout $\vec{\ve} \in \{ \vec{e}_1, \vec{e}_2, \vec{e}_3 \}$,
+  \begin{equation}
+    \PrincCurv{1} \cos^2 \theta + \PrincCurv{2} \sin^2 \theta ,
+  \end{equation}
+  %
+  $\theta$ étant un angle. Il est alors immédiat que :
+  %
+  \begin{equation}
+    |\Curv| \in \lbrack \min(|\PrincCurv{1}|,|\PrincCurv{2}|), \max(|\PrincCurv{1}|,|\PrincCurv{2}|) \rbrack ,
+  \end{equation}
+  %
+  et est de ce fait borné par $K$ sur ces deux plans.
+  %
+  Ensuite, pour tout $\vec{\ve} \in \{ \vec{\vx}_1, \vec{\vx}_2, \vec{\vx}_3 \}$,
   l'ensemble $\dS_{\vec{\ve}}$ est localement une courbe 3D qui croise $\vx$ sur
-  la surface $\dS$. Il y a au moins un $\vec{\ve} \in \{ \vec{e}_1, \vec{e}_2,
-  \vec{e}_3 \}$ dont $\vec{\NormalDir} \cdot \vec{\ve} \ge \frac{\sqrt{2}}{2}$.
-  En effet, notons la normale $\vec{\NormalDir} = a \vec{e}_1 + b \vec{e}_2 + c
-  \vec{e}_3$ et par exemple $\vec{\NormalDir} \cdot \vec{e}_1 \ge
-  \frac{\sqrt{2}}{2}$, alors $b^2 + c^2 = 1 - a^2 = 1 - (\vec{\NormalDir} \cdot
-  \vec{e}_1)^2 < \frac{1}{2}$.
+  la surface $\dS$. Il y a au moins un $\vec{\ve} \in \{ \vec{\vx}_1,
+  \vec{\vx}_2, \vec{\vx}_3 \}$ dont $\vec{\NormalDir} \cdot \vec{\ve} \ge
+  \frac{\sqrt{2}}{2}$. En effet, notons la normale $\vec{\NormalDir} = a
+  \vec{\vx}_1 + b \vec{\vx}_2 + c \vec{\vx}_3$ et que, par exemple,
+  $\vec{\NormalDir} \cdot \vec{\vx}_1 \ge \frac{\sqrt{2}}{2}$, alors :
+  %
+  \begin{equation}
+    b^2 + c^2 = 1 - a^2 = 1 - (\vec{\NormalDir} \cdot \vec{\vx}_1)^2 < \frac{1}{2} .
+  \end{equation}
+  %
+  De ce fait, $b = \vec{\NormalDir} \cdot \vec{\vx}_2$ et $c = \vec{\NormalDir}
+  \cdot \vec{\vx}_3$ sont plus petits que $\frac{\sqrt{2}}{2}$. Dans la suite,
+  nous considérons seulement un vecteur $\vec{\ve} \in \{ \vec{\vx}_1,
+  \vec{\vx}_2, \vec{\vx}_3 \}$ dont $\vec{\NormalDir} \cdot \vec{\ve} \le
+  \frac{\sqrt{2}}{2}$.
+  %
+  \\
+  %
+  Soit $\chi$ une courbe définie comme l'intersection entre $dS$ et le plan
+  $\pi_{\vec{\NormalDir} \times \vec{\vt}}$ contenant $\vec{\NormalDir}$ et la
+  tangente $\vec{\vt}$ au point $\vx$ de $\dS_{\vec{\ve}}$. D'après le
+  \comJeremy{Théorème de Meusnier}, nous avons la relation suivante entre la
+  courbure $\Curv_\chi$ de $\chi$ et la courbure $\Curv$ de $\dS_{\vec{\ve}}$ au
+  point $\vx$ :
+  %
+  \begin{equation}
+    \Curv_\chi = \Curv \cdot \cos \alpha
+  \end{equation}
+  %
+  où $\alpha$ est l'angle entre les plans $\pi_{\vec{\ve}}$ et
+  $\pi_{\vec{\NormalDir} \times \vec{\vt}}$. Puisque $\cos \alpha =
+  \vec{\NormalDir} \cdot \vec{\ve}$ et $\frac{\sqrt{2}}{2} \leq \cos \alpha \leq
+  1 $, nous avons au final :
+  %
+  \begin{equation}
+    %
+    |\Curv_\chi| \le |\Curv| \le \sqrt{2}|\Curv_\chi|.
+    %
+  \end{equation}
+  %
+  À nouveau, puisque  $|\Curv_\chi|$ est compris entre $\lbrack
+  \min(|\PrincCurv{1}|,|\PrincCurv{2}|),
+  \max(|\PrincCurv{1}|,|\PrincCurv{2}|)\rbrack$,  il est borné par $K$ et ainsi
+  nous obtenons le résultat final.
   %
 \end{proof}
+%
+Nous allons définir une version sans paramètre de l'estimateur de courbure
+moyenne $\MeanCurv{R}$ (voir \RefDefinition{def:digital-3d-mean-curvature}).
+Comme pour la version 2D sans paramètre, nous allons automatiquement calculer le
+rayon $R$ en fonction de la géométrie de l'objet. Le rayon $\rho'(\DigShape)$ de
+l'estimateur $\MeanCurvHS$ sera alors le carré de la moyenne de \emph{certaines}
+de longueurs de segments maximaux. Nous allons détailler plus précisement cela
+dans la définition suivante :
+%
+\begin{definition}
+  %
+  Pour un objet digital $\DigShape \subset \Z^3$, l'estimateur digital de
+  courbure moyenne sans paramètres $\MeanCurvHS$ au pointel $\vp \in
+  \BdZ{\DigShape}$ est défini par :
+  %
+  \begin{equation}
+    %
+    \MeanCurvHS( \DigShape, \vp ) \EqDef \frac{8}{3 {\rho'(\DigShape)}} - \frac{4 V_{{\rho'(\DigShape)}}(\DigShape, \vp)}{\pi{{\rho'(\DigShape)}}^4} ,
+    %
+    \label{def:curvature-estimator-3d-mean-pf}
+  \end{equation}
+  %
+  où $V_{\rho'(\DigShape)}(\DigShape, \vp) = Card(\Ball{\rho'(\DigShape)}{\vp} \cap \DigShape)$.
+  %
+\end{definition}
+%
+De plus, nous pouvons estimer les courbures principales, directions principales
+et la normale de la même manière :
+%
+\begin{definition}
+  %
+  Soit $Z$ be a digital shape in $\Z^3$, we define the {\em parameter-free principal
+  curvature estimators} $\hat{\kappa}^{1*}$ and
+  $\hat{\kappa}^{2*}$ of $Z$ at point $p \in \BdZ{Z}$ as
+  %
+  \begin{align}
+      %
+      \PrincCurvHS{1}(\DigShape, \vp)  &\EqDef \frac{6}{\pi (\rho'(\DigShape))^6}(\hat{\lambda}^{*}_2 - 3\hat{\lambda}^{*}_1) + \frac{8}{5 \rho'(\DigShape)},
+      &\PrincDirHS{1}(\DigShape, \vp) &\EqDef \hat{\nu}^{*}_1 \\
+      \PrincCurvHS{2}(\DigShape, \vp) &\EqDef \frac{6}{\pi (\rho'(\DigShape))^6}(\hat{\lambda}^{*}_1 - 3\hat{\lambda}^{*}_2) + \frac{8}{5 \rho'(\DigShape)},
+      &\PrincDirHS{2}(\DigShape, \vp) &\EqDef \hat{\nu}^{*}_2\\
+      & &\NormalDirHS(\DigShape, \vp) &\EqDef\hat{\nu}^{*}_3\,,
+      %
+  \end{align}
+  %
+  où $\hat{\lambda}^{*}_1$ et $\hat{\lambda}^{*}_2$ sont les deux plus grandes
+  valeurs propres de la matrice de covariance de $\Ball{{\rho'(\DigShape)}}{\vp}
+  \cap \DigShape$, et $ \hat{\nu}^{*}_1$, $\hat{\nu}^{*}_2$ et $\hat{\nu}^{*}_3$
+  ses vecteurs propres.
+  %
+  \label{def:curvature-estimator-3d-k1k2-pf}
+\end{definition}
+%
+Précisons maintenant à quoi correspond exactement le paramètre
+$\rho'(\DigShape)$. Nous apportons une définition pour sa version globale
+$\rho'(\DigShape)$ ainsi que pour sa version locale $\rho'(\DigShape, \vp)$ pour
+$\vp \in \BdZ{\DigShape}$ :
+%
+\begin{definition}
+  %
+  Pour un objet digital $\DigShape$, chaque surfel $\vp \in \BdZ{\DigShape}$ est
+  orthogonal à deux coupes $\pi_{\vec{\ve}_1}(\vp)$ et $\pi_{\vec{\ve}_2}(\vp)$.
+  Pour toutes les coupes $\pi_{\vec{\vp}_i}(\vp) \cap \DigShape$, le faisceau de
+  segments maximaux recouvrant $\vp$ détermine un ensemble de nombres entiers
+  $l_i(\vp)$, construit à partir des longueurs de ces segments maximaux. Enfin,
+  nous désignons par $M(\vp)$ la coupe au point $\vp$ contenant le segment
+  maximal le plus long, \cad la coupe $i$ pour laquelle l'ensemble $l_i(\vp)$
+  contient le plus grand nombre entier. Alors, nous définissons
+  %
+  \begin{itemize}
+    %
+    \item $\rho'(\DigShape)$ est le carré de la moyenne des longueurs des segments maximaux pour toutes les slices $\pi_{\vec{\ve}_i(\vp)} \cap \DigShape$ de $\DigShape$;
+    %
+    \item $\rho'(\DigShape, \vp)$ est le carré de la moyenne des longueurs contenu dans $l_{M(\vp)}(\vp)$.
+    %
+  \end{itemize}
+  %
+\end{definition}
+%
+Comme en 2D, des cas pathologiques peuvent apparaître à cause du segment maximal
+le plus long et de sa borne $h\rho'(\DigShape, \vp) \in \Theta(1)$. Dans ces conditions, nous ne pouvons rien espérer en terme de convergence asymptotique. Mais à nouveau, expérimentalement, ce mauvais comportement n'est pas observé (voir \RefSection{sec:comparaison-courbure}).
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
