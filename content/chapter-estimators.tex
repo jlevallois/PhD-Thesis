@@ -2132,7 +2132,27 @@ $\vp \in \BdZ{\DigShape}$ :
 \end{definition}
 %
 Comme en 2D, des cas pathologiques peuvent apparaître à cause du segment maximal
-le plus long et de sa borne $h\rho'(\DigShape, \vp) \in \Theta(1)$. Dans ces conditions, nous ne pouvons rien espérer en terme de convergence asymptotique. Mais à nouveau, expérimentalement, ce mauvais comportement n'est pas observé (voir \RefSection{sec:comparaison-courbure}).
+le plus long et de sa borne $h\rho'(\DigShape, \vp) \in \Theta(1)$. Dans ces
+conditions, nous ne pouvons rien espérer en terme de convergence asymptotique.
+Mais à nouveau, expérimentalement ce mauvais comportement n'est pas observé
+(voir \RefSection{sec:comparaison-courbure}).
+%
+Supposons alors la conjecture suivante :
+%
+\begin{conjecture}
+\label{conj:slice-mdss-3d}
+  %
+  Soit $\Shape$ une forme convexe de $\R^3$, avec un bord $C^3$ à courbure
+  bornée. Soit $\DigShape \EqDef \DSh$, alors avec une constante positive $h_0$,
+  nous avons :
+  %
+  \begin{equation}
+    %
+    \forall 0 < h \le h_0,\quad \Theta(h^{\frac{1}{3}}) \le h\rho'(\DigShape) \le \Theta(h^{\frac{1}{3}} \log^2 (\frac{1}{h})) .
+    %
+  \end{equation}
+  %
+\end{conjecture}
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
