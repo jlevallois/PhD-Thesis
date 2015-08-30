@@ -25,6 +25,7 @@ Pottmann2006 & \cite{Yang2006} & feature & Ils font un seuil sur le max des k1 k
 \bottomrule
 \end{tabular}
 \end{table}
+\todoJeremy{Parler d'espace d'échelle ?}
 
 \newpage
 
@@ -478,7 +479,7 @@ suffisamment robustes sur des données digitales.
 %
 Plus concrètement, pour un voisinage donné \footnote{des contraintes de
 connectivité et d'uniformité entre en jeu, mais sont satisfaites sur une grille
-régulière discrète}, \cauthors{Park}{Park2012} accumulent dans une matrice les
+régulière digitale}, \cauthors{Park}{Park2012} accumulent dans une matrice les
 tenseurs :
 %
 \begin{equation}
@@ -733,10 +734,9 @@ courbure}%
 \label{sec:applications:feature:II}
 %
 Nous allons décrire un nouvel estimateur de singularités \cite{SMI2015} en
-étudiant les estimateurs de courbures basées sur l'intégration d'invariants vus
+étudiant les estimateurs de courbures par intégration présentés
 précédemment (\RefSection{sec:estimators:volume}). Nous
-allons, pour une résolution donnée de grille $h$ d'une forme $\DigShape \subset \Z^d$, faire varier la taille de la
-boule. Ce changement de taille de boule va faire varier le résultat
+allons fixer la résolution $h$ d'une forme $\DigShape \subset \Z^d$ et considérer la taille de la sphère d'intégration $R$ comme paramètre de l'espace d'échelle. Ce changement de rayon de sphère d'intégration fera varier le résultat
 obtenu par notre estimateur de courbure (\RefFigure{fig:curvature-scale-3d}).
 Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
 étant le rayon de la boule.
@@ -750,7 +750,7 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
       \includegraphics[width=0.1cm,height=2.3cm]{images/YMTB6W}
     \end{center}}
     \caption{Courbure moyenne en utilisant la \RefDefinition{def:digital-3d-mean-curvature}
-      pour différents rayons de boules : $4$, $7$, $14$ et $30$.
+      pour différents rayons de boule : $4$, $7$, $14$ et $30$.
       \label{fig:curvature-scale-3d}}
 \end{figure}
 %
@@ -803,17 +803,16 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
           \includegraphics[width=7cm]{images/ScaleSpace_Flower}
       \end{center}}
 %
-      \caption[Analyse en espace-échelle de la courbure en fonction du rayon sur la forme discrète 2D de « Flower »]
-      {\emph{À gauche :} forme discrète 2D de « Flower ». \emph{À droite :}
-      Association des valeurs de courbure sur la bordure discrète de la forme «
+      \caption[Analyse en espace-échelle de la courbure en fonction du rayon sur la forme digitale 2D de « Flower »]
+      {\emph{À gauche :} forme digitale 2D de « Flower ». \emph{À droite :}
+      Association des valeurs de courbure sur le bord digital de la forme «
       Flower » en utilisant la \RefDefinition{def:digital-2d-curvature} (abscisse) pour différentes
-      tailles de boules $R_d$ (ordonnée, de haut en bas). Les couleurs correspondent
+      tailles de boules $R$ (ordonnée, de haut en bas). Les couleurs correspondent
       aux valeurs de courbures: du bleu (courbure la plus petite) au jaune (courbure
       la plus grande).\label{fig:curvature-scale-2d}}
 \end{figure}
 %
-Nous proposons alors d'étudier le comportement des estimateurs discrets basés
-sur les intégrations d'invariants lorsque nous réduisons le rayon de la boule
+Nous proposons alors d'étudier le comportement des estimateurs digitauxpar intégration lorsque nous réduisons le rayon de la boule
 pour une forme et une résolution donnée. La \RefFigure{fig:curvature-scale-2d}
 nous montre les variations de courbure en fonction du rayon de la boule
 lorsqu'il décroît (de haut en bas sur la figure) pour l'objet « Flower ». Nous
@@ -833,7 +832,7 @@ Plus formellement :
 %
 \begin{definition}
   %
-  Pour tout point $x$ sur la bordure d'une forme Euclidienne $\Shape$ de $\R^2$
+  Pour tout point $x$ sur le bord d'une forme Euclidienne $\Shape$ de $\R^2$
   (\respp $\R^3$), nous définissons \emph{l'estimateur en espace-échelle de zones
   caractéristiques} $\FeatDD(R)$ (\resp $\FeatTD(R)$) tels que :
   %
@@ -849,7 +848,7 @@ Plus formellement :
   \label{def:feature-estimator}
 \end{definition}
 %
-Dans la suite, nous assumons que l'objet $\Shape$ a une bordure $C^3$ par
+Dans la suite, nous assumons que l'objet $\Shape$ a un bord $C^3$ par
 morceaux, \cad est une objet lisse avec des singularités. Nous allons détailler
 le cas sur une partie lisse de cet objet, puis sur une singularité.
 %
@@ -912,8 +911,8 @@ $\partial \Shape$ :
 %
 \begin{definition}[Eq. 12 de \cite{Pottmann2009}]
   %
-  Soit $\Shape$ une forme euclidienne de $\R^2$ (\respp $\R^3$) avec au moins
-  une bordure $C^3$ par morceaux, et soit $x\in \dS$ une singularité. Alors, si
+  Soit $\Shape$ une forme euclidienne de $\R^2$ (\respp $\R^3$) avec
+  un bord $C^3$ par morceaux, et soit $x\in \dS$ une singularité. Alors, si
   $\alpha_0$ est l'angle entre les deux demi-tangentes au point $x$ et que
   $\Curv_{-}$ et $\Curv_{+}$ sont les courbures limites à gauche et à droite,
   nous avons:
@@ -1071,7 +1070,7 @@ Ces comportements sont exactement les mêmes en 2D et en 3D, ce qui suit peut
 %
 Pour un intervalle de rayons décroissants $R_i$, $0 \leq i \leq n$, nous
 calculons l'estimateur de zones caractéristiques $\DigFeatDD(R)$ (la version
-discrète de $\FeatDD(R)$) au point $p \in \Boundary{\DigShape}$.
+digitale de $\FeatDD(R)$) au point $p \in \Boundary{\DigShape}$.
 %
 \\
 %
