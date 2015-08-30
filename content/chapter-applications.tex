@@ -207,7 +207,7 @@ digitales, ces approches ne s'avèrent pas pertinentes.
 %  \caption{Test}
 % \end{algorithm}
 %
-\subsubsection{Méthodes basées quantités calculées par intégration de patchs surfaciques}%
+\subsubsection{Méthodes basées sur un patch surfacique}%
 \label{sec:applications:feature:patch}
 %
 Lorsque nous traitons des maillages ou les nuages de points, beaucoup
@@ -388,80 +388,51 @@ cellules de Voronoi ($Vor_C$) des points du bord de l'objet :
 \end{figure}
 %
 \begin{equation}
-    cov(E,\vp) \EqDef \int_E (\vx - \vp)(\vx - \vp)^T d\vx .
+    cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
 \end{equation}
 %
 Afin d'avoir une information plus locale de la variation de la forme, ils se
 limitent à un voisinage de rayon $R$ :
 %
 \begin{equation}
-  \mathcal{V}_{C,R}(\{\vp\}) \EqDef cov(Vor_C(\vp) \cap \Ball{R}{\vp}, \vp) .
+  \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
 \end{equation}
 %
 Enfin, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
-version convolué de \VCM grâce à un \comJeremy{fonction indicatrice} $\chi_r$
+version convolué de \VCM grâce à une fonction indicatrice $\chi_r$
 (ayant pour paramètre un rayon $r$) :
 %
 \begin{equation}
-  \mathcal{V}_{C,R} \ast \chi_r(\{\vp\}) \EqDef \int_{E^R} (\vx - \pi(\vx))(\vx - \pi(\vx))^T \chi(\pi(\vx) - \vp) d\vx .
+  \mathcal{V}_{K,R} \ast \chi_r(\{\vp\}) \EqDef \int_{K^R} (\vx - \pi^K(\vx))(\vx - \pi^K(\vx))^T \chi(\pi^K(\vx) - \vp) d\vx .
 \end{equation}
 %
-où $\pi$ est la projection de tout point $\vx$ vers le point le plus proche de
-$C$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si $\vx$
+où $\pi^K(\vx)$ est la projection de tout point $\vx$ vers le point le plus proche de
+$K$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si $\vx$
 appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction « Hat »
 ($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
-%
-\todoJeremy{changer $p_k$ par pi}
 %
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/VCM_notations}
     \end{center}}
-    \caption[Notations.]{Notations (Figure~5 de \cite{Merigot2011}).
-      \label{fig:mellado-multiscale}}
+    \caption[Notations.]{Notations (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:mellado-multiscale}}
 \end{figure}
 %
-\todoInlineJeremy{Reprendre ici}
+\\
 %
-
- et les directions de normales en faisant le produit de la matrice de
-covariance des cellules de Voronoi de la surface de l'objet localement avec un
-noyau de convolution.
-%
-Plus précisément, pour $K$ un compact de $\R^d$, $d_K$ la fonction distance à
-$K$ et $p_K : \R^d \rightarrow K$ la projection sur $K$, la \emph{mesure de
-covariance des cellules de Voronoi} (\VCMM --- \VCM --- en anglais) associe à toute
-fonction intégrale $\chi : \R^d \rightarrow \R^+$ la matrice
+À noter que \cauthors{Cuel}{Cuel2014DGCI} ont défini une variante digitale du
+\VCM ($\DigShape \in \Z^3$) :
 %
 \begin{equation}
-  \mathcal{V}_{K,R}(\chi, \vx) \EqDef \int_{K^R} (\vp - p_K(\vp)) (\vp - p_K(\vp))^t \chi(p_K(\vp) - \vx)dp .
+  \hat{\mathcal{V}}_{\DigShape,h,R} \ast \chi_r(\{\vp\})) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vx - \pi^{\DigShape}(\vx)) (\vx - \pi^{\DigShape}(\vx))^t \chi(\pi^{\DigShape}(\vx)) ,
 \end{equation}
-%
-Ici, $\chi(\vx) = max(0, r - ||\vx||^2)$ connue sous le nom de fonction « hat ».
-%
-\cauthors{Cuel}{Cuel2014DGCI} ont d'ailleurs défini une variante digitale du
-\VCM :
-%
-\begin{equation}
-  \hat{\mathcal{V}}_{Z_h,R}(\chi) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vp - p_{Z_h}(\vp)) (\vp - p_{Z_h}(\vp))^t \chi(p_{Z_h}(\vp)) ,
-\end{equation}
-
 %
 où $\Omega_h^R$ est l'ensemble des (centres de) voxels entièrement contenus dans
-$Z_h^R$, la $R$-dilatation de $Z_h$.
-%
-\begin{figure}[ht]{
-    \begin{center}
-    \includegraphics[height=6cm]{images/Feature/VCMd_notations}
-    \end{center}}
-    \caption[Notations.]{Notations (Figure~3.3 de \cite{Cuel2014These}).
-      \label{fig:mellado-multiscale}}
-\end{figure}
+$\DigShape^R$ (la $R$-dilatation de $\DigShape$) au pas de discrétisation $h$.
 %
 Il est à noter que la convergence asymptotique de cette variante digitale de
 l'estimateur \VCM pour les normales a été prouvée (bord de la surface de classe
-$C^2$ et de \emph{reach}\footnote{Minimum des distances de tout point du bord à
-l'axe médian.} $\rho > 0$)\cite{Cuel2014DGCI}.
+$C^2$ et de reach $\rho > 0$) \cite{Cuel2014DGCI}.
 %
 \\
 %
@@ -471,32 +442,23 @@ loin de la surface), et le rayon de convolution $r$ qui définit quelles cellule
 de Voronoi vont être intégrées pour lisser la mesure. Ces deux paramètres
 permettent également de limiter l'impact du bruit sur la surface tout en
 préservant les informations géométriques. Un score de point caractéristique
-$r(\vx)$ est alors calculé à l'aide d'un ratio des valeurs propres de la
-convolution du \VCM pour chaque point $\vx$ :
+$r(\vp)$ est alors calculé à l'aide d'un ratio des valeurs propres de la
+convolution du \VCM pour chaque point $\vp$ :
 %
 \begin{equation}
-  r(\vx) \EqDef \frac{\lambda_2(\vx)}{\lambda_0(\vx) + \lambda_1(\vx) + \lambda_2(\vx)}.
+  r(\vp) \EqDef \frac{\lambda_2(\vp)}{\lambda_0(\vp) + \lambda_1(\vp) + \lambda_2(\vp)}
+  \label{eq:VCM-ratio-eigenvalues}
 \end{equation}
 %
 Le point est alors considéré comme une singularité si son ratio est supérieur à
-un paramètre de seuillage $T$.
+un paramètre de seuillage $T$ donné par l'utilisateur.
 %
-\begin{figure}[ht]{
-  \begin{center}
-    \includegraphics[height=6cm]{figures/CubeSpherePlotVCM}
-  \end{center}}
-    \caption[.]{.
-    \label{fig:VCM-cubesphere}}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[height=6cm]{images/Feature/CubeSphere_VCM_r_10}
+  \includegraphics[height=6cm]{images/Feature/CubeSphere_VCM_r_22}
+  \caption[Résultat de l'\RefEquation{eq:VCM-ratio-eigenvalues}]{Résultat de l'\RefEquation{eq:VCM-ratio-eigenvalues} avec comme paramètres $R = 1$, $T = 50$ pour deux tailles de voisinage $r = 10$ et $r = 22$.}\label{fig:VCM-cubesphere}
 \end{figure}
-%
-% Experimentally, this method provides good results on both noise-free
-% (see Fig. \ref{fig:comparative}) and on noisy surfaces
-% (Fig. \ref{fig:comparative-noise}). However it requires three
-% parameters that are difficult to set for a large class of shapes. Note
-% that the digital version of the VCM has also some multigrid
-% convergence properties for normal directions
-% \cite{Cuel2014-DGCI}, and this is the implementation we used
-%   in our experiments.
 %
 \paragraph{Vote de tenseur}
 %
