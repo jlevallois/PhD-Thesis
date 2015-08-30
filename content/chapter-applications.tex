@@ -732,14 +732,14 @@ laplacienne :
 courbure}%
 \label{sec:applications:feature:II}
 %
-Nous allons décrire un nouvel estimateur de singularités\cite{SMI2015} en
+Nous allons décrire un nouvel estimateur de singularités \cite{SMI2015} en
 étudiant les estimateurs de courbures basées sur l'intégration d'invariants vus
-précédemment (\RefSection{sec:estimators:volume}) pour une forme donnée. Nous
-allons, pour une résolution donnée de grille $h$, faire varier la taille de la
-sphère. Cette variation de la taille de la sphère va faire varier le résultat
+précédemment (\RefSection{sec:estimators:volume}). Nous
+allons, pour une résolution donnée de grille $h$ d'une forme $\DigShape \subset \Z^d$, faire varier la taille de la
+boule. Ce changement de taille de boule va faire varier le résultat
 obtenu par notre estimateur de courbure (\RefFigure{fig:curvature-scale-3d}).
 Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
-étant le rayon de la sphère.
+étant le rayon de la boule.
 %
 \begin{figure}[ht]{
     \begin{center}
@@ -750,7 +750,7 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
       \includegraphics[width=0.1cm,height=2.3cm]{images/YMTB6W}
     \end{center}}
     \caption{Courbure moyenne en utilisant la \RefDefinition{def:digital-3d-mean-curvature}
-      pour différents rayons de sphères : $4$, $7$, $14$ et $30$.
+      pour différents rayons de boules : $4$, $7$, $14$ et $30$.
       \label{fig:curvature-scale-3d}}
 \end{figure}
 %
@@ -813,15 +813,15 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
 \end{figure}
 %
 Nous proposons alors d'étudier le comportement des estimateurs discrets basés
-sur les intégrations d'invariants lorsque nous réduisons le rayon de la sphère
+sur les intégrations d'invariants lorsque nous réduisons le rayon de la boule
 pour une forme et une résolution donnée. La \RefFigure{fig:curvature-scale-2d}
-nous montre les variations de courbure en fonction du rayon de la sphère
+nous montre les variations de courbure en fonction du rayon de la boule
 lorsqu'il décroît (de haut en bas sur la figure) pour l'objet « Flower ». Nous
 nous apercevons que certaines caractéristiques ne sont perceptibles qu'à une
 certaine intervalle de rayons (les zones bleues par exemple) tandis que d'autres
 vont s'étendre (les zones rouges par exemple). Plus généralement, les points
 autour de singularités ont une valeur de courbure qui tend à fortement varier en
-fonction du rayon de la sphère alors que les points autour de zones lisses sont
+fonction du rayon de la boule alors que les points autour de zones lisses sont
 relativement insensible au rayon. Pour analyser ce comportement en
 espace-échelle, nous proposons de classifier les points de notre forme en trois
 catégories : \featedge (correspondant à des points non-$C^1$), \featsmooth
@@ -842,9 +842,9 @@ Plus formellement :
   	\quad \FeatTD(R) \EqDef \frac{8}{3 R} - \frac{4 V(R,x)}{\pi R^4},
   \end{equation}
   %
-  où $R$ -- le paramètre de l'espace-échelle -- est le rayon de la sphère
+  où $R$ -- le paramètre de l'espace-échelle -- est le rayon de la boule
   euclidienne centrée au point $x$, $A(R,x)$ est l'aire (en 2D) et $V(R,x)$ est
-  le volume (en 3D) de l'intersection entre la sphère et la forme $\Shape$.
+  le volume (en 3D) de l'intersection entre la boule et la forme $\Shape$.
   %
   \label{def:feature-estimator}
 \end{definition}
@@ -924,7 +924,7 @@ $\partial \Shape$ :
   \end{align}
   %
   Alors, la quantité fournie par $\FeatDD(R)$ est une fonction du rayon de la
-  sphère $R$ et de l'angle $\alpha_0$, et :
+  boule $R$ et de l'angle $\alpha_0$, et :
   %
   \begin{align}
   	\FeatDD(R) &= \frac{3}{2} \frac{1}{R} ( \pi - \alpha_0 )
@@ -944,14 +944,14 @@ dépendant de l'angle $\alpha_0$.
   {\includegraphics[width=8cm]{figures/CubeSpherePlot_ES_NoColor}}
   \caption{Graphes (en échelle logarithmique) des valeurs de $\FeatTD(R)$ (sur
   l'axe des ordonnées) différentes tailles pour deux points de l'objet «
-  CubeSphere » en fonction du rayon de la sphère (décroissant, de droite
+  CubeSphere » en fonction du rayon de la boule (décroissant, de droite
   à gauche, sur l'axe des abscisses).\label{fig:CubeSpherePlot_ES_NoColor}}
 \end{center}
 \end{figure}
 %
 En conclusion, $\FeatDD(R)$ a deux comportements distincts lorsque nous sommes
 sur un point d'une surface lisse et lorsque nous sommes sur une singularité de
-la surface, quand nous utilisons le rayon de la sphère $R$ comme paramètre
+la surface, quand nous utilisons le rayon de la boule $R$ comme paramètre
 d'espace-échelle. Lorsque le rayon $R$ décroît sur une surface lisse,
 l'estimateur de caractéristiques nous retourne la courbure au point $x$. Cette
 quantité est constante quelque soit la valeur de $R$\footnote{En fait, $R$
@@ -964,7 +964,7 @@ valeur absolue de $\FeatDD(R)$.
 \subsubsection{Influence de la discrétisation}%
 \label{sec:applications:feature:II:kmax}
 %
-Lorsque nous discrétisons $\BRShape$, pour un rayon de sphère $R$ donné et un
+Lorsque nous discrétisons $\BRShape$, pour un rayon de boule $R$ donné et un
 pas de discrétisation $h$, une infinité de courbes euclidiennes
 $\Boundary{\Shape}$ avec différentes valeurs de courbure au point $x$ donnent
 exactement la même valeur pour $\AR$, et donc la même valeur pour $\FeatDD(R)$.
@@ -985,7 +985,7 @@ même en 3D.
 %
 La \RefFigure{fig:minInterval} illustre ceci en nous montrant une valeur de
 $\BRShape$ (en bleu) pour une valeur de courbure $\CurvMax$ limite de $\Shape$
-(en noir) au point $x$ pour un rayon de sphère $R$ (en orange) et un pas de
+(en noir) au point $x$ pour un rayon de boule $R$ (en orange) et un pas de
 discrétisation $h$ donnés. Toutes les courbes ayant une valeur (absolue) de
 courbure inférieure à $\CurvMax$ auront exactement la même valeur de $\BRShape$.
 %
@@ -999,7 +999,7 @@ est donnée par la propriété suivante :
 \begin{property}
   %
   Soit $\Shape$ une forme euclidienne sphérique de $\R^2$ (\resp $\R^3$), $R$ le
-  rayon de la sphère et $h$ le pas de discrétisation, pour $x \in \dS$, la
+  rayon de la boule et $h$ le pas de discrétisation, pour $x \in \dS$, la
   courbure maximale au point $x$ résultant à la même quantité $\FeatDD(R)$
   (\resp $\FeatTD(R)$) est :
   %
@@ -1019,7 +1019,7 @@ une surface plate.
 \\
 %
 Il apparaît alors clairement que le rayon $R$ (ou l'ensemble de rayons dans le
-cas d'une analyse en espace-échelle) de la sphère contrôle la \emph{taille} de
+cas d'une analyse en espace-échelle) de la boule contrôle la \emph{taille} de
 la caractéristique qui sera reconnu à cause des artefacts de discrétisation.
 %
 \begin{figure}[ht]
@@ -1027,7 +1027,7 @@ la caractéristique qui sera reconnu à cause des artefacts de discrétisation.
   {\includegraphics[width=8cm]{figures/CubeSpherePlot_F_NoColor}}
   \caption{Graphes (en échelle logarithmique) des valeurs de $\FeatTD(R)$ (sur
   l'axe des ordonnées) différentes tailles pour deux points de l'objet «
-  CubeSphere » en fonction du rayon de la sphère (décroissant, de droite
+  CubeSphere » en fonction du rayon de la boule (décroissant, de droite
   à gauche, sur l'axe des abscisses).\label{fig:CubeSpherePlot_F_NoColor}}
 \end{center}
 \end{figure}
@@ -1145,7 +1145,7 @@ nouveau modèle linéaire de valeur de pente de $-2$ : la pente de $\CurvMax(R,h
 que nous allons nommer le « modèle \featflat ». Si la distance au modèle
 \featflat est inférieure aux distances aux modèles \featsmooth et \featedge,
 nous pouvons corriger la classification en \featflat. Nous pouvons alors évaluer
-le comportement des trois distances lorsque le rayon de la sphère change. En
+le comportement des trois distances lorsque le rayon de la boule change. En
 faisant cela, nous pouvons évaluer lorsque des transitions opèrent lors des
 approximations de modèles linéaires. Si une transition est détectée (voir
 \RefFigure{fig:inversion}), nous décidons de classifier le point au modèle dont
@@ -1183,7 +1183,7 @@ Nous allons désormais notre classificateur sur un jeu de données, en 2D comme 
 \\
 %
 Il est important de noter que le rayon maximal $R_0$ de notre intervalle de
-rayons de sphère est en relié à la plus petite courbure d'une région \featsmooth
+rayons de boule est en relié à la plus petite courbure d'une région \featsmooth
 que nous souhaitons détecter. Autrement, d'après la
 \RefProperty{prop:minInterval}, notre estimateur classera avec erreur la zone
 comme une partie \featflat.
