@@ -19,7 +19,7 @@ Vandamme}{Ma vie, mon œuvre.}
 \multicolumn{4}{c}{\textsc{À citer}} \\ \midrule
 SUSAN2D & \cite{SUSAN2D} & intersection volume; image; 2D     & Détection de singularités à base de volume de l'intersection \\
 SUSAN3D & \cite{SUSAN3D} & \emph{à lire} & Variante 3D de SUSAN \\
-Witkin1983 & \cite{Witkin1983} & \emph{\#FIRST} & Première mention d'espace-échelle \\
+Witkin1983 & \cite{Witkin1983} & \emph{\#FIRST} & Première mention d'espace d'échelle \\
 Pottmann2006 & \cite{Yang2006} & feature & Ils font un seuil sur le max des k1 k2. \\
 
 \bottomrule
@@ -300,11 +300,11 @@ matrice de covariance\footnote{Dans \cite{Telea2004}, les auteurs nomment le
 moment d'ordre zéro comme le barycentre et le moment d'ordre un comme la matrice
 de covariance, ce qui peut porter à confusion avec notre définition des moments
 vue dans le \RefSection{sec:definitions-moments}.} de patchs surfaciques
-$B_R(x)\cap \partial X$.
+$\Ball{R}{\vx} \cap \dS$.
 %
 \\
 %
-Ils définissent alors une analyse en espace-échelle de $|n_R|$ la distance au barycentre ($\vec{xb}$) comme fonction du rayon du voisinage $R$. Ils démontrent
+Ils définissent alors une analyse en espace d'échelle de $|n_R|$ la distance au barycentre ($\vec{xb}$) comme fonction du rayon du voisinage $R$. Ils démontrent
 alors que cette longueur croît de façon quadratique sur des surfaces lisses
 lorsque le voisinage augmente, tandis que la longueur croît linéairement sur des
 singularités.
@@ -332,13 +332,13 @@ voisinage fixe qui produisent un score de lissage :
   voisinage :
   %
   \begin{equation}
-    \mathcal{C}_{R}^{1} \EqDef \frac{1}{\alpha + \beta(|n_R|/R)^2} \text{.}
+    \mathcal{C}_{R}^{1} \EqDef \frac{1}{\alpha + \beta(|n_R|/R)^2} .
     \label{eq:moment-C0}
   \end{equation}
 %
   \item Le second est basé sur la longueur $|n_R|$, la plus petite des valeurs
   propres $\lambda_{min}$ et la plus grande des valeurs propres $\lambda_{max}$
-  de la matrice de covariance de $B_R(x)\cap \partial X$ :
+  de la matrice de covariance de $\Ball{R}{\vx} \cap \dS$ :
   %
   \begin{equation}
     \mathcal{C}_{R}^{1,2} \EqDef \frac{1}{\alpha + \beta
@@ -470,7 +470,7 @@ Dans un esprit similaire aux méthodes précédentes, certains auteurs
 Voting} en anglais) sur des patchs surfaciques. Ce dernier, défini par
 \cauthors{Medioni}{Medioni2000-2} est l'intégration du tenseur des points d'un
 voisinage, contenant des informations de la surface sous-jacente. Ils utilisent
-alors un comportement en espace-échelle du vote du tenseur lorsque la taille du
+alors un comportement en espace d'échelle du vote du tenseur lorsque la taille du
 voisinage augmente afin d'extraire les singularités sur des nuages de points.
 Cependant, ces méthodes sont très sensibles et ne produisent pas de résultats
 suffisamment robustes sur des données digitales.
@@ -500,7 +500,7 @@ présent une singularité) et \NonFeature.
 %
 \\
 %
-L'analyse en espace-échelle intervient au niveau du seuillage avec les poids
+L'analyse en espace d'échelle intervient au niveau du seuillage avec les poids
 calculés à partir des matrices. Deux bornes sont alors définies par
 l'utilisateur : $\omega^-$ et $\omega^+$, celles-ci correspondent au seuil
 inférieur et supérieur de la variation de $\omega_i$ en fonction du rayon. En
@@ -555,7 +555,7 @@ caractéristiques ». Une analyse plus complète est proposée dans le
 %
 D'autres \cite{Mellado2012} ont introduit une approche rapide d'approximation
 aux moindres carrés de sphères sur un nuage de points pour créer un score de
-zones caractéristiques multi-échelles. À nouveau, le paramètre d'espace-échelle
+zones caractéristiques multi-échelles. À nouveau, le paramètre d'espace d'échelle
 est la taille de voisinage. Cependant, même si le score calculé est
 qualitativement pertinent pour détecter les zones caractéristiques, il n'est pas
 directement relié à quelconque information géométrique de la surface. De plus,
@@ -567,11 +567,11 @@ précision la localisation des points caractéristiques.
 Dans leurs travaux \cite{Mellado2012}, \nauthor{Mellado} proposent de calculer
 un score de \emph{feature} sur chaque élément de la surface. Plus précisément,
 la forme est analysée avec une approche de correspondance aux moindres carrés de
-sphères (\emph{least squares spherical fitting}). Le paramètre d'espace-échelle
+sphères (\emph{least squares spherical fitting}). Le paramètre d'espace d'échelle
 est la taille du voisinage à considérer dans la correspondance. Alors, en
 utilisant leurs notations, pour toutes les échelles $t$, ils font correspondre
 une hyper-sphère algébrique et la distance de décalage algébrique $\tau$ entre
-le point $p$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
+le point $\vp$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
 (signée) $\kappa$ de l'hyper-sphère.
 %
 \begin{figure}[ht]{
@@ -582,11 +582,11 @@ le point $p$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
       \label{fig:mellado-notations}}
 \end{figure}
 %
-Ils proposent alors de calculer la \emph{variation géométrique} au point $p$
+Ils proposent alors de calculer la \emph{variation géométrique} au point $\vp$
 définie telle que :
 %
 \begin{equation}
-  \nu(p,t) \EqDef
+  \nu(\vp,t) \EqDef
   {\left(
     \frac{d\tau}{dt} \right)}^2
     + {\left( t\frac{d\eta}{dt}
@@ -609,12 +609,12 @@ Cependant, ils déterminent également une fonction continue de points
 caractéristiques $f$ telle que :
 %
 \begin{equation}
-   f(p) \EqDef \int tanh(\nu(p,t)) dt
+   f(\vp) \EqDef \int tanh(\nu(\vp,t)) dt
 \end{equation}
 %
 qui permet de différencier les régions sans variations géométriques (en bleu sur
 la \RefFigure{fig:mellado-cubesphere}) de celles qui ont de hautes variations
-(en jaune)\footnote{$tanh(x)$ est souvent utilisée pour \comJeremy{renforcer des
+(en jaune)\footnote{$tanh(\vx)$ est souvent utilisée pour \comJeremy{renforcer des
 effets}}.
 %
 \begin{figure}[ht]{
@@ -729,7 +729,7 @@ laplacienne :
       \label{fig:laplacian-spectrum-avg}}
 \end{figure}
 %
-\subsection{Estimation de singularités par l'analyse en espace-échelle de la
+\subsection{Estimation de singularités par l'analyse en espace d'échelle de la
 courbure}%
 \label{sec:applications:feature:II}
 %
@@ -794,7 +794,7 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
 %   \PrincCurvH{2}{R}(\DigF{\Shape}{h},p) &= \PrincCurv{2}(X,x) + O(h^{\frac{1}{3}}).
 % \end{align*}
 %
-\subsubsection{Analyse en espace-échelle de $\CurvT{R}(x)$ et $\MeanCurvT{R}(x)$}%
+\subsubsection{Analyse en espace d'échelle de $\CurvT{R}(x)$ et $\MeanCurvT{R}(x)$}%
 \label{sec:applications:feature:II:analyse}
 %
 \begin{figure}[ht]{
@@ -803,7 +803,7 @@ Nous parlons ici d'analyse en espace-échelle de nos estimateurs, le paramètre
           \includegraphics[width=7cm]{images/ScaleSpace_Flower}
       \end{center}}
 %
-      \caption[Analyse en espace-échelle de la courbure en fonction du rayon sur la forme digitale 2D de « Flower »]
+      \caption[Analyse en espace d'échelle de la courbure en fonction du rayon sur la forme digitale 2D de « Flower »]
       {\emph{À gauche :} forme digitale 2D de « Flower ». \emph{À droite :}
       Association des valeurs de courbure sur le bord digital de la forme «
       Flower » en utilisant la \RefDefinition{def:digital-2d-curvature} (abscisse) pour différentes
@@ -822,7 +822,7 @@ vont s'étendre (les zones rouges par exemple). Plus généralement, les points
 autour de singularités ont une valeur de courbure qui tend à fortement varier en
 fonction du rayon de la boule alors que les points autour de zones lisses sont
 relativement insensible au rayon. Pour analyser ce comportement en
-espace-échelle, nous proposons de classifier les points de notre forme en trois
+espace d'échelle, nous proposons de classifier les points de notre forme en trois
 catégories : \featedge (correspondant à des points non-$C^1$), \featsmooth
 ($C^3$ et suffisamment lisse) et \featflat (courbure nulle).
 %
@@ -832,17 +832,17 @@ Plus formellement :
 %
 \begin{definition}
   %
-  Pour tout point $x$ sur le bord d'une forme Euclidienne $\Shape$ de $\R^2$
-  (\respp $\R^3$), nous définissons \emph{l'estimateur en espace-échelle de zones
-  caractéristiques} $\FeatDD(R)$ (\resp $\FeatTD(R)$) tels que :
+  Pour tout point $\vx$ sur le bord d'une forme euclidienne $\Shape$ de $\R^2$
+  (\respp $\R^3$), nous définissons \emph{l'estimateur en espace d'échelle de zones
+  caractéristiques} $\FeatDD(R)$ (\resp $\FeatTD(R)$) tel que :
   %
   \begin{equation}
-  	\FeatDD(R) \EqDef \frac{3 \pi}{2 R} - \frac{3 A(R,x)}{R^3},
-  	\quad \FeatTD(R) \EqDef \frac{8}{3 R} - \frac{4 V(R,x)}{\pi R^4},
+  	\FeatDD(R) \EqDef \frac{3 \pi}{2 R} - \frac{3 A(R,\vx)}{R^3},
+  	\quad \FeatTD(R) \EqDef \frac{8}{3 R} - \frac{4 V(R,\vx)}{\pi R^4},
   \end{equation}
   %
-  où $R$ -- le paramètre de l'espace-échelle -- est le rayon de la boule
-  euclidienne centrée au point $x$, $A(R,x)$ est l'aire (en 2D) et $V(R,x)$ est
+  où $R$ -- le paramètre de l'espace d'échelle -- est le rayon de la boule
+  euclidienne centrée au point $\vx$, $A(R,\vx)$ est l'aire (en 2D) et $V(R,\vx)$ est
   le volume (en 3D) de l'intersection entre la boule et la forme $\Shape$.
   %
   \label{def:feature-estimator}
@@ -854,7 +854,7 @@ le cas sur une partie lisse de cet objet, puis sur une singularité.
 %
 \paragraph{Cas lisse.}
 %
-Dans le cas lisse, \cad lorsque $\partial \Shape$ est $C^3$ au point $x$, il
+Dans le cas lisse, \cad lorsque $\partial \Shape$ est $C^3$ au point $\vx$, il
 apparaît clairement que $\FeatDD(R)$ est exactement la définition des
 estimateurs de courbures de la définition~\ref{def:pottmann-2d-3d-mean}.
 %
@@ -863,7 +863,7 @@ estimateurs de courbures de la définition~\ref{def:pottmann-2d-3d-mean}.
 {\scriptsize
 \begin{center}
   \begin{overpic}[width=4cm]{figures/II_kernels_smooth}
-    \put(46,51){$x$}
+    \put(46,51){$\vx$}
     \put(7,10){$\Shape$}
     \put(58,57.5){$R_n$}
     \put(62.5,62){$\iddots$}
@@ -875,21 +875,21 @@ estimateurs de courbures de la définition~\ref{def:pottmann-2d-3d-mean}.
 \end{figure}
 %
 Nous avons changé la notation car lorsque $\FeatDD(R)$ est sur une singularité,
-la valeur retournée n'est plus uniquement liée à la courbure au point. Soit
-$\Curv_0$ la valeur de courbure au point $x$. Puisque nous sommes dans les mêmes
+la valeur retournée n'est plus uniquement liée à la courbure au point $\vx$. Soit
+$\Curv_0$ la valeur de courbure au point $\vx$. Puisque nous sommes dans les mêmes
 conditions que le théorème~\ref{theo:pottmann-2d-3d-mean-conv}, nous savons que :
 %
 \begin{equation}
-\FeatDD(R) = \CurvT{}(R,x) = \Curv_0 + O(R),
-\quad \FeatTD(R) = \MeanCurvT{}(R,x) = \MeanCurv_0 + O(R),
+\FeatDD(R) = \CurvT{}(R,\vx) = \Curv_0 + O(R),
+\quad \FeatTD(R) = \MeanCurvT{}(R,\vx) = \MeanCurv_0 + O(R),
 \end{equation}
 %
-lorsque $R$ décroît vers zéro. Alors $G_{X,x}(R)$ nous donne un terme constant
-qui est la courbure au point $x$.
+lorsque $R$ décroît vers zéro. Alors $\FeatDD(R)$ nous donne un terme constant
+qui est la courbure au point $\vx$.
 %
 \paragraph{Singularité.}
 %
-Considérons désormais que le point $x$ est localisé sur une singularité de
+Considérons désormais que le point $\vx$ est localisé sur une singularité de
 $\partial \Shape$ :
 %
 % \graffito
@@ -898,7 +898,7 @@ $\partial \Shape$ :
 \begin{center}
   \begin{overpic}[width=6cm]{figures/II_kernels_edge2}
     \put(47,39.5){$\alpha_0$}
-    \put(51,30){$x$}
+    \put(51,30){$\vx$}
     \put(7,1){$\Shape$}
     \put(56.5,42){$R_n$}
     \put(59,45){$\iddots$}
@@ -913,13 +913,13 @@ $\partial \Shape$ :
   %
   Soit $\Shape$ une forme euclidienne de $\R^2$ (\respp $\R^3$) avec
   un bord $C^3$ par morceaux, et soit $x\in \dS$ une singularité. Alors, si
-  $\alpha_0$ est l'angle entre les deux demi-tangentes au point $x$ et que
+  $\alpha_0$ est l'angle entre les deux demi-tangentes au point $\vx$ et que
   $\Curv_{-}$ et $\Curv_{+}$ sont les courbures limites à gauche et à droite,
   nous avons:
   %
   \begin{align}
-  	A(R,x) &= \frac{\alpha_0 R^2}{2} - \frac{\Curv_{-} + \Curv_{+}}{6}R^3 + O(R^4),\\
-  	V(R,x) &= \frac{2 \alpha_0R^3}{3} - \frac{\pi(\MeanCurv_{-} + \MeanCurv_{+})}{8}R^4 + O(R^5).
+  	A(R,\vx) &= \frac{\alpha_0 R^2}{2} - \frac{\Curv_{-} + \Curv_{+}}{6}R^3 + O(R^4),\\
+  	V(R,\vx) &= \frac{2 \alpha_0R^3}{3} - \frac{\pi(\MeanCurv_{-} + \MeanCurv_{+})}{8}R^4 + O(R^5).
   \end{align}
   %
   Alors, la quantité fournie par $\FeatDD(R)$ est une fonction du rayon de la
@@ -935,7 +935,7 @@ $\partial \Shape$ :
   %
 \end{definition}
 %
-$G_{X,x}(R)$ nous donne un monôme d'exposant $-1$ auquel le coefficient est
+$\FeatDD(R)$ nous donne un monôme d'exposant $-1$ auquel le coefficient est
 dépendant de l'angle $\alpha_0$.
 %
 \begin{figure}[ht]
@@ -951,8 +951,8 @@ dépendant de l'angle $\alpha_0$.
 En conclusion, $\FeatDD(R)$ a deux comportements distincts lorsque nous sommes
 sur un point d'une surface lisse et lorsque nous sommes sur une singularité de
 la surface, quand nous utilisons le rayon de la boule $R$ comme paramètre
-d'espace-échelle. Lorsque le rayon $R$ décroît sur une surface lisse,
-l'estimateur de caractéristiques nous retourne la courbure au point $x$. Cette
+d'espace d'échelle. Lorsque le rayon $R$ décroît sur une surface lisse,
+l'estimateur de caractéristiques nous retourne la courbure au point $\vx$. Cette
 quantité est constante quelque soit la valeur de $R$\footnote{En fait, $R$
 intervient un peu dans le terme d'erreur.}; Sur une singularité, l'estimateur de
 caractéristiques nous retourne une quantité qui croît linéairement lorsque $R$
@@ -965,7 +965,7 @@ valeur absolue de $\FeatDD(R)$.
 %
 Lorsque nous discrétisons $\BRShape$, pour un rayon de boule $R$ donné et un
 pas de discrétisation $h$, une infinité de courbes euclidiennes
-$\Boundary{\Shape}$ avec différentes valeurs de courbure au point $x$ donnent
+$\Boundary{\Shape}$ avec différentes valeurs de courbure au point $\vx$ donnent
 exactement la même valeur pour $\AR$, et donc la même valeur pour $\FeatDD(R)$.
 Cela est dû à la perte d'informations de la discrétisation, et le constat est le
 même en 3D.
@@ -984,22 +984,22 @@ même en 3D.
 %
 La \RefFigure{fig:minInterval} illustre ceci en nous montrant une valeur de
 $\BRShape$ (en bleu) pour une valeur de courbure $\CurvMax$ limite de $\Shape$
-(en noir) au point $x$ pour un rayon de boule $R$ (en orange) et un pas de
+(en noir) au point $\vx$ pour un rayon de boule $R$ (en orange) et un pas de
 discrétisation $h$ donnés. Toutes les courbes ayant une valeur (absolue) de
 courbure inférieure à $\CurvMax$ auront exactement la même valeur de $\BRShape$.
 %
 \\
 %
 Nous nous intéressons alors à déterminer l'ensemble de valeurs de courbure au
-point $x$ qui correspondent à une zone plate à cause de la discrétisation. La
+point $\vx$ qui correspondent à une zone plate à cause de la discrétisation. La
 courbure maximale qui peut être mauvaisement interprétée comme une région plate
 est donnée par la propriété suivante :
 %
 \begin{property}
   %
   Soit $\Shape$ une forme euclidienne sphérique de $\R^2$ (\resp $\R^3$), $R$ le
-  rayon de la boule et $h$ le pas de discrétisation, pour $x \in \dS$, la
-  courbure maximale au point $x$ résultant à la même quantité $\FeatDD(R)$
+  rayon de la boule et $h$ le pas de discrétisation, pour $\vx \in \dS$, la
+  courbure maximale au point $\vx$ résultant à la même quantité $\FeatDD(R)$
   (\resp $\FeatTD(R)$) est :
   %
   \begin{equation}
@@ -1011,14 +1011,14 @@ est donnée par la propriété suivante :
 \end{property}
 %
 En conséquence, si $\FeatDD(R)$ est inférieure à $\CurvMax$ (ou $\FeatTD(R)$
-inférieure à $\MeanCurvMax$ en 3D) pour un point $x$ de $\Boundary{\Shape}$,
-nous ne pouvons décider si $x$ est sur une surface très légèrement lisse ou sur
+inférieure à $\MeanCurvMax$ en 3D) pour un point $\vx$ de $\Boundary{\Shape}$,
+nous ne pouvons décider si $\vx$ est sur une surface très légèrement lisse ou sur
 une surface plate.
 %
 \\
 %
 Il apparaît alors clairement que le rayon $R$ (ou l'ensemble de rayons dans le
-cas d'une analyse en espace-échelle) de la boule contrôle la \emph{taille} de
+cas d'une analyse en espace d'échelle) de la boule contrôle la \emph{taille} de
 la caractéristique qui sera reconnu à cause des artefacts de discrétisation.
 %
 \begin{figure}[ht]
@@ -1032,7 +1032,7 @@ la caractéristique qui sera reconnu à cause des artefacts de discrétisation.
 \end{figure}
 %
 Dans les Figures~\ref{fig:CubeSpherePlot_ES_NoColor} et
-\ref{fig:CubeSpherePlot_F_NoColor}, nous observons les trois cas en espace-
+\ref{fig:CubeSpherePlot_F_NoColor}, nous observons les trois cas en espace d'
 échelle : sur la courbe verte, toutes les valeurs de $\FeatTD(R)$ sont
 inférieures à $\MeanCurvMax$ (représenté par la droite grise en pointillés), ce
 qui est caractéristique des régions plates. Sur la courbe rouge, toutes les
@@ -1052,7 +1052,7 @@ incorrectes ».
 \subsubsection{Classification basée sur la distance aux modèles linéaires}%
 \label{sec:applications:feature:II:classification}
 %
-Nous avons deux comportements distincts exploitables en espace- échelle pour
+Nous avons deux comportements distincts exploitables en espace d'échelle pour
 notre classification :
 %
 \begin{itemize}
@@ -1070,7 +1070,7 @@ Ces comportements sont exactement les mêmes en 2D et en 3D, ce qui suit peut
 %
 Pour un intervalle de rayons décroissants $R_i$, $0 \leq i \leq n$, nous
 calculons l'estimateur de zones caractéristiques $\DigFeatDD(R)$ (la version
-digitale de $\FeatDD(R)$) au point $p \in \Boundary{\DigShape}$.
+digitale de $\FeatDD(R)$) au point $\vp \in \Boundary{\DigShape}$.
 %
 \\
 %
@@ -1090,16 +1090,16 @@ modèle \featedge », l'ordonnée est également inconnue, voir
 \\
 %
 Pour un modèle linéaire donné de pente $\gamma$, la distance entre le modèle
-linéaire $e_\gamma$ et l'ensemble $\{G_{Z,p}(R_i), ..., G_{Z,p}(R_j)\}$ (pour
+linéaire $e_\gamma$ et l'ensemble $\{\DigFeatDD(R_i), ..., \DigFeatDD(R_j)\}$ (pour
 $n$ valeurs de rayons $R_i$, $0 \leq i \leq n$) est donné par :
 %
 \begin{equation}
   \label{eq:distance-modele-lineaire}
-  e_\gamma(G_{Z,p}(R_i), ..., G_{Z,p}(R_j))= \min_{b\in \mathbb{R}}
+  e_\gamma(\DigFeatDD(R_i), ..., \DigFeatDD(R_j))= \min_{b\in \mathbb{R}}
   \left ( \sum_{k=i}^j (Y_k - \gamma X_k + b)^2\right)\,,
 \end{equation}
 %
-avec $X_k=\log R_k$ et $Y_k=\log(G_{Z,p}(R_k))$. Puisque nous minimisons une
+avec $X_k=\log R_k$ et $Y_k=\log(\DigFeatDD(R_k))$. Puisque nous minimisons une
 somme de termes quadratiques, la valeur de $b^*$ pour laquelle
 l'\RefEquation{eq:distance-modele-lineaire} est minimale est :
 %
@@ -1159,13 +1159,13 @@ autres).
 %
 \\
 %
-Finalement, pour un point $p$ de la forme $Z \subset \Z^2$ ou $\Z^3$, nous
+Finalement, pour un point $\vp$ de la forme $\DigShape \subset \Z^2$ ou $\Z^3$, nous
 définissons notre classification de zones caractéristiques comme suit :
 %
 \begin{equation}
- C_{Z,p}(R_0, R_n) =
+ C_{\DigShape,\vp}(R_0, R_n) =
   \begin{cases}
-      \text{FLAT},         & \text{si } \forall 0 \leq i \leq n,    G_{Z,p}(R_i) < \kappa_{max}(R_i,h) \\
+      \text{FLAT},         & \text{si } \forall 0 \leq i \leq n,    \DigFeatDD(R_i) < \CurvMax(R_i,h) \\
                            & \text{ou si } l_{-2} > \max( l_{-1}, l_{0} )\\
       \text{SMOOTH},       & \text{si } l_{0}> \max( l_{-1}, l_{-2} )\\
       \text{EDGE},        & \text{sinon.}
@@ -1241,7 +1241,7 @@ avons implémenté les estimateurs décris dans le
     \label{tab:feature-est}
     \begin{tabular}{@{}lrccc@{}}
       \toprule
-      Méthode & \multicolumn{1}{r}{Paramètres} & \multicolumn{1}{r}{Segmentation} & \multicolumn{1}{r}{Espace-Échelle} & \multicolumn{1}{r}{Robustesse}     \\ \midrule
+      Méthode & \multicolumn{1}{r}{Paramètres} & \multicolumn{1}{r}{Segmentation} & \multicolumn{1}{r}{Espace d'Échelle} & \multicolumn{1}{r}{Robustesse}     \\ \midrule
       \cauthors{Clarenz}{Telea2004}   & $R$, $\alpha$, $\beta$  & \svgNope   & \svgNope   & \svgYes \\
       \cauthors{Mérigot}{Merigot2011} & $R$, $r$, $T$           & \svgNope   & \svgNope   & \svgYes \\
       \cauthors{Mellado}{Mellado2012} & $r_{min}$, $r_{max}$    & \svgNope   & \svgNope   & \svgYes \\
