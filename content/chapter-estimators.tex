@@ -1741,6 +1741,18 @@ estimateur ne contient pas d'information d'échelle. De plus, pour $\DigShape =
   \Theta(h^{\frac{1}{3}}) \le hL^2_D( \DigShape ) \le \Theta(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)) \label{eq:bounds-length-MDSS}.
 \end{align}
 %
+\begin{figure}[ht]{
+  \begin{center}
+    \includegraphics[height=6cm]{images/Curvature/Ellipsoid_Radius}
+  \end{center}}
+    \caption{Comportement asymptotique (en échelle logarithmique) de $hL^2_D( \DigShape )$.
+    \label{fig:bounds-length-MDSS-fig}}
+\end{figure}
+%
+La \RefFigure{fig:bounds-length-MDSS-fig} confirme expérimentalement ces bornes.
+%
+\\
+%
 Ainsi, à l'exception du terme en $\log^2(\cdot)$, $h \rho(\DigShape)$ semble est
 un candidat parfait comme paramètre de rayon $R$, puisqu'il suit
 approximativement $\Theta(h^\frac{1}{3})$, pour obtenir un estimateur digital
@@ -2298,13 +2310,79 @@ Comme en 2D, nous pouvons changer le rayon de la boule locallement en fonction d
   \label{def:curvature-estimator-3d-k1k2-pfl}
 \end{definition}
 %
-\subsection{Optimisation des estimateurs locaux sans paramètres}
+\subsection{Optimisation des estimateurs locaux sans paramètres et résultats}
 %
-\todoInlineJeremy{Parler ici de l'optimisation $k=5$ pour réduire le temps de calcul.}
+\begin{figure}[ht]{
+  \begin{center}
+    \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local}
+    \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local_5}
+  \end{center}}
+  %
+  \caption[Rayons choisis par  $\CurvHSL$ et répartitions en 5 partitions.]{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
+  l'objet \textsc{AccFlower} allant du bleu (valeur minimale) au jaune (valeur
+  maximale). \emph{En abscisse :} position sur la surface de l'objet, \emph{en
+  ordonnée :} différents rayons $R$.
+  %
+  \\
+  %
+  \emph{En noir sur l'image du haut :} différents rayons choisis par
+  l'estimateur $\CurvHSL$ en fonction de la géométrie locale de la forme.
+  \emph{En noir sur l'image du bas :} $K = 5$ rayons choisis l'algorithme de
+  $K$-moyenne avec les rayons de $\CurvHSL$.
+  %
+  \label{fig:curvature-pfl-radii}.}
+  %
+\end{figure}
 %
-\subsection{Résultats sur l’estimation de la courbure sans paramètre par
-intégration volumique de la sphère}
+Nous pouvons améliorer le temps de calcul des estimateurs qui s'adaptent à la
+géométrie locale du bord de l'objet $\CurvHSL$, $\MeanCurvHSL$ et autres. En
+effet, sur des objets à forte résolution (\cad $h$ petit), ces estimateurs sont
+très couteux en temps. Nous proposons de limiter le nombre de rayons locaux à
+$K$ rayons. Cela aura pour conséquence la possibilité de précalculer les boules
+de différents rayons au préalable, au lieu de les recalculer localement pour
+chaque élément de surface. En effet, nos estimateurs par intégration sont
+optimisés lorsque nous nous déplaçons sur des élements de surface adjacents avec
+le même rayon de boule. Cette optimisation est décrite en détail dans la partie «
+Implémentation » (\RefSection{sec:applications:dgtal}). Nous introduisons ici
+les variantes des $K$-moyennes (« \anglais{$K$-means} »), limitant ainsi le
+nombre de rayons de boule disponibles à $K$. Pour se faire, nous distribuons les
+longueurs des segments maximaux dans $K$ partitions en minimisant la somme des
+carrés des différences des longueurs. La \RefFigure{fig:curvature-pfl-radii}
+montre le résultat de la répartition des rayons pour $K=5$.
 %
+\begin{figure}[ht]{
+  \begin{center}
+    \includegraphics[height=4cm]{images/Curvature/Flower_kMeans-5}
+    \includegraphics[height=4cm]{images/Curvature/Ellipsoid_Radius_2}
+  \end{center}}
+  %
+  \caption[.]{Répartition du partitionnement du carré des longueurs des segments maximaux en utilisant l'algorithme de $K$-moyennes (avec $K=5$), sur le bord de l'objet \Flower et de l'objet \Ellipsoid.
+  %
+  \label{fig:curvature-pfl-map}.}
+  %
+\end{figure}
+%
+La \RefFigure{fig:curvature-pfl-map} montre la répartition de ces partitions sur deux objets : \Flower pour un objet 2D et \Ellipsoid en 3D.
+%
+Une comparaison complète de tous les estimateurs présentés dans cette section est disponible dans le \RefSection{sec:comparaison-courbure}. La \RefFigure{fig:mean-curv-different-scale} montre le résultat de l'estimateur digital local sans paramètre $\MeanCurvHSL$ sur des objets de différentes tailles. Nous pouvons alors voir que l'estimateur s'adapte parfaitement à la géométrie locale de la forme et affiche une cohérence de résultat quelque soit l'échelle de l'objet.
+%
+\begin{figure}[ht]
+\begin{center}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Bunny_64_mean}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Bunny_128_mean}
+  \includegraphics[width=.30\linewidth]{images/Curvature/Bunny_256_mean}
+\end{center}
+  \caption{Courbure moyenne affichée sur des objets \Bunny à différentes résolutions : $64^3$, $128^3$ et $256^3$. La valeur de courbure moyenne est obtenue avec l'estimateur digital local sans paramètre $\MeanCurvHSL$ (la couleur jaune est la plus haute valeur de courbure, la couleur bleue est la plus petite). \label{fig:mean-curv-different-scale}}
+\end{figure}
+%
+% \section{Estimation de la courbure par intégration surfacique de la sphère}
+% \subsection{Analyse euclidienne de l'intégration surfacique de la sphère, et relation à la courbure}
+% \subsubsection{Estimation par aire de patch de surface}
+% \subsubsection{Estimation par aire de surface de sphère}
+
+\section{Comparaison des estimateurs de courbure}%
+\label{sec:comparaison-courbure}
+
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
@@ -2315,13 +2393,3 @@ intégration volumique de la sphère}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
-
-
-
-% \section{Estimation de la courbure par intégration surfacique de la sphère}
-% \subsection{Analyse euclidienne de l'intégration surfacique de la sphère, et relation à la courbure}
-% \subsubsection{Estimation par aire de patch de surface}
-% \subsubsection{Estimation par aire de surface de sphère}
-
-\section{Comparaison des estimateurs de courbure}%
-\label{sec:comparaison-courbure}
