@@ -444,7 +444,8 @@ de Voronoi vont être intégrées pour lisser la mesure. Ces deux paramètres
 permettent également de limiter l'impact du bruit sur la surface tout en
 préservant les informations géométriques. Un score de point caractéristique
 $r(\vp)$ est alors calculé à l'aide d'un ratio des valeurs propres de la
-convolution du \VCM pour chaque point $\vp$ :
+convolution du \VCM $\mathcal{V}_{K,R} \ast \chi_r(\{\vp\})$ pour chaque point
+$\vp$ :
 %
 \begin{equation}
   r(\vp) \EqDef \frac{\lambda_2(\vp)}{\lambda_0(\vp) + \lambda_1(\vp) + \lambda_2(\vp)}
