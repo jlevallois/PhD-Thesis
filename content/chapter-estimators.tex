@@ -2774,6 +2774,141 @@ théorèmes~\ref{thm:multigrid-convergence-curv,thm:multigrid-convergence-curv-m
 %%%%%%%%%%%%%%%%%%%
 %
 \todoInlineJeremy{-------------------------------}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Ellipse}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~Différents $\alpha$} &
+      \includegraphics[width=5cm]{images/Ellipse} &
+      \includegraphics[width=7cm]{graphs/Ellipse_ALPHA_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~~~~~~~~$\CurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/Ellipse_L2} &
+      \includegraphics[width=7cm]{graphs/Ellipse_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~~~~~~~~$\CurvHS$} &
+      \includegraphics[width=7cm]{graphs/Ellipse_PF_L2} &
+      \includegraphics[width=7cm]{graphs/Ellipse_PF_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption[Évaluation expériementale sur l'objet \Ellipse.]{
+      %
+      \emph{Première ligne :} Illustration de l'objet \Ellipse et comparaison
+      des vitesses de convergence asymptotique de l'estimateur $\CurvH{R}$ avec
+      différentes valeurs de $\alpha$ pour le rayon $R$ (avec $R=kh^\alpha$).
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de courbure 2D de $\CurvH{R}$
+      (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
+      \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}.
+      %
+      \\
+      %
+      \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
+      et $l_\infty$ (\emph{à droite}) d'estimation de courbure 2D de $\CurvHS$,
+      $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$ avec
+      l'estimateur \MDCA \cite{Roussillon2011}.
+      %
+      }
+      \label{fig:curv-experiments-ellipse}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Flower}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~Différents $\alpha$} &
+      \includegraphics[width=5cm]{images/Flower} &
+      \includegraphics[width=7cm]{graphs/Flower_ALPHA_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~~~~~~~~$\CurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/Flower_L2} &
+      \includegraphics[width=7cm]{graphs/Flower_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~~~~~~~~$\CurvHS$} &
+      \includegraphics[width=7cm]{graphs/Flower_PF_L2} &
+      \includegraphics[width=7cm]{graphs/Flower_PF_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption[Évaluation expériementale sur l'objet \Flower.]{
+      %
+      \emph{Première ligne :} Illustration de l'objet \Flower et comparaison
+      des vitesses de convergence asymptotique de l'estimateur $\CurvH{R}$ avec
+      différentes valeurs de $\alpha$ pour le rayon $R$ (avec $R=kh^\alpha$).
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de courbure 2D de $\CurvH{R}$
+      (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
+      \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}.
+      %
+      \\
+      %
+      \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
+      et $l_\infty$ (\emph{à droite}) d'estimation de courbure 2D de $\CurvHS$,
+      $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$ avec
+      l'estimateur \MDCA \cite{Roussillon2011}.
+      %
+      }
+      \label{fig:curv-experiments-flower}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{AccFlower}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~Différents $\alpha$} &
+      \includegraphics[width=5cm]{images/AccFlower} &
+      \includegraphics[width=7cm]{graphs/AccFlower_ALPHA_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~~~~~~~~$\CurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/AccFlower_L2} &
+      \includegraphics[width=7cm]{graphs/AccFlower_Loo}
+      \\
+      % \rotatebox{90}{~~~~~~~~~~~~~~$\CurvHS$} &
+      % \includegraphics[width=7cm]{graphs/AccFlower_PF_L2} &
+      % \includegraphics[width=7cm]{graphs/AccFlower_PF_Loo}
+      % \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption[Évaluation expériementale sur l'objet \AccFlower.]{
+      %
+      \emph{Première ligne :} Illustration de l'objet \AccFlower et comparaison
+      des vitesses de convergence asymptotique de l'estimateur $\CurvH{R}$ avec
+      différentes valeurs de $\alpha$ pour le rayon $R$ (avec $R=kh^\alpha$).
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de courbure 2D de $\CurvH{R}$
+      (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
+      \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}.
+      %
+      }
+      \label{fig:curv-experiments-accflower}
+  \end{center}
+\end{figure}
+
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
