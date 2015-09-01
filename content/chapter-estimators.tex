@@ -2389,20 +2389,6 @@ de courbure présentés dans ce chapitre.
 \subsection{Méthodologie d'évaluation}%
 \label{sec:comparaison:methodologie}
 %
-Tous les estimateurs présentés ont été implémentés dans \DGtal \cite{dgtal}.
-Nous reviendrons plus tard sur l'aspect implémentation et optimisation de ces
-estimateurs (voir \RefSection{sec:applications:dgtal}). \DGtal est une librairie
-C++ open-source dédié aux outils de géométrie digitale. En plus de proposer nos
-estimateurs, cette librairie nous permet de construire des formes paramétriques
-ou implicites en dimension 2 et 3 pour n'importe quel pas de discrétisation $h$,
-s'inscrivant dans un framework d'évaluation de convergence asymptotique. De
-plus, plusieurs estimateurs de courbure de la litérature sont disponible,
-rendant facile l'évaluation comparative. Le \RefTable{tab:shapes} et la
-\RefFigure{fig:illustrationShapes} présentent les formes continues considérés
-dans cette évaluation. Il est à noter que pour les estimateurs présentés dans ce
-chapitre, seulement les formes convexes (\Ellipse, \Sphere, \RoundedCube,
-\Ellipsoid) respectent les hypothèses des théorèmes de convergence.
-%
 \begin{table}[ht]
   \centering
   \scriptsize
@@ -2440,12 +2426,41 @@ chapitre, seulement les formes convexes (\Ellipse, \Sphere, \RoundedCube,
   \label{fig:illustrationShapes}
 \end{figure}
 %
+Tous les estimateurs présentés ont été implémentés dans \DGtal \cite{DGtal}.
+Nous reviendrons plus tard sur l'aspect implémentation et optimisation de ces
+estimateurs (voir \RefSection{sec:applications:dgtal}). \DGtal est une librairie
+C++ open-source dédié aux outils de géométrie digitale. En plus de proposer nos
+estimateurs, cette librairie nous permet de construire des formes paramétriques
+ou implicites en dimension 2 et 3 pour n'importe quel pas de discrétisation $h$,
+s'inscrivant dans un processus d'évaluation de convergence asymptotique. De
+plus, plusieurs estimateurs de courbure de la littérature sont disponible,
+rendant facile l'évaluation comparative. Le \RefTable{tab:shapes} et la
+\RefFigure{fig:illustrationShapes} présentent les formes continues considérés
+dans cette évaluation. Il est à noter que pour les estimateurs présentés dans ce
+chapitre, seulement les formes convexes (\Ellipse, \Sphere, \RoundedCube,
+\Ellipsoid) respectent les hypothèses des théorèmes de convergence. Cependant,
+nous pouvons expérimentalement évaluer le comportement de nos estimateurs
+lorsque nous considérons des formes qui ne satisfont pas les hypothèses, comme
+les formes avec des parties non convexes.
+%
 \subsection{Analyse de la convergence asymptotique}
 %
 Nous allons dans un premier temps confirmer le choix du paramètre $\alpha$
 utilisé pour guider le rayon de la sphère dans preuves des
-théorèmes~\ref{thm:multigrid-convergence-curv,thm:multigrid-convergence-curv-mean,thm:multigrid-convergence-curv-k1k2,fig:experiments2D-alpha}
-étudie les différents alpha + comparaison 2D.
+\RefTheoremsTF{thm:multigrid-convergence-curv}{thm:multigrid-convergence-curv-mean}{thm:multigrid-convergence-curv-k1k2}.
+%
+\\
+%
+Dans ces théorème, nous avions démontré que choisir un rayon de boule en $R =
+kh^\alpha$ avec $\alpha = \frac{1}{3}$ permettait de minimiser les termes
+d'erreurs et d'obtenir une convergence asymptotique en $O(h\frac{1}{3})$ pour
+les estimateurs digitaux de courbure 2D $\CurvH{R}$, de courbure moyenne 3D
+$\MeanCurvH{R}$ et de courbures principales $\PrincCurvH{1}{R}$ et
+$\PrincCurvH{2}{R}$ par intégration. La première ligne des
+\RefFiguresTF{fig:curv-experiments-ellipse}{fig:curv-experiments-flower}{fig:curv-experiments-accflower}
+nous montre les vitesses de convergence asymptotique pour 5 valeurs de $\alpha$
+différentes : $\frac{1}{2}$, $\frac{2}{5}$, $\frac{1}{3}$, $\frac{2}{7}$ et
+$\frac{1}{4}$.
 %
 \\
 %
