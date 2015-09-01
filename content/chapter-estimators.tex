@@ -2449,331 +2449,8 @@ théorèmes~\ref{thm:multigrid-convergence-curv,thm:multigrid-convergence-curv-m
 %
 \\
 %
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Différents $\alpha$ (Erreur $l_\infty$)}}
-      \\ \toprule
-      &
-      \textsc{Ellipse} &
-      \textsc{Flower} &
-      \textsc{AccFlower}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\CurvH{R}$} &
-      \includegraphics[width=4.5cm]{graphs/Ellipse_ALPHA_Loo} &
-      \includegraphics[width=4.5cm]{graphs/Flower_ALPHA_Loo} &
-      \includegraphics[width=4.5cm]{graphs/AccFlower_ALPHA_Loo}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des convergences asymptotiques de l'estimateur $\CurvH{R}$
-      avec différentes valeurs de $\alpha$ pour le rayon $R$ ($R=kh^\alpha$) sur
-      l'objet \Ellipse, \Flower et \AccFlower. L'erreur est en $l_\infty$.
-      %
-      }
-      \label{fig:curv-experiments2D-alpha}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-      \\ \toprule
-      &
-      \textsc{Ellipse} &
-      \textsc{Flower} &
-      \textsc{AccFlower}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-      \includegraphics[width=4.5cm]{graphs/Ellipse_Loo} &
-      \includegraphics[width=4.5cm]{graphs/Flower_Loo} &
-      \includegraphics[width=4.5cm]{graphs/AccFlower_Loo}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des erreurs $l_\infty$ d'estimation de courbure 2D de
-      $\CurvH{R}$ (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
-      \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}
-      sur l'objet \Ellipse, \Flower et \AccFlower.
-      %
-      }
-      \label{fig:curv-experiments2D-loo}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-      \\ \toprule
-      &
-      \textsc{Ellipse} &
-      \textsc{Flower} &
-      \textsc{AccFlower}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-      \includegraphics[width=4.5cm]{graphs/Ellipse_L2} &
-      \includegraphics[width=4.5cm]{graphs/Flower_L2} &
-      \includegraphics[width=4.5cm]{graphs/AccFlower_L2}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des erreurs $l_2$ d'estimation de courbure 2D de $\CurvH{R}$
-      (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
-      \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}
-      sur l'objet \Ellipse, \Flower et \AccFlower.
-      %
-      }
-      \label{fig:curv-experiments2D-l2}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Différents $\alpha$ (Erreur $l_\infty$)}}
-      \\ \toprule
-      &
-      \textsc{Sphere} &
-      \textsc{Rounded Cube} &
-      Surface de \textsc{Goursat}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurvH{R}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_Mean_Loo} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_Mean_Loo} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_Mean_Loo}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurvH{R}{1}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_k1_Loo} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_k1_Loo} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_k1_Loo}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurvH{R}{2}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_k2_Loo} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_k2_Loo} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_k2_Loo}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
-      (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-      $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec différentes valeurs de
-      $\alpha$ pour le rayon $R$ ($R=kh^\alpha$) sur l'objet \Sphere,
-      \RoundedCube et \Goursat. L'erreur est en $l_\infty$.
-      %
-      }
-      \label{fig:curv-experiments3D-alpha}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-      \\ \toprule
-      &
-      \textsc{Sphere} &
-      \textsc{Rounded Cube} &
-      Surface de \textsc{Goursat}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurv$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_Mean_Loo} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_Mean_Loo} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_Mean_Loo}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{1}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_k1_Loo} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_k1_Loo} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_k1_Loo}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{2}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_k2_Loo} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_k2_Loo} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_k2_Loo}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
-      (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-      $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \JetFitting
-      \cite{Cazals2005} sur l'objet \Sphere, \RoundedCube et \Goursat. L'erreur
-      est en $l_\infty$.
-      %
-      }
-      \label{fig:curv-experiments3D}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-      \\ \toprule
-      &
-      \textsc{Sphere} &
-      \textsc{Rounded Cube} &
-      Surface de \textsc{Goursat}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurv$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_Mean_L2} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_Mean_L2} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_Mean_L2}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{1}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_k1_L2} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_k1_L2} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_k1_L2}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{2}$} &
-      \includegraphics[width=4.5cm]{graphs/Sphere_k2_L2} &
-      \includegraphics[width=4.5cm]{graphs/RoundedCube2_k2_L2} &
-      \includegraphics[width=4.5cm]{graphs/BlobbyCube_k2_L2}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
-      (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-      $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \JetFitting
-      \cite{Cazals2005} sur l'objet \Sphere, \RoundedCube et \Goursat. L'erreur
-      est en $l_2$.
-      %
-      }
-      \label{fig:curv-experiments3D}
-  \end{center}
-\end{figure}
-%
-%%%%%%%%%%%%%%%%
 
-%
-\subsection{Estimateurs sans paramètres}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c@{}}
-      \multicolumn{3}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-      \\ \toprule
-      &
-      \textsc{Ellipse} &
-      \textsc{Flower}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-      \includegraphics[width=4.5cm]{graphs/Ellipse_PF_Loo} &
-      \includegraphics[width=4.5cm]{graphs/Flower_PF_Loo}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des erreurs $l_\infty$ d'estimation de courbure 2D de
-      $\CurvH{R}$, $\CurvHS$ et $\CurvHSL$ avec l'estimateur \MDCA
-      \cite{Roussillon2011} sur l'objet \Ellipse et \Flower.
-      %
-      }
-      \label{fig:curv-experiments2D-pf-loo}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c@{}}
-      \multicolumn{3}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-      \\ \toprule
-      &
-      \textsc{Ellipse} &
-      \textsc{Flower}
-      \\
-      \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-      \includegraphics[width=4.5cm]{graphs/Ellipse_PF_L2} &
-      \includegraphics[width=4.5cm]{graphs/Flower_PF_L2}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des erreurs $l_2$ d'estimation de courbure 2D de $\CurvH{R}$,
-      $\CurvHS$, $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$
-      avec l'estimateur \MDCA \cite{Roussillon2011} sur l'objet \Ellipse et
-      \Flower.
-      %
-      }
-      \label{fig:curv-experiments2D-pf-l2}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-      \\ \toprule
-      &
-      $\MeanCurv$ &
-      $\PrincCurv{1}$ &
-      $\PrincCurv{2}$
-      \\
-      \rotatebox{90}{~~~~~~~\textsc{Ellipsoid}} &
-      \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_Mean_Loo} &
-      \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k1_Loo} &
-      \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k2_Loo}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des erreurs $l_\infty$ d'estimation de courbure moyenne de
-      $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
-      $\MeanCurvHSLK{50}$ (\emph{première colonne}), de première courbure
-      principale de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
-      $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
-      (\emph{seconde colonne}) et de seconde courbure principale de
-      $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$, $\PrincCurvHSLK{2}{5}$,
-      $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$ (\emph{troisième
-      colonne}) sur l'objet \Ellipsoid.
-      %
-      }
-      \label{fig:curv-experiments3D-pf-loo}
-  \end{center}
-\end{figure}
-%
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.0pt}
-    \begin{tabular}{@{}l c c c@{}}
-      \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-      \\ \toprule
-      &
-      $\MeanCurv$ &
-      $\PrincCurv{1}$ &
-      $\PrincCurv{2}$
-      \\
-      \rotatebox{90}{~~~~~~~\textsc{Ellipsoid}} &
-      \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_Mean_L2} &
-      \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k1_L2} &
-      \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k2_L2}
-    \end{tabular}
-    \caption{
-      %
-      Comparaison des erreurs $l_2$ d'estimation de courbure moyenne de
-      $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
-      $\MeanCurvHSLK{50}$ (\emph{première colonne}), de première courbure
-      principale de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
-      $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
-      (\emph{seconde colonne}) et de seconde courbure principale de
-      $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$, $\PrincCurvHSLK{2}{5}$,
-      $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$ (\emph{troisième
-      colonne}) sur l'objet \Ellipsoid.
-      %
-      }
-      \label{fig:curv-experiments3D-pf-l2}
-  \end{center}
-\end{figure}
-%
-%%%%%%%%%%%%%%%%%%%
-%
-\todoInlineJeremy{-------------------------------}
+
 %
 \begin{figure}[ht]
   \begin{center}
@@ -2908,7 +2585,240 @@ théorèmes~\ref{thm:multigrid-convergence-curv,thm:multigrid-convergence-curv-m
       \label{fig:curv-experiments-accflower}
   \end{center}
 \end{figure}
-
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      &
+      \textsc{Rounded Cube} &
+      Surface de \textsc{Goursat}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~~$\MeanCurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_ALPHA_Mean_Loo} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_ALPHA_Mean_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{1}{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_ALPHA_k1_Loo} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_ALPHA_k1_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{2}{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_ALPHA_k2_Loo} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_ALPHA_k2_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
+      (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
+      $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \textbf{différentes valeurs de
+      $\alpha$} pour le rayon $R$ ($R=kh^\alpha$) sur l'objet \RoundedCube et
+      \Goursat. L'erreur est en $l_2$ pour la première colonne, et en $l_\infty$
+      pour la seconde.
+      %
+      }
+      \label{fig:curv-experiments-3D-alpha}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Sphere}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~~$\MeanCurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/Sphere_Mean_L2} &
+      \includegraphics[width=7cm]{graphs/Sphere_Mean_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{1}{R}$} &
+      \includegraphics[width=7cm]{graphs/Sphere_k1_L2} &
+      \includegraphics[width=7cm]{graphs/Sphere_k1_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{2}{R}$} &
+      \includegraphics[width=7cm]{graphs/Sphere_k2_L2} &
+      \includegraphics[width=7cm]{graphs/Sphere_k2_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $\MeanCurvH{R}$ avec \JetFitting \cite{Cazals2005} sur l'objet \Sphere.
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      principale} de $\PrincCurvH{1}{R}$ avec \JetFitting \cite{Cazals2005} sur
+      l'objet \Sphere.
+      %
+      \\
+      %
+      \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      principale} de $\PrincCurvH{2}{R}$ avec \JetFitting \cite{Cazals2005} sur
+      l'objet \Sphere.
+      %
+      }
+      \label{fig:curv-experiments-sphere}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Rounded Cube}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~~$\MeanCurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Mean_L2} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Mean_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{1}{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_k1_L2} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_k1_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{2}{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_k2_L2} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_k2_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $\MeanCurvH{R}$ avec \JetFitting \cite{Cazals2005} sur l'objet \RoundedCube.
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      principale} de $\PrincCurvH{1}{R}$ avec \JetFitting \cite{Cazals2005} sur
+      l'objet \RoundedCube.
+      %
+      \\
+      %
+      \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      principale} de $\PrincCurvH{2}{R}$ avec \JetFitting \cite{Cazals2005} sur
+      l'objet \RoundedCube.
+      %
+      }
+      \label{fig:curv-experiments-rounded}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{Surface de \textsc{Goursat}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~~$\MeanCurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_Mean_L2} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_Mean_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{1}{R}$} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_k1_L2} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_k1_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{2}{R}$} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_k2_L2} &
+      \includegraphics[width=7cm]{graphs/BlobbyCube_k2_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $\MeanCurvH{R}$ avec \JetFitting \cite{Cazals2005} sur l'objet \Goursat.
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      principale} de $\PrincCurvH{1}{R}$ avec \JetFitting \cite{Cazals2005} sur
+      l'objet \Goursat.
+      %
+      \\
+      %
+      \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      principale} de $\PrincCurvH{2}{R}$ avec \JetFitting \cite{Cazals2005} sur
+      l'objet \Goursat.
+      %
+      }
+      \label{fig:curv-experiments-goursat}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Ellipsoid}}
+      \\ \toprule
+      \rotatebox{90}{~~~~~~~$\MeanCurvHS$} &
+      \includegraphics[width=7cm]{graphs/Ellipsoid_PF_Mean_L2} &
+      \includegraphics[width=7cm]{graphs/Ellipsoid_PF_Mean_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvHS{1}$} &
+      \includegraphics[width=7cm]{graphs/Ellipsoid_PF_k1_L2} &
+      \includegraphics[width=7cm]{graphs/Ellipsoid_PF_k1_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvHS{2}$} &
+      \includegraphics[width=7cm]{graphs/Ellipsoid_PF_k2_L2} &
+      \includegraphics[width=7cm]{graphs/Ellipsoid_PF_k2_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
+      $\MeanCurvHSLK{50}$ sur l'objet \Ellipsoid.
+      %
+      \\
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      principale} de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
+      $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
+      sur l'objet \Ellipsoid.
+      %
+      \\
+      %
+      \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      principale} de $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$,
+      $\PrincCurvHSLK{2}{5}$, $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$
+      sur l'objet \Ellipsoid.
+      %
+      }
+      \label{fig:curv-experiments-ellipsoid}
+  \end{center}
+\end{figure}
+%
+%%%%%%%%%%% Sphere
+%%%%%%%%%%% Goursat
+%%%%%%%%%%% Rounded
+%
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
@@ -2918,3 +2828,329 @@ théorèmes~\ref{thm:multigrid-convergence-curv,thm:multigrid-convergence-curv-m
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
+%
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Différents $\alpha$ (Erreur $l_\infty$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Ellipse} &
+%       \textsc{Flower} &
+%       \textsc{AccFlower}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\CurvH{R}$} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipse_ALPHA_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/Flower_ALPHA_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/AccFlower_ALPHA_Loo}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des convergences asymptotiques de l'estimateur $\CurvH{R}$
+%       avec différentes valeurs de $\alpha$ pour le rayon $R$ ($R=kh^\alpha$) sur
+%       l'objet \Ellipse, \Flower et \AccFlower. L'erreur est en $l_\infty$.
+%       %
+%       }
+%       \label{fig:curv-experiments2D-alpha}
+%   \end{center}
+% \end{figure}
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Ellipse} &
+%       \textsc{Flower} &
+%       \textsc{AccFlower}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipse_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/Flower_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/AccFlower_Loo}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des erreurs $l_\infty$ d'estimation de courbure 2D de
+%       $\CurvH{R}$ (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
+%       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}
+%       sur l'objet \Ellipse, \Flower et \AccFlower.
+%       %
+%       }
+%       \label{fig:curv-experiments2D-loo}
+%   \end{center}
+% \end{figure}
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Ellipse} &
+%       \textsc{Flower} &
+%       \textsc{AccFlower}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipse_L2} &
+%       \includegraphics[width=4.5cm]{graphs/Flower_L2} &
+%       \includegraphics[width=4.5cm]{graphs/AccFlower_L2}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des erreurs $l_2$ d'estimation de courbure 2D de $\CurvH{R}$
+%       (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
+%       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}
+%       sur l'objet \Ellipse, \Flower et \AccFlower.
+%       %
+%       }
+%       \label{fig:curv-experiments2D-l2}
+%   \end{center}
+% \end{figure}
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Différents $\alpha$ (Erreur $l_\infty$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Sphere} &
+%       \textsc{Rounded Cube} &
+%       Surface de \textsc{Goursat}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurvH{R}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_Mean_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_Mean_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_Mean_Loo}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurvH{R}{1}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_k1_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_k1_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_k1_Loo}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurvH{R}{2}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_k2_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_k2_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_k2_Loo}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
+%       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
+%       $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec différentes valeurs de
+%       $\alpha$ pour le rayon $R$ ($R=kh^\alpha$) sur l'objet \Sphere,
+%       \RoundedCube et \Goursat. L'erreur est en $l_\infty$.
+%       %
+%       }
+%       \label{fig:curv-experiments3D-alpha}
+%   \end{center}
+% \end{figure}
+% %
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Sphere} &
+%       \textsc{Rounded Cube} &
+%       Surface de \textsc{Goursat}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurv$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_Mean_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_Mean_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_Mean_Loo}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{1}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_k1_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k1_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k1_Loo}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{2}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_k2_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k2_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k2_Loo}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
+%       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
+%       $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \JetFitting
+%       \cite{Cazals2005} sur l'objet \Sphere, \RoundedCube et \Goursat. L'erreur
+%       est en $l_\infty$.
+%       %
+%       }
+%       \label{fig:curv-experiments3D}
+%   \end{center}
+% \end{figure}
+% %
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Sphere} &
+%       \textsc{Rounded Cube} &
+%       Surface de \textsc{Goursat}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurv$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_Mean_L2} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_Mean_L2} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_Mean_L2}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{1}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_k1_L2} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k1_L2} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k1_L2}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{2}$} &
+%       \includegraphics[width=4.5cm]{graphs/Sphere_k2_L2} &
+%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k2_L2} &
+%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k2_L2}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
+%       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
+%       $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \JetFitting
+%       \cite{Cazals2005} sur l'objet \Sphere, \RoundedCube et \Goursat. L'erreur
+%       est en $l_2$.
+%       %
+%       }
+%       \label{fig:curv-experiments3D}
+%   \end{center}
+% \end{figure}
+%
+%%%%%%%%%%%%%%%%
+%
+%
+% \subsection{Estimateurs sans paramètres}
+%
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c@{}}
+%       \multicolumn{3}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Ellipse} &
+%       \textsc{Flower}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipse_PF_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/Flower_PF_Loo}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des erreurs $l_\infty$ d'estimation de courbure 2D de
+%       $\CurvH{R}$, $\CurvHS$ et $\CurvHSL$ avec l'estimateur \MDCA
+%       \cite{Roussillon2011} sur l'objet \Ellipse et \Flower.
+%       %
+%       }
+%       \label{fig:curv-experiments2D-pf-loo}
+%   \end{center}
+% \end{figure}
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c@{}}
+%       \multicolumn{3}{c}{\textbf{Comparaison (Erreur $l_2$)}}
+%       \\ \toprule
+%       &
+%       \textsc{Ellipse} &
+%       \textsc{Flower}
+%       \\
+%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipse_PF_L2} &
+%       \includegraphics[width=4.5cm]{graphs/Flower_PF_L2}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des erreurs $l_2$ d'estimation de courbure 2D de $\CurvH{R}$,
+%       $\CurvHS$, $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$
+%       avec l'estimateur \MDCA \cite{Roussillon2011} sur l'objet \Ellipse et
+%       \Flower.
+%       %
+%       }
+%       \label{fig:curv-experiments2D-pf-l2}
+%   \end{center}
+% \end{figure}
+%
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
+%       \\ \toprule
+%       &
+%       $\MeanCurv$ &
+%       $\PrincCurv{1}$ &
+%       $\PrincCurv{2}$
+%       \\
+%       \rotatebox{90}{~~~~~~~\textsc{Ellipsoid}} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_Mean_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k1_Loo} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k2_Loo}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des erreurs $l_\infty$ d'estimation de courbure moyenne de
+%       $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
+%       $\MeanCurvHSLK{50}$ (\emph{première colonne}), de première courbure
+%       principale de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
+%       $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
+%       (\emph{seconde colonne}) et de seconde courbure principale de
+%       $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$, $\PrincCurvHSLK{2}{5}$,
+%       $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$ (\emph{troisième
+%       colonne}) sur l'objet \Ellipsoid.
+%       %
+%       }
+%       \label{fig:curv-experiments3D-pf-loo}
+%   \end{center}
+% \end{figure}
+% %
+% \begin{figure}[ht]
+%   \begin{center}
+%     \setlength{\tabcolsep}{0.0pt}
+%     \begin{tabular}{@{}l c c c@{}}
+%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
+%       \\ \toprule
+%       &
+%       $\MeanCurv$ &
+%       $\PrincCurv{1}$ &
+%       $\PrincCurv{2}$
+%       \\
+%       \rotatebox{90}{~~~~~~~\textsc{Ellipsoid}} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_Mean_L2} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k1_L2} &
+%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k2_L2}
+%     \end{tabular}
+%     \caption{
+%       %
+%       Comparaison des erreurs $l_2$ d'estimation de courbure moyenne de
+%       $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
+%       $\MeanCurvHSLK{50}$ (\emph{première colonne}), de première courbure
+%       principale de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
+%       $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
+%       (\emph{seconde colonne}) et de seconde courbure principale de
+%       $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$, $\PrincCurvHSLK{2}{5}$,
+%       $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$ (\emph{troisième
+%       colonne}) sur l'objet \Ellipsoid.
+%       %
+%       }
+%       \label{fig:curv-experiments3D-pf-l2}
+%   \end{center}
+% \end{figure}
+%
+%%%%%%%%%%%%%%%%%%%
