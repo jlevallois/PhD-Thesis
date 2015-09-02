@@ -35,6 +35,14 @@ produisent des résultats corrects pour de « bons » maillages.
     $2$-voisinage de valence $5$ (Figure~1 de \cite{Gatzke2006}).}
     \label{fig:one-ring-neighborhood}
 \end{figure}
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/RingNeighborhood.tikz}
+  \end{center}
+  [$1$-voisinage et $2$-voisinage.]{$1$-voisinage de valence $6$ et
+  $2$-voisinage de valence $5$.}
+  \label{fig:one-ring-neighborhood-2}
+\end{figure}
 %
 Globalement, nous pouvons les distinguer en trois catégories :
 \begin{itemize}
@@ -2997,29 +3005,93 @@ suivre la vitesse espérée en $O(h^\frac{1}{3})$.
 %
 \todoJeremy{Je ne sais pas trop quoi dire pour les version locales $l_\infty$}
 %
-\paragraph{Temps de calcul}
+\paragraph{Complexité et temps de calcul}
 %
-\todoJeremy{Uniformiser les temps de calcul}
-La \RefFigure{fig:curv-experiments-timings} blablabla.
+Un des éléments qui peut être important dans le choix d'un estimateur est son
+temps de calcul. En fonction de l'utilisation que nous souhaitons en faire, il
+peut être judiscieux de connaître le comportement d'un estimateur face à des
+données de plus en plus grande afin d'en extraire un profil de temps de calcul.
+
+
+Bien que nos estimateurs soient des estimateurs intégrants des volumes, ceux-ci
+sont comparable en complexité à des estimateurs surfaciques. Une implémentation
+basique calculerait une sphère digitale, la centerait sur le bord de l'objet
+digital à analyser, calculerait son intersection avec la forme à chaque élément
+de surface de l'objet. Nous obtiendrions une complexité en $O((R/h)^{d})$ par
+élément de surface, \cad la taille de la sphère digitale au pas de
+discrétisation $h$. Cependant, nous pouvons optimiser cet algorithme en
+utilisant les avantages que nous offrent la structure des surfaces digitales :
+si nous nous déplaçons sur des éléments de surfaces adjacents, une partie du
+calcul de l'intersection entre la boule et la forme sont alors déjà calculés à
+l'itération précédente. Plus formellement, si nous nous déplaçons d'un point
+$\vx$ à un point $\vy$ par un vecteur de translation $\vec{\delta}$ (il y en a
+$8$ directions possibles en 2D, $26$ en 3D pour $||\vec{\delta}||_\infty = h$),
+nous avons pour le calcul d'aire ou de volume :
 %
+\begin{align}
+  & \AreaC\left(\DSh \cap \Ball{R}{\vx + \vec{\delta}}, h\right) =
+  \AreaC\left(\DSh \cap \Ball{R}{\vx}, h\right) \\
+  &\quad + \AreaC\left(\DSh \cap (\Ball{R}{\vx + \vec{\delta}} \setminus \Ball{R}{\vx} ), h\right) \\
+  &\quad - \AreaC\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx + \vec{\delta}}),h\right) .
+\end{align}
+%
+De la même manière, pour les moments :
+%
+\begin{align}
+  & \DMom{p_1 \cdots p_3}{h}\left(\DSh \cap \Ball{R}{\vx + \vec{\delta}}, h\right) =
+  \DMom{p_1 \cdots p_3}{h}\left(\DSh \cap \Ball{R}{\vx}, h\right) \\
+  &\quad + \DMom{p_1 \cdots p_3}{h}\left(\DSh \cap ( \Ball{R}{\vx+ \vec{\delta}} \setminus \Ball{R}{\vx} ), h\right)\\
+  &\quad - \DMom{p_1 \cdots p_3}{h}\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx+ \vec{\delta}} ), h\right) .
+\end{align}
+%
+Alors, si nous précalculons tous les noyaux de déplacement
+$\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
+\Ball{R}{\mathbf{0}}}{h}$, la complexité de l'algorithme peut être réduite à
+$O((R/h)^{d-1})$. Le cas idéal est la traversée Hamiltonienne de la surface :
+seul le premier surfel a besoin de calculer l'intersection entre la sphère
+entière et la forme, tous les autres surfels (du voisinage) n'auront à calculer
+que les sous-noyaux $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
+\Ball{R}{\mathbf{0}}}{h}$.
+
+
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=4.5cm]{graphs/Timing2D}
-    \includegraphics[width=4.5cm]{graphs/Timing2D_PF}\\
-    \includegraphics[width=4.5cm]{graphs/Timing3D}
+    \includegraphics[width=6cm]{graphs/Timing2D}
+    \includegraphics[width=6cm]{graphs/Timing2D_PF}\\
+    \includegraphics[width=6cm]{graphs/Timing3D}
     \caption{
       %
-      Temps de calcul en millisecondes pour les estimateurs de courbure 2D sur
-      l'objet \Flower (\emph{en haut à gauche}) et des estimateurs de courbure
-      moyenne 3D sur l'objet \RoundedCube (\emph{en bas}). Temps de calcul en
-      secondes pour les estimateurs de courbure 2D sans paramètre sur l'objet
-      \Ellipse (\emph{en haut à droite}). Les résultats ont été obtenus sur un
-      ordinateur de travail Intel Xeon 2.27GHz.
+      Temps de calcul (en échelle logarithmique) en millisecondes pour les
+      estimateurs de courbure 2D sur l'objet \Flower (\emph{en haut à gauche})
+      et des estimateurs de courbure moyenne 3D sur l'objet \RoundedCube
+      (\emph{en bas}). Temps de calcul en secondes pour les estimateurs de
+      courbure 2D sans paramètre sur l'objet \Ellipse (\emph{en haut à droite}).
+      Les résultats ont été obtenus sur un ordinateur de travail Intel Xeon
+      2.27GHz.
       %
       }
       \label{fig:curv-experiments-timings}
   \end{center}
 \end{figure}
+%
+La \RefFigure{fig:curv-experiments-timings} nous donne les temps de calcul pour
+nos estimateurs 2D $\CurvH{R}$ (\II), $\CurvHS$, $\CurvHSL$ et les variantes à
+nombre de rayons limités $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$,
+ainsi que pour les estimateurs \BC, \MDSS et \MDCA. Comme attendu, les approches
+basées sur la reconnaissance d'objets en dimension 2 (\MDSS et \MDCA) ont les
+temps de calcul les plus rapides. Nous pouvons observer que $\CurvH{R}$ (\II) est
+plus lent que ces deux estimateurs mais plus rapide que \BC. Nous pouvons
+également remarquer que $\CurvHSL$ est beaucoup plus lent que $\CurvHS$, ce qui
+est normal puisqu'une nouvelle sphère prenant en compte les informations locales
+est calculée à chaque déplacement. Cet écart est très fortement diminué avec les
+variantes limitant le nombre de rayons possibles pour $\CurvHSL$, se rapprochant
+des temps de calcul de $\CurvHS$ et $\CurvH{R}$.
+
+
+En 3D, alors que les vitesses de convergence asymptotiques entre \JetFitting et nos estimateurs sont similaires, nous pouvons observer que nos estimateurs sont environ $10$ fois plus rapides que notre implémentation de \JetFitting.
+%
+\section{Conclusion}
+\label{sec:estimators:conclusion}
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
@@ -3030,13 +3102,8 @@ La \RefFigure{fig:curv-experiments-timings} blablabla.
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
-
-\todoInlineJeremy{parler du bruit à un moment}
-\todoInlineJeremy{parler des vitesses}
-\section{Conclusion}
-\label{sec:estimators:conclusion}
-%
 \todoInlineJeremy{Conclusion estimators à faire}
+\todoInlineJeremy{parler du bruit à un moment}
 %
 %
 % \begin{figure}[ht]
