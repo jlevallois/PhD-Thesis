@@ -1,0 +1,59 @@
+
+\begin{tikzpicture}[x=0.50cm,y=0.50cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  \definecolor{kRed}{rgb}{0.59,0.0,0.0}
+
+  % nodes
+  \node (b0) at (15,15) {};
+  \node (b1) at (12,15) {};
+  \node (b2) at (13.5,18) {};
+  \node (b3) at (16.5,18) {};
+  \node (b4) at (18,15) {};
+  \node (b5) at (16.5,12) {};
+  \node (b6) at (13.5,12) {};
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b1);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b2);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b3);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b4);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b5);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b6);
+
+  \draw[draw,thick,color=kGrey, fill] (b1) -- (b2);
+  \draw[draw,thick,color=kGrey, fill] (b2) -- (b3);
+  \draw[draw,thick,color=kGrey, fill] (b3) -- (b4);
+  \draw[draw,thick,color=kGrey, fill] (b4) -- (b5);
+  \draw[draw,thick,color=kGrey, fill] (b5) -- (b6);
+  \draw[draw,thick,color=kGrey, fill] (b6) -- (b1);
+
+\end{tikzpicture}
+\begin{tikzpicture}[x=0.50cm,y=0.50cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  \definecolor{kRed}{rgb}{0.59,0.0,0.0}
+  % nodes
+  \node (b0) at (5,5) {};
+  \node (b1) at (4,5) {};
+  \node (b2) at (4.5,6) {};
+  \node (b3) at (5.5,6) {};
+  \node (b4) at (6,5) {};
+  \node (b5) at (5.5,4) {};
+  \node (b6) at (4.5,4) {};
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b1);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b2);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b3);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b4);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b5);
+  \draw[draw,thick,color=kGrey, fill] (b0) -- (b6);
+
+  \draw[draw,thick,color=kGrey, fill] (b1) -- (b2);
+  \draw[draw,thick,color=kGrey, fill] (b2) -- (b3);
+  \draw[draw,thick,color=kGrey, fill] (b3) -- (b4);
+  \draw[draw,thick,color=kGrey, fill] (b4) -- (b5);
+  \draw[draw,thick,color=kGrey, fill] (b5) -- (b6);
+  \draw[draw,thick,color=kGrey, fill] (b6) -- (b1);
+\end{tikzpicture}
