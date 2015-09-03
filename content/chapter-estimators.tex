@@ -10,6 +10,19 @@
 %
 \newpage
 %
+Dans ce chapitre, nous allons définir de nouveaux estimateurs de courbures pour
+les surfaces digitales. Après avoir détaillé l'état de l'art
+(\RefSection{sec:estimators:SOTA}), nous nous intéresserons à l'estimation de la
+courbure par intégration volumique de la sphère
+(\RefSection{sec:estimators:volume}) afin d'en extraire des estimateurs de
+courbure 2D et courbure moyenne 3D (\RefSection{sec:estimators:volume}) et
+courbures principales 3D (\RefSection{sec:estimators:moments}). Nous adapterons
+ces estimateurs à des versions ne nécessitant aucun paramètre (le paramètre
+étant la taille de la sphère d'intégration) dans la
+\RefSection{sec:curvature:parameter-free}. Enfin, nous comparerons nos
+estimateurs avec les méthodes représentatives de l'état de l'art dans la
+\RefSection{sec:comparaison-courbure}.
+%
 \section{Introduction}
 \label{sec:estimators:introduction}
 \todoInlineJeremy{Introduction curvature à faire}
@@ -158,7 +171,8 @@ forme à estimer.
 
 
 Pour l'estimation de courbure le long de courbes 2D, la convergence asymptotique
-d'estimateurs ne nécessitant aucuns paramètres représente toujours un défi
+d'estimateurs ne nécessitant aucun paramètre représente toujours un défi. Nous
+allons en présenter plusieurs dans ce chapitre.
 %
 % For curvature estimation along 2D curves, multigrid convergence of
 % parameter-free \comJeremy{estimators} is still challenging, although accurate
@@ -175,90 +189,114 @@ d'estimateurs ne nécessitant aucuns paramètres représente toujours un défi
 \section{Estimation de la courbure par intégration volumique de la sphère}
 \label{sec:estimators:volume}
 %
-En \GeometryProcessing, les invariants par intégration ont été largement
-étudiées pour définir des estimateurs de quantités différentielles.
-\cauthors{Pottmann}{Pottmann2007,Pottmann2009} en ont d'ailleurs fait une vue
-d'ensemble complète. L'idée principale est de déplacer un noyau sur les points
-$\vx \in \dS$ et calculer l'intégrale de l'intersection entre $\Shape$ et le
-noyau. Différents noyaux peuvent être considérés (sphère euclidienne, boule
-euclidienne) ainsi que différentes fonctions d'intégration (linéaire,
-gaussienne, etc.). Nous n'utiliserons par la suite que les invariants volumiques
-par intégration définis tels que :
-\begin{definition}\label{def:Volume}
+En \GeometryProcessing, le calcul d'invariants par intégration a été largement
+étudié dans le but de définir des estimateurs de quantités différentielles.
+\cauthors{Pottmann}{Pottmann2007,Pottmann2009} en ont d'ailleurs fait un
+panorama complète. L'idée principale de cette approche est de déplacer un noyau
+sur les points $\vx$ sur le bord $\dS$ d'une forme $\Shape$ et calculer
+l'intégrale de l'intersection entre $\Shape$ et le noyau. Différents noyaux
+peuvent être considérés (sphère euclidienne, boule euclidienne) ainsi que
+différentes fonctions d'intégration (linéaire, gaussienne, etc.). Nous
+n'utiliserons par la suite que les invariants volumiques par intégration définis
+de la sorte :
+%
+\begin{definition}
+  \label{def:Volume}
+  %
   Pour une forme $\Shape \in \Shapes$ et un rayon $R \in \R^{+*}$, l'intégrale
   volumique $V_R(\vx)$ au point $\vx \in \dS$ est donné par :
+  %
   \begin{equation}
-    V_R(\vx) \EqDef \int_{\Ball{R}{\vx}}  \chi(p)dp\,,
+    V_R(\vx) \EqDef \int_{\Ball{R}{\vx}} \chi(\vp)d\vp\,,
   \end{equation}
-  où $\Ball{R}{\vx}$ est une boule euclidienne de rayon $R$ et de centre $\vx$, et
-  $\chi(p)$ est la fonction caractéristique de $\Shape$. En dimension 2, nous
-  noterons cette quantité $A_R(\vx)$.
+  %
+  où $\Ball{R}{\vx}$ est une boule euclidienne de rayon $R$ et de centre $\vx$,
+  et $\chi(\cdot)$ est la fonction caractéristique de $\Shape$. En dimension 2,
+  nous noterons cette quantité $A_R(\vx)$.
+  %
 \end{definition}
 %
 \subsection{Analyse euclidienne de l'intégration volumique de la sphère, et relation à la courbure}
 %
 La relation entre $A_R(\vx)$ et la courbure (\resp $V_R(\vx)$ et la courbure
 moyenne ) au point $\vx$ pour des formes de $\R^2$ (\respp $\R^3$) a beaucoup
-été étudiée \cite{Bullard1995,Pottmann2007,Pottmann2009}, ainsi, nous pouvons la
-formaliser de la sorte :
+été étudiée dans la littérature \cite{Bullard1995,Pottmann2007,Pottmann2009},
+ainsi, nous pouvons la formaliser :
 %
 \begin{lemma}{\textbf{\cite{Pottmann2009}}}\\
 \label{lem:pottmann-2d}
-  Pour une forme suffisamment lisse\footnote{éclaircir} $\Shape$ de $\R^2$, $\vx
-  \in \dS$, nous avons :
+  %
+  Pour une forme suffisamment lisse $\Shape$ de $\R^2$, $\vx \in \dS$, nous
+  avons :
+  %
   \begin{equation}
     \label{eq:volume2d}
     A_R(\vx) = \frac{\pi}{2} R^2 - \frac{\Curv(\Shape,\vx)}{3}R^3 + O(R^4)\,.
   \end{equation}
+  %
   où $\Curv(\Shape,\vx)$ est la courbure de $\dS$ au point $\vx$.
-
-  Pour une forme suffisamment lisse\footnote{éclaircir} $\Shape$ de $\R^3$, $\vx
-  \in \dS$, nous avons :
+  %
+  \\
+  %
+  Pour une forme suffisamment lisse $\Shape$ de $\R^3$, $\vx \in \dS$, nous
+  avons :
+  %
   \begin{equation}
     \label{eq:volume3d}
     V_R(\vx) = \frac{2\pi}{3} R^3 - \frac{\pi \MeanCurv(\Shape,\vx)}{4}R^4 + O(R^5)\,.
   \end{equation}
+  %
   où $\MeanCurv(\Shape,\vx)$ est la courbure moyenne de $\dS$ au point $\vx$.
+  %
 \end{lemma}
 %
 De tels résultats sont obtenus par approximation de Taylor au point $\vx$ de la
-surface $\dS$ approximée par la fonction paramétrique $z=f(x,y)$ ($y=f(x)$ en
-2D). Alors, des \RefEquations{eq:volume2d}{eq:volume3d}, avec un
+surface $\dS$, approximée par la fonction paramétrique $z=f(x,y)$ ($y=f(x)$ en
+2D). Alors, des \RefEquations{eq:volume2d}{eq:volume3d} avec un
 rayon $R$ fixé, nous pouvons définir les estimateurs locaux de courbure 2D
 $\CurvT{R}(\vx)$ et de courbure moyenne 3D $\MeanCurvT{R}(\vx)$.
 %
 \begin{definition}{\textbf{(Estimateurs de courbure 2D $\CurvT{R}(\Shape,\vx)$ et de courbure moyenne 3D $\MeanCurvT{R}(\Shape,\vx)$ \cite{Pottmann2007}).}}
   \label{def:pottmann-2d-3d-mean}
+  %
   Pour une forme $\Shape \subset \R^2$, l'estimateur de courbure 2D $\CurvT{R}$
   au point $\vx \in \dS$ est défini par :
+  %
   \begin{equation}
     \label{eq:pottmann-2d}
     \CurvT{R}(\Shape,\vx) \EqDef \frac{3\pi}{2 R} - \frac{3 A_R(\vx)}{R^3},
   \end{equation}
-
+  %
+  \\
+  %
   Pour une forme $\Shape \subset \R^3$, l'estimateur de courbure moyenne 3D
   $\MeanCurvT{R}$ au point $\vx \in \dS$ est défini par :
+  %
   \begin{equation}
     \label{eq:pottmann-3d-mean}
     \MeanCurvT{R}(\Shape,\vx) \EqDef \frac{8}{3 R} - \frac{4 V_R(\vx)}{\pi R^4}.
   \end{equation}
+  %
 \end{definition}
 %
-De plus, lorsque me rayon $R$ tend vers zéro, les valeurs de ces deux
-estimateurs vont converger vers celles espérées. Plus formellement :
+De plus, lorsque le rayon $R$ de la boule tend vers zéro, les valeurs de ces
+deux estimateurs vont converger vers celles espérées. Plus formellement :
 %
 \begin{theorem}{\textbf{(Convergence des estimateurs de courbure 2D $\CurvT{R}(\Shape,\vx)$ et de courbure moyenne 3D $\MeanCurvT{R}(\Shape,\vx)$ \cite{Pottmann2007}).}}
   \label{theo:pottmann-2d-3d-mean-conv}
+  %
   \begin{equation}
     \CurvT{R}(\Shape,\vx) = \Curv(\Shape,\vx) + O(R),
     \quad\MeanCurvT{R}(\Shape,\vx) = \MeanCurv(\Shape,\vx) + O(R).
   \end{equation}
+  %
 \end{theorem}
 %
 De la même manière, des informations directionnelles comme les courbures
-principales (et donc la courbure gaussienne) peuvent être extraient du calcul
-par intégration. En effet, à la place de calculer la mesure de $\Ball{R}{\vx}$ dans
-la \RefDefinition{def:pottmann-2d-3d-mean}, nous allons calculer sa matrice de covariance.
+principales (et donc la courbure gaussienne) peuvent être extraites du calcul
+par intégration. En effet, à la place de calculer la mesure de $\Ball{R}{\vx}$
+dans la \RefDefinition{def:pottmann-2d-3d-mean}, nous allons calculer sa matrice
+de covariance :
 %
 \begin{definition}
   \label{def:cov-matrix}
@@ -288,8 +326,8 @@ par le $0$-moment, c'est à dire :
 %
 \begin{lemma}\label{lem:moment-ball}
   %
-  Soit $\Ball{R}{\vx}$ une boule de rayon $R$ et de centre $\vy$. Alors, pour un
-  ensemble non vide $Y \subset \Ball{R}{t}$, nous avons :
+  Soit $\Ball{R}{\vy}$ une boule de rayon $R$ et de centre $\vy$. Alors, pour un
+  ensemble non vide $Y \subset \Ball{R}{\vy}$, nous avons :
   %
   \begin{align}
     \Mom{000}(Y) =& O(R^3), \label{eq:ball-moment-0}\\
@@ -371,26 +409,30 @@ où $\otimes$ désigne le produit de tensoriel dans l'espace des vecteurs.
 \cauthors{Pottmann}{Pottmann2007} ont démontré que les valeurs propres et les
 vecteurs propres de $\Cov(A)$ fournissaient des informations sur les courbures
 principales et directions principales de courbure :
+%
 \begin{lemma}[\cite{Pottmann2007}, Théorème~2]
  \label{lem:pottmann-3d}
+ %
  Pour une forme $\Shape \in \Shapes$, les valeurs propres $\lambda_1$,
  $\lambda_2$, $\lambda_3$ de $\Cov(A)$, où $ A \EqDef \Ball{R}{\vx} \cap
  \Shape$ et $\vx \in \Bd{\Shape}$, $\lambda_1 \ge \lambda_2 \ge
  \lambda_3$, nous avons l'approximation de Taylor suivante :
+ %
  \begin{align}
    \lambda_1& = \frac{2\pi}{15}R^5 - \frac{\pi}{48}(3\PrincCurv{1}(\Shape,\vx) + \PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,\\
    \lambda_2& = \frac{2\pi}{15}R^5 - \frac{\pi}{48}(\PrincCurv{1}(\Shape,\vx) + 3\PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,\\
    \lambda_3& = \frac{19\pi}{480}R^5 - \frac{9\pi}{512}(\PrincCurv{1}(\Shape,\vx) + \PrincCurv{2}(\Shape,\vx))R^6 + O(R^7)\,,
  \end{align}
+ %
  où $\PrincCurv{1}(\Shape,\vx)$ et $\PrincCurv{2}(\Shape,\vx)$ désignent les
  courbures principales de  $\Bd{\Shape}$ au point $\vx$.\footnote{Il y a une
  erreur typographique dans l'expression de $\lambda_1$ dans~\cite{Pottmann2007}.}
+ %
 \end{lemma}
 %
 De même qu'avec l'\RefEquation{def:pottmann-2d-3d-mean}, nous pouvons définir
 les estimateurs locaux de courbures principales $\PrincCurvT{1}{R}$ et
-$\PrincCurvT{2}{R}$ et de courbure gaussienne $\GaussCurvT{R}$ comme des
-fonctions de $\{\lambda_i\}_{1,2,3}$ et de $R$ :
+$\PrincCurvT{2}{R}$ comme des fonctions de $\{\lambda_i\}_{1,2,3}$ et de $R$ :
 %
 \begin{align}
   \label{eq:pottmann-3d-princ}
@@ -405,26 +447,27 @@ quantité espérée lorsque le rayon $R$ tend vers $0$ :
 \begin{align}
   \label{eq:pottmann-3d-princ}
   \PrincCurvT{1}{R}(\Shape,\vx)& = \PrincCurv{1}(\Shape,\vx) + O(R)\,,\\
-  \PrincCurvT{2}{R}(\Shape,\vx)& = \PrincCurv{2}(\Shape,\vx) + O(R)\,,\\
-  \GaussCurvT{R}(\Shape,\vx)& = \GaussCurv(\Shape,\vx) + ???.
+  \PrincCurvT{2}{R}(\Shape,\vx)& = \PrincCurv{2}(\Shape,\vx) + O(R)\,.%\\
+  %\GaussCurvT{R}(\Shape,\vx)& = \GaussCurv(\Shape,\vx) + ???.
 \end{align}
-\todoJeremy{vérifier !!!!}
 %
 Lorsque nous nous intéressons à des formes digitales $\AnyDSh$, l'implémentation
 de ces estimateurs devient direct : choisir un rayon $R$, centrer une boule
 euclidienne (ou digitale) sur des points de $\Bd{\Body{\AnyDigF{\Shape}{h}}{h}}$
-(\cad les barycentres de linels en 2D ou surfels en 3D)\todoJeremy{Confirmer
-surfel = 3D ?}, calculer la quantité (aire, volume ou matrice de covariance) et
-enfin estimer l'information de courbure $\CurvT{R}$, $\MeanCurvT{R}$,
-$\PrincCurvT{1}{R}$, $\PrincCurvT{2}{R}$ or $\GaussCurvT{R}$.
-%
-Cependant, quelques problèmes surviennent dans cette approche : comment bien
+(\cad les barycentres de linels en 2D ou surfels en 3D), calculer la quantité
+(aire, volume ou matrice de covariance) et enfin estimer l'information de
+courbure $\CurvT{R}$, $\MeanCurvT{R}$, $\PrincCurvT{1}{R}$ ou
+$\PrincCurvT{2}{R}$.
+
+
+Cependant, quelques problèmes surviennent avec cette approche : comment bien
 estimer l'aire, le volume ou la matrice de covariance sur des formes digitales,
-pouvons nous conclure à des preuves de convergence des estimateurs sur des
-données digitales et que veut dire « $R$ tend vers zéro » quand la taille de la
-grille digitale influe également dessus ? Dans une premier temps nous allons
-nous intéresser à l'aire et au volume digital, puis dans un second temps aux
-moments digitaux.
+pouvons nous apporter des preuves de convergence de ces estimateurs sur des
+données digitales, et que veut dire « $R$ tend vers zéro » quand la taille de la
+grille digitale influe également dessus ?
+
+Dans une premier temps nous allons nous intéresser à l'aire et au volume
+digital, puis ensuite aux moments digitaux.
 %
 \subsection{Analyse digitale de l'aire et du volume de la sphère, et relation à la courbure}
 %
@@ -567,7 +610,7 @@ la forme respecte certaines contraintes.\\
 \begin{theorem}[Convergence de l'estimateur digital de courbure 2D $\CurvH{R}$ le long de $\dS$.]
   \label{thm:convergence-curv-2d}
   %
-  Soit $\Shape$ un domaine compact de $\R^2$ tel que son bord $\dS$ est $C^2$ et
+  Soit $\Shape$ une forme convexe de $\R^2$ tel que son bord $\dS$ est $C^2$ et
   sa courbure bornée. Alors, l'estimateur digital de courbure 2D $\CurvH{R}$ en
   tout point $\vx$ de $\dS$ converge vers la courbure
   $\Curv(\Shape,\vx)$ de $\Shape$ au point $\vx$ pour la discrétisation de
@@ -646,7 +689,7 @@ moyenne sur des formes 3D :
 \begin{theorem}[Convergence de l'estimateur digital de courbure moyenne 3D $\MeanCurvH{R}$ le long de $\dS$.]
   \label{thm:convergence-curv-3d}
   %
-  Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\dS$ est $C^3$ et
+  Soit $\Shape$ une forme convexe de $\R^3$ tel que son bord $\dS$ est $C^3$ et
   sa courbure bornée. Alors, l'estimateur digital de courbure moyenne 3D
   $\MeanCurvH{R}$ en tout point $\vx$ de $\dS$ converge vers la
   courbure $\MeanCurv(\Shape,\vx)$ de $\Shape$ au point $\vx$ pour la
@@ -844,7 +887,7 @@ d'un objet suffisamment lisse :
 %
 \begin{theorem} \label{thm:multigrid-convergence-curv-mean}
 %
-Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\dS$ est $C^3$ à
+Soit $\Shape$ une forme convexe de $\R^3$ tel que son bord $\dS$ est $C^3$ à
 courbure bornée. Alors, l'estimateur digital de courbure $\MeanCurvH{R}$ converge
 asymptotiquement vers la courbure $\MeanCurv$ pour la discrétisation de Gauss sur
 des formes $\Shape$, avec une vitesse de convergence d'au moins
@@ -853,7 +896,7 @@ $O(h^\frac{1}{3})$ lorsque $R = kh^\frac{1}{3}$. Plus précisément :
 \begin{align}
   \forall 0 < h \le h_0,\,\, & \forall \vx \in \Bd{\Shape},\,\,
   \forall \vxH \in \Bd{\Body{\DSh}{h}} \text{~avec~} \| \vxH -\vx\|_\infty \le h, \nonumber \\
-  & \left| \CurvH{R}(\DSh, \vxH, h) - \Curv(\Shape, \vx) \right| \le O\left(h^{\frac{1}{3}}\right)\,.
+  & \left| \MeanCurvH{R}(\DSh, \vxH, h) - \MeanCurv(\Shape, \vx) \right| \le O\left(h^{\frac{1}{3}}\right)\,.
 \end{align}
 %
 \end{theorem}
@@ -916,10 +959,9 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\ga
 %
 \end{proof}
 %
-\todoInlineJeremy{Manque un bout de preuve}
-%
 \subsection{Analyse digitale de l'intégration volumique de la sphère, et
 relation aux courbures principales 3D}
+\label{sec:estimators:moments}
 %
 Nous souhaitons alors calculer les moments sur l'intersection entre la forme
 $\Shape$ et la boule, \cad à $\Ball{R}{\vx} \cap \Shape$, dont la taille décroit
@@ -959,9 +1001,9 @@ pouvons écrire :
 %
 \end{align}
 %
-Ainsi, l'\RefEquation{eq:MomentsOnUnitaryBall-conv} est le resultat de
+Ainsi, l'\RefEquation{eq:MomentsOnUnitaryBall-conv} est le résultat de la
 convergence asymptotique des moments digitaux des sous-ensembles $\Ball{R}{\vx}
-\cap \Shape$ lorsque $R$ et $h$ décroisent.
+\cap \Shape$ lorsque $R$ et $h$ décroissent.
 %
 \subsubsection{Matrice de covariance digitale et estimateurs digitaux de courbures principales}
 %
@@ -1199,12 +1241,13 @@ bord digital de la forme.
 \begin{theorem}[Convergence de la matrice de covariance digitale.]
   \label{thm:conv-cov-matrix}
 %
-  Soit $\Shape$ un domaine compact de $\R^3$ à reach\footnote{Minimum des distances de tout point du bord à
-  l'axe médian.} positif, dont le bord est $C^3$ et peut
-  être décomposé en nombre fini de parties monotones. Alors, il existe une
-  constante $h_0$ telle que pour tout pas de discrétisation $0 < h < h_0$, pour
-  tout $\vy \in \R^3$, pour un rayon $R \ge h$, nous avons\footnote{$\mu_i \ge
-  1$ d'après l'\RefEquation{eq:MomentsByCounting-conv}} :
+  Soit $\Shape$ une forme convexe de $\R^3$ à reach\footnote{Minimum des
+  distances de tout point du bord à l'axe médian.} positif, dont le bord est
+  $C^3$ et peut être décomposé en nombre fini de parties monotones. Alors, il
+  existe une constante $h_0$ telle que pour tout pas de discrétisation $0 < h <
+  h_0$, pour tout $\vy \in \R^3$, pour un rayon $R \ge h$, nous
+  avons\footnote{$\mu_i \ge 1$ d'après
+  l'\RefEquation{eq:MomentsByCounting-conv}} :
 %
   \begin{equation}
     \left \| \DCov{h}( \Ball{R/h}{\vy/h} \cap  \DSh ) - \Cov( \Ball{R}{\vy} \cap \Shape )\right \| \le \sum_{i=0}^2 O(R^{5-\mu_i}h^{\mu_i}).
@@ -1328,7 +1371,7 @@ nous allons nous servir des précédents lemmes.
 \begin{theorem}[Convergence asymptotique de la matrice de covariance digitale]
 \label{thm:multigrid-conv-cov-matrix}
 %
-  Soit $\Shape$ un domaine compact de $\R^3$ à reach positif, dont le bord est
+  Soit $\Shape$ une forme convexe de $\R^3$ à reach positif, dont le bord est
   $C^3$ et peut être décomposé en nombre fini de parties monotones. Alors, il
   existe une constante $h_0$ telle que pour tout pas de discrétisation $0 < h <
   h_0$, pour tout $\vx \in \R^3$, pour un rayon $R \ge h$, nous
@@ -1506,7 +1549,7 @@ intégration :
 \begin{theorem}[Convergence asymptotique des estimateurs digitaux de courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$]
 \label{thm:multigrid-convergence-curv-k1k2}
 %
-  Soit $\Shape$ un domaine compact de $\R^3$ à reach positif tel que son bord
+  Soit $\Shape$ une forme convexe de $\R^3$ à reach positif tel que son bord
   $\Bd{X}$ est $C^3$ et peut être décomposé en nombre fini de parties monotones.
   Alors, pour la discrétisation de Gauss, les estimateurs digitaux de courbures
   principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ convergent
@@ -1579,7 +1622,7 @@ couvrent un plan. Cependant, nous pouvons écrire :
 \begin{theorem}[Convergence asymptotique des estimateurs digitaux de directions principales de courbure par intégration $\PrincDirH{1}{R}$ et $\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration \NormalDirH{R}]
 \label{thm:multigrid-conv-principal-directions-and-normal}
   %
-  Soit $\Shape$ un domaine compact de $\R^3$ tel que son bord $\Bd{\Shape}$ a un
+  Soit $\Shape$ une forme convexe de $\R^3$ tel que son bord $\Bd{\Shape}$ a un
   reach supérieur à $\rho$ et est $C^3$.
   %
   \\
@@ -1660,9 +1703,8 @@ du bleu (valeur minimale) au jaune (valeur maximale).
   \caption[Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$.]{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 15$. \emph{De gauche à droite, de haut en bas :} première et seconde direction principale de courbure et normale (zoom sur la dernière ligne). \label{fig:digital-II-octa-2}}
 \end{figure}
 %
-\todoInlineJeremy{vérifier si j'ai mis convexe partout}
-%
 \section{Estimation sans paramètre de la courbure par intégration volumique de la sphère}
+\label{sec:curvature:parameter-free}
 %
 Dans ce paragraphe, nous allons proposer une version sans paramètre des
 estimateurs de courbure du \RefSection{sec:estimators:volume}. Dans le contexte
@@ -1728,8 +1770,6 @@ paramètre de courbure 2D $\CurvHS$ :
   Card(\Ball{\rho(\DigShape)}{\vp} \cap \DigShape)$.
   %
 \end{definition}
-%
-\todoJeremy{Changer A par hat(Area)}
 %
 Pour paraphraser cette définition, nous devons dans un premier temps calculer la
 moyenne des longueurs des segments discret sur le bord de $\DigShape$. Nous

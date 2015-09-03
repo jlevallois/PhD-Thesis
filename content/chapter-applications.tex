@@ -116,9 +116,10 @@ Il existe une très vaste littérature sur les problèmes d'extraction de points
 caractéristiques sur des formes. Nous avons choisi les méthodes les plus
 représentatives de cette littérature afin d'avoir un ensemble complet
 d'estimateurs auxquels nous pourrons nous comparer. Nous les avons classer par
-catégories :
-%
-\todoInlineJeremy{Dire les catégories une fois l'état de l'art modifié}
+catégories : les méthodes « \anglais{Ridges and Valleys} »
+(\RefSection{sec:applications:feature:ridge}), les méthodes basées sur un patch
+surfacique (\RefSection{sec:applications:feature:patch}) et les méthodes
+d'analyse spectrale (\RefSection{sec:applications:feature:spectral}).
 %
 \subsubsection{Méthodes « Ridges and Valleys »}%
 \label{sec:applications:feature:ridge}
@@ -736,8 +737,6 @@ laplacienne :
   \mathcal{L}(i) = \log(|\mathcal{H}(i)|)
 \end{equation}
 %
-\todoJeremy{a finir}
-%
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=10cm]{images/Feature/LaplacianSpectrumLogAvg}
@@ -745,6 +744,23 @@ laplacienne :
     \caption[Matrice laplacienne et son spectre.]{Matrice laplacienne $L$ et son spectre $\mathcal{H}$ (Figure~6 de \cite{Song2014}).
       \label{fig:laplacian-spectrum-avg}}
 \end{figure}
+
+
+\begin{equation}
+  S = BRB^TW
+\end{equation}
+%
+où $B$ est la matrice orthogonale dans laquelle les colonnes $b_i$ sont les
+vecteurs propres de $L$ et $R = Diag\{\exp(|\mathcal{L}(i) - \mathcal{J}_n(i)
+\ast \mathcal{L}(i)|) : 1 \le f \l m\}$ la matrice diagonale dont les entrées
+sont l'exponentielles des éléments de $|\mathcal{L}(i) - \mathcal{J}_n(i) \ast
+\mathcal{L}(i)|$, avec $\mathcal{J}_n(i)$ un filtre local moyen.
+
+
+\comJeremy{La carte de saillance $\mathcal{S}_i$ est alors obtenue en sommant $S$ le long
+de chaque ligne de la matrice, correspondant chacune à un vertice du maillage.
+L'aspect multié-échelle apparait en calculant ces cartes de saillances sur le
+maillage auquel on aura fait varier le paramètre de lissage.}
 
 
 Ces techniques sont très intéressante mais possèdent cependant des inconvénients
