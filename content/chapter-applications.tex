@@ -13,18 +13,18 @@ Vandamme}{Ma vie, mon œuvre.}
 
 \newpage
 
-\begin{table}[h]
-\begin{tabular}{@{}p{2cm}lp{2cm}p{8cm}@{}}
-\toprule
-\multicolumn{4}{c}{\textsc{À citer}} \\ \midrule
-SUSAN2D & \cite{SUSAN2D} & intersection volume; image; 2D     & Détection de singularités à base de volume de l'intersection \\
-SUSAN3D & \cite{SUSAN3D} & \emph{à lire} & Variante 3D de SUSAN \\
-Witkin1983 & \cite{Witkin1983} & \emph{\#FIRST} & Première mention d'espace d'échelle \\
-Pottmann2006 & \cite{Yang2006} & feature & Ils font un seuil sur le max des k1 k2. \\
-
-\bottomrule
-\end{tabular}
-\end{table}
+% \begin{table}[h]
+% \begin{tabular}{@{}p{2cm}lp{2cm}p{8cm}@{}}
+% \toprule
+% \multicolumn{4}{c}{\textsc{À citer}} \\ \midrule
+% SUSAN2D & \cite{SUSAN2D} & intersection volume; image; 2D     & Détection de singularités à base de volume de l'intersection \\
+% SUSAN3D & \cite{SUSAN3D} & \emph{à lire} & Variante 3D de SUSAN \\
+% Witkin1983 & \cite{Witkin1983} & \emph{\#FIRST} & Première mention d'espace d'échelle \\
+% Pottmann2006 & \cite{Yang2006} & feature & Ils font un seuil sur le max des k1 k2. \\
+%
+% \bottomrule
+% \end{tabular}
+% \end{table}
 \todoJeremy{Parler d'espace d'échelle ?}
 
 \newpage
@@ -145,12 +145,12 @@ convient de remplacer $f$ et $\theta$ par les valeurs du
   \begin{center}
     %
     \caption[Tableau des fonctions pour détecter les crêtes, les vallées et les
-    points d'inflections d'une surface.]{Tableau des fonctions pour détecter les
-    crêtes, les vallées et les points d'inflections d'une surface.
+    points d’inflexions d'une surface.]{Tableau des fonctions pour détecter les
+    crêtes, les vallées et les points d’inflexions d'une surface.
     $\PrincCurv{max}$ et $\PrincCurv{min}$ désignent les fonctions donnant les
     valeurs de la courbure principale maximale et minimale, $\PrincDir{max}$ et
     $\PrincDir{min}$ les fonctions donnant les directions de courbure maximale
-    et minimale, et $\vv_{max}$ la fonction donnant la valeur du gradiant de
+    et minimale, et $\vv_{max}$ la fonction donnant la valeur du gradient de
     courbure.}
     %
     \label{tab:ridges-valleys-fonctions}
@@ -315,7 +315,7 @@ $\Ball{R}{\vx} \cap \dS$.
   %
   {Analyse de la variation de la longueur du barycentre $|n_R|$ sur une surface
   lisse (\emph{à gauche}) et sur une singularité (\emph{à droite}). La longueur
-  croît quadratiquement sur la surface lisse et linéairement sur la
+  croît de façon quadratique sur la surface lisse et linéairement sur la
   singularité.\label{fig:moments-explained}}
   %
 \end{figure}
@@ -420,7 +420,7 @@ limitent à un voisinage de rayon $R$ :
 \end{equation}
 %
 Enfin, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
-version convolué de \VCM grâce à une fonction indicatrice $\chi_r$
+version convoluée de \VCM grâce à une fonction indicatrice $\chi_r$
 (ayant pour paramètre un rayon $r$) :
 %
 \begin{equation}
@@ -554,7 +554,7 @@ $\omega^-$ alors le point sera labellisé comme \NonFeature (en vert); Si le
 poids est entre $\omega^-$ et $\omega^+$, nous allons regarder la variation du
 poids : si le poids est supérieure à $\tau$ fois le poids au rayon précédent,
 nous gardons le précédent poids. Cette dernière condition permet d'éliminer les
-résultats erronés dûs au bruit par exemple, introduisant une forte
+résultats erronés dû au bruit par exemple, introduisant une forte
 variation. Ces points seront traités plus tard. Pour tous les autres points
 (donc ceux qui ne sont pas labellisés \Feature, \NonFeature ou avec une forte
 variation de poids), nous allons effectuer la même vérification à l'échelle
@@ -756,7 +756,7 @@ induit par le côté isothétique des surfaces digitales.
 
 
 En effet, si nous considérons la formulation du calcul extérieur discret
-(\emph{Discrete Exterior Calculus} ou \emph{DEC}) ou simplement l'approche de la
+(\anglais{Discrete Exterior Calculus} ou \DEC) ou simplement l'approche de la
 formule des cotangentes\footnote{Il s'agit d'une discrétisation usuelle de l'opérateur
 de Laplace-Beltrami sur des surfaces polyédrales.}
 pour définir un opérateur laplacien discret sur le plongement digital de la
@@ -847,10 +847,10 @@ espace-échelle de nos estimateurs, le paramètre étant le rayon de la boule.
           \includegraphics[width=11cm]{images/ScaleSpace_Flower}
       \end{center}}
 %
-      \caption[Analyse en espace d'échelle de la courbure en fonction du rayon sur la forme digitale 2D de « Flower »]
-      {\emph{À gauche :} forme digitale 2D de « Flower ». \emph{À droite :}
+      \caption[Analyse en espace d'échelle de la courbure en fonction du rayon sur la forme digitale 2D de \Flower]
+      {\emph{À gauche :} forme digitale 2D de \Flower. \emph{À droite :}
       Association des valeurs de courbure sur le bord digital de la forme «
-      Flower » en utilisant la \RefDefinition{def:digital-2d-curvature} (abscisse) pour différentes
+      \Flower en utilisant la \RefDefinition{def:digital-2d-curvature} (abscisse) pour différentes
       tailles de boules $R$ (ordonnée, de haut en bas). Les couleurs correspondent
       aux valeurs de courbures: du bleu (courbure la plus petite) au jaune (courbure
       la plus grande).\label{fig:curvature-scale-2d}}
@@ -860,7 +860,7 @@ Nous proposons alors d'étudier le comportement des estimateurs digitaux par
 intégration lorsque nous réduisons le rayon de la boule pour une forme et une
 résolution donnée. La \RefFigure{fig:curvature-scale-2d} nous montre les
 variations de courbure en fonction du rayon de la boule lorsqu'il décroît (de
-haut en bas sur la figure) pour l'objet « Flower ». Nous nous apercevons que
+haut en bas sur la figure) pour l'objet \Flower. Nous nous apercevons que
 certaines caractéristiques ne sont perceptibles qu'à une certaine intervalle de
 rayons (les zones bleues par exemple) tandis que d'autres vont s'étendre (les
 zones rouges par exemple). Plus généralement, les points autour de singularités
@@ -1620,7 +1620,7 @@ deux états, la courbure doit suivre des courbes de pente $0$ (modèle
 \featsmooth) pour connecter les deux autres états. Cette transition peut être
 prédominante sur des zones proches de zones caractéristiques \featedge. Cet
 artefact peut être retiré facilement en mesurant la distance géométrique entre
-un \featedge sur la surface, et reclassifier les fausses zones \featsmooth vers
+un \featedge sur la surface, et reclasser les fausses zones \featsmooth vers
 leur état avant la transition si la distance est petite.
 
 

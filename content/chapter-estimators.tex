@@ -70,7 +70,7 @@ sur un plan). En assumant que la densité de l’échantillonnage est $\delta$,
 \nauthor{Xu} propose une propriété de convergence supplémentaire lorsque
 l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
 $\alpha > 2$ (ce qui est inapproprié pour des données discrètes car ce sont des
-outliers). \todoJeremy{détailler plus en détail ($>\_<$), avec formules et
+\anglais{outliers}). \todoJeremy{détailler plus en détail ($>\_<$), avec formules et
 schéma} Il est à noter que si le maillage triangulé ne satisfait pas ces
 conditions, l'estimation ne converge pas.
 
@@ -555,7 +555,7 @@ de l'intersection de cette boule et de la forme. Un calcul linéaire simple est
 alors appliqué sur cette quantité afin d'approximer la courbure. De plus, comme
 le montre également la \RefFigure{fig:2d-curv-estimator}, nous pouvons supposer
 que si la discrétisation s'affine nous aurons une meilleure estimation de la
-courbure. Le prochain subsubsectione va le démontrer.
+courbure. Le prochain paragraphe va le démontrer.
 %
 \subsubsection{Convergence des estimateurs digitaux de courbure 2D et de courbure moyenne 3D par intégration}
 %
@@ -719,7 +719,7 @@ moyenne sur des formes 3D :
 %
 Cependant, ces théorèmes ne sont valides que pour tous points $\vx$ de $\dS$.
 Lorsque nous traitons des bords des surfaces digitales, une nouvelle
-approximation intervient dû à la discrétisation. Le prochain subsubsectione adaptera
+approximation intervient dû à la discrétisation. Le prochain paragraphe adaptera
 ces estimateurs sur des contours digitaux de surface.
 %
 \subsubsection{Convergence asymptotique pour des formes suffisamment lisses}
@@ -1034,7 +1034,7 @@ propres de $\DCov{h}(\Ball{R/h}{\vy / h} \cap \DigShape)$, et $\hat{\nu}_1,
 %
 \end{definition}
 %
-Dans les subsubsectiones suivants nous allons montrer la convergence asymptotique de
+Dans les paragraphes suivants nous allons montrer la convergence asymptotique de
 ces estimateurs. La démonstration dépend de la convergence des moments digitaux,
 de la stabilité des moments face à des petits déplacements provoqués par la
 discrétisation, ainsi qu'à la théorie de perturbation de matrice.
@@ -1664,7 +1664,7 @@ du bleu (valeur minimale) au jaune (valeur maximale).
 %
 \section{Estimation sans paramètre de la courbure par intégration volumique de la sphère}
 %
-Dans ce subsubsectione, nous allons proposer une version sans paramètre des
+Dans ce paragraphe, nous allons proposer une version sans paramètre des
 estimateurs de courbure du \RefSection{sec:estimators:volume}. Dans le contexte
 de la convergence asymptotique, la notion d'échelle est explicitement donnée
 grâce au paramètre de discrétisation $h$. C'est d'ailleurs pour cela que nos
@@ -1849,7 +1849,7 @@ Nous utilisons un unique rayon pour estimer la courbure sur tout le bord de
 l'objet. En sachant que nous pouvons extraire des faisceaux de segments maximaux
 en chaque point du bord de l'objet, pouvons-nous adapter notre estimateur afin
 de la taille de la boule s'adapte localement à la géométrie de l'objet ? Le
-subsubsectione suivant traite cette question.
+paragraphe suivant traite cette question.
 %
 \subsection{Estimateur digital local sans paramètre de courbure 2D}
 %
@@ -1958,7 +1958,7 @@ Formalisons cela avec une proposition sur les manifolds lisses :
 \begin{proof}
   %
   Afin d'alléger la lecture, nous avons retiré les $(\vx)$ de toutes les
-  notations puisqu'il ne peut y avoir d'ambiguité. La
+  notations puisqu'il ne peut y avoir d’ambiguïté. La
   \RefFigure{fig:slices-3d-proof} illustre les notations utilisées.
   %
   \begin{figure}[ht]
@@ -2074,7 +2074,7 @@ moyenne $\MeanCurv{R}$ (voir \RefDefinition{def:digital-3d-mean-curvature}).
 Comme pour la version 2D sans paramètre, nous allons automatiquement calculer le
 rayon $R$ en fonction de la géométrie de l'objet. Le rayon $\rho'(\DigShape)$ de
 l'estimateur $\MeanCurvHS$ sera alors le carré de la moyenne de \emph{certaines}
-de longueurs de segments maximaux. Nous allons détailler plus précisement cela
+de longueurs de segments maximaux. Nous allons détailler plus précisément cela
 dans la définition suivante :
 %
 \begin{definition}
@@ -2099,7 +2099,7 @@ et la normale de la même manière :
 %
 \begin{definition}
   %
-  Soit $Z$ be a digital shape in $\Z^3$, nous définissons les estimateurs
+  Soit $\DigShape$ une forme digitale de $\Z^3$, nous définissons les estimateurs
   digitaux sans paramètre de courbures principales $\PrincCurvHS{1}$ et
   $\PrincCurvHS{2}$, de directions principales de courbure $\PrincDirHS{1}$ et
   $\PrincDirHS{2}$ et de normale $\NormalDirHS$ au point $\vp \in
@@ -2276,7 +2276,7 @@ $\PrincCurvHS{2}$.]
 %
 \subsection{Estimateur digital local sans paramètre de courbures 3D}
 %
-Comme en 2D, nous pouvons changer le rayon de la boule locallement en fonction de la géométrie de la forme grâce aux longueurs de segments maximaux, et comme en 2D, nous ne pouvons pas espérer de convergence asymptotique à cause du comportement des segments maximaux les plus longs. Cependant, nous pouvons déjà les définir, et nous verrons dans la partie comparative de la \RefSection{sec:comparaison-courbure} que nous obtenons des convergence.
+Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de la géométrie de la forme grâce aux longueurs de segments maximaux, et comme en 2D, nous ne pouvons pas espérer de convergence asymptotique à cause du comportement des segments maximaux les plus longs. Cependant, nous pouvons déjà les définir, et nous verrons dans la partie comparative de la \RefSection{sec:comparaison-courbure} que nous obtenons des convergence.
 %
 \begin{definition}
   %
@@ -2297,7 +2297,7 @@ Comme en 2D, nous pouvons changer le rayon de la boule locallement en fonction d
 %
 \begin{definition}
   %
-  Soit $Z$ be a digital shape in $\Z^3$, nous définissons les estimateurs
+  Soit $\DigShape$ une forme digitale de $\Z^3$, nous définissons les estimateurs
   digitaux local sans paramètre de courbures principales $\PrincCurvHSL{1}$ et
   $\PrincCurvHSL{2}$, de directions principales de courbure $\PrincDirHSL{1}$ et
   $\PrincDirHSL{2}$ et de normale $\NormalDirHSL$ au point $\vp \in
@@ -2349,11 +2349,11 @@ Comme en 2D, nous pouvons changer le rayon de la boule locallement en fonction d
 Nous pouvons améliorer le temps de calcul des estimateurs qui s'adaptent à la
 géométrie locale du bord de l'objet $\CurvHSL$, $\MeanCurvHSL$ et autres. En
 effet, sur des objets à forte résolution (\cad $h$ petit), ces estimateurs sont
-très couteux en temps. Nous proposons de limiter le nombre de rayons locaux à
-$K$ rayons. Cela aura pour conséquence la possibilité de précalculer les boules
+très coûteux en temps. Nous proposons de limiter le nombre de rayons locaux à
+$K$ rayons. Cela aura pour conséquence la possibilité de pré-calculer les boules
 de différents rayons au préalable, au lieu de les recalculer localement pour
 chaque élément de surface. En effet, nos estimateurs par intégration sont
-optimisés lorsque nous nous déplaçons sur des élements de surface adjacents avec
+optimisés lorsque nous nous déplaçons sur des éléments de surface adjacents avec
 le même rayon de boule. Cette optimisation est décrite en détail dans la partie «
 Implémentation » (\RefSection{sec:applications:dgtal}). Nous introduisons ici
 les variantes des $K$-moyennes (« \anglais{$K$-means} »), limitant ainsi le
@@ -2411,7 +2411,7 @@ de courbure présentés dans ce chapitre.
   \label{tab:shapes}
   \begin{tabular}{@{}llllrr@{}}
     \toprule
-    Forme   & Équation (parametrique en 2D, implicite en 3D) & Paramètres & Domaine    & $k_{min}$ & $k_{max}$ \\ \midrule
+    Forme   & Équation (paramétrique en 2D, implicite en 3D) & Paramètres & Domaine    & $k_{min}$ & $k_{max}$ \\ \midrule
     \multirow{2}{*}{\textsc{Ellipse}} & $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(a,b)=(20,7)$} & \multirow{2}{*}{$[-20,20]^2$} & \multirow{2}{*}{$0.018$} & \multirow{2}{*}{$0.408$}  \\
     & {avec $\rho(t)=\frac{b}{\sqrt{1 - (a^2-b^2)/a^2\cdot \cos(t+\phi)}}$} &     &   & & \\
     \multirow{2}{*}{\textsc{Flower}}  &  $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(r_1,r_2,p)=(20,7,6)$} & \multirow{2}{*}{$[-20,20]^2$} & \multirow{2}{*}{$-1.414$} & \multirow{2}{*}{$0.383$} \\
@@ -2897,7 +2897,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
   \end{center}
 \end{figure}
 %
-Alors, expérimentallement, le choix de $\alpha = \frac{1}{3}$ est cohérent pour
+Alors, expérimentalement, le choix de $\alpha = \frac{1}{3}$ est cohérent pour
 obtenir une vitesse de convergence des estimateurs $\CurvH{R}$, $\MeanCurvH{R}$,
 $\PrincCurvH{1}{R}$, $\PrincCurvH{2}{R}$ en $O(h^\frac{1}{3})$.
 %
@@ -2962,7 +2962,7 @@ petits pas de discrétisation $h$, $\CurvHSL$ est très consommateur de temps de
 calcul (nous devons créer une nouvelle boule digitale à chaque point). Ainsi,
 nous voulons analyser les erreurs que génèrent cette approximation. Nous
 remarquons alors que l'erreur $l_2$ de $\CurvHSL$ est inférieure à celles de
-$\CurvHS$ et $\CurvH{R}$, grâce à la nature adaptive de cet estimateur. Nous
+$\CurvHS$ et $\CurvH{R}$, grâce à la nature adaptative de cet estimateur. Nous
 remarquons également un très bonnes précisions asymptotique des résultats des
 estimateurs $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$, même lorsque le
 nombre de partitions est faible.
@@ -3009,7 +3009,7 @@ suivre la vitesse espérée en $O(h^\frac{1}{3})$.
 %
 Un des éléments qui peut être important dans le choix d'un estimateur est son
 temps de calcul. En fonction de l'utilisation que nous souhaitons en faire, il
-peut être judiscieux de connaître le comportement d'un estimateur face à des
+peut être judicieux de connaître le comportement d'un estimateur face à des
 données de plus en plus grande afin d'en extraire un profil de temps de calcul.
 
 
@@ -3044,7 +3044,7 @@ De la même manière, pour les moments :
   &\quad - \DMom{p_1 \cdots p_3}{h}\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx+ \vec{\delta}} ), h\right) .
 \end{align}
 %
-Alors, si nous précalculons tous les noyaux de déplacement
+Alors, si nous pré-calculons tous les noyaux de déplacement
 $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
 \Ball{R}{\mathbf{0}}}{h}$, la complexité de l'algorithme peut être réduite à
 $O((R/h)^{d-1})$. Le cas idéal est la traversée Hamiltonienne de la surface :
@@ -3096,7 +3096,7 @@ environ $10$ fois plus rapides que notre implémentation de \JetFitting.
 \label{sec:kanungo-noise}
 %
 Grâce à l'approche par intégration de volume de nos estimateurs, nous pouvons
-espérer une robustesse aux bruit et aux données abbérantes (\anglais{outliers}).
+espérer une robustesse aux bruit et aux données aberrantes (\anglais{outliers}).
 
 
 Définissons dans un premier temps le bruit utilisé dans nos expérimentations.
@@ -3200,7 +3200,7 @@ nous observons le comportement des estimateurs. En 2D, les approches basées sur
 la reconnaissance d'objets géométriques (\MDSS et \MDCA) sont très sensible aux
 perturbations du bord de la forme, comme le montre la
 \RefFigure{fig:curv-experiments-ellipse-noise}. Notre estimateur $\CurvH{R}$
-(\II) et \BC sont extrèmement robuste au bruit lorsqu'il n'est pas trop grand
+(\II) et \BC sont extrêmement robuste au bruit lorsqu'il n'est pas trop grand
 ($t < 0.5$). Nous pouvons d'ailleurs observer que notre estimateur semble plus
 robuste que l'estimateur \BC. En dimension 3D, nous pouvons constater que nos
 estimateurs et l'approche de \JetFitting obtiennent des résultats plutôt
@@ -3216,354 +3216,66 @@ estimateurs semblent assez robuste au bruit de \Kanungo.
 Nous avons présenté dans ce chapitre un ensemble d'estimateurs de courbure,
 courbure moyenne, courbures principales, directions principales de courbures et
 normale basés sur le principe d'intégration d'invariants sur des formes de
-dimension 2 et 3. Nous avons montré que ces estimateurs convergent
+dimension 2 et 3. Nous avons démontré que ces estimateurs convergent
 asymptotiquement pour une certaine catégorie de formes et nous avons explicité
 leurs vitesses de convergence. Nous avons également évalué expérimentalement ces
 estimateurs et observé que les vitesses de convergence respectent bien les
-vitesses attenduent, et la comparaison avec les autres méthodes rend nos
+vitesses attendues, et la comparaison avec les autres méthodes rend nos
 estimateurs très compétitifs, même en présence de bruit.
 
 
-Ces estimateurs souffrent par contre de certaines limitations. La première est
-qu'ils requièrent de connaitre une approximation volumétrique de la forme
-$\Shape$. Nous ne pouvons pas utiliser simplement un approximation du bord de
-$\Shape$, comme c'est le cas pour les algorithmes fonctionnant sur les nuages de
-points par exemple.
+Ces estimateurs souffrent par contre de certaines limitations.\\
+%
+La première et probablement la plus grande limitation est la nécessité de
+connaître une approximation volumétrique de la forme $\Shape$. Nous ne pouvons
+pas utiliser simplement un approximation du bord de $\Shape$, comme c'est le cas
+pour les algorithmes fonctionnant sur les nuages de points par exemple.\\
+%
+La seconde provient du paramètre $k$ guidant le rayon de la boule d'intégration
+($R=kh^\frac{1}{3}$) dans le contexte de la convergence asymptotique des
+estimateurs. Le choix du $k$ le plus optimal n'est pas évident, et est
+principalement lié aux bornes d'erreur de l'approximation de Taylor permettant
+d'extraire l'information de courbure qui ne sont pas explicites. L'intuition est
+que ce paramètre $k$ doit certainement dépendre de la dérivée des courbures
+maximales, mais cela reste à prouver.\\
+%
+La troisième limitation est le temps de calcul sur de gros objets digitaux. Il
+n'est pas rare d'avoir dans l'industrie des objets à analyser avec une grosse
+résolution (par exemple $1024^3$) et le coût de l'estimation peut s'avérer un
+peu élevé pour certaines utilisations. Cependant, cette limitation est à mettre
+en parallèle avec le fait que nos estimateurs sont robustes au bruit, et c'est
+certainement le prix à payer (les approches de reconnaissances d'objets par
+exemple sont plus rapides, mais très sensible au bruit comme nous l'avons
+montré).
 
-%
-\todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
-% \todoInlineJeremy{-------------------------------}
 
+Enfin, ce n'est pas une limitation à proprement parlé mais plutôt une
 %
+\begin{wrapfigure}[7]{r}[0.2cm]{4cm}
+	\includegraphics[width=4cm]{images/CriticalRadius}
+\end{wrapfigure}
 %
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Différents $\alpha$ (Erreur $l_\infty$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Ellipse} &
-%       \textsc{Flower} &
-%       \textsc{AccFlower}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\CurvH{R}$} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipse_ALPHA_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/Flower_ALPHA_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/AccFlower_ALPHA_Loo}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des convergences asymptotiques de l'estimateur $\CurvH{R}$
-%       avec différentes valeurs de $\alpha$ pour le rayon $R$ ($R=kh^\alpha$) sur
-%       l'objet \Ellipse, \Flower et \AccFlower. L'erreur est en $l_\infty$.
-%       %
-%       }
-%       \label{fig:curv-experiments2D-alpha}
-%   \end{center}
-% \end{figure}
+considération à prendre en compte lors de l'implémentation de ce type
+d'estimateurs. Puisque nos estimateurs récoltent l'information volumique, il se
+peut que de l'occultation avec une autre partie de l'objet intervienne dans le
+calcul de l’intégration. La figure sur le côté montre cet effet. Cela peut être
+gênant s'il n'est pas pris en compte et ainsi localement fausser les calculs de
+courbure.
+
+
+Les perspectives sont multiples pour ces travaux.\\
 %
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Ellipse} &
-%       \textsc{Flower} &
-%       \textsc{AccFlower}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipse_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/Flower_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/AccFlower_Loo}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des erreurs $l_\infty$ d'estimation de courbure 2D de
-%       $\CurvH{R}$ (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
-%       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}
-%       sur l'objet \Ellipse, \Flower et \AccFlower.
-%       %
-%       }
-%       \label{fig:curv-experiments2D-loo}
-%   \end{center}
-% \end{figure}
+Dans un premier temps nous pouvons nous intéresser à des noyaux autres que la
+sphère pour l'intégration, comme par exemple un noyau gaussien. Cela permettrait
+de pouvoir effectuer les calculs dans le domaine de Fourier, et ainsi de ne plus
+avoir des calculs dépendant de la taille du noyau mais linéaires à la taille de
+l'objet. Cependant, cela nécessite d'étudier ces nouveaux noyaux afin de pouvoir
+en extraire peut-être des preuves de convergence asymptotiques.
+
+
+Une autre perspective est le couplage de notre approche avec celles basées sur
+les cellules de Voronoi, plus particulièrement les méthodes de \VCMM
+\cite{Merigot2009,Merigot2011,Cuel2014} basées sur l'analyse de matrice de
+covariance non pas de la forme elle même mais du cône tangent à celle-ci. Ces
+approches sont assez complémentaires avec la notre et mérite de s'y intéresser.
 %
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Ellipse} &
-%       \textsc{Flower} &
-%       \textsc{AccFlower}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipse_L2} &
-%       \includegraphics[width=4.5cm]{graphs/Flower_L2} &
-%       \includegraphics[width=4.5cm]{graphs/AccFlower_L2}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des erreurs $l_2$ d'estimation de courbure 2D de $\CurvH{R}$
-%       (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
-%       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}
-%       sur l'objet \Ellipse, \Flower et \AccFlower.
-%       %
-%       }
-%       \label{fig:curv-experiments2D-l2}
-%   \end{center}
-% \end{figure}
-%
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Différents $\alpha$ (Erreur $l_\infty$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Sphere} &
-%       \textsc{Rounded Cube} &
-%       Surface de \textsc{Goursat}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurvH{R}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_Mean_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_Mean_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_Mean_Loo}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurvH{R}{1}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_k1_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_k1_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_k1_Loo}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurvH{R}{2}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_ALPHA_k2_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_ALPHA_k2_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_ALPHA_k2_Loo}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
-%       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-%       $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec différentes valeurs de
-%       $\alpha$ pour le rayon $R$ ($R=kh^\alpha$) sur l'objet \Sphere,
-%       \RoundedCube et \Goursat. L'erreur est en $l_\infty$.
-%       %
-%       }
-%       \label{fig:curv-experiments3D-alpha}
-%   \end{center}
-% \end{figure}
-% %
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Sphere} &
-%       \textsc{Rounded Cube} &
-%       Surface de \textsc{Goursat}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurv$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_Mean_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_Mean_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_Mean_Loo}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{1}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_k1_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k1_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k1_Loo}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{2}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_k2_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k2_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k2_Loo}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
-%       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-%       $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \JetFitting
-%       \cite{Cazals2005} sur l'objet \Sphere, \RoundedCube et \Goursat. L'erreur
-%       est en $l_\infty$.
-%       %
-%       }
-%       \label{fig:curv-experiments3D}
-%   \end{center}
-% \end{figure}
-% %
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Sphere} &
-%       \textsc{Rounded Cube} &
-%       Surface de \textsc{Goursat}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\MeanCurv$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_Mean_L2} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_Mean_L2} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_Mean_L2}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{1}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_k1_L2} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k1_L2} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k1_L2}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\PrincCurv{2}$} &
-%       \includegraphics[width=4.5cm]{graphs/Sphere_k2_L2} &
-%       \includegraphics[width=4.5cm]{graphs/RoundedCube2_k2_L2} &
-%       \includegraphics[width=4.5cm]{graphs/BlobbyCube_k2_L2}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
-%       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-%       $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \JetFitting
-%       \cite{Cazals2005} sur l'objet \Sphere, \RoundedCube et \Goursat. L'erreur
-%       est en $l_2$.
-%       %
-%       }
-%       \label{fig:curv-experiments3D}
-%   \end{center}
-% \end{figure}
-%
-%%%%%%%%%%%%%%%%
-%
-%
-% \subsection{Estimateurs sans paramètres}
-%
-%
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c@{}}
-%       \multicolumn{3}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Ellipse} &
-%       \textsc{Flower}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipse_PF_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/Flower_PF_Loo}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des erreurs $l_\infty$ d'estimation de courbure 2D de
-%       $\CurvH{R}$, $\CurvHS$ et $\CurvHSL$ avec l'estimateur \MDCA
-%       \cite{Roussillon2011} sur l'objet \Ellipse et \Flower.
-%       %
-%       }
-%       \label{fig:curv-experiments2D-pf-loo}
-%   \end{center}
-% \end{figure}
-%
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c@{}}
-%       \multicolumn{3}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-%       \\ \toprule
-%       &
-%       \textsc{Ellipse} &
-%       \textsc{Flower}
-%       \\
-%       \rotatebox{90}{~~~~~~~~~~~~~~$\Curv$} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipse_PF_L2} &
-%       \includegraphics[width=4.5cm]{graphs/Flower_PF_L2}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des erreurs $l_2$ d'estimation de courbure 2D de $\CurvH{R}$,
-%       $\CurvHS$, $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$
-%       avec l'estimateur \MDCA \cite{Roussillon2011} sur l'objet \Ellipse et
-%       \Flower.
-%       %
-%       }
-%       \label{fig:curv-experiments2D-pf-l2}
-%   \end{center}
-% \end{figure}
-%
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_\infty$)}}
-%       \\ \toprule
-%       &
-%       $\MeanCurv$ &
-%       $\PrincCurv{1}$ &
-%       $\PrincCurv{2}$
-%       \\
-%       \rotatebox{90}{~~~~~~~\textsc{Ellipsoid}} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_Mean_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k1_Loo} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k2_Loo}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des erreurs $l_\infty$ d'estimation de courbure moyenne de
-%       $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
-%       $\MeanCurvHSLK{50}$ (\emph{première colonne}), de première courbure
-%       principale de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
-%       $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
-%       (\emph{seconde colonne}) et de seconde courbure principale de
-%       $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$, $\PrincCurvHSLK{2}{5}$,
-%       $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$ (\emph{troisième
-%       colonne}) sur l'objet \Ellipsoid.
-%       %
-%       }
-%       \label{fig:curv-experiments3D-pf-loo}
-%   \end{center}
-% \end{figure}
-% %
-% \begin{figure}[ht]
-%   \begin{center}
-%     \setlength{\tabcolsep}{0.0pt}
-%     \begin{tabular}{@{}l c c c@{}}
-%       \multicolumn{4}{c}{\textbf{Comparaison (Erreur $l_2$)}}
-%       \\ \toprule
-%       &
-%       $\MeanCurv$ &
-%       $\PrincCurv{1}$ &
-%       $\PrincCurv{2}$
-%       \\
-%       \rotatebox{90}{~~~~~~~\textsc{Ellipsoid}} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_Mean_L2} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k1_L2} &
-%       \includegraphics[width=4.5cm]{graphs/Ellipsoid_PF_k2_L2}
-%     \end{tabular}
-%     \caption{
-%       %
-%       Comparaison des erreurs $l_2$ d'estimation de courbure moyenne de
-%       $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
-%       $\MeanCurvHSLK{50}$ (\emph{première colonne}), de première courbure
-%       principale de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
-%       $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
-%       (\emph{seconde colonne}) et de seconde courbure principale de
-%       $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$, $\PrincCurvHSLK{2}{5}$,
-%       $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$ (\emph{troisième
-%       colonne}) sur l'objet \Ellipsoid.
-%       %
-%       }
-%       \label{fig:curv-experiments3D-pf-l2}
-%   \end{center}
-% \end{figure}
-%
-%%%%%%%%%%%%%%%%%%%
