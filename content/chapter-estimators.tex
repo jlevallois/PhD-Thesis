@@ -3192,7 +3192,7 @@ plus il se rapproche de la forme sous-jacente.
 %
 Nous expérimentons nos estimateurs de courbures 2D et 3D avec des objets bruités
 dans les
-\RefFigureTD{fig:curv-experiments-ellipse-noise}{fig:curv-experiments-rounded-noise}
+\RefFiguresTF{fig:curv-experiments-ellipse-noise}{fig:curv-experiments-rounded-noise}
 sur les objets \Ellipse et \RoundedCube ($h = 0.1$). Notre critères
 d'expérimentation sont les suivants : à partir d'objets non bruités, nous
 augmentons progressivement le paramètre de bruit de \Kanungo $t$ de 0 à 1 et
@@ -3206,24 +3206,30 @@ robuste que l'estimateur \BC. En dimension 3D, nous pouvons constater que nos
 estimateurs et l'approche de \JetFitting obtiennent des résultats plutôt
 stables. Ce n'est pas surprenant pour \JetFitting puisque cette approche dépend
 d'une analyse en composante principale (ACP) sur un ensemble de points , qui
-produit des statistiques robustes.
+produit des statistiques robustes. En conclusion, expérimentalement, nos
+estimateurs semblent assez robuste au bruit de \Kanungo.
 
-
-
-, examples of noisified objects are
-given. Our experimental setting can be described as follows: for both the flower
-in 2D and the rounded cube in 3D ($h=0.1$ for both), we slightly increase the
-noise parameter from 0 to 1 and we plot the $l_\infty$ error. In dimension two
-(Fig.~\ref{fig:experimentsNoise}-$(e)$), we observe that estimators based on
-geometrical object recognition (MDSS and MDCA) are highly sensitive to contour
-perturbations. Both BC and II are extremely robust to small noise but for
-$\beta$ greater than 0.5, II significantly outperforms BC. In dimension 3, we
-observe that both II and Jet Fitting approaches lead to quite stable results.
-Indeed, some computations in the Jet Fitting approach rely on a point-set PCA
-(Principal Component Analysis) which also provides robust statistics.
 %
 \section{Conclusion}
 \label{sec:estimators:conclusion}
+%
+Nous avons présenté dans ce chapitre un ensemble d'estimateurs de courbure,
+courbure moyenne, courbures principales, directions principales de courbures et
+normale basés sur le principe d'intégration d'invariants sur des formes de
+dimension 2 et 3. Nous avons montré que ces estimateurs convergent
+asymptotiquement pour une certaine catégorie de formes et nous avons explicité
+leurs vitesses de convergence. Nous avons également évalué expérimentalement ces
+estimateurs et observé que les vitesses de convergence respectent bien les
+vitesses attenduent, et la comparaison avec les autres méthodes rend nos
+estimateurs très compétitifs, même en présence de bruit.
+
+
+Ces estimateurs souffrent par contre de certaines limitations. La première est
+qu'ils requièrent de connaitre une approximation volumétrique de la forme
+$\Shape$. Nous ne pouvons pas utiliser simplement un approximation du bord de
+$\Shape$, comme c'est le cas pour les algorithmes fonctionnant sur les nuages de
+points par exemple.
+
 %
 \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
@@ -3234,8 +3240,7 @@ Indeed, some computations in the Jet Fitting approach rely on a point-set PCA
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
 % \todoInlineJeremy{-------------------------------}
-\todoInlineJeremy{Conclusion estimators à faire}
-\todoInlineJeremy{parler du bruit à un moment}
+
 %
 %
 % \begin{figure}[ht]
