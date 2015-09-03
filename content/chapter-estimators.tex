@@ -3088,7 +3088,139 @@ variantes limitant le nombre de rayons possibles pour $\CurvHSL$, se rapprochant
 des temps de calcul de $\CurvHS$ et $\CurvH{R}$.
 
 
-En 3D, alors que les vitesses de convergence asymptotiques entre \JetFitting et nos estimateurs sont similaires, nous pouvons observer que nos estimateurs sont environ $10$ fois plus rapides que notre implémentation de \JetFitting.
+En 3D, alors que les vitesses de convergence asymptotiques entre \JetFitting et
+nos estimateurs sont similaires, nous pouvons observer que nos estimateurs sont
+environ $10$ fois plus rapides que notre implémentation de \JetFitting.
+%
+\subsection{Robustesse au bruit}
+\label{sec:kanungo-noise}
+%
+Grâce à l'approche par intégration de volume de nos estimateurs, nous pouvons
+espérer une robustesse aux bruit et aux données abbérantes (\anglais{outliers}).
+
+
+Définissons dans un premier temps le bruit utilisé dans nos expérimentations.
+Nous utilisons le modèle de bruit \Kanungo \cite{Kanungo1996} sur les contours
+des objets digitaux. Ainsi, pour une taille de bruit $t \in [0,1]$, la
+probabilité qu'un point digital $\vp$ situé à une distance $dt(\vp)$ de $\dS$
+appartienne au contour bruité est $t^{1+dt(\vp)}$. Ainsi la majorité des
+perturbations se situe dans une zone d'épaisseur $\frac{2h}{1-t}$ autour du bord
+digital de la forme. Ce modèle de \Kanungo est dépendant du pas de
+discrétisation $h$, ainsi plus le pas de discrétisation est petit (donc l'objet
+de plus grande résolution), plus le bruit obtenu est faible. Ce comportement est
+idéal pour évaluer la stabilité des algorithmes en géométrie digitale
+\cite{Kerautret2012} puisque plus la résolution de l'objet digital augmente,
+plus il se rapproche de la forme sous-jacente.
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Ellipse}}
+      \\ \toprule
+       &
+      \includegraphics[width=4cm]{images/ellipse_noise} &
+      \includegraphics[width=6cm]{images/ellipse_noise_border}
+      \\
+      \rotatebox{90}{~~~~~~~$\MeanCurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/Ellipse_Noise_L2} &
+      \includegraphics[width=7cm]{graphs/Ellipse_Noise_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      \emph{Première ligne :} \Ellipse avec du bruit de \Kanungo sur sa
+      surface.
+      %
+      \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
+      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure} de
+      $\CurvH{R}$ avec \MDCA, \MDSS et \BC sur l'objet \Ellipse bruité avec
+      différents paramètre $t$ de bruit de \Kanungo.
+      %
+      }
+      \label{fig:curv-experiments-ellipse-noise}
+  \end{center}
+\end{figure}
+%
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}l c c @{}}
+      \multicolumn{3}{c}{\textsc{Rounded Cube}}
+      \\ \toprule
+       &
+      \includegraphics[width=4cm]{images/RoundedCube2_Noise_Border} &
+      \includegraphics[width=6cm]{images/RoundedCube2_Noise_Border_split}
+      \\
+      \rotatebox{90}{~~~~~~~$\MeanCurvH{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Noise_Mean_L2} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Noise_Mean_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{1}{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Noise_k1_L2} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Noise_k1_Loo}
+      \\
+      \rotatebox{90}{~~~~~~~$\PrincCurvH{2}{R}$} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Noise_k2_L2} &
+      \includegraphics[width=7cm]{graphs/RoundedCube2_Noise_k2_Loo}
+      \\
+      &
+      Erreur $l_2$ &
+      Erreur $l_\infty$
+    \end{tabular}
+    \caption{
+      %
+      \emph{Première ligne :} \RoundedCube avec du bruit de \Kanungo sur sa
+      surface.
+      %
+       Comparaison des erreurs $l_2$ (\emph{à gauche}) et $l_\infty$ (\emph{à
+       droite}) d'estimation de \textbf{courbure moyenne} de $\MeanCurvH{R}$
+       (\emph{seconde ligne}), de \textbf{première courbure principale} de
+       $\PrincCurvH{1}{R}$ (\emph{troisième ligne}) et de \textbf{seconde
+       courbure principale} de $\PrincCurvH{2}{R}$ (\emph{quatrième ligne}) avec
+       \JetFitting sur l'objet \RoundedCube bruité avec différents paramètre $t$
+       de bruit de \Kanungo.
+      %
+      }
+      \label{fig:curv-experiments-rounded-noise}
+  \end{center}
+\end{figure}
+%
+Nous expérimentons nos estimateurs de courbures 2D et 3D avec des objets bruités
+dans les
+\RefFigureTD{fig:curv-experiments-ellipse-noise}{fig:curv-experiments-rounded-noise}
+sur les objets \Ellipse et \RoundedCube ($h = 0.1$). Notre critères
+d'expérimentation sont les suivants : à partir d'objets non bruités, nous
+augmentons progressivement le paramètre de bruit de \Kanungo $t$ de 0 à 1 et
+nous observons le comportement des estimateurs. En 2D, les approches basées sur
+la reconnaissance d'objets géométriques (\MDSS et \MDCA) sont très sensible aux
+perturbations du bord de la forme, comme le montre la
+\RefFigure{fig:curv-experiments-ellipse-noise}. Notre estimateur $\CurvH{R}$
+(\II) et \BC sont extrèmement robuste au bruit lorsqu'il n'est pas trop grand
+($t < 0.5$). Nous pouvons d'ailleurs observer que notre estimateur semble plus
+robuste que l'estimateur \BC. En dimension 3D, nous pouvons constater que nos
+estimateurs et l'approche de \JetFitting obtiennent des résultats plutôt
+stables. Ce n'est pas surprenant pour \JetFitting puisque cette approche dépend
+d'une analyse en composante principale (ACP) sur un ensemble de points , qui
+produit des statistiques robustes.
+
+
+
+, examples of noisified objects are
+given. Our experimental setting can be described as follows: for both the flower
+in 2D and the rounded cube in 3D ($h=0.1$ for both), we slightly increase the
+noise parameter from 0 to 1 and we plot the $l_\infty$ error. In dimension two
+(Fig.~\ref{fig:experimentsNoise}-$(e)$), we observe that estimators based on
+geometrical object recognition (MDSS and MDCA) are highly sensitive to contour
+perturbations. Both BC and II are extremely robust to small noise but for
+$\beta$ greater than 0.5, II significantly outperforms BC. In dimension 3, we
+observe that both II and Jet Fitting approaches lead to quite stable results.
+Indeed, some computations in the Jet Fitting approach rely on a point-set PCA
+(Principal Component Analysis) which also provides robust statistics.
 %
 \section{Conclusion}
 \label{sec:estimators:conclusion}
