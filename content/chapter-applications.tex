@@ -759,7 +759,7 @@ sont l'exponentielles des éléments de $|\mathcal{L}(i) - \mathcal{J}_n(i) \ast
 
 \comJeremy{La carte de saillance $\mathcal{S}_i$ est alors obtenue en sommant $S$ le long
 de chaque ligne de la matrice, correspondant chacune à un vertice du maillage.
-L'aspect multié-échelle apparait en calculant ces cartes de saillances sur le
+L'aspect multi-échelle apparait en calculant ces cartes de saillances sur le
 maillage auquel on aura fait varier le paramètre de lissage.}
 
 
@@ -773,12 +773,13 @@ induit par le côté isothétique des surfaces digitales.
 
 En effet, si nous considérons la formulation du calcul extérieur discret
 (\anglais{Discrete Exterior Calculus} ou \DEC) ou simplement l'approche de la
-formule des cotangentes\footnote{Il s'agit d'une discrétisation usuelle de l'opérateur
-de Laplace-Beltrami sur des surfaces polyédrales.}
-pour définir un opérateur laplacien discret sur le plongement digital de la
-surface, l'effet d'escaliers dû à la discrétisation rend la métrique pas bien
-définie par le plongement géométrique de la surface. Par exemple, la diffusion de chaleur obtenue par cet opérateur produira des
-artefacts anisotropes comme un isocontour ellipsoïdal sur un plan discret incliné (voir la \RefFigure{fig:staircase}).
+formule des cotangentes\footnote{Il s'agit d'une discrétisation usuelle de
+l'opérateur de Laplace-Beltrami sur des surfaces polyédrales.} pour définir un
+opérateur laplacien discret sur le plongement digital de la surface, l'effet
+d'escaliers dû à la discrétisation rend la métrique pas bien définie par le
+plongement géométrique de la surface. Par exemple, la diffusion de chaleur
+obtenue par cet opérateur produira des artefacts anisotropes comme un isocontour
+ellipsoïdal sur un plan discret incliné (voir la \RefFigure{fig:staircase}).
 %% Pas de convergence du laplacien discret vers le laplacien
 \begin{figure}[ht]{
     \begin{center}
@@ -1385,35 +1386,35 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/Fandisk} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower} &
        \\
-      \rotatebox{90}{~\nauthors{Clarenz}{Telea2004} $R_1$} &
+      \rotatebox{90}{~\nauthors{Clarenz} $R_1$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_Moments_r_10_c1} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_Moments_r_10_c1} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_Moments_r_10_c1} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_Moments_r_10_c1} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~\nauthors{Clarenz}{Telea2004} $R_2$} &
+      \rotatebox{90}{~\nauthors{Clarenz} $R_2$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_Moments_r_22_c1} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_Moments_r_22_c1} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_Moments_r_22_c1} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_Moments_r_22_c1} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~\nauthors{Mérigot}{Merigot2011} $R_1$, $r_1$} &
+      \rotatebox{90}{~\nauthors{Mérigot} $R_1$, $r_1$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_VCM_r_10} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_VCM_r_10} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_VCM_r_10} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_VCM_r_10} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~\nauthors{Mérigot}{Merigot2011} $R_2$, $r_2$} &
+      \rotatebox{90}{~\nauthors{Mérigot} $R_2$, $r_2$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_VCM_r_22} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W}
     \end{tabular}
-    \caption[Evaluation of feature detectors on perfectly digitized shapes.]{Evaluation of feature detectors on perfectly digitized shapes.
+    \caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Parameters used for \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
-    Parameters used for \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
+    Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
+    Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
   \end{center}
 \end{figure}
 %
@@ -1427,19 +1428,19 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/Fandisk} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower} &
        \\
-      \rotatebox{90}{~~~~~\nauthors{Mellado}{Mellado2012}} &
+      \rotatebox{90}{~~~~~\nauthors{Mellado}} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_Mellado_scale} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_Mellado_scale} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_Mellado_scale} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_Mellado_scale} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~~~~~~~~~\nauthors{Pauly}{Pauly2003}} &
+      \rotatebox{90}{~~~~~~~~~\nauthors{Pauly}} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_Pauly_scale} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_Pauly_scale} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_Pauly_scale} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_Pauly_scale} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~~~~~\nauthors{Park}{Park2012}} &
+      \rotatebox{90}{~~~~~\nauthors{Park}} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_Tensor_scale} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_Tensor_scale} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_Tensor_scale} &
@@ -1452,12 +1453,12 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_II_scale} &
       \rotatebox{90}{\includegraphics[width=0.2cm]{images/Feature/Red} Edge~~\includegraphics[width=0.2cm]{images/Feature/Blue} Smooth~~\includegraphics[width=0.2cm]{images/Feature/Green} Flat}
     \end{tabular}
-    \caption[Evaluation of feature detectors on perfectly digitized shapes.]{Evaluation of feature detectors on perfectly digitized shapes.
+    \caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Parameters used for \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
-    Parameters used for \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
-    Parameters used for \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
-    Parameters used for our algorithm: $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-2}}
+    Paramètre utilisé pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
+    Paramètre utilisé pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
+    Paramètre utilisé pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
+    Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-2}}
   \end{center}
 \end{figure}
 %
@@ -1471,35 +1472,35 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise2} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_noise2} &
        \\
-      \rotatebox{90}{~\nauthors{Clarenz}{Telea2004} $R_1$} &
+      \rotatebox{90}{~\nauthors{Clarenz} $R_1$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_Moments_r_10_c1} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_Moments_r_10_c1} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_Moments_r_10_c1} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_Moments_r_10_c1} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~\nauthors{Clarenz}{Telea2004} $R_2$} &
+      \rotatebox{90}{~\nauthors{Clarenz} $R_2$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_Moments_r_22_c1} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_Moments_r_22_c1} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_Moments_r_22_c1} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_Moments_r_22_c1} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~\nauthors{Mérigot}{Merigot2011} $R_1$,  $r_1$} &
+      \rotatebox{90}{~\nauthors{Mérigot} $R_1$,  $r_1$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_VCM_r_10} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_VCM_r_10} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_VCM_r_10} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_VCM_r_10} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W} \\
-      \rotatebox{90}{~\nauthors{Mérigot}{Merigot2011} $R_2$, $r_2$} &
+      \rotatebox{90}{~\nauthors{Mérigot} $R_2$, $r_2$} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_VCM_r_22} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W}
     \end{tabular}
-    \caption[Evaluation of feature detectors on noisy approximations of digital shapes of \RefFigure{fig:feature-comparative}]{Evaluation of feature detectors on noisy approximations of digital shapes of \RefFigure{fig:feature-comparative}.
+    \caption[Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative}]{Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative}.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Parameters used for \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
-    Parameters used for \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative-noise}}
+    Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
+    Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative-noise}}
   \end{center}
 \end{figure}
 %
@@ -1513,21 +1514,21 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise2} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_noise2} &
       \\
-      \rotatebox{90}{~~~~~~\nauthors{Mellado}{Mellado2012}} &
+      \rotatebox{90}{~~~~~~\nauthors{Mellado}} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_Mellado_scale} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_Mellado_scale} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_Mellado_scale} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_Mellado_scale} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W}
       \\
-      \rotatebox{90}{~~~~~~~~~~\nauthors{Pauly}{Pauly2003}} &
+      \rotatebox{90}{~~~~~~~~~~\nauthors{Pauly}} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_Pauly_scale} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_Pauly_scale} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_Pauly_scale} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_Pauly_scale} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W}
       \\
-      \rotatebox{90}{~~~~~~\nauthors{Park}{Park2012}} &
+      \rotatebox{90}{~~~~~~\nauthors{Park}} &
       \includegraphics[width=4.0cm]{images/Feature/SphereSphereSphere_noise_Tensor_scale} &
       \includegraphics[width=4.0cm]{images/Feature/CubeSphere_noise_Tensor_scale} &
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_noise_Tensor_scale} &
@@ -1540,12 +1541,12 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_II_scale} &
       \rotatebox{90}{\includegraphics[width=0.2cm]{images/Feature/Red} Edge~~\includegraphics[width=0.2cm]{images/Feature/Blue} Smooth~~\includegraphics[width=0.2cm]{images/Feature/Green} Flat}
     \end{tabular}
-    \caption[Evaluation of feature detectors on noisy approximations of digital shapes of \RefFigure{fig:feature-comparative-2}]{Evaluation of feature detectors on noisy approximations of digital shapes of \RefFigure{fig:feature-comparative-2}.
+    \caption[Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative-2}]{Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative-2}.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Parameters used for \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
-    Parameters used for \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
-    Parameters used for \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
-    Parameters used for our algorithm: $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-noise-2}}
+    Paramètre utilisé pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
+    Paramètre utilisé pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
+    Paramètre utilisé pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
+    Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-noise-2}}
   \end{center}
 \end{figure}
 %
@@ -1651,7 +1652,49 @@ notre estimateur, il est alors clair que ces résultats peuvent être facilement
 améliorés.
 %
 \subsection{Conclusion}
-\todoInlineJeremy{Conclusion feature à faire}
+%
+Dans ce chapitre, nous avons défini un nouvel outil de détection de singularité
+simple et robuste basé sur les estimateurs de courbure par intégration du
+chapitre précédent. Celui-ci, défini en dimension 2 et 3 et s'appuyant sur les
+bonnes propriétés mathématiques des estimateurs de courbure, propose de détecter
+les parties non-$C^1$, les parties $C^3$ et les parties à courbure nulle sur la
+surface d'objets digitaux. Puisque l'approche proposée est basée sur des
+quantités locales différentielles à plusieurs échelles, la classification
+obtenue est localement adaptative et invariante à l'échelle (au sens où il
+capture les singularités à différentes échelles sur le même objet géométrique).
+Nous avons évaluer expérimentalement notre détecteur avec des méthodes
+représentatives de l'état de l'art et montré qu'il était très compétitif en
+arrivant à détecter des singularités même à des échelles différentes sans autre
+paramètre à choisir autre que l'ensemble de rayons.
+
+
+D'ailleurs cet ensemble de rayons constitue une limitation. Comme le rayon
+maximal de cet ensemble est dépendant de la singularité maximale que nous
+souhaitons détecter, leur réglage peut être important. \\
+%
+Ensuite, comme pour les estimateurs de courbure, notre estimateur est basé sur
+l'intégration volumique de la sphère et cette opération reste coûteuse et peut
+la rendre moins compétitive face à d'autres à échelle fixe. Cependant, notre
+méthode permet de détecter les singularités à plusieurs échelles ce qui est la
+principal défaillance des autres méthodes à échelle fixe.
+
+
+Cet outil est le point d'entrée de plusieurs perspectives intéressantes.\\
+%
+Tout d'abord, les résultats présentés ici sont des résultats bruts. Nous pouvons
+facilement coupler notre méthode avec des outils de post-traitement pour
+améliorer significativement les défauts encore présents, notamment les artefacts
+sur les formes bruités.\\
+%
+Ensuite, nous pouvons analyser la forme en amont afin de mieux connaître la
+forme sous-jacente. L'utilisation de la longueur des segments maximaux s'avère
+être le candidat idéal, et permettrait alors de guider l'ensemble de rayons
+utilisés pour notre méthode.\\
+%
+Enfin, une meilleure connaissance de la distance à la surface sous-jacente
+permettrait de supprimer certains artefacts visibles sur les zones à courbure
+nulle.
+
 %
 %\section{Reconstruction de surface}%
 %\label{sec:applications:reconstruction}
