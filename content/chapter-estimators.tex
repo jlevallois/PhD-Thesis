@@ -32,29 +32,22 @@ estimateurs avec les méthodes représentatives de l'état de l'art dans la
 %
 \subsection{Estimation de courbure sur des maillages}
 %
-Les données digitales étant discrètes par nature, il semble alors intéressant de
-regarder du côté des techniques d'estimation de courbure sur des maillages
+Les données digitales étant discrètes par nature, il semble alors pertinant de
+s'intéresser aux techniques d'estimation de courbure sur des maillages
 triangulés. Il existe une vaste famille de techniques en \ComputerGraphics et en
 \GeometryProcessing pour estimer les courbures moyennes et gaussiennes, et
 parfois même le tenseur de courbure entier. La plupart effectuent des analyses
-locales (\cad limité au $1$-voisinage ou $2$-voisinage) de la forme mais
-produisent des résultats corrects pour de « bons » maillages.
+locales (\cad limité au $1$-voisinage ou $2$-voisinage) de la forme. La
+précision de l'estimation dépend fortement de la « qualité » du maillage (au
+sens où ce dernier approxime bien la surface continue sous-jascente).
 %
 \begin{figure}[ht]
     \begin{center}
-      \includegraphics[width=10cm]{images/Curvature/OneRingNeighborhood}
+      \includegraphics[width=10cm]{figures/OneRingNeighborhood}
     \end{center}
     \caption[$1$-voisinage et $2$-voisinage.]{$1$-voisinage de valence $6$ et
-    $2$-voisinage de valence $5$ (Figure~1 de \cite{Gatzke2006}).}
+    $2$-voisinage de valence $5$.}
     \label{fig:one-ring-neighborhood}
-\end{figure}
-\begin{figure}[ht]
-  \begin{center}
-    \input{figures/tikz/RingNeighborhood.tikz}
-  \end{center}
-  [$1$-voisinage et $2$-voisinage.]{$1$-voisinage de valence $6$ et
-  $2$-voisinage de valence $5$.}
-  \label{fig:one-ring-neighborhood-2}
 \end{figure}
 %
 Globalement, nous pouvons les distinguer en trois catégories :
