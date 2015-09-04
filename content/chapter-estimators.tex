@@ -50,15 +50,15 @@ sens où ce dernier approxime bien la surface continue sous-jascente).
     \label{fig:one-ring-neighborhood}
 \end{figure}
 %
-Globalement, nous pouvons les distinguer en trois catégories :
-\begin{itemize}
-  \item Méthode par Correspondance
-  \item Méthodes discrètes
-  \item Estimation du tenseur de courbure
-\end{itemize}
+% Globalement, nous pouvons les distinguer en trois catégories :
+% \begin{itemize}
+%   \item Méthode par Correspondance
+%   \item Méthodes discrètes
+%   \item Estimation du tenseur de courbure
+% \end{itemize}
 %
-\cauthors{Surazhsky}{Surazhsky2003} et \cauthors{Gatzke}{Gatzke2006} ont par
-ailleurs proposé une comparaison compréhensible de ces estimateurs. Nous nous
+\cauthors{Surazhsky}{Surazhsky2003} et \cauthors{Gatzke}{Gatzke2006} ont
+proposé une comparaison compréhensible de ces estimateurs. Nous nous
 référons à \cauthors{Desbrun}{Desbrun2005} et \cauthors{Bobenko}{Bobenko2008}
 pour une théorie entièrement discrète. Cependant, la plupart n'ont aucunes
 garanties de convergence théorique des valeurs estimées, même sans bruit sur le
@@ -1118,35 +1118,30 @@ Nous devons également étudier comment les moments sont perturbés par une erre
 \end{lemma}
 \begin{proof}
 %
-% \begin{figure}\small
-%   \begin{center}
-%     \subfig[]{\begin{overpic}[width=5cm]{figures/momentsPerturbation}
-%       \put(51,27){$\vx$}
-%       \put(40,40){$\vx+\vt$}
-%       \put(5,70){$\Ball{R}{\vx+\vt}$}
-%       \put(86,30){$\Ball{R}{\vx}$}
-%       \put(60,0){\tiny $(\Ball{R}{\vx} \setminus \Ball{R}{\vx+\vt} )\cap \Shape$}
-%       \put(22,18){\tiny$(\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx} )\cap \Shape$}
-%       \end{overpic}}
-%       ~~~~~~~~~~\subfig[]{\begin{overpic}[width=5cm]{figures/momentsPerturbation2}
-%       \put(51,32){$\vx$}
-%       \put(40,45){$\vx+\vt$}
-%       \put(5,73){$\Ball{R}{\vx+\vt}$}
-%       \put(90,33){$\Ball{R}{\vx}$}
-%     \end{overpic}}
-%   \end{center}
-%   \caption{[Illustration du \RefLemma{lem:moments-ball-position-error}.]{Illustration du \RefLemma{lem:moments-ball-position-error}.}
-%   \label{fig:moments-perturb}
-% \end{figure}
 \begin{figure}[ht]
-    \begin{center}
-      \includegraphics[width=5cm]{figures/momentsPerturbation}
-      \includegraphics[width=5cm]{figures/momentsPerturbation2}
-    \end{center}
+  \begin{center}
+    \setlength{\tabcolsep}{0.0pt}
+    \begin{tabular}{@{}c c@{}}
+      \begin{overpic}[width=5cm]{figures/momentsPerturbation}
+        \put(51,27){$\vx$}
+        \put(40,40){$\vx+\vt$}
+        \put(5,70){$\Ball{R}{\vx+\vt}$}
+        \put(86,30){$\Ball{R}{\vx}$}
+        \put(60,0){\tiny $(\Ball{R}{\vx} \setminus \Ball{R}{\vx+\vt} )\cap \Shape$}
+        \put(22,18){\tiny$(\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx} )\cap \Shape$}
+      \end{overpic}
+      &
+      \begin{overpic}[width=5cm]{figures/momentsPerturbation2}
+        \put(51,32){$\vx$}
+        \put(40,45){$\vx+\vt$}
+        \put(5,73){$\Ball{R}{\vx+\vt}$}
+        \put(90,33){$\Ball{R}{\vx}$}
+      \end{overpic}
+    \end{tabular}
     \caption[Illustration du \RefLemma{lem:moments-ball-position-error}.]{Illustration du \RefLemma{lem:moments-ball-position-error}.}
-    \label{fig:moments-perturb}
+      \label{fig:moments-perturb}
+  \end{center}
 \end{figure}
-\todoJeremy{Pb avec la figure}
 %
 En décomposant $\Shape$ en fonction de deux boules de rayon R, centrées en $\vx$
 et $\vx + \vt$ (voir \RefFigure{fig:moments-perturb}), nous avons :
