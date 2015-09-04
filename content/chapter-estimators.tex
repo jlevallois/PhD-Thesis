@@ -69,9 +69,9 @@ moyennage.
 
 \cauthor{Xu}{Xu2006} estime la courbure gaussienne avec une
 approche dérivée de la formule de Gauss-Bonnet (défaut d'angle) et donne un
-théorème de stabilité pour les maillages triangulés dont les sommets épousent la
+théorème de stabilité pour les maillages triangulés dont les sommets interpolent la
 variété lisse sous-jacente, de valence $6$, et respectant les conditions d'un
-parallélogramme (tous le $1$-voisinage sont projetés comme un parallélogramme
+parallélogramme (les $1$-voisinages sont projetés comme des parallélogrammes
 sur un plan). En assumant que la densité de l’échantillonnage est $\delta$,
 \nauthor{Xu} propose une propriété de convergence supplémentaire lorsque
 l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
@@ -85,7 +85,7 @@ Une autre approche notable est l'estimation d'information de
 courbure par intégration de mesures des courbures, basée sur la théorie du cycle
 des normales \cite{CohenSteiner2003,CohenSteiner2006} sur un maillage triangulé.
 Les auteurs (\nauthors{Cohen-Steiner}) mettent en avant des résultats de
-convergence lorsque les sommets épousent le bord de l'objet euclidien
+convergence lorsque les sommets interpolent le bord de l'objet euclidien
 sous-jacent. Dans ce cas, si le maillage a une distance de Hausdorff avec le
 bord de la forme au dessous de $\epsilon$, la convergence peut être obtenue avec
 une vitesse/erreur en $O(\epsilon)$ sous certaines conditions.
@@ -95,11 +95,11 @@ une vitesse/erreur en $O(\epsilon)$ sous certaines conditions.
 Enfin, en \emph{traitement géométrique}, d'intéressants outils
 mathématiques ont été développés pour concevoir des estimateurs différentiels
 sur des surfaces lisses basées sur les invariants par intégration
-(\cauthors{Pottmann}{Pottmann2007,Pottmann2009}). Cela consiste à faire déplacer
-une boule le long de la surface de la forme et calculer des intégrales sur
-l'intersection entre la forme et la boule. Les auteurs ont démontrés que ces
+(\cauthors{Pottmann}{Pottmann2007,Pottmann2009}). Cela consiste à déplacer
+une boule le long de la surface de la forme et à calculer des intégrales sur
+l'intersection entre la forme et la boule. Les auteurs ont démontré que ces
 quantités par intégration apportent d'intéressantes informations de courbure
-lorsque la taille de la boule tend vers zéro. Ils amènent également des preuves
+lorsque le rayon de la boule tend vers zéro. Ils amènent également des preuves
 de stabilité --- dans le cas d'échantillonnage de maillage par exemple ---
 dépendant de la taille de la boule et du $\epsilon$. Nos travaux sur les
 estimateurs digitaux de courbure se basent sur la même idée.
@@ -109,16 +109,16 @@ estimateurs digitaux de courbure se basent sur la même idée.
 Lorsque nous avons des données discrètes (par exemple un nuage de points), la
 façon la plus naturelle d'approcher la courbure est de faire correspondre une
 surface polynomiale de degré $2$ ou plus. Le meilleur représentant de cette
-technique est les « \anglais{Osculating jets} » de
+technique est les « \anglais{osculating jets} » de
 \cauthors{Cazals}{Cazals2005}. Les auteurs proposent des résultats de
 convergence en $O(\delta^2)$ lorsque la donnée d'entrée est un échantillonnage de
 la surface, avec $\delta$ la densité de points. Cependant, lorsque les données
-présentent du bruit, aucun résultat théorique n'est apporté malgré qu'en
-pratique la correspondance aux moindres carrés des jets osculatoires est très
+présentent du bruit, aucun résultat théorique n'est apporté malgré le fait qu'en
+pratique l'approximation aux moindres carrés des jets osculatoires est très
 robuste.
 
 
-Une autre famille de techniques utilisent le diagramme de Voronoi
+Une autre famille de techniques utilise le diagramme de Voronoi
 \cite{Alliez2007,Merigot2009,Merigot2011}. L'idée principale derrière cette
 approche est qu'au lieu de faire des correspondances dans l'espace tangent à la
 surface, d'estimer au mieux dans l'espace orthogonal. La mesure de covariance
@@ -156,7 +156,7 @@ Basés sur des principes de convolutions binomiales
 \cite{Malgouyres2008,Esbelin2011}, ou sur la correspondance de surface
 polynomiales \cite{Provot2011}, des résultats de convergence peuvent être obtenus
 pour les dérivés d'ordre supérieurs de courbes digitales. Ces algorithmes sont
-paramétrés par la taille de la convolution ou le support du kernel utilisé
+paramétrés par la taille du noyau de convolution ou du support utilisé
 pour la correspondance, et les théorèmes de convergence \todoJeremy{trouve plus
 les mots, nécessite, a besoin} quand la taille de support est une fonction
 croissante de la résolution de la grille et de quelques caractéristiques de la

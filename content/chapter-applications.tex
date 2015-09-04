@@ -585,7 +585,7 @@ de la forme à analyser, et de ce que nous voulons extraire comme « zones
 caractéristiques ». Une analyse plus complète est proposée dans le
 \RefSection{sec:applications:feature:comparison}.
 %
-\paragraph{Correspondance aux moindres carrés de sphères}%
+\paragraph{Approximation aux moindres carrés de sphères}% \comJeremy{approximation aux moindres carrés de sphères}
 \label{sec:applications:feature:growing}
 %
 D'autres \cite{Mellado2012} ont introduit une approche rapide d'approximation
@@ -599,10 +599,10 @@ précision la localisation des points caractéristiques.
 
 
 Dans leurs travaux, \cauthor{Mellado}{Mellado2012} proposent de faire
-correspondre aux moindres carrés des sphères (\emph{least squares spherical
+approximer aux moindres carrés des sphères (\emph{least squares spherical
 fitting}) à la surface de l'objet, et d'en extraire un score de \emph{feature}
 sur chaque élément de la surface. Le paramètre d'espace d'échelle est la taille
-du voisinage à considérer dans la correspondance. En utilisant leurs notations,
+du voisinage à considérer dans l'approximation. En utilisant leurs notations,
 pour toutes les échelles $t$ ($t=R$ avec nos notations), ils font correspondre
 une hyper-sphère algébrique et la distance de décalage algébrique $\tau$ entre
 le point $\vp$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
