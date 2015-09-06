@@ -65,59 +65,156 @@ garanties de convergence théorique des valeurs estimées, même sans bruit sur 
 maillage. Nous pouvons citer \cite{Page2002} et \cite{Rusinkiewicz2004} comme
 approches qui essayent de plaquer les perturbations sur la surface à travers un
 moyennage.
-
-
-\cauthor{Xu}{Xu2006} estime la courbure gaussienne avec une
-approche dérivée de la formule de Gauss-Bonnet (défaut d'angle) et donne un
-théorème de stabilité pour les maillages triangulés dont les sommets interpolent la
-variété lisse sous-jacente, de valence $6$, et respectant les conditions d'un
-parallélogramme (les $1$-voisinages sont projetés comme des parallélogrammes
-sur un plan). En assumant que la densité de l’échantillonnage est $\delta$,
-\nauthor{Xu} propose une propriété de convergence supplémentaire lorsque
+%
+\paragraph{}
+%
+\cauthor{Xu}{Xu2006} estime la courbure gaussienne avec une approche dérivée de
+la formule de Gauss-Bonnet (défaut d'angle). Cette approche a beaucoup été
+étudiée dans la littérature pour l'estimation de courbure gaussienne
+\cite{Meek2000, Stokely1992} mais aussi pour de la reconstruction \cite{Dyn2001}
+ou de la simplification de surface \cite{Kim2002}, et a même été déclarée « le
+meilleur algorithme (ndlr: parmi 5 approches) pour l'estimation de la courbure
+gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
+%
+\begin{figure}[ht]
+    \begin{center}
+      \includegraphics[width=5.5cm]{images/Curvature/Notations_Xu}
+      \includegraphics[width=7.5cm]{images/Curvature/Notations_Xu_2}
+    \end{center}
+    \caption[Notations pour \cauthor{Xu}{Xu2006}.]{\emph{À gauche :} Notations pour \cauthor{Xu}{Xu2006} (Figure~1 de \cite{Xu2006}). \emph{À droite :} Triangulation nécessaire du domaine (Figure~3 de \cite{Xu2006})}
+    \label{fig:xu_notations}
+\end{figure}
+%
+Soit $\vp$ un sommet de valence $6$ du maillage triangulé $M$ et $\vp_j$ avec
+$j = 1,\cdots, 6$ l'ensembles des sommets du $1$-voisinage de $\vp$ (voir
+\RefFigure{fig:xu_notations}-gauche pour les notations). Si $\vp$ et $\vp_j$
+sont sur la surface paramétrique suffisemment lisse $F(\xi_1,\xi_2) \in \R^3$ et
+qu'il existe $\vq, \vq_j \in \R^2$ tels que
+(\RefFigure{fig:xu_notations}-droite, le $1$-voisinage est projeté comme des
+parallélogrammes sur un plan) :
+%
+\begin{equation}
+  \vp=F(\vq), \quad \vp_j=F(\vq_j) \quad \text{~et~} \vq_j=\vq_{j-} + \vq_{j+} - \vq ,
+\end{equation}
+%
+Alors, en assumant que la densité de l’échantillonnage est $\delta$ avec $A(\vp, \delta)$ la somme des aires des triangles
+$[\vp\vp_j(\delta)\vp_{j+}(\delta)]$ (en gris sur la
+\RefFigure{fig:xu_notations}-gauche), $\omega_j$ l'angle $\angle
+\vp_j\vp\vp_{j+}$, ils prouvent que :
+%
+\begin{equation}
+  \frac{3}{A(\vp,\delta)} \left[ 2\pi - \sum \limits^6_{j=1} \omega_j(\delta) \right] \EqDef \GaussCurv(\vp) + O(\delta^2) ,
+\end{equation}
+%
+quand $\delta$ tend vers $0$, où $\GaussCurv(\vp)$ est la valeurs de courbure
+gaussienne au point $\vp$.
+%
+\\
+%
+L'auteur propose une propriété de convergence supplémentaire lorsque
 l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
-$\alpha > 2$ (ce qui est inapproprié pour des données discrètes car ce sont des
-\anglais{outliers}). \todoJeremy{détailler plus en détail ($>\_<$), avec formules et
-schéma} Il est à noter que si le maillage triangulé ne satisfait pas ces
-conditions, l'estimation ne converge pas.
-
-
-Une autre approche notable est l'estimation d'information de
-courbure par intégration de mesures des courbures, basée sur la théorie du cycle
-des normales \cite{CohenSteiner2003,CohenSteiner2006} sur un maillage triangulé.
+$\alpha \ge 3$. Cela n'est pas applicable directement à des surfaces digitales car la perturbation est trop loin par rapport à la surface et correspond plus à des \anglais{outliers}. De plus, les contraintes topologiques expliquées précédemment sont déterminantes pour la convergence : si elles ne sont pas satisfaitent, l'estimation de la courbure gaussienne ne converge pas.
+%
+\paragraph{}
+%
+Une autre approche notable est l'estimation d'information de courbure par
+intégration de mesures des courbures, basée sur la théorie du cycle normal sur
+un maillage triangulé \cite{CohenSteiner2003,CohenSteiner2006}.
+%
+\\
+%
+La théorie du cycle normal, introduite par \cauthor{Wintgen}{Wintgen1982} et
+\cauthor{Zähle}{Zahle1986} est une technique qui permet de définir de manière
+unifiée la courbure de surfaces lisses et polyhédrales. En effet, la mesure de
+courbure peut être obtenue par le cycle normal de la surface. Le cycle normal
+$N(V)$ de la forme $V \subset \R^3$ est le courant\footnote{sous-variété pouvant
+présenter des singularités.} associé à l'ensemble :
+%
+\begin{equation}
+  ST^\bot V \EqDef \{(\vp, \NormalDir(\vp)) | \vp \in \Boundary V\} \subset \R^3 \times E_\NormalDir \,,
+\end{equation}
+%
+avec $\vp \in \Boundary{V}$ et $\NormalDir(\vp)$ la normale unitaire au point
+$\vp$.
+%
+\todoInlineJeremy{Mouai ... a finir là ...}
+%
 Les auteurs (\nauthors{Cohen-Steiner}) mettent en avant des résultats de
 convergence lorsque les sommets interpolent le bord de l'objet euclidien
 sous-jacent. Dans ce cas, si le maillage a une distance de Hausdorff avec le
 bord de la forme au dessous de $\epsilon$, la convergence peut être obtenue avec
 une vitesse/erreur en $O(\epsilon)$ sous certaines conditions.
-\todoJeremy{détailler}
-
-
+%
+\paragraph{}
+%
 Enfin, en \emph{traitement géométrique}, d'intéressants outils
 mathématiques ont été développés pour concevoir des estimateurs différentiels
 sur des surfaces lisses basées sur les invariants par intégration
 (\cauthors{Pottmann}{Pottmann2007,Pottmann2009}). Cela consiste à déplacer
 une boule le long de la surface de la forme et à calculer des intégrales sur
 l'intersection entre la forme et la boule. Les auteurs ont démontré que ces
-quantités par intégration apportent d'intéressantes informations de courbure
+quantités par intégration apportent d'intéressantes informations de courbures
 lorsque le rayon de la boule tend vers zéro. Ils amènent également des preuves
 de stabilité --- dans le cas d'échantillonnage de maillage par exemple ---
 dépendant de la taille de la boule et du $\epsilon$. Nos travaux sur les
-estimateurs digitaux de courbure se basent sur la même idée.
+estimateurs digitaux de courbures se basant sur la même idée, nous détaillerons cette approche dans un prochain paragraphe (\RefSection{sec:pottmann-principle}).
 %
 \subsection{Estimation de courbure sur des nuages de points}
 %
-Lorsque nous avons des données discrètes (par exemple un nuage de points), la
-façon la plus naturelle d'approcher la courbure est de faire correspondre une
-surface polynomiale de degré $2$ ou plus. Le meilleur représentant de cette
-technique est les « \anglais{osculating jets} » de
-\cauthors{Cazals}{Cazals2005}. Les auteurs proposent des résultats de
-convergence en $O(\delta^2)$ lorsque la donnée d'entrée est un échantillonnage de
-la surface, avec $\delta$ la densité de points. Cependant, lorsque les données
-présentent du bruit, aucun résultat théorique n'est apporté malgré le fait qu'en
-pratique l'approximation aux moindres carrés des jets osculatoires est très
-robuste.
+Lorsque nous avons des nuages de points, la façon la plus naturelle d'approcher
+la courbure est de faire correspondre une surface polynomiale de degré $2$ ou
+plus à l'ensemble de points. Le meilleur représentant de ces techniques est l'estimation des quantités différentielles par ajustement polynomial des jets osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}.
+%
+\\
+%
+Un jet est un développement de Taylor tronqué, et ces jets contiennent des
+informations sur les quantités géométriques locales (normales, courbures, etc.).
 
 
+
+Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2) résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
+%
+\\
+%
+Pour la première étape, dans le cas d'un maillage, cela correspond à récupérer les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant progressivement jusqu'à atteindre $N$ points. Dans le cas d'un nuage de points, il faut d'abord estimer la normale au point $\vp$ et les $N$ points voisins peuvent alors facilement être récupérés avec un diagramme de puissance sur le plan tangeant estimé (nécessite cependant que l'échantillonnage soit assez dense). Nous obtenons ainsi :
+\begin{equation}
+  A =  \,,
+\end{equation}
+%
+\\
+%
+Pour la seconde étape, il faut calculer une analyse en composantes principales (\ACP) de notre ensemble de points voisins afin d'estimer grossièrement la normale au point $\vp$ Ainsi, l'ajustement polynomial peut etre calculé en supprimant la coordonée dont l'angle est le plus proche de la normale.
+Calcul de la matrice de Vandermonde $N \times N_n$ :
+%
+\begin{equation}
+  M =  (1,x_i, y_i, x^2_i, \cdots, x_iy_i^{n-1}, y_i^n)_{i=1,\cdots,N} \,,
+\end{equation}
+%
+À noter que cette matrice doit être mise à l'échelle avec la valeur moyenne des
+normes $||(x_i,y_i)||$. Ainsi, résoudre avec la décomposition en valeurs singulières
+(\anglais{Singular Value Decomposition}).
+%
+\todoInlineJeremy{pour récup la normale ?}
+%
+%\\
+%
+Enfin, calculer l'opérateur de forme (appelé également application de
+Weingarten) nous permet de retrouver des informations du second ordre puisqu'il
+est relié aux coefficients des formes fondamentales par les équations de
+Weingarten.
+%
+\\
+%
+Les auteurs proposent des résultats de convergence en $O(\delta^2)$ lorsque la
+donnée d'entrée est un échantillonnage de la surface, avec $\delta$ la densité
+de points. Cependant, lorsque les données présentent du bruit, aucun résultat
+théorique n'est apporté malgré le fait qu'en pratique l'approximation aux
+moindres carrés des jets osculatoires est très robuste.
+%
+Nous nommerons cet estimateur par la suite \JetFitting lors des comparaisons.
+%
+\paragraph{}
+%
 Une autre famille de techniques utilise le diagramme de Voronoi
 \cite{Alliez2007,Merigot2009,Merigot2011}. L'idée principale derrière cette
 approche est qu'au lieu de faire des correspondances dans l'espace tangent à la
@@ -211,6 +308,7 @@ de la sorte :
 \end{definition}
 %
 \subsection{Analyse euclidienne de l'intégration volumique de la sphère, et relation à la courbure}
+\label{sec:pottmann-principle}
 %
 La relation entre $A_R(\vx)$ et la courbure (\resp $V_R(\vx)$ et la courbure
 moyenne ) au point $\vx$ pour des formes de $\R^2$ (\respp $\R^3$) a beaucoup
