@@ -389,23 +389,23 @@ Il y a alors trois paramètres à choisir : $\alpha$, $\beta$, ainsi que la
 taille du voisinage, rendant la détection compliquée sans analyse au préalable
 de la forme d'entrée. Le \RefSection{sec:applications:feature:comparison} compare le résultat de l'\RefEquation{eq:moment-C1} avec deux rayons différents.
 %
-\paragraph{Voronoi Covariance Measure}
+\paragraph{Mesure de covariance des cellules de Voronoi}
 %
 \cauthors{Mérigot}{Merigot2011} proposent une méthode robuste pour extraire
 d'une surface lisse des informations de courbure ainsi que des zones
 caractéristiques nettes. Cette méthode, basée sur les travaux de
 \cauthors{Alliez}{Alliez2007}, associe en chaque point $\vp$ une \emph{mesure de
-covariance des cellules de Voronoi} $\mathcal{V}_{C,R}$ (\VCMM --- \VCM ---) à
+covariance des cellules de Voronoi} $\mathcal{V}_{K,R}$ (\VCMM --- \VCM ---) à
 laquelle ils peuvent extraire des informations sur la géométrie sous-jacente
 (\RefFigure{fig:mellado-VCM}). Il s'agit en fait de calculer un matrice de
-covariance ($cov$) sur des cellules de Voronoi ($Vor_C$) des points du bord de
+covariance ($cov$) sur des cellules de Voronoi ($Vor_K$) des points du bord de
 l'objet :
 %
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=4cm]{images/Feature/VCM}
     \end{center}}
-    \caption[Notations.]{Principe de VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoi, en orange : \comJeremy{longueur des directions des cellules} de Voronoi.
+    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoi, en orange : \comJeremy{longueur des directions des cellules} de Voronoi.
       \label{fig:mellado-VCM}}
 \end{figure}
 %
@@ -437,7 +437,7 @@ appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction « Hat �
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/VCM_notations}
     \end{center}}
-    \caption[Notations.]{Notations (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:mellado-multiscale}}
+    \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:mellado-multiscale}}
 \end{figure}
 
 

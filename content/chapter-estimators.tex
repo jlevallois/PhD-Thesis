@@ -66,7 +66,7 @@ maillage. Nous pouvons citer \cite{Page2002} et \cite{Rusinkiewicz2004} comme
 approches qui essayent de plaquer les perturbations sur la surface à travers un
 moyennage.
 %
-\paragraph{}
+\paragraph{Approche par formule de Gauss-Bonnet}
 %
 \cauthor{Xu}{Xu2006} estime la courbure gaussienne avec une approche dérivée de
 la formule de Gauss-Bonnet (défaut d'angle). Cette approche a beaucoup été
@@ -115,7 +115,7 @@ L'auteur propose une propriété de convergence supplémentaire lorsque
 l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
 $\alpha \ge 3$. Cela n'est pas applicable directement à des surfaces digitales car la perturbation est trop loin par rapport à la surface et correspond plus à des \anglais{outliers}. De plus, les contraintes topologiques expliquées précédemment sont déterminantes pour la convergence : si elles ne sont pas satisfaitent, l'estimation de la courbure gaussienne ne converge pas.
 %
-\paragraph{}
+\paragraph{Cycle normal}
 %
 Une autre approche notable est l'estimation d'information de courbure par
 intégration de mesures des courbures, basée sur la théorie du cycle normal sur
@@ -145,25 +145,31 @@ sous-jacent. Dans ce cas, si le maillage a une distance de Hausdorff avec le
 bord de la forme au dessous de $\epsilon$, la convergence peut être obtenue avec
 une vitesse/erreur en $O(\epsilon)$ sous certaines conditions.
 %
-\paragraph{}
+\paragraph{Invariants par intégration}
 %
-Enfin, en \emph{traitement géométrique}, d'intéressants outils
-mathématiques ont été développés pour concevoir des estimateurs différentiels
-sur des surfaces lisses basées sur les invariants par intégration
-(\cauthors{Pottmann}{Pottmann2007,Pottmann2009}). Cela consiste à déplacer
-une boule le long de la surface de la forme et à calculer des intégrales sur
+Enfin, en \emph{traitement géométrique}, d'intéressants outils mathématiques ont
+été développés pour concevoir des estimateurs différentiels sur des surfaces
+lisses basées sur les invariants par intégration
+(\cauthors{Pottmann}{Pottmann2007,Pottmann2009}). Cela consiste à déplacer une
+boule le long de la surface de la forme et à calculer des intégrales sur
 l'intersection entre la forme et la boule. Les auteurs ont démontré que ces
 quantités par intégration apportent d'intéressantes informations de courbures
 lorsque le rayon de la boule tend vers zéro. Ils amènent également des preuves
 de stabilité --- dans le cas d'échantillonnage de maillage par exemple ---
 dépendant de la taille de la boule et du $\epsilon$. Nos travaux sur les
-estimateurs digitaux de courbures se basant sur la même idée, nous détaillerons cette approche dans un prochain paragraphe (\RefSection{sec:pottmann-principle}).
+estimateurs digitaux de courbures se basant sur la même idée, nous détaillerons
+cette approche dans un prochain paragraphe
+(\RefSection{sec:pottmann-principle}).
 %
 \subsection{Estimation de courbure sur des nuages de points}
 %
+\paragraph{Ajustement polynomial des jets osculateurs}
+%
 Lorsque nous avons des nuages de points, la façon la plus naturelle d'approcher
 la courbure est de faire correspondre une surface polynomiale de degré $2$ ou
-plus à l'ensemble de points. Le meilleur représentant de ces techniques est l'estimation des quantités différentielles par ajustement polynomial des jets osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}.
+plus à l'ensemble de points. Le meilleur représentant de ces techniques est
+l'estimation des quantités différentielles par ajustement polynomial des jets
+osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}.
 %
 \\
 %
@@ -172,19 +178,30 @@ informations sur les quantités géométriques locales (normales, courbures, etc
 
 
 
-Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2) résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
+Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2)
+résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
 %
 \\
 %
-Pour la première étape, dans le cas d'un maillage, cela correspond à récupérer les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant progressivement jusqu'à atteindre $N$ points. Dans le cas d'un nuage de points, il faut d'abord estimer la normale au point $\vp$ et les $N$ points voisins peuvent alors facilement être récupérés avec un diagramme de puissance sur le plan tangeant estimé (nécessite cependant que l'échantillonnage soit assez dense). Nous obtenons ainsi :
+Pour la première étape, dans le cas d'un maillage, cela correspond à récupérer
+les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant
+progressivement jusqu'à atteindre $N$ points. Dans le cas d'un nuage de points,
+il faut d'abord estimer la normale au point $\vp$ et les $N$ points voisins
+peuvent alors facilement être récupérés avec un diagramme de puissance sur le
+plan tangeant estimé (nécessite cependant que l'échantillonnage soit assez
+dense). Nous obtenons ainsi :
+%
 \begin{equation}
   A =  \,,
 \end{equation}
 %
 \\
 %
-Pour la seconde étape, il faut calculer une analyse en composantes principales (\ACP) de notre ensemble de points voisins afin d'estimer grossièrement la normale au point $\vp$ Ainsi, l'ajustement polynomial peut etre calculé en supprimant la coordonée dont l'angle est le plus proche de la normale.
-Calcul de la matrice de Vandermonde $N \times N_n$ :
+Pour la seconde étape, il faut calculer une analyse en composantes principales
+(\ACP) de notre ensemble de points voisins afin d'estimer grossièrement la
+normale au point $\vp$ Ainsi, l'ajustement polynomial peut etre calculé en
+supprimant la coordonée dont l'angle est le plus proche de la normale. Calcul de
+la matrice de Vandermonde $N \times N_n$ :
 %
 \begin{equation}
   M =  (1,x_i, y_i, x^2_i, \cdots, x_iy_i^{n-1}, y_i^n)_{i=1,\cdots,N} \,,
@@ -213,22 +230,78 @@ moindres carrés des jets osculatoires est très robuste.
 %
 Nous nommerons cet estimateur par la suite \JetFitting lors des comparaisons.
 %
-\paragraph{}
+\paragraph{Mesure de covariance des cellules de Voronoi}
 %
 Une autre famille de techniques utilise le diagramme de Voronoi
-\cite{Alliez2007,Merigot2009,Merigot2011}. L'idée principale derrière cette
-approche est qu'au lieu de faire des correspondances dans l'espace tangent à la
-surface, d'estimer au mieux dans l'espace orthogonal. La mesure de covariance
-convoluée introduite par \cauthors{Mérigot}{Merigot2011} est particulièrement
-intéressante car cette mesure apporte de la robustesse même pour des ensembles
-compacts arbitraires, en $O(\sqrt{\epsilon})$. C'est en quelque sorte la mesure
-intégrale de la matrice de covariance du cône de normale autour du point
-d'intérêt. Néanmoins, la convergence des courbures est dépendante de plusieurs
-paramètres $r$ et $R$ qui contribuent de manière contradictoire avec l'erreur de
-Hausdorff. En pratique, cette approche donne des résultats comparables aux jets
-osculatoires pour les courbures.
-
-
+\cite{Alliez2007,Merigot2009,Merigot2011,Cuel2014DGCI}. L'idée principale
+derrière cette approche est qu'au lieu de faire des correspondances dans
+l'espace tangent à la surface, d'estimer au mieux dans l'espace orthogonal.
+\cauthors{Mérigot}{Merigot2011} proposent alors d'associer en chaque point $\vp$
+une \emph{mesure de covariance des cellules de Voronoi} $\mathcal{V}_{K,R}$
+(\VCMM --- \VCM ---) pour une forme $K$. Cette mesure contient des informations
+sur la géométrie sous-jacente.
+%
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=4cm]{images/Feature/VCM}
+    \end{center}}
+    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoi, en orange : \comJeremy{longueur des directions des cellules} de Voronoi.
+      \label{fig:mellado-VCM}}
+\end{figure}
+%
+Cela nécessite de calculer un matrice de covariance ($cov$) sur les cellules de
+Voronoi ($Vor_K$) des points $\vp$ du bord de l'objet :
+%
+\begin{equation}
+    cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
+\end{equation}
+%
+Afin d'avoir une information locale de la variation de la forme, les auteurs se
+limitent à un voisinage de rayon $R$ :
+%
+\begin{equation}
+  \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
+\end{equation}
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Feature/VCM_notations}
+    \end{center}}
+    \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:mellado-multiscale}}
+\end{figure}
+%
+Et, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
+version convoluée de \VCM grâce à une fonction indicatrice $\chi_r$
+(ayant pour paramètre un rayon $r$) :
+%
+\begin{equation}
+  \mathcal{V}_{K,R} \ast \chi_r(\{\vp\}) \EqDef \int_{K^R} (\vx - \pi^K(\vx))(\vx - \pi^K(\vx))^T \chi(\pi^K(\vx) - \vp) d\vx .
+\end{equation}
+%
+où $\pi^K(\vx)$ est la projection de tout point $\vx$ vers le point le plus
+proche de $K$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si
+$\vx$ appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction «
+Hat » ($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
+%
+Alors, si $\vp$ est un point lisse de $K$, les valeurs propres de
+$\mathcal{V}_{K,R} \ast \chi_r$ sont proportionnelles à (respectivement) : $1$,
+$\PrincCurv{1}^2(\vp)\frac{r^2}{4}$ et $\PrincCurv{2}^2(\vp)\frac{r^2}{4}$.
+%
+\\
+%
+La mesure de covariance convoluée est particulièrement intéressante car cette
+mesure apporte de la robustesse même pour des ensembles compacts arbitraires, en
+$O(\sqrt{\epsilon})$. C'est en quelque sorte la mesure intégrale de la matrice
+de covariance du cône de normale autour du point d'intérêt. Néanmoins, la
+convergence des courbures est dépendante de plusieurs paramètres $r$ et $R$ qui
+contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
+cette approche donne des résultats comparables aux jets osculatoires pour les
+courbures.
+% Citer thèse Louis comparaison normale
+%
+\paragraph{Champs de normales par accumulateur sphérique}
+%
 Récemment, plusieurs auteurs ont développés de nouvelles approches intéressantes
 pour estimer les champs de normales sur des nuages de points bruités, même en
 présence de singularités \cite{Li2010, Boulch2012, Zhang2013}.
