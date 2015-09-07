@@ -30,7 +30,7 @@ components are written with subscripts as $\vz=(z_1,\ldots,z_d)$.
 %
 \section{Introduction à la géométrie différentielle}
 %
-\section{Droites digitales standard, segments digitaux}%
+\section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
 %
 \begin{definition}{\fakeTitle{Droite digitale standard et segment digital (« \anglais{Digital Straight Segment} »)}}
@@ -100,6 +100,29 @@ suffisamment lisse de dimension 2 :
   \end{itemize}
   %
 \end{lemma}
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Notions/DCA1}
+    \end{center}}
+    \caption[Arc de cercle digital.]{Arc de cercle digital (Figure~1.22 de \cite{Roussillon2009}).\label{fig:dca-figure}}
+\end{figure}
+%
+\begin{definition}{\fakeTitle{Arcs de cercle digitaux}}
+  \label{def:digital-circular-arc}
+  %
+  Soit $\Shape$ une forme convexe de $\R^2$, avec un champ de courbure continue.
+  Le contour digital $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ est un arc de
+  cercle digital (\anglais{DCA}) si et seulement s'il existe un cercle euclidien
+  qui sépare les points intérieurs à $\BdZ{\DigShape}$ des points digitaux extérieurs de
+  $\BdZ{\DigShape}$ (voir \RefFigure{fig:dca-figure}).
+  %
+  \\
+  %
+  Un arc de cercle digital est maximal (\anglais{\MDCA}) si et seulement s'il ne
+  peut être étendu dans aucune direction.
+  %
+\end{definition}
 %
 \section{Estimateurs digitaux d'aire, de volume, de moments, de positionnement de surface}
 %

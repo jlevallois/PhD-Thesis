@@ -299,6 +299,7 @@ contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
 cette approche donne des résultats comparables aux jets osculatoires pour les
 courbures.
 % Citer thèse Louis comparaison normale
+\todoInlineJeremy{a faire}
 %
 \paragraph{Champs de normales par accumulateur sphérique}
 %
@@ -311,15 +312,52 @@ quelles » pour le calcul de courbure : ils peuvent être utilisées en parallè
 avec des techniques d'estimation de courbure pour détecter les singularités sur
 la surface dans un premier temps, et de limiter l'estimation de la courbure aux
 zones lisses.
+\todoInlineJeremy{a faire}
 %
 \subsection{Estimation de courbure sur des surfaces digitales}
 %
+%BC [Esbelin2011], MDSS [Coeurjolly2001;deVieilleville2007] et MDCA [Roussillon2011].
 Comme vu dans le \RefChapitre{sec:notions}, en géométrie digitale nous
-considérons généralement la convergence asymptotique comme un critère essentiel
-pour un estimateur \cite{Coeurjolly_ChapEstimateur}. En dimension 2, des
-résultats de convergence d'estimateurs sans paramètre ont été obtenus pour
-l'estimation de longueur \cite{Coeurjolly2004} et des normales
-\cite{deVieilleville2007}.
+considérons la convergence asymptotique comme un critère essentiel pour un
+estimateur \cite{Coeurjolly_ChapEstimateur}. Lorsque la forme est discrétisée
+sur une grille avec une résolution $h$ tendant vers zéro, la quantité estimée
+devrait converger vers la valeur attendue.
+%
+\\
+%
+En dimension 2, plusieurs méthodes se démarquent. Nous allons les détailler.
+%
+\paragraph{Analyse de segments digitaux maximaux}
+%
+\MDSS \cite{Coeurjolly2001,deVieilleville2007}
+%
+\paragraph{Analyse des arcs de cercle digitaux maximaux}
+%
+\cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
+maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
+(voir \RefDefinition{def:digital-circular-arc} pour la définition formelle).
+
+Soit $\Shape$ une forme de compacts
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Notions/MDCA1}
+    \end{center}}
+    \caption[Illustration des arcs de cercle digitaux maximaux sur une ellipse.]{Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1 de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
+\end{figure}
+% \MDCA \cite{Roussillon2011}
+% parameter free
+%
+\paragraph{Convolutions binomiales}
+%
+la première basée sur des principes de convolutions binomiales \cite{Malgouyres2008,Esbelin2011} (nous la nommerons \BC par la suite)
+%
+\paragraph{Correspondance de surface polynomiale}
+%
+la seconde sur la correspondance de surface polynomiales \cite{Provot2011}
+%
+
+
 
 
 Basés sur des principes de convolutions binomiales
@@ -332,6 +370,10 @@ les mots, nécessite, a besoin} quand la taille de support est une fonction
 croissante de la résolution de la grille et de quelques caractéristiques de la
 forme à estimer.
 
+En dimension 2, des
+résultats de convergence d'estimateurs sans paramètre ont été obtenus pour
+l'estimation de longueur \cite{Coeurjolly2004} et des normales
+\cite{deVieilleville2007}.
 
 Pour l'estimation de courbure le long de courbes 2D, la convergence asymptotique
 d'estimateurs ne nécessitant aucun paramètre représente toujours un défi. Nous
