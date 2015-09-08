@@ -494,46 +494,52 @@ convergence (\RefSection{sec:comparaison-courbure}).
 \paragraph{Correspondance de surface polynomiale}
 %
 \cauthors{Provot}{Provot2011} proposent quant à eux à s'intéresser aux
-\anglais{Digital Level Layer} (\DLL). Un \DLL est un sous-ensemble de points
-$\vp$ de $\Z^d$ vérifiant la double inégalité suivante :
+\anglais{Digital Level Layer} (\DLL) pour estimer les dérivées d'une fonction
+digitale à l'aide de la programmation linéaire ou avec des outils de la
+\ComputationalGeometry. Cette approche permet d'approcher les $k$ dérivées de
+$f^{(k)}(\vx)$. Ainsi, à l'instar de \JetFitting, ils proposent une nouvelle
+méthode basées sur les polynomes de Taylor.
+%
+\\
+%
+Le principe de cette méthode est de faire ajuster un polynome sur les valeurs de
+la fonction digitale. Ils étendent alors les valeurs de la fonction $F(\vx)$
+dans l'intervalle $[F(\vx) - R; F(\vx) - R]$. Il suffit alors juste de trouver
+un polynome $P(\vx)$ respectant :
 %
 \begin{equation}
-    -\delta \le F(\vp) \le \delta
+    F(\vx) - R \le P(\vx) \le F(\vx) + R \,,
 \end{equation}
 %
-où $F : \Shape \rightarrow \R$ avec $\Shape \subset \R$. L'idée derrière cette
-méthode est de rajouter une contrainte d'épaisseur (ce qu'ils appellent le
-paramètre de rugosité, voir \RefFigure{fig:dll-roughness, fig:dll-roughness2}) au lieu de faire de l'ajustement de polynôme avec de l'erreur aux moindres carrés comme \JetFitting.
+dans le voisinage de $\vx_0$, où $P(\vx) = \sum_{i=1}^{k} a_i\Shape^i$, $a_i$
+étant les coefficients du polynome $P(\vx)$. Ils introduisent alors la notion de
+rugosité (\anglais{roughness}) comment une fonction, le $R$ minimum nécessaire
+pour trouver un polynome s'ajustant sur les données de la fonction $F$ avec une
+erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
 %
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=14cm]{images/Curvature/DLL_roughness}
     \end{center}}
     %
-    \caption[Illustration des arcs de cercle digitaux maximaux sur une
-    ellipse.]{\emph{De gauche à droite : } Fonction $F$, $F$ étendu avec un
-    intervalle le plus petit possible pour lequel il existe un polynome de degré
-    1 ou plus qui passe  au travers de chaque point étendu (Figure~1 de
+    \caption[Illustration du paramètre $R$ de rugosité de \DLL.]{\emph{De gauche à
+    droite : } Fonction $F$, $F$ étendu avec un intervalle le plus petit
+    possible pour lequel il existe un polynome de degré 2 ou plus qui passe au
+    travers de chaque point étendu (Figure~1 de
     \cite{Provot2011}).\label{fig:dll-roughness}}
     %
 \end{figure}
 %
-De plus, cela permet de considérer la forme digitale directement, et ainsi de
-reconnaitre des structures digitales.
-%
 \\
 %
-% La première question que nous pouvons nous poser, c'est pourquoi définir une
-% nouvelle primitive digitale correspondant à des courbures algébriques ou à des
-% surfaces euclidiennes ? Les auteurs justifient ce choix par le fait que les
-% autres primitives digitales ont de chacunes des avantages et des inconvénients,
-% et qu'il est difficile de déterminer laquelle des approches est la plus adaptée.
-% Par exemple les primitives basées sur l'approche analytique peuvent perdre des
-% informations topologiques de la surface. Les primitives basées sur l'approche
-% topologique ou morphologique quant à elles ne possèdent pas de caractérisation
-% analytique. Les \DLL proposent une façon unifiée et efficace pour résoudre
-% toutes ces contraintes.
-
+Alors, ils montrent que nous pouvons calculer la rugosité comme l'épaisseur
+verticale (\anglais{vertical thickness}) d'un ensemble $S = \{((\vx^i)_{1 \le i
+\le k} \; F(\vx)) \text{ pour } \vx \in \Shape \}$ de dimension $k + 1$ (voir la
+\RefFigure{fig:dll-roughness2}). Ils utilisent alors l'algorithme de détection
+de collision Gilbert-Johnson-Keerthi (GJK) \cite{Gilbert1988} pour calculer
+rapidement l'épaisseur verticale de l'ensemble $S$ (l'épaisseur de la séparation
+entre deux hyperplans).
+%
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=14cm]{images/Curvature/DLL_roughness2}
@@ -541,17 +547,90 @@ reconnaitre des structures digitales.
     %
     \caption[Illustration de la notion d'épaisseur du \DLL.]{Illustration de la
     notion d'épaisseur du \DLL. Les trois bandes s'ajustent sur les points de
-    $S$ (en prenant en compte une direction $\vec{d}$, vertical dans notre cas).
+    $S$ (en prenant en compte une direction $\vec{d}$, vertical dans le cas présent).
     La bande bleue possède alors l'épaisseur minimale de toutes les bandes
     (Figure~10 de \cite{ProvotIPOL2014}).\label{fig:dll-roughness2}}
     %
 \end{figure}
+%
+\\
+%
+Enfin, ils définissent la $k$ième dérivée de $F$ à l'origine comme :
+%
+\begin{equation}
+    F^{(k)}(\mathbf{0}) \EqDef k!a_k \,,
+\end{equation}
+%
+si $P(\vx)$ respecte les contraintes de rugosité de ses bornes.
 
 Ils obtiennent alors une preuve de convergence en $O(h^{\frac{1}{k+1}})$ sur
 l'estimation des dérivées du $k$-ième ordre pour une fonction réelle $f : \R
 \rightarrow \R$ de classe $C^{k+1}$ où les dérivées d'ordre $k+1$ sont bornées
-dans le voisinnage du point $\vx$. Alors l'estimation de la courbure converge
-asymptotiquement en $O(h^\frac{1}{3})$
+dans le voisinnage du point $\vx$. L'inconvénient de cette méthode est qu'elle
+dépend énormément du paramètre de rugosité maximale. De plus, ils ne fournissent
+pas de moyen d'extraire la courbure de ces dérivées.
+%
+%
+% Un \DLL est un sous-ensemble de points
+% $\vp$ de $\Z^d$ vérifiant la double inégalité suivante :
+% %
+% \begin{equation}
+%     -\delta \le F(\vp) \le \delta
+% \end{equation}
+% %
+% où $F : \Shape \rightarrow \R$ avec $\Shape \subset \R$. L'idée derrière cette
+% méthode est de rajouter une contrainte d'épaisseur (ce qu'ils appellent le
+% paramètre de rugosité, voir \RefFigure{fig:dll-roughness, fig:dll-roughness2}) au lieu de faire de l'ajustement de polynôme avec de l'erreur aux moindres carrés comme \JetFitting.
+% %
+% \begin{figure}[ht]{
+%     \begin{center}
+%     \includegraphics[width=14cm]{images/Curvature/DLL_roughness}
+%     \end{center}}
+%     %
+%     \caption[Illustration des arcs de cercle digitaux maximaux sur une
+%     ellipse.]{\emph{De gauche à droite : } Fonction $F$, $F$ étendu avec un
+%     intervalle le plus petit possible pour lequel il existe un polynome de degré
+%     1 ou plus qui passe  au travers de chaque point étendu (Figure~1 de
+%     \cite{Provot2011}).\label{fig:dll-roughness}}
+%     %
+% \end{figure}
+% %
+% De plus, cela permet de considérer la forme digitale directement, et ainsi de
+% reconnaitre des structures digitales grâce à l'algorithme de détection de
+% collision Gilbert-Johnson-Keerthi (GJK) \cite{Gilbert1988}. Ainsi, il permet de décomposer la surface en DSS, DCA et coniques.
+% %
+% \\
+% %
+% % La première question que nous pouvons nous poser, c'est pourquoi définir une
+% % nouvelle primitive digitale correspondant à des courbures algébriques ou à des
+% % surfaces euclidiennes ? Les auteurs justifient ce choix par le fait que les
+% % autres primitives digitales ont de chacunes des avantages et des inconvénients,
+% % et qu'il est difficile de déterminer laquelle des approches est la plus adaptée.
+% % Par exemple les primitives basées sur l'approche analytique peuvent perdre des
+% % informations topologiques de la surface. Les primitives basées sur l'approche
+% % topologique ou morphologique quant à elles ne possèdent pas de caractérisation
+% % analytique. Les \DLL proposent une façon unifiée et efficace pour résoudre
+% % toutes ces contraintes.
+%
+% \begin{figure}[ht]{
+%     \begin{center}
+%     \includegraphics[width=14cm]{images/Curvature/DLL_roughness2}
+%     \end{center}}
+%     %
+%     \caption[Illustration de la notion d'épaisseur du \DLL.]{Illustration de la
+%     notion d'épaisseur du \DLL. Les trois bandes s'ajustent sur les points de
+%     $S$ (en prenant en compte une direction $\vec{d}$, vertical dans le cas présent).
+%     La bande bleue possède alors l'épaisseur minimale de toutes les bandes
+%     (Figure~10 de \cite{ProvotIPOL2014}).\label{fig:dll-roughness2}}
+%     %
+% \end{figure}
+%
+% Ils obtiennent alors une preuve de convergence en $O(h^{\frac{1}{k+1}})$ sur
+% l'estimation des dérivées du $k$-ième ordre pour une fonction réelle $f : \R
+% \rightarrow \R$ de classe $C^{k+1}$ où les dérivées d'ordre $k+1$ sont bornées
+% dans le voisinnage du point $\vx$.
+%Alors l'estimation de la courbure converge
+%asymptotiquement en $O(h^\frac{1}{3})$
 
 
 Ainsi, nous avons quelques estimateurs qui convergent asymptotiquement en
