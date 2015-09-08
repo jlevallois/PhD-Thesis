@@ -297,9 +297,7 @@ de covariance du cône de normale autour du point d'intérêt. Néanmoins, la
 convergence des courbures est dépendante de plusieurs paramètres $r$ et $R$ qui
 contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
 cette approche donne des résultats comparables aux jets osculatoires pour les
-courbures.
-% Citer thèse Louis comparaison normale
-\todoInlineJeremy{a faire}
+courbures. \cauthors{Cuel}{Cuel2014} propose une comparaison complète pour l'estimation des normales.
 %
 \paragraph{Champs de normales par accumulateur sphérique}
 %
@@ -360,7 +358,9 @@ que cet estimateur ne converge pas.
 \cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
 maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
 (\MDCA, voir \RefDefinition{def:digital-circular-arc} pour la définition
-formelle).
+formelle). La courbure de la surface étant défini comme l'inverse du rayon du
+cercle osculateur, il parait logique de s'intéresser à reconnaitre des arcs de
+cercle digitaux sur la surface digitale de la forme.
 %
 \\
 %
@@ -378,7 +378,8 @@ reliés au \MDCA bleu). Alors :
 %
 \begin{equation}
   %
-    \forall i \in 1,\cdots,n, \quad \forall \ve \in V_i, \quad \forall \vp \in \ve, \quad \CurvH{}_{MDCA}(\DigShape,\vp,h) \EqDef \Curv(A_i,h) \,.
+    \forall i \in 1,\cdots,n, \quad \forall \ve \in V_i, \quad \forall \vp \in \ve,
+    \quad \CurvH{}_{MDCA}(\DigShape,\vp,h) \EqDef \Curv(A_i,h) \,.
   %
 \end{equation}
 %
@@ -386,12 +387,16 @@ reliés au \MDCA bleu). Alors :
     \begin{center}
     \includegraphics[height=6cm]{images/Notions/MDCA}
     \end{center}}
-    \caption[Illustration des arcs de cercle digitaux maximaux sur une ellipse.]{Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1 de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
+    \caption[Illustration des arcs de cercle digitaux maximaux sur une ellipse.]
+    {Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1
+    de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
 \end{figure}
 %
-Les auteurs ont prouvé la convergence asymptotique en $O(h^{\min(1-2a,b)})$ de cet estimateur
-sur des formes convexes de $\R^2$ dont le champ de courbure est continue,
-strictement positif et borné supérieurement, avec $0 < b \le a < \frac{1}{2}$ correpondant aux bornes inférieures et supérieurs des longueurs des \MDCA (\respp $\Omega(h^\alpha)$ et $O(h^b)$).
+Les auteurs ont prouvé la convergence asymptotique en $O(h^{\min(1-2a,b)})$ de
+cet estimateur sur des formes convexes de $\R^2$ dont le champ de courbure est
+continue, strictement positif et borné supérieurement, avec $0 < b \le a <
+\frac{1}{2}$ correpondant aux bornes inférieures et supérieurs des longueurs des
+\MDCA (\respp $\Omega(h^\alpha)$ et $O(h^b)$).
 
 
 Le principal avantage de ces deux méthodes est qu'ils ne nécessitent aucun
@@ -403,8 +408,7 @@ C'est ce que nous verrons dans la section comparative
 %
 \paragraph{Convolutions binomiales}
 %
-\cauthors{Malgouyres}{Malgouyres2008} puis plus tard
-\cauthors{Esbelin}{Esbelin2011} ont proposé une méthode pour estimer les
+\cauthors{Malgouyres}{Malgouyres2008} ont proposé une méthode pour estimer les
 dérivées sur le principe de convolutions binomiales (nous la nommerons \BC par
 la suite). Ils définissent un opérateur $\Psi_K$ qui modifie la fonction $F : \Z
 \rightarrow \Z$ par la convolution avec un noyau $K : \Z \rightarrow \Z$. Par
@@ -457,7 +461,8 @@ et l'estimateur de dérivés pour une fonction discrète $F$ est :
   \frac{1}{2^n}\Psi_{D_n}F \,.
 \end{equation}
 %
-Les auteurs proposent également des dérivées d'ordre supérieur avec une expression similaire :
+Les auteurs proposent également des dérivées d'ordre supérieur avec une
+expression similaire :
 %
 \begin{align}
   D_n^2 &= \delta \ast \delta \ast D_n \\
@@ -480,50 +485,85 @@ sera robuste au bruit).
 %
 \\
 %
-Les auteurs annoncent une convergence asymptotique en $O(h^{4/9})$ des dérivées
-du second ordre. Nous verrons dans la partie comparative que nous n'observons
-expérimentalement pas la même vitesse de convergence
-(\RefSection{sec:comparaison-courbure}).
+\cauthors{Esbelin}{Esbelin2011} annoncent une convergence asymptotique en
+$O(h^{{2/3}^k})$ des dérivées du $k$-ième ordre pour des formes $C^3$ (donc en
+$O(h^{4/9})$ pour les dérivées du second ordre). Nous verrons dans la partie
+comparative que nous n'observons expérimentalement pas la même vitesse de
+convergence (\RefSection{sec:comparaison-courbure}).
 %
 \paragraph{Correspondance de surface polynomiale}
 %
-la seconde sur la correspondance de surface polynomiales \cite{Provot2011}
+\cauthors{Provot}{Provot2011} proposent quant à eux à s'intéresser aux
+\anglais{Digital Level Layer} (\DLL). Un \DLL est un sous-ensemble de points
+$\vp$ de $\Z^d$ vérifiant la double inégalité suivante :
 %
+\begin{equation}
+    -\delta \le F(\vp) \le \delta
+\end{equation}
+%
+où $F : \Shape \rightarrow \R$ avec $\Shape \subset \R$. L'idée derrière cette
+méthode est d'assouplir la contrainte d'épaisseur (ce qu'ils appellent le
+paramètre de rugosité, voir \RefFigure{fig:dll-roughness, fig:dll-roughness2}). Cela permet
+d'approcher des polynomes de degré supérieur à $1$.
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[width=14cm]{images/Curvature/DLL_roughness}
+    \end{center}}
+    %
+    \caption[Illustration des arcs de cercle digitaux maximaux sur une
+    ellipse.]{\emph{De gauche à droite : } Fonction $F$, $F$ étendu avec un
+    intervalle le plus petit possible pour lequel il existe un polynome de degré
+    1 ou plus qui passe  au travers de chaque point étendu (Figure~1 de
+    \cite{Provot2011}).\label{fig:dll-roughness}}
+    %
+\end{figure}
+%
+\\
+%
+La première question que nous pouvons nous poser, c'est pourquoi définir une
+nouvelle primitive digitale correspondant à des courbures algébriques ou à des
+surfaces euclidiennes ? Les auteurs justifient ce choix par le fait que les
+autres primitives digitales ont de chacunes des avantages et des inconvénients,
+et qu'il est difficile de déterminer laquelle des approches est la plus adaptée.
+Par exemple les primitives basées sur l'approche analytique peuvent perdre des
+informations topologiques de la surface. Les primitives basées sur l'approche
+topologique ou morphologique quant à elles ne possèdent pas de caractérisation
+analytique. Les \DLL proposent une façon unifiée et efficace pour résoudre
+toutes ces contraintes.
+
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[width=14cm]{images/Curvature/DLL_roughness2}
+    \end{center}}
+    %
+    \caption[Illustration de la notion d'épaisseur du \DLL.]{Illustration de la
+    notion d'épaisseur du \DLL. Les trois bandes s'ajustent sur les points de
+    $S$ (en prenant en compte une direction $\vec{d}$, vertical dans notre cas).
+    La bande bleue possède alors l'épaisseur minimale de toutes les bandes
+    (Figure~10 de \cite{ProvotIPOL2014}).\label{fig:dll-roughness2}}
+    %
+\end{figure}
+
+Ils obtiennent alors une preuve de convergence en $O(h^{\frac{1}{k+1}})$ sur
+l'estimation des dérivées du $k$-ième ordre pour une fonction réelle $f : \R
+\rightarrow \R$ de classe $C^{k+1}$ où les dérivées d'ordre $k+1$ sont bornées
+dans le voisinnage du point $\vx$. Alors l'estimation de la courbure converge
+asymptotiquement en $O(h^\frac{1}{3})$
 
 
-
-
-Basés sur des principes de convolutions binomiales
-\cite{Malgouyres2008,Esbelin2011}, ou sur la correspondance de surface
-polynomiales \cite{Provot2011}, des résultats de convergence peuvent être obtenus
-pour les dérivés d'ordre supérieurs de courbes digitales. Ces algorithmes sont
-paramétrés par la taille du noyau de convolution ou du support utilisé
-pour la correspondance, et les théorèmes de convergence \todoJeremy{trouve plus
-les mots, nécessite, a besoin} quand la taille de support est une fonction
-croissante de la résolution de la grille et de quelques caractéristiques de la
-forme à estimer.
-
-En dimension 2, des
+Ainsi, nous avons quelques estimateurs qui convergent asymptotiquement en
+dimension 2, mais qui peuvent être sensibles au bruit de la forme ou dont la
+preuve de convergence repose sur les paramètres choisis. De plus pour
+l'estimation de courbure le long de courbes 2D, la convergence asymptotique
+d'estimateurs ne nécessitant aucun paramètre représente toujours un défi (des
 résultats de convergence d'estimateurs sans paramètre ont été obtenus pour
 l'estimation de longueur \cite{Coeurjolly2004} et des normales
-\cite{deVieilleville2007}.
-
-Pour l'estimation de courbure le long de courbes 2D, la convergence asymptotique
-d'estimateurs ne nécessitant aucun paramètre représente toujours un défi. Nous
-allons en présenter plusieurs dans ce chapitre.
+\cite{deVieilleville2007}). Nous allons en proposer dans ce chapitre. Enfin, il
+n'existe aucun estimateur de courbure en dimension 3 apportant des preuves de
+convergence asymptotique \cite{Lenoir1997,Fourey2008}. Nous allons également
+palier à ce manque dans ce chapitre.
 %
-% For curvature estimation along 2D curves, multigrid convergence of
-% parameter-free \comJeremy{estimators} is still challenging, although accurate
-% experimental results have been obtained with maximal digital circular
-% arcs \cite{Roussillon11} and with global optimization
-% \cite{Kerautret:2009-pr}. In 3D digital space, several empirical
-% methods exist for estimating curvatures, but none achieves multigrid
-% convergence (e.g. see \cite{Lenoir:1997-dgci,Fourey08}). In
-% \cite{dgci2013II}, we recently presented a digital estimator for mean
-% curvature for 2D and 3D digital objects, which achieves multigrid
-% convergence in $O(h^{\frac{1}{3}})$.
-%
-\todoInlineJeremy{finir}
 \section{Estimation de la courbure par intégration volumique de la sphère}
 \label{sec:estimators:volume}
 %
@@ -2898,7 +2938,7 @@ des valeurs de $\alpha$ supérieures à $\frac{1}{3}$ (donc avec une taille de
 boule supérieure) pour cette catégorie de forme semble obtenir de meilleurs
 estimations.
 %
-\begin{table}[Vitesse de convergence observée de $\CurvH{R}$ en fonction du paramètre $\alpha$]
+\begin{table}[ht]
 \centering
 \caption{Vitesse de convergence observée de $\CurvH{R}$ en fonction du paramètre $\alpha$ avec $R=kh^\alpha$}
 \label{tab:convergence-speed-alpha-2d}
