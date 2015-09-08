@@ -299,18 +299,62 @@ contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
 cette approche donne des résultats comparables aux jets osculatoires pour les
 courbures. \cauthors{Cuel}{Cuel2014} propose une comparaison complète pour l'estimation des normales.
 %
-\paragraph{Champs de normales par accumulateur sphérique}
+\paragraph{Accumulateur sphérique}
 %
 Récemment, plusieurs auteurs ont développés de nouvelles approches intéressantes
 pour estimer les champs de normales sur des nuages de points bruités, même en
-présence de singularités \cite{Li2010, Boulch2012, Zhang2013}.
-\cauthors{Boulch}{Boulch2012} apportent également des résultats de convergence
-probabilistes. Cependant, ces méthodes ne peuvent pas être utilisées « telles
-quelles » pour le calcul de courbure : ils peuvent être utilisées en parallèle
-avec des techniques d'estimation de courbure pour détecter les singularités sur
-la surface dans un premier temps, et de limiter l'estimation de la courbure aux
-zones lisses.
-\todoInlineJeremy{a faire}
+présence de singularités \cite{Li2010, Boulch2012, Zhang2013}. Cela nécessite de
+mettre en place un accumulateur auquel les données vont contribuer. La
+transformée de Hough \cite{Hough1962} est traditionnellement employée, pour
+détecter des formes paramétriques simples comme des lignes ou des arcs de cercle \cite{Duda1972}. Cependant, elle peut être étendu en dimension 3 : l'accumulateur n'est plus une image, mais un objet 3D. \cauthors{Boulch}{Boulch2012} utilisent une boule accumulatrice (voir la \RefFigure{fig:hough-ball}) de $M$ bins.
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Curvature/Hough_ball}
+    \end{center}}
+    \caption[Boule accumulatrice.]{Boule accumulatrice (Figure~3 de \cite{Borrmann2011}). \label{fig:hough-ball}}
+\end{figure}
+%
+\\
+%
+Alors, les auteurs découpent le nuage de points en ensemble de plans (définis par trois points) et normales. Si le plan est loin d'un coin ou d'une singularité, alors la normale est correct. Cependant, si ce plan est près d'un coin, la normale est perturbée par cette singularité (voir la \RefFigure{fig:Hough_bad}-gauche).
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Curvature/Hough_bad}
+    \end{center}}
+    \caption[Erreur de reconstruction de normales et correction.]{Erreur de reconstruction de normales et correction (Figure~1 de \cite{Boulch2012}). \label{fig:hough-bad}}
+\end{figure}
+%
+\\
+%
+Les normales sont accumulés dans la boule accumulatrice, permettant à chaque
+plan de contribuer à un vote. Ils utilisent également la transformée aléatoire
+de Hough. La différence avec la transformée de Hough traditionnelle est qu'un
+point ne vote pas pour toutes les primitives auxquels il appartient. Le vote est
+associé à une primitive calculée à partir d'un sous-ensemble de points
+\cite{Xu1990, Xu1993} dont le nombre est défini par l'utilisateur comme
+condition globale. Enfin, les normales sont redistribuées aux plans en fonction
+des bins les plus votés, en moyennant les normales dans ces bins (voir la
+\RefFigure{fig:Hough_bad}-droite).
+%
+\\
+%
+Les principaux inconvénients de cette méthode est que nous obtenons un effet de
+regroupement par bin des résultats, de segmentation des données. Cet effet est
+surtout visible avec des données bruitées. Ensuite, les bins utilisés sont
+anisotropes. Les auteurs rectifient cela en proposant de calculer l'algorithmes
+plusieurs fois en tournant aléatoirement la boule accumulatrice pour limiter cet
+effet. Expérimentalement, ils avancent que cet effet est estompé au bout de $5$
+rotations.
+%
+\\
+%
+\nauthors{Boulch} apportent des résultats de convergence probabilistes.
+Cependant, ces méthodes ne peuvent pas être utilisées directement pour le calcul
+de courbure : ils peuvent être utilisées en parallèle avec des techniques
+d'estimation de courbure pour détecter les singularités sur la surface dans un
+premier temps, et de limiter l'estimation de la courbure aux zones lisses.
 %
 \subsection{Estimation de courbure sur des surfaces digitales}
 %
