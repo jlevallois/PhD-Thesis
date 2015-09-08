@@ -327,30 +327,163 @@ devrait converger vers la valeur attendue.
 %
 En dimension 2, plusieurs méthodes se démarquent. Nous allons les détailler.
 %
-\paragraph{Analyse de segments digitaux maximaux}
+\paragraph{Reconnaissance d'objets digitaux}
 %
-\MDSS \cite{Coeurjolly2001,deVieilleville2007}
+Nous allons nous interesser dans un premier temps aux méthodes reconnaissant des
+objets digitaux sur le bord de l'objet, afin d'en extraire la courbure.
+
+
+\textbf{Analyse de segments digitaux maximaux}\\
+% Most centered Maximal Segment
+\cauthors{de Vieilleville}{deVieilleville2007} s'intéressent à la reconnaissance
+des segments maximaux digitaux que nous avons défini dans le chapitre précédant
+(voir \RefSection{sec:segments}). Ainsi, le principe est simple : pour une forme
+$\Shape \subset \R^2$, pour chaque point $\vp$ du bord digital $\BdZ{\DigShape}$
+avec $\DigShape = \DSh$, ils récupèrent le segment digital maximal (\MDSS) dont
+son centre est le plus proche du point $\vp$. Alors, en s'appuyant sur des
+travaux de \cauthors{Coeurjolly}{Coeurjolly2001}, en calculant l'inverse du
+rayon du cercle circonscrit contenant $\vp$ et les deux extrémités du \MDSS le
+plus proche que nous aurons mis à l'échelle avec le pas de discrétisation $h$,
+nous obtenons une estimation de la courbure.
 %
-\paragraph{Analyse des arcs de cercle digitaux maximaux}
+\\
 %
+Cependant, les auteurs annoncent ne pas pouvoir prouver la convergence
+asymptotique de cet estimateur de courbure à cause d'une propriété sur les
+demi-tangentes sur le bord digital qui ne peut pas être vérifiée, la convergence
+de l'estimateur reposant sur celle-ci. Nous verrons dans la partie comparative
+que cet estimateur ne converge pas.
+
+
+\textbf{Analyse des arcs de cercle digitaux maximaux}\\
+% Most centered Digital Circular Arc
 \cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
 maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
-(voir \RefDefinition{def:digital-circular-arc} pour la définition formelle).
-
-Soit $\Shape$ une forme de compacts
+(\MDCA, voir \RefDefinition{def:digital-circular-arc} pour la définition
+formelle).
+%
+\\
+%
+Le principe de l'estimateur est simple : pour une forme $\Shape \subset \R^2$,
+ils calculent les $(A_i)_{i \in 1,n}$ \MDCA ($n$ étant le nombre totale de
+\MDCA) du bord digital $\BdZ{\DigShape}$ avec $\DigShape = \DSh$. Ils calculent
+également les $(V_i)_{i \in 1,n}$, une partition du bord digital permettant de
+mapper tous les surfels vers le \MDCA le plus proche. Afin de déterminer quel
+est le \MDCA le plus proche d'un surfel, il faut que la distance vers le surfel
+au centre\footnote{le surfel le plus proche au niveau de la moitié de sa
+longueur digitale} du \MDCA soit le plus petit par rapport aux autres. Ainsi,
+aucune ambiguité ne peut apparaitre, chaque surfel est relié à son \MDCA le plus
+représentatif (voir \RefFigure{fig:mdca-curv-figure}, les surfels bleus sont
+reliés au \MDCA bleu). Alors :
+%
+\begin{equation}
+  %
+    \forall i \in 1,\cdots,n, \quad \forall \ve \in V_i, \quad \forall \vp \in \ve, \quad \CurvH{}_{MDCA}(\DigShape,\vp,h) \EqDef \Curv(A_i,h) \,.
+  %
+\end{equation}
 %
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[height=6cm]{images/Notions/MDCA1}
+    \includegraphics[height=6cm]{images/Notions/MDCA}
     \end{center}}
     \caption[Illustration des arcs de cercle digitaux maximaux sur une ellipse.]{Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1 de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
 \end{figure}
-% \MDCA \cite{Roussillon2011}
-% parameter free
+%
+Les auteurs ont prouvé la convergence asymptotique en $O(h^{\min(1-2a,b)})$ de cet estimateur
+sur des formes convexes de $\R^2$ dont le champ de courbure est continue,
+strictement positif et borné supérieurement, avec $0 < b \le a < \frac{1}{2}$ correpondant aux bornes inférieures et supérieurs des longueurs des \MDCA (\respp $\Omega(h^\alpha)$ et $O(h^b)$).
+
+
+Le principal avantage de ces deux méthodes est qu'ils ne nécessitent aucun
+paramètre. \MDCA a l'avantage supplémentaire qu'une preuve de convergence
+asymptotique est avancée, contrairement à \MDSS. Cependant, ces méthodes de
+reconnaissances d'objets sont assez sensibles lorsque les données sont bruités.
+C'est ce que nous verrons dans la section comparative
+(\RefSection{sec:comparaison-courbure}).
 %
 \paragraph{Convolutions binomiales}
 %
-la première basée sur des principes de convolutions binomiales \cite{Malgouyres2008,Esbelin2011} (nous la nommerons \BC par la suite)
+\cauthors{Malgouyres}{Malgouyres2008} puis plus tard
+\cauthors{Esbelin}{Esbelin2011} ont proposé une méthode pour estimer les
+dérivées sur le principe de convolutions binomiales (nous la nommerons \BC par
+la suite). Ils définissent un opérateur $\Psi_K$ qui modifie la fonction $F : \Z
+\rightarrow \Z$ par la convolution avec un noyau $K : \Z \rightarrow \Z$. Par
+exemple, l'opérateur de différence finie arrière est $\Psi_\delta F$ où le noyau
+$\delta$ est défini comme :
+%
+\begin{equation}
+  %
+    \delta(a) =
+      \begin{cases}
+        1   & \text{si } a = 0,\\
+        -1  & \text{si } a = 1,\\
+        0   & \text{sinon}.\\
+      \end{cases}
+  %
+\end{equation}
+%
+Les auteurs donnent également un noyau de lissage défini par (pour $n \in \N$) :
+%
+\begin{equation}
+  %
+  H_n(a) =
+    \begin{cases}
+      \left(\!
+        \begin{array}{c}
+          n \\
+          a + \frac{n}{2}
+        \end{array}
+        \!\right)   & \text{si } n \text{ est pair et } a \in \{ -\frac{n}{2}, \cdots, \frac{n}{2},\\
+        \left(\!
+          \begin{array}{c}
+            n \\
+            a + \frac{n + 1}{2}
+          \end{array}
+          \!\right)   & \text{si } n \text{ est impair et } a \in \{ -\frac{n + 1}{2}, \cdots, \frac{n - 1}{2},\\
+      \quad\quad 0   & \text{sinon}.\\
+    \end{cases}
+  %
+\end{equation}
+%
+Alors, le noyau de dérivées $D_n$ est défini par :
+%
+\begin{equation}
+  D_n \EqDef \delta \ast H_n \,,
+\end{equation}
+%
+et l'estimateur de dérivés pour une fonction discrète $F$ est :
+%
+\begin{equation}
+  \frac{1}{2^n}\Psi_{D_n}F \,.
+\end{equation}
+%
+Les auteurs proposent également des dérivées d'ordre supérieur avec une expression similaire :
+%
+\begin{align}
+  D_n^2 &= \delta \ast \delta \ast D_n \\
+  D_n^k &= \underbrace{\delta \ast \cdots \ast \delta}_{k \text{ fois}} \ast D_n \,.
+\end{align}
+%
+\\
+%
+La courbure est alors estimée de la sorte :
+%
+\begin{equation}
+  %
+  \CurvH{n}_{BC}(\vp) = \frac{D_n^2(\vp_1) \ast D_n(\vp_2) - D_n^2(\vp_2) \ast D_n(\vp_1)}{D_n(\vp_1)^2 + D_n(\vp_2)^2} \,,
+  %
+\end{equation}
+%
+avec $n = \lfloor h^{2(\alpha -3)/3} \rfloor$ et $\alpha \in ]0,1]$ un paramètre
+associé au niveau de bruit (plus $\alpha$ est proche de $0$, plus l'estimateur
+sera robuste au bruit).
+%
+\\
+%
+Les auteurs annoncent une convergence asymptotique en $O(h^{4/9})$ des dérivées
+du second ordre. Nous verrons dans la partie comparative que nous n'observons
+expérimentalement pas la même vitesse de convergence
+(\RefSection{sec:comparaison-courbure}).
 %
 \paragraph{Correspondance de surface polynomiale}
 %
@@ -2753,16 +2886,33 @@ Nous observons expérimentalement pour l'objet \Ellipse
 toutes les valeurs de $\alpha$ à l'exception de $\alpha = \frac{1}{2}$. Comme
 suggéré dans la preuve du \RefTheorem{thm:multigrid-convergence-curv}, $\alpha =
 \frac{1}{3}$ donne expérimentalement un comportement (en norme $l_\infty$) en
-$O(h^\frac{1}{3})$. Le théorème est défini pour le cas général des formes
-convexes à bord $C^3$, mais comme précisé dans le théorème le terme d'erreur en
-grand « O » peut être amélioré si nous ajoutons des hypothèses sur la forme.
-Cela explique pourquoi de meilleures vitesses de convergence semblent être
-obtenues lorsque $\alpha = \frac{2}{7}$ et $\frac{1}{4}$. Nous pouvons également
-observer la convergence asymptotique en $O(h\frac{1}{3})$ sur les formes
-non-convexes pour $\alpha = \frac{1}{3}$. Il est intéressant de noter que des
-valeurs de $\alpha$ supérieures à $\frac{1}{3}$ (donc avec une taille de boule
-supérieure) pour cette catégorie de forme semble obtenir de meilleurs
+$O(h^\frac{1}{3})$ (voir le \RefTable{tab:convergence-speed-alpha-2d} pour les
+vitesses de convergence observées). Le théorème est défini pour le cas général
+des formes convexes à bord $C^3$, mais comme précisé dans le théorème le terme
+d'erreur en grand « O » peut être amélioré si nous ajoutons des hypothèses sur
+la forme. Cela explique pourquoi de meilleures vitesses de convergence semblent
+être obtenues lorsque $\alpha = \frac{2}{7}$ et $\frac{1}{4}$. Nous pouvons
+également observer la convergence asymptotique en $O(h\frac{1}{3})$ sur les
+formes non-convexes pour $\alpha = \frac{1}{3}$. Il est intéressant de noter que
+des valeurs de $\alpha$ supérieures à $\frac{1}{3}$ (donc avec une taille de
+boule supérieure) pour cette catégorie de forme semble obtenir de meilleurs
 estimations.
+%
+\begin{table}[Vitesse de convergence observée de $\CurvH{R}$ en fonction du paramètre $\alpha$]
+\centering
+\caption{Vitesse de convergence observée de $\CurvH{R}$ en fonction du paramètre $\alpha$ avec $R=kh^\alpha$}
+\label{tab:convergence-speed-alpha-2d}
+\begin{tabular}{@{}lr@{}}
+%\toprule
+ $\alpha$ & Vitesse de convergence observée \\ \midrule
+ $1/2$    & $O(h^0.024)$                    \\
+ $2/5$    & $O(h^0.24)$                    \\
+ $1/3$    & $O(h^0.38)$                    \\
+ $2/7$    & $O(h^0.41)$                    \\
+ $1/4$    & $O(h^0.44)$                    \\ \bottomrule
+\end{tabular}
+\end{table}
+%
 
 
 Nous avons fait également une évaluation de ce paramètre $\alpha$ sur des formes
