@@ -502,9 +502,8 @@ $\vp$ de $\Z^d$ vérifiant la double inégalité suivante :
 \end{equation}
 %
 où $F : \Shape \rightarrow \R$ avec $\Shape \subset \R$. L'idée derrière cette
-méthode est d'assouplir la contrainte d'épaisseur (ce qu'ils appellent le
-paramètre de rugosité, voir \RefFigure{fig:dll-roughness, fig:dll-roughness2}). Cela permet
-d'approcher des polynomes de degré supérieur à $1$.
+méthode est de rajouter une contrainte d'épaisseur (ce qu'ils appellent le
+paramètre de rugosité, voir \RefFigure{fig:dll-roughness, fig:dll-roughness2}) au lieu de faire de l'ajustement de polynôme avec de l'erreur aux moindres carrés comme \JetFitting.
 %
 \begin{figure}[ht]{
     \begin{center}
@@ -519,18 +518,21 @@ d'approcher des polynomes de degré supérieur à $1$.
     %
 \end{figure}
 %
+De plus, cela permet de considérer la forme digitale directement, et ainsi de
+reconnaitre des structures digitales.
+%
 \\
 %
-La première question que nous pouvons nous poser, c'est pourquoi définir une
-nouvelle primitive digitale correspondant à des courbures algébriques ou à des
-surfaces euclidiennes ? Les auteurs justifient ce choix par le fait que les
-autres primitives digitales ont de chacunes des avantages et des inconvénients,
-et qu'il est difficile de déterminer laquelle des approches est la plus adaptée.
-Par exemple les primitives basées sur l'approche analytique peuvent perdre des
-informations topologiques de la surface. Les primitives basées sur l'approche
-topologique ou morphologique quant à elles ne possèdent pas de caractérisation
-analytique. Les \DLL proposent une façon unifiée et efficace pour résoudre
-toutes ces contraintes.
+% La première question que nous pouvons nous poser, c'est pourquoi définir une
+% nouvelle primitive digitale correspondant à des courbures algébriques ou à des
+% surfaces euclidiennes ? Les auteurs justifient ce choix par le fait que les
+% autres primitives digitales ont de chacunes des avantages et des inconvénients,
+% et qu'il est difficile de déterminer laquelle des approches est la plus adaptée.
+% Par exemple les primitives basées sur l'approche analytique peuvent perdre des
+% informations topologiques de la surface. Les primitives basées sur l'approche
+% topologique ou morphologique quant à elles ne possèdent pas de caractérisation
+% analytique. Les \DLL proposent une façon unifiée et efficace pour résoudre
+% toutes ces contraintes.
 
 \begin{figure}[ht]{
     \begin{center}
