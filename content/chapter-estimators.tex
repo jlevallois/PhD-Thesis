@@ -32,14 +32,14 @@ estimateurs avec les méthodes représentatives de l'état de l'art dans la
 %
 \subsection{Estimation de courbure sur des maillages}
 %
-Les données digitales étant discrètes par nature, il semble alors pertinant de
+Les données digitales étant discrètes par nature, il semble alors pertinent de
 s'intéresser aux techniques d'estimation de courbure sur des maillages
 triangulés. Il existe une vaste famille de techniques en \ComputerGraphics et en
 \GeometryProcessing pour estimer les courbures moyennes et gaussiennes, et
 parfois même le tenseur de courbure entier. La plupart effectuent des analyses
 locales (\cad limité au $1$-voisinage ou $2$-voisinage) de la forme. La
 précision de l'estimation dépend fortement de la « qualité » du maillage (au
-sens où ce dernier approxime suffisamment précisement la surface continue sous-jascente).
+sens où ce dernier approxime suffisamment précisément la surface continue sous-jacente).
 %
 \begin{figure}[ht]
     \begin{center}
@@ -73,7 +73,7 @@ la formule de Gauss-Bonnet (défaut d'angle). Cette approche a beaucoup été
 étudiée dans la littérature pour l'estimation de courbure gaussienne
 \cite{Meek2000, Stokely1992} mais aussi pour de la reconstruction \cite{Dyn2001}
 ou de la simplification de surface \cite{Kim2002}, et a même été déclarée « le
-meilleur algorithme (ndlr: parmi 5 approches) pour l'estimation de la courbure
+meilleur algorithme (NDLR: parmi 5 approches) pour l'estimation de la courbure
 gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
 %
 \begin{figure}[ht]
@@ -88,7 +88,7 @@ gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
 Soit $\vp$ un sommet de valence $6$ du maillage triangulé $M$ et $\vp_j$ avec
 $j = 1,\cdots, 6$ l'ensemble des sommets du $1$-voisinage de $\vp$ (voir
 \RefFigure{fig:xu_notations}-gauche pour les notations). Si $\vp$ et $\vp_j$
-sont sur la surface paramétrique suffisemment lisse $F(x,y) \in \R^3$ et
+sont sur la surface paramétrique suffisamment lisse $F(x,y) \in \R^3$ et
 qu'il existe $\vq, \vq_j \in \R^2$ tels que
 (\RefFigure{fig:xu_notations}-droite, le $1$-voisinage est projeté comme des
 parallélogrammes sur un plan) :
@@ -116,7 +116,7 @@ l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
 $\alpha \ge 3$.
 
 
-Cette approche n'est pas applicable directement à des surfaces digitales car la perturbation par rapport à la surface est a une distance trop grande et correspond plus à des \anglais{outliers} qu'à du bruit de discrétisation. De plus, les contraintes topologiques expliquées précédemment (surface paramétrique, sommets de valence $6$) sont déterminantes pour la convergence : si elles ne sont pas satisfaitent, l'estimation de la courbure gaussienne ne converge pas.
+Cette approche n'est pas applicable directement à des surfaces digitales car la perturbation par rapport à la surface est a une distance trop grande et correspond plus à des \anglais{outliers} qu'à du bruit de discrétisation. De plus, les contraintes topologiques expliquées précédemment (surface paramétrique, sommets de valence $6$) sont déterminantes pour la convergence : si elles ne sont pas satisfaites, l'estimation de la courbure gaussienne ne converge pas.
 %
 \paragraph{Cycle normal}
 %
@@ -128,7 +128,7 @@ un maillage triangulé \cite{CohenSteiner2003,CohenSteiner2006}.
 %
 La théorie du cycle normal, introduite par \cauthor{Wintgen}{Wintgen1982} et
 \cauthor{Zähle}{Zahle1986} est une technique qui permet de définir de manière
-unifiée la courbure de surfaces lisses et polyhédrales. En effet, la mesure de
+unifiée la courbure de surfaces lisses et polyédrales. En effet, la mesure de
 courbure peut être obtenue par le cycle normal de la surface. Le cycle normal
 $N(V)$ de la forme $V \subset \R^3$ est le courant\footnote{sous-variété pouvant
 présenter des singularités.} associé à l'ensemble :
@@ -187,7 +187,7 @@ les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant
 progressivement jusqu'à atteindre $N$ points. Dans le cas d'un nuage de points,
 il faut d'abord estimer la normale au point $\vp$ et les $N$ points voisins
 peuvent alors facilement être récupérés avec un diagramme de puissance sur le
-plan tangeant estimé (nécessite cependant que l'échantillonnage soit assez
+plan tangent estimé (nécessite cependant que l'échantillonnage soit assez
 dense). Nous obtenons ainsi :
 %
 \begin{equation}
@@ -198,8 +198,8 @@ dense). Nous obtenons ainsi :
 %
 Pour la seconde étape, il faut calculer une analyse en composantes principales
 (\ACP) de notre ensemble de points voisins afin d'estimer grossièrement la
-normale au point $\vp$ Ainsi, l'ajustement polynomial peut etre calculé en
-supprimant la coordonée dont l'angle est le plus proche de la normale. Calcul de
+normale au point $\vp$ Ainsi, l'ajustement polynomial peut être calculé en
+supprimant la coordonnée dont l'angle est le plus proche de la normale. Calcul de
 la matrice de Vandermonde $N \times N_n$ :
 %
 \begin{equation}
@@ -225,7 +225,7 @@ Les auteurs proposent des résultats de convergence en $O(\delta^2)$ lorsque la
 donnée d'entrée est un échantillonnage de la surface, avec $\delta$ la densité
 de points. Cependant, lorsque les données présentent du bruit, aucun résultat
 théorique n'est apporté malgré le fait qu'en pratique l'approximation aux
-moindres carrés des jets osculatoires est très robuste.
+moindres carrés des jets osculateurs est très robuste.
 %
 Nous nommerons cet estimateur par la suite \JetFitting lors des comparaisons.
 %
@@ -342,7 +342,7 @@ des bins les plus votés, en moyennant les normales dans ces bins (voir la
 Les principaux inconvénients de cette méthode est que nous obtenons un effet de
 regroupement par bin des résultats, de segmentation des données. Cet effet est
 surtout visible avec des données bruitées. Ensuite, les bins utilisés sont
-anisotropes. Les auteurs rectifient cela en proposant de calculer l'algorithmes
+anisotropes. Les auteurs rectifient cela en proposant de calculer l’algorithme
 plusieurs fois en tournant aléatoirement la boule accumulatrice pour limiter cet
 effet. Expérimentalement, ils avancent que cet effet est estompé au bout de $5$
 rotations.
@@ -370,7 +370,7 @@ devrait converger vers la valeur attendue.
 %
 \\
 %
-\cauthors{Coeurjolly}{Coeurjolly_ChapEstimateur} on proposé un état de l'art complet pour l'estimation de tangeantes et de la courbure en dimension 2. Nous allons les détailler les méthodes les plus représentatives.
+\cauthors{Coeurjolly}{Coeurjolly_ChapEstimateur} on proposé un état de l'art complet pour l'estimation de tangentes et de la courbure en dimension 2. Nous allons les détailler les méthodes les plus représentatives.
 %
 \paragraph{Reconnaissance d'objets digitaux}
 %
@@ -406,7 +406,7 @@ que cet estimateur ne converge pas.
 maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
 (\MDCA, voir \RefDefinition{def:digital-circular-arc} pour la définition
 formelle). La courbure d'une courbe étant définie comme l'inverse du rayon du
-cercle osculateur, il parait logique de s'intéresser à reconnaitre des arcs de
+cercle osculateur, il parait logique de s'intéresser à reconnaître des arcs de
 cercle digitaux sur la forme digitale.
 %
 \begin{figure}[ht]{
@@ -428,7 +428,7 @@ faire correspondre tous les surfels vers le \MDCA le plus proche. Afin de déter
 est le \MDCA le plus proche d'un surfel, il faut que la distance vers le surfel
 au centre\footnote{le surfel le plus proche au niveau de la moitié de sa
 longueur digitale} du \MDCA soit le plus petit par rapport aux autres. Ainsi,
-aucune ambiguité ne peut apparaitre, chaque surfel est relié à son \MDCA le plus
+aucune ambiguïté ne peut apparaître, chaque surfel est relié à son \MDCA le plus
 représentatif (voir \RefFigure{fig:mdca-curv-figure}, les surfels bleus sont
 reliés au \MDCA bleu). Alors :
 %
@@ -442,7 +442,7 @@ reliés au \MDCA bleu). Alors :
 Les auteurs ont prouvé la convergence asymptotique en $O(h^{\min(1-2a,b)})$ de
 cet estimateur sur des formes convexes de $\R^2$ dont le champ de courbure est
 continue, strictement positif et borné supérieurement, si $0 < b \le a <
-\frac{1}{2}$ correpond aux bornes inférieures et supérieurs des longueurs des
+\frac{1}{2}$ correspond aux bornes inférieures et supérieurs des longueurs des
 \MDCA (\respp $\Omega(h^a)$ et $O(h^b)$). Cette dernière hypothèse n'est pas prouvé à ce jour.
 
 
@@ -542,23 +542,23 @@ convergence (\RefSection{sec:comparaison-courbure}).
 digitale à l'aide de la programmation linéaire ou avec des outils de la
 \ComputationalGeometry. Cette approche permet d'approcher les $k$ dérivées de
 $f^{(k)}(\vx)$. Ainsi, à l'instar de \JetFitting, ils proposent une nouvelle
-méthode basées sur les polynomes de Taylor.
+méthode basées sur les polynômes de Taylor.
 %
 \\
 %
-Le principe de cette méthode est de faire ajuster un polynome sur les valeurs de
+Le principe de cette méthode est de faire ajuster un polynôme sur les valeurs de
 la fonction digitale. Ils étendent alors les valeurs de la fonction $F(\vx)$
 dans l'intervalle $[F(\vx) - R; F(\vx) - R]$. Il suffit alors juste de trouver
-un polynome $P(\vx)$ respectant :
+un polynôme $P(\vx)$ respectant :
 %
 \begin{equation}
     F(\vx) - R \le P(\vx) \le F(\vx) + R \,,
 \end{equation}
 %
 dans le voisinage de $\vx_0$, où $P(\vx) = \sum_{i=1}^{k} a_i\Shape^i$, $a_i$
-étant les coefficients du polynome $P(\vx)$. Ils introduisent alors la notion de
+étant les coefficients du polynôme $P(\vx)$. Ils introduisent alors la notion de
 rugosité (\anglais{roughness}) comment une fonction, le $R$ minimum nécessaire
-pour trouver un polynome s'ajustant sur les données de la fonction $F$ avec une
+pour trouver un polynôme s'ajustant sur les données de la fonction $F$ avec une
 erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
 %
 \begin{figure}[ht]{
@@ -568,7 +568,7 @@ erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
     %
     \caption[Illustration du paramètre $R$ de rugosité de \DLL.]{\emph{De gauche à
     droite : } Fonction $F$, $F$ étendu avec un intervalle le plus petit
-    possible pour lequel il existe un polynome de degré 2 ou plus qui passe au
+    possible pour lequel il existe un polynôme de degré 2 ou plus qui passe au
     travers de chaque point étendu (Figure~1 de
     \cite{Provot2011}).\label{fig:dll-roughness}}
     %
@@ -599,7 +599,7 @@ entre deux hyperplans).
 %
 \\
 %
-Enfin, ils définissent la $k$ième dérivée de $F$ à l'origine comme :
+Enfin, ils définissent la $k$-ième dérivée de $F$ à l'origine comme :
 %
 \begin{equation}
     F^{(k)}(\mathbf{0}) \EqDef k!a_k \,,
@@ -610,7 +610,7 @@ si $P(\vx)$ respecte les contraintes de rugosité de ses bornes.
 Ils obtiennent alors une preuve de convergence en $O(h^{\frac{1}{k+1}})$ sur
 l'estimation des dérivées du $k$-ième ordre pour une fonction réelle $f : \R
 \rightarrow \R$ de classe $C^{k+1}$ où les dérivées d'ordre $k+1$ sont bornées
-dans le voisinnage du point $\vx$. L'inconvénient de cette méthode est qu'elle
+dans le voisinage du point $\vx$. L'inconvénient de cette méthode est qu'elle
 dépend énormément du paramètre de rugosité maximale. De plus, ils ne fournissent
 pas de moyen d'extraire la courbure de ces dérivées.
 %
@@ -816,7 +816,7 @@ de covariance :
 \end{definition}
 %
 Pour les entiers $p, q, s \ge 0$, nous pouvons écrire la définition des $
-pqs$-moments $\Mom{pqs}(Y)$ de $Y$ ($x_i$ est la $i$ème composante de $\vx$) :
+pqs$-moments $\Mom{pqs}(Y)$ de $Y$ ($x_i$ est la $i$-ème composante de $\vx$) :
 %
 \begin{equation}
   \label{eq:moments}
@@ -1704,7 +1704,7 @@ Pour les moments du premier ordre, nous translatons la forme à l'origine du
 repère et nous utilisons le résultat précédent ainsi que le fait que le
 $100$-moment centré est maximisé pour la demi-boule à valeur de $x_1$ positive
 (que nous noterons $\HalfBall{R}{\vx}$)\footnote{Rappelons que $x_i$ est la
-$i$ème composante de $\vx$.} :
+$i$-ème composante de $\vx$.} :
 %
 \begin{align}
   \sup_{Y \subset S_{R,t}(\vx)} |\Mom{100}(Y)|
