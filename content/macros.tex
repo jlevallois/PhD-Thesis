@@ -11,28 +11,30 @@
 \newenvironment{proof}{\textit{\textbf{D\'emonstration.}}}{\hfill$\square$\\}
 
 %%% colors
-\newcommand{\cDarkRed}[1]{\color[HTML]{660A10} #1}
-\newcommand{\cDarkBlue}[1]{\color[HTML]{00197F} #1}
-\newcommand{\cDarkGreen}[1]{\color[HTML]{1D660A} #1}
-\newcommand{\cGreen}[1]{\color[HTML]{91CF50} #1}
-\newcommand{\cGreyBlue}[1]{\color[HTML]{99B4D3} #1}
-\newcommand{\cPurple}[1]{\color[HTML]{70309F} #1}
-\newcommand{\cLightOrange}[1]{\color[HTML]{FFC000} #1}
+\newcommand{\cDarkRed}[1]{{\color[HTML]{660A10} #1}}
+\newcommand{\cDarkBlue}[1]{{\color[HTML]{00197F} #1}}
+\newcommand{\cDarkGreen}[1]{{\color[HTML]{1D660A} #1}}
+\newcommand{\cGreen}[1]{{\color[HTML]{91CF50} #1}}
+\newcommand{\cGreyBlue}[1]{{\color[HTML]{99B4D3} #1}}
+\newcommand{\cPurple}[1]{{\color[HTML]{70309F} #1}}
+\newcommand{\cLightOrange}[1]{{\color[HTML]{FFC000} #1}}
 
+\newcommand{\colorize}[1]{\normalfont\textbf{#1}}
 
 %%% references
 \newcommand{\refPrePost}[3]{\hyperref[#2]{#1~\vref*{#2}\xspace#3}}
 \newcommand{\refPrePostN}[3]{\hyperref[#2]{#1\ref*{#2}\xspace#3}} %%temp
 \newcommand{\RefEquation}[1]{\refPrePost{\'equation~}{#1}{}}
-\newcommand{\RefEquations}[2]{\refPrePostN{\'equations~}{#1}{}~et~\refPrePost{}{#2}{}}
+\newcommand{\RefEquations}[2]{\refPrePostN{\'equations~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefChapitre}[1]{\refPrePost{chapitre~}{#1}{}}
 \newcommand{\RefSection}[1]{\refPrePost{paragraphe~}{#1}{}}
+\newcommand{\RefSections}[2]{\refPrePost{paragraphes~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefFig}[1]{\refPrePost{Fig.~}{#1}{}}
 \newcommand{\RefFigure}[1]{\refPrePost{figure~}{#1}{}}
-\newcommand{\RefFigures}[2]{\refPrePost{figures~}{#1}{}~et~\refPrePost{}{#2}{}}
+\newcommand{\RefFigures}[2]{\refPrePost{figures~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefFiguresDF}[2]{\refPrePost{figures~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefFiguresTF}[3]{\refPrePost{figures~}{#1}{}, \refPrePost{}{#2}{} et \refPrePost{}{#3}{}}
-\newcommand{\RefFiguresN}[2]{\refPrePostN{figures~}{#1}{}~et~\refPrePostN{}{#2}{}}
+\newcommand{\RefFiguresN}[2]{\refPrePostN{figures~}{#1}{} et \refPrePostN{}{#2}{}}
 \newcommand{\RefTable}[1]{\refPrePost{tableau~}{#1}{}}
 \newcommand{\RefDefinition}[1]{\refPrePost{d\'efinition~}{#1}{}}
 \newcommand{\RefProposition}[1]{\refPrePost{proposition~}{#1}{}}

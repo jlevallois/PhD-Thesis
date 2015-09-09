@@ -16,7 +16,7 @@ les surfaces digitales. Après avoir détaillé l'état de l'art
 courbure par intégration volumique de la sphère
 (\RefSection{sec:estimators:volume}) afin d'en extraire des estimateurs de
 courbure en 2D et courbure moyenne (\RefSection{sec:estimators:volume}) et
-courbures principales (\RefSection{sec:estimators:moments}) en 3D. Nous adapterons
+courbures principales (\RefSection{sec:ii-3d}) en 3D. Nous adapterons
 ces estimateurs à des versions ne nécessitant aucun paramètre (l'unique paramètre
 étant la taille de la sphère d'intégration) dans la
 \RefSection{sec:curvature:parameter-free}. Enfin, nous comparerons nos
@@ -116,9 +116,15 @@ l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
 $\alpha \ge 3$.
 
 
-Cette approche n'est pas applicable directement à des surfaces digitales car la perturbation par rapport à la surface est a une distance trop grande et correspond plus à des \anglais{outliers} qu'à du bruit de discrétisation. De plus, les contraintes topologiques expliquées précédemment (surface paramétrique, sommets de valence $6$) sont déterminantes pour la convergence : si elles ne sont pas satisfaites, l'estimation de la courbure gaussienne ne converge pas.
+Cette approche n'est pas applicable directement à des surfaces digitales car la
+perturbation par rapport à la surface est a une distance trop grande et
+correspond plus à des \anglais{outliers} qu'à du bruit de discrétisation. De
+plus, les contraintes topologiques expliquées précédemment (surface
+paramétrique, sommets de valence $6$) sont déterminantes pour la convergence :
+si elles ne sont pas satisfaites, l'estimation de la courbure gaussienne ne
+converge pas.
 %
-\paragraph{Cycle normal}
+\paragraph{Cycles normaux}
 %
 Une autre approche notable est l'estimation d'information de courbure par
 intégration de mesures des courbures, basée sur la théorie du cycle normal sur
@@ -129,24 +135,74 @@ un maillage triangulé \cite{CohenSteiner2003,CohenSteiner2006}.
 La théorie du cycle normal, introduite par \cauthor{Wintgen}{Wintgen1982} et
 \cauthor{Zähle}{Zahle1986} est une technique qui permet de définir de manière
 unifiée la courbure de surfaces lisses et polyédrales. En effet, la mesure de
-courbure peut être obtenue par le cycle normal de la surface. Le cycle normal
-$N(V)$ de la forme $V \subset \R^3$ est le courant\footnote{sous-variété pouvant
-présenter des singularités.} associé à l'ensemble :
+courbure peut être obtenue par les cycles normaux de la surface. L'idée
+principale derrière est assez similaire à l'approche par formule de Gauss-Bonnet
+vu juste avant et permet de s'affranchir de la contrainte de la valence des
+sommets.
+
+
+Pour une surface lisse $M$ d'un compact $V \subset \R^3$, les auteurs
+définissent la mesure de courbure gaussienne $\phi^\GaussCurv_V$ et de
+courbure moyenne $\phi^\MeanCurv_V$ d'un ensemble ouvert (d'une tribu
+borélienne pour être précis) $B \subset \R^3$ comme :
 %
-\begin{equation}
-  ST^\bot V \EqDef \{(\vp, \NormalDir(\vp)) | \vp \in \Boundary V\} \subset \R^3 \times E_\NormalDir \,,
-\end{equation}
+\begin{align}
+  &\phi^\GaussCurv_V(B) \EqDef \int_{B \cap M} \GaussCurv(\vp) d\vp \,,\\
+  &\phi^\MeanCurv_V(B)  \EqDef \int_{B \cap M} \MeanCurv(\vp)  d\vp \,,
+\end{align}
 %
-avec $\vp \in \Boundary{V}$ et $\NormalDir(\vp)$ la normale unitaire au point
-$\vp$.
+avec $\vp \in M$, où $\GaussCurv(\vp)$ et $\MeanCurv(\vp)$ sont respectivement
+la courbure gaussienne et moyenne du point $\vp$. Ces mesures sont des mesures
+intégrales, c'est à dire qu'elle ne correspond pas à une valeur pour un point de
+la surface, mais pour l'ensemble $B$.
+
+
+Les auteurs (\nauthors{Cohen-Steiner}) proposent alors de calculer ces deux
+mesures dans le cas d'un maillage triangulé. Si $V$ est un polyhèdre dont
+l'ensemble de ses sommets est $P$ et l'ensemble d'arêtes est $E$. Alors, ils
+proposent de calculer les mesures de courbure gaussienne et moyenne en sommant
+des quantités :
 %
-\todoInlineJeremy{Mouai ... a finir là ...}
+\begin{align}
+  &\phi^\GaussCurv_V(B) \EqDef \sum_{\vp \in B \cap P} g(\vp) \,,\\
+  &\phi^\MeanCurv_V(B)  \EqDef \sum_{\ve \in E} \text{longueur}(\ve \cap B) \beta(\ve) \,,
+\end{align}
 %
-Les auteurs (\nauthors{Cohen-Steiner}) mettent en avant des résultats de
-convergence lorsque les sommets interpolent le bord de l'objet euclidien
-sous-jacent. Dans ce cas, si le maillage a une distance de Hausdorff avec le
-bord de la forme au dessous de $\epsilon$, la convergence peut être obtenue avec
-une vitesse/erreur en $O(\epsilon)$ sous certaines conditions.
+où $g(\vp)$ correspond au \colorize{défaut d'angle} de $\Boundary V$ au point
+$\vp$, \cad à $2\pi$ moins la somme des angles entre les arêtes incidentes
+consécutifs à $\vp$  (voir \RefFigure{fig:normal-cycle-1}), et $|\beta(\ve)|$
+est l'angle entre les normales des triangles de $\Boundary V$ incidents au point
+$\vp$ (voir \RefFigure{fig:normal-cycle-2}). Si $\ve$ est convexe, le signe de
+$\beta(\ve)$ doit être positif et négatif si $\ve$ est concave.
+%
+\missingfigure{fig:normal-cycle-1}
+\missingfigure{fig:normal-cycle-2}
+
+
+Enfin, ils proposent des propriétés de convergence de ces mesures de courbure
+sous certaines conditions. Soit $\mathcal{P}$ un sous-ensemble fini de $\dS$,
+$T$ la triangulation de Delaunay de $\mathcal{P}$ restraint à
+$\Shape$, et $\epsilon$ la densité de l'échantillonnage de la surface. Si
+$\mathcal{P}$ est le $\epsilon$-échantillonnage de $\dS$, \cad si la boule
+$\Ball{\epsilon lfs(\vx)}{\vx}$ centrée au point $\vx$ et de rayon $lfs(\vx)$
+rencontre $\mathcal{P}$. $lfs(\vx)$ (pour \anglais{local feature size})
+correspond à la distance entre $\vx$ et l'axe médian de $\Shape$. Cela signifie
+pour résumer que l'échantillonnage doit être plus dense sur les zones à forte
+courbure. Alors, lorsque $\epsilon < 0.08$
+%
+\begin{align}
+  &|\phi^\GaussCurv_T(B) - \tilde{\phi}^\GaussCurv_V(\pi(B)) | \le K\epsilon \,,\\
+  &|\phi^\MeanCurv_T(B)  - \tilde{\phi}^\GaussCurv_V(\pi(B)) | \le K\epsilon \,,
+\end{align}
+%
+avec $\pi$ la projection sur $M$ (grâce à $\epsilon < 0.08$, $\pi$ est défini
+sur $\Boundary T$ et est un homéomorphe de $\Boundary T$ vers $M$ ).
+
+
+Les deux principaux problèmes avec cette méthode sont son inadaptabilité face à
+des données digitales en ce qui concerne l'échantillonnage et les contraintes
+sur la topologie, et également le fait que la mesure se fait sur un ensemble de
+points et non pas ponctuellement.
 %
 \paragraph{Invariants par intégration}
 %
@@ -320,7 +376,7 @@ Alors, les auteurs découpent le nuage de points en ensemble de plans (définis 
 %
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[height=6cm]{images/Curvature/Hough_bad}
+    \includegraphics[width=15cm]{images/Curvature/Hough_bad}
     \end{center}}
     \caption[Erreur de reconstruction de normales et correction.]{Erreur de reconstruction de normales et correction (Figure~1 de \cite{Boulch2012}). \label{fig:hough-bad}}
 \end{figure}
@@ -688,14 +744,24 @@ l'estimation de longueur \cite{Coeurjolly2004} et des normales
 n'existe aucun estimateur de courbure en dimension 3 apportant des preuves de
 convergence asymptotique \cite{Lenoir1997,Fourey2008}. Nous allons également
 palier à ce manque dans ce chapitre.
-%
+
 \section{Estimation de la courbure par intégration volumique de la sphère}
 \label{sec:estimators:volume}
 %
+Nous allons désormais nous intéresser aux travaux réalisés au cours de cette
+thèse. Nous allons dans un premier temps décrire l'estimation de quantités
+différentielles que proposent \cauthors{Pottmann}{Pottmann2007,Pottmann2009},
+dans le \RefSection{sec:pottmann-principle}. Nous allons ensuite proposer une
+version digitale de ces estimateurs dans les \RefSections{sec:ii-2d}{sec:ii-3d}
+en dimension 2 et 3. La principale contribution de ces travaux est de démontrer
+la convergence asymptotique de ces estimateurs sur des données digitales. Ces
+travaux ont été publiés dans \cite{DGCI2013,CVIU2014}.
+
+
 En \GeometryProcessing, le calcul d'invariants par intégration a été largement
 étudié dans le but de définir des estimateurs de quantités différentielles.
 \cauthors{Pottmann}{Pottmann2007,Pottmann2009} en ont d'ailleurs fait un
-panorama complète. L'idée principale de cette approche est de déplacer un support
+panorama complet. L'idée principale de cette approche est de déplacer un support
 sur les points $\vx$ sur le bord $\dS$ d'une forme $\Shape$ et calculer
 l'intégrale de l'intersection entre $\Shape$ et le support. Différents supports
 peuvent être considérés (sphère euclidienne, boule euclidienne, etc.) ainsi que
@@ -706,8 +772,8 @@ de la sorte :
 \begin{definition}
   \label{def:Volume}
   %
-  Pour une forme $\Shape \in \Shapes$ et un rayon $R \in \R^{+*}$, l'intégrale
-  volumique $V_R(\vx)$ au point $\vx \in \dS$ est donné par :
+  Pour une forme $\Shape \in \Shapes$ et un rayon $R \in \R^{+*}$, \colorize{l'intégrale
+  volumique} $V_R(\vx)$ au point $\vx \in \dS$ est donné par :
   %
   \begin{equation}
     V_R(\vx) \EqDef \int_{\Ball{R}{\vx}} \chi(\vp)d\vp\,,
@@ -840,7 +906,7 @@ normalisés par le $0$-moment, c'est à dire :
     \Mom{000}(Y) =& O(R^3), \label{eq:ball-moment-0}\\
     \Mom{100}(Y) =& O(R^3(\|\vy\|_\infty + R)), \label{eq:ball-moment-1}\\
     \Mom{200}(Y) =& O(R^3(\|\vy\|^2_\infty + R\|\vy\|_\infty + R^2)), \label{eq:ball-moment-2}\\
-    \Mom{100}(Y)/\Mom{000}(Y) =& O(R+\vy), \label{eq:ball-moment-1bis}
+    \Mom{100}(Y)/\Mom{000}(Y) =& O(\|\vy\|_\infty + R), \label{eq:ball-moment-1bis}
   \end{align}
   %
   Les autres moments du même ordre ont respectivement les mêmes bornes.
@@ -987,6 +1053,7 @@ Dans une premier temps nous allons nous intéresser à l'aire et au volume
 digital, puis ensuite aux moments digitaux.
 %
 \subsection{Analyse digitale de l'aire et du volume de la sphère, et relation à la courbure}
+\label{sec:ii-2d}
 %
 Nous souhaitons estimer la quantité $A_R(\vx) = \Area(\Ball{R}{\vx}\cap\Shape)$ de la
 \RefDefinition{def:Volume} au pas de discrétisation $h$, où $\Ball{R}{\vx}$ est une
@@ -1468,7 +1535,7 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\ga
 %
 \subsection{Analyse digitale de l'intégration volumique de la sphère, et
 relation aux courbures principales en 3D}
-\label{sec:estimators:moments}
+\label{sec:ii-3d}
 %
 Nous souhaitons alors calculer les moments sur l'intersection entre la forme
 $\Shape$ et la boule, \cad à $\Ball{R}{\vx} \cap \Shape$, dont la taille décroit
