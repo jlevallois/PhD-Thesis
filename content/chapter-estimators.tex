@@ -10,14 +10,14 @@
 %
 \newpage
 %
-Dans ce chapitre, nous allons définir de nouveaux estimateurs de courbures pour
+Dans ce chapitre, nous allons définir de nouveaux estimateurs de courbure pour
 les surfaces digitales. Après avoir détaillé l'état de l'art
 (\RefSection{sec:estimators:SOTA}), nous nous intéresserons à l'estimation de la
 courbure par intégration volumique de la sphère
 (\RefSection{sec:estimators:volume}) afin d'en extraire des estimateurs de
 courbure en 2D et courbure moyenne (\RefSection{sec:estimators:volume}) et
 courbures principales (\RefSection{sec:estimators:moments}) en 3D. Nous adapterons
-ces estimateurs à des versions ne nécessitant aucun paramètre (le paramètre
+ces estimateurs à des versions ne nécessitant aucun paramètre (l'unique paramètre
 étant la taille de la sphère d'intégration) dans la
 \RefSection{sec:curvature:parameter-free}. Enfin, nous comparerons nos
 estimateurs avec les méthodes représentatives de l'état de l'art dans la
@@ -39,7 +39,7 @@ triangulés. Il existe une vaste famille de techniques en \ComputerGraphics et e
 parfois même le tenseur de courbure entier. La plupart effectuent des analyses
 locales (\cad limité au $1$-voisinage ou $2$-voisinage) de la forme. La
 précision de l'estimation dépend fortement de la « qualité » du maillage (au
-sens où ce dernier approxime bien la surface continue sous-jascente).
+sens où ce dernier approxime suffisamment précisement la surface continue sous-jascente).
 %
 \begin{figure}[ht]
     \begin{center}
@@ -58,12 +58,12 @@ sens où ce dernier approxime bien la surface continue sous-jascente).
 % \end{itemize}
 %
 \cauthors{Surazhsky}{Surazhsky2003} et \cauthors{Gatzke}{Gatzke2006} ont
-proposé une comparaison compréhensible de ces estimateurs. Nous nous
+proposé une étude comparative de ces estimateurs. Nous nous
 référons à \cauthors{Desbrun}{Desbrun2005} et \cauthors{Bobenko}{Bobenko2008}
 pour une théorie entièrement discrète. Cependant, la plupart n'ont aucunes
 garanties de convergence théorique des valeurs estimées, même sans bruit sur le
-maillage. Nous pouvons citer \cite{Page2002} et \cite{Rusinkiewicz2004} comme
-approches qui essayent de plaquer les perturbations sur la surface à travers un
+maillage. Nous pouvons citer \cite{Rusinkiewicz2004} (et \cite{Page2002} pour les normales) comme
+approche qui essaye de plaquer les perturbations sur la surface à travers un
 moyennage.
 %
 \paragraph{Approche par formule de Gauss-Bonnet}
@@ -86,9 +86,9 @@ gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
 \end{figure}
 %
 Soit $\vp$ un sommet de valence $6$ du maillage triangulé $M$ et $\vp_j$ avec
-$j = 1,\cdots, 6$ l'ensembles des sommets du $1$-voisinage de $\vp$ (voir
+$j = 1,\cdots, 6$ l'ensemble des sommets du $1$-voisinage de $\vp$ (voir
 \RefFigure{fig:xu_notations}-gauche pour les notations). Si $\vp$ et $\vp_j$
-sont sur la surface paramétrique suffisemment lisse $F(\xi_1,\xi_2) \in \R^3$ et
+sont sur la surface paramétrique suffisemment lisse $F(x,y) \in \R^3$ et
 qu'il existe $\vq, \vq_j \in \R^2$ tels que
 (\RefFigure{fig:xu_notations}-droite, le $1$-voisinage est projeté comme des
 parallélogrammes sur un plan) :
@@ -100,7 +100,7 @@ parallélogrammes sur un plan) :
 Alors, en assumant que la densité de l’échantillonnage est $\delta$ avec $A(\vp, \delta)$ la somme des aires des triangles
 $[\vp\vp_j(\delta)\vp_{j+}(\delta)]$ (en gris sur la
 \RefFigure{fig:xu_notations}-gauche), $\omega_j$ l'angle $\angle
-\vp_j\vp\vp_{j+}$, ils prouvent que :
+\vp_j\vp\vp_{j+}$, ils démontrent que :
 %
 \begin{equation}
   \frac{3}{A(\vp,\delta)} \left[ 2\pi - \sum \limits^6_{j=1} \omega_j(\delta) \right] \EqDef \GaussCurv(\vp) + O(\delta^2) ,
@@ -113,7 +113,10 @@ gaussienne au point $\vp$.
 %
 L'auteur propose une propriété de convergence supplémentaire lorsque
 l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
-$\alpha \ge 3$. Cela n'est pas applicable directement à des surfaces digitales car la perturbation est trop loin par rapport à la surface et correspond plus à des \anglais{outliers}. De plus, les contraintes topologiques expliquées précédemment sont déterminantes pour la convergence : si elles ne sont pas satisfaitent, l'estimation de la courbure gaussienne ne converge pas.
+$\alpha \ge 3$.
+
+
+Cette approche n'est pas applicable directement à des surfaces digitales car la perturbation par rapport à la surface est a une distance trop grande et correspond plus à des \anglais{outliers} qu'à du bruit de discrétisation. De plus, les contraintes topologiques expliquées précédemment (surface paramétrique, sommets de valence $6$) sont déterminantes pour la convergence : si elles ne sont pas satisfaitent, l'estimation de la courbure gaussienne ne converge pas.
 %
 \paragraph{Cycle normal}
 %
@@ -156,7 +159,7 @@ l'intersection entre la forme et la boule. Les auteurs ont démontré que ces
 quantités par intégration apportent d'intéressantes informations de courbures
 lorsque le rayon de la boule tend vers zéro. Ils amènent également des preuves
 de stabilité --- dans le cas d'échantillonnage de maillage par exemple ---
-dépendant de la taille de la boule et du $\epsilon$. Nos travaux sur les
+dépendant de la taille de la boule et du paramètre d'échantillonnage $\epsilon$. Nos travaux sur les
 estimateurs digitaux de courbures se basant sur la même idée, nous détaillerons
 cette approche dans un prochain paragraphe
 (\RefSection{sec:pottmann-principle}).
@@ -169,14 +172,9 @@ Lorsque nous avons des nuages de points, la façon la plus naturelle d'approcher
 la courbure est de faire correspondre une surface polynomiale de degré $2$ ou
 plus à l'ensemble de points. Le meilleur représentant de ces techniques est
 l'estimation des quantités différentielles par ajustement polynomial des jets
-osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}.
-%
-\\
-%
-Un jet est un développement de Taylor tronqué, et ces jets contiennent des
+osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}. Un jet est un développement de Taylor tronqué, et ces jets contiennent des
 informations sur les quantités géométriques locales (normales, courbures, etc.).
 Un $n$-jet osculateur est un développement de Taylor tronqué de la fonction de hauteur à l'ordre $n$.
-
 
 
 Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2)
@@ -234,7 +232,7 @@ Nous nommerons cet estimateur par la suite \JetFitting lors des comparaisons.
 \paragraph{Mesure de covariance des cellules de Voronoi}
 %
 Une autre famille de techniques utilise le diagramme de Voronoi
-\cite{Alliez2007,Merigot2009,Merigot2011,Cuel2014DGCI}. L'idée principale
+\cite{Alliez2007,Merigot2009,Merigot2011,Cuel2014DGCI} principalement pour estimer les normales, mais peuvent également extraire des informations de courbure. L'idée principale
 derrière cette approche est qu'au lieu de faire des correspondances dans
 l'espace tangent à la surface, d'estimer au mieux dans l'espace orthogonal.
 \cauthors{Mérigot}{Merigot2011} proposent alors d'associer en chaque point $\vp$
@@ -297,7 +295,7 @@ $O(\sqrt{\epsilon})$. C'est en quelque sorte la mesure intégrale de la matrice
 de covariance du cône de normale autour du point d'intérêt. Néanmoins, la
 convergence des courbures est dépendante de plusieurs paramètres $r$ et $R$ qui
 contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
-cette approche donne des résultats comparables aux jets osculatoires pour les
+cette approche donne des résultats comparables à \JetFitting pour les
 courbures. \cauthors{Cuel}{Cuel2014} propose une comparaison complète pour l'estimation des normales.
 %
 \paragraph{Accumulateur sphérique}
@@ -357,26 +355,30 @@ de courbure : ils peuvent être utilisées en parallèle avec des techniques
 d'estimation de courbure pour détecter les singularités sur la surface dans un
 premier temps, et de limiter l'estimation de la courbure aux zones lisses.
 %
+\paragraph{Théorie des varifolds}
+%
+\todoInlineJeremy{a faire}
+%
 \subsection{Estimation de courbure sur des surfaces digitales}
 %
 %BC [Esbelin2011], MDSS [Coeurjolly2001;deVieilleville2007] et MDCA [Roussillon2011].
 Comme vu dans le \RefChapitre{sec:notions}, en géométrie digitale nous
 considérons la convergence asymptotique comme un critère essentiel pour un
-estimateur \cite{Coeurjolly_ChapEstimateur}. Lorsque la forme est discrétisée
+estimateur \cite{Klette2000}. Lorsque la forme est discrétisée
 sur une grille avec une résolution $h$ tendant vers zéro, la quantité estimée
 devrait converger vers la valeur attendue.
 %
 \\
 %
-En dimension 2, plusieurs méthodes se démarquent. Nous allons les détailler.
+\cauthors{Coeurjolly}{Coeurjolly_ChapEstimateur} on proposé un état de l'art complet pour l'estimation de tangeantes et de la courbure en dimension 2. Nous allons les détailler les méthodes les plus représentatives.
 %
 \paragraph{Reconnaissance d'objets digitaux}
 %
-Nous allons nous interesser dans un premier temps aux méthodes reconnaissant des
-objets digitaux sur le bord de l'objet, afin d'en extraire la courbure.
+Nous allons nous intéresser dans un premier temps aux méthodes reconnaissant des
+objets digitaux sur le bord de l'objet, afin d'en extraire des informations différentielles.
 
 
-\textbf{Analyse de segments digitaux maximaux}\\
+\textbf{Segments digitaux maximaux}\\
 % Most centered Maximal Segment
 \cauthors{de Vieilleville}{deVieilleville2007} s'intéressent à la reconnaissance
 des segments maximaux digitaux que nous avons défini dans le chapitre précédant
@@ -403,9 +405,18 @@ que cet estimateur ne converge pas.
 \cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
 maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
 (\MDCA, voir \RefDefinition{def:digital-circular-arc} pour la définition
-formelle). La courbure de la surface étant défini comme l'inverse du rayon du
+formelle). La courbure d'une courbe étant définie comme l'inverse du rayon du
 cercle osculateur, il parait logique de s'intéresser à reconnaitre des arcs de
-cercle digitaux sur la surface digitale de la forme.
+cercle digitaux sur la forme digitale.
+%
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=6cm]{images/Notions/MDCA}
+    \end{center}}
+    \caption[Illustration des arcs de cercle digitaux maximaux sur une ellipse.]
+    {Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1
+    de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
+\end{figure}
 %
 \\
 %
@@ -413,7 +424,7 @@ Le principe de l'estimateur est simple : pour une forme $\Shape \subset \R^2$,
 ils calculent les $(A_i)_{i \in 1,n}$ \MDCA ($n$ étant le nombre totale de
 \MDCA) du bord digital $\BdZ{\DigShape}$ avec $\DigShape = \DSh$. Ils calculent
 également les $(V_i)_{i \in 1,n}$, une partition du bord digital permettant de
-mapper tous les surfels vers le \MDCA le plus proche. Afin de déterminer quel
+faire correspondre tous les surfels vers le \MDCA le plus proche. Afin de déterminer quel
 est le \MDCA le plus proche d'un surfel, il faut que la distance vers le surfel
 au centre\footnote{le surfel le plus proche au niveau de la moitié de sa
 longueur digitale} du \MDCA soit le plus petit par rapport aux autres. Ainsi,
@@ -428,20 +439,11 @@ reliés au \MDCA bleu). Alors :
   %
 \end{equation}
 %
-\begin{figure}[ht]{
-    \begin{center}
-    \includegraphics[height=6cm]{images/Notions/MDCA}
-    \end{center}}
-    \caption[Illustration des arcs de cercle digitaux maximaux sur une ellipse.]
-    {Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1
-    de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
-\end{figure}
-%
 Les auteurs ont prouvé la convergence asymptotique en $O(h^{\min(1-2a,b)})$ de
 cet estimateur sur des formes convexes de $\R^2$ dont le champ de courbure est
-continue, strictement positif et borné supérieurement, avec $0 < b \le a <
-\frac{1}{2}$ correpondant aux bornes inférieures et supérieurs des longueurs des
-\MDCA (\respp $\Omega(h^\alpha)$ et $O(h^b)$).
+continue, strictement positif et borné supérieurement, si $0 < b \le a <
+\frac{1}{2}$ correpond aux bornes inférieures et supérieurs des longueurs des
+\MDCA (\respp $\Omega(h^a)$ et $O(h^b)$). Cette dernière hypothèse n'est pas prouvé à ce jour.
 
 
 Le principal avantage de ces deux méthodes est qu'ils ne nécessitent aucun
@@ -500,7 +502,7 @@ Alors, le noyau de dérivées $D_n$ est défini par :
   D_n \EqDef \delta \ast H_n \,,
 \end{equation}
 %
-et l'estimateur de dérivés pour une fonction discrète $F$ est :
+où $\ast$ est le produit de convolution. L'estimateur de dérivés pour une fonction discrète $F$ est :
 %
 \begin{equation}
   \frac{1}{2^n}\Psi_{D_n}F \,.
@@ -520,17 +522,14 @@ La courbure est alors estimée de la sorte :
 %
 \begin{equation}
   %
-  \CurvH{n}_{BC}(\vp) = \frac{D_n^2(\vp_1) \ast D_n(\vp_2) - D_n^2(\vp_2) \ast D_n(\vp_1)}{D_n(\vp_1)^2 + D_n(\vp_2)^2} \,,
+  \CurvH{n}_{BC}(\vp) \EqDef \frac{D_n^2(\vp_1) \ast D_n(\vp_2) - D_n^2(\vp_2) \ast D_n(\vp_1)}{D_n(\vp_1)^2 + D_n(\vp_2)^2} \,.
   %
 \end{equation}
-%
-avec $n = \lfloor h^{2(\alpha -3)/3} \rfloor$ et $\alpha \in ]0,1]$ un paramètre
+
+
+Dans le cas où $n = \lfloor h^{2(\alpha -3)/3} \rfloor$ et $\alpha \in ]0,1]$ est un paramètre
 associé au niveau de bruit (plus $\alpha$ est proche de $0$, plus l'estimateur
-sera robuste au bruit).
-%
-\\
-%
-\cauthors{Esbelin}{Esbelin2011} annoncent une convergence asymptotique en
+sera robuste au bruit), \cauthors{Esbelin}{Esbelin2011} annoncent une convergence asymptotique en
 $O(h^{{2/3}^k})$ des dérivées du $k$-ième ordre pour des formes $C^3$ (donc en
 $O(h^{4/9})$ pour les dérivées du second ordre). Nous verrons dans la partie
 comparative que nous n'observons expérimentalement pas la même vitesse de
