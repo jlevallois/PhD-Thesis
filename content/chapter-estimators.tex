@@ -332,15 +332,15 @@ moindres carrés des jets osculateurs est très robuste.
 %
 Nous nommerons cet estimateur par la suite \JetFitting lors de notre analyse comparative.
 %
-\paragraph{Mesure de covariance des cellules de Voronoi}
+\paragraph{Mesure de covariance des cellules de Voronoï}
 %
-Une autre famille de techniques utilise le diagramme de Voronoi
+Une autre famille de techniques utilise le diagramme de Voronoï
 \cite{Alliez2007,Merigot2009,Merigot2011,Cuel2014DGCI} principalement pour
 estimer les normales, mais peuvent également extraire des informations de
 courbure. L'idée principale derrière cette approche est qu'au lieu de faire des
 correspondances dans l'espace tangent à la surface, d'estimer au mieux dans
 l'espace orthogonal. \cauthors{Mérigot}{Merigot2011} proposent alors d'associer
-en chaque point $\vp$ une \emph{mesure de covariance des cellules de Voronoi}
+en chaque point $\vp$ une \emph{mesure de covariance des cellules de Voronoï}
 $\mathcal{V}_{K,R}$ (\VCMM --- \VCM ---) pour une forme $K$. Cette mesure
 contient des informations sur la géométrie sous-jacente.
 %
@@ -349,12 +349,12 @@ contient des informations sur la géométrie sous-jacente.
     \begin{center}
     \includegraphics[height=4cm]{images/Feature/VCM}
     \end{center}}
-    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoi, en orange : \comJeremy{longueur des directions des cellules} de Voronoi.
+    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : \comJeremy{longueur des directions des cellules} de Voronoï.
       \label{fig:mellado-VCM}}
 \end{figure}
 %
 Cela nécessite de calculer un matrice de covariance ($cov$) sur les cellules de
-Voronoi ($Vor_K$) des points $\vp$ du bord de l'objet :
+Voronoï ($Vor_K$) des points $\vp$ du bord de l'objet :
 %
 \begin{equation}
     cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
@@ -4026,7 +4026,7 @@ en extraire peut-être des preuves de convergence asymptotiques.
 
 
 Une autre perspective est le couplage de notre approche avec celles basées sur
-les cellules de Voronoi, plus particulièrement les méthodes de \VCMM
+les cellules de Voronoï, plus particulièrement les méthodes de \VCMM
 \cite{Merigot2009,Merigot2011,Cuel2014} basées sur l'analyse de matrice de
 covariance non pas de la forme elle même mais du cône tangent à celle-ci. Ces
 approches sont assez complémentaires avec la notre et mérite de s'y intéresser.
