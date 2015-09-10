@@ -10,11 +10,108 @@
 
 \newpage
 %
-Notations:
+\section{Introduction}
+%
+\todoInlineJeremy{faire l'introduction chapitre notions}
+%
+\subsection{Notations}
+%
+\begin{table}[ht]
+  \centering
+  \caption{Notations utilisées dans cette thèse}
+  \label{tab:notations}
+    \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{@{}lp{11.5cm}@{}}
+    \toprule
+    Notation      & Description  \\ \midrule
 
-In the sequel, points and vectors of $\R^d$ and $\Z^d$ are written in
-bold, and for some point or vector $\vz \in \Z^d$, its coordinates or
-components are written with subscripts as $\vz=(z_1,\ldots,z_d)$.
+    $\R^d$        & Espace euclidien de dimension $d$ \\
+    $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée \\
+    $\Shape$      & Forme de $\Shapes$ \\
+    $\dS$         & Bord topologique de $\Shape$ \\
+    $\vx$         & Point de $\dS$ \\
+    $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ \\
+    $\Z^d$        & Espace en coordonnées entières de dimension $d$ \\
+    $\DigShape$   & Objet digital de $\Z^d$ \\
+    $h$           & Pas de discrétisation pour la discrétisation de Gauss \\
+    $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ \\
+    $\partial\Body{\DigShape}{h}$ & \comJeremy{XXXXXXXXXXXXXXXXX}\\
+    $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ \\
+
+
+    $E(\Shape,\vx)$                   & Quantité définie au point $\vx \in \dS$, $\Shape \subset \R^d$ \\
+    $\hat{E}(\DigShape,\hat{\vx},h)$  & Quantité estimée au point $\hat{\vx} \in \partial\Body{\DigShape}{h}$, $\DigShape \subset \Z^d$ \\
+    $\Mom{p_1 \cdots p_d}(\Shape)$    & Moment géométrique d'ordre $p_1 \cdots p_d$ de $\Shape$ \\
+    $\Cov(\Shape)$                    & Matrice de covariance de $\Shape$ \\
+    $\Curv(\Shape,\vx)$               & Courbure au point $\vx \in \dS$, $\Shape \subset \R^2$ \\
+    $\MeanCurv(\Shape,\vx)$           & Courbure moyenne au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
+    $\GaussCurv(\Shape,\vx)$          & Courbure gaussienne au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
+    $\PrincCurv{i}(\Shape,\vx)$       & $i$-ième courbure principale au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
+    $\PrincDir{i}(\Shape,\vx)$        & $i$-ième direction principale de courbure au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
+    $\NormalDir(\Shape,\vx)$          & Normale au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+%
+\section{Introduction à la géométrie différentielle}
+
+% \begin{table}
+%   \begin{tabular}{@{}lp{3.5cm}p{7cm}@{}}
+%     \toprule
+%     \textsc{Symbol} & \LaTeX~ \textsc{symbol} & \textsc{Description}\\
+%     \midrule
+
+%     \midrule
+%     $\hQ{\vz}{h}$ & \verb?\hQ{\vz}{h}? & $d$-dimensional cube in $\R^d$ of size $h$
+%     centered at $h\cdot\vz$ \\
+%     $\Body{Z}{h}$ & \verb?\Body{Z}{h}? & embedding of $Z$ as the
+%     union of cubes $Q_h(\vz)$ for all $\vz\in Z$ \\
+%     $\hat{\vx},\hat{\vy}$ &   \scriptsize \verb?\hat{\vx},\hat{\vy}? & Points in
+%     $\partial\Body{Z}{h}$ for some $Z$\\ \midrule
+%     $E(\Shape,\vx)$ & \verb?E(\Shape,\vx)? &Quantity defined on $\Shape$ at point $\vx$\\
+%     $\hat{E}(\AnyDSh,\hat{\vx},h)$ &
+%    \scriptsize \verb?\hat{E}(\DSh,\hat{\vx},h)? &Estimated quantity defined
+%     on $\AnyDigF{X}{h}$ at point $\hat{\vx}$ for a given gridstep
+%     $h$\\
+%     $\Mom{p_1 \cdots p_d}(X)$ & \scriptsize\verb?\Mom{p_1\cdots p_d}(X)? &
+%     Geometrical moment of order $p_1 \cdots p_d$ of $\Shape$\\
+%     $\DMom{p_1\cdots p_d}{h}(\AnyDSh)$ & \scriptsize\verb?\DMom{p_1\cdots p_d}(\AnyDSh)? &
+%     Geometrical moment of order $p_1 \cdots p_d$ of  $\AnyDSh$\\
+%     \midrule
+%     $\Curv(\Shape,\vx)$ & \scriptsize\verb?\Curv(\Shape,\vx)? &
+%     Curvature at a point
+%     $\vx\in\partial\Shape$, $\Shape\subset\R^2$\\
+%     $\PCurvHat{R}(Z,\vx,h)$ & \scriptsize\verb?\PCurvHat{R}(Z,\vx,h)? & Estimated  curvature a point
+%     $\vx\in\partial\Body{Z}{h}$ for circular kernel of radius
+%     $R$, $Z\subset\Z^2$\\
+%     $\MeanCurv(\Shape,\vx)$ & \scriptsize\verb?\MeanCurv(\Shape,\vx)? & Mean
+%     curvature at a point
+%     $\vx\in\partial\Shape$, $\Shape\subset\R^3$\\
+%     $\PMeanCurvHat{R}(Z,\vx,h)$ & \scriptsize\verb?\PMeanCurvHat{R}(Z,\vx,h)? & Estimated mean curvature a point
+%     $\vx\in\partial\Body{Z}{h}$ for spherical kernel of radius
+%     $R$, $Z\subset\Z^3$\\
+%
+%     $\FirstCurv(\Shape,\vx)$ & \scriptsize\verb?\FirstCurv(\Shape,\vx)? & First principal
+%     curvature at a point
+%     $\vx\in\partial\Shape$, $\Shape\subset\R^3$\\
+%     $\PFirstCurvHat{R}(Z,\vx,h)$ &
+%     \scriptsize\verb?\PFirstCurvHat{R}(Z,\vx,h)? & Estimated first principal curvature a point
+%     $\vx\in\partial\Body{Z}{h}$ for spherical kernel of radius
+%     $R$, $Z\subset\Z^3$\\
+%     $\SecondCurv(\Shape,\vx)$ & \scriptsize\verb?\SecondCurv(\Shape,\vx)? & Second principal
+%     curvature at a point
+%     $\vx\in\partial\Shape$, $\Shape\subset\R^3$\\
+%     $\PSecondCurvHat{R}(Z,\vx,h)$ &
+%     \scriptsize\verb?\PSecondCurvHat{R}(Z,\vx,h)? & Estimated second principal curvature a point
+%     $\vx\in\partial\Body{Z}{h}$ for spherical kernel of radius
+%     $R$, $Z\subset\Z^3$\\
+%
+%     \bottomrule
+%   \end{tabular}
+%   \caption{Notations.}
+%   \label{tab:notations}
+% \end{table}
+
 %
 % Introduction à la géométrie différentielle ?
 %
