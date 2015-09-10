@@ -103,7 +103,7 @@ $[\vp\vp_j(\delta)\vp_{j+}(\delta)]$ (en gris sur la
 \vp_j\vp\vp_{j+}$, ils démontrent que :
 %
 \begin{equation}
-  \frac{3}{A(\vp,\delta)} \left[ 2\pi - \sum \limits^6_{j=1} \omega_j(\delta) \right] \EqDef \GaussCurv(\vp) + O(\delta^2) ,
+  \frac{3}{A(\vp,\delta)} \left[ 2\pi - \sum \limits^6_{j=1} \omega_j(\delta) \right] \EqDef \GaussCurv(\vp) + O(\delta^2) \,,
 \end{equation}
 %
 quand $\delta$ tend vers $0$, où $\GaussCurv(\vp)$ est la valeurs de courbure
@@ -228,33 +228,66 @@ Lorsque nous avons des nuages de points, la façon la plus naturelle d'approcher
 la courbure est de faire correspondre une surface polynomiale de degré $2$ ou
 plus à l'ensemble de points. Le meilleur représentant de ces techniques est
 l'estimation des quantités différentielles par ajustement polynomial des jets
-osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}. Un jet est un développement de Taylor tronqué, et ces jets contiennent des
-informations sur les quantités géométriques locales (normales, courbures, etc.).
-Un $n$-jet osculateur est un développement de Taylor tronqué de la fonction de hauteur à l'ordre $n$.
+osculateurs (\anglais{osculating jets}) de \cauthors{Cazals}{Cazals2005}. Un jet
+est un développement de Taylor tronqué, et ces jets contiennent des informations
+sur les quantités géométriques locales (tangentes / normales, courbures
+principales, etc.). Un $n$-jet est un développement de Taylor tronqué de la
+fonction de hauteur à l'ordre $n$.
+%
+\\
+%
+Le développement de Taylor d'une courbe à l'ordre $n$ équivaut à :
+%
+\begin{align}
+  &f(x) \EqDef J_{B,n}(x) + O(x^{n+1}) \,, \\
+  &J_{B,n}(x) \EqDef B_0 + B_1x + B_2x^2 + B_3x^3 + \cdots + B_nx^n \,.
+\end{align}
+%
+Dans le cas d'une surface, nous avons :
+%
+\begin{align}
+  &f(x,y) \EqDef J_{B,n}(x,y) + O(||(x,y)||^{n+1}) \,, \\
+  &J_{B,n}(x,y) \EqDef \sum_{k=1}^{n} \left( \sum_{j=0}^{k} B_{k-j,j}x^{k-j}y^j \right) \,,
+\end{align}
+%
+où les développements tonqués de Taylor $J_{B,n}(x)$ et $J_{B,n}(x,y)$ sont les
+$n$-jets. Le terme de jet osculateur désigne les $2$-jets. Ainsi, comme les $n$-jets
+contiennent des propriétés différentielles de la courbe/surface de l'ordre $n$,
+ce qui implique que toutes les quantités différentielles de l'ordre $n$ peuvent
+être calculées grâce aux $n$-jets. Ce qui nous intéresse ici, ce sont les
+informations reliées à la courbure contenues dans les $2$-jets.
 
 
-Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2)
-résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
+Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2) résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
 %
 \\
 %
 Pour la première étape, dans le cas d'un maillage, cela correspond à récupérer
 les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant
-progressivement jusqu'à atteindre $N$ points. Dans le cas d'un nuage de points,
-il faut d'abord estimer la normale au point $\vp$ et les $N$ points voisins
-peuvent alors facilement être récupérés avec un diagramme de puissance sur le
-plan tangent estimé (nécessite cependant que l'échantillonnage soit assez
-dense). Nous obtenons ainsi :
-%
-\begin{equation}
-  A =  \,,
-\end{equation}
+progressivement jusqu'à atteindre $N$ points.
+% Dans le cas d'un nuage de points,
+% il faut d'abord estimer la normale au point $\vp$ et les $N$ points voisins
+% peuvent alors facilement être récupérés avec un diagramme de puissance sur le
+% plan tangent estimé (nécessite cependant que l'échantillonnage soit assez
+% dense).
 %
 \\
 %
-Pour la seconde étape, il faut calculer une analyse en composantes principales
+Pour la seconde étape, il faut effectuer une analyse en composantes principales
 (\ACP) de notre ensemble de points voisins afin d'estimer grossièrement la
-normale au point $\vp$ Ainsi, l'ajustement polynomial peut être calculé en
+normale au point $\vp$. Cela nous permet de placer le point $\vp$ à l'origine du repère et de changer de système de coordonnées pour celui de Monge (l'axe $\vec{z}$ est aligné avec la normale, et les axes $\vec{x} et \vec{z}$ sont alignés avec les directions principales de courbure). Alors :
+%
+\begin{align}
+  f(x,y) = & \frac{1}{2}(\PrincCurv{1}x^2 + \PrincCurv{2}y^2)+ \frac{1}{6}(b_0x^3+3b_1x^2y+3b_2xy^2+b_3y^3) \\ & +\frac{1}{24}(c_0x^4+4c_1x^3y+6c_2x^2y^2+4c_3xy^3+c_4y^4) + O(||(x,y)||^{5}) \,.
+\end{align}
+%
+où $\PrincCurv{1}$ et $\PrincCurv{2}$ sont les courbures principales, $b_0$ et $b_3$ sont les dérivées directionelles de $\PrincCurv{1}$ et $\PrincCurv{2}$ le long de leur ligne de courbure respective, et are the directional derivatives of k1,k2 along their respective curvature line, while b1,b2 are the directional derivatives of k1,k2 along the other curvature lines.
+
+Alors, en ayant recours à de l'ajustement de polynômes, nous pouvons récupérer les $n$-jets de la surface dans ce système de coordonnées. Nous calculons alors la base de Monge $(d_1, d_2, n)$
+
+Une propriété utile de la forme de Monge
+
+ Ainsi, l'ajustement polynomial peut être calculé en
 supprimant la coordonnée dont l'angle est le plus proche de la normale. Calcul de
 la matrice de Vandermonde $N \times N_n$ :
 %
