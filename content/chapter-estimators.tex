@@ -67,7 +67,7 @@ parfois même le tenseur de courbure entier. La plupart effectuent des analyses
 locales (\cad limité au $1$-voisinage ou $2$-voisinage) de la forme. La
 précision de l'estimation dépend fortement de la « qualité » du maillage (au
 sens où ce dernier approxime suffisamment précisément la surface continue sous-jacente).
-%
+
 \begin{figure}[ht]
     \begin{center}
       \includegraphics[width=10cm]{figures/OneRingNeighborhood}
@@ -76,7 +76,7 @@ sens où ce dernier approxime suffisamment précisément la surface continue sou
     $2$-voisinage de valence $5$.}
     \label{fig:one-ring-neighborhood}
 \end{figure}
-%
+
 % Globalement, nous pouvons les distinguer en trois catégories :
 % \begin{itemize}
 %   \item Méthode par Correspondance
@@ -102,7 +102,7 @@ la formule de Gauss-Bonnet (défaut d'angle). Cette approche a beaucoup été
 ou de la simplification de surface \cite{Kim2002}, et a même été déclarée « le
 meilleur algorithme (NDLR: parmi 5 approches) pour l'estimation de la courbure
 gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
-%
+
 \begin{figure}[ht]
     \begin{center}
       \includegraphics[width=5.5cm]{images/Curvature/Notations_Xu}
@@ -111,7 +111,7 @@ gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
     \caption[Notations pour \cauthor{Xu}{Xu2006}.]{\emph{À gauche :} Notations pour \cauthor{Xu}{Xu2006} (Figure~1 de \cite{Xu2006}). \emph{À droite :} Triangulation nécessaire du domaine (Figure~3 de \cite{Xu2006})}
     \label{fig:xu_notations}
 \end{figure}
-%
+
 Soit $\vp$ un sommet de valence $6$ du maillage triangulé $M$ et $\vp_j$ avec
 $j = 1,\cdots, 6$ l'ensemble des sommets du $1$-voisinage de $\vp$ (voir
 \RefFigure{fig:xu_notations}-gauche pour les notations). Si $\vp$ et $\vp_j$
@@ -373,7 +373,7 @@ en chaque point $\vp$ une \emph{mesure de covariance des cellules de Voronoï}
 $\mathcal{V}_{K,R}$ (\VCMM --- \VCM ---) pour une forme $K$. Cette mesure
 contient des informations sur la géométrie sous-jacente.
 %
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=4cm]{images/Feature/VCM}
@@ -381,7 +381,7 @@ contient des informations sur la géométrie sous-jacente.
     \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : \comJeremy{longueur des directions des cellules} de Voronoï.
       \label{fig:mellado-VCM}}
 \end{figure}
-%
+
 Cela nécessite de calculer un matrice de covariance ($cov$) sur les cellules de
 Voronoï ($Vor_K$) des points $\vp$ du bord de l'objet :
 %
@@ -395,14 +395,14 @@ limitent à un voisinage de rayon $R$ :
 \begin{equation}
   \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
 \end{equation}
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/VCM_notations}
     \end{center}}
     \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:mellado-multiscale}}
 \end{figure}
-%
+
 Et, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
 version convoluée de \VCM grâce à une fonction indicatrice $\chi_r$
 (ayant pour paramètre un rayon $r$) :
@@ -444,14 +444,14 @@ détecter des formes paramétriques simples comme des lignes ou des arcs de cerc
 l'accumulateur n'est plus une image, mais un objet 3D.
 \cauthors{Boulch}{Boulch2012} utilisent une boule accumulatrice (voir la
 \RefFigure{fig:hough-ball}) de $M$ bins.
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Curvature/Hough_ball}
     \end{center}}
     \caption[Boule accumulatrice.]{Boule accumulatrice (Figure~3 de \cite{Borrmann2011}). \label{fig:hough-ball}}
 \end{figure}
-%
+
 \\
 %
 Alors, les auteurs découpent le nuage de points en ensemble de plans (définis
@@ -459,14 +459,14 @@ par trois points) et normales. Si le plan est loin d'un coin ou d'une
 singularité, alors la normale est correct. Cependant, si ce plan est près d'un
 coin, la normale est perturbée par cette singularité (voir la
 \RefFigure{fig:Hough_bad}-gauche).
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=15cm]{images/Curvature/Hough_bad}
     \end{center}}
     \caption[Erreur de reconstruction de normales et correction.]{Erreur de reconstruction de normales et correction (Figure~1 de \cite{Boulch2012}). \label{fig:hough-bad}}
 \end{figure}
-%
+
 \\
 %
 Les normales sont accumulés dans la boule accumulatrice, permettant à chaque
@@ -541,14 +541,14 @@ Cette méthode, que nous appellerons \MDSS par le suite, propose de calculer la
 longueur des segments maximaux du bord $\Boundary \DigShape$ de $\DigShape
 \subset \Z^2$. En effet, il existe une relation entre la corde d'un cercle et
 son rayon (voir \RefFigure{fig:mdss-chord}).
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=10cm]{images/Notions/MDSS1}
     \end{center}}
     \caption[Relation entre la corde d'un cercle et son rayon.]{Relation entre la corde d'un cercle et son rayon (Figure~3 de \cite{Coeurjolly2001}). \label{fig:mdss-chord}}
 \end{figure}
-%
+
 L'idée ici est de considérer le segment maximal comme une corde à une distance
 $h$ (la taille de la grille) du cercle osculateur de la surface.
 
@@ -610,7 +610,7 @@ maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
 formelle). La courbure d'une courbe étant définie comme l'inverse du rayon du
 cercle osculateur, il parait logique de s'intéresser à reconnaître des arcs de
 cercle digitaux sur la forme digitale.
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Notions/MDCA}
@@ -619,7 +619,7 @@ cercle digitaux sur la forme digitale.
     {Illustration des arcs de cercle digitaux maximaux sur une ellipse (Figure~1
     de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
 \end{figure}
-%
+
 \\
 %
 Le principe de l'estimateur est simple : pour une forme $\Shape \subset \R^2$
@@ -758,7 +758,7 @@ dans le voisinage de $\vx_0$, où $P(\vx) = \sum_{i=1}^{k} a_i\Shape^i$, $a_i$
 rugosité (\anglais{roughness}) comment une fonction, le $R$ minimum nécessaire
 pour trouver un polynôme s'ajustant sur les données de la fonction $F$ avec une
 erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=14cm]{images/Curvature/DLL_roughness}
@@ -771,7 +771,7 @@ erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
     \cite{Provot2011}).\label{fig:dll-roughness}}
     %
 \end{figure}
-%
+
 \\
 %
 Alors, ils montrent que nous pouvons calculer la rugosité comme l'épaisseur
@@ -781,7 +781,7 @@ verticale (\anglais{vertical thickness}) d'un ensemble $S = \{((\vx^i)_{1 \le i
 de collision Gilbert-Johnson-Keerthi (GJK) \cite{Gilbert1988} pour calculer
 rapidement l'épaisseur verticale de l'ensemble $S$ (l'épaisseur de la séparation
 entre deux hyperplans).
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=14cm]{images/Curvature/DLL_roughness2}
@@ -794,7 +794,7 @@ entre deux hyperplans).
     (Figure~10 de \cite{ProvotIPOL2014}).\label{fig:dll-roughness2}}
     %
 \end{figure}
-%
+
 \\
 %
 Enfin, ils définissent la $k$-ième dérivée de $F$ à l'origine comme :
@@ -836,7 +836,7 @@ pas de moyen d'extraire la courbure de ces dérivées.
 %     \cite{Provot2011}).\label{fig:dll-roughness}}
 %     %
 % \end{figure}
-% %
+ %
 % De plus, cela permet de considérer la forme digitale directement, et ainsi de
 % reconnaitre des structures digitales grâce à l'algorithme de détection de
 % collision Gilbert-Johnson-Keerthi (GJK) \cite{Gilbert1988}. Ainsi, il permet de décomposer la surface en DSS, DCA et coniques.
@@ -866,7 +866,7 @@ pas de moyen d'extraire la courbure de ces dérivées.
 %     (Figure~10 de \cite{ProvotIPOL2014}).\label{fig:dll-roughness2}}
 %     %
 % \end{figure}
-%
+
 % Ils obtiennent alors une preuve de convergence en $O(h^{\frac{1}{k+1}})$ sur
 % l'estimation des dérivées du $k$-ième ordre pour une fonction réelle $f : \R
 % \rightarrow \R$ de classe $C^{k+1}$ où les dérivées d'ordre $k+1$ sont bornées
@@ -1193,7 +1193,7 @@ $\Bd{\Body{\AnyDigF{\Shape}{h}}{h}}$ (\cad les barycentres de linels en 2D ou
 surfels en 3D), calculer la quantité (aire, volume ou matrice de covariance) et
 enfin estimer l'information de courbure $\CurvT{R}$, $\MeanCurvT{R}$,
 $\PrincCurvT{1}{R}$ ou $\PrincCurvT{2}{R}$.
-%
+
 \begin{figure}[ht]
   \begin{center}
     \input{figures/tikz/2d-curv-estimator.tikz}
@@ -1856,7 +1856,7 @@ Nous devons également étudier comment les moments sont perturbés par une erre
 %
 \end{lemma}
 \begin{proof}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -1881,7 +1881,7 @@ Nous devons également étudier comment les moments sont perturbés par une erre
       \label{fig:moments-perturb}
   \end{center}
 \end{figure}
-%
+
 En décomposant $\Shape$ en fonction de deux boules de rayon R, centrées en $\vx$
 et $\vx + \vt$ (voir \RefFigure{fig:moments-perturb}), nous avons :
 %
@@ -2411,7 +2411,7 @@ choisi $R=15$ pour toutes les images des
 \RefFigures{fig:digital-II-octa}{fig:digital-II-octa-2}. La carte des couleurs
 pour les estimateurs de courbure moyenne, gaussienne et courbures principales va
 du bleu (valeur minimale) au jaune (valeur maximale).
-%
+
 \begin{figure}[ht]
 \begin{center}
   \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Mean_R_15_0001}
@@ -2421,7 +2421,7 @@ du bleu (valeur minimale) au jaune (valeur maximale).
 \end{center}\vspace{-0.5cm}
   \caption[Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$.]{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 15$. \emph{De gauche à droite, de haut en bas :} courbure moyenne, courbure gaussienne, première et seconde courbures principales. \label{fig:digital-II-octa}}
 \end{figure}
-%
+
 \begin{figure}[ht]
 \begin{center}
   \includegraphics[width=.197\linewidth]{images/Curvature/Octa256_dir1_R_15_0001}
@@ -2432,7 +2432,7 @@ du bleu (valeur minimale) au jaune (valeur maximale).
 \end{center}\vspace{-0.5cm}
   \caption[Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$.]{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 15$. \emph{De gauche à droite, de haut en bas :} première et seconde direction principale de courbure et normale (zoom sur la dernière ligne). \label{fig:digital-II-octa-2}}
 \end{figure}
-%
+
 \section{Estimation sans paramètre de la courbure par intégration volumique de la sphère}
 \label{sec:curvature:parameter-free}
 %
@@ -2447,7 +2447,7 @@ courbure, et la qualité d'estimation dépend de ce paramètre. La
 \RefFigure{fig:digital-II-octa-scale} montre le résultat de l'estimation de la
 courbure moyenne et de la courbure gaussienne avec différents rayons $R$ pour la
 forme \textsc{OctaFlower}.
-%
+
 \begin{figure}[ht]
 \begin{center}
   \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Mean_R_15_0001}
@@ -2459,7 +2459,7 @@ forme \textsc{OctaFlower}.
 \end{center}\vspace{-0.5cm}
   \caption{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec trois rayons différents : $R = 15, 25, 30$. \emph{De haut en bas}, courbure moyenne, courbure gaussienne. \label{fig:digital-II-octa-scale}}
 \end{figure}
-%
+
 Nous voulons alors automatiquement détecter ce paramètre de rayon pour des
 objets digitaux $\DigShape$ de dimension $2$ et $3$ tout en garantissant les
 propriétés de convergence asymptotiques si ceux-ci respectent les conditions de
@@ -2601,7 +2601,7 @@ De ce fait, nous avons un estimateur digital de courbure qui convergent, qui ne
 nécessite aucun paramètre de rayon. Le paramètre d'échelle $h$ est présent
 seulement pour déterminer l'unité utilisée pour mesurer les courbures comme
 l'explique la \RefFigure{fig:2d-parameter-free-explained}.
-%
+
 \begin{figure}[ht]
   \begin{center}
     \input{figures/tikz/2d-parameter-free-explained.tikz}
@@ -2614,7 +2614,7 @@ l'explique la \RefFigure{fig:2d-parameter-free-explained}.
   dépend alors $h$.\label{fig:2d-parameter-free-explained}}
   %
 \end{figure}
-%
+
 Nous utilisons un unique rayon pour estimer la courbure sur tout le bord de
 l'objet. En sachant que nous pouvons extraire des faisceaux de segments maximaux
 en chaque point du bord de l'objet, pouvons-nous adapter notre estimateur afin
@@ -2650,7 +2650,7 @@ sur les parties à faible courbure et de diminuer la taille de la boule sur les
 zones fortement courbées. La \RefFigure{fig:curvature-pf-radii} montre la
 différence entre $\CurvHS$ et $\CurvHSL$ : dans sa version locale, le rayon est
 adapté localement à la géométrie de la forme.
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Global}
@@ -2672,7 +2672,7 @@ adapté localement à la géométrie de la forme.
   \label{fig:curvature-pf-radii}.}
   %
 \end{figure}
-%
+
 Dans cette version locale, quelques segments maximaux peuvent avoir une longueur
 trop importante, ce qui nous empêche d'obtenir des preuves de convergence
 asymptotique. En effet, si, dans le faisceau de segments maximaux, les longueurs
@@ -2694,7 +2694,7 @@ objets $\DigShape \subset \Z^3$. Comme le montre la
 \RefFigure{fig:3d-dig-object-slices}, nous proposons d'utiliser des coupes de
 l’objet afin d'extraire des contours 2D, et ainsi pouvoir calculer les segments
 maximaux.
-%
+
 \begin{figure}[ht]
     \begin{center}
       \includegraphics[width=6cm]{images/Curvature/ctopo3dSurfelCut}
@@ -2702,7 +2702,7 @@ maximaux.
     \caption[Coupes sur un objet digital 3D.]{Coupes sur un objet digital 3D.}
     \label{fig:3d-dig-object-slices}
 \end{figure}
-%
+
 Formalisons cela avec une proposition sur les manifolds lisses :
 %
 \begin{proposition}
@@ -2959,7 +2959,7 @@ de la conjecture.
     \caption{Comportement asymptotique (en échelle logarithmique) de $h\rho'( \DigShape )$ sur l'objet \Ellipsoid.
     \label{fig:bounds-length-MDSS-fig}}
 \end{figure}
-%
+
 La \RefFigure{fig:bounds-length-MDSS-fig} confirme expérimentalement ces bornes.
 
 
@@ -3093,7 +3093,7 @@ Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de
 %
 \subsection{Optimisation des estimateurs locaux sans paramètres et résultats}
 \label{sec:curvature:parameter-free:k-means}
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local}
@@ -3115,7 +3115,7 @@ Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de
   \label{fig:curvature-pfl-radii}.}
   %
 \end{figure}
-%
+
 Nous pouvons améliorer le temps de calcul des estimateurs qui s'adaptent à la
 géométrie locale du bord de l'objet $\CurvHSL$, $\MeanCurvHSL$ et autres. En
 effet, sur des objets à forte résolution (\cad $h$ petit), ces estimateurs sont
@@ -3131,7 +3131,7 @@ nombre de rayons de boule disponibles à $K$. Pour se faire, nous distribuons le
 longueurs des segments maximaux dans $K$ partitions en minimisant la somme des
 carrés des différences des longueurs. La \RefFigure{fig:curvature-pfl-radii}
 montre le résultat de la répartition des rayons pour $K=5$.
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[height=4cm]{images/Curvature/Flower_kMeans-5}
@@ -3143,11 +3143,11 @@ montre le résultat de la répartition des rayons pour $K=5$.
   \label{fig:curvature-pfl-map}.}
   %
 \end{figure}
-%
+
 La \RefFigure{fig:curvature-pfl-map} montre la répartition de ces partitions sur deux objets : \Flower pour un objet 2D et \Ellipsoid en 3D.
 %
 Une comparaison complète de tous les estimateurs présentés dans cette section est disponible dans le \RefSection{sec:comparaison-courbure}. La \RefFigure{fig:mean-curv-different-scale} montre le résultat de l'estimateur digital local sans paramètre $\MeanCurvHSL$ sur des objets de différentes tailles. Nous pouvons alors voir que l'estimateur s'adapte parfaitement à la géométrie locale de la forme et affiche une cohérence de résultat quelque soit l'échelle de l'objet.
-%
+
 \begin{figure}[ht]
 \begin{center}
   \includegraphics[width=.30\linewidth]{images/Curvature/Bunny_64_mean}
@@ -3156,7 +3156,7 @@ Une comparaison complète de tous les estimateurs présentés dans cette section
 \end{center}
   \caption{Courbure moyenne affichée sur des objets \Bunny à différentes résolutions : $64^3$, $128^3$ et $256^3$. La valeur de courbure moyenne est obtenue avec l'estimateur digital local sans paramètre $\MeanCurvHSL$ (la couleur jaune est la plus haute valeur de courbure, la couleur bleue est la plus petite). \label{fig:mean-curv-different-scale}}
 \end{figure}
-%
+
 % \section{Estimation de la courbure par intégration surfacique de la sphère}
 % \subsection{Analyse euclidienne de l'intégration surfacique de la sphère, et relation à la courbure}
 % \subsubsection{Estimation par aire de patch de surface}
@@ -3194,7 +3194,7 @@ de courbure présentés dans ce chapitre.
       \bottomrule
   \end{tabular}
 \end{table}
-%
+
 \begin{figure}[ht]
   \begin{center}
       \includegraphics[width=.30\linewidth]{images/Ellipse}
@@ -3207,7 +3207,7 @@ de courbure présentés dans ce chapitre.
   \caption{Illustration de formes 2D et 3D considérées pour l'évaluation expérimentale (se référer au \RefTable{tab:shapes} pour les équations et les paramètres utilisés). \emph{De gauche à droite, de haut en bas} : \textsc{Ellipse}, \textsc{Flower}, \textsc{AccFlower}, \textsc{Sphere}, \textsc{Rounded Cube} et Surface de \textsc{Goursat}.}
   \label{fig:illustrationShapes}
 \end{figure}
-%
+
 Tous les estimateurs présentés ont été implémentés dans \DGtal \cite{DGtal}.
 Nous reviendrons plus tard sur l'aspect implémentation et optimisation de ces
 estimateurs (voir \RefSection{sec:applications:dgtal}). \DGtal est une librairie
@@ -3367,7 +3367,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-ellipse}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3414,7 +3414,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-flower}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3454,7 +3454,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-accflower}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3492,7 +3492,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-3D-alpha}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3539,7 +3539,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-sphere}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3586,7 +3586,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-rounded}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3633,7 +3633,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-goursat}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3683,7 +3683,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \label{fig:curv-experiments-ellipsoid}
   \end{center}
 \end{figure}
-%
+
 Alors, expérimentalement, le choix de $\alpha = \frac{1}{3}$ est cohérent pour
 obtenir une vitesse de convergence des estimateurs $\CurvH{R}$, $\MeanCurvH{R}$,
 $\PrincCurvH{1}{R}$, $\PrincCurvH{2}{R}$ en $O(h^\frac{1}{3})$.
@@ -3860,7 +3860,7 @@ que les sous-supports $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
       \label{fig:curv-experiments-timings}
   \end{center}
 \end{figure}
-%
+
 La \RefFigure{fig:curv-experiments-timings} nous donne les temps de calcul pour
 nos estimateurs 2D $\CurvH{R}$ (\II), $\CurvHS$, $\CurvHSL$ et les variantes à
 nombre de rayons limités $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$,
@@ -3932,7 +3932,7 @@ plus il se rapproche de la forme sous-jacente.
       \label{fig:curv-experiments-ellipse-noise}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
@@ -3976,7 +3976,7 @@ plus il se rapproche de la forme sous-jacente.
       \label{fig:curv-experiments-rounded-noise}
   \end{center}
 \end{figure}
-%
+
 Nous expérimentons nos estimateurs de courbure en 2D et en 3D avec des objets bruités
 dans les
 \RefFiguresDF{fig:curv-experiments-ellipse-noise}{fig:curv-experiments-rounded-noise}

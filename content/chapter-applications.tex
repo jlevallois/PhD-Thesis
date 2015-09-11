@@ -168,7 +168,7 @@ d'ordre $3$ en s'intéressant aux variations des directions principales de
 courbure dans un voisinage de la surface \cite{Lai2007,Yang2006}. En seuillant
 les déviations angulaire significatives des directions principales de courbure,
 nous pouvons alors détecter les discontinuités.
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/RidgesValleys}
@@ -176,7 +176,7 @@ nous pouvons alors détecter les discontinuités.
     \caption[Notations.]{« Crêtes » et « Vallées » (Figure~12 de \cite{Vergne2011}).
       \label{fig:ridges-valleys}}
 \end{figure}
-%
+
 Ces techniques apportent une approche formelle à l'extraction de discontinuités,
 mais sont dépendantes de l'échelle à travers le seuillage. De plus, elles
 nécessitent d'avoir une estimation robuste de quantités différentielles d'ordre
@@ -255,7 +255,7 @@ en fonction d'un ensemble de rayons $\{ R_i \}_{0 \le i \le n}$ :
 \begin{equation}
   \tau_{R_i}(\vx) \EqDef \frac{\lambda_0(J_{R_i}(\vx))}{\lambda_0(J_{R_i}(\vx)) + \lambda_1(J_{R_i}(\vx)) + \lambda_2(J_{R_i}(\vx))}.
 \end{equation}
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[height=6cm]{images/Feature/PaulyTau}
@@ -263,7 +263,7 @@ en fonction d'un ensemble de rayons $\{ R_i \}_{0 \le i \le n}$ :
     \caption[Valeurs retournées par $\tau_{R_i}$.]{Valeurs retournées par $\tau_{R_i}$ (Figure~7 de \cite{Pauly2003}).
     \label{fig:pauly-tau}}
 \end{figure}
-%
+
 Puisque les valeurs propres diminuent lorsque la courbure augmente, il apparaît
 que la valeur de $\tau_{R_i}$ sera plus grande sur les singularités que sur les parties
 à courbure nulle de la surface. Pour appuyer cette distinction, les auteurs calculent un
@@ -279,7 +279,7 @@ l'utilisateur. Plus formellement :
 Il est alors évident que le poids sera plus important sur les zones
 caractéristiques (de couleur jaune sur la \RefFigure{fig:pauly-cubesphere})
 tandis qu'il sera faible sur le reste de la forme (en bleu).
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[height=6cm]{figures/CubeSpherePlotPauly}
@@ -287,7 +287,7 @@ tandis qu'il sera faible sur le reste de la forme (en bleu).
     \caption[Résultat de l'\RefEquation{eq:pauly-omega}]{Résultat de l'\RefEquation{eq:pauly-omega} avec comme paramètres $\tau_{max} = 0.01$, $5 \le i \le 25$.
     \label{fig:pauly-cubesphere}}
 \end{figure}
-%
+
 Puisque ce détecteur est relié à la variation de la surface, il fournit des
 résultats géométriquement valides. Cependant, cela nécessite que l'utilisateur
 fournisse un paramètre $\tau_{max}$ qui dépend de la géométrie de la forme : il
@@ -307,7 +307,7 @@ moment d'ordre zéro comme le barycentre et le moment d'ordre un comme la matric
 de covariance, ce qui peut porter à confusion avec notre définition des moments
 vue dans le \RefSection{sec:definitions-moments}.} de patchs surfaciques
 $\Ball{R}{\vx} \cap \dS$.
-%
+
 \begin{figure}[ht]
   \begin{center}
     \input{figures/tikz/Moments-Edge.tikz}
@@ -327,7 +327,7 @@ $\vx$ au barycentre $\vb$) comme fonction du rayon du voisinage $R$ (voir
 \RefFigure{fig:moments-explained}). Ils démontrent alors que cette longueur
 croît de façon quadratique sur des surfaces lisses lorsque le voisinage
 augmente, tandis que la longueur croît linéairement sur des singularités.
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{figures/CubeSpherePlotMoment_SS}
@@ -335,7 +335,7 @@ augmente, tandis que la longueur croît linéairement sur des singularités.
     \caption[Évolution de $n_R$ en fonction de la taille du voisinage $R$]{Évolution de $n_R$ en fonction de la taille du voisinage $R$.
       \label{fig:moment-multiscale}}
 \end{figure}
-%
+
 Cependant, ils n'utilisent pas cette propriété dans leur méthode de
 classification et ne l'évaluent pas expérimentalement, probablement à cause de
 la difficulté à distinguer les deux comportements (linéaire et quadratique)
@@ -377,14 +377,14 @@ propres de la matrice de covariance, liées à la normal et à la plus forte des
 courbure principale.
 %
 %\missingfigure{Moment : Donner des résultats avec $C^0$}
-%
+
 \begin{figure}[hbt]
   \centering
   \includegraphics[height=6cm]{images/Feature/CubeSphere_Moments_r_10_c1}
   \includegraphics[height=6cm]{images/Feature/CubeSphere_Moments_r_22_c1}
   \caption[Résultat de l'\RefEquation{eq:moment-C1}]{Résultat de l'\RefEquation{eq:moment-C1} avec comme paramètres $\alpha = 1$, $\beta = 50$ pour deux tailles de voisinage $R = 10$ et $R = 22$.}\label{fig:moment-C1}
 \end{figure}
-%
+
 Il y a alors trois paramètres à choisir : $\alpha$, $\beta$, ainsi que la
 taille du voisinage, rendant la détection compliquée sans analyse au préalable
 de la forme d'entrée. Le \RefSection{sec:applications:feature:comparison} compare le résultat de l'\RefEquation{eq:moment-C1} avec deux rayons différents.
@@ -401,6 +401,10 @@ laquelle ils peuvent extraire des informations sur la géométrie sous-jacente
 covariance ($cov$) sur des cellules de Voronoï ($Vor_K$) des points du bord de
 l'objet :
 %
+\begin{equation}
+    cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
+\end{equation}
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=4cm]{images/Feature/VCM}
@@ -408,11 +412,7 @@ l'objet :
     \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : \comJeremy{longueur des directions des cellules} de Voronoï.
       \label{fig:mellado-VCM}}
 \end{figure}
-%
-\begin{equation}
-    cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
-\end{equation}
-%
+
 Afin d'avoir une information plus locale de la variation de la forme, ils se
 limitent à un voisinage de rayon $R$ :
 %
@@ -432,7 +432,7 @@ où $\pi^K(\vx)$ est la projection de tout point $\vx$ vers le point le plus pro
 $K$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si $\vx$
 appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction « Hat »
 ($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/VCM_notations}
@@ -473,7 +473,7 @@ $\vp$ :
 %
 Le point est alors considéré comme une singularité si son ratio est supérieur à
 un paramètre de seuillage $T$ donné par l'utilisateur.
-%
+
 \begin{figure}[ht]
   \centering
   \includegraphics[height=6cm]{images/Feature/CubeSphere_VCM_r_10}
@@ -485,7 +485,7 @@ un paramètre de seuillage $T$ donné par l'utilisateur.
   droite}).}\label{fig:VCM-cubesphere}
   %
 \end{figure}
-%
+
 \paragraph{Vote de tenseur}
 %
 %\todoJeremy{more citations}
@@ -509,7 +509,7 @@ tenseurs :
 \begin{equation}
   T_i = \sum\limits_{j \in N(i)} \left(\mathcal{I}_3 - \frac{\overrightarrow{v}_j\overrightarrow{v}_j^T}{||\overrightarrow{v}_j\overrightarrow{v}_j^T||} \right) .
 \end{equation}
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/Tensor_voting_notations}
@@ -517,7 +517,7 @@ tenseurs :
     \caption{Les trois différents type de tenseur de la théorie du vote de tenseur \cite{Medioni2000-2}. Nous utiliserons ici uniquement le tenseur de boule.
       \label{fig:mellado-multiscale}}
 \end{figure}
-%
+
 Avec un ratio sur les valeurs propres de cette matrice, \nauthor{Park} veulent
 obtenir un poids $\omega_i$ déterminant si le point caractéristique :
 %
@@ -539,7 +539,7 @@ ces zones, l'analyse à plusieurs rayons permet de capturer des zones de
 saillance qui auraient pu ne pas être considérées à une échelle donnée; c'est le
 cas d'une zone lisse ou proche d'une singularité par exemple où $\omega_i$ croîtra
 (\RefFigure{fig:tensor-weight}).
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=8cm]{images/Feature/Tensor_weight}
@@ -547,7 +547,7 @@ cas d'une zone lisse ou proche d'une singularité par exemple où $\omega_i$ cro
     \caption[Variation du poids $\omega_i$.]{Variation du poids $\omega_i$ (Figure~6 de \cite{Park2012}).
       \label{fig:tensor-weight}}
 \end{figure}
-%
+
 Ainsi, pour tous les rayons, si le poids devient plus grand que $\omega^+$, le
 point sera labellisé comme \Feature (en rouge sur
 \RefFigure{fig:tensor-cubesphere}); Si le poids devient plus petit que
@@ -565,7 +565,7 @@ $n_{min}$ points\footnote{dans leur article, les auteurs choisissent
 arbitrairement $n_{min}=10$, mais ajoutent que cette valeur peut varier en
 fonction de la densité de points.} comme \NonFeature, les autres regroupements
 comme \Feature.
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[height=6cm]{figures/CubeSpherePlotTensor}
@@ -607,7 +607,7 @@ pour toutes les échelles $t$ ($t=R$ avec nos notations), ils font correspondre
 une hyper-sphère algébrique et la distance de décalage algébrique $\tau$ entre
 le point $\vp$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
 (signée) $\kappa$ de l'hyper-sphère.
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/Mellado_notations}
@@ -615,7 +615,7 @@ le point $\vp$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
     \caption[Notations.]{Notations (Figure~1 de \cite{Mellado2012}).
       \label{fig:mellado-notations}}
 \end{figure}
-%
+
 Ils proposent alors de calculer la \emph{variation géométrique} au point $\vp$
 définie telle que :
 %
@@ -630,7 +630,7 @@ définie telle que :
 %
 Les auteurs laissent l'utilisateur déterminer ce qu'il considère comme un point
 caractéristique en seuillant par exemple cette variation géométrique.
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=14cm]{images/Feature/Mellado_multiscale}
@@ -638,7 +638,7 @@ caractéristique en seuillant par exemple cette variation géométrique.
     \caption[Sélection des points caractéristiques par l'utilisateur.]{Sélection des points caractéristiques par l'utilisateur en fonction de la variation géométrique $\nu$ (Figure~11 de \cite{Mellado2012}).
       \label{fig:mellado-multiscale}}
 \end{figure}
-%
+
 Cependant, ils déterminent également une autre fonction continue d'estimation de
 singularités $f$ intégrant toutes les échelles :
 %
@@ -650,7 +650,7 @@ Cette fonction permet de différencier les régions sans variations géométriqu
 la \RefFigure{fig:mellado-cubesphere}) de celles qui ont de hautes variations
 (en jaune)\footnote{$tanh(\vx)$ est souvent utilisée pour \comJeremy{renforcer des
 effets}}.
-%
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[height=6cm]{figures/CubeSpherePlotMellado}
@@ -662,7 +662,7 @@ effets}}.
   rayon $t$. \label{fig:mellado-cubesphere}}
     %
 \end{figure}
-%
+
 Expérimentalement, cette méthode semble moins sensible au bruit, mais des
 artefacts apparaissent sur les singularités (voir le
 \RefSection{sec:applications:feature:comparison} pour une comparaison).
@@ -718,7 +718,7 @@ Alors, le spectre laplacien est calculé à partir des valeurs propres $\lambda_
 \begin{equation}
   \mathcal{H}(i) = \{ \lambda_i, 1 \le i \le n \}.
 \end{equation}
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=10cm]{images/Feature/LaplacianSpectrum}
@@ -727,7 +727,7 @@ Alors, le spectre laplacien est calculé à partir des valeurs propres $\lambda_
     \caption[Matrice laplacienne et son spectre.]{Matrice laplacienne $L$ et son spectre $\mathcal{H}$ et son spectre logarithmique $\mathcal{L}$ (Figures~1 et 5 de \cite{Song2014}).
       \label{fig:laplacian-spectrum}}
 \end{figure}
-%
+
 Plus récemment, \cauthors{Hou}{Hou2007} ont utilisé le logarithme du spectre de
 Fourier pour détecter les saillances visuelles d'images 2D. \nauthors{Song} vont
 s'inspirer de cette méthode en utilisant le spectre logarithmique de la matrice
@@ -736,7 +736,7 @@ laplacienne :
 \begin{equation}
   \mathcal{L}(i) = \log(|\mathcal{H}(i)|)
 \end{equation}
-%
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[width=10cm]{images/Feature/LaplacianSpectrumLogAvg}
@@ -788,7 +788,7 @@ ellipsoïdal sur un plan discret incliné (voir la \RefFigure{fig:staircase}).
     \caption[Problème des méthodes d'analyse spectrales sur des données digitales.]{Diffusion de chaleur sur un objet digital d'un opérateur laplacien discret de la formulation du calcul extérieur discret. Un effet d'escalier apparaît sur les résultats.
       \label{fig:staircase}}
 \end{figure}
-%
+
 \subsection{Estimation de singularités par l'analyse en espace d'échelle de la
 courbure}%
 \label{sec:applications:feature:II}
@@ -801,7 +801,7 @@ d'intégration $R$ comme paramètre de l'espace d'échelle. Ce changement de ray
 de sphère d'intégration fera varier le résultat obtenu par notre estimateur de
 courbure (\RefFigure{fig:curvature-scale-3d}). Nous parlons ici d'analyse en
 espace-échelle de nos estimateurs, le paramètre étant le rayon de la boule.
-%
+
 \begin{figure}[ht]{
     \begin{center}
       \includegraphics[width=3.2cm]{images/Curvature/MeanAl_4}
@@ -814,7 +814,7 @@ espace-échelle de nos estimateurs, le paramètre étant le rayon de la boule.
       pour différents rayons de boule : $4$, $7$, $14$ et $30$.
       \label{fig:curvature-scale-3d}}
 \end{figure}
-%
+
 % Dans un premier temps, nous allons faire quelques rappels, puis nous étudierons
 % les spécificités en espace-échelle ces estimateurs.
 %
@@ -857,7 +857,7 @@ espace-échelle de nos estimateurs, le paramètre étant le rayon de la boule.
 %
 \subsubsection{Analyse en espace d'échelle de $\CurvT{R}(x)$ et $\MeanCurvT{R}(x)$}%
 \label{sec:applications:feature:II:analyse}
-%
+
 \begin{figure}[ht]{
       \begin{center}
           \includegraphics[width=2cm]{images/Flower}
@@ -872,7 +872,7 @@ espace-échelle de nos estimateurs, le paramètre étant le rayon de la boule.
       aux valeurs de courbures: du bleu (courbure la plus petite) au jaune (courbure
       la plus grande).\label{fig:curvature-scale-2d}}
 \end{figure}
-%
+
 Nous proposons alors d'étudier le comportement des estimateurs digitaux par
 intégration lorsque nous réduisons le rayon de la boule pour une forme et une
 résolution donnée. La \RefFigure{fig:curvature-scale-2d} nous montre les
@@ -934,7 +934,7 @@ estimateurs de courbures de la \RefDefinition{def:pottmann-2d-3d-mean}.
 \end{center}
 }
 \end{figure}
-%
+
 Puisque nous sommes dans les mêmes conditions que le
 théorème~\ref{theo:pottmann-2d-3d-mean-conv}, nous savons que :
 %
@@ -971,7 +971,7 @@ $\dS$ :
 \end{center}
 }
 \end{figure}
-%
+
 \begin{definition}{\fakeTitle{\RefTheoremFake{12}{Pottmann2009}}}
   %
   Soit $\Shape$ une forme euclidienne de $\R^2$ (\respp $\R^3$) avec
@@ -1000,7 +1000,7 @@ $\dS$ :
 %
 $\FeatDD(R)$ nous donne un monôme en $R$ d'exposant $-1$ dont le coefficient est
 dépendant de l'angle $\alpha_0$.
-%
+
 \begin{figure}[ht]
 \begin{center}
   {\includegraphics[width=8cm]{figures/CubeSpherePlot_ES_NoColor}}
@@ -1012,7 +1012,7 @@ dépendant de l'angle $\alpha_0$.
   %
 \end{center}
 \end{figure}
-%
+
 En conclusion, $\FeatDD(R)$ a deux comportements distincts lorsque nous sommes
 sur un point d'une surface lisse ou lorsque nous sommes sur une singularité de
 la surface. Lorsque le rayon $R$ décroît sur une surface lisse, l'estimateur de
@@ -1036,7 +1036,7 @@ de discrétisation $h$, une infinité de courbes euclidiennes $\dS$ avec
 différentes valeurs de courbure au point $\vx$ donnent exactement la même valeur
 pour $\AR$, et donc la même valeur pour $\FeatDD(R)$. Cela est dû à la perte
 d'informations de la discrétisation, et le constat est le même en 3D.
-%
+
 \begin{figure}[ht]{\small
   \begin{center}
     \begin{overpic}[width=7cm]{figures/minInterval_min2}
@@ -1048,7 +1048,7 @@ d'informations de la discrétisation, et le constat est le même en 3D.
   \caption[Notations de la propriété~\ref{prop:minInterval}]{Effets de discrétisation et notations de la propriété~\ref{prop:minInterval}. Toutes les courbes noires et grises donnent la même discrétisation d'intersection avec $\Ball{R}{\vx}$.
   \label{fig:minInterval}}
 \end{figure}
-%
+
 La \RefFigure{fig:minInterval} illustre ceci en nous montrant une valeur de
 $\Ball{R}{\vx} \cap \DSh$ (en bleu) pour une valeur de courbure $\CurvMax$
 limite de $\Shape$ (en noir) au point $\vx$ pour un rayon de boule $R$ (en
@@ -1107,7 +1107,7 @@ cas d'une analyse en espace d'échelle) de la boule contrôle la \emph{taille} d
 la caractéristique qui sera détecté à cause des artefacts de discrétisation :
 une singularité trop petite avec un pas de discrétisation trop faible sera
 absorbé par les artefacts de discrétisation.
-%
+
 \begin{figure}[ht]
 \begin{center}
   {\includegraphics[width=8cm]{figures/CubeSpherePlot_F_NoColor}}
@@ -1119,7 +1119,7 @@ absorbé par les artefacts de discrétisation.
   %
 \end{center}
 \end{figure}
-%
+
 Nous pouvons observer les trois cas en espace d'échelle : sur la courbe verte de
 la \RefFigure{fig:CubeSpherePlot_F_NoColor}, toutes les valeurs de $\FeatTD(R)$
 sont inférieures à $\MeanCurvMax$ (représentées par la droite grise en
@@ -1216,7 +1216,7 @@ peut être classifié comme \featedge pour de grands rayons, \featsmooth pour de
 plus petits et éventuellement \featflat si la valeur tombe au dessous de
 $\CurvMax(R,h)$. Cet effet est illustré sur la \RefFigure{fig:inversion} pour un
 point proche d'une singularité.
-%
+
 \begin{figure}
 \begin{center}
   {\includegraphics[width=8cm]{figures/CubeSpherePlot_transition}}
@@ -1224,7 +1224,7 @@ point proche d'une singularité.
   \label{fig:inversion}
 \end{center}
 \end{figure}
-%
+
 Afin de reconnaître ce comportement, nous introduisons dans un premier temps un
 nouveau modèle linéaire de pente de $-2$ qui correspond à la pente de
 $\CurvMax(R,h)$ comme nous l'avons vu précédemment, que nous allons nommer le «
@@ -1274,7 +1274,7 @@ comme une partie \featflat.
 %\missingfigure{Montrer un exemple de feature avec un range de rayon trop petit}
 %
 %\missingfigure{Robustesse de II feature}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{1pt}
@@ -1286,14 +1286,14 @@ comme une partie \featflat.
     \caption{Résultat de notre estimateur de singularité sur l'objet \Bunny ainsi que des microstructures de neige obtenues à partir de micro-tomographie à rayons X.\label{fig:feature-snow}}
   \end{center}
 \end{figure}
-%
+
 L'autre avantage de notre classificateur est qu'il ne nécessite d'aucun
 paramètre autre que l'intervalle de rayons. De ce fait, il est alors simple de
 classer des zones quelque soit la résolution de la forme. La
 \RefFigure{fig:feature-octa} nous montre le résultat de classification pour
 différentes résolutions de la forme \emph{OctaFlower} : $256^3$, $512^3$ et
 $1024^3$.
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{1pt}
@@ -1305,7 +1305,7 @@ $1024^3$.
     \caption{Résultat de notre estimateur de singularité sur l'objet \OctaFlower à différentes résolutions ($256^3$, $512^3$ et $1024^3$).\label{fig:feature-octa}}
   \end{center}
 \end{figure}
-%
+
 Comme pour l'estimation de courbure, un pré-calcul de la taille de la forme
 grâce aux segments maximaux pourrait aider à se défaire de ces paramètres de
 rayons.
@@ -1375,7 +1375,7 @@ tandis que les
 \RefFiguresN{fig:feature-comparative-noise}{fig:feature-comparative-noise-2}
 montrent les résultats des estimateurs sur les formes bruitées. Les paramètres
 utilisés sont spécifiés dans les légendes des figures.
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{1pt}
@@ -1417,7 +1417,7 @@ utilisés sont spécifiés dans les légendes des figures.
     Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{1pt}
@@ -1461,7 +1461,7 @@ utilisés sont spécifiés dans les légendes des figures.
     Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-2}}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{1pt}
@@ -1503,7 +1503,7 @@ utilisés sont spécifiés dans les légendes des figures.
     Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative-noise}}
   \end{center}
 \end{figure}
-%
+
 \begin{figure}[ht]
   \begin{center}
     \setlength{\tabcolsep}{1pt}
@@ -1549,7 +1549,7 @@ utilisés sont spécifiés dans les légendes des figures.
     Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-noise-2}}
   \end{center}
 \end{figure}
-%
+
 Les méthodes basées sur la variation de barycentres (\nauthor{Clarenz}) et \VCM
 (\nauthor{Mérigot}) étant mono-échelles, nous avons choisi deux échelles
 d'analyse (dans le même éventail que les estimateurs multi-échelles) afin de
