@@ -242,9 +242,9 @@ l'intersection entre la forme et la boule. Les auteurs ont démontré que ces
 quantités par intégration apportent d'intéressantes informations de courbures
 lorsque le rayon de la boule tend vers zéro. Ils amènent également des preuves
 de stabilité --- dans le cas d'échantillonnage de maillage par exemple ---
-dépendant de la taille de la boule et du paramètre d'échantillonnage $\epsilon$. Nos travaux sur les
-estimateurs digitaux de courbures se basant sur la même idée, nous détaillerons
-cette approche dans un prochain paragraphe
+dépendant de la taille de la boule et du paramètre d'échantillonnage $\epsilon$.
+Nos travaux sur les estimateurs digitaux de courbures se basant sur la même
+idée, nous détaillerons cette approche dans un prochain paragraphe
 (\RefSection{sec:pottmann-principle}).
 %
 \subsection{Estimation de courbure sur des nuages de points}
@@ -428,8 +428,9 @@ $O(\sqrt{\epsilon})$. C'est en quelque sorte la mesure intégrale de la matrice
 de covariance du cône de normale autour du point d'intérêt. Néanmoins, la
 convergence des courbures est dépendante de plusieurs paramètres $r$ et $R$ qui
 contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
-cette approche donne des résultats comparables à \JetFitting pour les
-courbures. \cauthors{Cuel}{Cuel2014} propose une comparaison complète pour l'estimation des normales.
+cette approche donne des résultats comparables à \JetFitting pour les courbures.
+\cauthors{Cuel}{Cuel2014} propose une comparaison complète pour l'estimation des
+normales.
 %
 \paragraph{Accumulateur sphérique}
 %
@@ -438,7 +439,11 @@ pour estimer les champs de normales sur des nuages de points bruités, même en
 présence de singularités \cite{Li2010, Boulch2012, Zhang2013}. Cela nécessite de
 mettre en place un accumulateur auquel les données vont contribuer. La
 transformée de Hough \cite{Hough1962} est traditionnellement employée, pour
-détecter des formes paramétriques simples comme des lignes ou des arcs de cercle \cite{Duda1972}. Cependant, elle peut être étendu en dimension 3 : l'accumulateur n'est plus une image, mais un objet 3D. \cauthors{Boulch}{Boulch2012} utilisent une boule accumulatrice (voir la \RefFigure{fig:hough-ball}) de $M$ bins.
+détecter des formes paramétriques simples comme des lignes ou des arcs de cercle
+\cite{Duda1972}. Cependant, elle peut être étendu en dimension 3 :
+l'accumulateur n'est plus une image, mais un objet 3D.
+\cauthors{Boulch}{Boulch2012} utilisent une boule accumulatrice (voir la
+\RefFigure{fig:hough-ball}) de $M$ bins.
 %
 \begin{figure}[ht]{
     \begin{center}
@@ -449,7 +454,11 @@ détecter des formes paramétriques simples comme des lignes ou des arcs de cerc
 %
 \\
 %
-Alors, les auteurs découpent le nuage de points en ensemble de plans (définis par trois points) et normales. Si le plan est loin d'un coin ou d'une singularité, alors la normale est correct. Cependant, si ce plan est près d'un coin, la normale est perturbée par cette singularité (voir la \RefFigure{fig:Hough_bad}-gauche).
+Alors, les auteurs découpent le nuage de points en ensemble de plans (définis
+par trois points) et normales. Si le plan est loin d'un coin ou d'une
+singularité, alors la normale est correct. Cependant, si ce plan est près d'un
+coin, la normale est perturbée par cette singularité (voir la
+\RefFigure{fig:Hough_bad}-gauche).
 %
 \begin{figure}[ht]{
     \begin{center}
@@ -519,7 +528,8 @@ allons les détailler les méthodes les plus représentatives.
 \paragraph{Reconnaissance d'objets digitaux}
 %
 Nous allons nous intéresser dans un premier temps aux méthodes reconnaissant des
-objets digitaux sur le bord de l'objet, afin d'en extraire des informations différentielles.
+objets digitaux sur le bord de l'objet, afin d'en extraire des informations
+différentielles.
 
 
 \textbf{Segments digitaux maximaux}\\
@@ -569,6 +579,7 @@ moyenne (voir le \RefLemma{lem:law-length-MDSS}). Cette borne supérieure a pour
 conséquence de réfuter la preuve de convergence avancée dans
 \cite{Coeurjolly2001}.
 %
+%
 % \textbf{Demi-tangentes digitales}\\
 % %
 % \cauthors{de Vieilleville}{deVieilleville2007} s'intéressent à la reconnaissance
@@ -589,6 +600,8 @@ conséquence de réfuter la preuve de convergence avancée dans
 % demi-tangentes sur le bord digital qui ne peut pas être vérifiée, la convergence
 % de l'estimateur reposant sur celle-ci.
 % %
+
+
 \textbf{Analyse des arcs de cercle digitaux maximaux}\\
 % Most centered Digital Circular Arc
 \cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
@@ -609,15 +622,12 @@ cercle digitaux sur la forme digitale.
 %
 \\
 %
-Le principe de l'estimateur est simple : pour une forme $\Shape \subset \R^2$ avec un champ de courbure continu,
-ils calculent les $(A_i)_{i \in 1,n}$ \MDCA ($n$ étant le nombre totale de
-\MDCA) du bord digital $\BdZ{\DigShape}$ avec $\DigShape = \DSh$. Ils calculent
-également les $(V_i)_{i \in 1,n}$, une partition du bord digital permettant de
-faire correspondre tous les surfels vers le \MDCA le plus proche. Afin de déterminer quel
-est le \MDCA le plus proche d'un surfel, il faut que la distance vers le surfel
-au centre\footnote{le surfel le plus proche au niveau de la moitié de sa
-longueur digitale} du \MDCA soit le plus petit par rapport aux autres. Ainsi,
-aucune ambiguïté ne peut apparaître, chaque surfel est relié à son \MDCA le plus
+Le principe de l'estimateur est simple : pour une forme $\Shape \subset \R^2$
+avec un champ de courbure continu, ils calculent les $(A_i)_{i \in 1,n}$ \MDCA
+($n$ étant le nombre totale de \MDCA) du bord digital $\BdZ{\DigShape}$ avec
+$\DigShape = \DSh$. Ils calculent également les $(V_i)_{i \in 1,n}$, une
+partition du bord digital permettant de faire correspondre tous les surfels vers
+le \MDCA le plus proche. Chaque surfel est relié à son \MDCA le plus
 représentatif (voir \RefFigure{fig:mdca-curv-figure}, les surfels bleus sont
 reliés au \MDCA bleu). Alors :
 %
@@ -632,7 +642,8 @@ Les auteurs ont prouvé la convergence asymptotique en $O(h^{\min(1-2a,b)})$ de
 cet estimateur sur des formes convexes de $\R^2$ dont le champ de courbure est
 continue, strictement positif et borné supérieurement, si $0 < b \le a <
 \frac{1}{2}$ correspond aux bornes inférieures et supérieurs des longueurs des
-\MDCA (\respp $\Omega(h^a)$ et $O(h^b)$). Cette dernière hypothèse n'est pas prouvé à ce jour.
+\MDCA (\respp $\Omega(h^a)$ et $O(h^b)$). Cette dernière hypothèse n'est pas
+prouvé à ce jour.
 
 
 Le principal avantage de ces deux méthodes est qu'ils ne nécessitent aucun
