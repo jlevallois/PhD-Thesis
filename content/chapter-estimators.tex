@@ -505,7 +505,7 @@ son rayon (voir \RefFigure{fig:mdss-chord}).
 %
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[width=15cm]{images/Notions/MDSS1}
+    \includegraphics[width=10cm]{images/Notions/MDSS1}
     \end{center}}
     \caption[Relation entre la corde d'un cercle et son rayon.]{Relation entre la corde d'un cercle et son rayon (Figure~3 de \cite{Coeurjolly2001}). \label{fig:mdss-chord}}
 \end{figure}
@@ -538,31 +538,28 @@ bien que la borne supérieur du plus long MDSS est en $O(h^{-\frac{1}{2}})$, leu
 longueur est en $\Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right))$ en
 moyenne (voir le \RefLemma{lem:law-length-MDSS}). Cette borne supérieure a pour
 conséquence de réfuter la preuve de convergence avancée dans
-\cite{Coeurjolly2001}, bien qu'expérimentalement cet estimateur semble bien se
-comporter.
-
-\textbf{Demi-tangentes digitales}\\
-
-\cauthors{de Vieilleville}{deVieilleville2007} s'intéressent à la reconnaissance
-des segments maximaux digitaux que nous avons défini dans le chapitre précédent
-(voir \RefSection{sec:segments}). Ainsi, le principe est simple : pour une forme
-$\Shape \subset \R^2$, pour chaque point $\vp$ du bord digital $\BdZ{\DigShape}$
-avec $\DigShape = \DSh$, ils récupèrent le segment digital maximal (\MDSS) dont
-son centre est le plus proche du point $\vp$. Alors, en s'appuyant sur des
-travaux de \cauthors{Coeurjolly}{Coeurjolly2001}, en calculant l'inverse du
-rayon du cercle circonscrit contenant $\vp$ et les deux extrémités du \MDSS le
-plus proche que nous aurons mis à l'échelle avec le pas de discrétisation $h$,
-nous obtenons une estimation de la courbure.
+\cite{Coeurjolly2001}.
 %
-\\
-%
-Cependant, les auteurs annoncent ne pas pouvoir prouver la convergence
-asymptotique de cet estimateur de courbure à cause d'une propriété sur les
-demi-tangentes sur le bord digital qui ne peut pas être vérifiée, la convergence
-de l'estimateur reposant sur celle-ci. Nous verrons dans la partie comparative
-que cet estimateur ne converge pas.
-
-
+% \textbf{Demi-tangentes digitales}\\
+% %
+% \cauthors{de Vieilleville}{deVieilleville2007} s'intéressent à la reconnaissance
+% des segments maximaux digitaux que nous avons défini dans le chapitre précédent
+% (voir \RefSection{sec:segments}). Ainsi, le principe est simple : pour une forme
+% $\Shape \subset \R^2$, pour chaque point $\vp$ du bord digital $\BdZ{\DigShape}$
+% avec $\DigShape = \DSh$, ils récupèrent le segment digital maximal (\MDSS) dont
+% son centre est le plus proche du point $\vp$. Alors, en s'appuyant sur des
+% travaux de \cauthors{Coeurjolly}{Coeurjolly2001}, en calculant l'inverse du
+% rayon du cercle circonscrit contenant $\vp$ et les deux extrémités du \MDSS le
+% plus proche que nous aurons mis à l'échelle avec le pas de discrétisation $h$,
+% nous obtenons une estimation de la courbure.
+% %
+% \\
+% %
+% Cependant, les auteurs annoncent ne pas pouvoir prouver la convergence
+% asymptotique de cet estimateur de courbure à cause d'une propriété sur les
+% demi-tangentes sur le bord digital qui ne peut pas être vérifiée, la convergence
+% de l'estimateur reposant sur celle-ci.
+% %
 \textbf{Analyse des arcs de cercle digitaux maximaux}\\
 % Most centered Digital Circular Arc
 \cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
@@ -610,11 +607,9 @@ continue, strictement positif et borné supérieurement, si $0 < b \le a <
 
 
 Le principal avantage de ces deux méthodes est qu'ils ne nécessitent aucun
-paramètre. \comJeremy{\MDCA a l'avantage supplémentaire qu'une preuve de convergence
-asymptotique est avancée, contrairement à \MDSS}. Cependant, ces méthodes de
-reconnaissances d'objets sont assez sensibles lorsque les données sont bruités.
-C'est ce que nous verrons dans la section comparative
-(\RefSection{sec:comparaison-courbure}).
+paramètre. Cependant, ces méthodes de reconnaissances d'objets sont assez
+sensibles lorsque les données sont bruités. C'est ce que nous verrons dans la
+section comparative (\RefSection{sec:comparaison-courbure}).
 %
 \paragraph{Convolutions binomiales}
 %
