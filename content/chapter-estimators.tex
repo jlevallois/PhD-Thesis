@@ -452,8 +452,6 @@ l'accumulateur n'est plus une image, mais un objet 3D.
     \caption[Boule accumulatrice.]{Boule accumulatrice (Figure~3 de \cite{Borrmann2011}). \label{fig:hough-ball}}
 \end{figure}
 
-\\
-%
 Alors, les auteurs découpent le nuage de points en ensemble de plans (définis
 par trois points) et normales. Si le plan est loin d'un coin ou d'une
 singularité, alors la normale est correct. Cependant, si ce plan est près d'un
@@ -467,8 +465,6 @@ coin, la normale est perturbée par cette singularité (voir la
     \caption[Erreur de reconstruction de normales et correction.]{Erreur de reconstruction de normales et correction (Figure~1 de \cite{Boulch2012}). \label{fig:hough-bad}}
 \end{figure}
 
-\\
-%
 Les normales sont accumulés dans la boule accumulatrice, permettant à chaque
 plan de contribuer à un vote. Ils utilisent également la transformée aléatoire
 de Hough. La différence avec la transformée de Hough traditionnelle est qu'un
@@ -620,8 +616,6 @@ cercle digitaux sur la forme digitale.
     de \cite{Roussillon2011}).\label{fig:mdca-curv-figure}}
 \end{figure}
 
-\\
-%
 Le principe de l'estimateur est simple : pour une forme $\Shape \subset \R^2$
 avec un champ de courbure continu, ils calculent les $(A_i)_{i \in 1,n}$ \MDCA
 ($n$ étant le nombre totale de \MDCA) du bord digital $\BdZ{\DigShape}$ avec
@@ -772,8 +766,6 @@ erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
     %
 \end{figure}
 
-\\
-%
 Alors, ils montrent que nous pouvons calculer la rugosité comme l'épaisseur
 verticale (\anglais{vertical thickness}) d'un ensemble $S = \{((\vx^i)_{1 \le i
 \le k} \; F(\vx)) \text{ pour } \vx \in \Shape \}$ de dimension $k + 1$ (voir la
@@ -795,8 +787,6 @@ entre deux hyperplans).
     %
 \end{figure}
 
-\\
-%
 Enfin, ils définissent la $k$-ième dérivée de $F$ à l'origine comme :
 %
 \begin{equation}
@@ -3237,7 +3227,7 @@ euclidienne est alors calculée avec la norme $l_2$ et la norme $l_\infty$
 Considérons $a$ comme l'ensemble des valeurs de courbure euclidienne du bord de
 l'objet, et $b$ l'ensemble des valeurs estimées, alors les normes $l_2$ (appelée
 norme moyenne) et $l_\infty$ (celle qui nous intéresse lorsque nous nous
-intéressons à la convergence asymptotique) se calculent comme suit :
+intéressons à la convergence asymptotique uniforme) se calculent comme suit :
 %
 \begin{align}
   &|| a - b ||_2 \EqDef \sqrt{(\sum_i(a_i - b_i)^2)} \quad &\text{(norme $l_2$)} \\
