@@ -2077,7 +2077,7 @@ bord digital de la forme.
   pouvons alors utiliser les
   \RefEquations{eq:ball-moment-1}{eq:ball-moment-1bis} du
   \RefLemma{lem:moment-ball} pour l'ensemble $\tilde{A} \subset \Ball{R}{t}$,
-  pour les points $\vt = \vx - h\frac{\vx}{h}$, en sachant que $||\vt||_\infty
+  pour les points $\vt = \vx - h^\frac{\vx}{h}$, en sachant que $||\vt||_\infty
   \le \frac{h}{2}$. Nous obtenons alors :
   %
   \begin{equation}
@@ -2441,7 +2441,7 @@ estimateurs de courbure du \RefSection{sec:estimators:volume}. Dans le contexte
 de la convergence asymptotique, la notion d'échelle est explicitement donnée
 grâce au paramètre de discrétisation $h$. C'est d'ailleurs pour cela que nos
 rayons de boules doivent être en relation avec $h$ ($R$ est en
-$O(h\frac{1}{3})$). Cependant, pour un objet digital donné, ce choix de rayon
+$O(h^\frac{1}{3})$). Cependant, pour un objet digital donné, ce choix de rayon
 nécessite d'étudier au préalable la forme dont nous souhaitons estimer la
 courbure, et la qualité d'estimation dépend de ce paramètre. La
 \RefFigure{fig:digital-II-octa-scale} montre le résultat de l'estimation de la
@@ -3264,7 +3264,7 @@ utilisé pour guider le rayon de la sphère dans preuves des
 %
 Dans ces théorème, nous avions démontré que choisir un rayon de boule en $R =
 kh^\alpha$ avec $\alpha = \frac{1}{3}$ permettait de minimiser les termes
-d'erreurs et d'obtenir une convergence asymptotique en $O(h\frac{1}{3})$ pour
+d'erreurs et d'obtenir une convergence asymptotique en $O(h^\frac{1}{3})$ pour
 les estimateurs digitaux de courbure en 2D $\CurvH{R}$, de courbure moyenne
 $\MeanCurvH{R}$ et de courbures principales $\PrincCurvH{1}{R}$ et
 $\PrincCurvH{2}{R}$ en 3D par intégration. La première ligne des
@@ -3285,7 +3285,7 @@ des formes convexes à bord $C^3$, mais comme précisé dans le théorème le te
 d'erreur en grand « O » peut être amélioré si nous ajoutons des hypothèses sur
 la forme. Cela explique pourquoi de meilleures vitesses de convergence semblent
 être obtenues lorsque $\alpha = \frac{2}{7}$ et $\frac{1}{4}$. Nous pouvons
-également observer la convergence asymptotique en $O(h\frac{1}{3})$ sur les
+également observer la convergence asymptotique en $O(h^\frac{1}{3})$ sur les
 formes non-convexes pour $\alpha = \frac{1}{3}$. Il est intéressant de noter que
 des valeurs de $\alpha$ supérieures à $\frac{1}{3}$ (donc avec une taille de
 boule supérieure) pour cette catégorie de forme semble obtenir de meilleurs
@@ -3298,11 +3298,11 @@ estimations.
 \begin{tabular}{@{}lr@{}}
 %\toprule
  $\alpha$ & Vitesse de convergence observée \\ \midrule
- $1/2$    & $O(h^0.024)$                    \\
- $2/5$    & $O(h^0.24)$                    \\
- $1/3$    & $O(h^0.38)$                    \\
- $2/7$    & $O(h^0.41)$                    \\
- $1/4$    & $O(h^0.44)$                    \\ \bottomrule
+ $1/2$    & $O(h^{0.024})$                    \\
+ $2/5$    & $O(h^{0.24})$                    \\
+ $1/3$    & $O(h^{0.38})$                    \\
+ $2/7$    & $O(h^{0.41})$                    \\
+ $1/4$    & $O(h^{0.44})$                    \\ \bottomrule
 \end{tabular}
 \end{table}
 %
@@ -3314,7 +3314,7 @@ digitales 3D (voir \RefFigure{fig:curv-experiments-3D-alpha}) \RoundedCube et
 courbures principales $\PrincCurv{1}{R}$ et $\PrincCurv{2}{R}$. Les preuves des
 \RefTheoremsDF{thm:multigrid-convergence-curv-mean}{thm:multigrid-convergence-curv-k1k2}
 ont statués à $\alpha = \frac{1}{3}$ afin de minimiser les termes d'erreurs et
-obtenir une convergence en $O(h\frac{1}{3})$. Nous pouvons observer que pour les
+obtenir une convergence en $O(h^\frac{1}{3})$. Nous pouvons observer que pour les
 formes convexes comme non-convexe, $\alpha = \frac{1}{3}$ amène à la vitesse de
 convergence espérée pour ces trois estimateurs. Nous pouvons noter que de
 meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
