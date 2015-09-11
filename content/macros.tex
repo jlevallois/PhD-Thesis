@@ -19,14 +19,16 @@
 \newcommand{\cPurple}[1]{{\color[HTML]{70309F} #1}}
 \newcommand{\cLightOrange}[1]{{\color[HTML]{FFC000} #1}}
 
-\newcommand{\colorize}[1]{\normalfont\textbf{#1}}
+\newcommand{\colorize}[1]{{\normalfont\textbf{#1}}}
 
 %%% references
 \newcommand{\refPrePost}[3]{\hyperref[#2]{#1~\vref*{#2}\xspace#3}}
+\newcommand{\refPrePostShort}[3]{\hyperref[#2]{#1~\ref{#2} page~\pageref{#2}\xspace#3}}
 \newcommand{\refPrePostN}[3]{\hyperref[#2]{#1\ref*{#2}\xspace#3}} %%temp
 \newcommand{\RefEquation}[1]{\refPrePost{\'equation~}{#1}{}}
 \newcommand{\RefEquations}[2]{\refPrePostN{\'equations~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefChapitre}[1]{\refPrePost{chapitre~}{#1}{}}
+\newcommand{\RefSectionTable}[1]{\refPrePostShort{\textsection}{#1}{}}
 \newcommand{\RefSection}[1]{\refPrePost{paragraphe~}{#1}{}}
 \newcommand{\RefSections}[2]{\refPrePost{paragraphes~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefFig}[1]{\refPrePost{Fig.~}{#1}{}}
@@ -37,6 +39,7 @@
 \newcommand{\RefFiguresN}[2]{\refPrePostN{figures~}{#1}{} et \refPrePostN{}{#2}{}}
 \newcommand{\RefTable}[1]{\refPrePost{tableau~}{#1}{}}
 \newcommand{\RefDefinition}[1]{\refPrePost{d\'efinition~}{#1}{}}
+\newcommand{\RefDefinitionFake}[2]{d\'efinition~~#1 de \cite{#2}}
 \newcommand{\RefProposition}[1]{\refPrePost{proposition~}{#1}{}}
 \newcommand{\RefConjecture}[1]{\refPrePost{conjecture~}{#1}{}}
 \newcommand{\RefProperty}[1]{\refPrePost{propri\'et\'e~}{#1}{}}
