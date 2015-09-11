@@ -25,7 +25,34 @@ estimateurs avec les méthodes représentatives de l'état de l'art dans la
 %
 \section{Introduction}
 \label{sec:estimators:introduction}
-\todoInlineJeremy{Introduction curvature à faire}
+%
+Comme nous l'avons vu dans le chapitre précédent (\RefSection{sec:geo-diff}),
+une forme peut être décrite à partir de ses quantités différentielles comme la
+courbure. Et nous parlons bien de décrire, puisque toutes ces quantités sont ce
+qui la caractérise de manière unique. C'est pour cela que plusieurs champs de
+recherches se tournent vers la manière de récupérer ces quantités en les
+estimant à partir de données \todoJeremy{citer un survey}.
+%
+\\
+%
+Ces données discrètes sont principalement liées à la façon de capturer les
+objets ou de son utilisation et peuvent prendre la forme de nuages de points, de
+maillages triangulés, ou encore de données digitales. Les besoins des
+estimateurs sont différents et très liés à l'usage de la quantité différentielle :
+certains privilégerons la rapidité d'estimation en dépis de la qualité notamment
+dans un enjeu d'utilisation en temps interactif ou réel, tandis que d'autres (et
+c'est notre cas) préfèrerons garantir la qualité des résultats de l'estimation
+en priorité.
+
+
+Comme nous l'avons vu dans le \RefChapitre{sec:introduction}, notre estimation
+de la courbure est utilisée au cœur d'un processus complexe d'analyse de
+déformation de microstructure de grains de neige, nécessitant des résultats les
+plus justes possible. Il nous parait également important de connaitre le
+comportement de l'estimateur si nous prenons le coût d'augmenter la résolution
+de la capture des données digitales : aurons-nous une meilleure estimation de la
+courbure ? Nous devons alors nous focaliser sur la convergence asymptotique de
+notre estimation à l'aide de preuves théoriques et pratiques.
 %
 \section{État de l'art}%
 \label{sec:estimators:SOTA}
