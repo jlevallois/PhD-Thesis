@@ -13,120 +13,158 @@
 \section{Introduction}
 %
 \todoInlineJeremy{faire l'introduction chapitre notions}
+% historique geo dis : http://www.citr.auckland.ac.nz/~rklette/talks/01_CP.pdf
 %
 \subsection{Notations}
 %
+Le \RefTable{tab:notations} montre la signification des notations utilisées
+dans cette thèse (sauf mention contraire).
+
 \begin{table}[ht]
   \centering
   \caption{Notations utilisées dans cette thèse}
   \label{tab:notations}
     \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{@{}lp{11.5cm}@{}}
+  \begin{tabular}{@{}lp{9cm}p{2.5cm}@{}}
     \toprule
-    Notation      & Description  \\ \midrule
+    Notation      & Description  & Définition \\ \midrule
 
-    $\R^d$        & Espace euclidien de dimension $d$ \\
-    $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée \\
-    $\Shape$      & Forme de $\Shapes$ \\
-    $\dS$         & Bord topologique de $\Shape$ \\
-    $\vx$         & Point de $\dS$ \\
-    $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ \\
-    $\Z^d$        & Espace en coordonnées entières de dimension $d$ \\
-    $\DigShape$   & Objet digital de $\Z^d$ \\
-    $h$           & Pas de discrétisation pour la discrétisation de Gauss \\
-    $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ \\
-    $\partial\Body{\DigShape}{h}$ & \comJeremy{XXXXXXXXXXXXXXXXX}\\
-    $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ \\
+    $\R^d$        & Espace euclidien de dimension $d$ & \RefSectionTable{sec:notions} \\
+    $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée & \RefSectionTable{sec:notions} \\
+    $\Shape$      & Forme de $\Shapes$ & \RefSectionTable{sec:notions} \\
+    $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:notions} \\
+    $\vx$         & Point de $\dS$ & \RefSectionTable{sec:notions} \\
+    $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \RefSectionTable{sec:notions} \\
+    $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:notions} \\
+    $\DigShape$   & Objet digital de $\Z^d$ & \RefSectionTable{sec:notions} \\
+    $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:notions} \\
+    $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
+    $\partial\Body{\DigShape}{h}$ & \comJeremy{XXXXXXXXXXXXXXXXX} & \RefSectionTable{sec:digitization}\\
+    $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ & \RefSectionTable{sec:digitization} \\
 
 
-    $E(\Shape,\vx)$                   & Quantité définie au point $\vx \in \dS$, $\Shape \subset \R^d$ \\
-    $\hat{E}(\DigShape,\hat{\vx},h)$  & Quantité estimée au point $\hat{\vx} \in \partial\Body{\DigShape}{h}$, $\DigShape \subset \Z^d$ \\
-    $\Mom{p_1 \cdots p_d}(\Shape)$    & Moment géométrique d'ordre $p_1 \cdots p_d$ de $\Shape$ \\
-    $\Cov(\Shape)$                    & Matrice de covariance de $\Shape$ \\
-    $\Curv(\Shape,\vx)$               & Courbure au point $\vx \in \dS$, $\Shape \subset \R^2$ \\
-    $\MeanCurv(\Shape,\vx)$           & Courbure moyenne au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
-    $\GaussCurv(\Shape,\vx)$          & Courbure gaussienne au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
-    $\PrincCurv{i}(\Shape,\vx)$       & $i$-ième courbure principale au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
-    $\PrincDir{i}(\Shape,\vx)$        & $i$-ième direction principale de courbure au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
-    $\NormalDir(\Shape,\vx)$          & Normale au point $\vx \in \dS$, $\Shape \subset \R^3$ \\
+    $E(\Shape,\vx)$                   & Quantité définie au point $\vx \in \dS$, $\Shape \subset \R^d$ & \RefSectionTable{sec:estimator-local-global} \\
+    $\hat{E}(\DigShape,\hat{\vx},h)$  & Quantité estimée au point $\hat{\vx} \in \partial\Body{\DigShape}{h}$, $\DigShape \subset \Z^d$ & \RefSectionTable{sec:estimator-local-global} \\
+    $\Mom{p_1 \cdots p_d}(\Shape)$    & Moment géométrique d'ordre $p_1 \cdots p_d$ de $\Shape$ & \RefSectionTable{sec:pottmann-principle} \\
+    $\Cov(\Shape)$                    & Matrice de covariance de $\Shape$ & \RefSectionTable{sec:pottmann-principle} \\
+    $\Curv(\Shape,\vx)$               & Courbure au point $\vx \in \dS$, $\Shape \subset \R^2$ & \RefSectionTable{sec:geo-diff} \\
+    $\MeanCurv(\Shape,\vx)$           & Courbure moyenne au point $\vx \in \dS$, $\Shape \subset \R^3$ & \RefSectionTable{sec:geo-diff} \\
+    $\GaussCurv(\Shape,\vx)$          & Courbure gaussienne au point $\vx \in \dS$, $\Shape \subset \R^3$ & \RefSectionTable{sec:geo-diff} \\
+    $\PrincCurv{i}(\Shape,\vx)$       & $i$-ième courbure principale au point $\vx \in \dS$, $\Shape \subset \R^3$ & \RefSectionTable{sec:geo-diff} \\
+    $\PrincDir{i}(\Shape,\vx)$        & $i$-ième direction principale de courbure au point $\vx \in \dS$, $\Shape \subset \R^3$ & \RefSectionTable{sec:geo-diff} \\
+    $\NormalDir(\Shape,\vx)$          & Normale au point $\vx \in \dS$, $\Shape \subset \R^3$ & \RefSectionTable{sec:geo-diff} \\
     \bottomrule
   \end{tabular}
 \end{table}
 %
+\section{Discrétisation}
+\label{sec:digitization}
+%
+
+% Parler de discret vs digital
+\section{Estimateurs locaux et globaux}
+\label{sec:estimator-local-global}
+%
+\begin{definition}{\fakeTitle{Quantités géométriques locales et globales}}
+  \label{def:global-quantity}
+  %
+  Une quantité géométrique est dite « locale » lorsqu'elle est définie
+  ponctuellement sur le bord de la forme. Une quantité géométrique est dite «
+  globale » lorsqu'elle est définie pour la forme.
+  %
+\end{definition}
+%
+\section{Convergence asymptotique d'estimateurs locaux et globaux}
+\label{sec:multigrid-convergence-estimator}
+%
+% Première mention de convergence : \cauthor{Serra}{Serra1983}
+%
+% la convergence asymptotique comme un critère essentiel
+% pour un estimateur \cite{Coeurjolly_ChapEstimateur}
+%
+La propriété de convergence asymptotique est un critère important, permettant
+d'évaluer et de comparer des estimateurs digitaux. L'idée principale est, pour
+une forme euclidienne $\Shape$ donnée, d'évaluer l'erreur entre une quantité
+géométrique de $\Shape$ et la quantité géométrique digitale estimée sur la
+discrétisation de $\Shape$, à plusieurs échelles de discrétisation. Le
+comportement attendu est alors que si nous raffinons l'objet digital (\cad que
+le pas de discrétisation diminue, donnant ainsi un objet digital plus proche de
+la forme euclidienne), l'erreur d'estimation doit diminuer.
+Plus formellement, nous pouvons écrire (\RefDefinitionFake{2.10}{Klette2004}) :
+%
+\begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique globale}}
+  \label{def:multigrid-convergence-global}
+  %
+  Un estimateur digital de quantité géométrique globale $\hat{E}$ d'une quantité géométrique
+  $E$ \colorize{converge asymptotiquement} pour une famille de formes $\Shapes$ si
+  et seulement si pour toute forme $\Shape \in \Shapes$, il existe un pas de
+  discrétisation $h_0 > 0$ tel que l'estimation de $\hat{E}(\DSh,h)$
+  soit défini pour tout $0 < h < h_0$,
+  %
+  \begin{equation}
+    | \hat{E}(\DSh,h) - E(\Shape) | \le \tau_{\Shape}(h) \,,
+  \end{equation}
+  %
+  où $\tau_{\Shape}: \R^{+*} \rightarrow \R^+$, désignant l'erreur d'estimation
+  de la quantité géométrique pour le pas de discrétisation $h$, a une limite
+  nulle à $0$. Cette fonction définie la vitesse de convergence de $\hat{E}$
+  vers $E$ sur $\Shape$. La convergence est dite \colorize{uniforme} pour
+  $\Shape$ lorsque toutes les valeurs de $\tau_{\Shape}$ sont bornées (borne
+  supérieure) par une fonction $\tau_\Shape$ indépendante de $\vx \in \dS$ avec
+  une limite nulle à $0$.
+  %
+\end{definition}
+%
+Lorsqu'une quantité géométrique est « locale », comme par exemple la courbure ou
+les tangentes, nous avons besoin de connaître explicitement la correspondance entre $\dS$ et
+$\Boundary{\Body{\DSh}{h}}$.
+% A local discrete estimator however estimates a geometric quantity at
+% points on the $h$-frontier of a digital set, otherwise said at any point
+% on the interpixel representation of the digital set boundary. This
+% definition encompasses usual definitions where input points are
+% pointels, linels or surfels.
+%
+
+
+ :
+%
+\begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique locale}}
+  \label{def:multigrid-convergence-local}
+  %
+  Un estimateur digital de quantité géométrique locale $\hat{E}$ d'une quantité géométrique
+  $E$ \colorize{converge asymptotiquement} pour une famille de formes $\Shapes$ si
+  et seulement si pour toute forme $\Shape \in \Shapes$, il existe un pas de
+  discrétisation $h_0 > 0$ tel que l'estimation de $\hat{E}(\DSh,\hat{\vx},h)$
+  soit défini en tout point $\hat{\vx} \in \hBd{h} \Shape$ avec $0 < h < h_0$,
+  et pour tout $\vx \in \dS$,
+  %
+  \begin{equation}
+    \forall \hat{\vx} \in \partial\Body{\DSh}{h} \text{~avec~} \| \hat{\vx} -\vx\|_\infty
+    \le h, \quad | \hat{E}(\DSh,\hat{\vx},h) - E(\Shape,\vx) | \le \tau_{\Shape,\vx}(h) \,,
+  \end{equation}
+  %
+  où $\tau_{\Shape,\vx}: \R^{+*} \rightarrow \R^+$ a une limite
+  nulle à $0$. Cette fonction définie la vitesse de convergence de $\hat{E}$
+  vers $E$ au point $\vx$ de $\Shape$. La convergence est dite
+  \colorize{uniforme} pour $\Shape$ lorsque toutes les valeurs de
+  $\tau_{\Shape,\vx}$ sont bornées (borne supérieure) par une fonction
+  $\tau_\Shape$ indépendante de $\vx \in \dS$ avec une limite nulle à $0$.
+  %
+\end{definition}
+
+
+Concrètement, cela revient à prouver que l'erreur d'estimation est en $O(h^a)$,
+avec $a$ une constante. Alors, lorsque $h$ tend vers $0$, l'erreur tend
+également vers $0$. Nous nous intéressons dans cette thèse à la
+\colorize{convergence asymptotique uniforme} de nos estimateurs, en d'autres
+mots il s'agit l'erreur dans le pire des cas de nos estimateurs.
+%
 \section{Introduction à la géométrie différentielle}
 \label{sec:geo-diff}
-% \begin{table}
-%   \begin{tabular}{@{}lp{3.5cm}p{7cm}@{}}
-%     \toprule
-%     \textsc{Symbol} & \LaTeX~ \textsc{symbol} & \textsc{Description}\\
-%     \midrule
-
-%     \midrule
-%     $\hQ{\vz}{h}$ & \verb?\hQ{\vz}{h}? & $d$-dimensional cube in $\R^d$ of size $h$
-%     centered at $h\cdot\vz$ \\
-%     $\Body{Z}{h}$ & \verb?\Body{Z}{h}? & embedding of $Z$ as the
-%     union of cubes $Q_h(\vz)$ for all $\vz\in Z$ \\
-%     $\hat{\vx},\hat{\vy}$ &   \scriptsize \verb?\hat{\vx},\hat{\vy}? & Points in
-%     $\partial\Body{Z}{h}$ for some $Z$\\ \midrule
-%     $E(\Shape,\vx)$ & \verb?E(\Shape,\vx)? &Quantity defined on $\Shape$ at point $\vx$\\
-%     $\hat{E}(\AnyDSh,\hat{\vx},h)$ &
-%    \scriptsize \verb?\hat{E}(\DSh,\hat{\vx},h)? &Estimated quantity defined
-%     on $\AnyDigF{X}{h}$ at point $\hat{\vx}$ for a given gridstep
-%     $h$\\
-%     $\Mom{p_1 \cdots p_d}(X)$ & \scriptsize\verb?\Mom{p_1\cdots p_d}(X)? &
-%     Geometrical moment of order $p_1 \cdots p_d$ of $\Shape$\\
-%     $\DMom{p_1\cdots p_d}{h}(\AnyDSh)$ & \scriptsize\verb?\DMom{p_1\cdots p_d}(\AnyDSh)? &
-%     Geometrical moment of order $p_1 \cdots p_d$ of  $\AnyDSh$\\
-%     \midrule
-%     $\Curv(\Shape,\vx)$ & \scriptsize\verb?\Curv(\Shape,\vx)? &
-%     Curvature at a point
-%     $\vx\in\partial\Shape$, $\Shape\subset\R^2$\\
-%     $\PCurvHat{R}(Z,\vx,h)$ & \scriptsize\verb?\PCurvHat{R}(Z,\vx,h)? & Estimated  curvature a point
-%     $\vx\in\partial\Body{Z}{h}$ for circular kernel of radius
-%     $R$, $Z\subset\Z^2$\\
-%     $\MeanCurv(\Shape,\vx)$ & \scriptsize\verb?\MeanCurv(\Shape,\vx)? & Mean
-%     curvature at a point
-%     $\vx\in\partial\Shape$, $\Shape\subset\R^3$\\
-%     $\PMeanCurvHat{R}(Z,\vx,h)$ & \scriptsize\verb?\PMeanCurvHat{R}(Z,\vx,h)? & Estimated mean curvature a point
-%     $\vx\in\partial\Body{Z}{h}$ for spherical kernel of radius
-%     $R$, $Z\subset\Z^3$\\
-%
-%     $\FirstCurv(\Shape,\vx)$ & \scriptsize\verb?\FirstCurv(\Shape,\vx)? & First principal
-%     curvature at a point
-%     $\vx\in\partial\Shape$, $\Shape\subset\R^3$\\
-%     $\PFirstCurvHat{R}(Z,\vx,h)$ &
-%     \scriptsize\verb?\PFirstCurvHat{R}(Z,\vx,h)? & Estimated first principal curvature a point
-%     $\vx\in\partial\Body{Z}{h}$ for spherical kernel of radius
-%     $R$, $Z\subset\Z^3$\\
-%     $\SecondCurv(\Shape,\vx)$ & \scriptsize\verb?\SecondCurv(\Shape,\vx)? & Second principal
-%     curvature at a point
-%     $\vx\in\partial\Shape$, $\Shape\subset\R^3$\\
-%     $\PSecondCurvHat{R}(Z,\vx,h)$ &
-%     \scriptsize\verb?\PSecondCurvHat{R}(Z,\vx,h)? & Estimated second principal curvature a point
-%     $\vx\in\partial\Body{Z}{h}$ for spherical kernel of radius
-%     $R$, $Z\subset\Z^3$\\
-%
-%     \bottomrule
-%   \end{tabular}
-%   \caption{Notations.}
-%   \label{tab:notations}
-% \end{table}
-
 %
 % Introduction à la géométrie différentielle ?
 %
 % courbure : Defining and studying the curvatures of singular spaces goes back to Steiner (1840) in the convex case (see [30] for instance). ([30] = L. Santalo, Integral geometry anf geometric probability, Encyclopedia of Math- ematics and its applications, Vol. 1. Addison-Wesley Publishing Co. (1976), MR0433364, Zbl 0342.53049.)
-%
-\section{Discrétisation}
-%
-% Parler de discret vs digital
-\section{Estimateurs locaux et globaux}
-%
-\section{Convergence asymptotique d'estimateurs}
-% la convergence asymptotique comme un critère essentiel
-% pour un estimateur \cite{Coeurjolly_ChapEstimateur}
-%
-\section{Introduction à la géométrie différentielle}
 %
 \section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
@@ -136,7 +174,7 @@
 %
   L'ensemble de points $(x_1,x_2) \in \Z^2$ satisfaisant $\mu \le ax_1 - bx_2 <
   \mu + |a| + |b|$, avec $a$, $b$ et $\mu$ des nombres entiers, est appelé une
-  \emph{droite digitale standard} avec comme pente $a/b$ et comme décallage
+  \emph{droite digitale standard} avec comme pente $a/b$ et comme décalage
   $\mu$. Tout sous ensemble de pixels connectés d'une droite digitale standard
   est un \emph{segment digital} (ou « \anglais{DSS} »).
 %
