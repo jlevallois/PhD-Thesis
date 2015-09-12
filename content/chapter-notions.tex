@@ -189,7 +189,7 @@ mots il s'agit l'erreur dans le pire des cas de nos estimateurs.
   %
 \end{definition}
 %
-\subsection{Aire et volume}
+%\subsection{Aire et volume}
 %
 \begin{definition}{\fakeTitle{Aire d'une forme}}
   %
@@ -239,10 +239,65 @@ Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curvilig
   \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right|
   %
 \end{equation}
-%
-\subsection{Courbure en dimension 2}
-%
 
+\begin{equation}
+  %
+  \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2}
+  %
+\end{equation}
+
+\begin{equation}
+  %
+  \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2}
+  %
+\end{equation}
+%
+%\subsection{Courbure en dimension 2}
+%
+\begin{table}[ht]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+                  & $\GaussCurv = 0$   & $\GaussCurv > 0$   & $\GaussCurv < 0$   \\ \midrule
+$\MeanCurv = 0$   & plan               & indéterminé        & surface minimale   \\
+$\MeanCurv > 0$   & cylindre concave   & vallée             & col concave        \\
+$\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.5cm}
+    \begin{tabular}{cc}
+      \includegraphics[width=5.5cm]{figures/curv_plan} &
+      \includegraphics[width=5.5cm]{figures/curv_minimal}
+      \\
+      Plan &
+      Surface minimale
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_cylindre_conv} &
+      \includegraphics[width=5.5cm]{figures/curv_cylindre_conc}
+      \\
+      Cylindre convexe &
+      Cylindre concave
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_pic} &
+      \includegraphics[width=5.5cm]{figures/curv_vallee}
+      \\
+      Pic &
+      Vallée
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_col_conv} &
+      \includegraphics[width=5.5cm]{figures/curv_col_conc}
+      \\
+      Col convexe &
+      Col concave
+    \end{tabular}
+    \caption[]{.\label{fig:curvature-figures}}
+  \end{center}
+\end{figure}
 %
 \section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
