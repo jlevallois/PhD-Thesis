@@ -62,35 +62,45 @@ dans cette thèse (sauf mention contraire).
 %
 
 % Parler de discret vs digital
-\section{Estimateurs locaux et globaux}
-\label{sec:estimator-local-global}
+\section{Convergence asymptotique d'estimateurs locaux et globaux}
+\label{sec:multigrid-convergence-estimator}
+%
+Nous allons définir ce que sont les quantités géométriques « locales » et « globales »
 %
 \begin{definition}{\fakeTitle{Quantités géométriques locales et globales}}
   \label{def:global-quantity}
   %
   Une quantité géométrique est dite « locale » lorsqu'elle est définie
-  ponctuellement sur le bord de la forme. Une quantité géométrique est dite «
+  localement sur le bord de la forme. Une quantité géométrique est dite «
   globale » lorsqu'elle est définie pour la forme.
   %
 \end{definition}
 %
-\section{Convergence asymptotique d'estimateurs locaux et globaux}
-\label{sec:multigrid-convergence-estimator}
-%
-% Première mention de convergence : \cauthor{Serra}{Serra1983}
-%
-% la convergence asymptotique comme un critère essentiel
-% pour un estimateur \cite{Coeurjolly_ChapEstimateur}
-%
-La propriété de convergence asymptotique est un critère important, permettant
-d'évaluer et de comparer des estimateurs digitaux. L'idée principale est, pour
-une forme euclidienne $\Shape$ donnée, d'évaluer l'erreur entre une quantité
-géométrique de $\Shape$ et la quantité géométrique digitale estimée sur la
-discrétisation de $\Shape$, à plusieurs échelles de discrétisation. Le
-comportement attendu est alors que si nous raffinons l'objet digital (\cad que
-le pas de discrétisation diminue, donnant ainsi un objet digital plus proche de
-la forme euclidienne), l'erreur d'estimation doit diminuer.
-Plus formellement, nous pouvons écrire (\RefDefinitionFake{2.10}{Klette2004}) :
+Il apparait alors clairement que, par exemple, le volume d'une forme est une quantité géométrique « globale », tandis que la normale, la courbure ou encore la tangente sur sa surface sont des quantités géométriques dites « locales ».
+
+
+Alors nous pouvons nous intéresser à la propriété de \colorize{convergence
+asymptotique d'estimateurs} de quantités géométriques (locales et globales). La
+notion de convergence asymptotique, introduite en $1983$ par
+\cauthor{Serra}{Serra1983}, est un critère important permettant d'évaluer et de
+comparer des estimateurs digitaux. L'idée principale est, pour une forme
+euclidienne $\Shape$ donnée, d'évaluer l'erreur entre une quantité géométrique
+de $\Shape$ et la quantité géométrique digitale estimée sur la discrétisation de
+$\Shape$, à plusieurs échelles de discrétisation. Le comportement attendu est
+alors que si nous raffinons l'objet digital (\cad que le pas de discrétisation
+diminue, donnant ainsi un objet digital plus proche de la forme euclidienne),
+l'erreur d'estimation doit diminuer.
+
+
+Ainsi, définissons $\hat{E}(\DSh,h)$ (\respp $\hat{E}(\DSh,\hat{\vx},h)$) un
+estimateur de quantité géométrique globale (\resp locale) sur $\DSh$ la
+discrétisation (de Gauss, voir le \RefSection{sec:digitization}) de la forme
+$\Shape$ au pas de discrétisation $h$. La version locale est définie sur un
+point $\hat{\vx}$ le bord digital $\partial\Body{\DSh}{h}$ de la discrétisation
+de la forme $\Shape$ au pas de discrétisation $h$.
+
+
+Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs (\RefDefinitionFake{2.10}{Klette2004}) :
 %
 \begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique globale}}
   \label{def:multigrid-convergence-global}
@@ -115,18 +125,12 @@ Plus formellement, nous pouvons écrire (\RefDefinitionFake{2.10}{Klette2004}) :
   %
 \end{definition}
 %
-Lorsqu'une quantité géométrique est « locale », comme par exemple la courbure ou
-les tangentes, nous avons besoin de connaître explicitement la correspondance entre $\dS$ et
-$\Boundary{\Body{\DSh}{h}}$.
-% A local discrete estimator however estimates a geometric quantity at
-% points on the $h$-frontier of a digital set, otherwise said at any point
-% on the interpixel representation of the digital set boundary. This
-% definition encompasses usual definitions where input points are
-% pointels, linels or surfels.
-%
-
-
- :
+Lorsqu'une quantité géométrique est « locale », nous avons besoin de connaître
+explicitement la correspondance entre $\dS$ et $\Boundary{\Body{\DSh}{h}}$. Un
+estimateur local digital estime la quantité géométrique sur les points de la
+$h$-frontière de l'ensemble digital. En d'autre termes, l'estimation se fait en
+tout point situé à entre les pixels internes de l'objet digital et les pixels
+externes.
 %
 \begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique locale}}
   \label{def:multigrid-convergence-local}
@@ -165,6 +169,80 @@ mots il s'agit l'erreur dans le pire des cas de nos estimateurs.
 % Introduction à la géométrie différentielle ?
 %
 % courbure : Defining and studying the curvatures of singular spaces goes back to Steiner (1840) in the convex case (see [30] for instance). ([30] = L. Santalo, Integral geometry anf geometric probability, Encyclopedia of Math- ematics and its applications, Vol. 1. Addison-Wesley Publishing Co. (1976), MR0433364, Zbl 0342.53049.)
+\subsection{Classe $C^1$, $C^2$, $C^d$}
+%
+\begin{definition}{\fakeTitle{Classe $C^1$}}
+  %
+  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction continûment différentiable si elle est différentiable et si sa dérivée $f'$ est continue. Nous dirons également que $f$ est de \colorize{classe $C^1$}.
+  %
+\end{definition}
+%
+\begin{definition}{\fakeTitle{Classe $C^2$}}
+  %
+  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction deux fois continûment différentiable si elle est deux fois différentiable et si sa dérivée seconde $f''$ (la dérivée de $f'$) est continue. Nous dirons également que $f$ est de \colorize{classe $C^2$}.
+  %
+\end{definition}
+%
+\begin{definition}{\fakeTitle{Classe $C^d$}}
+  %
+  Une fonction $f$ est de \colorize{classe $C^p$} (avec $p \ge 2$) sur un intervalle réel non vide et non trivial si elle est $p$ fois continûment différentiable.
+  %
+\end{definition}
+%
+\subsection{Aire et volume}
+%
+\begin{definition}{\fakeTitle{Aire d'une forme}}
+  %
+  Soit $\mathcal{V}$ une partie bornée de $\R^2$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{l'aire} de $\mathcal{V}$ est :
+  %
+  \begin{equation}
+    \label{eq:aire}
+    Aire(\mathcal{V}) = \iint_{\mathcal{V}} dxdy \,.
+  \end{equation}
+  %
+\end{definition}
+%
+\begin{definition}{\fakeTitle{Volume d'une forme}}
+  %
+  Soit $\mathcal{V}$ une partie bornée de $\R^3$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{le volume} de $\mathcal{V}$ est :
+  %
+  \begin{equation}
+    \label{eq:volume}
+    Volume(\mathcal{V}) = \iiint_{\mathcal{V}} dxdydz \,.
+  \end{equation}
+  %
+\end{definition}
+%
+% \subsection{Tangente de surface}
+% %
+% \begin{definition}{\fakeTitle{Tangente}}
+%   %
+%   Nous appellons \colorize{tangente} d'une surface $\mathcal{S}$ au point $\vx$
+%   %
+% \end{definition}
+Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curviligne dans un espace de dimension $n$ :
+\begin{align}
+    %
+    f : [0,1] &\rightarrow \R^n \nonumber\\
+    \vx &\rightarrow f(\vx)
+    %
+\end{align}
+
+\begin{equation}
+  %
+  t(\vx) = \left| \frac{df}{d\vx} \right|
+  %
+\end{equation}
+
+\begin{equation}
+  %
+  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right|
+  %
+\end{equation}
+%
+\subsection{Courbure en dimension 2}
+%
+
 %
 \section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
