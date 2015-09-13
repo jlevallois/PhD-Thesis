@@ -12,10 +12,11 @@
 %
 \section{Introduction}
 %
+Dans ce chapitre, nous allons poser les définissions des éléments dont nous allons nous servir pour la suite de ce document. Cela comprend une introduction à la géométrie différentielle (\RefSection{sec:geo-diff}) permettant de faire le lien entre les mathématiques et nos estimateurs digitaux, ainsi que tout le pipeline permettant d'analyser le comportement d'un estimateur digital (\RefSection{sec:multigrid-convergence-estimator}).
 \todoInlineJeremy{faire l'introduction chapitre notions}
 % historique geo dis : http://www.citr.auckland.ac.nz/~rklette/talks/01_CP.pdf
 %
-\subsection{Notations}
+\section{Notations}
 %
 Le \RefTable{tab:notations} montre la signification des notations utilisées
 dans cette thèse (sauf mention contraire).
@@ -62,6 +63,75 @@ dans cette thèse (sauf mention contraire).
 %
 
 % Parler de discret vs digital
+% 2-dimensional cells (closed unit square) = pixels
+% 1-dimensional cells (closed unit segment) = linels
+% 0-dimensional cells (closed point) = pointels
+
+Pour certaines preuves mathématiques, une correspondance précise entre les points $\vx \in \dS$ et $\hat{\vx}\in \partial\Body{\DigShape}{h}$ est nécessaire. Pour un forme $\Shape \subset \R^2$ dont son bord est à courbure bornée $\kappa_{\max}$,la correspondance est nommée la \colorize{projection inverse} ou \anglais{back-projection} (voir la \RefFigure{fig:IIPottmann}). Plus formellement, soit $\NormalDir(\Shape,\vx,l)$ le segment centré au point $\vx$, aligné le long de la normale au point $\vx$ et de demi-longueur $l$. Alors:
+%
+\begin{definition}{\fakeTitle{Back-projection $\Proj$ \cite{Lachaud2006}}}
+\label{def:projection}
+%
+  Pour $0 < h \le 1/{\kappa_{\max}}$, soit $\Proj: \partial\Body{\DigShape}{h}
+  \rightarrow \dS$, $\hat{\vx} \mapsto \vx=\Proj(\hat{\vx})$, où $\vx$ est le
+  seul point tel que $\hat{\vx} \in \NormalDir(\Shape,\vx,\frac{\sqrt{2}}{2}h)$.
+%
+\end{definition}
+%
+Lemma B.9 \cite{Lachaud:2006-hdr} indicates that the map $\Proj$ is
+well-defined and onto. Lemma B.10 further tells that this map is
+continuous. It shows that the boundaries $\hBd{h} X$ and $\dS$
+are indeed close, since their Hausdorff distance is no greater than
+$\frac{\sqrt{2}}{2}h$.
+
+\section{Voisinages}
+\label{sec:voisinage}
+%
+% 4-voisinage relation d'adjacence par arêtes
+% 8-voisinage relation d'adjacence par arêtes et sommets
+
+% 6-voisinage relation d'adjacence par faces
+% 18-voisinage relation d'adjacence par faces et arêtes
+% 26-voisinage relation d'adjacence par faces, arêtes et sommets
+%
+\begin{table}[ht]
+  \centering
+  \caption{Définition des voisinages en dimension $2$.}
+  \label{tab:adjacence2d}
+    \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    Adjacence  & Caractérisation \\ \midrule
+    $4$        & $|x_1 - y_1| + |x_2 - y_2| = 1$ \\
+    $8$        & $\max(|x_1 - y_1|,|x_2 - y_2|) = 1$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+  \centering
+  \caption{Définition des voisinages en dimension $3$.}
+  \label{tab:adjacence3d}
+    \renewcommand{\arraystretch}{1.1}
+  \begin{tabular}{@{}lr@{}}
+    \toprule
+    Adjacence  & Caractérisation \\ \midrule
+    $6$        & $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| = 1$ \\
+    $18$       & $\vx$ et $\vy$ sont 26-voisins et $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| \le 2$ \\
+    $26$       & $\max(|x_1 - y_1|,|x_2 - y_2|,|x_3 - y_3|) = 1$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj4}
+    \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj8}
+    \caption[]{Illustation du voisinage en dimension 2.\label{fig:adjacence2d}}
+  \end{center}
+\end{figure}
+
+%
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
 %
