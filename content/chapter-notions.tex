@@ -36,6 +36,7 @@ dans cette thèse (sauf mention contraire).
     $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:notions} \\
     $\vx$         & Point de $\dS$ & \RefSectionTable{sec:notions} \\
     $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \RefSectionTable{sec:notions} \\
+    $\vx_i$       & $i$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n}$ & \RefSectionTable{sec:notions} \\
     $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:notions} \\
     $\DigShape$   & Objet digital de $\Z^d$ & \RefSectionTable{sec:notions} \\
     $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:notions} \\
@@ -58,37 +59,210 @@ dans cette thèse (sauf mention contraire).
   \end{tabular}
 \end{table}
 %
-\section{Discrétisation}
-\label{sec:digitization}
+\section{Introduction à la géométrie différentielle}
+\label{sec:geo-diff}
+\todoInlineJeremy{Partie géo diff à faire}
 %
+% Introduction à la géométrie différentielle ?
+%
+% courbure : Defining and studying the curvatures of singular spaces goes back to Steiner (1840) in the convex case (see [30] for instance). ([30] = L. Santalo, Integral geometry anf geometric probability, Encyclopedia of Math- ematics and its applications, Vol. 1. Addison-Wesley Publishing Co. (1976), MR0433364, Zbl 0342.53049.)
+\subsection{Classes de fonctions $C^1$, $C^2$, $C^d$}
+%
+\begin{definition}{\fakeTitle{Classe de fonction $C^1$}}
+  %
+  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction continûment différentiable si elle est différentiable et si sa dérivée $f'$ est continue. Nous dirons également que $f$ est de \colorize{classe $C^1$}.
+  %
+\end{definition}
+%
+\begin{definition}{\fakeTitle{Classe de fonction $C^2$}}
+  %
+  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction deux fois continûment différentiable si elle est deux fois différentiable et si sa dérivée seconde $f''$ (la dérivée de $f'$) est continue. Nous dirons également que $f$ est de \colorize{classe $C^2$}.
+  %
+\end{definition}
+%
+\begin{definition}{\fakeTitle{Classe de fonction $C^d$}}
+  %
+  Une fonction $f$ est de \colorize{classe $C^p$} (avec $p \ge 2$) sur un intervalle réel non vide et non trivial si elle est $p$ fois continûment différentiable.
+  %
+\end{definition}
+%
+%\subsection{Aire et volume}
+%
+\begin{definition}{\fakeTitle{Aire d'une forme}}
+  %
+  Soit $\mathcal{V}$ une partie bornée de $\R^2$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{l'aire} de $\mathcal{V}$ est :
+  %
+  \begin{equation}
+    \label{eq:aire}
+    Aire(\mathcal{V}) = \iint_{\mathcal{V}} dxdy \,.
+  \end{equation}
+  %
+\end{definition}
+%
+\begin{definition}{\fakeTitle{Volume d'une forme}}
+  %
+  Soit $\mathcal{V}$ une partie bornée de $\R^3$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{le volume} de $\mathcal{V}$ est :
+  %
+  \begin{equation}
+    \label{eq:volume}
+    Volume(\mathcal{V}) = \iiint_{\mathcal{V}} dxdydz \,.
+  \end{equation}
+  %
+\end{definition}
 
+
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.5cm}
+    \begin{tabular}{cc}
+      \includegraphics[width=5.5cm]{figures/curv_plan} &
+      \includegraphics[width=5.5cm]{figures/curv_minimal}
+      \\
+      Plan &
+      Surface minimale
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_cylindre_conv} &
+      \includegraphics[width=5.5cm]{figures/curv_cylindre_conc}
+      \\
+      Cylindre convexe &
+      Cylindre concave
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_pic} &
+      \includegraphics[width=5.5cm]{figures/curv_vallee}
+      \\
+      Pic &
+      Vallée
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_col_conv} &
+      \includegraphics[width=5.5cm]{figures/curv_col_conc}
+      \\
+      Col convexe &
+      Col concave
+    \end{tabular}
+    \caption[]{.\label{fig:curvature-figures}}
+  \end{center}
+\end{figure}
+
+
+%
+% \subsection{Tangente de surface}
+% %
+% \begin{definition}{\fakeTitle{Tangente}}
+%   %
+%   Nous appellons \colorize{tangente} d'une surface $\mathcal{S}$ au point $\vx$
+%   %
+% \end{definition}
+Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curviligne dans un espace de dimension $n$ :
+\begin{align}
+    %
+    f : [0,1] &\rightarrow \R^n \nonumber\\
+    \vx &\rightarrow f(\vx)
+    %
+\end{align}
+
+\begin{equation}
+  %
+  t(\vx) = \left| \frac{df}{d\vx} \right|
+  %
+\end{equation}
+
+\begin{equation}
+  %
+  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right|
+  %
+\end{equation}
+
+\begin{equation}
+  %
+  \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2}
+  %
+\end{equation}
+
+\begin{equation}
+  %
+  \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2}
+  %
+\end{equation}
+%
+%\subsection{Courbure en dimension 2}
+%
+\begin{table}[ht]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+                  & $\GaussCurv = 0$   & $\GaussCurv > 0$   & $\GaussCurv < 0$   \\ \midrule
+$\MeanCurv = 0$   & plan               & indéterminé        & surface minimale   \\
+$\MeanCurv > 0$   & cylindre concave   & vallée             & col concave        \\
+$\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe        \\ \bottomrule
+\end{tabular}
+\end{table}
+%
+\section{Notions de bases}
+\label{sec:notions-base}
+%
+Dans ce paragraphe, nous allons introduire les notions de bases de la géométrie
+digitale comme le \colorize{pavage}. Un pavage est un ensemble de cellules
+partitionnant entièrement l'espace euclidien. Il existe plusieurs types de
+pavages présents dans la nature (craquement de sol sous l'effet de la chaleur,
+peaux d'animaux (serpent, girafe, etc.), sol de la Chaussée des Géants
+(Royaume-Uni), etc.) comme dans les constructions de l'Homme (carrelages, routes
+pavées, pyramide du Louvres (Paris, France), mosaïques, vitraux, etc.), comme l'illuste la \RefFigure{fig:pavage-exemple}.
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=6.8cm]{images/Notions/pavage_mer_de_sel}
+    \includegraphics[width=6.8cm]{images/Notions/pavage_chateau}
+    \caption[Différents pavages dans la nature ou dans les constructions humaines]{Différents pavages dans la nature ou dans les constructions humaines. \emph{De gauche à droite :} désert de sel en Bolivie \cite{pavage1}, sol d'un des châteaux de la Loire (France) \cite{pavage2}.\label{fig:pavage-exemple}}
+  \end{center}
+\end{figure}
+
+Un sous-ensemble de ces pavages est le \colorize{pavage régulier}. Nous appelons
+un \colorize{espace discret} un pavage régulier du plan en dimension 2 ou de
+l'espace en dimension $d > 2$. Plusieurs types de pavages réguliers existent
+(voir la \RefFigure{fig:pavages}), nous nous intéressons ici qu'uniquement aux
+pavages discrets par carrés (ou des cubes en dimension supérieure). Ce pavage
+régulier isothétique (aligné sur les axes) représente \colorize{l'espace
+digital}. Ainsi, les points digitaux (\colorize{pixels} en dimension 2,
+\colorize{voxels} en dimension 3) associés à cet espace sont des points de
+$\Z^d$ de dimension $d$ comme nous pouvons le voir avec le graphe dual de la
+\RefFigure{fig:pavage_dual}. Les coordonnées des points digitaux sont alors des
+nombres entiers, rendant les calculs plus simples et stables qu'avec des
+coordonnées réelles.
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=14cm]{images/Notions/Pavages}
+    \caption{Pavages 2D réguliers par carrés, hexagones et triangles.\label{fig:pavages}}
+  \end{center}
+\end{figure}
+
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=5cm]{images/Notions/Pavage_dual}
+    \caption{Dual du pavage 2D réguliers par carrés.\label{fig:pavage_dual}}
+  \end{center}
+\end{figure}
+
+Cela amène aux questions de voisinage des points digitaux
+\todoInlineJeremy{notions de base à faire (pixel, linel, pointel, etc...)}
+%
 % Parler de discret vs digital
 % 2-dimensional cells (closed unit square) = pixels
 % 1-dimensional cells (closed unit segment) = linels
 % 0-dimensional cells (closed point) = pointels
-
-Pour certaines preuves mathématiques, une correspondance précise entre les points $\vx \in \dS$ et $\hat{\vx}\in \partial\Body{\DigShape}{h}$ est nécessaire. Pour un forme $\Shape \subset \R^2$ dont son bord est à courbure bornée $\kappa_{\max}$,la correspondance est nommée la \colorize{projection inverse} ou \anglais{back-projection} (voir la \RefFigure{fig:IIPottmann}). Plus formellement, soit $\NormalDir(\Shape,\vx,l)$ le segment centré au point $\vx$, aligné le long de la normale au point $\vx$ et de demi-longueur $l$. Alors:
 %
-\begin{definition}{\fakeTitle{Back-projection $\Proj$ \cite{Lachaud2006}}}
-\label{def:projection}
-%
-  Pour $0 < h \le 1/{\kappa_{\max}}$, soit $\Proj: \partial\Body{\DigShape}{h}
-  \rightarrow \dS$, $\hat{\vx} \mapsto \vx=\Proj(\hat{\vx})$, où $\vx$ est le
-  seul point tel que $\hat{\vx} \in \NormalDir(\Shape,\vx,\frac{\sqrt{2}}{2}h)$.
-%
-\end{definition}
-%
-Lemma B.9 \cite{Lachaud:2006-hdr} indicates that the map $\Proj$ is
-well-defined and onto. Lemma B.10 further tells that this map is
-continuous. It shows that the boundaries $\hBd{h} X$ and $\dS$
-are indeed close, since their Hausdorff distance is no greater than
-$\frac{\sqrt{2}}{2}h$.
-
-\section{Voisinages}
+\subsection{Voisinages}
 \label{sec:voisinage}
+\todoInlineJeremy{Transition voisinage à faire}
 %
-% 4-voisinage relation d'adjacence par arêtes
-% 8-voisinage relation d'adjacence par arêtes et sommets
+% 4-connexité 0-adjacence relation d'adjacence par arêtes
+% 8-connexité 1-adjacence relation d'adjacence par arêtes et sommets
 
 % 6-voisinage relation d'adjacence par faces
 % 18-voisinage relation d'adjacence par faces et arêtes
@@ -130,7 +304,98 @@ $\frac{\sqrt{2}}{2}h$.
     \caption[]{Illustation du voisinage en dimension 2.\label{fig:adjacence2d}}
   \end{center}
 \end{figure}
+%
+\section{Discrétisation}
+\label{sec:digitization}
+%
+Nous allons maintenant décrire le processus de discrétisation d'un sous-ensemble
+de l'espace euclidien $\R^d$ vers un ensemble de points de l'espace digital
+$\Z^d$.
 
+
+Nous considérons comme un objet digital une partie de l'espace digital $\Z^d$,
+\cad une grille régulière. Cet objet est caractérisé par la taille d'un élément
+la grille $h$, appelé également le \colorize{pas de discrétisation}.
+
+
+Nous notons $\DSh$ la discrétisation de Gauss de $\Shape$ dans une grille de
+dimension $d$, de résolution $h$ :
+%
+\begin{equation}
+  \DSh \EqDef \{ \vp \in \Z^d, (h \cdot \vp) \in \Shape \} \,,
+\end{equation}
+%
+où $h \cdot \vp$ est le redimensionnement uniforme de $\vp$ par le facteur $h$.
+
+
+Nous notons $\dS$ la \colorize{frontière} de $\Shape$, \cad son bord topologique
+(en rouge sur la \RefFigure{fig:frontier}).
+
+
+Si $\vp \in \Z^d$, alors $Q_\vp$ désigne le cube unitaire de dimension $d$ de
+$\R^d$ centré au point $\vp$. La \colorize{$h$-frontière} $\DFr{h} Z$ de
+l'ensemble digital $\DigShape \subset \Z^d$ est définie comme :
+%
+\begin{equation}
+  \DFr{h} \DigShape \EqDef \partial (h \cdot \cup_{\vp \in \DigShape} Q_\vp) \,,
+\end{equation}
+%
+\cad le bord topologique de l'ensemble des cubes unitaires $Q_\vp$ de
+$\DigShape$, mis à l'échelle par le facteur $h$. Pour simplifier les notations,
+nous noterons la $h$-frontière de $\Shape$ (ou le $h$-bord de $\Shape$) pour la
+discrétisation de Gauss au pas $h$ : $\partial\Body{\DSh}{h} \EqDef \DFr{h}
+\DSh$.
+
+
+De plus, la $h$-frontière de $\DSh$ est un sous-ensemble de dimension $(d-1)$ de
+$\R^d$, qui est alors proche de $\partial \Shape$. Pour certaines preuves
+mathématiques cette notion de proximité est essentielle. Une correspondance
+précise entre les points $\vx \in \dS$ et $\hat{\vx}\in \partial\Body{\DSh}{h}$
+est alors nécessaire. Pour un forme $\Shape \subset \R^d$, l'\colorize{axe
+médian} $MA(\dS)$ de $\dS$ est le sous-ensemble de $\R^d$ dans lequel tous les
+points sont les plus proche d'au moins deux points de $\dS$. Le \colorize{reach}
+de $\Shape$ est la borne inférieure de la distance entre $\dS$ et son axe
+médian. Les formes à reach positif ont leur courbures principales bornées par
+$\pm 1 / \Reach{\Shape}$. Nous définissons la \colorize{projection orthogonale}
+$\ProjX{\Shape}$ comme la correspondance de $\Shape \setminus MA(\dS)$ vers
+$\dS$ qui associe tout point vers son point le plus proche de $\dS$ (en rouge
+sur la \RefFigure{fig:projection}).
+%
+\\
+%
+Dans notre cas, nous souhaitons restreindre cette projection au domaine
+$\partial\Body{\DSh}{h}$ afin de définir la correspondance $\Proj$ de la
+$h$-frontière $\partial\Body{\DSh}{h}$ vers le bord topologique $\dS$ de
+$\Shape$. Cette projection est nommée la \colorize{projection inverse} ou
+\anglais{back-projection} \cite{Lachaud2006} :
+%
+\begin{definition}{\fakeTitle{Back-projection $\Proj$ \cite{Lachaud2006}}}
+\label{def:projection}
+%
+  Pour tout forme 2D $\Shape$ à reach positif, pour $0 < h \le \Reach{\Shape}$,
+  soit $\NormalDir(\Shape,\vx,l)$ le segment centré au point $\vx$, aligné le
+  long de la normale au point $\vx$ et de demi-longueur $l$ Alors la
+  \colorize{projection inverse} $\Proj$ est définie comme :
+  %
+  \begin{align}
+    \Proj: \partial\Body{\DigShape}{h} &\rightarrow \dS, \nonumber \\
+    \hat{\vx} &\mapsto \vx=\Proj(\hat{\vx}) \,,
+  \end{align}
+  %
+  où $\vx$ est le seul point tel que $\hat{\vx} \in
+  \NormalDir(\Shape,\vx,\frac{\sqrt{2}}{2}h)$.
+%
+\end{definition}
+%
+Le \RefLemmaFake{B.9}{Lachaud2006} nous indique que la correspondance $\Proj$
+n'introduit aucune ambiguité et est surjectif, et le
+\RefLemmaFake{B.10}{Lachaud2006} que cette correspondance est continue. La
+\RefFigure{fig:backproj} nous montre (en rouge) la projection de tout point
+$\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des points $\vx \in \dS$. Alors,
+nous pouvons conclure que les bords $\partial\Body{\DSh}{h}$ et $\dS$ ont une
+distance de Hausdorff inférieure ou égale à $\frac{\sqrt{2}}{2}h$. De plus, la
+projection $\ProjX{\Shape}$ est continue sur $\R^d \setminus MA(\dS)$, donc
+également sur $\partial\Body{\DSh}{h}$ avec un $h$ adéquat.
 %
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
@@ -146,7 +411,9 @@ Nous allons définir ce que sont les quantités géométriques « locales » et 
   %
 \end{definition}
 %
-Il apparait alors clairement que, par exemple, le volume d'une forme est une quantité géométrique « globale », tandis que la normale, la courbure ou encore la tangente sur sa surface sont des quantités géométriques dites « locales ».
+Il apparait alors clairement que, par exemple, le volume d'une forme est une
+quantité géométrique « globale », tandis que la normale, la courbure ou encore
+la tangente sur sa surface sont des quantités géométriques dites « locales ».
 
 
 Alors nous pouvons nous intéresser à la propriété de \colorize{convergence
@@ -170,7 +437,8 @@ point $\hat{\vx}$ le bord digital $\partial\Body{\DSh}{h}$ de la discrétisation
 de la forme $\Shape$ au pas de discrétisation $h$.
 
 
-Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs (\RefDefinitionFake{2.10}{Klette2004}) :
+Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs
+(\RefDefinitionFake{2.10}{Klette2004}) :
 %
 \begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique globale}}
   \label{def:multigrid-convergence-global}
@@ -233,157 +501,36 @@ avec $a$ une constante. Alors, lorsque $h$ tend vers $0$, l'erreur tend
 \colorize{convergence asymptotique uniforme} de nos estimateurs, en d'autres
 mots il s'agit l'erreur dans le pire des cas de nos estimateurs.
 %
-\section{Introduction à la géométrie différentielle}
-\label{sec:geo-diff}
-%
-% Introduction à la géométrie différentielle ?
-%
-% courbure : Defining and studying the curvatures of singular spaces goes back to Steiner (1840) in the convex case (see [30] for instance). ([30] = L. Santalo, Integral geometry anf geometric probability, Encyclopedia of Math- ematics and its applications, Vol. 1. Addison-Wesley Publishing Co. (1976), MR0433364, Zbl 0342.53049.)
-\subsection{Classe $C^1$, $C^2$, $C^d$}
-%
-\begin{definition}{\fakeTitle{Classe $C^1$}}
-  %
-  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction continûment différentiable si elle est différentiable et si sa dérivée $f'$ est continue. Nous dirons également que $f$ est de \colorize{classe $C^1$}.
-  %
-\end{definition}
-%
-\begin{definition}{\fakeTitle{Classe $C^2$}}
-  %
-  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction deux fois continûment différentiable si elle est deux fois différentiable et si sa dérivée seconde $f''$ (la dérivée de $f'$) est continue. Nous dirons également que $f$ est de \colorize{classe $C^2$}.
-  %
-\end{definition}
-%
-\begin{definition}{\fakeTitle{Classe $C^d$}}
-  %
-  Une fonction $f$ est de \colorize{classe $C^p$} (avec $p \ge 2$) sur un intervalle réel non vide et non trivial si elle est $p$ fois continûment différentiable.
-  %
-\end{definition}
-%
-%\subsection{Aire et volume}
-%
-\begin{definition}{\fakeTitle{Aire d'une forme}}
-  %
-  Soit $\mathcal{V}$ une partie bornée de $\R^2$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{l'aire} de $\mathcal{V}$ est :
-  %
-  \begin{equation}
-    \label{eq:aire}
-    Aire(\mathcal{V}) = \iint_{\mathcal{V}} dxdy \,.
-  \end{equation}
-  %
-\end{definition}
-%
-\begin{definition}{\fakeTitle{Volume d'une forme}}
-  %
-  Soit $\mathcal{V}$ une partie bornée de $\R^3$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{le volume} de $\mathcal{V}$ est :
-  %
-  \begin{equation}
-    \label{eq:volume}
-    Volume(\mathcal{V}) = \iiint_{\mathcal{V}} dxdydz \,.
-  \end{equation}
-  %
-\end{definition}
-%
-% \subsection{Tangente de surface}
-% %
-% \begin{definition}{\fakeTitle{Tangente}}
-%   %
-%   Nous appellons \colorize{tangente} d'une surface $\mathcal{S}$ au point $\vx$
-%   %
-% \end{definition}
-Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curviligne dans un espace de dimension $n$ :
-\begin{align}
-    %
-    f : [0,1] &\rightarrow \R^n \nonumber\\
-    \vx &\rightarrow f(\vx)
-    %
-\end{align}
-
-\begin{equation}
-  %
-  t(\vx) = \left| \frac{df}{d\vx} \right|
-  %
-\end{equation}
-
-\begin{equation}
-  %
-  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right|
-  %
-\end{equation}
-
-\begin{equation}
-  %
-  \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2}
-  %
-\end{equation}
-
-\begin{equation}
-  %
-  \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2}
-  %
-\end{equation}
-%
-%\subsection{Courbure en dimension 2}
-%
-\begin{table}[ht]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-                  & $\GaussCurv = 0$   & $\GaussCurv > 0$   & $\GaussCurv < 0$   \\ \midrule
-$\MeanCurv = 0$   & plan               & indéterminé        & surface minimale   \\
-$\MeanCurv > 0$   & cylindre concave   & vallée             & col concave        \\
-$\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe        \\ \bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.5cm}
-    \begin{tabular}{cc}
-      \includegraphics[width=5.5cm]{figures/curv_plan} &
-      \includegraphics[width=5.5cm]{figures/curv_minimal}
-      \\
-      Plan &
-      Surface minimale
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_cylindre_conv} &
-      \includegraphics[width=5.5cm]{figures/curv_cylindre_conc}
-      \\
-      Cylindre convexe &
-      Cylindre concave
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_pic} &
-      \includegraphics[width=5.5cm]{figures/curv_vallee}
-      \\
-      Pic &
-      Vallée
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_col_conv} &
-      \includegraphics[width=5.5cm]{figures/curv_col_conc}
-      \\
-      Col convexe &
-      Col concave
-    \end{tabular}
-    \caption[]{.\label{fig:curvature-figures}}
-  \end{center}
-\end{figure}
-%
 \section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
+%
+Nous allons maintenant nous intéresser à la définition de primitives digitales.
+Ces primitives seront estimées et, grâce à leurs bonnes propriétés
+mathématiques, pourront utilisées par la suite comme point d'entré d'estimateurs
+de quantités différentielles comme la courbure (ce que nous verrons dans le
+\RefChapitre{sec:estimators}).
+
+
+La primitive la plus basique à reconnaître est sans nul doute la droite. Alors
+nous devons définir ce qu'une droite représente dans l'espace digital et ce
+n'est pas trivial à cause de la discrétisation de la forme. Définissons tout
+d'abord une \colorize{droite digitale standard} (ou droite $4$-connexe), et
+ainsi le \colorize{segment digital} :
 %
 \begin{definition}{\fakeTitle{Droite digitale standard et segment digital (« \anglais{Digital Straight Segment} ») \cite{Reveilles1991}}}
   \label{def:DSS}
 %
-  L'ensemble de points $(x_1,x_2) \in \Z^2$ satisfaisant $\mu \le ax_1 - bx_2 <
+  L'ensemble de points $(p_1,p_2) \in \Z^2$ satisfaisant $\mu \le ap_1 - bp_2 <
   \mu + |a| + |b|$, avec $a$, $b$ et $\mu$ des nombres entiers, est appelé une
-  \emph{droite digitale standard} avec comme pente $a/b$ et comme décalage
+  \colorize{droite digitale standard} avec comme pente $a/b$ et comme décalage
   $\mu$. Tout sous ensemble de pixels connectés d'une droite digitale standard
-  est un \emph{segment digital} (ou « \anglais{DSS} »).
+  est un \colorize{segment digital} (ou « \anglais{DSS} »).
 %
 \end{definition}
-%
-Une droite digitale standard est une droite 4-connexe.
+
+
+Ainsi, de cette définition, nous pouvons en extraire les \colorize{segments
+maximaux} ainsi que le \colorize{faisceau de segments maximaux} :
 %
 \begin{definition}{\fakeTitle{Segments maximaux et faisceau de segments maximaux \cite{Lachaud2007}}}
   \label{def:MDSS}
@@ -392,7 +539,7 @@ Une droite digitale standard est une droite 4-connexe.
   $\DigShape \subset \Z^2$ forme un contour $4$-connecté. Cela nous permet de
   les dénombrer consécutivement par $(\vp_i)_{i={0\ldots n-1}}$. Une séquence de
   pointels $(\vp_i, \ldots, \vp_j)$ (dont l'indice est modulo $n$) est un
-  \emph{segment maximal} (ou « \anglais{MDSS} ») sur $\BdZ{\DigShape}$ si c'est
+  \colorize{segment maximal} (ou « \anglais{MDSS} ») sur $\BdZ{\DigShape}$ si c'est
   un DSS qui ne peut s'étendre dans aucun sens (en avant ou en arrière) en
   restant un DSS.
   %
@@ -409,11 +556,14 @@ Une droite digitale standard est une droite 4-connexe.
   des segments maximaux de $\BdZ{\DigShape}$ contenant $\vp$.
 %
 \end{definition}
-%
-\cauthors{Lachaud}{lachaud2006HDR} et \cauthors{de
-Vieilleville}{deVieilleville2007} se sont intéressés sur les propriétés
-asymptotiques des longueurs des segments maximaux sur des formes convexe
-suffisamment lisse de dimension 2 :
+
+
+Il parait alors essentiel d'étudier le comportement asymptotique de ces
+primitives afin de pouvoir les exploiter au sein d'estimateurs auxquels nous
+voulons prouver la convergence. \cauthors{Lachaud}{lachaud2006HDR} et
+\cauthors{de Vieilleville}{deVieilleville2007} se sont alors intéressés sur les
+propriétés asymptotiques des longueurs des segments maximaux sur des formes
+convexe suffisamment lisse de dimension $2$ :
 %
 \begin{lemma}{\fakeTitle{Lois asymptotiques des segments maximaux}}
   \label{lem:law-length-MDSS}
@@ -424,13 +574,14 @@ suffisamment lisse de dimension 2 :
   %
   \begin{itemize}
     %
-    \item le plus court des segments maximaux a une borne inférieure en
+    \item le \colorize{plus court des segments maximaux} a une borne inférieure en
     $\Omega(h^{-\frac{1}{3}})$;
     %
-    \item le plus long des segments maximaux a une borne supérieure en
+    \item le \colorize{plus long des segments maximaux} a une borne supérieure en
     $O(h^{-\frac{1}{2}})$;
     %
-    \item la longueur moyenne des segments maximaux $L_D({\DigShape})$, est bornée par :
+    \item la \colorize{longueur moyenne des segments maximaux} $L_D({\DigShape})$, est
+    bornée par :
     %
     \begin{equation}
       \label{eq:lengthMS}
@@ -439,31 +590,45 @@ suffisamment lisse de dimension 2 :
   \end{itemize}
   %
 \end{lemma}
-%
+
+
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=6cm]{images/Notions/DCA}
     \end{center}}
     \caption[Arc de cercle digital.]{Arc de cercle digital (Figure~1.22 de \cite{Roussillon2009}).\label{fig:dca-figure}}
 \end{figure}
+
+
+L'arc de cercle est une autre primitive intéressante à étudier. En effet,
+puisque la courbure est l'inverse du rayon du cercle osculateur du bord d'un
+objet, le reconnaître permettrait d'approcher cette valeur. Définissons alors
+\colorize{l'arc de cercle digital} (voir la \RefFigure{fig:dca-figure}) :
 %
 \begin{definition}{\fakeTitle{Arcs de cercle digitaux}}
   \label{def:digital-circular-arc}
   %
   Soit $\Shape$ une forme convexe de $\R^2$, avec un champ de courbure continue.
-  Le contour digital $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ est un arc de
-  cercle digital (\anglais{DCA}) si et seulement s'il existe un cercle euclidien
-  qui sépare les points intérieurs à $\BdZ{\DigShape}$ des points digitaux extérieurs de
-  $\BdZ{\DigShape}$ (voir \RefFigure{fig:dca-figure}).
+  Le contour digital $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ est un \colorize{arc de
+  cercle digital} (\anglais{DCA}) si et seulement s'il existe un cercle euclidien
+  qui sépare les points intérieurs à $\BdZ{\DigShape}$ des points digitaux
+  extérieurs de $\BdZ{\DigShape}$ (voir \RefFigure{fig:dca-figure}).
   %
   \\
   %
-  Un arc de cercle digital est maximal (\anglais{\MDCA}) si et seulement s'il ne
+  Un arc de \colorize{cercle digital est maximal} (\anglais{MDCA}) si et seulement s'il ne
   peut être étendu dans aucune direction.
   %
 \end{definition}
+
+
+Nous verrons dans le chapitre suivant des estimateurs utilisant ces primitives
+digitales pour estimer la courbure. Nous allons également proposer un estimateur
+digital de courbure tirant parti des segments maximaux.
 %
 \section{Estimateurs digitaux d'aire, de volume, de moments, de positionnement de surface}
+%
+\todoInlineJeremy{Refaire un passe ici + transitions}
 %
 \subsection{Aire et volume digitaux}
 %
@@ -620,7 +785,9 @@ avec $\mu_{\sigma} \ge 1$ dans le cas général (\todoJeremy{expliciter}). Cette
 borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
 \cauthors{Krätzel}{Kratzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
 \cauthors{Müller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
-\todoInlineJeremy{A verifier}
 %
-\section{Enveloppes convexes}
+%\section{Enveloppes convexes}
 %
+\section{Conclusion}
+%
+\todoInlineJeremy{Conclusion notions à faire}
