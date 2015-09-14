@@ -1,5 +1,10 @@
 \newtheorem{definition}{D\'efinition}[chapter]
 \newtheorem{theorem}{Th\'eor\`eme}[chapter]
+% \surroundwithmdframed[outerlinewidth=0.4pt,
+%   innerlinewidth=0.4pt,
+%   middlelinewidth=1pt,
+%   middlelinecolor=white,
+%   bottomline=false,topline=false,rightline=false]{theorem}
 \newtheorem{proposition}{Proposition}[chapter]
 \newtheorem{property}{Propri\'et\'e}[chapter]
 \newtheorem{corollary}{Corollaire}[chapter]
@@ -44,6 +49,7 @@
 \newcommand{\RefConjecture}[1]{\refPrePost{conjecture~}{#1}{}}
 \newcommand{\RefProperty}[1]{\refPrePost{propri\'et\'e~}{#1}{}}
 \newcommand{\RefLemma}[1]{\refPrePost{lemme~}{#1}{}}
+\newcommand{\RefLemmaFake}[2]{lemme~#1 de \cite{#2}}
 \newcommand{\RefTheorem}[1]{\refPrePost{th\'eor\`eme~}{#1}{}}
 \newcommand{\RefTheoremsDF}[2]{\refPrePost{th\'eor\`emes~}{#1}{} et \refPrePost{}{#2}{}}
 \newcommand{\RefTheoremsTF}[3]{\refPrePost{th\'eor\`emes~}{#1}{}, \refPrePost{}{#2}{} et \refPrePost{}{#3}{}}
