@@ -86,7 +86,7 @@ dans cette thèse (sauf mention contraire).
   %
 \end{definition}
 %
-%\subsection{Aire et volume}
+\subsection{Aire et volume}
 %
 \begin{definition}{\fakeTitle{Aire d'une forme}}
   %
@@ -110,6 +110,7 @@ dans cette thèse (sauf mention contraire).
   %
 \end{definition}
 
+\subsection{Courbure}
 
 \begin{figure}[ht]
   \begin{center}
@@ -199,6 +200,65 @@ $\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe       
 \end{tabular}
 \end{table}
 %
+
+
+\subsection{Moments géométriques}
+%
+Le concept mathématique des moments a beaucoup été étudié depuis plusieurs
+années et trouve son champ d'application sans cesse augmenté, allant des
+statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
+reconnaissance de formes (\cauthors{Trier}{Trier1996} pour un survey sur la
+reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghorbel2005}.
+La première utilisation des moments en analyse d'images remonte à 1962 par
+\cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
+%
+Les moments ont l'avantage d'être indépendant à l'échelle, la position et
+l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout
+d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite
+nous intéresser à les estimer sur des données digitales.
+%
+\todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
+%
+\subsubsection{Définition et propriétés des moments géométriques}%
+\label{sec:definitions-moments}
+%
+Une définition générale du moment géométrique (ou moment cartésien) $\Mom{p_1
+\cdots p_d}$ d'ordre $p_1 \cdots p_d$ (aussi appelé le $p_1 \cdots p_d$-moment)
+de $\Shape$ (de $\R^d$) peut être donnée comme :
+%
+\begin{equation}
+  \Mom{p_1 \cdots p_d}(\Shape) \EqDef \idotsint_{\Shape} x_1^{p_1} \cdots x_d^{p_d} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
+\end{equation}
+%
+\paragraph{Moment d'ordre zéro : aire / volume}
+%
+Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au
+volume en 3D de $\Shape$ :
+%
+\begin{equation}
+  \Mom{0 \cdots 0}(\Shape) \EqDef \idotsint_{\Shape} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
+\end{equation}
+%
+\paragraph{Moments du premier ordre : barycentre}
+%
+Les $d$ moments du premier ordre ($\Mom{1 0 \cdots 0}(\Shape)$, $\Mom{0 1 0
+\cdots 0}(\Shape)$, $\cdots$, $\Mom{0 \cdots 0 1}(\Shape)$) sont généralement
+utilisés pour déterminer le barycentre de la forme à analyser. Les coordonnées
+du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont :
+%
+\begin{equation}
+  \overline{x_1} = \frac{\Mom{1 0 \cdots 0}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}, \cdots, \overline{x_p} = \frac{\Mom{0 \cdots 0 1}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}.
+\end{equation}
+%
+\paragraph{Moments du second ordre}
+%
+Les moments du second ordre $\Mom{p_1 \cdots p_d}(\Shape)$ avec $p_1 + \cdots +
+p_2 = 2$ sont connus comme les moments d'inertie, caractérisant la géométrie des
+masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
+1}(\Shape)$ et $\Mom{0 2}(\Shape)$, en 3D il en existe 6 :  $\Mom{2 0
+0}(\Shape)$, $\Mom{0 2 0}(\Shape)$, $\Mom{0 0 2}(\Shape)$, $\Mom{1 1
+0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$
+%
 \section{Notions de bases}
 \label{sec:notions-base}
 %
@@ -208,7 +268,7 @@ partitionnant entièrement l'espace euclidien. Il existe plusieurs types de
 pavages présents dans la nature (craquement de sol sous l'effet de la chaleur,
 peaux d'animaux (serpent, girafe, etc.), sol de la Chaussée des Géants
 (Royaume-Uni), etc.) comme dans les constructions de l'Homme (carrelages, routes
-pavées, pyramide du Louvres (Paris, France), mosaïques, vitraux, etc.), comme l'illuste la \RefFigure{fig:pavage-exemple}.
+pavées, pyramide du Louvre (Paris, France), mosaïques, vitraux, etc.), comme l'illustre la \RefFigure{fig:pavage-exemple}.
 
 
 \begin{figure}[ht]
@@ -240,8 +300,6 @@ coordonnées réelles.
   \end{center}
 \end{figure}
 
-
-
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=5cm]{images/Notions/Pavage_dual}
@@ -249,35 +307,66 @@ coordonnées réelles.
   \end{center}
 \end{figure}
 
-Cela amène aux questions de voisinage des points digitaux
-\todoInlineJeremy{notions de base à faire (pixel, linel, pointel, etc...)}
+De ces points digitaux, nous pouvons ajouter des informations topologiques en
+considérant l'espace de grille cellulaire. L'idée est de plonger l'espace
+digital $\Z^n$ dans l'espace cubique cartésien afin de pouvoir représenter les
+éléments entre les pixels.
 %
-% Parler de discret vs digital
-% 2-dimensional cells (closed unit square) = pixels
-% 1-dimensional cells (closed unit segment) = linels
-% 0-dimensional cells (closed point) = pointels
+\\
+%
+Ainsi, les $0$-cellules sont appelées des \colorize{pointels} (éléments de
+dimension 0). Par convention, les points digitaux $\vp \in \Z^d$ sont plongés
+dans des $0$-cellules.
+%
+\\
+%
+Les $1$-cellules sont appelées des \colorize{lignels} ou \anglais{linels} (éléments de dimension 1).
+%
+\\
+%
+Les $2$-cellules sont appelées des \colorize{pixels} (éléments de dimension 2).
+%
+\\
+%
+Les $3$-cellules sont appelées des \colorize{voxels} (éléments de dimension 3).
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=5cm]{images/Notions/notations_topo}
+    \caption{Illustration des $0$-cellules (pointels), $1$-cellules (lignels) et $2$-cellules (pixels).\label{fig:notations_topo}}
+  \end{center}
+\end{figure}
+
+
+La \RefFigure{fig:notations_topo} illustre les pointels, lignels et pixels. Par
+convention, nous nommons les $n$-cellules les \colorize{spels} (un pixel en
+dimension 2), les $n-1$-cellules sont nommées les \colorize{surfels} (pour
+\anglais{surface elements}).
+
+Grâce à ces définitions, cela nous amène directement aux questions de voisinage
+des points digitaux.
 %
 \subsection{Voisinages}
 \label{sec:voisinage}
-\todoInlineJeremy{Transition voisinage à faire}
 %
-% 4-connexité 0-adjacence relation d'adjacence par arêtes
-% 8-connexité 1-adjacence relation d'adjacence par arêtes et sommets
+La relation de voisinage est une notion importante pour la définition de notre
+objet digital. Le voisinage est défini en fonction de la connexité (ou de
+l'adjacence) que possède une cellule digitale par rapport aux autres. Les
+\RefTables{tab:adjacence2d}{tab:adjacence3d} définissent formellement ces
+notions, et la \RefFigure{fig:adjacence2d} illustre la $4$-connexité et la
+$8$-connexité sur un objet digital de dimension 2.
 
-% 6-voisinage relation d'adjacence par faces
-% 18-voisinage relation d'adjacence par faces et arêtes
-% 26-voisinage relation d'adjacence par faces, arêtes et sommets
-%
 \begin{table}[ht]
   \centering
   \caption{Définition des voisinages en dimension $2$.}
   \label{tab:adjacence2d}
     \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{@{}lr@{}}
+  \begin{tabular}{@{}llr@{}}
     \toprule
-    Adjacence  & Caractérisation \\ \midrule
-    $4$        & $|x_1 - y_1| + |x_2 - y_2| = 1$ \\
-    $8$        & $\max(|x_1 - y_1|,|x_2 - y_2|) = 1$ \\
+    Adjacence & Connexité  & Caractérisation \\ \midrule
+    $0$ & $4$        & $|x_1 - y_1| + |x_2 - y_2| = 1$ \\
+    $1$ & $8$        & $\max(|x_1 - y_1|,|x_2 - y_2|) = 1$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -287,12 +376,12 @@ Cela amène aux questions de voisinage des points digitaux
   \caption{Définition des voisinages en dimension $3$.}
   \label{tab:adjacence3d}
     \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{@{}lr@{}}
+  \begin{tabular}{@{}llr@{}}
     \toprule
-    Adjacence  & Caractérisation \\ \midrule
-    $6$        & $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| = 1$ \\
-    $18$       & $\vx$ et $\vy$ sont 26-voisins et $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| \le 2$ \\
-    $26$       & $\max(|x_1 - y_1|,|x_2 - y_2|,|x_3 - y_3|) = 1$ \\
+    Adjacence & Connexité  & Caractérisation \\ \midrule
+    $0$ & $6$        & $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| = 1$ \\
+    $1$ & $18$       & $\vx$ et $\vy$ sont 26-connexes et $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| \le 2$ \\
+    $2$ & $26$       & $\max(|x_1 - y_1|,|x_2 - y_2|,|x_3 - y_3|) = 1$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -301,65 +390,144 @@ Cela amène aux questions de voisinage des points digitaux
   \begin{center}
     \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj4}
     \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj8}
-    \caption[]{Illustation du voisinage en dimension 2.\label{fig:adjacence2d}}
+    \caption{Illustation du voisinage en dimension 2.\label{fig:adjacence2d}}
   \end{center}
 \end{figure}
+
+
+Pour résumer, en dimension 2 :
+%
+\begin{itemize}
+  %
+  \item la $4$-connexité (ou $1$-adjacence) est la relation de voisinage par les arêtes;
+  \item la $8$-connexité (ou $0$-adjacence) est la relation de voisinage par les arêtes et les sommets.
+  %
+\end{itemize}
+%
+De même, en dimension 3 :
+%
+\begin{itemize}
+  %
+  \item la $6$-connexité (ou $2$-adjacence) est la relation de voisinage par les faces;
+  \item la $18$-connexité (ou $1$-adjacence) est la relation de voisinage par les faces et les arêtes.
+  \item la $26$-connexité (ou $0$-adjacence) est la relation de voisinage par les faces, les arêtes et les sommets.
+  %
+\end{itemize}
+
+
+
+La notion de voisinage est alors importante. En effet, en fonction de la
+connexité de l'espace digital, différentes composantes connexes peuvent être
+extraites comme le montre la \RefFigure{fig:connexite}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/connexite.tikz}
+  \end{center}
+  \caption[Illustration du nombre de composantes connexes en fonction de la connexité de l'espace digital.]
+  %
+  {Illustration du nombre de composantes connexes en fonction de la connexité de l'espace digital. \emph{À gauche :} trois composantes connexes sont extraites en $4$-connexité. \emph{À droite :} une seule composante connexe est extraites en $8$-connexité.\label{fig:connexite}}
+  %
+\end{figure}
+
 %
 \section{Discrétisation}
 \label{sec:digitization}
 %
 Nous allons maintenant décrire le processus de discrétisation d'un sous-ensemble
 de l'espace euclidien $\R^d$ vers un ensemble de points de l'espace digital
-$\Z^d$.
+$\Z^d$. La formalisation de ce processus est important pour l'évaluation théorique et expérimentale des estimateurs sur les bords digitaux des objets.
 
-
-Nous considérons comme un objet digital une partie de l'espace digital $\Z^d$,
-\cad une grille régulière. Cet objet est caractérisé par la taille d'un élément
-la grille $h$, appelé également le \colorize{pas de discrétisation}.
-
-
-Nous notons $\DSh$ la discrétisation de Gauss de $\Shape$ dans une grille de
-dimension $d$, de résolution $h$ :
+Considérons une forme $\Shape$ de $\R^d$ à discrétiser en points de $\R^d$ en coordonnées entières (\cad de $\Z^d$), alors la \colorize{discrétisation de Gauss} $\DSh$ de $\Shape$ dans une grille de dimension $d$ et de résolution $h$ est :
 %
 \begin{equation}
   \DSh \EqDef \{ \vp \in \Z^d, (h \cdot \vp) \in \Shape \} \,,
 \end{equation}
 %
 où $h \cdot \vp$ est le redimensionnement uniforme de $\vp$ par le facteur $h$.
+Ce facteur $h$ est important car les points digitaux sont des carrés (ou cubes)
+unitaires, et n'ont alors aucune information d'échelle permettant la
+correspondance vers les forme euclidienne. Par exemple, la
+\RefFigure{fig:scale-digital} montre deux sphères de rayons différents
+discrétisés à deux échelles $h$ différentes, donnant exactement la même
+discrétisation.
 
 
-Nous notons $\dS$ la \colorize{frontière} de $\Shape$, \cad son bord topologique
-(en rouge sur la \RefFigure{fig:frontier}).
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/2d-parameter-free-explained.tikz}
+  \end{center}
+  \caption[Illustration de la dépendance du paramètre d'échelle $h$.]
+  %
+  {Illustration de la dépendance du paramètre d'échelle $h$. L'objet euclidien
+  de gauche donne le même objet digital que l'objet euclidien de droite alors
+  qu'ils sont à des échelles différentes.\label{fig:scale-digital}}
+  %
+\end{figure}
 
-
-Si $\vp \in \Z^d$, alors $Q_\vp$ désigne le cube unitaire de dimension $d$ de
-$\R^d$ centré au point $\vp$. La \colorize{$h$-frontière} $\DFr{h} Z$ de
-l'ensemble digital $\DigShape \subset \Z^d$ est définie comme :
+Si $\vp \in \Z^d$, alors $\Q{\vp}$ désigne le cube unitaire de dimension $d$ de
+$\R^d$ centré au point $\vp$ et aligné sur les axes de $\Z^d$. Nous définissons le \colorize{$h$-cube}, \cad $\Q{\vp}$ mis à l'échelle par $h$, comme :
 %
 \begin{equation}
-  \DFr{h} \DigShape \EqDef \partial (h \cdot \cup_{\vp \in \DigShape} Q_\vp) \,,
+  \hQ{\vp}{h} \EqDef h\cdot \Q{\vp} \,.
+\end{equation}
+
+
+Ainsi, pour un ensemble digital $\DigShape \subset \Z^d$, le \colorize{corps} de $\DigShape$ est le plongement $\Body{\cdot}{h}$ de $\DigShape$ vers $\R^d$, défini comme :
+%
+\begin{equation}
+  \Body{\DigShape}{h} \EqDef \bigcup_{\vp \in \DigShape} \hQ{\vp}{h} \,.
 \end{equation}
 %
-\cad le bord topologique de l'ensemble des cubes unitaires $Q_\vp$ de
-$\DigShape$, mis à l'échelle par le facteur $h$. Pour simplifier les notations,
-nous noterons la $h$-frontière de $\Shape$ (ou le $h$-bord de $\Shape$) pour la
-discrétisation de Gauss au pas $h$ : $\partial\Body{\DSh}{h} \EqDef \DFr{h}
-\DSh$.
+En d'autres termes, $\Body{\DigShape}{h}$ est l'ensemble des cubes de dimension
+$d$ appartenant à $\DigShape$, mis à l'échelle par le pas de discrétisation $h$.
 
 
-De plus, la $h$-frontière de $\DSh$ est un sous-ensemble de dimension $(d-1)$ de
-$\R^d$, qui est alors proche de $\partial \Shape$. Pour certaines preuves
-mathématiques cette notion de proximité est essentielle. Une correspondance
-précise entre les points $\vx \in \dS$ et $\hat{\vx}\in \partial\Body{\DSh}{h}$
-est alors nécessaire. Pour un forme $\Shape \subset \R^d$, l'\colorize{axe
-médian} $MA(\dS)$ de $\dS$ est le sous-ensemble de $\R^d$ dans lequel tous les
-points sont les plus proche d'au moins deux points de $\dS$. Le \colorize{reach}
-de $\Shape$ est la borne inférieure de la distance entre $\dS$ et son axe
-médian. Les formes à reach positif ont leur courbures principales bornées par
-$\pm 1 / \Reach{\Shape}$. Nous définissons la \colorize{projection orthogonale}
-$\ProjX{\Shape}$ comme la correspondance de $\Shape \setminus MA(\dS)$ vers
-$\dS$ qui associe tout point vers son point le plus proche de $\dS$ (en rouge
-sur la \RefFigure{fig:projection}).
+Intéressons nous désormais aux bords de ces objets. Nous verrons plus tard que
+certains estimateurs sont définis sur le bord de l'objet, il semble alors
+important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
+\cad son bord topologique (en orange foncé sur la \RefFigure{fig:frontier}). La
+\colorize{$h$-frontière} $\DFr{h} \DigShape$ de l'ensemble digital $\DigShape
+\subset \Z^d$ est définie comme :
+%
+\begin{equation}
+  \partial\Body{\DigShape}{h} \EqDef \partial \left( \bigcup_{\vp \in \DigShape} \hQ{\vp}{h} \right) \,.
+\end{equation}
+%
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/gauss-digit.tikz}
+  \end{center}
+  \caption{Illustration d'une forme euclidienne $\Shape$, de sa frontière $\dS$, du corps de sa discrétisation de Gauss $\Body{\DSh}{h}$ et sa $h$-frontière $\partial\Body{\DSh}{h}$.\label{fig:frontier}}
+\end{figure}
+
+
+La \RefFigure{fig:frontier} montre une forme euclidienne $\Shape \subset \R^2$
+(en orange pâle) et sa frontière $\dS$ (en orange foncé), ainsi que
+$\Body{\DSh}{h}$ le corps de la discrétisation de Gauss de $\Shape$ avec le pas
+de discrétisation $h$ (en rouge pâle) et sa $h$-frontière
+$\partial\Body{\DSh}{h}$ (en rouge foncé). Les points $\vp \in \DSh$ remis à
+l'échelle par le facteur $h$ sont en noir sur la figure de gauche.
+
+
+Comme nous pouvons le voir sur la \RefFigure{fig:frontier}, la $h$-frontière de
+$\DSh$ est un sous-ensemble de dimension $(d-1)$ de $\R^d$ qui est proche
+de $\partial \Shape$. Pour certaines preuves mathématiques cette notion de
+proximité est essentielle. Une correspondance précise entre les points $\vx \in
+\dS$ et $\hat{\vx}\in \partial\Body{\DSh}{h}$ est alors nécessaire.
+%
+\\
+%
+Pour un forme $\Shape \subset \R^d$, l'\colorize{axe médian} $MA(\dS)$ de $\dS$
+est le sous-ensemble de $\R^d$ dans lequel tous les points sont les plus proche
+d'au moins deux points de $\dS$. Le \colorize{reach} de $\Shape$ est la borne
+inférieure de la distance entre $\dS$ et son axe médian. Les formes à reach
+positif ont leur courbures principales bornées par $\pm 1 / \Reach{\Shape}$.
+Nous définissons la \colorize{projection orthogonale} $\ProjX{\Shape}$ comme la
+correspondance de $\Shape \setminus MA(\dS)$ vers $\dS$ qui associe tout point
+vers son point le plus proche de $\dS$.
 %
 \\
 %
@@ -369,7 +537,7 @@ $h$-frontière $\partial\Body{\DSh}{h}$ vers le bord topologique $\dS$ de
 $\Shape$. Cette projection est nommée la \colorize{projection inverse} ou
 \anglais{back-projection} \cite{Lachaud2006} :
 %
-\begin{definition}{\fakeTitle{Back-projection $\Proj$ \cite{Lachaud2006}}}
+\begin{definition}{\fakeTitle{Projection inverse $\Proj$ \cite{Lachaud2006}}}
 \label{def:projection}
 %
   Pour tout forme 2D $\Shape$ à reach positif, pour $0 < h \le \Reach{\Shape}$,
@@ -388,7 +556,7 @@ $\Shape$. Cette projection est nommée la \colorize{projection inverse} ou
 \end{definition}
 %
 Le \RefLemmaFake{B.9}{Lachaud2006} nous indique que la correspondance $\Proj$
-n'introduit aucune ambiguité et est surjectif, et le
+n'introduit aucune ambiguïté et est surjectif, et le
 \RefLemmaFake{B.10}{Lachaud2006} que cette correspondance est continue. La
 \RefFigure{fig:backproj} nous montre (en rouge) la projection de tout point
 $\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des points $\vx \in \dS$. Alors,
@@ -400,7 +568,7 @@ projection $\ProjX{\Shape}$ est continue sur $\R^d \setminus MA(\dS)$, donc
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
 %
-Nous allons définir ce que sont les quantités géométriques « locales » et « globales »
+Maintenant que le processus de discrétisation est défini, nous allons nous intéresser aux propriétés de convergence asymptotique des estimateurs de quantités géométriques. Tout d'abord, nous pouvons distinguer deux types de quantités géométriques : les quantités « locales » et les quantités « globales » :
 %
 \begin{definition}{\fakeTitle{Quantités géométriques locales et globales}}
   \label{def:global-quantity}
@@ -411,22 +579,22 @@ Nous allons définir ce que sont les quantités géométriques « locales » et 
   %
 \end{definition}
 %
-Il apparait alors clairement que, par exemple, le volume d'une forme est une
+Il apparaît alors clairement que, par exemple, le volume d'une forme est une
 quantité géométrique « globale », tandis que la normale, la courbure ou encore
 la tangente sur sa surface sont des quantités géométriques dites « locales ».
 
 
-Alors nous pouvons nous intéresser à la propriété de \colorize{convergence
-asymptotique d'estimateurs} de quantités géométriques (locales et globales). La
-notion de convergence asymptotique, introduite en $1983$ par
-\cauthor{Serra}{Serra1983}, est un critère important permettant d'évaluer et de
-comparer des estimateurs digitaux. L'idée principale est, pour une forme
-euclidienne $\Shape$ donnée, d'évaluer l'erreur entre une quantité géométrique
-de $\Shape$ et la quantité géométrique digitale estimée sur la discrétisation de
-$\Shape$, à plusieurs échelles de discrétisation. Le comportement attendu est
-alors que si nous raffinons l'objet digital (\cad que le pas de discrétisation
-diminue, donnant ainsi un objet digital plus proche de la forme euclidienne),
-l'erreur d'estimation doit diminuer.
+Alors nous pouvons nous définir ce qu'est la \colorize{convergence asymptotique
+d'estimateurs} de quantités géométriques (locales et globales). La notion de
+convergence asymptotique, introduite en $1983$ par \cauthor{Serra}{Serra1983},
+est un critère important permettant d'évaluer et de comparer des estimateurs
+digitaux. L'idée principale est, pour une forme euclidienne $\Shape$ donnée,
+d'évaluer l'erreur entre une quantité géométrique de $\Shape$ et la quantité
+géométrique digitale estimée sur la discrétisation de $\Shape$, à plusieurs
+échelles de discrétisation. Le comportement attendu est alors que si nous
+raffinons l'objet digital (\cad que le pas de discrétisation diminue, donnant
+ainsi un objet digital plus proche de la forme euclidienne), l'erreur
+d'estimation doit diminuer.
 
 
 Ainsi, définissons $\hat{E}(\DSh,h)$ (\respp $\hat{E}(\DSh,\hat{\vx},h)$) un
@@ -628,11 +796,15 @@ digital de courbure tirant parti des segments maximaux.
 %
 \section{Estimateurs digitaux d'aire, de volume, de moments, de positionnement de surface}
 %
-\todoInlineJeremy{Refaire un passe ici + transitions}
+Nous avons vu dans le \RefSection{sec:geo-diff} certaines quantités
+différentielles, comme l'aire, le volume ou encore les moments. Ces quantités
+différentielles peuvent être très facilement estimées sur des surfaces
+digitales, le calcul intégral pouvant se limiter à compter des points digitaux.
+Nous allons ici détailler l'estimation digitale d'aire, de volume et des moments
+sur des surfaces digitales provenant de la littérature, ainsi que leurs
+convergence.
 %
-\subsection{Aire et volume digitaux}
-%
-\subsubsection{Aire et volume en comptant les points digitaux}
+\subsection{Aire et volume digitaux en dénombrant les points digitaux}
 \label{sec:AreaByCounting}
 %
 Une façon simple de calculer l'aire ou le volume d'une forme digitale consiste à
@@ -684,64 +856,7 @@ précédents restent valides chaque fois que le bord de la forme peut être
 décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
 nulle pour les bornes améliorées).
 %
-\subsection{Moments géométriques digitaux}
-%
-Le concept mathématique des moments a beaucoup été étudié depuis plusieurs
-années et trouve son champ d'application sans cesse augmenté, allant des
-statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
-reconnaissance de formes (\cauthors{Trier}{Trier1996} pour un survey sur la
-reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghorbel2005}.
-La première utilisation des moments en analyse d'images remonte à 1962 par
-\cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
-%
-Les moments ont l'avantage d'être indépendant à l'échelle, la position et
-l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout
-d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite
-nous intéresser à les estimer sur des données digitales.
-%
-\todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
-%
-\subsubsection{Définition et propriétés des moments géométriques}%
-\label{sec:definitions-moments}
-%
-Une définition générale du moment géométrique (ou moment cartésien) $\Mom{p_1
-\cdots p_d}$ d'ordre $p_1 \cdots p_d$ (aussi appelé le $p_1 \cdots p_d$-moment)
-de $\Shape$ (de $\R^d$) peut être donnée comme :
-%
-\begin{equation}
-  \Mom{p_1 \cdots p_d}(\Shape) \EqDef \idotsint_{\Shape} x_1^{p_1} \cdots x_d^{p_d} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
-\end{equation}
-%
-\paragraph{Moment d'ordre zéro : aire / volume}
-%
-Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au
-volume en 3D de $\Shape$ :
-%
-\begin{equation}
-  \Mom{0 \cdots 0}(\Shape) \EqDef \idotsint_{\Shape} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
-\end{equation}
-%
-\paragraph{Moments du premier ordre : barycentre}
-%
-Les $d$ moments du premier ordre ($\Mom{1 0 \cdots 0}(\Shape)$, $\Mom{0 1 0
-\cdots 0}(\Shape)$, $\cdots$, $\Mom{0 \cdots 0 1}(\Shape)$) sont généralement
-utilisés pour déterminer le barycentre de la forme à analyser. Les coordonnées
-du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont :
-%
-\begin{equation}
-  \overline{x_1} = \frac{\Mom{1 0 \cdots 0}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}, \cdots, \overline{x_p} = \frac{\Mom{0 \cdots 0 1}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}.
-\end{equation}
-%
-\paragraph{Moments du second ordre}
-%
-Les moments du second ordre $\Mom{p_1 \cdots p_d}(\Shape)$ avec $p_1 + \cdots +
-p_2 = 2$ sont connus comme les moments d'inertie, caractérisant la géométrie des
-masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
-1}(\Shape)$ et $\Mom{0 2}(\Shape)$, en 3D il en existe 6 :  $\Mom{2 0
-0}(\Shape)$, $\Mom{0 2 0}(\Shape)$, $\Mom{0 0 2}(\Shape)$, $\Mom{1 1
-0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$
-%
-\subsubsection{Moments en comptant les points digitaux}
+\subsection{Moments géométriques digitaux en dénombrant les points digitaux}
 \label{sec:MomentsByCounting}
 %
 Comme pour l'aire ou le volume précédemment, il est très simple de calculer les
