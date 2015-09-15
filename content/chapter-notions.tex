@@ -14,13 +14,13 @@
 %
 Dans ce chapitre, nous allons poser les définitions des éléments dont nous
 allons nous servir pour la suite de ce document. Cela comprend une introduction à
-la géométrie différentielle des surfaces (\RefSection{sec:geo-diff}) permettant
+la géométrie des surfaces et des formes continues (\RefSectionN{sec:geo-diff}) permettant
 de faire le lien entre les mathématiques et nos estimateurs digitaux, les
-notions de base de la géométrie digitale (\RefSection{sec:notions-base}) ainsi
-que tout le pipeline permettant d'analyser le comportement d'un estimateur
-digital (\RefSection{sec:multigrid-convergence-estimator}). Enfin, nous verrons
+notions de base de la géométrie digitale (\RefSectionN{sec:notions-base}) ainsi
+que tout le processis formel permettant d'analyser le comportement d'un estimateur
+digital (\RefSectionN{sec:multigrid-convergence-estimator}). Enfin, nous verrons
 quelques primitives digitales que nous utiliserons par la suite, comme les
-segments maximaux (\RefSections{sec:segments}{sec:aire-volume-moments}).
+segments maximaux (\RefSectionsN{sec:segments}{sec:aire-volume-moments}).
 % historique geo dis : http://www.citr.auckland.ac.nz/~rklette/talks/01_CP.pdf
 %
 \section{Notations}
@@ -33,7 +33,7 @@ dans cette thèse (sauf mention contraire).
   \caption{Notations utilisées dans cette thèse}
   \label{tab:notations}
     \renewcommand{\arraystretch}{1.1}
-  \begin{tabular}{@{}lp{9cm}p{2.5cm}@{}}
+  \begin{tabular}{@{}lp{9cm}r@{}}
     \toprule
     Notation      & Description  & Définition \\ \midrule
 
@@ -41,15 +41,15 @@ dans cette thèse (sauf mention contraire).
     $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée & \RefSectionTable{sec:notions} \\
     $\Shape$      & Forme de $\Shapes$ & \RefSectionTable{sec:notions} \\
     $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:digitization} \\
-    $\vx$         & Point de $\dS$ & \RefSectionTable{sec:digitization} \\
+    $\vx$         & Point de $\R^d$ & \RefSectionTable{sec:digitization} \\
     $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \RefSectionTable{sec:notions} \\
     $\vx_i$       & $i$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n}$ & \RefSectionTable{sec:notions} \\
     $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:digitization} \\
-    $\DigShape$   & Objet digital de $\Z^d$ & \RefSectionTable{sec:digitization} \\
+    $\DigShape$   & Objet digital (partie de $\Z^d$) & \RefSectionTable{sec:digitization} \\
     $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:digitization} \\
     $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
-    $\Body{\DSh}{h}$ & Corps de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
-    $\partial\Body{\DigShape}{h}$ & Bord topologique du corps de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization}\\
+    $\Body{\DSh}{h}$ & Plongement euclidien de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
+    $\partial\Body{\DigShape}{h}$ & Bord topologique du plongement euclidien de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization}\\
     $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ & \RefSectionTable{sec:digitization} \\
 
 
@@ -67,9 +67,9 @@ dans cette thèse (sauf mention contraire).
   \end{tabular}
 \end{table}
 %
-\section{Introduction à la géométrie différentielle des surfaces}
+\section{Introduction à la géométrie des surfaces et formes continues}
 \label{sec:geo-diff}
-La \colorize{géométrie différentielle des surfaces} est l'étude des surfaces comme graphes de fonctions
+La \colorize{géométrie des surfaces et des formes continues} est l'étude des surfaces comme graphes de fonctions.
 
 
 %
@@ -79,7 +79,7 @@ La \colorize{géométrie différentielle des surfaces} est l'étude des surfaces
 
 \subsection{Classes de fonctions $C^1$, $C^2$, $C^d$}
 %
-Alors, définissons les classes de fonctions $C^1$, $C^2$ ou plus généralement
+Définissons les classes de fonctions $C^1$, $C^2$ ou plus généralement
 $C^d$, permettant de connaître le différentiabilité d'une fonction :
 %
 \begin{definition}{\fakeTitle{Classe de fonction $C^1$}}
@@ -100,10 +100,12 @@ $C^d$, permettant de connaître le différentiabilité d'une fonction :
   %
 \end{definition}
 %
+Plus généralement, pour $d>2$, la classe de fonction $C^d$ est définie comme :
+%
 \begin{definition}{\fakeTitle{Classe de fonction $C^d$}}
   %
-  Une fonction $f$ est de \colorize{classe $C^p$} (avec $p \ge 2$) sur un
-  intervalle réel non vide et non trivial si elle est $p$ fois continûment
+  Une fonction $f$ est de \colorize{classe $C^d$} (avec $d \ge 2$) sur un
+  intervalle réel non vide et non trivial si elle est $d$ fois continûment
   différentiable.
   %
 \end{definition}
@@ -111,39 +113,41 @@ $C^d$, permettant de connaître le différentiabilité d'une fonction :
 \subsection{Aire et volume}
 %
 Nous nous intéressons aux quantités différentielles d'une forme $\Shape \subset
-\R^d$. Les quantités différentielles les plus directes sont probablement l'aire
+\R^d$. Les quantités les plus directes sont probablement l'aire
 de la forme en dimension 2 ou son volume en dimension 3. Ce revient à résoudre
-une double ou triple intégrale de la forme :
+une double ou triple intégrale de la forme suivante :
 %
 \begin{definition}{\fakeTitle{Aire d'une forme}}
   %
-  Soit $\mathcal{V}$ une partie bornée de $\R^2$. Si la fonction constant $1$
-  est intégrable sur $\mathcal{V}$, alors \colorize{l'aire} de $\mathcal{V}$ est :
+  Soit $\Shape$ une partie bornée de $\R^2$. Si la fonction constant $1$
+  est intégrable sur $\Shape$, alors \colorize{l'aire} de $\Shape$ est :
   %
   \begin{equation}
     \label{eq:aire}
-    Aire(\mathcal{V}) = \iint_{\mathcal{V}} dxdy \,.
+    Aire(\Shape) = \iint_{\Shape} dxdy \,.
   \end{equation}
   %
 \end{definition}
 %
 \begin{definition}{\fakeTitle{Volume d'une forme}}
   %
-  Soit $\mathcal{V}$ une partie bornée de $\R^3$. Si la fonction constant $1$
-  est intégrable sur $\mathcal{V}$, alors \colorize{le volume} de $\mathcal{V}$
+  Soit $\Shape$ une partie bornée de $\R^3$. Si la fonction constant $1$
+  est intégrable sur $\Shape$, alors \colorize{le volume} de $\Shape$
   est :
   %
   \begin{equation}
     \label{eq:volume}
-    Volume(\mathcal{V}) = \iiint_{\mathcal{V}} dxdydz \,.
+    Volume(\Shape) = \iiint_{\Shape} dxdydz \,.
   \end{equation}
   %
 \end{definition}
 %
+% On parle également de mesure de $\Shape$ au sens de
+%
 \subsection{Moments géométriques}
 \label{sec:moments-geo}
 %
-Le concept mathématique des moments a beaucoup été étudié depuis plusieurs
+Le concept mathématique des moments géométriques a beaucoup été étudié depuis plusieurs
 années et trouve son champ d'application sans cesse augmenté, allant des
 statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
 reconnaissance de formes (\cauthors{Trier}{Trier1996} pour une revue sur la
@@ -151,22 +155,23 @@ reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghor
 La première utilisation des moments en analyse d'images remonte à 1962 par
 \cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
 %
-Les moments ont l'avantage d'être indépendant à l'échelle, la position et
-l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout
-d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite
-nous intéresser à les estimer sur des données digitales.
+% Les moments ont l'avantage d'être indépendant à l'échelle, la position et
+% l'orientation, en faisant un outil invariant robuste \cite{}.
+Nous allons tout d'abord définir ce que sont les moments et leurs
+caractéristiques, pour ensuite nous intéresser à les estimer sur des données
+digitales.
 %
 % \todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
 %
-\subsubsection{Définition et propriétés des moments géométriques}%
-\label{sec:definitions-moments}
+% \subsubsection{Définition et propriétés des moments géométriques}%
+% \label{sec:definitions-moments}
 %
 Une définition générale du moment géométrique (ou moment cartésien) $\Mom{p_1
 \cdots p_d}$ d'ordre $p_1 \cdots p_d$ (aussi appelé le $p_1 \cdots p_d$-moment)
 de $\Shape$ (de $\R^d$) peut être donnée comme :
 %
 \begin{equation}
-  \Mom{p_1 \cdots p_d}(\Shape) \EqDef \idotsint_{\Shape} x_1^{p_1} \cdots x_d^{p_d} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
+  \Mom{p_1 \cdots p_d}(\Shape) \EqDef \idotsint_{\Shape} x_1^{p_1} \cdots x_d^{p_d} dx_1 \ldots dx_d.
 \end{equation}
 %
 \paragraph{Moment d'ordre zéro : aire / volume}
@@ -175,18 +180,18 @@ Il apparaît alors que le $0\cdots0$-moment correspond à l'aire en 2D ou au
 volume en 3D de $\Shape$ :
 %
 \begin{equation}
-  \Mom{0 \cdots 0}(\Shape) \EqDef \idotsint_{\Shape} f(x_1 \cdots x_d) dx_1 \ldots dx_d.
+  \Mom{0 \cdots 0}(\Shape) \EqDef \idotsint_{\Shape}  dx_1 \ldots dx_d.
 \end{equation}
 %
-\paragraph{Moments du premier ordre : barycentre}
+\paragraph{Moments du premier ordre : barycentre ou centre d'inertie}
 %
 Les $d$ moments du premier ordre ($\Mom{1 0 \cdots 0}(\Shape)$, $\Mom{0 1 0
 \cdots 0}(\Shape)$, $\cdots$, $\Mom{0 \cdots 0 1}(\Shape)$) sont généralement
 utilisés pour déterminer le barycentre de la forme à analyser. Les coordonnées
-du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont :
+du barycentre $(\overline{x_1}, \cdots, \overline{x_p})$ sont données par :
 %
 \begin{equation}
-  \overline{x_1} = \frac{\Mom{1 0 \cdots 0}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}, \cdots, \overline{x_p} = \frac{\Mom{0 \cdots 0 1}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}.
+  \overline{x_1} \EqDef \frac{\Mom{1 0 \cdots 0}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}, \cdots, \overline{x_p} \EqDef \frac{\Mom{0 \cdots 0 1}(\Shape)}{\Mom{0 \cdots 0}(\Shape)}.
 \end{equation}
 %
 \paragraph{Moments du second ordre}
@@ -196,47 +201,14 @@ p_2 = 2$ sont connus comme les moments d'inertie, caractérisant la géométrie 
 masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
 1}(\Shape)$ et $\Mom{0 2}(\Shape)$, en 3D il en existe 6 :  $\Mom{2 0
 0}(\Shape)$, $\Mom{0 2 0}(\Shape)$, $\Mom{0 0 2}(\Shape)$, $\Mom{1 1
-0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$
+0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$.
 %
 \subsection{Courbure}
 %
-Viens ensuite la courbure de la surface. La courbure est une scalaire mesurant
+Nous nous intéressons maintenant à la courbure de la surface. La courbure est une scalaire mesurant
 la déviation de la courbe par rapport au vecteur tangent. Cette quantité est
 énormément utilisée en \GeometryProcessing pour l'analyse et suivi de formes,
 entre autres. Nous détaillerons cela dans le \RefChapitre{sec:estimators}.
-
-
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.5cm}
-    \begin{tabular}{cc}
-      \includegraphics[width=5.5cm]{figures/curv_plan} &
-      \includegraphics[width=5.5cm]{figures/curv_minimal}
-      \\
-      Plan &
-      Surface minimale
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_cylindre_conv} &
-      \includegraphics[width=5.5cm]{figures/curv_cylindre_conc}
-      \\
-      Cylindre convexe &
-      Cylindre concave
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_pic} &
-      \includegraphics[width=5.5cm]{figures/curv_vallee}
-      \\
-      Pic &
-      Vallée
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_col_conv} &
-      \includegraphics[width=5.5cm]{figures/curv_col_conc}
-      \\
-      Col convexe &
-      Col concave
-    \end{tabular}
-    \caption{Illustration de différents surfaces de dimension 3.\label{fig:curvature-figures}}
-  \end{center}
-\end{figure}
 
 
 %
@@ -248,13 +220,13 @@ entre autres. Nous détaillerons cela dans le \RefChapitre{sec:estimators}.
 %   %
 % \end{definition}
 %
-Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curviligne
-dans un espace de dimension $n$ :
+Soit une courbe $f(x)$ une courbe $C^2$ paramétrée par son abscisse curviligne
+dans un espace de dimension $2$ :
 %
 \begin{align}
     %
-    f : [0,1] &\rightarrow \R^n \nonumber\\
-    \vx &\rightarrow f(\vx)
+    f : [0,1] &\rightarrow \R^2 \nonumber\\
+    x &\rightarrow f(x)
     %
 \end{align}
 %
@@ -263,25 +235,16 @@ seconde :
 %
 \begin{equation}
   %
-  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right| \,,
+  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right| \,.
   %
 \end{equation}
 %
-ou encore comme la dérivée de l'orientation du vecteur tangent. Si $\phi(\vx)$
-est l'angle orienté entre le vecteur tangent $\vec{t}(\vx)$ et une droite fixe, nous avons :
-%
-\begin{equation}
-  %
-  \Curv(\vx) = \frac{d\phi}{d\vx} \,.
-  %
-\end{equation}
-%
-Enfin, une troisième façon de récupérer la courbure est de s'intéresser aux
+Une autre façon de récupérer la courbure est de s'intéresser aux
 cercles osculateurs de la surface :
 %
 \begin{equation}
   %
-  \Curv(\vx) = \left| \frac{1}{r_o(\vx)} \right| \,,
+  \Curv(\vx) = \frac{1}{r_o(\vx)} \,,
   %
 \end{equation}
 %
@@ -290,6 +253,54 @@ où $r_o(\vx)$ est le rayon du cercle osculateur de la courbe $f$ au point $\vx$
 $\vx$ (voir \RefFigure{fig:curvature_osc}).
 
 
+Usuellement, lorsque nous parlons de courbure, nous parlons de
+\colorize{courbure algébrique}. La distinction se fait dans le signe de la
+courbure. Les définitions précédentes donnent un scalaire positif, représentant
+la dérivation de la courbe par rapport au vecteur tangent. Nous souhaitons
+obtenir des valeurs de courbure positives, négatives ou encore nulles. Les
+courbures algébriques sont alors signées. Cela implique par exemple de pouvoir
+obtenir des valeurs de $r_o$ négatives dans le cas d'une forme concave.
+
+La courbure peut être également définie comme la dérivée de l'orientation du
+vecteur tangent. Si $\phi(\vx)$ est l'angle orienté entre le vecteur tangent
+$\vec{t}(\vx)$ et une droite fixe, nous avons :
+%
+\begin{equation}
+  %
+  \Curv(\vx) = \frac{d\phi}{d\vx} \,.
+  %
+\end{equation}
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.5cm}
+    \begin{tabular}{ccc}
+      \includegraphics[width=3.5cm]{figures/curv_plan} &
+      \includegraphics[width=3.5cm]{figures/curv_cylindre_conv} &
+      \includegraphics[width=3.5cm]{figures/curv_cylindre_conc}
+      \\
+      Plan &
+      Cylindre convexe &
+      Cylindre concave
+      \\
+      \includegraphics[width=3.5cm]{figures/curv_minimal} &
+      \includegraphics[width=3.5cm]{figures/curv_pic} &
+      \includegraphics[width=3.5cm]{figures/curv_vallee}
+      \\
+      Surface minimale &
+      Pic &
+      Vallée
+      \\
+      \includegraphics[width=3.5cm]{figures/curv_col_conv} &
+      \includegraphics[width=3.5cm]{figures/curv_col_conc} &
+      \\
+      Col convexe &
+      Col concave &
+    \end{tabular}
+    \caption{Illustration de différents surfaces de dimension 3.\label{fig:curvature-figures}}
+  \end{center}
+\end{figure}
 % \begin{figure}[ht]
 %   \begin{center}
 %     \input{figures/tikz/curv-osc.tikz}
@@ -301,33 +312,68 @@ $\vx$ (voir \RefFigure{fig:curvature_osc}).
 % \end{figure}
 
 
-En dimension 3, nous pouvons également obtenir la courbure moyenne, la courbure
-gaussienne et les courbures principales. En recentrant à l'origine du repère, et
-que le plan tangent est $x_2 = 0$, nous pouvons décomposer $f$ grâce au
-développement en série de Taylor \cite{Taylor1717} afin d'en extraire les
-\colorize{courbures principales} $\PrincCurv{1}$ et $\PrincCurv{2}$ :
+En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures principales. Nous allons détailler cela.
+
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[width=8cm]{figures/Minimal_surface_curvature_planes-fr}
+    \end{center}}
+    \caption{Plans de courbures principales \cite{WikipediaCurv}.\label{fig:dss-figure}}
+\end{figure}
+
+Considérons le \colorize{repère de Frenet} défini par la normale $\NormalDir$ et
+deux vecteurs orthogonaux $\vec{t_1}$ et $\vec{t_2}$ du plan tangent au point
+$\vx$ de la surface $\dS$ pour $\Shape \subset \R^3$. Dans ce repère, nous
+considérons deux plans orthogonaux, $\Pi_1$ et $\Pi_2$, formant deux courbes 2D
+$f_1$ et $f_2$ à l'intersection du plan et de la surface $\dS$. Notons
+$\PrincCurv{a}(\vx)$ la courbure de $f_1$ au point $\vx$ et $\PrincCurv{b}(\vx)$
+la courbure de $f_2$ au point $\vx$. Alors, la \colorize{courbure moyenne}
+$\MeanCurv(\vx)$ est définie comme étant :
 %
 \begin{equation}
   %
-  f(x_1,x_2) = \frac{1}{2}\PrincCurv{1}x_1^2 + \frac{1}{2}\PrincCurv{2}x_2^2 + \cdots \,.
+  \MeanCurv(\vx) = \frac{\PrincCurv{a} + \PrincCurv{b}}{2} \,.
   %
 \end{equation}
-%
-Alors, la \colorize{courbure moyenne} est calculée comme étant :
-%
-\begin{equation}
-  %
-  \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2} \,,
-  %
-\end{equation}
-%
-et la \colorize{courbure gaussienne} :
+
+Si $\PrincCurv{a}$ et $\PrincCurv{b}$ sont \respp la \colorize{courbure
+maximale} $\PrincCurv{1}(\vx)$ et la \colorize{courbure minimale}
+$\PrincCurv{2}(\vx)$ dans toutes les directions du repère de Frenet au point
+$\vx$, alors nous pouvons définir la coubure gaussienne $\GaussCurv(\vx)$ comme
+étant :
 %
 \begin{equation}
   %
   \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2} \,.
   %
 \end{equation}
+
+% En dimension 3, nous pouvons également définir la courbure moyenne, la courbure
+% gaussienne et les courbures principales. En recentrant à l'origine du repère, et
+% que le plan tangent est $x_3 = 0$, nous pouvons paramétrer $f$ par une décomposition en série de Taylor \cite{Taylor1717} afin d'en extraire les
+% \colorize{courbures principales} $\PrincCurv{1}$ et $\PrincCurv{2}$ :
+% %
+% \begin{equation}
+%   %
+%   f(x_1,x_2) = \frac{1}{2}\PrincCurv{1}x_1^2 + \frac{1}{2}\PrincCurv{2}x_2^2 + \cdots \,.
+%   %
+% \end{equation}
+% %
+% Alors, la \colorize{courbure moyenne} est calculée comme étant :
+% %
+% \begin{equation}
+%   %
+%   \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2} \,,
+%   %
+% \end{equation}
+% %
+% et la \colorize{courbure gaussienne} :
+% %
+% \begin{equation}
+%   %
+%   \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2} \,.
+%   %
+% \end{equation}
 %
 Nous pouvons noter quelques particularités en dimension 3 :
 \begin{itemize}
@@ -337,8 +383,8 @@ Nous pouvons noter quelques particularités en dimension 3 :
 \end{itemize}
 %
 Le \RefTable{tab:courbure-particularities} et la
-\RefFigure{fig:curvature-figures} montre quelques autres différents cas en
-fonction de leur courbure moyenne et gaussienne.
+\RefFigure{fig:curvature-figures} montre une classification des surfaces de
+dimension 3 en fonction du signe de leur courbure moyenne et gaussienne.
 
 
 \begin{table}[ht]
@@ -355,7 +401,7 @@ $\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe       
 \end{table}
 
 
-\section{Notions de bases}
+\section{Notions de bases de géométrie digitale}
 \label{sec:notions-base}
 %
 Dans ce paragraphe, nous allons introduire les notions de bases de la géométrie
@@ -379,30 +425,29 @@ l'illustre la \RefFigure{fig:pavage-exemple}.
     {Différents pavages dans la nature ou dans les constructions humaines.
     \emph{De gauche à droite, de haut en bas :} désert de sel en Bolivie
     \cite{pavage1}, sol d'un des châteaux de la Loire (France) \cite{pavage2},
-    mosaïque représentant Amphitrite, formation de basalte à la Chaussée des
+    mosaïque représentant Amphitrite (Herculanum, Italie), formation de basalte à la Chaussée des
     Géants (Royaume-Uni) \cite{pavage4}.\label{fig:pavage-exemple}}
     %
   \end{center}
 \end{figure}
 
-Un sous-ensemble de ces pavages est le \colorize{pavage régulier}. Nous appelons
-un \colorize{espace discret} un pavage régulier du plan en dimension 2 ou de
-l'espace en dimension $d > 2$. Plusieurs types de pavages réguliers existent
-(voir la \RefFigure{fig:pavages}), nous nous intéressons ici qu'uniquement aux
-pavages discrets par carrés (ou des cubes en dimension supérieure). Ce pavage
-régulier isothétique (aligné sur les axes) représente \colorize{l'espace
-digital}. Ainsi, les points digitaux (\colorize{pixels} en dimension 2,
-\colorize{voxels} en dimension 3) associés à cet espace sont des points de
-$\Z^d$ de dimension $d$ comme nous pouvons le voir avec le graphe dual de la
-\RefFigure{fig:pavage_dual}. Les coordonnées des points digitaux sont alors des
-nombres entiers, rendant les calculs plus simples et stables qu'avec des
-coordonnées réelles.
+Un sous-ensemble de ces pavages contient les \colorize{pavages réguliers}. Nous
+appelons un \colorize{espace digital} un pavage régulier du plan en dimension 2
+ou de l'espace en dimension $d > 2$. Plusieurs types de pavages réguliers
+existent (voir la \RefFigure{fig:pavages}), nous nous intéressons ici
+qu'uniquement aux pavages discrets par carrés (ou des cubes en dimension
+supérieure).  Les points digitaux (\colorize{pixels} en dimension 2,
+\colorize{voxels} en dimension 3) de ce pavage régulier isothétique (aligné sur
+les axes)  associés à cet espace sont des points de $\Z^d$ comme nous pouvons le
+voir avec le graphe dual de la \RefFigure{fig:pavage_dual}. Les coordonnées des
+points digitaux sont alors des nombres entiers, rendant les calculs plus simples
+et stables qu'avec des coordonnées réelles.
 
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=14cm]{images/Notions/Pavages}
-    \caption{Pavages 2D réguliers par carrés, hexagones et triangles.\label{fig:pavages}}
+    \caption{Pavages 2D réguliers par carrés, hexagones et triangles (\RefFigureFake{1.1}{Coeurjolly2002}).\label{fig:pavages}}
   \end{center}
 \end{figure}
 
@@ -416,26 +461,22 @@ coordonnées réelles.
 De ces points digitaux, nous pouvons ajouter des informations topologiques en
 considérant l'espace de grille cellulaire. L'idée est de plonger l'espace
 digital $\Z^n$ dans l'espace cubique cartésien afin de pouvoir représenter les
-éléments entre les pixels.
+éléments interpixels. Ainsi :
 %
-\\
+\begin{itemize}
 %
-Ainsi, les $0$-cellules sont appelées des \colorize{pointels} (éléments de
-dimension 0). Par convention, les points digitaux $\vp \in \Z^d$ sont plongés
-dans des $0$-cellules.
+  \item Les $0$-cellules sont appelées des \colorize{pointels} (éléments
+  de dimension 0). Par convention, les points digitaux $\vp \in \Z^d$ sont
+  plongés dans des $0$-cellules;
 %
-\\
+  \item Les $1$-cellules sont appelées des \colorize{lignels} ou
+  \anglais{linels} (éléments de dimension 1);
 %
-Les $1$-cellules sont appelées des \colorize{lignels} ou \anglais{linels}
-(éléments de dimension 1).
+  \item Les $2$-cellules sont appelées des \colorize{pixels} (éléments de
+  dimension 2). En dimension 3, les $2$-cellules sont également nommées les
+  \colorize{surfels} (pour \anglais{surface elements}).
 %
-\\
-%
-Les $2$-cellules sont appelées des \colorize{pixels} (éléments de dimension 2).
-En dimension 3, les $2$-cellules sont également nommées les \colorize{surfels}
-(pour \anglais{surface elements}).
-%
-\\
+\end{itemize}
 %
 Les $3$-cellules sont appelées des \colorize{voxels} (éléments de dimension 3).
 
@@ -452,21 +493,24 @@ Les $3$-cellules sont appelées des \colorize{voxels} (éléments de dimension 3
 La \RefFigure{fig:notations_topo} illustre les pointels, lignels et pixels. Par
 convention, nous nommons les $n$-cellules les \colorize{spels} (un pixel en
 dimension 2, un voxel en dimension 3), les $n-1$-cellules sont nommées les
-\colorize{bells} (un lignel en dimension 2, un \colorize{surfel} en dimension
+\colorize{bels} (un \colorize{lignel} en dimension 2, un \colorize{surfel} en dimension
 3).
 
+
+%
+% \subsection{Voisinages}
+% \label{sec:voisinage}
+%
 Grâce à ces définitions, cela nous amène directement aux questions de voisinage
-des points digitaux.
-%
-\subsection{Voisinages}
-\label{sec:voisinage}
-%
-La relation de voisinage est une notion importante pour la définition de notre
-objet digital. Le voisinage est défini en fonction de la connexité (ou de
-l'adjacence) que possède une cellule digitale par rapport aux autres. Les
-\RefTables{tab:adjacence2d}{tab:adjacence3d} définissent formellement ces
+des points digitaux. La relation de voisinage est une notion importante pour la
+définition de notre objet digital. Le voisinage est défini en fonction de la
+\colorize{connexité} que possède une cellule digitale par rapport aux autres.
+Les \RefTables{tab:adjacence2d}{tab:adjacence3d} définissent formellement ces
 notions, et la \RefFigure{fig:adjacence2d} illustre la $4$-connexité et la
-$8$-connexité sur un objet digital de dimension 2.
+$8$-connexité sur un objet digital de dimension 2. Un autre terme désigne cette
+notion de voisinage : \colorize{l'adjacence}. Ainsi, nous parlons de
+$n$-adjacence pour les liens entre éléments de dimension $n$ (\cad les pointels
+pour $n=0$, les lignels pour $n=1$ en dimension 2).
 
 \begin{table}[ht]
   \centering
@@ -476,8 +520,8 @@ $8$-connexité sur un objet digital de dimension 2.
   \begin{tabular}{@{}llr@{}}
     \toprule
     Adjacence & Connexité  & Caractérisation \\ \midrule
-    $0$ & $4$        & $|x_1 - y_1| + |x_2 - y_2| = 1$ \\
-    $1$ & $8$        & $\max(|x_1 - y_1|,|x_2 - y_2|) = 1$ \\
+    $1$ & $4$        & $|x_1 - y_1| + |x_2 - y_2| = 1$ \\
+    $0$ & $8$        & $\max(|x_1 - y_1|,|x_2 - y_2|) = 1$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -490,9 +534,9 @@ $8$-connexité sur un objet digital de dimension 2.
   \begin{tabular}{@{}llr@{}}
     \toprule
     Adjacence & Connexité  & Caractérisation \\ \midrule
-    $0$ & $6$        & $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| = 1$ \\
+    $2$ & $6$        & $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| = 1$ \\
     $1$ & $18$       & $\vx$ et $\vy$ sont 26-connexes et $|x_1 - y_1| + |x_2 - y_2| + |x_3 - y_3| \le 2$ \\
-    $2$ & $26$       & $\max(|x_1 - y_1|,|x_2 - y_2|,|x_3 - y_3|) = 1$ \\
+    $0$ & $26$       & $\max(|x_1 - y_1|,|x_2 - y_2|,|x_3 - y_3|) = 1$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -558,7 +602,7 @@ extraites comme le montre la \RefFigure{fig:connexite}.
 %
 Nous allons maintenant décrire le processus de discrétisation d'un sous-ensemble
 de l'espace euclidien $\R^d$ vers un ensemble de points de l'espace digital
-$\Z^d$. La formalisation de ce processus est important pour l'évaluation
+$\Z^d$. La formalisation de ce processus est importante pour l'évaluation
 théorique et expérimentale des estimateurs sur les bords digitaux des objets.
 
 
@@ -586,9 +630,10 @@ discrétisation.
   \end{center}
   \caption[Illustration de la dépendance du paramètre d'échelle $h$.]
   %
-  {Illustration de la dépendance du paramètre d'échelle $h$. L'objet euclidien
-  de gauche donne le même objet digital que l'objet euclidien de droite alors
-  qu'ils sont à des échelles différentes.\label{fig:scale-digital}}
+  {Illustration de la dépendance du paramètre d'échelle $h$ et de la taille de
+  la forme. L'objet euclidien de gauche donne le même objet digital que l'objet
+  euclidien de droite alors qu'ils sont à des échelles
+  différentes.\label{fig:scale-digital}}
   %
 \end{figure}
 
@@ -601,9 +646,9 @@ le \colorize{$h$-cube}, \cad $\Q{\vp}$ mis à l'échelle par $h$, comme :
 \end{equation}
 
 
-Ainsi, pour un ensemble digital $\DigShape \subset \Z^d$, le \colorize{corps} de
-$\DigShape$ est le plongement $\Body{\cdot}{h}$ de $\DigShape$ vers $\R^d$,
-défini comme :
+Ainsi, pour un ensemble digital $\DigShape \subset \Z^d$, le
+\colorize{plongement euclidien} (\anglais{body}) de $\DigShape$ est le
+plongement $\Body{\cdot}{h}$ de $\DigShape$ vers $\R^d$, défini comme :
 %
 \begin{equation}
   \Body{\DigShape}{h} \EqDef \bigcup_{\vp \in \DigShape} \hQ{\vp}{h} \,.
@@ -631,43 +676,39 @@ important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
     \input{figures/tikz/gauss-digit.tikz}
   \end{center}
   \caption{Illustration d'une forme euclidienne $\Shape$, de sa frontière $\dS$,
-  du corps de sa discrétisation de Gauss $\Body{\DSh}{h}$ et sa $h$-frontière
+  du plongement euclidien de sa discrétisation de Gauss $\Body{\DSh}{h}$ et sa $h$-frontière
   $\partial\Body{\DSh}{h}$.\label{fig:frontier}}
 \end{figure}
 
 
 La \RefFigure{fig:frontier} montre une forme euclidienne $\Shape \subset \R^2$
 (en orange pâle) et sa frontière $\dS$ (en orange foncé), ainsi que
-$\Body{\DSh}{h}$ le corps de la discrétisation de Gauss de $\Shape$ avec le pas
+$\Body{\DSh}{h}$ le plongement euclidien de la discrétisation de Gauss de $\Shape$ avec le pas
 de discrétisation $h$ (en rouge pâle) et sa $h$-frontière
 $\partial\Body{\DSh}{h}$ (en rouge foncé). Les points $\vp \in \DSh$ remis à
 l'échelle par le facteur $h$ sont en noir sur la figure de gauche.
 
 
 Comme nous pouvons le voir sur la \RefFigure{fig:frontier}, la $h$-frontière de
-$\DSh$ est un sous-ensemble de dimension $(d-1)$ de $\R^d$ qui est proche
-de $\partial \Shape$. Pour certaines preuves mathématiques cette notion de
+$\DSh$ est un sous-ensemble de dimension $(d-1)$ de $\R^d$ qui est proche de
+$\partial \Shape$. Pour certaines preuves mathématiques cette notion de
 proximité est essentielle. Une correspondance précise entre les points $\vx \in
-\dS$ et $\hat{\vx}\in \partial\Body{\DSh}{h}$ est alors nécessaire.
-%
-\\
-%
-Pour un forme $\Shape \subset \R^d$, l'\colorize{axe médian} $MA(\dS)$ de $\dS$
-est le sous-ensemble de $\R^d$ dans lequel tous les points sont les plus proche
-d'au moins deux points de $\dS$. Le \colorize{reach} de $\Shape$ est la borne
+\dS$ et $\hat{\vx}\in \partial\Body{\DSh}{h}$ est alors nécessaire. Pour un
+forme $\Shape \subset \R^d$, l'\colorize{axe médian} $MA(\dS)$ de $\dS$ est le
+sous-ensemble de $\R^d$ dans lequel tous les points sont les plus proche d'au
+moins deux points de $\dS$. Le \colorize{reach} de $\Shape$ est la borne
 inférieure de la distance entre $\dS$ et son axe médian. Les formes à reach
 positif ont leur courbures principales bornées par $\pm 1 / \Reach{\Shape}$.
-Nous définissons la \colorize{projection orthogonale} $\ProjX{\Shape}$ comme la
-correspondance de $\Shape \setminus MA(\dS)$ vers $\dS$ qui associe tout point
-vers son point le plus proche de $\dS$.
+% Nous définissons la \colorize{projection orthogonale} $\ProjX{\Shape}$ comme la
+% correspondance de $\Shape \setminus MA(\dS)$ vers $\dS$ qui associe tout point
+% vers son point le plus proche de $\dS$.
 %
 \\
 %
-Dans notre cas, nous souhaitons restreindre cette projection au domaine
-$\partial\Body{\DSh}{h}$ afin de définir la correspondance $\Proj$ de la
-$h$-frontière $\partial\Body{\DSh}{h}$ vers le bord topologique $\dS$ de
-$\Shape$. Cette projection est nommée la \colorize{projection inverse} ou
-\anglais{back-projection} \cite{Lachaud2006} :
+Alors nous pouvons définir la correspondance $\Proj$ de la $h$-frontière
+$\partial\Body{\DSh}{h}$ vers le bord topologique $\dS$ de $\Shape$ dans la
+direction de la normale de la surface. Cette projection est nommée la
+\colorize{projection inverse} ou \anglais{back-projection} \cite{Lachaud2006} :
 %
 \begin{definition}{\fakeTitle{Projection inverse $\Proj$ \cite{Lachaud2006}}}
 \label{def:projection}
@@ -688,14 +729,15 @@ $\Shape$. Cette projection est nommée la \colorize{projection inverse} ou
 \end{definition}
 %
 Le \RefLemmaFake{B.9}{Lachaud2006} nous indique que la correspondance $\Proj$
-n'introduit aucune ambiguïté et est surjectif, et le
-\RefLemmaFake{B.10}{Lachaud2006} que cette correspondance est continue. La
-\RefFigure{fig:backproj} nous montre (en rouge) la projection de tout point
-$\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des points $\vx \in \dS$. Alors,
-nous pouvons conclure que les bords $\partial\Body{\DSh}{h}$ et $\dS$ ont une
-distance de Hausdorff inférieure ou égale à $\frac{\sqrt{2}}{2}h$. De plus, la
-projection $\ProjX{\Shape}$ est continue sur $\R^d \setminus MA(\dS)$, donc
-également sur $\partial\Body{\DSh}{h}$ avec un $h$ adéquat.
+n'introduit aucune ambiguïté et est surjectif si $h < h_0$ et si le bord de
+$\Shape$ est $C^3$-convexe, et le \RefLemmaFake{B.10}{Lachaud2006} que cette
+correspondance est continue. La \RefFigure{fig:backproj} nous montre (en rouge)
+la projection de tout point $\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des
+points $\vx \in \dS$. Alors, nous pouvons conclure que les bords
+$\partial\Body{\DSh}{h}$ et $\dS$ ont une distance de Hausdorff inférieure ou
+égale à $\frac{\sqrt{2}}{2}h$. De plus, la projection $\ProjX{\Shape}$ est
+continue sur $\R^d \setminus MA(\dS)$, donc également sur
+$\partial\Body{\DSh}{h}$ avec un $h$ adéquat.
 %
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
@@ -716,10 +758,10 @@ quantités géométriques : les quantités « locales » et les quantités « gl
 %
 Il apparaît alors clairement que, par exemple, le volume d'une forme est une
 quantité géométrique « globale », tandis que la normale, la courbure ou encore
-la tangente sur sa surface sont des quantités géométriques dites « locales ».
+la tangente en un point de sa surface sont des quantités géométriques dites « locales ».
 
 
-Alors nous pouvons nous définir ce qu'est la \colorize{convergence asymptotique
+Nous allons désormais définir la \colorize{convergence asymptotique
 d'estimateurs} de quantités géométriques (locales et globales). La notion de
 convergence asymptotique, introduite en $1983$ par \cauthor{Serra}{Serra1983},
 est un critère important permettant d'évaluer et de comparer des estimateurs
@@ -728,8 +770,20 @@ d'évaluer l'erreur entre une quantité géométrique de $\Shape$ et la quantit�
 géométrique digitale estimée sur la discrétisation de $\Shape$, à plusieurs
 échelles de discrétisation. Le comportement attendu est alors que si nous
 raffinons l'objet digital (\cad que le pas de discrétisation diminue, donnant
-ainsi un objet digital plus proche de la forme euclidienne), l'erreur
-d'estimation doit diminuer.
+ainsi un objet digital plus proche de la forme euclidienne comme le montre la
+\RefFigure{fig:digital-ellipse}), l'erreur d'estimation doit tendre vers $0$.
+
+
+\begin{figure}[ht]{
+    \begin{center}
+    %\includegraphics[width=6cm]{images/Notions/StandardDSS4bis}
+    \includegraphics[width=3.4cm]{images/Notions/multi-ellipse-0}
+    \includegraphics[width=3.4cm]{images/Notions/multi-ellipse-1}
+    \includegraphics[width=3.4cm]{images/Notions/multi-ellipse-2}
+    \includegraphics[width=3.4cm]{images/Notions/multi-ellipse-4}
+    \end{center}}
+    \caption{Ellipse euclidienne et ses versions discrétisées à différents pas de discrétisation $h = 1$, $0.5$ et $0.1$.\label{fig:digital-ellipse}}
+\end{figure}
 
 
 Ainsi, définissons $\hat{E}(\DSh,h)$ (\respp $\hat{E}(\DSh,\hat{\vx},h)$) un
@@ -741,7 +795,7 @@ de la forme $\Shape$ au pas de discrétisation $h$.
 
 
 Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs
-(\RefDefinitionFake{2.10}{Klette2004}) :
+(issue de la \RefDefinitionFake{2.10}{Klette2004}) :
 %
 \begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique globale}}
   \label{def:multigrid-convergence-global}
@@ -798,11 +852,113 @@ externes.
 \end{definition}
 
 
-Concrètement, cela revient à prouver que l'erreur d'estimation est en $O(h^a)$,
-avec $a$ une constante. Alors, lorsque $h$ tend vers $0$, l'erreur tend
-également vers $0$. Nous nous intéressons dans cette thèse à la
-\colorize{convergence asymptotique uniforme} de nos estimateurs, en d'autres
-mots il s'agit l'erreur dans le pire des cas de nos estimateurs.
+Dans notre cas, nous souhaitons obtenir des estimateurs dont l'erreur
+d'estimation est en $O(h^a)$, avec la constance $a < 1$. Cette valeur de $a$
+nous permet alors de comparer les vitesses de convergence des estimateurs. Nous
+nous intéressons dans cette thèse à la \colorize{convergence asymptotique
+uniforme} de nos estimateurs, en d'autres mots il s'agit l'erreur dans le pire
+des cas de nos estimateurs.
+%
+\section{Estimateurs digitaux d'aire, de volume, de moments géométriques}
+\label{sec:aire-volume-moments}
+%
+Nous avons vu dans le \RefSection{sec:geo-diff} certaines quantités
+intégrales, comme l'aire, le volume ou encore les moments. Ces quantités
+peuvent être très facilement estimées sur des surfaces
+digitales, le calcul intégral pouvant se limiter à compter des points digitaux.
+Nous allons ici détailler l'estimation digitale d'aire, de volume et des moments
+sur des surfaces digitales provenant de la littérature, ainsi que leurs
+convergence.
+%
+\subsection{Aire et volume digitaux en dénombrant les points digitaux}
+\label{sec:AreaByCounting}
+%
+Une façon simple de calculer l'aire ou le volume d'une forme digitale consiste à
+compter le nombre de points digitaux appartenant à la forme. Plus formellement,
+pour tout sous-ensemble $\DigShape \subset \Z^2$, l'estimateur digital d'aire au pas
+de discrétisation $h$ est défini par :
+%
+\begin{equation}
+  \AreaC(\DigShape, h) \EqDef h^2 \MCard(\DigShape)
+\end{equation}
+%
+En dimension $3$, nous noterons l'estimateur digital de volume au pas de
+discrétisation $h$ :
+%
+\begin{equation}
+  \VolC(\DigShape, h) \EqDef h^3 \MCard(\DigShape)
+\end{equation}
+%
+Maintenant, si ce sous-ensemble digital $\DigShape$ provient de la discrétisation de
+formes euclidiennes $\Shape$, nous voulons que l'estimation du volume devienne
+meilleure lorsque le pas de discrétisation $h$ se raffine (voir
+\RefSection{sec:multigrid-convergence-estimator}). Il est connu depuis
+\nauthor{Gauss} et \nauthor{Dirichlet} que cette façon d'estimer l'aire donne
+des résultats de convergence asymptotique sur les formes $\Shape$ convexes
+finies de $\R^2$ :
+%
+\begin{equation}
+  \label{eq:AreaByCountingConv}
+  \AreaC(\DigF{\Shape}{h},h) = \Area(\Shape) + O(h^\beta),
+\end{equation}
+%
+avec $\beta = 1$ dans le cas général \cite{Klette2000}, et peut être optimisé à
+$\beta = \frac{15}{11} - \epsilon$ avec $\epsilon > 0$ (arbitrairement petit)
+lorsque le bord de l'objet est $C^3$ à courbure non nulle \cite{Huxley1990}.
+De mêmes résultats ont été proposés en 3D :
+%
+\begin{equation}
+  \label{eq:VolumeByCountingConv}
+  \VolC(\DigF{\Shape}{h},h) = \Vol(\Shape) + O(h^\gamma),
+\end{equation}
+%
+avec $\gamma = 1$ dans le cas général \cite{Kratzel1988}, et peut être amélioré à
+$\gamma=\frac{243}{158}$ lorsque le bord est lisse \cite{Guo2010}.
+%
+En dimension 2, les objets non convexes suivent les mêmes règles tant que
+$\Shape$ peut être exprimé comme une somme ou une différence de régions convexes
+bornées par des courbes fermées simples \cite{Huxley1996}. Ces résultats
+précédents restent valides chaque fois que le bord de la forme peut être
+décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
+nulle pour les bornes améliorées).
+%
+\subsection{Moments géométriques digitaux en dénombrant les points digitaux}
+\label{sec:MomentsByCounting}
+%
+Comme pour l'aire ou le volume précédemment, il est très simple de calculer les
+moments sur des données digitales. En effet, il suffit de sommer les valeurs des
+points digitaux de la forme et de remettre à l'échelle suivant le pas de
+discrétisation $h$. Plus formellement, pour tout sous-ensemble $\DigShape$ de
+$\Z^d$, le $p_1 \cdots p_d$-moment digital de $\DigShape$ au pas de
+discrétisation $h$ est défini par :
+%
+\begin{equation} \label{eq:MomentsByCounting-def}
+%
+  \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d} \,.
+%
+\end{equation}
+%
+Ainsi, le $0$-moment digital de $\DigShape$ correspond au volume digital de
+$\DigShape$, \cad $\AreaC(\DigShape,h)$ lorsque $d = 2$ et $\VolC(\DigShape,h)$
+lorsque $d \geq 3$.
+%
+Nous souhaitons alors borner l'erreur entre les moments de $\Shape$ et
+l'estimation des moments digitaux de la discrétisation de $\Shape$ comme
+fonction du pas de discrétisation $h$. \cauthors{Klette}{Klette2000} ont
+démontré la convergence de cet estimation des moments avec une vitesse de
+convergence dépendante de l'ordre du moment $\sigma = p_1 + \cdots + p_d$ :
+%
+\begin{equation} \label{eq:MomentsByCounting-conv}
+%
+  \DMom{p_1 \cdots p_d}{h}(\DigF{\Shape}{h},h) = \Mom{p_1 \cdots p_d}(\Shape) + O(h^{\mu_{\sigma}}).
+%
+\end{equation}
+%
+avec $\mu_{\sigma} \ge 1$ dans le cas général.
+%(\todoJeremy{expliciter}).
+Cette borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
+\cauthors{Krätzel}{Kratzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
+\cauthors{Müller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
 %
 \section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
@@ -948,116 +1104,6 @@ digitale.
 Nous verrons dans le chapitre suivant des estimateurs utilisant ces primitives
 digitales pour estimer la courbure. Nous allons également proposer un estimateur
 digital de courbure tirant parti des segments maximaux.
-%
-\section{Estimateurs digitaux d'aire, de volume, de moments géométriques}
-\label{sec:aire-volume-moments}
-%
-Nous avons vu dans le \RefSection{sec:geo-diff} certaines quantités
-différentielles, comme l'aire, le volume ou encore les moments. Ces quantités
-différentielles peuvent être très facilement estimées sur des surfaces
-digitales, le calcul intégral pouvant se limiter à compter des points digitaux.
-Nous allons ici détailler l'estimation digitale d'aire, de volume et des moments
-sur des surfaces digitales provenant de la littérature, ainsi que leurs
-convergence.
-%
-\subsection{Aire et volume digitaux en dénombrant les points digitaux}
-\label{sec:AreaByCounting}
-%
-Une façon simple de calculer l'aire ou le volume d'une forme digitale consiste à
-compter le nombre de points digitaux appartenant à la forme. Plus formellement,
-pour tout sous-ensemble $\DigShape \subset \Z^2$, l'estimateur digital d'aire au pas
-de discrétisation $h$ est défini par :
-%
-\begin{equation}
-  \AreaC(\DigShape, h) \EqDef h^2 \MCard(\DigShape)
-\end{equation}
-%
-En dimension $3$, nous noterons l'estimateur digital de volume au pas de
-discrétisation $h$ :
-%
-\begin{equation}
-  \VolC(\DigShape, h) \EqDef h^3 \MCard(\DigShape)
-\end{equation}
-%
-Maintenant, si ce sous-ensemble digital $\DigShape$ provient de la discrétisation de
-formes euclidiennes $\Shape$, nous voulons que l'estimation du volume devienne
-meilleure lorsque le pas de discrétisation $h$ se raffine (voir
-\RefSection{sec:multigrid-convergence-estimator}). Il est connu depuis
-\nauthor{Gauss} et \nauthor{Dirichlet} que cette façon d'estimer l'aire donne
-des résultats de convergence asymptotique sur les formes $\Shape$ convexes
-finies de $\R^2$ :
-%
-\begin{equation}
-  \label{eq:AreaByCountingConv}
-  \AreaC(\DigF{\Shape}{h},h) = \Area(\Shape) + O(h^\beta),
-\end{equation}
-%
-avec $\beta = 1$ dans le cas général \cite{Klette2000}, et peut être optimisé à
-$\beta = \frac{15}{11} - \epsilon$ avec $\epsilon > 0$ (arbitrairement petit)
-lorsque le bord de l'objet est $C^3$ à courbure non nulle \cite{Huxley1990}.
-De mêmes résultats ont été proposés en 3D :
-%
-\begin{equation}
-  \label{eq:VolumeByCountingConv}
-  \VolC(\DigF{\Shape}{h},h) = \Vol(\Shape) + O(h^\gamma),
-\end{equation}
-%
-avec $\gamma = 1$ dans le cas général \cite{Kratzel1988}, et peut être amélioré à
-$\gamma=\frac{243}{158}$ lorsque le bord est lisse \cite{Guo2010}.
-%
-En dimension 2, les objets non convexes suivent les mêmes règles tant que
-$\Shape$ peut être exprimé comme une somme ou une différence de régions convexes
-bornées par des courbes fermées simples \cite{Huxley1996}. Ces résultats
-précédents restent valides chaque fois que le bord de la forme peut être
-décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
-nulle pour les bornes améliorées).
-%
-\subsection{Moments géométriques digitaux en dénombrant les points digitaux}
-\label{sec:MomentsByCounting}
-%
-Comme pour l'aire ou le volume précédemment, il est très simple de calculer les
-moments sur des données digitales. En effet, il suffit de sommer les valeurs des
-points digitaux de la forme et de remettre à l'échelle suivant le pas de
-discrétisation $h$. Plus formellement, pour tout sous-ensemble $\DigShape$ de
-$\Z^d$, le $p_1 \cdots p_d$-moment digital de $\DigShape$ au pas de
-discrétisation $h$ est défini par :
-%
-\begin{equation}
-  \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d} f(z_1^{p_1} \cdots z_d^{p_d}).
-\end{equation}
-%
-Il est à noter que $f(z_1 \cdots z_d)$ est tout le temps égal à $1$ lorsque
-$(z_1,\ldots,z_d) \in \DigShape$, $0$ sinon, nous pouvons alors l'enlever de
-l'équation :
-%
-\begin{equation} \label{eq:MomentsByCounting-def}
-%
-  \DMom{p_1 \cdots p_d}{h}(\DigShape) \EqDef h^{d + p_1 + \cdots + p_d} \sum_{(z_1,\ldots,z_d) \in \DigShape} z_1^{p_1} \cdots z_d^{p_d}.
-%
-\end{equation}
-%
-Ainsi, le $0$-moment digital de $\DigShape$ correspond au volume digital de
-$\DigShape$, \cad $\AreaC(\DigShape,h)$ lorsque $d = 2$ et $\VolC(\DigShape,h)$
-lorsque $d \geq 3$.
-%
-Nous souhaitons alors borner l'erreur entre les moments de $\Shape$ et
-l'estimation des moments digitaux de la discrétisation de $\Shape$ comme
-fonction du pas de discrétisation $h$. \cauthors{Klette}{Klette2000} ont
-démontré la convergence de cet estimation des moments avec une vitesse de
-convergence dépendante de l'ordre du moment $\sigma = p_1 + \cdots + p_d$ :
-%
-\begin{equation} \label{eq:MomentsByCounting-conv}
-%
-  \DMom{p_1 \cdots p_d}{h}(\DigF{\Shape}{h},h) = \Mom{p_1 \cdots p_d}(\Shape) + O(h^{\mu_{\sigma}}).
-%
-\end{equation}
-%
-avec $\mu_{\sigma} \ge 1$ dans le cas général.
-%(\todoJeremy{expliciter}).
-Cette borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
-\cauthors{Krätzel}{Kratzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
-\cauthors{Müller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
-%
 %\section{Enveloppes convexes}
 %
 \section{Conclusion}
