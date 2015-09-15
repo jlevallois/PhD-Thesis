@@ -87,6 +87,9 @@
 	bookmarksopen			= true										%
 }
 
+% \usepackage{showframe} 				% DEBUG : show borders
+% \usepackage{layout}						% DEBUG : show parameters for borders
+
 \usepackage[french]{varioref}		% "figure page précédente"
 \usepackage{minitoc}     				% Mini TOC en debut de chapitre
 \usepackage{subfig}      				% subfigures
@@ -105,6 +108,8 @@
 \usepackage{pgfplots}						% Adding PgfPlots to draw plots in LaTeX
 
 \usepackage{lineno}      				% DEBUG : pour afficher les lignes
+
+\usepackage{mdframed}
 
 
 % **************************************************
@@ -148,6 +153,7 @@
 \setcounter{page}{1}								% set page counter
 \setcounter{secnumdepth}{3}					% set counter to 3 depth (subsubsection)
 \pagestyle{maincontentstyle}				% fancy header and footer
+\mtcsettitle{minitoc}{Sommaire}
 
 \input{content/chapter-introduction}    % INCLUDE: Introduction et Contexte -- Géométrie digitale et projet digitalSnow
 \input{content/chapter-notions}         % INCLUDE: Notions et éléments de base de la géométrie digitale
