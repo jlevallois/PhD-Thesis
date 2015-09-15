@@ -13,12 +13,12 @@
 Dans ce chapitre, nous allons définir de nouveaux estimateurs de courbure pour
 les surfaces digitales. Après avoir détaillé l'état de l'art
 (\RefSection{sec:estimators:SOTA}), nous nous intéresserons à l'estimation de la
-courbure par intégration volumique de la sphère
+courbure par intégration volumique de la boule
 (\RefSection{sec:estimators:volume}) afin d'en extraire des estimateurs de
 courbure en 2D et courbure moyenne (\RefSection{sec:estimators:volume}) et
 courbures principales (\RefSection{sec:ii-3d}) en 3D. Nous adapterons
 ces estimateurs à des versions ne nécessitant aucun paramètre (l'unique paramètre
-étant la taille de la sphère d'intégration) dans la
+étant la taille de la boule d'intégration) dans la
 \RefSection{sec:curvature:parameter-free}. Enfin, nous comparerons nos
 estimateurs avec les méthodes représentatives de l'état de l'art dans la
 \RefSection{sec:comparaison-courbure}.
@@ -896,7 +896,7 @@ n'existe aucun estimateur de courbure en dimension 3 apportant des preuves de
 convergence asymptotique \cite{Lenoir1997,Fourey2008}. Nous allons également
 palier à ce manque dans ce chapitre.
 
-\section{Estimation de la courbure par intégration volumique de la sphère}
+\section{Estimation de la courbure par intégration volumique de la boule}
 \label{sec:estimators:volume}
 %
 Nous allons désormais nous intéresser aux travaux réalisés au cours de cette
@@ -937,7 +937,7 @@ de la sorte :
   %
 \end{definition}
 %
-\subsection{Analyse euclidienne de l'intégration volumique de la sphère, et relation à la courbure}
+\subsection{Analyse euclidienne de l'intégration volumique de la boule, et relation à la courbure}
 \label{sec:pottmann-principle}
 %
 La relation entre $A_R(\vx)$ et la courbure (\resp $V_R(\vx)$ et la courbure
@@ -1203,7 +1203,7 @@ grille digitale influe également dessus ?
 Dans une premier temps nous allons nous intéresser à l'aire et au volume
 digital, puis ensuite aux moments digitaux.
 %
-\subsection{Analyse digitale de l'aire et du volume de la sphère, et relation à la courbure}
+\subsection{Analyse digitale de l'aire et du volume de la boule, et relation à la courbure}
 \label{sec:ii-2d}
 %
 Nous souhaitons estimer la quantité $A_R(\vx) = \Area(\Ball{R}{\vx}\cap\Shape)$ de la
@@ -1684,7 +1684,7 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\ga
 %
 \end{proof}
 %
-\subsection{Analyse digitale de l'intégration volumique de la sphère, et
+\subsection{Analyse digitale de l'intégration volumique de la boule, et
 relation aux courbures principales en 3D}
 \label{sec:ii-3d}
 %
@@ -2387,7 +2387,7 @@ du \RefTheoremFake{3}{Pottmann2007} sur la proximité des vecteurs propres de la
 matrice de covariance et des directions de courbures principales permet de
 conclure à une convergence asymptotique.
 %
-\subsection{Résultats sur l'estimation de la courbure par intégration volumique de la sphère}
+\subsection{Résultats sur l'estimation de la courbure par intégration volumique de la boule}
 %
 Avons de conclure sur cette méthode, nous allons montrer quelques résultats des
 estimateurs. Une comparaison expérimentale complète sera proposée dans le
@@ -2422,7 +2422,7 @@ du bleu (valeur minimale) au jaune (valeur maximale).
   \caption[Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$.]{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 15$. \emph{De gauche à droite, de haut en bas :} première et seconde direction principale de courbure et normale (zoom sur la dernière ligne). \label{fig:digital-II-octa-2}}
 \end{figure}
 
-\section{Estimation sans paramètre de la courbure par intégration volumique de la sphère}
+\section{Estimation sans paramètre de la courbure par intégration volumique de la boule}
 \label{sec:curvature:parameter-free}
 %
 Dans ce paragraphe, nous allons proposer une version sans paramètre des
@@ -3246,7 +3246,7 @@ qu'expérimentalement, l'estimateur ne converge pas.
 \subsection{Analyse de la convergence asymptotique}
 %
 Nous allons dans un premier temps confirmer le choix du paramètre $\alpha$
-utilisé pour guider le rayon de la sphère dans preuves des
+utilisé pour guider le rayon de la boule dans preuves des
 \RefTheoremsTF{thm:multigrid-convergence-curv}{thm:multigrid-convergence-curv-mean}{thm:multigrid-convergence-curv-k1k2}.
 %
 \paragraph{Choix de $\alpha = \frac{1}{3}$}
@@ -3791,10 +3791,10 @@ données de plus en plus grande afin d'en extraire un profil de temps de calcul.
 
 Bien que nos estimateurs soient des estimateurs intégrants des volumes, ceux-ci
 sont comparable en complexité à des estimateurs surfaciques. Une implémentation
-basique calculerait une sphère digitale, la centerait sur le bord de l'objet
+basique calculerait une boule digitale, la centerait sur le bord de l'objet
 digital à analyser, calculerait son intersection avec la forme à chaque élément
 de surface de l'objet. Nous obtiendrions une complexité en $O((R/h)^{d})$ par
-élément de surface, \cad la taille de la sphère digitale au pas de
+élément de surface, \cad la taille de la boule digitale au pas de
 discrétisation $h$. Cependant, nous pouvons optimiser cet algorithme en
 utilisant les avantages que nous offrent la structure des surfaces digitales :
 si nous nous déplaçons sur des éléments de surfaces adjacents, une partie du
