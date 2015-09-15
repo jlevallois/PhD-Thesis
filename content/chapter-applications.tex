@@ -1377,7 +1377,9 @@ montrent les résultats des estimateurs sur les formes bruitées. Les paramètre
 utilisés sont spécifiés dans les légendes des figures.
 
 \begin{figure}[ht]
-  \begin{center}
+\begin{overpic}[width=\textwidth,height=.9\textheight]%
+  {images/misc/TransparentPixel}
+  \put(-5,50){%
     \setlength{\tabcolsep}{1pt}
     \begin{tabular}{l c c c cl}
       \rotatebox{90}{~~~~~~Input data} &
@@ -1410,16 +1412,20 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/Fandisk_VCM_r_22} &
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_VCM_r_22} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W}
-    \end{tabular}
-    \caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
-    \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
-    Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
-  \end{center}
+    \end{tabular}%
+  }
+\end{overpic}
+\caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
+\SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
+Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
+Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
 \end{figure}
 
+
 \begin{figure}[ht]
-  \begin{center}
+\begin{overpic}[width=\textwidth,height=.9\textheight]%
+  {images/misc/TransparentPixel}
+  \put(-5,50){%
     \setlength{\tabcolsep}{1pt}
     \begin{tabular}{l c c c cl}
       \rotatebox{90}{~~~~~~Input data} &
@@ -1453,17 +1459,20 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_II_scale} &
       \rotatebox{90}{\includegraphics[width=0.2cm]{images/Feature/Red} Edge~~\includegraphics[width=0.2cm]{images/Feature/Blue} Smooth~~\includegraphics[width=0.2cm]{images/Feature/Green} Flat}
     \end{tabular}
+    }
+    \end{overpic}
     \caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
     Paramètre utilisé pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
     Paramètre utilisé pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
     Paramètre utilisé pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
     Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-2}}
-  \end{center}
 \end{figure}
 
 \begin{figure}[ht]
-  \begin{center}
+\begin{overpic}[width=\textwidth,height=.9\textheight]%
+  {images/misc/TransparentPixel}
+  \put(-5,50){%
     \setlength{\tabcolsep}{1pt}
     \begin{tabular}{l c c c cl}
       \rotatebox{90}{~~~~~~Input data} &
@@ -1497,15 +1506,18 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_VCM_r_22} &
       \includegraphics[width=0.1cm,height=4cm]{images/YMTB6W}
     \end{tabular}
+    }
+    \end{overpic}
     \caption[Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative}]{Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative}.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
     Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
     Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative-noise}}
-  \end{center}
 \end{figure}
 
 \begin{figure}[ht]
-  \begin{center}
+\begin{overpic}[width=\textwidth,height=.9\textheight]%
+  {images/misc/TransparentPixel}
+  \put(-5,50){%
     \setlength{\tabcolsep}{1pt}
     \begin{tabular}{l c c c c l}
       \rotatebox{90}{~~~~~~Input data} &
@@ -1541,13 +1553,14 @@ utilisés sont spécifiés dans les légendes des figures.
       \includegraphics[width=4.0cm]{images/Feature/OctaFlower_512_noise_II_scale} &
       \rotatebox{90}{\includegraphics[width=0.2cm]{images/Feature/Red} Edge~~\includegraphics[width=0.2cm]{images/Feature/Blue} Smooth~~\includegraphics[width=0.2cm]{images/Feature/Green} Flat}
     \end{tabular}
+    }
+    \end{overpic}
     \caption[Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative-2}]{Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative-2}.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
     Paramètre utilisé pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
     Paramètre utilisé pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
     Paramètre utilisé pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
     Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-noise-2}}
-  \end{center}
 \end{figure}
 
 Les méthodes basées sur la variation de barycentres (\nauthor{Clarenz}) et \VCM
