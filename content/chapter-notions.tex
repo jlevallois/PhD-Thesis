@@ -12,8 +12,15 @@
 %
 \section{Introduction}
 %
-Dans ce chapitre, nous allons poser les définissions des éléments dont nous allons nous servir pour la suite de ce document. Cela comprend une introduction à la géométrie différentielle des surfaces (\RefSection{sec:geo-diff}) permettant de faire le lien entre les mathématiques et nos estimateurs digitaux, ainsi que tout le pipeline permettant d'analyser le comportement d'un estimateur digital (\RefSection{sec:multigrid-convergence-estimator}).
-\todoInlineJeremy{faire l'introduction chapitre notions}
+Dans ce chapitre, nous allons poser les définitions des éléments dont nous
+allons nous servir pour la suite de ce document. Cela comprend une introduction à
+la géométrie différentielle des surfaces (\RefSection{sec:geo-diff}) permettant
+de faire le lien entre les mathématiques et nos estimateurs digitaux, les
+notions de base de la géométrie digitale (\RefSection{sec:notions-base}) ainsi
+que tout le pipeline permettant d'analyser le comportement d'un estimateur
+digital (\RefSection{sec:multigrid-convergence-estimator}). Enfin, nous verrons
+quelques primitives digitales que nous utiliserons par la suite, comme les
+segments maximaux (\RefSections{sec:segments}{sec:aire-volume-moments}).
 % historique geo dis : http://www.citr.auckland.ac.nz/~rklette/talks/01_CP.pdf
 %
 \section{Notations}
@@ -33,22 +40,22 @@ dans cette thèse (sauf mention contraire).
     $\R^d$        & Espace euclidien de dimension $d$ & \RefSectionTable{sec:notions} \\
     $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée & \RefSectionTable{sec:notions} \\
     $\Shape$      & Forme de $\Shapes$ & \RefSectionTable{sec:notions} \\
-    $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:notions} \\
-    $\vx$         & Point de $\dS$ & \RefSectionTable{sec:notions} \\
+    $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:digitization} \\
+    $\vx$         & Point de $\dS$ & \RefSectionTable{sec:digitization} \\
     $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \RefSectionTable{sec:notions} \\
     $\vx_i$       & $i$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n}$ & \RefSectionTable{sec:notions} \\
-    $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:notions} \\
-    $\DigShape$   & Objet digital de $\Z^d$ & \RefSectionTable{sec:notions} \\
-    $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:notions} \\
+    $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:digitization} \\
+    $\DigShape$   & Objet digital de $\Z^d$ & \RefSectionTable{sec:digitization} \\
+    $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:digitization} \\
     $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
     $\Body{\DSh}{h}$ & Corps de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
     $\partial\Body{\DigShape}{h}$ & Bord topologique du corps de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization}\\
     $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ & \RefSectionTable{sec:digitization} \\
 
 
-    $E(\Shape,\vx)$                   & Quantité définie au point $\vx \in \dS$, $\Shape \subset \R^d$ & \RefSectionTable{sec:estimator-local-global} \\
-    $\hat{E}(\DigShape,\hat{\vx},h)$  & Quantité estimée au point $\hat{\vx} \in \partial\Body{\DigShape}{h}$, $\DigShape \subset \Z^d$ & \RefSectionTable{sec:estimator-local-global} \\
-    $\Mom{p_1 \cdots p_d}(\Shape)$    & Moment géométrique d'ordre $p_1 \cdots p_d$ de $\Shape$ & \RefSectionTable{sec:pottmann-principle} \\
+    $E(\Shape,\vx)$                   & Quantité définie au point $\vx \in \dS$, $\Shape \subset \R^d$ & \RefSectionTable{sec:multigrid-convergence-estimator} \\
+    $\hat{E}(\DigShape,\hat{\vx},h)$  & Quantité estimée au point $\hat{\vx} \in \partial\Body{\DigShape}{h}$, $\DigShape \subset \Z^d$ & \RefSectionTable{sec:multigrid-convergence-estimator} \\
+    $\Mom{p_1 \cdots p_d}(\Shape)$    & Moment géométrique d'ordre $p_1 \cdots p_d$ de $\Shape$ & \RefSectionTable{sec:moments-geo} \\
     $\Cov(\Shape)$                    & Matrice de covariance de $\Shape$ & \RefSectionTable{sec:pottmann-principle} \\
     $\Curv(\Shape,\vx)$               & Courbure au point $\vx \in \dS$, $\Shape \subset \R^2$ & \RefSectionTable{sec:geo-diff} \\
     $\MeanCurv(\Shape,\vx)$           & Courbure moyenne au point $\vx \in \dS$, $\Shape \subset \R^3$ & \RefSectionTable{sec:geo-diff} \\
@@ -134,6 +141,7 @@ une double ou triple intégrale de la forme :
 \end{definition}
 %
 \subsection{Moments géométriques}
+\label{sec:moments-geo}
 %
 Le concept mathématique des moments a beaucoup été étudié depuis plusieurs
 années et trouve son champ d'application sans cesse augmenté, allant des
@@ -148,7 +156,7 @@ l'orientation, en faisant un outil invariant robuste \cite{}. Nous allons tout
 d'abord définir ce que sont les moments et leurs caractéristiques, pour ensuite
 nous intéresser à les estimer sur des données digitales.
 %
-\todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
+% \todoJeremy{Le papier Reconstructing With Geometric Moments \cite{Ghorbel2005} est pas mal niveau intro}
 %
 \subsubsection{Définition et propriétés des moments géométriques}%
 \label{sec:definitions-moments}
@@ -192,7 +200,10 @@ masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
 %
 \subsection{Courbure}
 %
-Viens ensuite la courbure de la surface. La courbure est une scalaire mesurant la déviation de la courbe par rapport au vecteur tangent. Cette quantité est énormément utilisée en \GeometryProcessing pour l'analyse et suivi de formes, entre autres. Nous détaillerons cela plus en détail dans le \RefChapitre{sec:estimators}.
+Viens ensuite la courbure de la surface. La courbure est une scalaire mesurant
+la déviation de la courbe par rapport au vecteur tangent. Cette quantité est
+énormément utilisée en \GeometryProcessing pour l'analyse et suivi de formes,
+entre autres. Nous détaillerons cela dans le \RefChapitre{sec:estimators}.
 
 
 \begin{figure}[ht]
@@ -223,7 +234,7 @@ Viens ensuite la courbure de la surface. La courbure est une scalaire mesurant l
       Col convexe &
       Col concave
     \end{tabular}
-    \caption[]{.\label{fig:curvature-figures}}
+    \caption{Illustration de différents surfaces de dimension 3.\label{fig:curvature-figures}}
   \end{center}
 \end{figure}
 
@@ -807,7 +818,7 @@ La primitive la plus basique à reconnaître est sans nul doute la droite. Alors
 nous devons définir ce qu'une droite représente dans l'espace digital et ce
 n'est pas trivial à cause de la discrétisation de la forme. Définissons tout
 d'abord une \colorize{droite digitale standard} (ou droite $4$-connexe), et
-ainsi le \colorize{segment digital} :
+ainsi le \colorize{segment digital} (voir la \RefFigure{fig:dss-figure}) :
 %
 \begin{definition}{\fakeTitle{Droite digitale standard et segment digital (« \anglais{Digital Straight Segment} ») \cite{Reveilles1991}}}
   \label{def:DSS}
@@ -819,6 +830,15 @@ ainsi le \colorize{segment digital} :
   est un \colorize{segment digital} (ou « \anglais{DSS} »).
 %
 \end{definition}
+
+
+\begin{figure}[ht]{
+    \begin{center}
+    %\includegraphics[width=6cm]{images/Notions/StandardDSS4bis}
+    \includegraphics[width=6cm]{images/Notions/StandardDSS4}
+    \end{center}}
+    \caption{Segments digitaux.\label{fig:dss-figure}}
+\end{figure}
 
 
 Ainsi, de cette définition, nous pouvons en extraire les \colorize{segments
@@ -913,12 +933,24 @@ objet, le reconnaître permettrait d'approcher cette valeur. Définissons alors
   %
 \end{definition}
 
+La \RefFigure{fig:dca-figure2} montre les arcs de cercle reconnu sur une courbe
+digitale.
+
+
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[width=13cm]{images/Notions/DCA2}
+    \end{center}}
+    \caption[Arcs de cercle digitaux reconnus.]{Arcs de cercle digitaux reconnus sur une forme de dimension 2.\label{fig:dca-figure2}}
+\end{figure}
+
 
 Nous verrons dans le chapitre suivant des estimateurs utilisant ces primitives
 digitales pour estimer la courbure. Nous allons également proposer un estimateur
 digital de courbure tirant parti des segments maximaux.
 %
-\section{Estimateurs digitaux d'aire, de volume, de moments, de positionnement de surface}
+\section{Estimateurs digitaux d'aire, de volume, de moments géométriques}
+\label{sec:aire-volume-moments}
 %
 Nous avons vu dans le \RefSection{sec:geo-diff} certaines quantités
 différentielles, comme l'aire, le volume ou encore les moments. Ces quantités
@@ -950,7 +982,7 @@ discrétisation $h$ :
 Maintenant, si ce sous-ensemble digital $\DigShape$ provient de la discrétisation de
 formes euclidiennes $\Shape$, nous voulons que l'estimation du volume devienne
 meilleure lorsque le pas de discrétisation $h$ se raffine (voir
-\RefSection{sec:notion:multigridconvergence}). Il est connu depuis
+\RefSection{sec:multigrid-convergence-estimator}). Il est connu depuis
 \nauthor{Gauss} et \nauthor{Dirichlet} que cette façon d'estimer l'aire donne
 des résultats de convergence asymptotique sur les formes $\Shape$ convexes
 finies de $\R^2$ :
@@ -1020,8 +1052,9 @@ convergence dépendante de l'ordre du moment $\sigma = p_1 + \cdots + p_d$ :
 %
 \end{equation}
 %
-avec $\mu_{\sigma} \ge 1$ dans le cas général (\todoJeremy{expliciter}). Cette
-borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
+avec $\mu_{\sigma} \ge 1$ dans le cas général.
+%(\todoJeremy{expliciter}).
+Cette borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
 \cauthors{Krätzel}{Kratzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
 \cauthors{Müller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
 %
@@ -1029,4 +1062,8 @@ borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
 %
 \section{Conclusion}
 %
-\todoInlineJeremy{Conclusion notions à faire}
+Nous avons dans ce chapitre posé les bases de la géométrie différentielle et de
+la géométrie digitale.  Ces bases vont nous permettre dans le chapitre suivant
+de définir formellement des estimateurs digitaux de courbures en dimension 2 et
+3. De plus, la reconnaissance de primitives nous permettra d'adapter nos
+estimateurs en analysant au préalable la géométrie de la forme d'entrée.
