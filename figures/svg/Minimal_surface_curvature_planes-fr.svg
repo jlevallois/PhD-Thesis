@@ -8,10 +8,34 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="850"
    height="580"
-   id="svg1324">
+   id="svg1324"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Minimal_surface_curvature_planes-fr.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1021"
+     id="namedview5500"
+     showgrid="false"
+     inkscape:zoom="0.8137931"
+     inkscape:cx="-24.872763"
+     inkscape:cy="295.74912"
+     inkscape:window-x="-4"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g11601" />
   <metadata
      id="metadata1329">
     <rdf:RDF>
@@ -1126,65 +1150,7 @@
     <g
        transform="translate(-4,2)"
        id="g21144"
-       style="display:inline">
-      <g
-         id="g21132">
-        <text
-           x="97.812805"
-           y="25.589882"
-           id="text11675"
-           xml:space="preserve"
-           style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial"><tspan
-             x="97.812805"
-             y="25.589882"
-             id="tspan17207">plans</tspan><tspan
-             x="97.812805"
-             y="55.589882"
-             id="tspan17209">des courbures</tspan><tspan
-             x="97.812805"
-             y="85.589882"
-             id="tspan17211">principales</tspan></text>
-        <text
-           x="637.85529"
-           y="25.089882"
-           id="text20221"
-           xml:space="preserve"
-           style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial"><tspan
-             x="637.85529"
-             y="25.089882"
-             id="tspan20229">vecteur</tspan><tspan
-             x="637.85529"
-             y="55.089882"
-             id="tspan20231">normal</tspan></text>
-        <text
-           x="801.81281"
-           y="239.58987"
-           id="text20233"
-           xml:space="preserve"
-           style="font-size:24px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Arial"><tspan
-             x="801.81281"
-             y="239.58987"
-             id="tspan20239">plan</tspan><tspan
-             x="801.81281"
-             y="269.58987"
-             id="tspan20241">tangent</tspan></text>
-      </g>
-      <g
-         id="g21127">
-        <path
-           d="m 348.85368,145.79647 -173.5,-80.499995 148,28.5"
-           id="path19469"
-           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Dot_m);marker-end:url(#Dot_m);display:inline" />
-        <path
-           d="M 592.3537,26.796477 442.85368,69.796475"
-           id="path20243"
-           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Dot_m)" />
-        <path
-           d="m 756.8537,272.29647 -81.5,61"
-           id="path20995"
-           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Dot_m)" />
-      </g>
-    </g>
+       style="display:inline" />
     <g
        transform="translate(-4,2)"
        id="g21205"
