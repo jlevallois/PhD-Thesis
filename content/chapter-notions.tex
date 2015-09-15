@@ -12,7 +12,7 @@
 %
 \section{Introduction}
 %
-Dans ce chapitre, nous allons poser les définissions des éléments dont nous allons nous servir pour la suite de ce document. Cela comprend une introduction à la géométrie différentielle (\RefSection{sec:geo-diff}) permettant de faire le lien entre les mathématiques et nos estimateurs digitaux, ainsi que tout le pipeline permettant d'analyser le comportement d'un estimateur digital (\RefSection{sec:multigrid-convergence-estimator}).
+Dans ce chapitre, nous allons poser les définissions des éléments dont nous allons nous servir pour la suite de ce document. Cela comprend une introduction à la géométrie différentielle des surfaces (\RefSection{sec:geo-diff}) permettant de faire le lien entre les mathématiques et nos estimateurs digitaux, ainsi que tout le pipeline permettant d'analyser le comportement d'un estimateur digital (\RefSection{sec:multigrid-convergence-estimator}).
 \todoInlineJeremy{faire l'introduction chapitre notions}
 % historique geo dis : http://www.citr.auckland.ac.nz/~rklette/talks/01_CP.pdf
 %
@@ -41,7 +41,8 @@ dans cette thèse (sauf mention contraire).
     $\DigShape$   & Objet digital de $\Z^d$ & \RefSectionTable{sec:notions} \\
     $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:notions} \\
     $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
-    $\partial\Body{\DigShape}{h}$ & \comJeremy{XXXXXXXXXXXXXXXXX} & \RefSectionTable{sec:digitization}\\
+    $\Body{\DSh}{h}$ & Corps de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
+    $\partial\Body{\DigShape}{h}$ & Bord topologique du corps de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization}\\
     $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ & \RefSectionTable{sec:digitization} \\
 
 
@@ -59,38 +60,58 @@ dans cette thèse (sauf mention contraire).
   \end{tabular}
 \end{table}
 %
-\section{Introduction à la géométrie différentielle}
+\section{Introduction à la géométrie différentielle des surfaces}
 \label{sec:geo-diff}
-\todoInlineJeremy{Partie géo diff à faire}
+La \colorize{géométrie différentielle des surfaces} est l'étude des surfaces comme graphes de fonctions
+
+
 %
 % Introduction à la géométrie différentielle ?
 %
 % courbure : Defining and studying the curvatures of singular spaces goes back to Steiner (1840) in the convex case (see [30] for instance). ([30] = L. Santalo, Integral geometry anf geometric probability, Encyclopedia of Math- ematics and its applications, Vol. 1. Addison-Wesley Publishing Co. (1976), MR0433364, Zbl 0342.53049.)
+
 \subsection{Classes de fonctions $C^1$, $C^2$, $C^d$}
+%
+Alors, définissons les classes de fonctions $C^1$, $C^2$ ou plus généralement
+$C^d$, permettant de connaître le différentiabilité d'une fonction :
 %
 \begin{definition}{\fakeTitle{Classe de fonction $C^1$}}
   %
-  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction continûment différentiable si elle est différentiable et si sa dérivée $f'$ est continue. Nous dirons également que $f$ est de \colorize{classe $C^1$}.
+  Une fonction $f$ sur un intervalle réel non vide et non trivial est une
+  fonction continûment différentiable si elle est différentiable et si sa
+  dérivée $f'$ est continue. Nous dirons également que $f$ est de
+  \colorize{classe $C^1$}.
   %
 \end{definition}
 %
 \begin{definition}{\fakeTitle{Classe de fonction $C^2$}}
   %
-  Une fonction $f$ sur un intervalle réel non vide et non trivial est une fonction deux fois continûment différentiable si elle est deux fois différentiable et si sa dérivée seconde $f''$ (la dérivée de $f'$) est continue. Nous dirons également que $f$ est de \colorize{classe $C^2$}.
+  Une fonction $f$ sur un intervalle réel non vide et non trivial est une
+  fonction deux fois continûment différentiable si elle est deux fois
+  différentiable et si sa dérivée seconde $f''$ (la dérivée de $f'$) est
+  continue. Nous dirons également que $f$ est de \colorize{classe $C^2$}.
   %
 \end{definition}
 %
 \begin{definition}{\fakeTitle{Classe de fonction $C^d$}}
   %
-  Une fonction $f$ est de \colorize{classe $C^p$} (avec $p \ge 2$) sur un intervalle réel non vide et non trivial si elle est $p$ fois continûment différentiable.
+  Une fonction $f$ est de \colorize{classe $C^p$} (avec $p \ge 2$) sur un
+  intervalle réel non vide et non trivial si elle est $p$ fois continûment
+  différentiable.
   %
 \end{definition}
 %
 \subsection{Aire et volume}
 %
+Nous nous intéressons aux quantités différentielles d'une forme $\Shape \subset
+\R^d$. Les quantités différentielles les plus directes sont probablement l'aire
+de la forme en dimension 2 ou son volume en dimension 3. Ce revient à résoudre
+une double ou triple intégrale de la forme :
+%
 \begin{definition}{\fakeTitle{Aire d'une forme}}
   %
-  Soit $\mathcal{V}$ une partie bornée de $\R^2$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{l'aire} de $\mathcal{V}$ est :
+  Soit $\mathcal{V}$ une partie bornée de $\R^2$. Si la fonction constant $1$
+  est intégrable sur $\mathcal{V}$, alors \colorize{l'aire} de $\mathcal{V}$ est :
   %
   \begin{equation}
     \label{eq:aire}
@@ -101,7 +122,9 @@ dans cette thèse (sauf mention contraire).
 %
 \begin{definition}{\fakeTitle{Volume d'une forme}}
   %
-  Soit $\mathcal{V}$ une partie bornée de $\R^3$. Si la fonction constant $1$ est intégrable sur $\mathcal{V}$, alors \colorize{le volume} de $\mathcal{V}$ est :
+  Soit $\mathcal{V}$ une partie bornée de $\R^3$. Si la fonction constant $1$
+  est intégrable sur $\mathcal{V}$, alors \colorize{le volume} de $\mathcal{V}$
+  est :
   %
   \begin{equation}
     \label{eq:volume}
@@ -109,105 +132,13 @@ dans cette thèse (sauf mention contraire).
   \end{equation}
   %
 \end{definition}
-
-\subsection{Courbure}
-
-\begin{figure}[ht]
-  \begin{center}
-    \setlength{\tabcolsep}{0.5cm}
-    \begin{tabular}{cc}
-      \includegraphics[width=5.5cm]{figures/curv_plan} &
-      \includegraphics[width=5.5cm]{figures/curv_minimal}
-      \\
-      Plan &
-      Surface minimale
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_cylindre_conv} &
-      \includegraphics[width=5.5cm]{figures/curv_cylindre_conc}
-      \\
-      Cylindre convexe &
-      Cylindre concave
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_pic} &
-      \includegraphics[width=5.5cm]{figures/curv_vallee}
-      \\
-      Pic &
-      Vallée
-      \\
-      \includegraphics[width=5.5cm]{figures/curv_col_conv} &
-      \includegraphics[width=5.5cm]{figures/curv_col_conc}
-      \\
-      Col convexe &
-      Col concave
-    \end{tabular}
-    \caption[]{.\label{fig:curvature-figures}}
-  \end{center}
-\end{figure}
-
-
 %
-% \subsection{Tangente de surface}
-% %
-% \begin{definition}{\fakeTitle{Tangente}}
-%   %
-%   Nous appellons \colorize{tangente} d'une surface $\mathcal{S}$ au point $\vx$
-%   %
-% \end{definition}
-Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curviligne dans un espace de dimension $n$ :
-\begin{align}
-    %
-    f : [0,1] &\rightarrow \R^n \nonumber\\
-    \vx &\rightarrow f(\vx)
-    %
-\end{align}
-
-\begin{equation}
-  %
-  t(\vx) = \left| \frac{df}{d\vx} \right|
-  %
-\end{equation}
-
-\begin{equation}
-  %
-  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right|
-  %
-\end{equation}
-
-\begin{equation}
-  %
-  \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2}
-  %
-\end{equation}
-
-\begin{equation}
-  %
-  \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2}
-  %
-\end{equation}
-%
-%\subsection{Courbure en dimension 2}
-%
-\begin{table}[ht]
-\centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-                  & $\GaussCurv = 0$   & $\GaussCurv > 0$   & $\GaussCurv < 0$   \\ \midrule
-$\MeanCurv = 0$   & plan               & indéterminé        & surface minimale   \\
-$\MeanCurv > 0$   & cylindre concave   & vallée             & col concave        \\
-$\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe        \\ \bottomrule
-\end{tabular}
-\end{table}
-%
-
-
 \subsection{Moments géométriques}
 %
 Le concept mathématique des moments a beaucoup été étudié depuis plusieurs
 années et trouve son champ d'application sans cesse augmenté, allant des
 statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
-reconnaissance de formes (\cauthors{Trier}{Trier1996} pour un survey sur la
+reconnaissance de formes (\cauthors{Trier}{Trier1996} pour une revue sur la
 reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghorbel2005}.
 La première utilisation des moments en analyse d'images remonte à 1962 par
 \cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
@@ -259,6 +190,160 @@ masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
 0}(\Shape)$, $\Mom{0 2 0}(\Shape)$, $\Mom{0 0 2}(\Shape)$, $\Mom{1 1
 0}(\Shape)$, $\Mom{0 1 0}(\Shape)$ et $\Mom{1 0 1}(\Shape)$
 %
+\subsection{Courbure}
+%
+Viens ensuite la courbure de la surface. La courbure est une scalaire mesurant la déviation de la courbe par rapport au vecteur tangent. Cette quantité est énormément utilisée en \GeometryProcessing pour l'analyse et suivi de formes, entre autres. Nous détaillerons cela plus en détail dans le \RefChapitre{sec:estimators}.
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \setlength{\tabcolsep}{0.5cm}
+    \begin{tabular}{cc}
+      \includegraphics[width=5.5cm]{figures/curv_plan} &
+      \includegraphics[width=5.5cm]{figures/curv_minimal}
+      \\
+      Plan &
+      Surface minimale
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_cylindre_conv} &
+      \includegraphics[width=5.5cm]{figures/curv_cylindre_conc}
+      \\
+      Cylindre convexe &
+      Cylindre concave
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_pic} &
+      \includegraphics[width=5.5cm]{figures/curv_vallee}
+      \\
+      Pic &
+      Vallée
+      \\
+      \includegraphics[width=5.5cm]{figures/curv_col_conv} &
+      \includegraphics[width=5.5cm]{figures/curv_col_conc}
+      \\
+      Col convexe &
+      Col concave
+    \end{tabular}
+    \caption[]{.\label{fig:curvature-figures}}
+  \end{center}
+\end{figure}
+
+
+%
+% \subsection{Tangente de surface}
+% %
+% \begin{definition}{\fakeTitle{Tangente}}
+%   %
+%   Nous appellons \colorize{tangente} d'une surface $\mathcal{S}$ au point $\vx$
+%   %
+% \end{definition}
+%
+Soit une courbe $f(\vx)$ une courbe $C^2$ paramétrée par son abscisse curviligne
+dans un espace de dimension $n$ :
+%
+\begin{align}
+    %
+    f : [0,1] &\rightarrow \R^n \nonumber\\
+    \vx &\rightarrow f(\vx)
+    %
+\end{align}
+%
+Alors la courbure de $f$ au point $\vx$ s'écrit comme la norme de la dérivée
+seconde :
+%
+\begin{equation}
+  %
+  \Curv(\vx) = \left| \frac{d^2f}{d\vx^2} \right| \,,
+  %
+\end{equation}
+%
+ou encore comme la dérivée de l'orientation du vecteur tangent. Si $\phi(\vx)$
+est l'angle orienté entre le vecteur tangent $\vec{t}(\vx)$ et une droite fixe, nous avons :
+%
+\begin{equation}
+  %
+  \Curv(\vx) = \frac{d\phi}{d\vx} \,.
+  %
+\end{equation}
+%
+Enfin, une troisième façon de récupérer la courbure est de s'intéresser aux
+cercles osculateurs de la surface :
+%
+\begin{equation}
+  %
+  \Curv(\vx) = \left| \frac{1}{r_o(\vx)} \right| \,,
+  %
+\end{equation}
+%
+où $r_o(\vx)$ est le rayon du cercle osculateur de la courbe $f$ au point $\vx$,
+\cad le cercle qui épouse géométriquement le mieux à la courbe $f$ en
+$\vx$ (voir \RefFigure{fig:curvature_osc}).
+
+
+% \begin{figure}[ht]
+%   \begin{center}
+%     \input{figures/tikz/curv-osc.tikz}
+%   \end{center}
+%   \caption[.]
+%   %
+%   {.\label{fig:curvature_osc}}
+%   %
+% \end{figure}
+
+
+En dimension 3, nous pouvons également obtenir la courbure moyenne, la courbure
+gaussienne et les courbures principales. En recentrant à l'origine du repère, et
+que le plan tangent est $x_2 = 0$, nous pouvons décomposer $f$ grâce au
+développement en série de Taylor \cite{Taylor1717} afin d'en extraire les
+\colorize{courbures principales} $\PrincCurv{1}$ et $\PrincCurv{2}$ :
+%
+\begin{equation}
+  %
+  f(x_1,x_2) = \frac{1}{2}\PrincCurv{1}x_1^2 + \frac{1}{2}\PrincCurv{2}x_2^2 + \cdots \,.
+  %
+\end{equation}
+%
+Alors, la \colorize{courbure moyenne} est calculée comme étant :
+%
+\begin{equation}
+  %
+  \MeanCurv(\vx) = \frac{\PrincCurv{1} + \PrincCurv{2}}{2} \,,
+  %
+\end{equation}
+%
+et la \colorize{courbure gaussienne} :
+%
+\begin{equation}
+  %
+  \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2} \,.
+  %
+\end{equation}
+%
+Nous pouvons noter quelques particularités en dimension 3 :
+\begin{itemize}
+  \item la sphère unité a une courbure moyenne et gaussienne constante égale à $1$;
+  \item le plan euclidien a une courbure moyenne et gaussienne nulle;
+  \item le cylindre a une courbure moyenne positive et une courbure gaussienne nulle.
+\end{itemize}
+%
+Le \RefTable{tab:courbure-particularities} et la
+\RefFigure{fig:curvature-figures} montre quelques autres différents cas en
+fonction de leur courbure moyenne et gaussienne.
+
+
+\begin{table}[ht]
+\centering
+\caption{Particularités des surfaces en fonction de leur courbure moyenne et gaussienne}
+\label{tab:courbure-particularities}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+                  & $\GaussCurv = 0$   & $\GaussCurv > 0$   & $\GaussCurv < 0$   \\ \midrule
+$\MeanCurv = 0$   & plan               & indéterminé        & surface minimale   \\
+$\MeanCurv > 0$   & cylindre concave   & vallée             & col concave        \\
+$\MeanCurv < 0$   & cylindre convexe   & pic                & col convexe        \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
 \section{Notions de bases}
 \label{sec:notions-base}
 %
@@ -268,14 +353,24 @@ partitionnant entièrement l'espace euclidien. Il existe plusieurs types de
 pavages présents dans la nature (craquement de sol sous l'effet de la chaleur,
 peaux d'animaux (serpent, girafe, etc.), sol de la Chaussée des Géants
 (Royaume-Uni), etc.) comme dans les constructions de l'Homme (carrelages, routes
-pavées, pyramide du Louvre (Paris, France), mosaïques, vitraux, etc.), comme l'illustre la \RefFigure{fig:pavage-exemple}.
+pavées, pyramide du Louvre (Paris, France), mosaïques, vitraux, etc.), comme
+l'illustre la \RefFigure{fig:pavage-exemple}.
 
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=6.8cm]{images/Notions/pavage_mer_de_sel}
-    \includegraphics[width=6.8cm]{images/Notions/pavage_chateau}
-    \caption[Différents pavages dans la nature ou dans les constructions humaines]{Différents pavages dans la nature ou dans les constructions humaines. \emph{De gauche à droite :} désert de sel en Bolivie \cite{pavage1}, sol d'un des châteaux de la Loire (France) \cite{pavage2}.\label{fig:pavage-exemple}}
+    \includegraphics[width=6.8cm]{images/Notions/pavage_chateau}\\
+    \includegraphics[width=6.8cm]{images/Notions/pavage_mosaique}
+    \includegraphics[width=6.8cm]{images/Notions/pavage_chaussee_des_geants}\\
+    \caption[Différents pavages dans la nature ou dans les constructions humaines]
+    %
+    {Différents pavages dans la nature ou dans les constructions humaines.
+    \emph{De gauche à droite, de haut en bas :} désert de sel en Bolivie
+    \cite{pavage1}, sol d'un des châteaux de la Loire (France) \cite{pavage2},
+    mosaïque représentant Amphitrite, formation de basalte à la Chaussée des
+    Géants (Royaume-Uni) \cite{pavage4}.\label{fig:pavage-exemple}}
+    %
   \end{center}
 \end{figure}
 
@@ -320,11 +415,14 @@ dans des $0$-cellules.
 %
 \\
 %
-Les $1$-cellules sont appelées des \colorize{lignels} ou \anglais{linels} (éléments de dimension 1).
+Les $1$-cellules sont appelées des \colorize{lignels} ou \anglais{linels}
+(éléments de dimension 1).
 %
 \\
 %
 Les $2$-cellules sont appelées des \colorize{pixels} (éléments de dimension 2).
+En dimension 3, les $2$-cellules sont également nommées les \colorize{surfels}
+(pour \anglais{surface elements}).
 %
 \\
 %
@@ -334,15 +432,17 @@ Les $3$-cellules sont appelées des \colorize{voxels} (éléments de dimension 3
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=5cm]{images/Notions/notations_topo}
-    \caption{Illustration des $0$-cellules (pointels), $1$-cellules (lignels) et $2$-cellules (pixels).\label{fig:notations_topo}}
+    \caption{Illustration des $0$-cellules (pointels), $1$-cellules (lignels) et
+    $2$-cellules (pixels).\label{fig:notations_topo}}
   \end{center}
 \end{figure}
 
 
 La \RefFigure{fig:notations_topo} illustre les pointels, lignels et pixels. Par
 convention, nous nommons les $n$-cellules les \colorize{spels} (un pixel en
-dimension 2), les $n-1$-cellules sont nommées les \colorize{surfels} (pour
-\anglais{surface elements}).
+dimension 2, un voxel en dimension 3), les $n-1$-cellules sont nommées les
+\colorize{bells} (un lignel en dimension 2, un \colorize{surfel} en dimension
+3).
 
 Grâce à ces définitions, cela nous amène directement aux questions de voisinage
 des points digitaux.
@@ -390,7 +490,8 @@ $8$-connexité sur un objet digital de dimension 2.
   \begin{center}
     \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj4}
     \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj8}
-    \caption{Illustation du voisinage en dimension 2.\label{fig:adjacence2d}}
+    \caption{Illustation du voisinage en dimension 2.\emph{À gauche :}
+    $4$-connexité, \emph{à droite :} $8$-connexité.\label{fig:adjacence2d}}
   \end{center}
 \end{figure}
 
@@ -399,8 +500,11 @@ Pour résumer, en dimension 2 :
 %
 \begin{itemize}
   %
-  \item la $4$-connexité (ou $1$-adjacence) est la relation de voisinage par les arêtes;
-  \item la $8$-connexité (ou $0$-adjacence) est la relation de voisinage par les arêtes et les sommets.
+  \item la $4$-connexité (ou $1$-adjacence) est la relation de voisinage par les
+  arêtes (à gauche sur la \RefFigure{fig:adjacence2d});
+  %
+  \item la $8$-connexité (ou $0$-adjacence) est la relation de voisinage par les
+  arêtes et les sommets (à droite sur la \RefFigure{fig:adjacence2d}).
   %
 \end{itemize}
 %
@@ -408,12 +512,16 @@ De même, en dimension 3 :
 %
 \begin{itemize}
   %
-  \item la $6$-connexité (ou $2$-adjacence) est la relation de voisinage par les faces;
-  \item la $18$-connexité (ou $1$-adjacence) est la relation de voisinage par les faces et les arêtes.
-  \item la $26$-connexité (ou $0$-adjacence) est la relation de voisinage par les faces, les arêtes et les sommets.
+  \item la $6$-connexité (ou $2$-adjacence) est la relation de voisinage par les
+  faces;
+  %
+  \item la $18$-connexité (ou $1$-adjacence) est la relation de voisinage par
+  les faces et les arêtes.
+  %
+  \item la $26$-connexité (ou $0$-adjacence) est la relation de voisinage par
+  les faces, les arêtes et les sommets.
   %
 \end{itemize}
-
 
 
 La notion de voisinage est alors importante. En effet, en fonction de la
@@ -426,7 +534,10 @@ extraites comme le montre la \RefFigure{fig:connexite}.
   \end{center}
   \caption[Illustration du nombre de composantes connexes en fonction de la connexité de l'espace digital.]
   %
-  {Illustration du nombre de composantes connexes en fonction de la connexité de l'espace digital. \emph{À gauche :} trois composantes connexes sont extraites en $4$-connexité. \emph{À droite :} une seule composante connexe est extraites en $8$-connexité.\label{fig:connexite}}
+  {Illustration du nombre de composantes connexes en fonction de la connexité de
+  l'espace digital. \emph{À gauche :} trois composantes connexes sont extraites
+  en $4$-connexité. \emph{À droite :} une seule composante connexe est extraites
+  en $8$-connexité.\label{fig:connexite}}
   %
 \end{figure}
 
@@ -436,9 +547,14 @@ extraites comme le montre la \RefFigure{fig:connexite}.
 %
 Nous allons maintenant décrire le processus de discrétisation d'un sous-ensemble
 de l'espace euclidien $\R^d$ vers un ensemble de points de l'espace digital
-$\Z^d$. La formalisation de ce processus est important pour l'évaluation théorique et expérimentale des estimateurs sur les bords digitaux des objets.
+$\Z^d$. La formalisation de ce processus est important pour l'évaluation
+théorique et expérimentale des estimateurs sur les bords digitaux des objets.
 
-Considérons une forme $\Shape$ de $\R^d$ à discrétiser en points de $\R^d$ en coordonnées entières (\cad de $\Z^d$), alors la \colorize{discrétisation de Gauss} $\DSh$ de $\Shape$ dans une grille de dimension $d$ et de résolution $h$ est :
+
+Considérons une forme $\Shape$ de $\R^d$ à discrétiser en points de $\R^d$ en
+coordonnées entières (\cad de $\Z^d$), alors la \colorize{discrétisation de
+Gauss} $\DSh$ de $\Shape$ dans une grille de dimension $d$ et de résolution $h$
+est :
 %
 \begin{equation}
   \DSh \EqDef \{ \vp \in \Z^d, (h \cdot \vp) \in \Shape \} \,,
@@ -466,14 +582,17 @@ discrétisation.
 \end{figure}
 
 Si $\vp \in \Z^d$, alors $\Q{\vp}$ désigne le cube unitaire de dimension $d$ de
-$\R^d$ centré au point $\vp$ et aligné sur les axes de $\Z^d$. Nous définissons le \colorize{$h$-cube}, \cad $\Q{\vp}$ mis à l'échelle par $h$, comme :
+$\R^d$ centré au point $\vp$ et aligné sur les axes de $\Z^d$. Nous définissons
+le \colorize{$h$-cube}, \cad $\Q{\vp}$ mis à l'échelle par $h$, comme :
 %
 \begin{equation}
   \hQ{\vp}{h} \EqDef h\cdot \Q{\vp} \,.
 \end{equation}
 
 
-Ainsi, pour un ensemble digital $\DigShape \subset \Z^d$, le \colorize{corps} de $\DigShape$ est le plongement $\Body{\cdot}{h}$ de $\DigShape$ vers $\R^d$, défini comme :
+Ainsi, pour un ensemble digital $\DigShape \subset \Z^d$, le \colorize{corps} de
+$\DigShape$ est le plongement $\Body{\cdot}{h}$ de $\DigShape$ vers $\R^d$,
+défini comme :
 %
 \begin{equation}
   \Body{\DigShape}{h} \EqDef \bigcup_{\vp \in \DigShape} \hQ{\vp}{h} \,.
@@ -500,7 +619,9 @@ important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
   \begin{center}
     \input{figures/tikz/gauss-digit.tikz}
   \end{center}
-  \caption{Illustration d'une forme euclidienne $\Shape$, de sa frontière $\dS$, du corps de sa discrétisation de Gauss $\Body{\DSh}{h}$ et sa $h$-frontière $\partial\Body{\DSh}{h}$.\label{fig:frontier}}
+  \caption{Illustration d'une forme euclidienne $\Shape$, de sa frontière $\dS$,
+  du corps de sa discrétisation de Gauss $\Body{\DSh}{h}$ et sa $h$-frontière
+  $\partial\Body{\DSh}{h}$.\label{fig:frontier}}
 \end{figure}
 
 
@@ -568,7 +689,10 @@ projection $\ProjX{\Shape}$ est continue sur $\R^d \setminus MA(\dS)$, donc
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
 %
-Maintenant que le processus de discrétisation est défini, nous allons nous intéresser aux propriétés de convergence asymptotique des estimateurs de quantités géométriques. Tout d'abord, nous pouvons distinguer deux types de quantités géométriques : les quantités « locales » et les quantités « globales » :
+Maintenant que le processus de discrétisation est défini, nous allons nous
+intéresser aux propriétés de convergence asymptotique des estimateurs de
+quantités géométriques. Tout d'abord, nous pouvons distinguer deux types de
+quantités géométriques : les quantités « locales » et les quantités « globales » :
 %
 \begin{definition}{\fakeTitle{Quantités géométriques locales et globales}}
   \label{def:global-quantity}
