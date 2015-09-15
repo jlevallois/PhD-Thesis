@@ -69,7 +69,11 @@ dans cette thèse (sauf mention contraire).
 %
 \section{Introduction à la géométrie des surfaces et formes continues}
 \label{sec:geo-diff}
-La \colorize{géométrie des surfaces et des formes continues} est l'étude des surfaces comme graphes de fonctions.
+%
+La \colorize{géométrie des surfaces et des formes continues} est l'étude des
+surfaces comme graphes de fonctions. Nous allons dans un premier temps étudier
+la dérivabilité de ces fonctions (\colorize{classes de fonctions}). Ensuite,
+nous nous définirons des quantités intégrales décrivant la surface.
 
 
 %
@@ -142,18 +146,19 @@ une double ou triple intégrale de la forme suivante :
   %
 \end{definition}
 %
-% On parle également de mesure de $\Shape$ au sens de
+Nous parlons également de mesure de $\Shape$ au sens de de Lebesgue. Nous
+reviendrons dessus dans le \RefSection{sec:aire-volume-moments}.
 %
 \subsection{Moments géométriques}
 \label{sec:moments-geo}
 %
-Le concept mathématique des moments géométriques a beaucoup été étudié depuis plusieurs
-années et trouve son champ d'application sans cesse augmenté, allant des
-statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
+Le concept mathématique des moments géométriques a beaucoup été étudié depuis
+plusieurs années et trouve son champ d'application sans cesse augmenté, allant
+des statistiques et mécaniques (\anglais{General moment theory}) \cite{} à la
 reconnaissance de formes (\cauthors{Trier}{Trier1996} pour une revue sur la
-reconnaissance de caractères, \cite{}) et la reconstruction d'objets \cite{Ghorbel2005}.
-La première utilisation des moments en analyse d'images remonte à 1962 par
-\cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
+reconnaissance de caractères, \cite{}) et la reconstruction d'objets
+\cite{Ghorbel2005}. La première utilisation des moments en analyse d'images
+remonte à 1962 par \cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
 %
 % Les moments ont l'avantage d'être indépendant à l'échelle, la position et
 % l'orientation, en faisant un outil invariant robuste \cite{}.
@@ -205,10 +210,11 @@ masses de la forme. En 2D, nous en dénombrons 3 : $\Mom{2 0}(\Shape)$, $\Mom{1
 %
 \subsection{Courbure}
 %
-Nous nous intéressons maintenant à la courbure de la surface. La courbure est une scalaire mesurant
-la déviation de la courbe par rapport au vecteur tangent. Cette quantité est
-énormément utilisée en \GeometryProcessing pour l'analyse et suivi de formes,
-entre autres. Nous détaillerons cela dans le \RefChapitre{sec:estimators}.
+Nous nous intéressons maintenant à la courbure de la surface. La courbure est
+une scalaire mesurant la déviation de la courbe par rapport au vecteur tangent.
+Cette quantité est énormément utilisée en \GeometryProcessing pour l'analyse et
+suivi de formes, entre autres. Nous détaillerons cela dans le
+\RefChapitre{sec:estimators}.
 
 
 %
@@ -312,7 +318,9 @@ $\vec{t}(\vx)$ et une droite fixe, nous avons :
 % \end{figure}
 
 
-En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures principales. Nous allons détailler cela.
+En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend
+plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures
+principales. Nous allons détailler cela.
 
 \begin{figure}[ht]{
     \begin{center}
@@ -441,7 +449,9 @@ supérieure).  Les points digitaux (\colorize{pixels} en dimension 2,
 les axes)  associés à cet espace sont des points de $\Z^d$ comme nous pouvons le
 voir avec le graphe dual de la \RefFigure{fig:pavage_dual}. Les coordonnées des
 points digitaux sont alors des nombres entiers, rendant les calculs plus simples
-et stables qu'avec des coordonnées réelles.
+et stables qu'avec des coordonnées réelles. Les \colorize{objets digitaux}
+$\DigShape \subset \Z^d$ sont alors définis comme des ensembles de points
+digitaux de dimension $d$.
 
 
 \begin{figure}[ht]
@@ -594,6 +604,23 @@ extraites comme le montre la \RefFigure{fig:connexite}.
   en $4$-connexité. \emph{À droite :} une seule composante connexe est extraites
   en $8$-connexité.\label{fig:connexite}}
   %
+\end{figure}
+
+
+Nous pouvons définir les \colorize{surfaces digitales} $\DigBoundary{\DigShape}$
+comme étant le bord topologique de l'objet digital. En dimension 2 (\respp
+dimension 3), il s'agit de la région interpixels (\resp intervoxels) entre les
+pixels (\resp voxels) à l'intérieur de l'objet digital de ceux à l'extérieur.
+Plus concrétement, les surfaces digitales sont des ensembles de bels et de
+cellules de dimensions inférieures partageant un côté à l'intérieur de l'objet
+et un côté à l'extérieur. La \RefFigure{fig:dig-boundary} illustre (en rouge foncé) le
+bord topologique de $\DigShape$.
+
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/dig-boundary.tikz}
+  \end{center}
+  \caption{Illustration du bord topologique de $\DigShape$.\label{fig:dig-boundary}}
 \end{figure}
 
 %
