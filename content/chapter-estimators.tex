@@ -4044,23 +4044,43 @@ gênant s'il n'est pas pris en compte et peut ainsi localement fausser les calcu
 courbure.
 
 
-Les perspectives sont multiples pour ces travaux.\\
-%
-Dans un premier temps nous pouvons nous intéresser à des noyaux autres que la
-sphère pour l'intégration, comme par exemple un noyau gaussien. Cela permettrait
-de pouvoir effectuer les calculs dans le domaine de Fourier, et ainsi de ne plus
-avoir des calculs dépendants de la taille du support mais linéaires en la taille de
-l'objet. Cependant, cela nécessite d'étudier ces nouveaux noyaux afin de pouvoir
-en extraire peut-être des preuves de convergence asymptotique.
+L'inconvénient avec les estimateurs précédents est que lorsque nous souhaitons
+récupérer la valeur de courbure pour un objet particulier, nous devons adapter
+le rayon de la sphère en fonction de l'objet. Nous avons alors proposé
+d'analyser la géométrie de l'objet digital en amont à l'aide de segments
+maximaux afin de proposer des estimateurs de courbures en dimension 2 et 3 sans
+paramètre. En effet, les segments maximaux permettent d'extraire l'échelle de la
+forme digitale lorsque nous ne connaissons pas le pas de discrétisation $h$ pour
+une forme digitale donnée. De plus, les propriétés sur les longueurs des
+segments maximaux en font un de très bons candidats pour remplacer le rayon de
+la boule d'intégration des estimateurs de courbures précédents, les rendant
+ainsi sans paramètre. De plus, ces longueurs ont permis de définir deux
+approches d'estimateurs :
 
+Un approche « globale », \cad que l'ensemble des longueurs des segments maximaux
+de la forme nous donnent un rayon global pour la sphère d'intégration. La
+convergence asymptotique des estimateurs dont le rayon est guidé par la longueur
+moyenne des segments maximaux a alors été prouvé en dimension 2
+($O(h^\frac{1}{3} \log^2 \left(\frac{1}{3}\right)$), se basant une grande partie
+sur la preuve des estimateurs précédents et des lois asymptotiques des longueurs
+des segments maximaux. En dimension 3, la preuve de convergence en
+$O(h^\frac{1}{3} \log^2 \left(\frac{1}{3}\right)$ des estimateurs de courbure
+sans paramètre repose sur une supposition non vérifiée à ce jour, qui mériterait
+d'être étudiée. L'analyse comparative de ces estimateurs sans paramètre ont
+montré que la convergence asymptotique était plutôt en $O(h^\frac{1}{3})$ (le
+terme en $\log^2 \left(\frac{1}{3}\right)$ de l'erreur semble ne pas intervenir
+dans notre évaluation expérimentale), comme les versions avec le paramètre de
+rayon.
 
-Une autre perspective est le couplage de notre approche avec celles basées sur
-les cellules de Voronoï, plus particulièrement les méthodes de \VCMM
-\cite{Merigot2009,Merigot2011,Cuel2014} basées sur l'analyse de matrice de
-covariance non pas de la forme elle même mais du cône normal à celle-ci. Ces
-approches sont assez complémentaires avec la notre et méritent de s'y intéresser.
+Une approche « locale », où le rayon de la sphère est adapté localement en
+fonction de la géométrie de la forme (en fonction des longueurs des segments
+maximaux). À cause de la borne d'erreur d'un cas pathologique des segments
+maximaux, nous ne pouvons espérer de preuves théoriques de convergence
+asymptotique de ces estimateurs. Cependant, d'après l'évaluation expérimentale,
+ces estimateurs semblent suivre le comportement asymptotique de l'approche «
+globale ». La distinction se fait avec l'erreur moyenne, l'erreur de norme $l_2$
+où ces estimateurs obtiennent de très bons résultats.
 
-
-Enfin, étudier plus en détail l'erreur de positionnement du bord de la surface à
-partir des données digitales permettrait d'améliorer la qualité des résultats de
-ces estimateurs et espérer de meilleures vitesses de convergence asymptotique.
+La plus grosse limitation de ces méthodes sans paramètre est qu'elle est très
+dépendante de la qualité de discrétisation de l'objet digital, comme la plupart
+des estimateurs reconnaissant des primitives sur la surface digitale.
