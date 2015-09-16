@@ -3,6 +3,176 @@
 \chapter{Conclusions et perspectives}
 \label{sec:conclusion}
 
-\cleanchapterquote{We have seen that computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty.}{Jean-Claude Vandamme}{Ma vie, mon œuvre.}
+% \cleanchapterquote{
+% %
+% My name is Ozymandias, king of kings:\\Look on my works, Ye Mighty, and despair!
+% %
+% }{Walter \textsc{White}}{Breaking Bad}\footnote{Dans l'épisode, Walter \textsc{White} récite le poème Ozymandias de Percy Bysshe \textsc{Shelley}. Évidemment, aucun lien entre la citation et les travaux présentés ici ne doit être tiré.}
+\cleanchapterquote{We have seen that computer programming is an art, because it
+applies accumulated knowledge to the world, because it requires skill and
+ingenuity, and especially because it produces objects of beauty.}{Jean-Claude
+Vandamme}{Ma vie, mon œuvre.}
 
-conclusion
+Tout au long de cette thèse, nous avons abordé plusieurs approches pour analyser
+des contours d'objets digitaux dans l'objectif de les décrire. Nous nous sommes
+penchés dans un premier temps à l'estimation de la courbure en dimension 2 ainsi
+que de la courbure moyenne, de la courbure gaussienne, des courbures
+principales, des directions principales de courbure et des normales en dimension
+3. Ensuite, nous avons proposé un estimateur en dimension 2 et 3 permettant
+d'extraire les singularités d'une surface digitale. Ces travaux ont pour but
+d'être utilisés dans des algorithmes de plus haut niveau, leurs bonnes
+propriétés mathématiques permettant de s'assurer le bon fonctionnement de
+ceux-ci.
+
+\subsection*{Courbure}
+%
+Dans le \RefChapitre{sec:estimators}, nous avons décrit le fonctionnement de
+l'estimation de la courbure à partir d'intégration différentielles de la
+surface, puis nous l'avons adapté dans le cadre digital, permettant ainsi une
+simplicité de calcul (les intégrales se résumant à dénombrer des points
+digitaux) et permettant d'obtenir une validation formelle du comportement
+asymptotique de ces estimateurs. La motivation derrière ce travail était
+d'apporter des estimateurs digitaux de courbures robustes, avec des preuves de
+convergence. De plus, il n'existait aucun estimateur de courbure avec preuves de
+convergence en dimension 3.
+
+Pour résumer, nous intégrons l'intersection entre une boule et la forme, et
+cette quantité nous donne des informations sur la géométrie de la surface, plus
+particulièrement sur sa courbure au point de la surface. Ainsi, nous pouvons
+extraire la courbure en dimension 2 et la courbure moyenne en dimension 3 à
+l'aide de \respp l'aire et le volume de l'intersection entre la sphère et la
+forme à analyser. Si nous calculons les moments géométriques de cette
+intersection, nous pouvons en extraire le tenseur de courbure local de la
+surface, et donc les courbures principales, les directions principales de
+courbure, la normale, et par extension la courbure gaussienne.
+
+Les contributions majeures de ce chapitre sont les preuves de convergence
+asymtotiques uniformes pour les estimateurs de courbure en dimension 2, de
+courbure moyenne et principales en dimension 3. En effet, nous avons montré que
+sur des formes convexes à bord $C^3$ à courbure bornée et positive, en
+paramétrant le rayon de la sphère comme $R = kh^\frac{1}{3}$, nous obtenons des
+convergences asymptotiques uniformes en $O(h^\frac{1}{3})$ avec $h$ qui tend
+vers $0$.
+
+Nous avons également proposé une analyse comparative complète avec des
+estimateurs de courbure de la littérature, confirmant expérimentalement la
+vitesse de convergence théorique attendue par la preuve. De plus, nous avons
+montré que nos estimateurs sont très compétitifs par rapport aux autres, surtout
+en restant robuste en présence de bruit.
+
+
+Les perspectives sont multiples pour ces travaux. Dans un premier temps nous
+pouvons nous intéresser à des noyaux autres que la sphère et la fonction
+caractéristique pour l'intégration, comme par exemple un noyau gaussien. Cela
+permettrait de pouvoir effectuer les calculs dans le domaine de Fourier, et
+ainsi de ne plus avoir des calculs dépendants de la taille du support mais
+linéaires en la taille de l'objet. Les premiers résultats montrent une qualité
+de résultat presque équivalents, avec une vitesse d'exécution énormément
+réduite. Cependant, cela nécessite d'étudier ces nouveaux noyaux afin de pouvoir
+en extraire peut-être des preuves de convergence asymptotique. De plus, sur le
+papier la complexité de ces algorithmes n'est pas avantageuse, bien qu'en
+pratique très largement concurrentielle.
+
+
+Une autre perspective serait le couplage de notre approche avec celles basées
+sur les cellules de Voronoï, plus particulièrement les méthodes de \VCMM
+\cite{Merigot2009,Merigot2011,Cuel2014} sur l'analyse de matrice de covariance
+non pas de la forme elle même mais du cône normal. Ces approches sont
+assez complémentaires avec la notre et méritent de s'y intéresser.
+
+
+Enfin, étudier plus en détail l'erreur de positionnement du bord de la surface à
+partir des données digitales permettrait d'améliorer la qualité des résultats de
+ces estimateurs et espérer de meilleures vitesses de convergence asymptotique.
+%
+\subsection*{Courbure sans paramètre}
+%
+L'inconvénient avec les estimateurs précédents lorsque nous souhaitons récupérer
+la valeur de courbure pour un objet particulier, nous devons adapter le rayon de
+la sphère en fonction de l'objet. Nous avons alors proposé dans le
+\RefChapitre{sec:estimators} d'analyser la géométrie de l'objet digital en amont à
+l'aide de segments maximaux afin de proposer des estimateurs de courbures en
+dimension 2 et 3 sans paramètre. Deux versions ont été proposées, une approche «
+globale » dont le rayon de la boule d'intégration est relié à la moyenne des
+longueurs des segments maximaux de la forme, et une approche « locale » où le
+rayon de la sphère est relié aux longueurs des segments maximaux locaux du point
+estimé.
+
+Nous avons prouvé la convergence asymptotique uniforme de l'estimateur de
+courbure en dimension 2 dans son approche « globale » en $O(h^\frac{1}{3} \log^2
+\left(\frac{1}{3}\right)$ pour des formes convexes à bord $C^3$ à courbure
+bornée et positive. La preuve de convergence de ces estimateurs en dimension 3
+repose sur une supposition non vérifiée à ce jour, qui mériterait d'être étudiée
+dans le futur.
+
+L'analyse expérimentale a montré que ces deux approches d'estimateurs de
+courbure sans paramètre obtiennent des résultats aussi bons que les estimateurs
+précédents (en $O(h^\frac{1}{3}$) même en dimension 3, et l'approche « locale »
+est très concurrentielle en erreur de norme $l_2$.
+
+La motivation principale derrière ce travail est de palier au manque
+d'estimateurs digitaux de courbure en dimension 2 (ou supérieure) sans paramètre
+avec des preuves de convergence asymptotiques. De plus, d'un point de vue
+pratique, ces estimateurs permettent d'obtenir de bons résultats d'estimation de
+courbure sans avoir à analyser la forme digitale d'entrée.
+
+Ces estimateurs sans paramètre sont moins efficaces en présence de surfaces
+bruités. De récents travaux (\cauthors{Kerautret}{Kerautret2012}) proposent
+d'estimer le niveau de bruit grâce aux segments maximaux. Ainsi, nous pouvons
+adapter leurs longueurs en fonction du bruit et ainsi augmenter la robustesse de
+notre estimation. Cependant, il est peut probable de garantir des preuves de
+convergence dans ces conditions, l'application est surtout pratique.
+%
+\subsection*{Singularités}
+%
+Enfin, dans le \RefChapitre{sec:applications}, nous avons proposé d'estimer les
+singularités sur des objets digitaux. Encore une fois, la principale motivation
+de ce travail est de palier au manque d'estimateurs de singularités de la
+géométrie digitale. C'est à ce jour le seul estimateur permettant de le faire en
+dimension 3.
+%
+\\
+%
+Notre estimateur analyse le comportement de l'estimateur de courbure défini
+précédemment à plusieurs rayons de sphère sur le bord de l'objet, en dimension 2
+et 3. Cette analyse permet de classifier la surface en trois comportements
+distincts : des singularités (non-$C^1$), des zones lisses ($C^3$) et des zones à
+courbure nulle.
+%
+\\
+%
+L'analyse comparative de notre estimateurs avec les méthodes représentatives de
+la littérature affiche que notre estimateur est compétitif, étant à la fois
+robuste au bruit, ne nécessitant pas d'autre paramètres qu'un ensemble de
+rayons, et classifiant directement tous les éléments de la surface.
+
+
+Cet outil est le point d'entrée de plusieurs perspectives intéressantes.Tout
+d'abord, les résultats présentés ici sont des résultats bruts. Nous pouvons
+facilement coupler notre méthode avec des outils de post-traitement pour
+améliorer significativement les défauts encore présents, notamment les artefacts
+sur les formes bruités.
+
+
+Ensuite, nous pouvons analyser la forme en amont afin de mieux connaître la
+forme sous-jacente. L'utilisation de la longueur des segments maximaux s'avère
+être le candidat idéal, et permettrait alors de guider l'ensemble de rayons
+utilisés pour notre méthode.
+
+
+Enfin, une meilleure connaissance de la distance à la surface sous-jacente
+permettrait de supprimer certains artefacts visibles sur les zones à courbure
+nulle.
+%
+\subsection*{Point de vue général}
+
+% Au travers de ces travaux de thèse, j'ai tenté d'apporter ma contribution à la
+% communauté de la géométrie digitale.
+%
+%
+% Comme le dit Jean \textsc{Françon} dans la préface de \cite[Coeurjolly2007Book]
+%
+%
+%
+% La géométrie digitale possède un ensemble
+% d'outils formel
