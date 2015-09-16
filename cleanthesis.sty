@@ -706,6 +706,22 @@
 	\end{minipage}%
 	\bigskip
 }
+\newcommand{\cleanchapterquoteL}[4]{%
+	\begin{minipage}{.865\textwidth}%
+		\begin{flushright}
+			\begin{minipage}{.65\textwidth}%
+				\begin{flushleft}
+					{\hugequote}\textit{#1}
+				\end{flushleft}
+	    		\begin{flushright}
+    				--- #2 \textbf{#3} \\
+    				#4
+		    	\end{flushright}
+		    \end{minipage}%
+		\end{flushright}
+	\end{minipage}%
+	\bigskip
+}
 %
 % Clean Quotation environment
 \newenvironment{thesis_quotation}%
