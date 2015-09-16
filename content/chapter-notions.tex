@@ -38,8 +38,8 @@ dans cette thèse (sauf mention contraire).
     Notation      & Description  & Définition \\ \midrule
 
     $\R^d$        & Espace euclidien de dimension $d$ & \RefSectionTable{sec:notions} \\
-    $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée & \RefSectionTable{sec:notions} \\
-    $\Shape$      & Forme de $\Shapes$ & \RefSectionTable{sec:notions} \\
+    $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée & \RefSectionTable{sec:multigrid-convergence-estimator} \\
+    $\Shape$      & Forme de $\Shapes$ & \RefSectionTable{sec:multigrid-convergence-estimator} \\
     $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:digitization} \\
     $\vx$         & Point de $\R^d$ & \RefSectionTable{sec:digitization} \\
     $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \RefSectionTable{sec:notions} \\
@@ -471,7 +471,8 @@ digitaux de dimension $d$.
 De ces points digitaux, nous pouvons ajouter des informations topologiques en
 considérant l'espace de grille cellulaire. L'idée est de plonger l'espace
 digital $\Z^n$ dans l'espace cubique cartésien afin de pouvoir représenter les
-éléments interpixels. Ainsi :
+éléments interpixels \cite{Kovalesvsky1989, Khalimsky1990, Francon1991}, que
+nous nommerons \colorize{topologie de Khalimsky}. Ainsi :
 %
 \begin{itemize}
 %
@@ -483,12 +484,13 @@ digital $\Z^n$ dans l'espace cubique cartésien afin de pouvoir représenter les
   \anglais{linels} (éléments de dimension 1);
 %
   \item Les $2$-cellules sont appelées des \colorize{pixels} (éléments de
-  dimension 2). En dimension 3, les $2$-cellules sont également nommées les
-  \colorize{surfels} (pour \anglais{surface elements}).
+  dimension 2).
+%
+  \item Les $3$-cellules sont appelées des \colorize{voxels} (éléments de
+  dimension 3).
 %
 \end{itemize}
 %
-Les $3$-cellules sont appelées des \colorize{voxels} (éléments de dimension 3).
 
 
 \begin{figure}[ht]
@@ -503,7 +505,7 @@ Les $3$-cellules sont appelées des \colorize{voxels} (éléments de dimension 3
 La \RefFigure{fig:notations_topo} illustre les pointels, lignels et pixels. Par
 convention, nous nommons les $n$-cellules les \colorize{spels} (un pixel en
 dimension 2, un voxel en dimension 3), les $n-1$-cellules sont nommées les
-\colorize{bels} (un \colorize{lignel} en dimension 2, un \colorize{surfel} en dimension
+\colorize{bels} ou \colorize{surfel} pour \anglais{surface elements} (un \colorize{lignel} en dimension 2, un \colorize{pixel} en dimension
 3).
 
 
@@ -607,13 +609,20 @@ extraites comme le montre la \RefFigure{fig:connexite}.
 \end{figure}
 
 
-Nous pouvons définir les \colorize{surfaces digitales} $\DigBoundary{\DigShape}$
-comme étant le bord topologique de l'objet digital. En dimension 2 (\respp
+Nous pouvons définir les \colorize{surfaces digitales}\footnote{Il existe
+plusieurs définitions pour les surfaces digitales \cite{Rosenfeld1979,
+Latecki1995}. Nous ne les détaillerons pas ici et n'utiliserons que la
+définition la plus courante.} $\DigBoundary{\DigShape}$ comme étant le bord
+topologique de l'objet digital, \cad des sous-ensemble du plan discret $\Z^n$.
+
+
+
+En dimension 2 (\respp
 dimension 3), il s'agit de la région interpixels (\resp intervoxels) entre les
 pixels (\resp voxels) à l'intérieur de l'objet digital de ceux à l'extérieur.
-Plus concrétement, les surfaces digitales sont des ensembles de bels et de
+Plus concrétement, les surfaces digitales sont des ensembles de surfels et de
 cellules de dimensions inférieures partageant un côté à l'intérieur de l'objet
-et un côté à l'extérieur. La \RefFigure{fig:dig-boundary} illustre (en rouge foncé) le
+et un côté à l'extérieur (voir \cite{Herman1998, Udupa1994, Kong1992}). La \RefFigure{fig:dig-boundary} illustre (en rouge foncé) le
 bord topologique de $\DigShape$.
 
 \begin{figure}[ht]
@@ -622,6 +631,10 @@ bord topologique de $\DigShape$.
   \end{center}
   \caption{Illustration du bord topologique de $\DigShape$.\label{fig:dig-boundary}}
 \end{figure}
+
+L'autre avantage de la topologie de Khalimsky que nous pouvons exploiter est de
+pouvoir facilement utiliser des algorithmes d'extraction de surface par suivi de
+contour grâce aux relations d'adjacence.
 
 %
 \section{Discrétisation}
@@ -693,7 +706,7 @@ important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
 \subset \Z^d$ est définie comme :
 %
 \begin{equation}
-  \partial\Body{\DigShape}{h} \EqDef \partial \left( \bigcup_{\vp \in \DigShape} \hQ{\vp}{h} \right) \,.
+  \DFr{h} \DigShape \EqDef \partial \left( h \cdot \bigcup_{\vp \in \DigShape} \Q{\vp} \right) \,.
 \end{equation}
 %
 
@@ -885,6 +898,15 @@ nous permet alors de comparer les vitesses de convergence des estimateurs. Nous
 nous intéressons dans cette thèse à la \colorize{convergence asymptotique
 uniforme} de nos estimateurs, en d'autres mots il s'agit l'erreur dans le pire
 des cas de nos estimateurs.
+
+Les preuves de convergences sont valides seulement pour des \colorize{familles d'objets}
+$\Shapes$. Ces familles d'objets font des hypothèses sur la formes, permettant
+alors de valider la convergence.
+\begin{itemize}
+  \item La famille de toutes les formes convexes finies du plan euclidien est noté $\Shape^{C}$;
+  \item La famille de tous les ensembles convexes dont la bordure est $C^n$ à courbure positive est noté $\Shape^{n-SC}$;
+  \item La famille de tous les ensembles convexes dont la bordure est $C^n$ par morceaux est noté $\Shape^{n-PW-SC}$.
+\end{itemize}
 %
 \section{Estimateurs digitaux d'aire, de volume, de moments géométriques}
 \label{sec:aire-volume-moments}
@@ -929,7 +951,7 @@ finies de $\R^2$ :
   \AreaC(\DigF{\Shape}{h},h) = \Area(\Shape) + O(h^\beta),
 \end{equation}
 %
-avec $\beta = 1$ dans le cas général \cite{Klette2000}, et peut être optimisé à
+avec $\beta = 1$ dans le cas général ($\Shapes^{C}$) \cite{Klette2000}, et peut être optimisé à
 $\beta = \frac{15}{11} - \epsilon$ avec $\epsilon > 0$ (arbitrairement petit)
 lorsque le bord de l'objet est $C^3$ à courbure non nulle \cite{Huxley1990}.
 De mêmes résultats ont été proposés en 3D :
@@ -940,7 +962,7 @@ De mêmes résultats ont été proposés en 3D :
 \end{equation}
 %
 avec $\gamma = 1$ dans le cas général \cite{Kratzel1988}, et peut être amélioré à
-$\gamma=\frac{243}{158}$ lorsque le bord est lisse \cite{Guo2010}.
+$\gamma=\frac{243}{158}$ lorsque le bord est lisse ($\Shape{3-SC}$) \cite{Guo2010}.
 %
 En dimension 2, les objets non convexes suivent les mêmes règles tant que
 $\Shape$ peut être exprimé comme une somme ou une différence de régions convexes
@@ -987,23 +1009,66 @@ Cette borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle
 \cauthors{Krätzel}{Kratzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
 \cauthors{Müller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
 %
+\subsection{Tableau récapitulatif de convergence d'estimateurs de quantités géométriques}
+%
+\cauthors{Coeurjolly}{Coeurjolly_ChapEstimateur} ont proposé une analyse
+complète d'estimateurs (en dimension 2) de la longueur de la forme (ou
+périmètre) ainsi que de la tangente en tout point du bord de l'objet. Le
+\RefTable{tab:tang-comp} récapitule les vitesses de convergence ainsi que les
+familles de formes associées pour les preuves de convergence.
+
+
+\begin{table}[ht]
+\centering
+\caption{Convergence asymptotique connus de certains estimateurs de quantités géométriques (\RefTablesFake{1}{2}{Coeurjolly_ChapEstimateur}).}
+\label{tab:tang-comp}
+\begin{tabular}{@{}lp{1.9cm}lllr@{}}
+\toprule
+ & & & \multicolumn{2}{c}{Vitesse de convergence} &            \\ \cmidrule(r){4-5}
+Quantité & Estimateur & Famille de formes & Borne sup. & Observée & Référence \\ \midrule
+
+% Aire & $\AreaC$ & $\Shapes^{C}$ & $O(h)$ & & \cite{Klette2000} \\
+% Aire & $\AreaC$ & $\Shapes^{3-PW-SC}$ & $O(h^{\frac{15}{11} + \epsilon})$ & & \cite{Huxley1990} \\
+%
+% Volume & $\VolC$ & $\Shapes^{3-PW-SC}$ & $O(h)$ & & \cite{} \\
+% Volume & $\VolC$ & $\Shapes^{3-SC}$ & $O(h)$ & & \cite{} \\
+Longueur & $\hat{\vL}^{DSS}$ & Polygones convexes & $\approx 4.5h$ & & \cite{Kovalevsky1992} \\
+Longueur & $\hat{\vL}^{DSS}$ & $\Shapes^{3-PW-SC}$ & ? & $O(h)$ & \cite{Kovalevsky1992} \\
+Longueur & $\epsilon-sausage$ & Polygones convexes & $\approx 5.844h$ & & \cite{Asano2001} \\
+Longueur & $\hat{\vL}^{ST}$ & $\Shapes^{C}$ & ? & $O(h)$ & \cite{Coeurjolly2004} \\
+Longueur & $\hat{\vL}^{FP}$ & $\Shapes^{C}$ & ? & $O(h)$ & \cite{Roussillon2011b} \\
+Longueur & $\hat{\vL}^{MLP}$ & $\Shapes^{C}$ & $\approx 8h$ & & \cite{Sloboda1998} \\
+Longueur & $\hat{\vL}^{MLP}$ & $\Shapes^{3-PW-SC}$ & $O(h)$ & $O(h^\frac{4}{3})$ & \cite{Sloboda1998} \\
+Longueur & $\hat{\vL}^{\lambda-MST}$ & $\Shapes^{3-PW-SC}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{4}{3})$ & \cite{Lachaud2006HDR} \\
+
+Tangente & $\hat{\vT}^{BC}$ & Polygones & ? & $O(h^\frac{1}{3})$ & \cite{Coeurjolly_ChapEstimateur} \\
+Tangente & $\hat{\vT}^{BC}$ & $\Shapes^{1-SC}$ & $O(h^\frac{2}{3})$ & $O(h^\frac{2}{3})$ & \cite{Malgouyres2008} \\
+Tangente & $\hat{\vT}^{BC}$ & $\Shapes^{1-PW-SC}$ & ? & $O(h^\frac{1}{3})$ & \cite{Coeurjolly_ChapEstimateur} \\
+
+Tangente & $\hat{\vT}^{\lambda-MST}$ et $\hat{\vT}^{MCMS}$ & Polygones & $O(h)$ & $O(h)$ & \cite{Lachaud2006HDR} \\
+Tangente & $\hat{\vT}^{\lambda-MST}$ et $\hat{\vT}^{MCMS}$ & $\Shapes^{1-PW-SC}$ & ? & $O(h^\frac{2}{3})$ & \cite{deVieilleville2009} \\
+Tangente & $\hat{\vT}^{\lambda-MST}$ et $\hat{\vT}^{MCMS}$ & $\Shapes^{3-SC}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{2}{3})$ & \cite{Lachaud2006HDR} \\
+
+Tangente & $\hat{\vT}^{H1-0GD}$ & Polygones & ? & \svgNope & \cite{Coeurjolly_ChapEstimateur} \\
+Tangente & $\hat{\vT}^{H1-0GD}$ & $\Shapes^{1-PW-SC}$ & ? & $\approx O(h^\frac{2.5}{3})$ & \cite{deVieilleville2009} \\
+Tangente & $\hat{\vT}^{H1-0GD}$ & $\Shapes^{3-SC}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{2.5}{3})$ & \cite{deVieilleville2009} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+%
 \section{Droites digitales standard, segments digitaux, arcs de cercle digitaux}%
 \label{sec:segments}
 %
-Nous allons maintenant nous intéresser à la définition de primitives digitales.
-Ces primitives seront estimées et, grâce à leurs bonnes propriétés
-mathématiques, pourront utilisées par la suite comme point d'entré d'estimateurs
-de quantités différentielles comme la courbure (ce que nous verrons dans le
-\RefChapitre{sec:estimators}).
-
-
-La primitive la plus basique à reconnaître est sans nul doute la droite. Alors
-nous devons définir ce qu'une droite représente dans l'espace digital et ce
-n'est pas trivial à cause de la discrétisation de la forme. Définissons tout
-d'abord une \colorize{droite digitale standard} (ou droite $4$-connexe), et
-ainsi le \colorize{segment digital} (voir la \RefFigure{fig:dss-figure}) :
+Nous allons maintenant nous intéresser aux définitions de primitives digitales.
+La primitive la plus basique à reconnaître est sans nul doute la droite ou le
+segment de droite. Alors nous devons définir ce qu'une droite représente dans
+l'espace digital et ce n'est pas trivial à cause de la discrétisation de la
+forme. Définissons tout d'abord une \colorize{droite digitale standard} (ou
+droite $4$-connexe), et ainsi le \colorize{segment digital} (voir la
+\RefFigure{fig:dss-figure}) :
 %
-\begin{definition}{\fakeTitle{Droite digitale standard et segment digital (« \anglais{Digital Straight Segment} ») \cite{Reveilles1991}}}
+\begin{definition}{\fakeTitle{Droite digitale standard et segment digital (« \anglais{Standard Digital Straight Segment} ») \cite{Reveilles1991}}}
   \label{def:DSS}
 %
   L'ensemble de points $(p_1,p_2) \in \Z^2$ satisfaisant $\mu \le ap_1 - bp_2 <
@@ -1023,6 +1088,14 @@ ainsi le \colorize{segment digital} (voir la \RefFigure{fig:dss-figure}) :
     \caption{Segments digitaux.\label{fig:dss-figure}}
 \end{figure}
 
+% et étudier estimées et, grâce à leurs bonnes propriétés
+% mathématiques, pourront utilisées par la suite comme point d'entré d'estimateurs
+% de quantités différentielles comme la courbure (ce que nous verrons dans le
+% \RefChapitre{sec:estimators}).
+
+Nous pouvons alors faire de la reconnaissance de ces primitives. La définition
+suivante décrit la manière de reconnaître un \colorize{segment maximal} à partir
+d'un ensemble de points digitaux.
 
 Ainsi, de cette définition, nous pouvons en extraire les \colorize{segments
 maximaux} ainsi que le \colorize{faisceau de segments maximaux} :
@@ -1031,7 +1104,7 @@ maximaux} ainsi que le \colorize{faisceau de segments maximaux} :
   \label{def:MDSS}
 %
   Les pointels composant le bord digital $\BdZ{\DigShape}$ d'une forme
-  $\DigShape \subset \Z^2$ forme un contour $4$-connecté. Cela nous permet de
+  $\DigShape \subset \Z^2$ forment un contour $4$-connecté. Cela nous permet de
   les dénombrer consécutivement par $(\vp_i)_{i={0\ldots n-1}}$. Une séquence de
   pointels $(\vp_i, \ldots, \vp_j)$ (dont l'indice est modulo $n$) est un
   \colorize{segment maximal} (ou « \anglais{MDSS} ») sur $\BdZ{\DigShape}$ si c'est
@@ -1055,7 +1128,7 @@ maximaux} ainsi que le \colorize{faisceau de segments maximaux} :
 
 Il parait alors essentiel d'étudier le comportement asymptotique de ces
 primitives afin de pouvoir les exploiter au sein d'estimateurs auxquels nous
-voulons prouver la convergence. \cauthors{Lachaud}{lachaud2006HDR} et
+voulons prouver la convergence. \cauthors{Lachaud}{Lachaud2006HDR} et
 \cauthors{de Vieilleville}{deVieilleville2007} se sont alors intéressés sur les
 propriétés asymptotiques des longueurs des segments maximaux sur des formes
 convexe suffisamment lisse de dimension $2$ :
