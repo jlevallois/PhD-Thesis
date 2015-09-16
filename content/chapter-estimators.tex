@@ -13,47 +13,48 @@
 Dans ce chapitre, nous allons définir de nouveaux estimateurs de courbure pour
 les surfaces digitales. Après avoir détaillé l'état de l'art
 (\RefSection{sec:estimators:SOTA}), nous nous intéresserons à l'estimation de la
-courbure par intégration volumique de la boule
-(\RefSection{sec:estimators:volume}) afin d'en extraire des estimateurs de
-courbure en 2D et courbure moyenne (\RefSection{sec:estimators:volume}) et
-courbures principales (\RefSection{sec:ii-3d}) en 3D. Nous adapterons ces
-estimateurs à des versions ne nécessitant aucun paramètre (l'unique paramètre
-étant la taille de la boule d'intégration) dans la
-\RefSection{sec:curvature:parameter-free}. Enfin, nous comparerons nos
-estimateurs avec les méthodes représentatives de l'état de l'art dans la
-\RefSection{sec:comparaison-courbure}. Dans ce chapitre, nous considérons
-que $\Shapes = \Shapes^{C}$.
+courbure par intégration locale (\RefSection{sec:estimators:volume}) afin d'en
+extraire des estimateurs de courbure en 2D et courbure moyenne
+(\RefSection{sec:estimators:volume}) et courbures principales
+(\RefSection{sec:ii-3d}) en 3D. Ces estimateurs nécessitent une taille de boule
+d'intégration, nous adapterons ces estimateurs à des versions ne nécessitant
+aucun paramètre dans la \RefSection{sec:curvature:parameter-free}. Enfin, nous
+comparerons nos estimateurs avec les méthodes représentatives de l'état de l'art
+dans la \RefSection{sec:comparaison-courbure}. Dans ce chapitre, nous
+considérons que $\Shapes = \Shapes^{C}$.
 %
 \section{Introduction}
 \label{sec:estimators:introduction}
 %
 Comme nous l'avons vu dans le chapitre précédent (\RefSection{sec:geo-diff}),
-une forme peut être décrite à partir de ses quantités différentielles comme la
-courbure. Et nous parlons bien de décrire, puisque toutes ces quantités sont ce
-qui la caractérise de manière unique. C'est pour cela que plusieurs champs de
+la géométrie d'une forme est décrite à partir de ses quantités différentielles comme la
+courbure.
+% Et nous parlons bien de décrire, puisque toutes ces quantités sont ce
+%qui la caractérise de manière unique.
+C'est pour cela que plusieurs champs de
 recherches se tournent vers la manière de récupérer ces quantités en les
-estimant à partir de données \todoJeremy{citer un survey}.
+estimant à partir des données.\todoJeremy{citer un survey}
 %
 \\
 %
-Ces données discrètes sont principalement liées à la façon de capturer les
-objets ou de son utilisation et peuvent prendre la forme de nuages de points, de
-maillages triangulés, ou encore de données digitales. Les besoins des
+Les données discrètes prennent différentes formes, qui sont principalement liées à la façon de capturer les
+objets ou à leur utilisation. Elles peuvent être des nuages de points, des
+maillages triangulés, ou encore des données digitales. Les critères guidant les définitions des
 estimateurs sont différents et très liés à l'usage de la quantité différentielle :
-certains privilégerons la rapidité d'estimation en dépis de la qualité notamment
+certains privilégeront la rapidité d'estimation en dépit de la qualité notamment
 dans un enjeu d'utilisation en temps interactif ou réel, tandis que d'autres (et
-c'est notre cas) préfèrerons garantir la qualité des résultats de l'estimation
+c'est notre cas) préfèreront garantir la qualité des résultats de l'estimation
 en priorité.
 
 
 Comme nous l'avons vu dans le \RefChapitre{sec:introduction}, notre estimation
 de la courbure est utilisée au cœur d'un processus complexe d'analyse de
 déformation de microstructure de grains de neige, nécessitant des résultats les
-plus justes possible. Il nous parait également important de connaitre le
-comportement de l'estimateur si nous prenons le coût d'augmenter la résolution
+plus justes possibles. Il nous parait également important de connaître le
+comportement de l'estimateur si nous choisissons le coût d'augmenter la résolution
 de la capture des données digitales : aurons-nous une meilleure estimation de la
 courbure ? Nous devons alors nous focaliser sur la convergence asymptotique de
-notre estimation à l'aide de preuves théoriques et pratiques.
+notre estimation à l'aide de preuves théoriques et de validations pratiques.
 %
 \section{État de l'art}%
 \label{sec:estimators:SOTA}
@@ -91,7 +92,7 @@ référons à \cauthors{Desbrun}{Desbrun2005} et \cauthors{Bobenko}{Bobenko2008}
 pour une théorie entièrement discrète. Cependant, la plupart n'ont aucunes
 garanties de convergence théorique des valeurs estimées, même sans bruit sur le
 maillage. Nous pouvons citer \cite{Rusinkiewicz2004} (et \cite{Page2002} pour les normales) comme
-approche qui essaye de plaquer les perturbations sur la surface à travers un
+approche qui essaye de lisser les perturbations sur la surface à travers un
 moyennage.
 %
 \paragraph{Approche par formule de Gauss-Bonnet}
@@ -116,7 +117,7 @@ gaussienne » par \cauthors{Surazhsky}{Surazhsky2003}.
 Soit $\vp$ un sommet de valence $6$ du maillage triangulé $M$ et $\vp_j$ avec
 $j = 1,\cdots, 6$ l'ensemble des sommets du $1$-voisinage de $\vp$ (voir
 \RefFigure{fig:xu_notations}-gauche pour les notations). Si $\vp$ et $\vp_j$
-sont sur la surface paramétrique suffisamment lisse $F(x,y) \in \R^3$ et
+sont sur une surface paramétrique suffisamment lisse $F(x,y) \in \R^3$ et
 qu'il existe $\vq, \vq_j \in \R^2$ tels que
 (\RefFigure{fig:xu_notations}-droite, le $1$-voisinage est projeté comme des
 parallélogrammes sur un plan) :
@@ -145,8 +146,8 @@ $\alpha \ge 3$.
 
 
 Cette approche n'est pas applicable directement à des surfaces digitales car la
-perturbation par rapport à la surface est a une distance trop grande et
-correspond plus à des \anglais{outliers} qu'à du bruit de discrétisation. De
+perturbation par rapport à la surface est trop grande et
+correspond plus à des \anglais{outliers} qu'à du bruit de l'échantillonnage. De
 plus, les contraintes topologiques expliquées précédemment (surface
 paramétrique, sommets de valence $6$) sont déterminantes pour la convergence :
 si elles ne sont pas satisfaites, l'estimation de la courbure gaussienne ne
@@ -198,7 +199,7 @@ des quantités :
 %
 où $g(\vp)$ correspond au \colorize{défaut d'angle} de $\Boundary V$ au point
 $\vp$, \cad à $2\pi$ moins la somme des angles entre les arêtes incidentes
-consécutifs à $\vp$  (voir \RefFigure{fig:normal-cycle-1}), et $|\beta(\ve)|$
+consécutives à $\vp$  (voir \RefFigure{fig:normal-cycle-1}), et $|\beta(\ve)|$
 est l'angle entre les normales des triangles de $\Boundary V$ incidents au point
 $\vp$ (voir \RefFigure{fig:normal-cycle-2}). Si $\ve$ est convexe, le signe de
 $\beta(\ve)$ doit être positif et négatif si $\ve$ est concave.
@@ -209,7 +210,7 @@ $\beta(\ve)$ doit être positif et négatif si $\ve$ est concave.
 
 Enfin, ils proposent des propriétés de convergence de ces mesures de courbure
 sous certaines conditions. Soit $\mathcal{P}$ un sous-ensemble fini de $\dS$,
-$T$ la triangulation de Delaunay de $\mathcal{P}$ restraint à $\Shape$, et
+$T$ la triangulation de Delaunay de $\mathcal{P}$ restreinte à $\Shape$, et
 $\epsilon$ la densité de l'échantillonnage de la surface. Si $\mathcal{P}$ est
 le $\epsilon$-échantillonnage de $\dS$, \cad si la boule $\Ball{\epsilon
 lfs(\vx)}{\vx}$ centrée au point $\vx$ et de rayon $lfs(\vx)$ rencontre
@@ -224,7 +225,7 @@ Alors, lorsque $\epsilon < 0.08$ :
 \end{align}
 %
 avec $\pi$ la projection sur $M$ (grâce à $\epsilon < 0.08$, $\pi$ est défini
-sur $\Boundary T$ et est un homéomorphe de $\Boundary T$ vers $M$ ).
+sur $\Boundary T$ et est un homéomorphe de $\Boundary T$ vers $M$ ), et $K$ une constante.
 
 
 Les deux principaux problèmes avec cette méthode sont son inadaptabilité face à
@@ -444,7 +445,7 @@ détecter des formes paramétriques simples comme des lignes ou des arcs de cerc
 \cite{Duda1972}. Cependant, elle peut être étendu en dimension 3 :
 l'accumulateur n'est plus une image, mais un objet 3D.
 \cauthors{Boulch}{Boulch2012} utilisent une boule accumulatrice (voir la
-\RefFigure{fig:hough-ball}) de $M$ bins.
+\RefFigure{fig:hough-ball}) de $M$ réceptacles (\anglais{bins}).
 
 \begin{figure}[ht]{
     \begin{center}
@@ -520,7 +521,7 @@ devrait converger vers la valeur attendue.
 %
 \cauthors{Coeurjolly}{Coeurjolly_ChapEstimateur} ont proposé un état de l'art
 complet pour l'estimation de tangentes et de la courbure en dimension 2. Nous
-allons les détailler les méthodes les plus représentatives.
+allons détailler les méthodes les plus représentatives.
 %
 \paragraph{Reconnaissance d'objets digitaux}
 %
@@ -532,7 +533,7 @@ différentielles.
 \textbf{Segments digitaux maximaux}\\
 % The curvature k is defined from the length l and the width w of a DSS as follow: $1/k=(l \ast l)/(8 \ast w)+w/2$
 % Most centered Maximal Segment
-\cauthors{Coeurjolly}{Coeurjolly2001} ont montré qu'une façon simple d'estimer
+\cauthors{Coeurjolly}{Coeurjolly2001} ont montré une façon simple d'estimer
 la courbure à la surface d'un objet digital à l'aide des segments maximaux.
 Cette méthode, que nous appellerons \MDSS par le suite, propose de calculer la
 longueur des segments maximaux du bord $\Boundary \DigShape$ de $\DigShape
@@ -571,9 +572,10 @@ d'un cercle euclidien se comportent comme des cordes de hauteur $h$ (le pas de
 discrétisation) et de longueur $\Theta(h^{-\frac{1}{2}})$. Cependant, quelques
 années plus tard, \cauthors{de Vieilleville}{deVieilleville2007} remarquent que
 bien que la borne supérieur du plus long MDSS est en $O(h^{-\frac{1}{2}})$, leur
-longueur est en $\Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right))$ en
-moyenne (voir le \RefLemma{lem:law-length-MDSS}). Cette borne supérieure a pour
-conséquence de réfuter la preuve de convergence avancée dans
+longueur en moyenne est proche de $\Theta(h^{-\frac{1}{3}}$ (entre
+$\Theta(h^{-\frac{1}{3}}$ et $\Theta(h^{-\frac{1}{3}} \log
+\left(\frac{1}{h}\right))$, voir le \RefLemma{lem:law-length-MDSS}). Cette borne
+supérieure a pour conséquence de réfuter la preuve de convergence avancée dans
 \cite{Coeurjolly2001}.
 %
 %
@@ -641,7 +643,7 @@ continue, strictement positif et borné supérieurement, si $0 < b \le a <
 prouvé à ce jour.
 
 
-Le principal avantage de ces deux méthodes est qu'ils ne nécessitent aucun
+Le principal avantage de ces deux méthodes est qu'elles ne nécessitent aucun
 paramètre. Cependant, ces méthodes de reconnaissances d'objets sont assez
 sensibles lorsque les données sont bruités. C'est ce que nous verrons dans la
 section comparative (\RefSection{sec:comparaison-courbure}).
@@ -715,7 +717,7 @@ La courbure est alors estimée de la sorte :
 %
 \begin{equation}
   %
-  \CurvH{n}_{BC}(\vp) \EqDef \frac{D_n^2(\vp_1) \ast D_n(\vp_2) - D_n^2(\vp_2) \ast D_n(\vp_1)}{D_n(\vp_1)^2 + D_n(\vp_2)^2} \,.
+  \CurvH{n}_{BC}(\vp) \EqDef \frac{D_n^2(\vp_1) \ast D_n(\vp_2) - D_n^2(\vp_2) \ast D_n(\vp_1)}{(D_n(\vp_1)^2 + D_n(\vp_2)^2)^\frac{3}{2}} \,.
   %
 \end{equation}
 
@@ -723,17 +725,17 @@ La courbure est alors estimée de la sorte :
 Dans le cas où $n = \lfloor h^{2(\alpha -3)/3} \rfloor$ et $\alpha \in ]0,1]$ est un paramètre
 associé au niveau de bruit (plus $\alpha$ est proche de $0$, plus l'estimateur
 sera robuste au bruit), \cauthors{Esbelin}{Esbelin2011} annoncent une convergence asymptotique en
-$O(h^{{2/3}^k})$ des dérivées du $k$-ième ordre pour des formes $C^3$ (donc en
+$O(h^{{(\frac{2}{3})}^k})$ des dérivées du $k$-ième ordre pour des formes $C^3$ (donc en
 $O(h^{4/9})$ pour les dérivées du second ordre). Nous verrons dans la partie
 comparative que nous n'observons expérimentalement pas la même vitesse de
 convergence (\RefSection{sec:comparaison-courbure}).
 %
 \paragraph{Correspondance de surface polynomiale}
 %
-\cauthors{Provot}{Provot2011} proposent quant à eux à s'intéresser aux
+\cauthors{Provot}{Provot2011} proposent quant à eux de s'intéresser aux
 \anglais{Digital Level Layer} (\DLL) pour estimer les dérivées d'une fonction
 digitale à l'aide de la programmation linéaire ou avec des outils de la
-\ComputationalGeometry. Cette approche permet d'approcher les $k$ dérivées de
+\AlgorithmicGeometry. Cette approche permet d'approcher les $k$ dérivées de
 $f^{(k)}(\vx)$. Ainsi, à l'instar de \JetFitting, ils proposent une nouvelle
 méthode basées sur les polynômes de Taylor.
 %
@@ -749,8 +751,8 @@ un polynôme $P(\vx)$ respectant :
 \end{equation}
 %
 dans le voisinage de $\vx_0$, où $P(\vx) = \sum_{i=1}^{k} a_i\Shape^i$, $a_i$
-étant les coefficients du polynôme $P(\vx)$. Ils introduisent alors la notion de
-rugosité (\anglais{roughness}) comment une fonction, le $R$ minimum nécessaire
+étant les coefficients entiers du polynôme $P(\vx)$. Ils introduisent alors la notion de
+rugosité (\anglais{roughness}) de la fonction, \cad le $R$ minimum nécessaire
 pour trouver un polynôme s'ajustant sur les données de la fonction $F$ avec une
 erreur inférieure à $R$ (voir la \RefFigure{fig:dll-roughness}).
 
@@ -800,8 +802,11 @@ Ils obtiennent alors une preuve de convergence en $O(h^{\frac{1}{k+1}})$ sur
 l'estimation des dérivées du $k$-ième ordre pour une fonction réelle $f : \R
 \rightarrow \R$ de classe $C^{k+1}$ où les dérivées d'ordre $k+1$ sont bornées
 dans le voisinage du point $\vx$. L'inconvénient de cette méthode est qu'elle
-dépend énormément du paramètre de rugosité maximale. De plus, ils ne fournissent
-pas de moyen d'extraire la courbure de ces dérivées.
+dépend énormément du paramètre de rugosité maximale. De plus, cette approche
+n'est applicable qu'à des fonctions discrètes, et pas directement à des bords
+d'objets discrets.
+% ils ne fournissent
+%pas de moyen d'extraire la courbure de ces dérivées.
 %
 %
 % Un \DLL est un sous-ensemble de points
