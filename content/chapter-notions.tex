@@ -517,7 +517,7 @@ Grâce à ces définitions, cela nous amène directement aux questions de voisin
 des points digitaux. La relation de voisinage est une notion importante pour la
 définition de notre objet digital. Le voisinage est défini en fonction de la
 \colorize{connexité} que possède une cellule digitale par rapport aux autres.
-Les \RefTables{tab:adjacence2d}{tab:adjacence3d} définissent formellement ces
+Les \RefTablesN{tab:adjacence2d}{tab:adjacence3d} définissent formellement ces
 notions, et la \RefFigure{fig:adjacence2d} illustre la $4$-connexité et la
 $8$-connexité sur un objet digital de dimension 2. Un autre terme désigne cette
 notion de voisinage : \colorize{l'adjacence}. Ainsi, nous parlons de
@@ -557,7 +557,7 @@ pour $n=0$, les lignels pour $n=1$ en dimension 2).
   \begin{center}
     \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj4}
     \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj8}
-    \caption{Illustation du voisinage en dimension 2.\emph{À gauche :}
+    \caption{Illustation du voisinage en dimension 2. \emph{À gauche :}
     $4$-connexité, \emph{à droite :} $8$-connexité.\label{fig:adjacence2d}}
   \end{center}
 \end{figure}
@@ -617,24 +617,25 @@ topologique de l'objet digital, \cad des sous-ensemble du plan discret $\Z^n$.
 
 
 
-En dimension 2 (\respp
-dimension 3), il s'agit de la région interpixels (\resp intervoxels) entre les
-pixels (\resp voxels) à l'intérieur de l'objet digital de ceux à l'extérieur.
-Plus concrétement, les surfaces digitales sont des ensembles de surfels et de
-cellules de dimensions inférieures partageant un côté à l'intérieur de l'objet
-et un côté à l'extérieur (voir \cite{Herman1998, Udupa1994, Kong1992}). La \RefFigure{fig:dig-boundary} illustre (en rouge foncé) le
-bord topologique de $\DigShape$.
+En dimension 2 (\respp dimension 3), il s'agit de la région interpixels (\resp
+intervoxels) entre les pixels (\resp voxels) à l'intérieur de l'objet digital de
+ceux à l'extérieur. Plus concrétement, les surfaces digitales sont des ensembles
+de surfels et de cellules de dimensions inférieures partageant un côté à
+l'intérieur de l'objet et un côté à l'extérieur (voir \cite{Herman1998,
+Udupa1994, Kong1992}). La \RefFigure{fig:frontier} illustre (\emph{figure du
+bas, en bleu}) le bord topologique de $\DigShape$.
 
-\begin{figure}[ht]
-  \begin{center}
-    \input{figures/tikz/dig-boundary.tikz}
-  \end{center}
-  \caption{Illustration du bord topologique de $\DigShape$.\label{fig:dig-boundary}}
-\end{figure}
+% \begin{figure}[ht]
+%   \begin{center}
+%     \input{figures/tikz/dig-boundary.tikz}
+%   \end{center}
+%   \caption{Illustration du bord topologique de $\DigShape$.\label{fig:dig-boundary}}
+% \end{figure}
 
-L'autre avantage de la topologie de Khalimsky que nous pouvons exploiter est de
-pouvoir facilement utiliser des algorithmes d'extraction de surface par suivi de
-contour grâce aux relations d'adjacence.
+L'autre avantage de la topologie de Khalimsky que nous pouvons exploiter est le
+suivi de contour. En effet, grâce aux relations d'adjacence est à la définition
+de la topologie, les algorithmes d'extraction de surface par suivi puisqu'il
+s'agit uniquement de résoudre un graphe de surfels.
 
 %
 \section{Discrétisation}
@@ -701,13 +702,14 @@ $d$ appartenant à $\DigShape$, mis à l'échelle par le pas de discrétisation 
 Intéressons nous désormais aux bords de ces objets. Nous verrons plus tard que
 certains estimateurs sont définis sur le bord de l'objet, il semble alors
 important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
-\cad son bord topologique (en orange foncé sur la \RefFigure{fig:frontier}). La
-\colorize{$h$-frontière} $\DFr{h} \DigShape$ de l'ensemble digital $\DigShape
-\subset \Z^d$ est définie comme :
+\cad son bord topologique (en orange foncé sur la \RefFigure{fig:frontier}). Nous pouvons également noter $\partial \Body{\DSh}{h}$ le bord topologique du plongement euclidien de $\DSh$.
+% La
+% \colorize{$h$-frontière} $\DFr{h} \DigShape$ de l'ensemble digital $\DigShape
+% \subset \Z^d$ est définie comme :
 %
-\begin{equation}
-  \DFr{h} \DigShape \EqDef \partial \left( h \cdot \bigcup_{\vp \in \DigShape} \Q{\vp} \right) \,.
-\end{equation}
+% \begin{equation}
+  % \DFr{h} \DigShape \EqDef \partial \left( h \cdot \bigcup_{\vp \in \DigShape} \Q{\vp} \right) \,.
+% \end{equation}
 %
 
 
@@ -715,25 +717,39 @@ important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
   \begin{center}
     \input{figures/tikz/gauss-digit.tikz}
   \end{center}
-  \caption{Illustration d'une forme euclidienne $\Shape$, de sa frontière $\dS$,
-  du plongement euclidien de sa discrétisation de Gauss $\Body{\DSh}{h}$ et sa $h$-frontière
-  $\partial\Body{\DSh}{h}$.\label{fig:frontier}}
+  %
+  \caption{\emph{De gauche à droite en haut :} Illustration d'une forme
+  euclidienne $\Shape$ (\emph{en orange pâle}), de sa frontière $\dS$ (\emph{en
+  orange foncé}), du plongement euclidien de sa discrétisation de Gauss
+  $\Body{\DSh}{h}$ (\emph{en rouge pâle}) et son bord topologique euclidien
+  $\partial\Body{\DSh}{h}$ (\emph{en orange foncé}). \emph{En bas :} l'objet
+  digital $\DigShape = \DSh$ (\emph{en gris}, à noter que les carrés de la
+  grille sont unitaires) et son bord digital $\DigBoundary{\DSh}$ (\emph{en
+  bleu}) composé de lignels et surfels. \label{fig:frontier}}
+  %
 \end{figure}
 
 
 La \RefFigure{fig:frontier} montre une forme euclidienne $\Shape \subset \R^2$
 (en orange pâle) et sa frontière $\dS$ (en orange foncé), ainsi que
-$\Body{\DSh}{h}$ le plongement euclidien de la discrétisation de Gauss de $\Shape$ avec le pas
-de discrétisation $h$ (en rouge pâle) et sa $h$-frontière
-$\partial\Body{\DSh}{h}$ (en rouge foncé). Les points $\vp \in \DSh$ remis à
-l'échelle par le facteur $h$ sont en noir sur la figure de gauche.
+$\Body{\DSh}{h}$ le plongement euclidien de la discrétisation de Gauss de
+$\Shape$ avec le pas de discrétisation $h$ (en rouge pâle) et son bord euclidien
+$\partial\Body{\DSh}{h}$ (en rouge foncé). La figure du bas de la
+\RefFigureN{fig:frontier} montre l'objet digital $\DigShape$ ($= \DSh$) que nous
+obtenons après la discrétisation de $\Shape$ dans l'espace de Khalimsky au pas
+de discrétisation $h$ (en gris). Ainsi, nous obtenons des points digitaux $\vp
+\in \Z^2$ dans une grille carré régulière unitaire. Nous pouvons extraire le
+bord $\DigBoundary{\DigShape}$ afin d'obtenir un ensemble de lignels et de
+pointels (en bleu).
 
 
-Comme nous pouvons le voir sur la \RefFigure{fig:frontier}, la $h$-frontière de
-$\DSh$ est un sous-ensemble de dimension $(d-1)$ de $\R^d$ qui est proche de
-$\partial \Shape$. Pour certaines preuves mathématiques cette notion de
-proximité est essentielle. Une correspondance précise entre les points $\vx \in
-\dS$ et $\hat{\vx}\in \partial\Body{\DSh}{h}$ est alors nécessaire. Pour un
+Comme nous pouvons le voir sur la \RefFigure{fig:frontier}, la bord
+$\partial\Body{\DSh}{h}$ du plongement euclidien de $\DSh$ est un sous-ensemble
+de dimension $(d-1)$ de $\R^d$ qui est proche de $\partial \Shape$. Pour
+certaines preuves mathématiques cette notion de proximité est essentielle. Une
+correspondance précise entre les points $\vx \in \dS$ et $\hat{\vx}\in
+\partial\Body{\DSh}{h}$ est alors nécessaire. Définissons dans un premier temps
+les outils dont nous avons besoin pour étudier cette correspondance : pour un
 forme $\Shape \subset \R^d$, l'\colorize{axe médian} $MA(\dS)$ de $\dS$ est le
 sous-ensemble de $\R^d$ dans lequel tous les points sont les plus proche d'au
 moins deux points de $\dS$. Le \colorize{reach} de $\Shape$ est la borne
@@ -745,10 +761,11 @@ positif ont leur courbures principales bornées par $\pm 1 / \Reach{\Shape}$.
 %
 \\
 %
-Alors nous pouvons définir la correspondance $\Proj$ de la $h$-frontière
-$\partial\Body{\DSh}{h}$ vers le bord topologique $\dS$ de $\Shape$ dans la
-direction de la normale de la surface. Cette projection est nommée la
-\colorize{projection inverse} ou \anglais{back-projection} \cite{Lachaud2006} :
+Alors nous pouvons définir la correspondance $\Proj$ du bord
+$\partial\Body{\DSh}{h}$ du plongement euclidien de la discrétisation de Gauss
+de $\Shape$ vers le bord topologique $\dS$ de $\Shape$ dans la direction de la
+normale de la surface. Cette projection est nommée la \colorize{projection
+inverse} ou \anglais{back-projection} \cite{Lachaud2006} :
 %
 \begin{definition}{\fakeTitle{Projection inverse $\Proj$ \cite{Lachaud2006}}}
 \label{def:projection}
@@ -777,7 +794,7 @@ points $\vx \in \dS$. Alors, nous pouvons conclure que les bords
 $\partial\Body{\DSh}{h}$ et $\dS$ ont une distance de Hausdorff inférieure ou
 égale à $\frac{\sqrt{2}}{2}h$. De plus, la projection $\ProjX{\Shape}$ est
 continue sur $\R^d \setminus MA(\dS)$, donc également sur
-$\partial\Body{\DSh}{h}$ avec un $h$ adéquat.
+$\partial\Body{\DSh}{h}$ avec un $h$ adéquat. En dimension supérieure, nous pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}
 %
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
@@ -860,12 +877,12 @@ Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs
   %
 \end{definition}
 %
-Lorsqu'une quantité géométrique est « locale », nous avons besoin de connaître
-explicitement la correspondance entre $\dS$ et $\Boundary{\Body{\DSh}{h}}$. Un
-estimateur local digital estime la quantité géométrique sur les points de la
-$h$-frontière de l'ensemble digital. En d'autre termes, l'estimation se fait en
-tout point situé à entre les pixels internes de l'objet digital et les pixels
-externes.
+Lorsqu'une quantité géométrique est « locale », nous avons besoin de la
+propriété de projection inverse (\RefDefinition{def:projection}) afin de
+connaître explicitement la correspondance entre $\dS$ et le bord du plongement
+euclidien de sa discrétisation $\partial\Body{\DSh}{h}$. Un estimateur local
+digital estime la quantité géométrique sur tout point $\hat{\vx}$ de
+$\partial\Body{\DSh}{h}$.
 %
 \begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique locale}}
   \label{def:multigrid-convergence-local}
@@ -874,7 +891,7 @@ externes.
   $E$ \colorize{converge asymptotiquement} pour une famille de formes $\Shapes$ si
   et seulement si pour toute forme $\Shape \in \Shapes$, il existe un pas de
   discrétisation $h_0 > 0$ tel que l'estimation de $\hat{E}(\DSh,\hat{\vx},h)$
-  soit défini en tout point $\hat{\vx} \in \hBd{h} \Shape$ avec $0 < h < h_0$,
+  soit défini en tout point $\hat{\vx} \in \partial \Body{\DSh}{h}$ avec $0 < h < h_0$,
   et pour tout $\vx \in \dS$,
   %
   \begin{equation}
@@ -891,13 +908,20 @@ externes.
   %
 \end{definition}
 
+Lorsque nous implémentons un estimateur différentiel sur une surface digitale,
+l'estimation est donnée sur un élement de la surface combinatoire (une surfel ou
+un élément de dimension inférieure). Implicitement, nous estimons en un point
+$\hat{\vx}$ correspondant au centre du plongement géométrique du surfel. Nos
+preuves de convergences étant définies pour tout $\hat{\vx}$ de $\partial
+\Body{\DSh}{h}$, ce type d'implémentation des estimateurs digitaux reste
+parfaitement cohérent.
 
 Dans notre cas, nous souhaitons obtenir des estimateurs dont l'erreur
-d'estimation est en $O(h^a)$, avec la constance $a < 1$. Cette valeur de $a$
-nous permet alors de comparer les vitesses de convergence des estimateurs. Nous
-nous intéressons dans cette thèse à la \colorize{convergence asymptotique
-uniforme} de nos estimateurs, en d'autres mots il s'agit l'erreur dans le pire
-des cas de nos estimateurs.
+d'estimation est en $O(h^a)$, avec la constance $a < 1$ et $h$ qui tend vers
+$0$. Cette valeur de $a$ nous permet alors de comparer les vitesses de
+convergence des estimateurs. Nous nous intéressons dans cette thèse à la
+\colorize{convergence asymptotique uniforme} de nos estimateurs, en d'autres
+mots il s'agit l'erreur dans le pire des cas de nos estimateurs.
 
 Les preuves de convergences sont valides seulement pour des \colorize{familles d'objets}
 $\Shapes$. Ces familles d'objets font des hypothèses sur la formes, permettant
@@ -1078,7 +1102,9 @@ droite $4$-connexe), et ainsi le \colorize{segment digital} (voir la
   est un \colorize{segment digital} (ou « \anglais{DSS} »).
 %
 \end{definition}
-
+%
+Cette droite est $4$-connexe, et en fait un candidat parfait pour être reconnu à
+partir d'une surface digitale.
 
 \begin{figure}[ht]{
     \begin{center}
@@ -1095,10 +1121,8 @@ droite $4$-connexe), et ainsi le \colorize{segment digital} (voir la
 
 Nous pouvons alors faire de la reconnaissance de ces primitives. La définition
 suivante décrit la manière de reconnaître un \colorize{segment maximal} à partir
-d'un ensemble de points digitaux.
-
-Ainsi, de cette définition, nous pouvons en extraire les \colorize{segments
-maximaux} ainsi que le \colorize{faisceau de segments maximaux} :
+d'un ensemble de points digitaux, ainsi que le \colorize{faisceau de segments
+maximaux} :
 %
 \begin{definition}{\fakeTitle{Segments maximaux et faisceau de segments maximaux \cite{Lachaud2007}}}
   \label{def:MDSS}
