@@ -199,14 +199,21 @@ des quantités :
 %
 où $g(\vp)$ correspond au \colorize{défaut d'angle} de $\Boundary V$ au point
 $\vp$, \cad à $2\pi$ moins la somme des angles entre les arêtes incidentes
-consécutives à $\vp$  (voir \RefFigure{fig:normal-cycle-1}), et $|\beta(\ve)|$
-est l'angle entre les normales des triangles de $\Boundary V$ incidents au point
-$\vp$ (voir \RefFigure{fig:normal-cycle-2}). Si $\ve$ est convexe, le signe de
-$\beta(\ve)$ doit être positif et négatif si $\ve$ est concave.
-%
-\missingfigure{fig:normal-cycle-1}
-\missingfigure{fig:normal-cycle-2}
+consécutives à $\vp$  (voir à gauche de \RefFigure{fig:normal-cycle}), et
+$|\beta(\ve)|$ est l'angle entre les normales des triangles de $\Boundary V$
+incidents au point $\vp$ (voir à droite de \RefFigure{fig:normal-cycle}). Si
+$\ve$ est convexe, le signe de $\beta(\ve)$ doit être positif et négatif si
+$\ve$ est concave.
 
+
+\begin{figure}[ht]{
+    \begin{center}
+    \includegraphics[height=4cm]{figures/NormalCycle1}
+    \includegraphics[height=4cm]{figures/NormalCycle2}
+    \end{center}}
+    \caption{Principe de l'estimation de courbure des cycles normaux. La courbure gaussienne est calculée avec la somme des angles des arêtes incidentes au point concerné (\emph{à gauche}) et la courbure gaussienne avec la somme des angles des normales des faces incidentes au point (\emph{à droite}).
+      \label{fig:normal-cycle}}
+\end{figure}
 
 Enfin, ils proposent des propriétés de convergence de ces mesures de courbure
 sous certaines conditions. Soit $\mathcal{P}$ un sous-ensemble fini de $\dS$,
