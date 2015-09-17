@@ -869,40 +869,67 @@ d'objets discrets.
 % dans le voisinnage du point $\vx$.
 %Alors l'estimation de la courbure converge
 %asymptotiquement en $O(h^\frac{1}{3})$
-\begin{table}[]
+% \begin{table}[]
+% \centering
+% \caption{My caption}
+% \label{my-label}
+% \begin{tabular}{@{}lp{0.15cm}p{0.15cm}p{0.15cm}p{0.15cm}p{0.15cm}p{4cm}p{2cm}r@{}}
+% \hline
+% Estimateur & \multicolumn{5}{c}{Courbure} & Famille de formes & Vitesse de convergence & Référence \\ \cline{2-6}
+% & $\Curv$ & $\MeanCurv$ & $\GaussCurv$ & $\PrincCurv{i}$ & $\NormalDir$ &  &  & \\ \hline
+%
+% Gauss-Bonnet & \svgNope & \svgNope & \svgYes & \svgNope & \svgNope & Surface paramétrique lisse de valence $6$ & $O(\delta^\alpha)$ avec $\alpha \ge 3$ & \cite{Xu2006} \\
+%
+% Cycles normaux & \svgNope & \svgYes & \svgYes & \svgNope & \svgNope & Surface lisse $\epsilon lfs$ & $O(\epsilon)$ & \cite{CohenSteiner2003} \\
+%
+%
+% \MDCA     & \svgYes & \svgNope & \svgNope & \svgNope & \svgNope & ??? & \svgNope & \cite{Coeurjolly2001} \\
+% \II       & \svgYes & \svgYes & \svgYes & \svgYes & \svgYes & $\Shapes^{3-SC}$ avec $R = kh^\frac{1}{3}$ & $O(h^\frac{1}{3})$ & \cite{CVIU2014} \\
+% \hline
+% \end{tabular}
+% \end{table}
+
+\begin{table}[ht]
 \centering
-\caption{My caption}
-\label{my-label}
-\begin{tabular}{@{}lp{0.15cm}p{0.15cm}p{0.15cm}p{0.15cm}p{0.15cm}p{4cm}p{2cm}r@{}}
-\hline
-Estimateur & \multicolumn{5}{c}{Courbure} & Famille de formes & Vitesse de convergence & Référence \\ \cline{2-6}
-& $\Curv$ & $\MeanCurv$ & $\GaussCurv$ & $\PrincCurv{i}$ & $\NormalDir$ &  &  & \\ \hline
+\caption{Convergence asymptotique connus d'estimateurs de courbure sur des données digitales.}
+\label{tab:curv-comp}
+\begin{tabular}{@{}p{1.9cm}lllr@{}}
+\toprule
+ & & \multicolumn{2}{c}{Vitesse de convergence} &            \\ \cmidrule(r){3-4}
+Estimateur & Famille de formes & Borne sup. & Observée & Référence \\ \midrule
 
-Gauss-Bonnet & \svgNope & \svgNope & \svgYes & \svgNope & \svgNope & Surface paramétrique lisse de valence $6$ & $O(\delta^\alpha)$ avec $\alpha \ge 3$ & \cite{Xu2006} \\
+$\hat{\Curv}^{MDCA}$ & $\Shapes^{1-SC}$ & ? & $O(h^\frac{1}{3})$ & \cite{Roussillon2011} \\
+$\hat{\Curv}^{BC}$ & $\Shapes^{3-SC}$ & $O(h^\frac{4}{9})$ & $\approx O(h^{0.154})$ & \cite{Malgouyres2008} \\
+$\hat{\Curv}^{MDSS}$ & $\Shapes^{1-SC}$ & ? & \svgNope & \cite{Coeurjolly2001} \\
+$\hat{\Curv}^{II}$ & $\Shapes^{3-SC}$ avec $R = kh^\frac{1}{3}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{1}{3})$ & ici \\
+$\hat{\Curv}^{*II}$ & $\Shapes^{3-SC}$ & $O\left(h^\frac{1}{3} \log^2 \left(\frac{1}{3}\right)\right)$ & $O(h^\frac{1}{3})$ & ici \\
+\midrule
+% $\hat{\MeanCurv}^{JetFitting}$ &  & ? & $O(h^\frac{1}{3})$ & \cite{Cazals2005} \\
+$\hat{\MeanCurv}^{II}$ & $\Shapes^{3-SC}$ avec $R = kh^\frac{1}{3}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{1}{3})$ & ici \\
+$\hat{\MeanCurv}^{*II}$ & $\Shapes^{3-SC}$ & ? & $O(h^\frac{1}{3})$ & ici \\
+\midrule
+% $\hat{\PrincCurv{i}}^{JetFitting}$ &  & ? & $O(h^\frac{1}{3})$ & \cite{Cazals2005} \\
+$\hat{\PrincCurv{i}}^{II}$ & $\Shapes^{3-SC}$ avec $R = kh^\frac{1}{3}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{1}{3})$ & ici \\
+$\hat{\PrincCurv{i}}^{*II}$ & $\Shapes^{3-SC}$ & ? & $O(h^\frac{1}{3})$ & ici \\
 
-Cycles normaux & \svgNope & \svgYes & \svgYes & \svgNope & \svgNope & Surface lisse $\epsilon lfs$ & $O(\epsilon)$ & \cite{CohenSteiner2003} \\
-
-
-\MDCA     & \svgYes & \svgNope & \svgNope & \svgNope & \svgNope & ??? & \svgNope & \cite{Roussillon2011} \\
-\II       & \svgYes & \svgYes & \svgYes & \svgYes & \svgYes & Convexe $C^3$ à courbure non nulle avec $R = kh^\frac{1}{3}$ & $O(h^\frac{1}{3})$ & \cite{CVIU2014} \\
-\hline
+\bottomrule
 \end{tabular}
 \end{table}
 
 
 Ainsi, nous avons quelques estimateurs qui convergent asymptotiquement en
-dimension 2, mais qui peuvent être sensibles au bruit de la forme ou dont la
-preuve de convergence repose sur les paramètres choisis. De plus pour
-l'estimation de courbure le long de courbes 2D, la convergence asymptotique
-d'estimateurs ne nécessitant aucun paramètre représente toujours un défi (des
-résultats de convergence d'estimateurs sans paramètre ont été obtenus pour
-l'estimation de longueur \cite{Coeurjolly2004} et des normales
+dimension 2 (voir \RefTable{tab:curv-comp}), mais qui peuvent être sensibles au
+bruit de la forme ou dont la preuve de convergence repose sur les paramètres
+choisis. De plus pour l'estimation de courbure le long de courbes 2D, la
+convergence asymptotique d'estimateurs ne nécessitant aucun paramètre représente
+toujours un défi (des résultats de convergence d'estimateurs sans paramètre ont
+été obtenus pour l'estimation de longueur \cite{Coeurjolly2004} et des normales
 \cite{deVieilleville2007}). Nous allons en proposer dans ce chapitre. Enfin, il
 n'existe aucun estimateur de courbure en dimension 3 apportant des preuves de
 convergence asymptotique \cite{Lenoir1997,Fourey2008}. Nous allons également
 palier à ce manque dans ce chapitre.
 
-\section{Estimation de la courbure par intégration volumique d'une boule locale}
+\section{Estimation de la courbure par intégration volumique locale d'une boule}
 \label{sec:estimators:volume}
 %
 Nous allons désormais nous intéresser aux travaux réalisés au cours de cette
@@ -914,8 +941,7 @@ en dimension 2 et 3. La principale contribution de ces travaux est de démontrer
 la convergence asymptotique de ces estimateurs sur des données digitales. Ces
 travaux ont été publiés dans \cite{DGCI2013,CVIU2014}.
 
-
-En \GeometryProcessing, le calcul d'invariants par intégration a été largement
+\GeometryProcessing, le calcul d'invariants par intégration a été largement
 étudié dans le but de définir des estimateurs de quantités différentielles.
 \cauthors{Pottmann}{Pottmann2007,Pottmann2009} en ont d'ailleurs fait un
 panorama assez complet. L'idée principale de cette approche est de déplacer un support
