@@ -1,0 +1,60 @@
+% !TEX root = ../main.tex
+%
+\section{Application dans digitalSnow}%
+\label{sec:applications:digitalsnow}
+%
+Le projet \digitalSnow est un projet de recherche financé par l'Agence Nationale de le
+Recherche qui regroupe trois laboratoires spécialisé dans des domaines
+différents : le laboratoire d'informatique \textsc{LIRIS} de l'Université de
+Lyon, le laboratoire de mathématiques \textsc{LAMA} de l'Université de Savoie
+Mont-Blanc, et le Centre d'Études de la Neige \textsc{CEN} du Centre National de
+Recherches Météorologiques.
+
+
+L'objectif principal de ce projet est de fournir des outils efficaces pour
+étudier la métamorphose de la neige à partir d'images digitales 3D de
+micro-structures de neige acquises en utilisant des techniques de tomographie à
+rayons X. En effet, lors d'une chute de neige, les cristaux de neige
+s'accumulent sur le sol et forment progressivement un milieu poreux complexe
+constitué d'air, de vapeur d'eau, de glace et parfois d'eau liquide. Cette neige
+se transforme avec le temps en fonction de l'environnement. Ce transformation
+est appelée la métamorphose peut être provoquée par trois facteurs : la
+métamorphose de la neige humide, la métamorphose isotherme et la métamorphose du
+gradient de température.
+
+
+%  En particulier, notre travail se concentrera sur le développement de
+% modèles numériques 3D à partir d'images qui peuvent simuler l'évolution de la
+% forme de la microstructure de la neige au cours de son métamorphisme. Il sera
+% complété par d'autres outils conçus pour extraire les propriétés physiques des
+% microstructures calculées.
+%
+%
+%
+%
+%
+%
+%
+% L'objectif est de mieux comprendre les équations physiques d'évolution de
+% micro-structures de neige.
+%
+%
+%
+% , afin de pouvoir les modéliser dans un schéma
+% numérique pour simuler les métamorphoses des grains.
+%
+% Modélisation et analyse de structures digitales 3D (grain, facettes)
+%
+% Mise en relation équations ↔ schéma numérique ↔ modèle d’évolution de surfaces ↔
+% outils d’analyse discrets pour la métamorphose
+
+% Moteur des métamorphoses de neige sèche : gradient de pression H2O causé par la courbure moyenne (Effet de Kelvin) ===> slides de neige calonne 14-03-2012 T06
+% En gros, ça se lisse en déplaçant de la matière (facette, toussa)
+
+% Le calcul de courbure moyenne sur les volumes digitaux  permet :
+% - de caractériser le volume. En l'absence de gradient de température dans le manteau neigeux, les grains grossissent et s'arrondissent lentement. Par contre, en présence d'un gradient de température, les cristaux croissent suivant leurs axes cristallographiques privilégiés et forment des facette
+% - de simuler certains méthamorphoses de neige -> les zones convexes ont tendance à se sublimer tandis que la vapeur se condense dans les zones concaves.
+
+\section{Implémentations dans DGtal}%
+\label{sec:applications:dgtal}
+%
