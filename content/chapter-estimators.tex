@@ -4023,12 +4023,35 @@ maximales, mais cela reste à prouver.
 
 La troisième limitation est le temps de calcul sur de gros objets digitaux. Il
 n'est pas rare d'avoir dans l'industrie des objets à analyser avec une grosse
-résolution (par exemple $1024^3$) et le coût de l'estimation peut s'avérer un
-peu élevé pour certaines utilisations. Cependant, cette limitation est à mettre
-en parallèle avec le fait que nos estimateurs sont robustes au bruit, et c'est
-certainement le prix à payer (les approches de reconnaissances d'objets par
-exemple sont plus rapides, mais très sensibles au bruit comme nous l'avons
-montré).
+résolution (par exemple $\nombre{1024}^3$) et le coût de l'estimation peut
+s'avérer un peu élevé pour certaines utilisations. Cependant, cette limitation
+est à mettre en parallèle avec le fait que nos estimateurs sont robustes au
+bruit, et c'est certainement le prix à payer (les approches de reconnaissances
+d'objets par exemple sont plus rapides, mais très sensibles au bruit comme nous
+l'avons montré). À noter que pour obtenir exactement les mêmes résultats avec
+\BC et \II (\cad quand l'erreur d'estimation en norme $l_\infty$ par rapport à
+la vraie valeur de courbure est égale entre les deux estimateurs), \BC a besoin
+d'aller à une résolution de grille dix fois inférieure par rapport à notre
+estimateur, comme le montre le \RefTable{tab:comp-BC-II}, avec le coût en temps
+de calcul qui en résulte.
+
+\begin{table}[]
+\centering
+%
+\caption{Comparaison des estimateurs \BC et \II sur la forme \Ellipse pour une
+erreur d'estimation en norme $l_\infty$ égale (erreur de $0.046$).}
+%
+\label{tab:comp-BC-II}
+\setlength{\tabcolsep}{10pt}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+                                                  & \BC                     & \II                     \\ \midrule
+pas de discrétisation $h$                         & $0.003$                 & $0.03$                  \\
+temps de calcul (\emph{en ms})                    & $\nombre{421945}$       & $\nombre{350}$          \\
+Taille de masque                                  & $\nombre{91336}$        & $\nombre{8349}$         \\
+\multicolumn{1}{r}{(\emph{avec optimisation})}    &                         & $8 \times 145$          \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
 Enfin, ce n'est pas une limitation à proprement parlé mais plutôt une
