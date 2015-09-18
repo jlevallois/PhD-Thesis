@@ -3,10 +3,10 @@
 \chapter{Applications}
 \label{sec:applications}
 
-\cleanchapterquote{We have seen that computer programming is an art, because it
-applies accumulated knowledge to the world, because it requires skill and
-ingenuity, and especially because it produces objects of beauty.}{Jean-Claude
-Vandamme}{Ma vie, mon œuvre.}
+% \cleanchapterquote{We have seen that computer programming is an art, because it
+% applies accumulated knowledge to the world, because it requires skill and
+% ingenuity, and especially because it produces objects of beauty.}{Jean-Claude
+% Vandamme}{Ma vie, mon œuvre.}
 
 \setcounter{minitocdepth}{3}
 \minitoc
@@ -53,7 +53,7 @@ utilisant, allant de la reconnaissance d'objets dans une scène à la compressio
 de données, l'analyse de données médicales ou bien archéologiques. Plus
 récemment, la rapide démocratisation de systèmes d'acquisition 3D à bas coût
 comme la \emph{Microsoft Kinect} apporte un regain d'intérêt pour l'analyse de
-formes.\comJeremy{Citer les articles -> mendeley}
+formes.%\comJeremy{Citer les articles -> mendeley}
 %
 %% Parler de features globales (aire, volume, moments, D2 shape distributions) et locales ?
 %
@@ -391,69 +391,65 @@ de la forme d'entrée. Le \RefSection{sec:applications:feature:comparison} compa
 %
 \paragraph{Mesure de covariance des cellules de Voronoï}
 %
-\cauthors{Mérigot}{Merigot2011} proposent une méthode robuste pour extraire
-d'une surface lisse des informations de courbure ainsi que des zones
-caractéristiques nettes. Cette méthode, basée sur les travaux de
-\cauthors{Alliez}{Alliez2007}, associe en chaque point $\vp$ une \emph{mesure de
-covariance des cellules de Voronoï} $\mathcal{V}_{K,R}$ (\VCMM --- \VCM ---) à
-laquelle ils peuvent extraire des informations sur la géométrie sous-jacente
-(\RefFigure{fig:mellado-VCM}). Il s'agit en fait de calculer un matrice de
-covariance ($cov$) sur des cellules de Voronoï ($Vor_K$) des points du bord de
-l'objet :
-%
-\begin{equation}
-    cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
-\end{equation}
-
-\begin{figure}[ht]{
-    \begin{center}
-    \includegraphics[height=4cm]{images/Feature/VCM}
-    \end{center}}
-    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : \comJeremy{longueur des directions des cellules} de Voronoï.
-      \label{fig:mellado-VCM}}
-\end{figure}
-
-Afin d'avoir une information plus locale de la variation de la forme, ils se
-limitent à un voisinage de rayon $R$ :
-%
-\begin{equation}
-  \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
-\end{equation}
-%
-Enfin, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
-version convoluée de \VCM grâce à une fonction indicatrice $\chi_r$
-(ayant pour paramètre un rayon $r$) :
-%
-\begin{equation}
-  \mathcal{V}_{K,R} \ast \chi_r(\{\vp\}) \EqDef \int_{K^R} (\vx - \pi^K(\vx))(\vx - \pi^K(\vx))^T \chi(\pi^K(\vx) - \vp) d\vx .
-\end{equation}
-%
-où $\pi^K(\vx)$ est la projection de tout point $\vx$ vers le point le plus proche de
-$K$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si $\vx$
-appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction « Hat »
-($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
-
-\begin{figure}[ht]{
-    \begin{center}
-    \includegraphics[height=6cm]{images/Feature/VCM_notations}
-    \end{center}}
-    \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:VCM-multiscale}}
-\end{figure}
+Nous avons déjà parlé de la mesure de covariances des cellules de Voronoï de
+\cauthors{Mérigot}{Merigot2011} dans l'état de l'art du
+\RefChapitre{sec:estimators}. Pour résumer, chaque point $\vp$ est associé à une
+\emph{mesure de covariance des cellules de Voronoï} $\mathcal{V}_{K,R}$ (\VCMM ---
+\VCM ---) à laquelle ils peuvent extraire des informations sur la géométrie
+sous-jacente.
 
 
-À noter que \cauthors{Cuel}{Cuel2014DGCI} ont défini une variante digitale du
-\VCM ($\DigShape \in \Z^3$) :
+% Il s'agit en fait de calculer un matrice de
+% covariance ($cov$) sur des cellules de Voronoï ($Vor_K$) des points du bord de
+% l'objet :
+% %
+% \begin{equation}
+%     cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
+% \end{equation}
 %
-\begin{equation}
-  \hat{\mathcal{V}}_{\DigShape,h,R} \ast \chi_r(\{\vp\})) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vx - \pi^{\DigShape}(\vx)) (\vx - \pi^{\DigShape}(\vx))^t \chi(\pi^{\DigShape}(\vx)) ,
-\end{equation}
 %
-où $\Omega_h^R$ est l'ensemble des (centres de) voxels entièrement contenus dans
-$\DigShape^R$ (la $R$-dilatation de $\DigShape$) au pas de discrétisation $h$.
 %
-Il est à noter que la convergence asymptotique de cette variante digitale de
-l'estimateur \VCM pour les normales a été prouvée (bord de la surface de classe
-$C^2$ et de reach $\rho > 0$) \cite{Cuel2014DGCI}.
+% Afin d'avoir une information plus locale de la variation de la forme, ils se
+% limitent à un voisinage de rayon $R$ :
+% %
+% \begin{equation}
+%   \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
+% \end{equation}
+% %
+% Enfin, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
+% version convoluée de \VCM grâce à une fonction indicatrice $\chi_r$
+% (ayant pour paramètre un rayon $r$) :
+% %
+% \begin{equation}
+%   \mathcal{V}_{K,R} \ast \chi_r(\{\vp\}) \EqDef \int_{K^R} (\vx - \pi^K(\vx))(\vx - \pi^K(\vx))^T \chi(\pi^K(\vx) - \vp) d\vx .
+% \end{equation}
+% %
+% où $\pi^K(\vx)$ est la projection de tout point $\vx$ vers le point le plus proche de
+% $K$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si $\vx$
+% appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction « Hat »
+% ($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
+%
+% \begin{figure}[ht]{
+%     \begin{center}
+%     \includegraphics[height=6cm]{images/Feature/VCM_notations}
+%     \end{center}}
+%     \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:VCM-multiscale}}
+% \end{figure}
+%
+%
+% À noter que \cauthors{Cuel}{Cuel2014DGCI} ont défini une variante digitale du
+% \VCM ($\DigShape \in \Z^3$) :
+% %
+% \begin{equation}
+%   \hat{\mathcal{V}}_{\DigShape,h,R} \ast \chi_r(\{\vp\})) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vx - \pi^{\DigShape}(\vx)) (\vx - \pi^{\DigShape}(\vx))^t \chi(\pi^{\DigShape}(\vx)) ,
+% \end{equation}
+% %
+% où $\Omega_h^R$ est l'ensemble des (centres de) voxels entièrement contenus dans
+% $\DigShape^R$ (la $R$-dilatation de $\DigShape$) au pas de discrétisation $h$.
+% %
+% Il est à noter que la convergence asymptotique de cette variante digitale de
+% l'estimateur \VCM pour les normales a été prouvée (bord de la surface de classe
+% $C^2$ et de reach $\rho > 0$) \cite{Cuel2014DGCI}.
 
 
 L'estimateur \VCM a alors besoin de deux paramètres : le rayon de dilatation $R$
@@ -648,8 +644,8 @@ singularités $f$ intégrant toutes les échelles :
 %
 Cette fonction permet de différencier les régions sans variations géométriques (en bleu sur
 la \RefFigure{fig:mellado-cubesphere}) de celles qui ont de hautes variations
-(en jaune)\footnote{$tanh(\vx)$ est souvent utilisée pour \comJeremy{renforcer des
-effets}}.
+(en jaune)\footnote{$tanh(\vx)$ est souvent utilisée pour renforcer des
+effets}.
 
 \begin{figure}[ht]{
   \begin{center}
@@ -757,10 +753,10 @@ sont l'exponentielles des éléments de $|\mathcal{L}(i) - \mathcal{J}_n(i) \ast
 \mathcal{L}(i)|$, avec $\mathcal{J}_n(i)$ un filtre local moyen.
 
 
-\comJeremy{La carte de saillance $\mathcal{S}_i$ est alors obtenue en sommant $S$ le long
+La carte de saillance $\mathcal{S}_i$ est alors obtenue en sommant $S$ le long
 de chaque ligne de la matrice, correspondant chacune à un vertice du maillage.
 L'aspect multi-échelle apparait en calculant ces cartes de saillances sur le
-maillage auquel on aura fait varier le paramètre de lissage.}
+maillage auquel on aura fait varier le paramètre de lissage.
 
 
 Ces techniques sont très intéressante mais possèdent cependant des inconvénients
@@ -1279,9 +1275,9 @@ comme une partie \featflat.
   \begin{center}
     \setlength{\tabcolsep}{1pt}
     \begin{tabular}{c c c}
-      \includegraphics[width=4cm]{images/Feature/Bunny_512_II_scale} &
-      \includegraphics[width=4cm]{images/Feature/Snow_I08_II_scale} &
-      \includegraphics[width=4cm]{images/Feature/Snow_E2bis_II_scale} \\
+      \includegraphics[width=4.5cm]{images/Feature/Bunny_512_II_scale} &
+      \includegraphics[width=4.5cm]{images/Feature/Snow_I08_II_scale} &
+      \includegraphics[width=4.5cm]{images/Feature/Snow_E2bis_II_scale} \\
     \end{tabular}
     \caption{Résultat de notre estimateur de singularité sur l'objet \Bunny ainsi que des microstructures de neige obtenues à partir de micro-tomographie à rayons X.\label{fig:feature-snow}}
   \end{center}
@@ -1298,9 +1294,9 @@ $1024^3$.
   \begin{center}
     \setlength{\tabcolsep}{1pt}
     \begin{tabular}{c c c}
-      \includegraphics[width=4cm]{images/Feature/OctaFlower_256_II_scale} &
-      \includegraphics[width=4cm]{images/Feature/OctaFlower_512_II_scale} &
-      \includegraphics[width=4cm]{images/Feature/OctaFlower_1024_II_scale}
+      \includegraphics[width=4.5cm]{images/Feature/OctaFlower_256_II_scale} &
+      \includegraphics[width=4.5cm]{images/Feature/OctaFlower_512_II_scale} &
+      \includegraphics[width=4.5cm]{images/Feature/OctaFlower_1024_II_scale}
     \end{tabular}
     \caption{Résultat de notre estimateur de singularité sur l'objet \OctaFlower à différentes résolutions ($256^3$, $512^3$ et $1024^3$).\label{fig:feature-octa}}
   \end{center}
@@ -1351,10 +1347,10 @@ comportent en effet plusieurs zones caractéristiques de différentes tailles
       \toprule
       Object & Résolution (voxels) & \multicolumn{2}{r}{\# éléments de surface (surfels)} \\ \cmidrule(l){3-4}
                      &            & non bruité & bruité \\ \midrule
-      \textsc{SpheresUnion}    & $400 \times 200 \times 200$ & $265~062$ & $640~476$ \\
-      \textsc{CubeSphere}     & $200^3$    & $262~642$ & $855~316$   \\
-      \textsc{Fandisk}        & $512^3$    & $734~658$ & $1~832~088$   \\
-      \textsc{OctaFlower}     & $512^3$    & $692~916$ & $1~740~509$   \\ \bottomrule
+      \textsc{SpheresUnion}    & $400 \times 200 \times 200$ & $\nombre{265062}$ & $\nombre{640476}$ \\
+      \textsc{CubeSphere}     & $200^3$    & $\nombre{262642}$ & $\nombre{855316}$   \\
+      \textsc{Fandisk}        & $512^3$    & $\nombre{734658}$ & $\nombre{1832088}$   \\
+      \textsc{OctaFlower}     & $512^3$    & $\nombre{692916}$ & $\nombre{1740509}$   \\ \bottomrule
     \end{tabular}
   \end{center}
 \end{table}
@@ -1417,8 +1413,8 @@ utilisés sont spécifiés dans les légendes des figures.
 \end{overpic}
 \caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
 \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
-Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
+Paramètres utilisés pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
+Paramètres utilisés pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative}}
 \end{figure}
 
 
@@ -1463,10 +1459,10 @@ Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10
     \end{overpic}
     \caption[Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.]{Évaluation des détecteurs de singularités sur des formes parfaitement discrétisées.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Paramètre utilisé pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
-    Paramètre utilisé pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
-    Paramètre utilisé pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
-    Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-2}}
+    Paramètres utilisés pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
+    Paramètres utilisés pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
+    Paramètres utilisés pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
+    Paramètres utilisés pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-2}}
 \end{figure}
 
 \begin{figure}[ht]
@@ -1510,8 +1506,8 @@ Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10
     \end{overpic}
     \caption[Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative}]{Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative}.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Paramètre utilisé pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
-    Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative-noise}}
+    Paramètres utilisés pour \cauthors{Clarenz}{Telea2004}: $R_1 = 10$, $R_2 = 22$, $\alpha = 1$, $\beta = 50$.
+    Paramètres utilisés pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10$, $R_2 = 22$, $r_2 = 22$, $T = 0.2$.\label{fig:feature-comparative-noise}}
 \end{figure}
 
 \begin{figure}[ht]
@@ -1557,10 +1553,10 @@ Paramètre utilisé pour \cauthors{Mérigot}{Merigot2011}: $R_1 = 10$, $r_1 = 10
     \end{overpic}
     \caption[Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative-2}]{Évaluation des détecteurs de singularités sur des approximations bruitées de \RefFigure{fig:feature-comparative-2}.
     \SpheresUnion : $400 \times 200 \times 200$ voxels, \CubeSphere : $200^3$ voxels, \Fandisk : $512^3$ voxels, \OctaFlower : $512^3$ voxels.
-    Paramètre utilisé pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
-    Paramètre utilisé pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
-    Paramètre utilisé pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
-    Paramètre utilisé pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-noise-2}}
+    Paramètres utilisés pour \cauthors{Mellado}{Mellado2012}: $r_{min} = 5$, $r_{max} = 25$.
+    Paramètres utilisés pour \cauthors{Pauly}{Pauly2003}: $r_{min} = 5$, $r_{max} = 25$, $\tau_{max} = 0.01$.
+    Paramètres utilisés pour \cauthors{Park}{Park2012}: $r_{min} = 5$, $r_{max} = 25$, $\omega_{min} = 1.4$, $\omega_{max} = 1.4$, $\tau = 1.2$.
+    Paramètres utilisés pour notre algorithme : $r_{min} = 5$, $r_{max} = 25$.\label{fig:feature-comparative-noise-2}}
 \end{figure}
 
 Les méthodes basées sur la variation de barycentres (\nauthor{Clarenz}) et \VCM

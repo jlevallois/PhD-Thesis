@@ -20,12 +20,12 @@ L'objectif principal de ce projet est de fournir des outils efficaces pour
 \end{wrapfigure}
 %
 micro-structures de neige acquises en utilisant des techniques de tomographie à
-rayons X (image de droite\footnote{Tomographe appartenant au laboratoire 3SR}).
-En effet, lors d'une chute de neige, les cristaux de neige s'accumulent sur le
-sol et forment progressivement un milieu poreux complexe constitué d'air, de
-vapeur d'eau, de glace et parfois d'eau liquide. La quantité de ces composants
-et leur arrangement géométrique à l'échelle granulaire (micro-structure de
-neige) se transforme avec le temps en fonction des paramètres physiques de
+rayons X (image de droite\footnote{Crédit image : laboratoire 3SR}). En effet,
+lors d'une chute de neige, les cristaux de neige s'accumulent sur le sol et
+forment progressivement un milieu poreux complexe constitué d'air, de vapeur
+d'eau, de glace et parfois d'eau liquide. La quantité de ces composants et leur
+arrangement géométrique à l'échelle granulaire (micro-structure de neige) se
+transforme avec le temps en fonction des paramètres physiques de
 l'environnement. Cette transformation est appelée la métamorphose, et peut être
 décomposée en deux types : la métamorphose de la « neige humide » provoqué par
 la présence d'eau liquide, la métamorphose de la « neige sèche » (métamorphose
@@ -42,7 +42,7 @@ d'isothermie et métamorphose du gradient de température).
     \includegraphics[width=4.5cm]{images/digitalSnow/Snow_I08_II_scale}
     \includegraphics[width=4.5cm]{images/digitalSnow/Snow_E2bis_II_scale}\\
     \end{center}}
-    \caption{.
+    \caption{Échantillons
       \label{fig:digitalSnow-curv}}
 \end{figure}
 
@@ -55,16 +55,19 @@ métamorphisme. Le calcul de courbure moyenne sur les volumes digitaux
 (\RefFigure{fig:digitalSnow-curv}, au milieu) permet tout d'abord de
 caractériser le volume des grains de neige. En l'absence de gradient de
 température dans le manteau neigeux, les grains grossissent et s'arrondissent
-lentement (Effet de Kelvin). Cependant, en présence d'un gradient de
-température, les cristaux croissent suivant leurs axes cristallographiques
-privilégiés et forment des facettes. Nous pouvons également détecter ces
-facettes grâces à l'estimateur de singularité dont nous avons décrit dans ce
-chapitre. La \RefFigure{fig:digitalSnow-curv} en bas montre deux captures de
-microstructures de neige à différents moments. Il est alors immédiat que les
-grains de neige de gauche présentent plus de facettes que ceux de droite. De
-plus, l'estimation de la courbure permet de simuler certains méthamorphoses de
-neige : les zones convexes ont tendance à se sublimer tandis que la vapeur se
-condense dans les zones concaves.
+lentement, principalement guidé par un flot de courbure moyenne sur l'interface
+(Effet de Kelvin). Cependant, en présence d'un gradient de température, les
+cristaux croissent suivant leurs axes cristallographiques privilégiés et forment
+des facettes. Nous pouvons également détecter ces facettes grâces à l'estimateur
+de singularité dont nous avons décrit dans ce chapitre. La
+\RefFigure{fig:digitalSnow-curv} en bas montre deux captures de microstructures
+de neige à différents moments. Il est alors immédiat que les grains de neige de
+gauche présentent plus de facettes que ceux de droite. De plus, l'estimation de
+la courbure permet de simuler certains méthamorphoses de neige : les zones
+convexes ont tendance à se sublimer tandis que la vapeur se condense dans les
+zones concaves. Notre rôle était d'apporter des estimateurs de courbure fiables
+(c'est à dire avec des preuves de convergence) mais également robuste au bruit
+lié à l'acquisition par le tomographe à rayons X.
 
 \section{Implémentations dans DGtal}%
 \label{sec:applications:dgtal}
@@ -117,6 +120,17 @@ Ainsi, au lieu de dénombrer le nombre de points digitaux sur la sphère digital
 entière, nous pouvons récupérer le dénombrement de l'itération (hachurée),
 retirer la partie qui n'est plus partagée avec la nouvelle position (en orange),
 et ajouter celle qui est nouvelle (en vert).
+Dans le pire des cas (déplacement non $0$-adjacent), l'estimateur utilisera
+l'intégralité du support pour le dénombrement de l'intersection de la sphère et
+de l'objet, \cad qu'il n'y aura aucune optimisation. Comme nous l'avons dit
+précédemment (\RefSection{sec:complexite}), le coût du calcul par élément de
+surface peut être réduit de $O\left(\left(\frac{R}{h}\right)^d\right)$ (taille du support complet) à
+$O\left(\left(\frac{R}{h}\right)^{d-1}\right)$. Pour être tout à fait juste, il faut également
+rajouter le coût initial du premier calcul obligatoire sur le support entier, et
+le coût supplémentaire au début pour précalculer les masques de déplacement,
+mais ceux-ci sont négligeable. Par exemple, pour une taille de support 2D entier
+de $\nombre{91893}$ éléments, l'optimisation construit de $8$ masques de
+déplacements supplémentaires d'environ $\nombre{450}$ éléments.
 
 \begin{figure}[th]
   \centerline{
@@ -146,21 +160,8 @@ et ajouter celle qui est nouvelle (en vert).
   %
 \end{figure}
 
-Dans le pire des cas (déplacement non $0$-adjacent), l'estimateur utilisera
-l'intégralité du support pour le dénombrement de l'intersection de la sphère et
-de l'objet, \cad qu'il n'y aura aucune optimisation. Comme nous l'avons dit
-précédemment (\RefSection{sec:complexite}), le coût du calcul par élément de
-surface peut être réduit de $O\left(\left(\frac{R}{h}\right)^d\right)$ (taille du support complet) à
-$O\left(\left(\frac{R}{h}\right)^{d-1}\right)$. Pour être tout à fait juste, il faut également
-rajouter le coût initial du premier calcul obligatoire sur le support entier, et
-le coût supplémentaire au début pour précalculer les masques de déplacement,
-mais ceux-ci sont négligeable. Par exemple, pour une taille de support 2D entier
-de $\nombre{91893}$ éléments, l'optimisation construit de $8$ masques de
-déplacements supplémentaires d'environ $\nombre{450}$ éléments.
-
-
 Tous les estimateurs de courbure et de singularité conçus pendant cette thèse et
 décris dans le \RefChapitre{sec:estimators} et ce chapitre ont été implémentés
 dans \DGtal et sont dès à présent disponible librement. Tous les résultats
-exposés dans ce document sont vérifiables directement avec les outils de \DGtal. Pour plus d'informations, se référer à la documentation de \DGtal\footnote{Documentation du paquet « Géométrie » :
+exposés dans ce document sont reproductibles directement avec les outils de \DGtal. Pour plus d'informations, se référer à la documentation de \DGtal\footnote{Documentation du paquet « Géométrie » :
 \url{http://liris.cnrs.fr/dgtal/doc/stable/packageGeometry.html}} et à \cite{Coeurjolly2013Implementation}.

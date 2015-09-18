@@ -3,7 +3,7 @@
 \chapter{Estimateurs digitaux de courbures}
 \label{sec:estimators}
 %
-\cleanchapterquote{We have seen that computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty.}{Jean-Claude Vandamme}{Ma vie, mon œuvre.}
+% \cleanchapterquote{We have seen that computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty.}{Jean-Claude Vandamme}{Ma vie, mon œuvre.}
 %
 \setcounter{minitocdepth}{4}
 \minitoc
@@ -26,16 +26,15 @@ considérons que $\Shapes = \Shapes^{C}$.
 \section{Introduction}
 \label{sec:estimators:introduction}
 %
-Comme nous l'avons vu dans le chapitre précédent (\RefSection{sec:geo-diff}),
-la géométrie d'une forme est décrite à partir de ses quantités différentielles comme la
-courbure.
+Comme nous l'avons vu dans le chapitre précédent (\RefSection{sec:geo-diff}), la
+géométrie d'une forme est décrite à partir de ses quantités différentielles
+comme la courbure.
 % Et nous parlons bien de décrire, puisque toutes ces quantités sont ce
 %qui la caractérise de manière unique.
-C'est pour cela que plusieurs champs de
-recherches se tournent vers la manière de récupérer ces quantités en les
-estimant à partir des données.\todoJeremy{citer un survey}
+C'est pour cela que plusieurs champs de recherches se tournent vers la manière
+de récupérer ces quantités en les estimant à partir des
+données \cite{Petitjean2002, Wang2009}.
 %
-\\
 %
 Les données discrètes prennent différentes formes, qui sont principalement liées à la façon de capturer les
 objets ou à leur utilisation. Elles peuvent être des nuages de points, des
@@ -138,7 +137,6 @@ $[\vp\vp_j(\delta)\vp_{j+}(\delta)]$ (en gris sur la
 quand $\delta$ tend vers $0$, où $\GaussCurv(\vp)$ est la valeurs de courbure
 gaussienne au point $\vp$.
 %
-\\
 %
 L'auteur propose une propriété de convergence supplémentaire lorsque
 l'échantillonnage est perturbé par une erreur $O(\delta^\alpha)$, mais avec
@@ -159,7 +157,6 @@ Une autre approche notable est l'estimation d'information de courbure par
 intégration de mesures des courbures, basée sur la théorie du cycle normal sur
 un maillage triangulé \cite{CohenSteiner2003,CohenSteiner2006}.
 %
-\\
 %
 La théorie du cycle normal, introduite par \cauthor{Wintgen}{Wintgen1982} et
 \cauthor{Zähle}{Zahle1986} est une technique qui permet de définir de manière
@@ -270,7 +267,6 @@ Taylor tronqué à l'ordre $n$. L'intérêt de ces jets est qu'ils contiennent d
 informations sur les quantités géométriques locales (tangentes / normales,
 courbures principales, etc.).
 %
-\\
 %
 Ainsi, le développement de Taylor d'une courbe à l'ordre $n$ équivaut à :
 %
@@ -298,7 +294,6 @@ dans les jets osculateurs.
 Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2)
 résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
 %
-\\
 %
 Pour la première étape, dans le cas d'un maillage, cela correspond à récupérer
 les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant
@@ -309,7 +304,8 @@ progressivement jusqu'à atteindre $N$ points.
 % plan tangent estimé (nécessite cependant que l'échantillonnage soit assez
 % dense).
 %
-\\
+
+
 %
 Ensuite, il faut effectuer une analyse en composantes principales (\ACP) de
 notre ensemble de points voisins afin d'estimer la normale au point $\vp$. Cela
@@ -328,7 +324,8 @@ long de leur ligne de courbure respective, et $b_1$ et $b_2$ sont les dérivées
 directionelles de $\PrincCurv{1}$ et $\PrincCurv{2}$ le long de l'autre ligne de
 courbure.
 %
-\\
+
+
 %
 Enfin, en ayant recours à de l'ajustement de polynômes, nous pouvons récupérer
 les $n$-jets de la surface dans ce système de coordonnées. Nous calculons alors
@@ -380,14 +377,15 @@ correspondances dans l'espace tangent à la surface, d'estimer au mieux dans
 l'espace orthogonal. \cauthors{Mérigot}{Merigot2011} proposent alors d'associer
 en chaque point $\vp$ une \emph{mesure de covariance des cellules de Voronoï}
 $\mathcal{V}_{K,R}$ (\VCMM --- \VCM ---) pour une forme $K$. Cette mesure
-contient des informations sur la géométrie sous-jacente.
+contient des informations sur la géométrie sous-jacente (voir la
+\RefFigure{fig:merigot-VCM-c}).
 %
 
 \begin{figure}[ht]{
     \begin{center}
     \includegraphics[height=4cm]{images/Feature/VCM}
     \end{center}}
-    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : \comJeremy{longueur des directions des cellules} de Voronoï.
+    \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : longueur des directions des cellules de Voronoï.
       \label{fig:merigot-VCM-c}}
 \end{figure}
 
@@ -399,7 +397,7 @@ Voronoï ($Vor_K$) des points $\vp$ du bord de l'objet :
 \end{equation}
 %
 Afin d'avoir une information locale de la variation de la forme, les auteurs se
-limitent à un voisinage de rayon $R$ :
+limitent à un voisinage de rayon $R$ (voir la \RefFigure{fig:VCM-multiscale-c}) :
 %
 \begin{equation}
   \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
@@ -429,7 +427,8 @@ Alors, si $\vp$ est un point lisse de $K$, les valeurs propres de
 $\mathcal{V}_{K,R} \ast \chi_r$ sont proportionnelles à (respectivement) : $1$,
 $\PrincCurv{1}^2(\vp)\frac{r^2}{4}$ et $\PrincCurv{2}^2(\vp)\frac{r^2}{4}$.
 %
-\\
+
+
 %
 La mesure de covariance convoluée est particulièrement intéressante car cette
 mesure apporte de la robustesse même pour des ensembles compacts arbitraires, en
@@ -438,8 +437,19 @@ de covariance du cône de normale autour du point d'intérêt. Néanmoins, la
 convergence des courbures est dépendante de plusieurs paramètres $r$ et $R$ qui
 contribuent de manière contradictoire avec l'erreur de Hausdorff. En pratique,
 cette approche donne des résultats comparables à \JetFitting pour les courbures.
-\cauthors{Cuel}{Cuel2014} propose une comparaison complète pour l'estimation des
-normales.
+
+À noter que \cauthors{Cuel}{Cuel2014DGCI} ont défini une variante digitale du
+\VCM ($\DigShape \in \Z^3$) :
+%
+\begin{equation}
+  \hat{\mathcal{V}}_{\DigShape,h,R} \ast \chi_r(\{\vp\})) \EqDef \sum_{\vx \in \Omega_h^R} h^3 (\vx - \pi^{\DigShape}(\vx)) (\vx - \pi^{\DigShape}(\vx))^t \chi(\pi^{\DigShape}(\vx)) ,
+\end{equation}
+%
+où $\Omega_h^R$ est l'ensemble des (centres de) voxels entièrement contenus dans
+$\DigShape^R$ (la $R$-dilatation de $\DigShape$) au pas de discrétisation $h$.
+La convergence asymptotique de cette variante digitale de l'estimateur \VCM pour
+les normales a été prouvée (bord de la surface de classe $C^2$ et de reach $\rho >
+0$) \cite{Cuel2014DGCI}.
 %
 \paragraph{Accumulateur sphérique}
 %
@@ -465,7 +475,7 @@ Alors, les auteurs découpent le nuage de points en ensemble de plans (définis
 par trois points) et normales. Si le plan est loin d'un coin ou d'une
 singularité, alors la normale est correct. Cependant, si ce plan est près d'un
 coin, la normale est perturbée par cette singularité (voir la
-\RefFigure{fig:Hough_bad}-gauche).
+\RefFigure{fig:Hough-bad} à gauche).
 
 \begin{figure}[ht]{
     \begin{center}
@@ -482,10 +492,9 @@ associé à une primitive calculée à partir d'un sous-ensemble de points
 \cite{Xu1990, Xu1993} dont le nombre est défini par l'utilisateur comme
 condition globale. Enfin, les normales sont redistribuées aux plans en fonction
 des bins les plus votés, en moyennant les normales dans ces bins (voir la
-\RefFigure{fig:Hough_bad}-droite).
-%
-\\
-%
+\RefFigure{fig:Hough-bad} à droite).
+
+
 Les principaux inconvénients de cette méthode est que nous obtenons un effet de
 regroupement par bin des résultats, de segmentation des données. Cet effet est
 surtout visible avec des données bruitées. Ensuite, les bins utilisés sont
@@ -493,9 +502,8 @@ anisotropes. Les auteurs rectifient cela en proposant de calculer l’algorithme
 plusieurs fois en tournant aléatoirement la boule accumulatrice pour limiter cet
 effet. Expérimentalement, ils avancent que cet effet est estompé au bout de $5$
 rotations.
-%
-\\
-%
+
+
 \nauthors{Boulch} apportent des résultats de convergence probabilistes.
 Cependant, ces méthodes ne peuvent pas être utilisées directement pour le calcul
 de courbure : ils peuvent être utilisées en parallèle avec des techniques
@@ -508,7 +516,7 @@ Enfin, une approche très récente venant de la théorie de la mesure géométri
 utilise la théorie de \anglais{Varifolds} \cite{Almgren1965} pour concevoir une
 robuste estimation de la courbure moyenne \cite{Buet2014,Buet2015}. Cette
 théorie est suffisamment générique pour fonctionner sur des variétés lisses, des
-maillages discrètes, des nuages de points ainsi que sur des données digitales.
+maillages discrèts, des nuages de points ainsi que sur des données digitales.
 Afin de mener à bien l'estimation géométrique, cette approche nécessite d'avoir
 une position et une approximation des normales. Si les deux prérequis
 convergent, alors la première variation régularisé de la mesure de Varifold
@@ -523,9 +531,8 @@ considérons la convergence asymptotique comme un critère essentiel pour un
 estimateur \cite{Klette2000}. Lorsque la forme est discrétisée
 sur une grille avec une résolution $h$ tendant vers zéro, la quantité estimée
 devrait converger vers la valeur attendue.
-%
-\\
-%
+
+
 \cauthors{Coeurjolly}{Coeurjolly_ChapEstimateur} ont proposé un état de l'art
 complet pour l'estimation de tangentes et de la courbure en dimension 2. Nous
 allons détailler les méthodes les plus représentatives.
@@ -537,7 +544,7 @@ objets digitaux sur le bord de l'objet, afin d'en extraire des informations
 différentielles.
 
 
-\textbf{Segments digitaux maximaux}\\
+\noindent\textbf{Segments digitaux maximaux.\quad}
 % The curvature k is defined from the length l and the width w of a DSS as follow: $1/k=(l \ast l)/(8 \ast w)+w/2$
 % Most centered Maximal Segment
 \cauthors{Coeurjolly}{Coeurjolly2001} ont montré une façon simple d'estimer
@@ -556,8 +563,6 @@ son rayon (voir \RefFigure{fig:mdss-chord}).
 
 L'idée ici est de considérer le segment maximal comme une corde à une distance
 $h$ (la taille de la grille) du cercle osculateur de la surface.
-
-
 Alors, si $l$ est la longueur du MDSS au point $\vp \in \Z^2$, nous avons :
 %
 \begin{equation}
@@ -574,16 +579,18 @@ Une version plus robuste est proposée en ajoutant l'épaisseur du MDSS $w$ :
   %
 \end{equation}
 %
-La convergence de la méthode repose sur l'hypothèse que les segments maximaux
-d'un cercle euclidien se comportent comme des cordes de hauteur $h$ (le pas de
-discrétisation) et de longueur $\Theta(h^{-\frac{1}{2}})$. Cependant, quelques
-années plus tard, \cauthors{de Vieilleville}{deVieilleville2007} remarquent que
-bien que la borne supérieur du plus long MDSS est en $O(h^{-\frac{1}{2}})$, leur
-longueur en moyenne est proche de $\Theta(h^{-\frac{1}{3}}$ (entre
-$\Theta(h^{-\frac{1}{3}}$ et $\Theta(h^{-\frac{1}{3}} \log
-\left(\frac{1}{h}\right))$, voir le \RefLemma{lem:law-length-MDSS}). Cette borne
-supérieure a pour conséquence de réfuter la preuve de convergence avancée dans
-\cite{Coeurjolly2001}.
+Cependant, aucune preuve de convergence n'est apporté pour cet estimateur.
+% => ça c'est pour les demi tangentes, erreur dans le bouquin ?
+% La méthode repose sur l'hypothèse que les segments maximaux
+% d'un cercle euclidien se comportent comme des cordes de hauteur $h$ (le pas de
+% discrétisation) et de longueur $\Theta(h^{-\frac{1}{2}})$. Cependant, quelques
+% années plus tard, \cauthors{de Vieilleville}{deVieilleville2007} remarquent que
+% bien que la borne supérieure du plus long MDSS est en $O(h^{-\frac{1}{2}})$, leur
+% longueur en moyenne est proche de $\Theta(h^{-\frac{1}{3}})$ (entre
+% $\Theta(h^{-\frac{1}{3}})$ et $\Theta(h^{-\frac{1}{3}} \log
+% \left(\frac{1}{h}\right))$, voir le \RefLemma{lem:law-length-MDSS}). Cette borne
+% supérieure a pour conséquence de réfuter la preuve de convergence avancée dans
+% \cite{Coeurjolly2001}.
 %
 %
 % \textbf{Demi-tangentes digitales}\\
@@ -608,7 +615,7 @@ supérieure a pour conséquence de réfuter la preuve de convergence avancée da
 % %
 
 
-\textbf{Analyse des arcs de cercle digitaux maximaux}\\
+\noindent\textbf{Analyse des arcs de cercle digitaux maximaux.\quad}
 % Most centered Digital Circular Arc
 \cauthors{Roussillon}{Roussillon2011} proposent non plus d'étudier les segments
 maximaux digitaux, mais de reconnaître des arcs de cercle maximaux digitaux
@@ -718,8 +725,6 @@ expression similaire :
   D_n^k &= \underbrace{\delta \ast \cdots \ast \delta}_{k \text{ fois}} \ast D_n \,.
 \end{align}
 %
-\\
-%
 La courbure est alors estimée de la sorte :
 %
 \begin{equation}
@@ -745,8 +750,6 @@ digitale à l'aide de la programmation linéaire ou avec des outils de la
 \AlgorithmicGeometry. Cette approche permet d'approcher les $k$ dérivées de
 $f^{(k)}(\vx)$. Ainsi, à l'instar de \JetFitting, ils proposent une nouvelle
 méthode basées sur les polynômes de Taylor.
-%
-\\
 %
 Le principe de cette méthode est de faire ajuster un polynôme sur les valeurs de
 la fonction digitale. Ils étendent alors les valeurs de la fonction $F(\vx)$
@@ -1104,13 +1107,14 @@ normalisés par le $0$-moment, c'est à dire :
 \end{lemma}
 \begin{proof}
   %
-  \textbf{Moment d'ordre zéro.\quad}
+  \noindent\textbf{Moment d'ordre zéro.\quad}
   %
   L'\RefEquation{eq:ball-moment-0} peut être facilement démontré puisque le
   moment d'ordre zéro est le volume de $Y$, de ce fait ne peut pas dépasser le
   volume de la boule qui est $\frac{4}{3}\pi R^3$.
-  %
-  \textbf{\\Moments du premier ordre.\quad}
+
+
+  \noindent\textbf{Moments du premier ordre.\quad}
   %
   Nous changeons les variables de $(x_1',x_2',x_3')=(x_1,x_2,x_3)-\vy$ dans
   l'expression suivante :
@@ -1943,8 +1947,9 @@ de rayons différents ($S_{R,t}(\vx)$). Ceci est représenté
 en bleu sur la \RefFigure{fig:moments-perturb}, correspond à un anneau en 2D de
 largeur $2t$. Il s'agit évidemment d'une borne supérieure épaisse, mais les
 ordres de perturbations sont les mêmes.
-%
-\textbf{\\Moment d'ordre zéro.\quad}
+
+
+\noindent\textbf{Moment d'ordre zéro.\quad}
 %
 Pour le moment d'ordre zéro, nous utilisons simplement le volume de la boule :
 %
@@ -1954,8 +1959,9 @@ Pour le moment d'ordre zéro, nous utilisons simplement le volume de la boule :
   &= \frac{4\pi}{3}(R+t)^3 - \frac{4\pi}{3}(R-t)^3 \\
   &= \frac{4\pi}{3}(6R^2t+2t^3)=O(tR^2).
 \end{align}
-%
-\textbf{\\Moments du premier ordre.\quad}
+
+
+\noindent\textbf{Moments du premier ordre.\quad}
 %
 Pour les moments du premier ordre, nous translatons la forme à l'origine du
 repère et nous utilisons le résultat précédent ainsi que le fait que le
@@ -1970,8 +1976,9 @@ $i$-ème composante de $\vx$.} :
   &= 2\pi(R^3t +Rt^3) + O( (\| \vx \|_\infty) tR^2) \nonumber \\
   &= O(tR^3) + O(\| \vx \|_\infty tR^2).
 \end{align}
-%
-\textbf{\\Moments du second ordre.\quad}
+
+
+\noindent\textbf{Moments du second ordre.\quad}
 %
 Pour les moments du second ordre, nous translatons également la forme à
 l'origine du repère, puis nous utilisons les deux résultats précédents ainsi que
@@ -2686,7 +2693,7 @@ adapté localement à la géométrie de la forme.
     %\includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local_5}
   \end{center}}
   %
-  \caption[.]{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
+  \caption{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
   l'objet \textsc{AccFlower} allant du bleu (valeur minimale) au jaune (valeur
   maximale). \emph{En abscisse :} position sur la surface de l'objet, \emph{en
   ordonnée :} différents rayons $R$.
@@ -2697,7 +2704,7 @@ adapté localement à la géométrie de la forme.
   \emph{En noir sur l'image du bas :} différents rayons choisis par l'estimateur
   $\CurvHSL$ en fonction de la géométrie locale de la forme.
   %
-  \label{fig:curvature-pf-radii}.}
+  \label{fig:curvature-pf-radii}}
   %
 \end{figure}
 
@@ -3167,7 +3174,7 @@ montre le résultat de la répartition des rayons pour $K=5$.
     \includegraphics[height=4cm]{images/Curvature/Ellipsoid_Radius_2}
   \end{center}}
   %
-  \caption[.]{Répartition du partitionnement du carré des longueurs des segments maximaux en utilisant l'algorithme de $K$-moyennes (avec $K=5$), sur le bord de l'objet \Flower et de l'objet \Ellipsoid
+  \caption{Répartition du partitionnement du carré des longueurs des segments maximaux en utilisant l'algorithme de $K$-moyennes (avec $K=5$), sur le bord de l'objet \Flower et de l'objet \Ellipsoid
   %
   \label{fig:curvature-pfl-map}.}
   %
@@ -3199,29 +3206,32 @@ de courbure présentés dans ce chapitre.
 %
 \subsection{Méthodologie d'évaluation}%
 \label{sec:comparaison:methodologie}
-%
+
+
 \begin{table}[ht]
-  \centering
-  \scriptsize
-  \renewcommand{\arraystretch}{1.5}
-  %
-  \caption{Équations, paramètres et domaines des formes  euclidiennes considérées pour l'évaluation expérimentale ($t\in[0,2\pi]$ pour les courbes paramétriques). Les illustrations sont disponibles avec la \RefFigure{fig:illustrationShapes}.}
-  %
-  \label{tab:shapes}
-  \begin{tabular}{@{}llllrr@{}}
-    \toprule
-    Forme   & Équation (paramétrique en 2D, implicite en 3D) & Paramètres & Domaine    & $k_{min}$ & $k_{max}$ \\ \midrule
-    \multirow{2}{*}{\textsc{Ellipse}} & $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(a,b)=(20,7)$} & \multirow{2}{*}{$[-20,20]^2$} & \multirow{2}{*}{$0.018$} & \multirow{2}{*}{$0.408$}  \\
-    & {avec $\rho(t)=\frac{b}{\sqrt{1 - (a^2-b^2)/a^2\cdot \cos(t+\phi)}}$} &     &   & & \\
-    \multirow{2}{*}{\textsc{Flower}}  &  $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(r_1,r_2,p)=(20,7,6)$} & \multirow{2}{*}{$[-20,20]^2$} & \multirow{2}{*}{$-1.414$} & \multirow{2}{*}{$0.383$} \\
-    & {avec $\rho(t)=r_1+r_2\cdot\cos(p\cdot t)$} &     &   & & \\
-    \multirow{2}{*}{\textsc{AccFlower}}  & $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(r_1,r_2,p)=(20,5,3)$} & \multirow{2}{*}{$[-20,20]^2$}  & \multirow{2}{*}{$-10.45$} & \multirow{2}{*}{$3.1482$} \\
-    & {avec $\rho(t)=r_1+r_2\cdot\cos(p\cdot t^3)$} &     &   & & \\
-    \textsc{Sphere}      & $x^2 + y^2 + z^2 - a^2 = 0$ & $a=9$ & $[-10,10]^3$ & $0.111$    & $0.111$    \\
-    \textsc{Rounded Cube} & $x^4 + y^4 + z^4 - a^4 = 0$ & $a=9$ &$[-10,10]^3$ & $0$       & $0.282$     \\
-    Surface de \textsc{Goursat} & $ax^4 + ay^4 + az^4 + bx^2 + by^2 + bz^2 + c = 0$  & $(a,b,c)=(0.03,-2,-8)$ & $[-10,10]^3$ & $-0.15$     & $0.453$      \\
-      \bottomrule
-  \end{tabular}
+    \caption{Équations, paramètres et domaines des formes  euclidiennes considérées pour l'évaluation expérimentale ($t\in[0,2\pi]$ pour les courbes paramétriques). Les illustrations sont disponibles avec la \RefFigure{fig:illustrationShapes}.}
+\begin{overpic}[width=\textwidth,height=.25\textheight]%
+  {images/misc/TransparentPixel}
+  \put(-10,20){%
+    \scriptsize
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{@{}llllrr@{}}
+      \toprule
+      Forme   & Équation (paramétrique en 2D, implicite en 3D) & Paramètres & Domaine    & $k_{min}$ & $k_{max}$ \\ \midrule
+      \multirow{2}{*}{\textsc{Ellipse}} & $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(a,b)=(20,7)$} & \multirow{2}{*}{$[-20,20]^2$} & \multirow{2}{*}{$0.018$} & \multirow{2}{*}{$0.408$}  \\
+      & {avec $\rho(t)=\frac{b}{\sqrt{1 - (a^2-b^2)/a^2\cdot \cos(t+\phi)}}$} &     &   & & \\
+      \multirow{2}{*}{\textsc{Flower}}  &  $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(r_1,r_2,p)=(20,7,6)$} & \multirow{2}{*}{$[-20,20]^2$} & \multirow{2}{*}{$-1.414$} & \multirow{2}{*}{$0.383$} \\
+      & {avec $\rho(t)=r_1+r_2\cdot\cos(p\cdot t)$} &     &   & & \\
+      \multirow{2}{*}{\textsc{AccFlower}}  & $(x(t),y(t))=(\rho(t)\cdot\cos(t),\rho(t)\cdot\sin(t))$ & \multirow{2}{*}{$(r_1,r_2,p)=(20,5,3)$} & \multirow{2}{*}{$[-20,20]^2$}  & \multirow{2}{*}{$-10.45$} & \multirow{2}{*}{$3.1482$} \\
+      & {avec $\rho(t)=r_1+r_2\cdot\cos(p\cdot t^3)$} &     &   & & \\
+      \textsc{Sphere}      & $x^2 + y^2 + z^2 - a^2 = 0$ & $a=9$ & $[-10,10]^3$ & $0.111$    & $0.111$    \\
+      \textsc{Rounded Cube} & $x^4 + y^4 + z^4 - a^4 = 0$ & $a=9$ &$[-10,10]^3$ & $0$       & $0.282$     \\
+      Surface de \textsc{Goursat} & $ax^4 + ay^4 + az^4 + bx^2 + by^2 + bz^2 + c = 0$  & $(a,b,c)=(0.03,-2,-8)$ & $[-10,10]^3$ & $-0.15$     & $0.453$      \\
+        \bottomrule
+    \end{tabular}
+    }
+    \end{overpic}
+    \label{tab:shapes}
 \end{table}
 
 \begin{figure}[ht]
@@ -4086,20 +4096,6 @@ Taille de masque                                  & $\nombre{91336}$        & $\
 \multicolumn{1}{r}{(\emph{avec optimisation})}    &                         & $8 \times 145$          \\ \bottomrule
 \end{tabular}
 \end{table}
-
-
-Enfin, ce n'est pas une limitation à proprement parlé mais plutôt une
-%
-\begin{wrapfigure}[7]{r}[0.2cm]{4cm}
-	\includegraphics[width=4cm]{images/CriticalRadius}
-\end{wrapfigure}
-%
-considération à prendre en compte lors de l'implémentation de ce type
-d'estimateurs. Puisque nos estimateurs récoltent l'information volumique, il se
-peut que de l'occultation avec une autre partie de l'objet intervienne dans le
-calcul de l’intégration. La figure sur le côté montre cet effet. Cela peut être
-gênant s'il n'est pas pris en compte et peut ainsi localement fausser les calculs de
-courbure.
 
 
 L'inconvénient avec les estimateurs précédents est que lorsque nous souhaitons
