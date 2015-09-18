@@ -37,9 +37,9 @@ convergence en dimension 3.
 %
 Pour résumer, nous intégrons l'intersection entre une boule et la forme, et
 cette quantité nous donne des informations sur la géométrie de la surface, plus
-particulièrement sur sa courbure au point de la surface considéré. Ainsi, nous pouvons
-extraire la courbure en dimension 2 et la courbure moyenne en dimension 3 à
-l'aide de \respp l'aire et le volume de l'intersection entre la sphère et la
+particulièrement sur sa courbure au point de la surface considéré. Ainsi, nous
+pouvons extraire la courbure en dimension 2 et la courbure moyenne en dimension
+3 à l'aide de \respp l'aire et le volume de l'intersection entre la sphère et la
 forme à analyser. Si nous calculons les moments géométriques de cette
 intersection, nous pouvons en extraire le tenseur de courbure local de la
 surface, et donc les courbures principales, les directions principales de
@@ -60,17 +60,17 @@ montré que nos estimateurs sont très compétitifs par rapport aux autres, surt
 en restant robuste en présence de bruit et efficace algorithmiquement.
 
 
-Les perspectives sont multiples pour ces travaux. Dans un premier temps nous
-pouvons nous intéresser à des noyaux autres que la sphère et la fonction
-caractéristique pour l'intégration, comme par exemple un noyau gaussien. Cela
-permettrait de pouvoir effectuer les calculs dans le domaine de Fourier, et
-ainsi de ne plus avoir des calculs dépendants de la taille du support mais
-linéaires en la taille de l'objet. Les premiers résultats montrent une qualité
-de résultat presque équivalents, avec une vitesse d'exécution énormément
-réduite. Cependant, cela nécessite d'étudier ces nouveaux noyaux afin de pouvoir
-en extraire peut-être des preuves de convergence asymptotique. De plus, sur le
-papier la complexité de ces algorithmes n'est pas avantageuse, bien qu'en
-pratique très largement concurrentielle.
+Les perspectives sont multiples pour ces travaux. D'un point de vue pratique,
+nous pouvons nous intéresser de faire les calculs dans le domaine de Fourier.
+Cela permettrait d'accélerer grandement les temps de calcul pour de gros rayons
+de sphères car les calculs ne sont plus dépendants de la taille du support mais
+linéaires en la taille de l'objet (les convolutions deviennent des
+multiplications des transformées de Fourier). Les premiers résultats montrent
+une qualité de résultats presque équivalent, avec une vitesse d'exécution
+énormément réduite. Cependant, la complexité de ces algorithmes n'est pas
+avantageuse : la transformée et la transformée inverse de Fourier de l'objet est
+en $O(n^d \log n)$ (le produit est en $O(n^d))$), bien supérieur à notre
+algorithme actuel. En pratique, cette version très largement concurrentielle.
 
 
 Une autre perspective serait le couplage de notre approche avec celles basées
@@ -80,9 +80,11 @@ non pas de la forme elle même mais du cône normal. Ces approches sont
 assez complémentaires avec la notre et méritent de s'y intéresser.
 
 
-Enfin, étudier plus en détail l'erreur de positionnement du bord de la surface à
-partir des données digitales permettrait d'améliorer la qualité des résultats de
-ces estimateurs et espérer de meilleures vitesses de convergence asymptotique.
+Enfin, il apparait que l'erreur de positionnement entre le point digital et le
+point sur la surface euclidienne est un terme dominant. Des premiers résultats
+lorsque nous approchons mieux la surface sous-jacente montre une amélioration de
+la qualité des résultats, et laissent espérer de meilleures vitesses de
+convergence asymptotique.
 %
 \subsection*{Courbure sans paramètre}
 %
@@ -143,18 +145,37 @@ Cet outil est le point d'entrée de plusieurs perspectives intéressantes. Tout
 d'abord, les résultats présentés ici sont des résultats bruts. Nous pouvons
 facilement coupler notre méthode avec des outils de post-traitement pour
 améliorer significativement les défauts encore présents, notamment les artefacts
-sur les formes bruités.
+sur les formes bruités. De plus, des extensions naturelles de ce type
+d'estimateur sont le débruitage de forme ou encore la reconstruction de surface,
+et notre estimateur pourrait être un très bon point d'entrée.
 
 
-Ensuite, nous pouvons analyser la forme en amont afin de mieux connaître la
-forme sous-jacente. L'utilisation de la longueur des segments maximaux s'avère
-être le candidat idéal, et permettrait alors de guider l'ensemble de rayons
-utilisés pour notre méthode.
+Ensuite, dans notre estimateur, le rayon maximal de l'ensemble des rayons pour
+utilisés pour l'analyse est lié à la distinction de classification de parties
+lisse ($C^3$) et de parties à courbure nulle. Si le rayon maximal est trop petit
+pour une zone lisse à faible courbure, nous pouvons ne pas détecter la géométrie
+locale de la forme (voir le \RefSection{sec:applications:feature:II:kmax}) et
+ainsi ne pas le classifier comme une partie lisse. Si nous augmentons ce rayon
+maximal, nous pouvons annuler cet effet. Ceci est problématique puisque cela
+exige que l'utilisateur analyse la forme avant de choisir les paramètres de
+rayons de notre estimateur. Alors, comme pour l'estimation de la courbure,
+l'utilisation de la longueur des segments maximaux peut s'avèrer être le
+candidat idéal, et permettrait alors de guider l'ensemble de rayons utilisés
+pour notre méthode.
 
 
-Enfin, une meilleure connaissance de la distance à la surface sous-jacente
-permettrait de supprimer certains artefacts visibles sur les zones à courbure
-nulle.
+Une autre perspective dont nous avons un peu abordé dans le
+\RefSection{sec:applications:feature:II:transitions} relève du traitement des
+zones où une transition de modèle est détecté. Pour résumer, ces zones suivent
+un modèle avant d'être perturbé par un autre modèle. Actuellement nous prenons
+le modèle dominant, mais nous pouvons faire une analyse plus fine de ces
+transitions comme rajouter une dimension à la classification : du rayon $R_a$ à
+$R_b$ le point est classifié selon le modèle $A$, du rayon $R_b$ à $R_c$ le
+point est classifié selon le modèle $B$, etc. De plus, cela permettrait
+également de détecter le changement de statut des points de la surface, comme le
+propose \cauthors{Mellado}{Mellado2012} (voir la
+\RefFigure{fig:mellado-multiscale}).
+
 %
 \subsection*{Point de vue général}
 
