@@ -1675,17 +1675,18 @@ surface d'objets digitaux. Puisque l'approche proposée est basée sur des
 quantités locales différentielles à plusieurs échelles, la classification
 obtenue est localement adaptative et invariante à l'échelle (au sens où il
 capture les singularités à différentes échelles sur le même objet géométrique).
-Nous avons évaluer expérimentalement notre détecteur avec des méthodes
+
+
+Nous avons évalué expérimentalement notre détecteur avec des méthodes
 représentatives de l'état de l'art et montré qu'il était très compétitif en
 arrivant à détecter des singularités même à des échelles différentes sans autre
-paramètre à choisir autre que l'ensemble de rayons.
+paramètre à choisir autre que l'ensemble de rayons. D'ailleurs cet ensemble de
+rayons constitue une limitation. Comme le rayon maximal de cet ensemble est
+dépendant de la singularité maximale que nous souhaitons détecter, leur réglage
+peut être important.
 
 
-D'ailleurs cet ensemble de rayons constitue une limitation. Comme le rayon
-maximal de cet ensemble est dépendant de la singularité maximale que nous
-souhaitons détecter, leur réglage peut être important. \\
-%
-Ensuite, comme pour les estimateurs de courbure, notre estimateur est basé sur
+Enfin, comme pour les estimateurs de courbure, notre estimateur est basé sur
 l'intégration volumique de la sphère et cette opération reste coûteuse et peut
 la rendre moins compétitive face à d'autres à échelle fixe. Cependant, notre
 méthode permet de détecter les singularités à plusieurs échelles ce qui est la
