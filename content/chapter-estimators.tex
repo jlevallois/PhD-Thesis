@@ -85,15 +85,14 @@ sens où ce dernier approxime suffisamment précisément la surface continue sou
 %   \item Estimation du tenseur de courbure
 % \end{itemize}
 %
-\cauthors{Surazhsky}{Surazhsky2003} et \cauthors{Gatzke}{Gatzke2006} ont
-proposé une étude comparative de ces estimateurs. Nous nous
-référons à \cauthors{Desbrun}{Desbrun2005} et \cauthors{Bobenko}{Bobenko2008}
-pour une théorie entièrement discrète. Cependant, la plupart n'ont aucunes
-garanties de convergence théorique des valeurs estimées, même sans bruit sur le
-maillage. Nous pouvons citer \cite{Rusinkiewicz2004} (et \cite{Page2002} pour les normales) comme
-approche qui essaye de lisser les perturbations sur la surface à travers un
-moyennage.
-%
+\cauthors{Surazhsky}{Surazhsky2003} et \cauthors{Gatzke}{Gatzke2006} ont proposé
+une étude comparative de ces estimateurs. Nous nous référons à
+\cauthors{Bobenko}{Bobenko2008} pour une théorie entièrement discrète.
+Cependant, la plupart n'ont aucunes garanties de convergence théorique des
+valeurs estimées, même sans bruit sur le maillage. Nous pouvons citer
+\cite{Rusinkiewicz2004} (et \cite{Page2002} pour les normales) comme approche
+qui essaye de lisser les perturbations sur la surface à travers un moyennage.
+
 \paragraph{Approche par formule de Gauss-Bonnet}
 %
 \cauthor{Xu}{Xu2006} estime la courbure gaussienne avec une approche dérivée de
@@ -154,11 +153,11 @@ converge pas.
 \paragraph{Cycles normaux}
 %
 Une autre approche notable est l'estimation d'information de courbure par
-intégration de mesures des courbures, basée sur la théorie du cycle normal sur
+intégration de mesures des courbures, basée sur la théorie des cycles normaux sur
 un maillage triangulé \cite{CohenSteiner2003,CohenSteiner2006}.
 %
 %
-La théorie du cycle normal, introduite par \cauthor{Wintgen}{Wintgen1982} et
+La théorie des cycles normaux, introduite par \cauthor{Wintgen}{Wintgen1982} et
 \cauthor{Zähle}{Zahle1986} est une technique qui permet de définir de manière
 unifiée la courbure de surfaces lisses et polyédrales. En effet, la mesure de
 courbure peut être obtenue par les cycles normaux de la surface. L'idée
@@ -899,6 +898,8 @@ d'objets discrets.
 % \end{tabular}
 % \end{table}
 
+\paragraph{Tableau récapitulatif de convergence d'estimateurs digitaux de courbure}
+
 \begin{table}[ht]
 \centering
 \caption{Convergence asymptotique connus d'estimateurs de courbure sur des données digitales.}
@@ -1089,6 +1090,9 @@ normalisés par le $0$-moment, c'est à dire :
 \begin{equation}
   \overline{Y} \EqDef \frac{( \Mom{100}(Y), \Mom{010}(Y), \Mom{001}(Y) )^T}{\Mom{000}(Y)}
 \end{equation}
+
+Nous allons maintenant définir les ordres de grandeur des moments. Ces résultats nous seront
+utile par la suite.
 %
 \begin{lemma}\label{lem:moment-ball}
   %
@@ -1109,7 +1113,7 @@ normalisés par le $0$-moment, c'est à dire :
   %
   \noindent\textbf{Moment d'ordre zéro.\quad}
   %
-  L'\RefEquation{eq:ball-moment-0} peut être facilement démontré puisque le
+  L'\RefEquation{eq:ball-moment-0} peut être facilement démontrée puisque le
   moment d'ordre zéro est le volume de $Y$, de ce fait ne peut pas dépasser le
   volume de la boule qui est $\frac{4}{3}\pi R^3$.
 
@@ -1124,11 +1128,12 @@ normalisés par le $0$-moment, c'est à dire :
                  &= y_1 \Vol(Y) + \Mom{100}(Y-\vy).
   \end{align}
   %
-  Dans le premier terme, $\Vol(Y)$ est borné par le volume de la boule de rayon
-  $R$. Avec la propriété d'additivité des intégrales, le second terme est
-  maximisé par le $100$-moment de la demi-boule $\HalfBall{R}{0}$ centrée en $0$ à
-  valeur de $x_1$ positives. Alors, en utilisant les coordonnées sphériques,
-  nous obtenons :
+  $(Y-\vy)$ correspond au translaté de $Y$ de centre $\vy$ en $(0,0,0)$. Dans le
+  premier terme, $\Vol(Y)$ est borné par le volume de la boule de rayon $R$.
+  Avec la propriété d'additivité des intégrales, le second terme est maximisé
+  par le $100$-moment de la demi-boule $\HalfBall{R}{0}$ centrée en $0$ à valeur
+  de $x_1$ positives. Alors, en utilisant les coordonnées sphériques, nous
+  obtenons :
   %
   \begin{align}
     \Mom{100}(\HalfBall{R}{0})
@@ -1140,7 +1145,8 @@ normalisés par le $0$-moment, c'est à dire :
   Les autres équations sont prouvées de la même façon.
   %
 \end{proof}
-%
+
+
 Pour plus de simplicité dans les formules, nous noterons $A$ l'ensemble
 euclidien $\Ball{R}{\vx} \cap \Shape$. La matrice de covariance $\Cov(A)$ de
 $A$ peut alors être réécrite comme :
@@ -1180,7 +1186,7 @@ principales et directions principales de courbure :
 \begin{lemma}[\cite{Pottmann2007}, Théorème~2]
  \label{lem:pottmann-3d}
  %
- Pour une forme $\Shape \in \Shapes$, les valeurs propres $\lambda_1$,
+ Pour une forme $\Shape \in \Shapes$ suffisamment lisse, les valeurs propres $\lambda_1$,
  $\lambda_2$, $\lambda_3$ de $\Cov(A)$, où $ A \EqDef \Ball{R}{\vx} \cap
  \Shape$ et $\vx \in \Bd{\Shape}$, $\lambda_1 \ge \lambda_2 \ge
  \lambda_3$, nous avons l'approximation de Taylor suivante :
@@ -1193,7 +1199,7 @@ principales et directions principales de courbure :
  %
  où $\PrincCurv{1}(\Shape,\vx)$ et $\PrincCurv{2}(\Shape,\vx)$ désignent les
  courbures principales de  $\Bd{\Shape}$ au point $\vx$.\footnote{Il y a une
- erreur typographique dans l'expression de $\lambda_1$ dans~\cite{Pottmann2007}.}
+ erreur typographique dans l'expression de $\lambda_1$ dans~\cite{Pottmann2007}, corrigé ici.}
  %
 \end{lemma}
 %
@@ -1215,38 +1221,52 @@ quantité espérée lorsque le rayon $R$ tend vers $0$ :
 \begin{align}
   \label{eq:pottmann-3d-princ-conv}
   \PrincCurvT{1}{R}(\Shape,\vx)& = \PrincCurv{1}(\Shape,\vx) + O(R)\,,\\
-  \PrincCurvT{2}{R}(\Shape,\vx)& = \PrincCurv{2}(\Shape,\vx) + O(R)\,.%\\
-  %\GaussCurvT{R}(\Shape,\vx)& = \GaussCurv(\Shape,\vx) + ???.
+  \PrincCurvT{2}{R}(\Shape,\vx)& = \PrincCurv{2}(\Shape,\vx) + O(R)\,,\\
+  \GaussCurvT{R}(\Shape,\vx)& = \GaussCurv(\Shape,\vx) + O(R^2) + O(R) \,.
 \end{align}
 %
+Pour la courbure gaussienne, la constante derrière le terme le grand « $O$ » de
+$O(R)$ est dépendant de la courbure moyenne $\MeanCurv(\Shape, \vx)$.
+
 Lorsque nous nous intéressons à des formes digitales $\DSh$ (voir
-\RefSection{sec:digitization}), l'implémentation de ces estimateurs
-devient direct (voir \RefFigure{fig:2d-curv-estimator}) : choisir un rayon $R$,
-centrer une boule euclidienne (ou digitale) sur des points de
-$\Bd{\Body{\AnyDigF{\Shape}{h}}{h}}$ (\cad les barycentres de linels en 2D ou
-surfels en 3D), calculer la quantité par dénombrement de points digitaux (aire, volume ou matrice de covariance) et
-enfin estimer l'information de courbure $\CurvT{R}$, $\MeanCurvT{R}$,
+\RefSection{sec:digitization}), l'implémentation de ces estimateurs devient
+direct (voir \RefFigure{fig:2d-curv-estimator}) : choisir un rayon $R$, centrer
+une boule euclidienne (ou digitale) sur des points de $\Bd{\Body{\DSh}{h}}$
+(\cad des éléments de la surface digitale), calculer la quantité par
+dénombrement de points digitaux (aire, volume ou matrice de covariance) et enfin
+estimer l'information de courbure $\CurvT{R}$, $\MeanCurvT{R}$,
 $\PrincCurvT{1}{R}$ ou $\PrincCurvT{2}{R}$.
 
 \begin{figure}[ht]
   \begin{center}
     \input{figures/tikz/2d-curv-estimator.tikz}
   \end{center}
-  \caption[Illustration de l'estimateur digital de courbure en 2D par intégration
-  $\CurvH{R}$.]{Illustration de l'estimateur digital de courbure en 2D par
-  intégration $\CurvH{R}$ avec deux pas de discrétisation de la forme $h$
-  différents.\label{fig:2d-curv-estimator}}
+  %
+  \caption[Illustration de l'estimateur digital de courbure en 2D par
+  intégration $\CurvH{R}$.]{Illustration de l'estimateur digital de courbure en
+  dimension 2 par intégration $\CurvH{R}$ avec deux pas de discrétisation $h =
+  1$ et $h = 0.5$ sur un disque de rayon $7.5$. La sphère orange a un rayon
+  valant $3$. Sur la figure de gauche, on dénombre $12$ points à l'intersection
+  entre la sphère et la forme, sur la figure de droite on dénombre $50$ points.
+  Alors la courbure estimée sur la figure de gauche vaut
+  $\CurvH{3}(\DigF{\Shape}{1}, \vx, 1) = 3\pi/(2\times3) -
+  3\times12\times1^2/3^3 \approx 0.237$ et celle de la figure de droite vaut
+  $\CurvH{3}(\DigF{\Shape}{0.5}, \vx, 0.5) = 3\pi/(2\times3) -
+  3\times50\times{0.5}^2/3^3 \approx 0.182$. La vraie valeur de la courbure est
+  $1/7.5 \approx 0.133$.
+  %
+  \label{fig:2d-curv-estimator}}
+%
 \end{figure}
 
 Cependant, quelques problèmes surviennent avec cette approche : comment bien
-estimer l'aire, le volume ou la matrice de covariance sur des formes digitales,
-pouvons nous apporter des preuves de convergence de ces estimateurs sur des
-données digitales, et que veut dire « $R$ tend vers zéro » quand la taille de la
-grille digitale influe également dessus ?
+estimer l'aire, le volume ou la matrice de covariance sur des formes digitales ?
+Pouvons nous apporter des preuves de convergence de ces estimateurs sur des
+données digitales ? Que veut dire « $R$ tend vers zéro » quand la taille de la
+grille digitale influe également dessus ? Dans une premier temps nous allons
+nous intéresser à l'aire et au volume digital, puis ensuite aux moments
+digitaux.
 
-Dans une premier temps nous allons nous intéresser à l'aire et au volume
-digital, puis ensuite aux moments digitaux.
-%
 \subsection{Analyse digitale de l'aire et du volume de la boule, et relation à la courbure}
 \label{sec:ii-2d}
 %
@@ -1262,10 +1282,10 @@ d'estimer l'aire de la même forme doublée en taille (que nous nommerons
 $\Shape'$). Alors, il paraît évident que :
 %
 \begin{equation}
-  2 \cdot \AreaC(\DSh,h) \ne \AreaC(\DigF{\Shape'}{h},h),
+  2 \cdot \AreaC(\DSh,h) \ne \AreaC(\DigF{\Shape'}{h},h) \,,
 \end{equation}
 %
-la discrétisation de $\Shape'$ le rendant plus détaillé et donc son estimation
+la discrétisation de $\Shape'$ la rendant plus détaillée et donc son estimation
 plus précise. C'est un problème gênant avec les invariants par intégration car
 les boules impliquées ont un rayon $R$ qui doit tendre vers $0$ lorsque $h$ tend
 également vers $0$. Nous devons alors normaliser notre estimation d'aire et de
@@ -1274,10 +1294,10 @@ boule. Nous estimons alors l'aire de l'intersection entre la forme et la boule
 de rayon $R$ en se ramenant à la boule unité :
 %
 \begin{align}
-  \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) & \EqDef h^2 \MCard( ( \frac{1}{h} \cdot ( \Ball{R}{\vx} \cap \Shape ) ) \cap \Z^2 ), \\
-   & = h^2 \MCard( (\frac{R}{h} \cdot ( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
-   & = R^2 \frac{h^2}{R^2} \MCard( (\frac{R}{h} \cdot ( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) ) \cap \Z^2 ), \\
-   & = R^2 \AreaC( \DigF{\Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape}{h/R}, h/R ), \label{eq:Area_unitary_ball}
+  \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) & \EqDef h^2 \MCard\left( \left( \frac{1}{h} \cdot \left( \Ball{R}{\vx} \cap \Shape \right) \right) \cap \Z^2 \right), \\
+   & = h^2 \MCard\left( \left(\frac{R}{h} \cdot \left( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape\right) \right) \cap \Z^2 \right), \\
+   & = R^2 \frac{h^2}{R^2} \MCard\left( \left(\frac{R}{h} \cdot \left( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape\right) \right) \cap \Z^2 \right), \\
+   & = R^2 \AreaC\left( \DigF{\Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape}{h/R}, h/R \right), \label{eq:Area_unitary_ball}
 \end{align}
 %
 Alors, en insérant l'\RefEquation{eq:AreaByCountingConv} dans le terme de droite
@@ -1287,18 +1307,19 @@ de \ref{eq:Area_unitary_ball}\footnote{Le terme $\beta$ est celui défini dans l
   \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) = R^2 \left(\Area( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape) + O( (h/R)^\beta) \right).
 \end{equation}
 %
-Notons $SB(R)$ l'ensemble $\Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot
-\Shape$. La constante $K_1$ associée au terme d'erreur grand « O » dépend
+Notons $SB(R)$ l'ensemble $\Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R}
+\cdot \Shape$. La constante $K_1$ associée au terme d'erreur grand « O » dépend
 uniquement de la courbure maximale de $\BT SB(R)$. La courbure n'est pas définie
 aux intersections des deux bords de la forme et de la boule (dans le
-sous-ensemble $\BT \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \dS$) mais
-son influence dans l'estimation d'aire est négligeable car au moins de l'ordre
+sous-ensemble $\BT \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \dS$)
+mais son influence dans l'estimation d'aire est négligeable car c'est de l'ordre
 de $O(h^2)$. La partie restante de $\BT SB(R)$ a une courbure maximale qui est
 égale à $1$ pour un rayon $R$ suffisamment petit. En effet, puisque $\Shape$ a
 une courbure bornée, son dilaté $\frac{1}{R} \cdot \dS$ devient plat au point
-$\frac{1}{R} \cdot \vx$, alors la courbure maximale est introduite par $\BT
-\Ball{1}{\vx}$. Alors, il existe un rayon $R_0$ tel qu'une constante $K_1$ intervienne pour un rayon arbitraire $R < R_0$. En développant le
-terme d'erreur en grand « O » avec ce $K_1$, et en insérant dans
+$\frac{1}{R} \cdot \vx$ quand $R$ tend vers $0$, alors la courbure maximale est
+introduite par $\BT \Ball{1}{\vx}$. Alors, il existe un rayon $R_0$ tel qu'une
+constante $K_1$ intervienne pour un rayon arbitraire $R < R_0$. En développant
+le terme d'erreur en grand « O » avec ce $K_1$, et en insérant dans
 l'\RefEquation{eq:Area_unitary_ball_shape} la relation :
 %
 \begin{equation}
@@ -1361,7 +1382,7 @@ compter le nombre de points digitaux dans un voisinage du point d'intérêt :
 %
 Comme le montre la \RefFigure{fig:2d-curv-estimator}, ces estimateurs placent
 une boule de rayon euclidien $R$ autour du point d'intérêt $\vx$ et comptent le
-nombre de points digitaux de $\DigShape$, après mise à l'échelle en $(h\Z)^d$,
+nombre de points digitaux de $\DigShape = \Body{\DSh}{h}$,
 de l'intersection de cette boule et de la forme. Un calcul linéaire simple est
 alors appliqué sur cette quantité afin d'approcher la courbure. De plus, comme
 le montre également la \RefFigure{fig:2d-curv-estimator}, nous pouvons supposer
@@ -1565,18 +1586,18 @@ $O(h^\frac{1}{3})$ lorsque $R = kh^\frac{1}{3}$. Plus précisément :
 %
 \begin{proof}
 %
-Notons $\vt \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
+Notons $t \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
 $\Bd{\Body{\DSh}{h}}$ à un point $\vx$ de $\dS$. En 3D, le
 \RefTheoremFake{7}{Pottmann2009} permet de quantifier cette erreur :
 %
 \begin{equation}\label{eq:volume-shift-error}
-  | V_r(\vxH) - V_r(\vx) | = R^2 \pi \vt (1 + O(R^2)+O(\vt)).
+  | V_r(\vxH) - V_r(\vx) | = R^2 \pi t (1 + O(R^2)+O(t)).
 \end{equation}
 %
 De la même façon en 2D, nous obtenons :
 %
 \begin{equation}\label{eq:area-shift-error}
-  | A_r(\vxH) - A_r(\vx) | = 2R \vt (1 + O(R^2)+O(\vt)).
+  | A_r(\vxH) - A_r(\vx) | = 2R t (1 + O(R^2)+O(t)).
 \end{equation}
 %
 Nous pouvons alors réécrire l'\RefEquation{eq:convergence-area-intersection}
@@ -1589,7 +1610,7 @@ pour $\vxH$ :
 ce qui implique, avec l'\RefEquation{eq:area-shift-error} :
 %
 \begin{equation}\label{eq:shift-B-R-error-bound-2D}
-  | \AreaC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - A_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  2 R \vt (1 + O(R^2) + O(\vt)).
+  | \AreaC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - A_R(\vx) |  \le K_1 h^\beta R^{2-\beta} +  2 R t (1 + O(R^2) + O(t)).
 \end{equation}
 %
 Ensuite, dans le but d'obtenir un estimateur de courbure, nous suivons le même
@@ -1597,13 +1618,13 @@ raisonnement que pour la preuve du \RefTheorem{thm:convergence-curv-2d} mais en
 utilisant l'\RefEquation{eq:shift-B-R-error-bound-2D}, ce qui nous donne :
 %
 \begin{equation}\label{eq:shift-curvhat-error-bound-2D}
-  | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) | \le O(R) + 3 K_1 \frac{h^\beta}{R^{1+\beta}} + \frac{6 \vt}{R^2}(1 + O(R^2) + O(\vt)).
+  | \CurvH{R}(\DSh,\vxH,h) - \Curv(\Shape,\vx) | \le O(R) + 3 K_1 \frac{h^\beta}{R^{1+\beta}} + \frac{6 t}{R^2}(1 + O(R^2) + O(t)).
 \end{equation}
 %
-Puisque nous sommes sur des données digitales, nous savons que $\vt \le
+Puisque nous sommes sur des données digitales, nous savons que $t \le
 \frac{\sqrt{2}}{2}h$ d'après la \RefDefinition{def:projection} de la projection
 inverse. Dans certains cas, nous pouvons espérer une meilleure localisation de
-$\vxH$ vers $\vx$ \cite{deVieilleville2006}. Nous noterons alors $\vt =
+$\vxH$ vers $\vx$ \cite{deVieilleville2006}. Nous noterons alors $t =
 O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la précédente
 équation afin d'obtenir une borne d'erreur uniquement dépendante de $h$, avec
 $R=kh^{\alpha}$ :
@@ -1640,7 +1661,7 @@ Alors, si $\alpha' \ge \frac{3 \beta}{2 + \beta}$, alors $\alpha = \frac{\beta}{
 \beta}$, sinon $\alpha = \frac{\alpha'}{3}$.
 %
 Si le point $\vxH$ est sur le bord digital $\Bd{\Body{\DSh}{h}}$, nous savons
-que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{2}}{2}h$, $\beta = 1$
+que $\alpha'=1$ grâce à la relation $t \le \frac{\sqrt{2}}{2}h$, $\beta = 1$
 dans le cas général, alors nous obtenons $\alpha = \frac{\alpha'}{3} =
 \frac{1}{3}$. Donc, lorsque $R = kh^{\frac{1}{3}}$ :
 %
@@ -1673,12 +1694,12 @@ $O(h^\frac{1}{3})$ lorsque $R = kh^\frac{1}{3}$. Plus précisément :
 %
 \begin{proof}
 %
-Notons $\vt \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
+Notons $t \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
 $\Bd{\Body{\DSh}{h}}$ à un point $\vx$ de $\dS$. En 3D, le
 \RefTheoremFake{7}{Pottmann2009} permet de quantifier cette erreur :
 %
 \begin{equation}\label{eq:volume-shift-error-2}
-  | V_r(\vxH) - V_r(\vx) | = R^2 \pi \vt (1 + O(R^2)+O(\vt)).
+  | V_r(\vxH) - V_r(\vx) | = R^2 \pi t (1 + O(R^2)+O(t)).
 \end{equation}
 %
 Nous pouvons alors réécrire l'\RefEquation{eq:convergence-volume-intersection}
@@ -1691,7 +1712,7 @@ pour $\vxH$ :
 ce qui implique, avec l'\RefEquation{eq:volume-shift-error-2} :
 %
 \begin{equation}\label{eq:shift-B-R-error-bound-3D}
-  | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\gamma R^{3-\gamma} +  R^2 \pi \vt (1 + O(R^2) + O(\vt)).
+  | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\gamma R^{3-\gamma} +  R^2 \pi t (1 + O(R^2) + O(t)).
 \end{equation}
 %
 Ensuite, nous suivons le même raisonnement que pour la preuve du
@@ -1699,11 +1720,11 @@ Ensuite, nous suivons le même raisonnement que pour la preuve du
 l'\RefEquation{eq:shift-B-R-error-bound-3D}, ce qui nous donne :
 %
 \begin{equation}\label{eq:shift-curvhat-error-bound-3D}
-  | \MeanCurvH{R}(\DSh,\vxH,h) - \MeanCurv(\Shape,\vx) | \le O(R) + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}} + \frac{4 \vt}{R^2}(1 + O(R^2) + O(\vt)).
+  | \MeanCurvH{R}(\DSh,\vxH,h) - \MeanCurv(\Shape,\vx) | \le O(R) + \frac{4 K_1}{\pi} \frac{h^\gamma}{R^{1+\gamma}} + \frac{4 t}{R^2}(1 + O(R^2) + O(t)).
 \end{equation}
 %
-À nouveau, nous savons que $\vt \le \frac{\sqrt{3}}{2}h$. Nous noterons alors
-$\vt = O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la
+À nouveau, nous savons que $t \le \frac{\sqrt{3}}{2}h$ \cite{Lachaud2015}. Nous noterons alors
+$t = O(h^{\alpha'})$, avec $\alpha' \ge 1$. Nous pouvons réécrire la
 précédente équation afin d'obtenir une borne d'erreur uniquement dépendante de
 $h$, avec $R=kh^{\alpha}$ :
 %
@@ -1719,7 +1740,7 @@ obtenons $\alpha = \frac{\gamma}{2 + \gamma}$ si $\alpha' \ge \frac{3 \gamma}{1 
 \gamma}$, sinon $\alpha = \frac{\alpha'}{3}$
 %
 Si le point $\vxH$ est sur le bord digital $\Bd{\Body{\DSh}{h}}$, alors nous
-savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{3}}{2}h$, $\gamma =
+savons que $\alpha'=1$ grâce à la relation $t \le \frac{\sqrt{3}}{2}h$, $\gamma =
 1$ dans le cas général, alors nous obtenons $\alpha = \frac{\alpha'}{3} =
 \frac{1}{3}$. Donc, lorsque $R = kh^{\frac{1}{3}}$ :
 %
@@ -1729,11 +1750,17 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{3}}{2}h$, $\ga
 %
 \end{proof}
 
+Dans les prochains paragraphes, nous allons nous intéresser à calculer les
+courbures principales sur des objets digitaux, en calculant des matrices de
+covariance sur la surface de l'objet. Comme pour la courbure en dimension 2 et
+la courbure moyenne en dimension 3, nous chercherons à prouver la convergence
+asymptotiques de ces estimateurs.
+
 \subsection{Analyse digitale de la matrice de covariance, et
 relation aux courbures principales en 3D}
 \label{sec:ii-3d}
 %
-Nous souhaitons alors calculer les moments sur l'intersection entre la forme
+Nous souhaitons maintenant calculer les moments sur l'intersection entre la forme
 $\Shape$ et la boule, \cad à $\Ball{R}{\vx} \cap \Shape$, dont la taille décroit
 avec le pas de discrétisation $h$. Nous ne pouvons pas utiliser directement les résultats
 de l'\RefEquation{eq:MomentsByCounting-conv} car les constantes cachées dans le
@@ -1866,6 +1893,9 @@ covariance et des moments face aux perturbations. Nous pouvons
   \end{itemize}
 %
 \end{lemma}
+\begin{proof}
+  La preuve est directe par additivité des moments géométriques.
+\end{proof}
 %
 Nous devons également étudier comment les moments sont perturbés par une erreur de positionnement de la boule :
 %
@@ -2292,9 +2322,9 @@ principales).
 \begin{theorem}{\fakeTitle{Inégalité de Lidskii-Weyl}}
   \label{thm:lidskii-weyl}
   %
-  Si $\lambda_i(M)$ désigne les valeurs propres ordonnées d'un matrice
-  symétrique $M$ et $\lambda_i(M')$ les valeurs propres ordonnées d'un matrice
-  symétrique $M'$, alors:
+  Si $\lambda_i(M)$ désigne la $i$-ième valeur propre ordonnée d'un matrice
+  symétrique $M$ et $\lambda_i(M')$ la $i$-ième valeur propre ordonnée d'un matrice
+  symétrique $M'$, alors :
   %
   \begin{equation}
     \max_{i}| \lambda_i(M) - \lambda_i(M')| \le \|M-M'\| .
@@ -2317,7 +2347,7 @@ intégration :
 \label{thm:multigrid-convergence-curv-k1k2}
 %
   Soit $\Shape$ une forme convexe de $\R^3$ à reach positif tel que son bord
-  $\Bd{X}$ est $C^3$ et peut être décomposé en nombre fini de parties monotones.
+  $\Bd{X}$ est $C^3$ et peut être décomposée en nombre fini de parties monotones.
   Alors, pour la discrétisation de Gauss, les estimateurs digitaux de courbures
   principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ convergent
   asymptotiquement vers les courbures principales $\PrincCurv{1}$ et
@@ -2437,35 +2467,41 @@ conclure à une convergence asymptotique.
 %
 \subsection{Résultats sur l'estimation de la courbure par intégration volumique de la boule}
 %
-Avons de conclure sur cette méthode, nous allons montrer quelques résultats des
+Avant de conclure sur cette méthode, nous allons montrer quelques résultats des
 estimateurs. Une comparaison expérimentale complète sera proposée dans le
 \RefSection{sec:comparaison-courbure}.
 
-
-Nous avons choisi l'objet digital \textsc{OctaFlower} de dimension $256^3$.
-L'unique paramètre de nos estimateurs est le rayon de la boule : nous avons
-choisi $R=15$ pour toutes les images des
+Les estimateurs sont définis sur des formes $\Shape$ de la famille $\Shapes$ des
+formes convexes à bord $C^3$ et à courbure bornée positive, cependant nous
+voulons tester également sur d'autres formes ne rentrant pas dans ce cadre. Nous
+avons choisi l'objet digital \textsc{OctaFlower} de dimension $256^3$. L'unique
+paramètre de nos estimateurs est le rayon de la boule : nous avons choisi $R=15$
+pour toutes les images des
 \RefFigures{fig:digital-II-octa}{fig:digital-II-octa-2}. La carte des couleurs
 pour les estimateurs de courbure moyenne, gaussienne et courbures principales va
 du bleu (valeur minimale) au jaune (valeur maximale).
 
 \begin{figure}[ht]
 \begin{center}
-  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Mean_R_15_0001}
-  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_Gauss_R_15_0001}\\
-  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_k1_R_15_0001}
-  \includegraphics[width=.30\linewidth]{images/Curvature/Octa256_k2_R_15_0001}\\
+  \includegraphics[width=.40\linewidth]{images/Curvature/Octa256_Mean_R_15_0001}
+  \includegraphics[width=0.1cm,height=5.5cm]{images/YMTB6W}
+  \includegraphics[width=.40\linewidth]{images/Curvature/Octa256_Gauss_R_15_0001}
+  \includegraphics[width=0.1cm,height=5.5cm]{images/YMTB6W}\\
+  \includegraphics[width=.40\linewidth]{images/Curvature/Octa256_k1_R_15_0001}
+  \includegraphics[width=0.1cm,height=5.5cm]{images/YMTB6W}
+  \includegraphics[width=.40\linewidth]{images/Curvature/Octa256_k2_R_15_0001}
+  \includegraphics[width=0.1cm,height=5.5cm]{images/YMTB6W}\\
 \end{center}\vspace{-0.5cm}
   \caption[Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$.]{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 15$. \emph{De gauche à droite, de haut en bas :} courbure moyenne, courbure gaussienne, première et seconde courbures principales. \label{fig:digital-II-octa}}
 \end{figure}
 
 \begin{figure}[ht]
 \begin{center}
-  \includegraphics[width=.197\linewidth]{images/Curvature/Octa256_dir1_R_15_0001}
-  \includegraphics[width=.197\linewidth]{images/Curvature/Octa256_dir2_R_15_0001}
-  \includegraphics[width=.197\linewidth]{images/Curvature/octa-256-normal}\\
-  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir1-zoom}
-  \includegraphics[width=.30\linewidth]{images/Curvature/octa-256-prindir2-zoom}
+  \includegraphics[width=.2645\linewidth]{images/Curvature/Octa256_dir1_R_15_0001}
+  \includegraphics[width=.2645\linewidth]{images/Curvature/Octa256_dir2_R_15_0001}
+  \includegraphics[width=.2645\linewidth]{images/Curvature/octa-256-normal}\\
+  \includegraphics[width=.40\linewidth]{images/Curvature/octa-256-prindir1-zoom}
+  \includegraphics[width=.40\linewidth]{images/Curvature/octa-256-prindir2-zoom}
 \end{center}\vspace{-0.5cm}
   \caption[Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$.]{Estimateurs différentiels digitaux par intégration sur une surface digitale (\textsc{OctaFlower} de dimension $256^3$) avec $R = 15$. \emph{De gauche à droite, de haut en bas :} première et seconde direction principale de courbure et normale (zoom sur la dernière ligne). \label{fig:digital-II-octa-2}}
 \end{figure}
@@ -2481,7 +2517,7 @@ rayons de boules doivent être en relation avec $h$ ($R$ est en
 $O(h^\frac{1}{3})$). Cependant, pour un objet digital donné, ce choix de rayon
 nécessite d'étudier au préalable la forme dont nous souhaitons estimer la
 courbure, et la qualité d'estimation dépend de ce paramètre. La
-\RefFigure{fig:digital-II-octa-scale} montre le résultat de l'estimation de la
+\RefFigureN{fig:digital-II-octa-scale} montre le résultat de l'estimation de la
 courbure moyenne et de la courbure gaussienne avec différents rayons $R$ pour la
 forme \textsc{OctaFlower}.
 

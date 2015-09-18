@@ -13,7 +13,7 @@
 \newtheorem{problem}{Probl\'eme}[chapter]
 \newtheorem{lemma}{Lemme}[chapter]
 \newtheorem{claim}{Claim}[chapter]
-\newenvironment{proof}{\textit{\textbf{D\'emonstration.}}}{\hfill$\square$\\}
+\newenvironment{proof}{\textit{\textbf{D\'emonstration.\quad}}}{\hfill$\square$\par}
 % \newenvironment{theorem}
 %   {\par\noindent\normalfont\textbf{Proof.}\par\nopagebreak%
 %   \begin{mdframed}[
@@ -136,7 +136,7 @@
 
 % Gauss digitization
 \newcommand{\Dig}{\ensuremath{\mathtt{G}}}
-\newcommand{\DigF}[2]{\ensuremath{\Dig_{#2}(#1)}}
+\newcommand{\DigF}[2]{\ensuremath{\Dig_{#2}\left(#1\right)}}
 \newcommand{\DSh}{\DigF{\Shape}{h}}
 
 % cube Q(z)
@@ -195,7 +195,7 @@
 \newcommand{\EqDef}{\ensuremath{:=}}
 
 %% Area/Volume notation
-\newcommand{\AR}{\ensuremath{A(R,x)}}
+\newcommand{\AR}{\ensuremath{A(R,\vx)}}
 
 %% Curvature notations
 \newcommand{\Curv}{\ensuremath{\kappa}}
@@ -304,7 +304,7 @@
 \newcommand{\hBd}[1]{\ensuremath{\partial_{#1}}}
 
 %Ball of radius R (#1) centered on x (#2).
-\newcommand{\Ball}[2]{\ensuremath{B_{#1}(#2)}}
+\newcommand{\Ball}[2]{\ensuremath{B_{#1}\left(#2\right)}}
 %Positive half-Ball of radius R (#1) centered on x (#2).
 \newcommand{\HalfBall}[2]{\ensuremath{B^+_{#1}(#2)}}
 % Vector #1/#2 rounded to the closest integer vector.

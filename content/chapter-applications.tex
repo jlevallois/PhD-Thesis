@@ -115,7 +115,7 @@ caractéristiques sur des formes. Nous avons choisi les méthodes les plus
 représentatives de cette littérature afin d'avoir un ensemble complet
 d'estimateurs auxquels nous pourrons nous comparer. Nous les avons classer par
 catégories : les méthodes « \anglais{Ridges and Valleys} »
-(\RefSection{sec:applications:feature:ridge}), les méthodes basées sur un patch
+(\RefSection{sec:applications:feature:ridge}), les méthodes basées sur un morceau
 surfacique (\RefSection{sec:applications:feature:patch}) et les méthodes
 d'analyse spectrale (\RefSection{sec:applications:feature:spectral}).
 %
@@ -211,14 +211,14 @@ digitales, ces approches ne s'avèrent pas pertinentes.
 %  \caption{Test}
 % \end{algorithm}
 %
-\subsubsection{Méthodes basées sur un patch surfacique}%
+\subsubsection{Méthodes basées sur un voisinage surfacique}%
 \label{sec:applications:feature:patch}
 %
 Lorsque nous traitons des maillages ou les nuages de points, beaucoup
-d'approches se basent sur des quantités calculées par intégration sur des patchs
+d'approches se basent sur des quantités calculées par intégration sur des voisinages
 surfaciques de la surface. La caractéristique est obtenue en fonction d'un score
-évalué sur la géométrie de patchs surfaciques centrés autour du point à
-considérer. Généralement, les patchs sont simplement issus d'un noyau sphérique.
+évalué sur la géométrie de voisinages surfaciques centrés autour du point à
+considérer. Généralement, les voisinages sont simplement issus d'un noyau sphérique.
 %  Nous allons en détailler quelques-unes
 % \cite{Pauly2003,Telea2004} utilisant l'Analyse en Composante Principale
 % (\emph{ACP}) sur le voisinage du point d’intérêt. Un score de zone
@@ -305,7 +305,7 @@ classification de surface basé sur la variation du barycentre $\vb$ et de la
 matrice de covariance\footnote{Dans \cite{Telea2004}, les auteurs nomment le
 moment d'ordre zéro comme le barycentre et le moment d'ordre un comme la matrice
 de covariance, ce qui peut porter à confusion avec notre définition des moments
-vue dans le \RefSection{sec:moments-geo}.} de patchs surfaciques
+vue dans le \RefSection{sec:moments-geo}.} de morceaux surfaciques
 $\Ball{R}{\vx} \cap \dS$.
 
 \begin{figure}[ht]
@@ -488,7 +488,7 @@ un paramètre de seuillage $T$ donné par l'utilisateur.
 %
 Dans un esprit similaire aux méthodes précédentes, certains auteurs
 \cite{Park2012} ont proposé une stratégie de vote de tenseur (\anglais{Tensor
-Voting}) sur des patchs surfaciques. Ce dernier, défini par
+Voting}) sur des morceaux surfaciques. Ce dernier, défini par
 \cauthors{Medioni}{Medioni2000-2} est l'intégration du tenseur des points d'un
 voisinage, contenant des informations de la surface sous-jacente. Ils utilisent
 alors un comportement en espace d'échelle du vote du tenseur lorsque la taille du
