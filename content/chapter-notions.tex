@@ -37,13 +37,13 @@ dans cette thèse (sauf mention contraire).
     \toprule
     Notation      & Description  & Définition \\ \midrule
 
-    $\R^d$        & Espace euclidien de dimension $d$ & \RefSectionTable{sec:notions} \\
+    $\R^d$        & Espace euclidien de dimension $d$ & \\%\RefSectionTable{sec:notions} \\
     $\Shapes$     & Famille de formes convexes de $\R^d$ de bord $C^3$ à courbure bornée & \RefSectionTable{sec:multigrid-convergence-estimator} \\
     $\Shape$      & Forme de $\Shapes$ & \RefSectionTable{sec:multigrid-convergence-estimator} \\
     $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:digitization} \\
     $\vx$         & Point de $\R^d$ & \RefSectionTable{sec:digitization} \\
-    $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \RefSectionTable{sec:notions} \\
-    $\vx_i$       & $i$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n}$ & \RefSectionTable{sec:notions} \\
+    $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \\%\RefSectionTable{sec:notions} \\
+    $\vx_i$       & $i$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n}$ & \\%\RefSectionTable{sec:notions} \\
     $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:digitization} \\
     $\DigShape$   & Objet digital (partie de $\Z^d$) & \RefSectionTable{sec:digitization} \\
     $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:digitization} \\
@@ -258,6 +258,21 @@ où $r_o(\vx)$ est le rayon du cercle osculateur de la courbe $f$ au point $\vx$
 \cad le cercle qui épouse géométriquement le mieux à la courbe $f$ en
 $\vx$ (voir \RefFigure{fig:curvature_osc}).
 
+\begin{figure}[ht]
+{\scriptsize
+\begin{center}
+  \begin{overpic}[width=6cm]{figures/Curvature-OsculatorCircle}
+    \put(52,35){$R_1$}
+    \put(83,36){$R_2$}
+  \end{overpic}
+\end{center}
+}
+%
+\caption{La courbure est l'inverse du rayon du cercle osculateur. Ainsi plus le
+rayon est petit, plus la courbure (en valeur absolue) est
+forte.\label{fig:curvature_osc}}
+%
+\end{figure}
 
 Usuellement, lorsque nous parlons de courbure, nous parlons de
 \colorize{courbure algébrique}. La distinction se fait dans le signe de la
@@ -759,7 +774,7 @@ positif ont leur courbures principales bornées par $\pm 1 / \Reach{\Shape}$.
 % correspondance de $\Shape \setminus MA(\dS)$ vers $\dS$ qui associe tout point
 % vers son point le plus proche de $\dS$.
 %
-\\
+% \\
 %
 Alors nous pouvons définir la correspondance $\Proj$ du bord
 $\partial\Body{\DSh}{h}$ du plongement euclidien de la discrétisation de Gauss
@@ -794,7 +809,24 @@ points $\vx \in \dS$. Alors, nous pouvons conclure que les bords
 $\partial\Body{\DSh}{h}$ et $\dS$ ont une distance de Hausdorff inférieure ou
 égale à $\frac{\sqrt{2}}{2}h$. De plus, la projection $\ProjX{\Shape}$ est
 continue sur $\R^d \setminus MA(\dS)$, donc également sur
-$\partial\Body{\DSh}{h}$ avec un $h$ adéquat. En dimension supérieure, nous pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}
+$\partial\Body{\DSh}{h}$ avec un $h$ adéquat. En dimension supérieure, nous
+pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}
+
+
+\begin{figure}[t]{\small
+    \begin{center}
+      {\begin{overpic}[width=8cm]{images/Notions/notation}
+          \put(43,23.5){$\hat{\vx}$}
+          \put(41,29){$\vx$}
+          \put(39,15){$h$}
+          \put(77,39){$\Proj(\hat{\vx})$}
+          \put(5,15){$\dS$}
+          \put(17,10){$\partial\Body{\DSh}{h}$}
+      \end{overpic}}
+    \end{center}}
+    \caption{Projection inverse de tout point $\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des
+    points $\vx \in \dS$.\label{fig:backproj}}
+\end{figure}
 %
 \section{Convergence asymptotique d'estimateurs locaux et globaux}
 \label{sec:multigrid-convergence-estimator}
