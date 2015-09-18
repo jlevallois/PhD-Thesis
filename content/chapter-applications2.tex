@@ -12,22 +12,24 @@ Recherches Météorologiques.
 
 
 L'objectif principal de ce projet est de fournir des outils efficaces pour
-étudier la métamorphose de la neige à partir d'images digitales 3D de
+étudier la métamorphose de la neige à partir d'images digitales 3D
+(\RefFigure{fig:digitalSnow-curv}, en haut) de
 %
 \begin{wrapfigure}[11]{r}[0.2cm]{4cm}
 	\includegraphics[width=4cm]{images/digitalSnow/YTEjpE}
 \end{wrapfigure}
 %
 micro-structures de neige acquises en utilisant des techniques de tomographie à
-rayons X (image de droite\footnote{Tomographe appartenant au laboratoire 3SR}). En
-effet, lors d'une chute de neige, les cristaux de neige s'accumulent sur le sol
-et forment progressivement un milieu poreux complexe constitué d'air, de vapeur
-d'eau, de glace et parfois d'eau liquide. Cette neige se transforme avec le
-temps en fonction de l'environnement. Cette transformation est appelée la
-métamorphose peut être provoquée par trois facteurs : la métamorphose de la
-neige humide, la métamorphose isotherme et la métamorphose du gradient de
-température.
-
+rayons X (image de droite\footnote{Tomographe appartenant au laboratoire 3SR}).
+En effet, lors d'une chute de neige, les cristaux de neige s'accumulent sur le
+sol et forment progressivement un milieu poreux complexe constitué d'air, de
+vapeur d'eau, de glace et parfois d'eau liquide. La quantité de ces composants
+et leur arrangement géométrique à l'échelle granulaire (micro-structure de
+neige) se transforme avec le temps en fonction des paramètres physiques de
+l'environnement. Cette transformation est appelée la métamorphose, et peut être
+décomposée en deux types : la métamorphose de la « neige humide » provoqué par
+la présence d'eau liquide, la métamorphose de la « neige sèche » (métamorphose
+d'isothermie et métamorphose du gradient de température).
 
 
 \begin{figure}[ht]{
@@ -35,8 +37,8 @@ température.
     \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/SnowE2_DigitalData}
     \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/SnowI08_DigitalData}\\
     \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowE2mean_0001}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08mean_0001}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08gaussian_0001}\\
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08mean_0001}\\
+    % \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08gaussian_0001}\\
     \includegraphics[width=4.5cm]{images/digitalSnow/Snow_I08_II_scale}
     \includegraphics[width=4.5cm]{images/digitalSnow/Snow_E2bis_II_scale}\\
     \end{center}}
@@ -44,39 +46,25 @@ température.
       \label{fig:digitalSnow-curv}}
 \end{figure}
 
-
-
-%  En particulier, notre travail se concentrera sur le développement de
-% modèles numériques 3D à partir d'images qui peuvent simuler l'évolution de la
-% forme de la microstructure de la neige au cours de son métamorphisme. Il sera
-% complété par d'autres outils conçus pour extraire les propriétés physiques des
-% microstructures calculées.
-%
-%
-%
-%
-%
-%
-%
-% L'objectif est de mieux comprendre les équations physiques d'évolution de
-% micro-structures de neige.
-%
-%
-%
-% , afin de pouvoir les modéliser dans un schéma
-% numérique pour simuler les métamorphoses des grains.
-%
-% Modélisation et analyse de structures digitales 3D (grain, facettes)
-%
-% Mise en relation équations ↔ schéma numérique ↔ modèle d’évolution de surfaces ↔
-% outils d’analyse discrets pour la métamorphose
-
-% Moteur des métamorphoses de neige sèche : gradient de pression H2O causé par la courbure moyenne (Effet de Kelvin) ===> slides de neige calonne 14-03-2012 T06
-% En gros, ça se lisse en déplaçant de la matière (facette, toussa)
-
-% Le calcul de courbure moyenne sur les volumes digitaux  permet :
-% - de caractériser le volume. En l'absence de gradient de température dans le manteau neigeux, les grains grossissent et s'arrondissent lentement. Par contre, en présence d'un gradient de température, les cristaux croissent suivant leurs axes cristallographiques privilégiés et forment des facette
-% - de simuler certains méthamorphoses de neige -> les zones convexes ont tendance à se sublimer tandis que la vapeur se condense dans les zones concaves.
+Dans des conditions polaires ou montagneuses, ces effets sont suivis par des
+contraintes mécaniques comme la compaction de la neige sous l'effet du poids des
+couches supérieures de neige. En particulier, notre travail se concentre sur le
+développement de modèles numériques 3D à partir d'images pour simuler
+l'évolution de la forme de la microstructure de la neige au cours de son
+métamorphisme. Le calcul de courbure moyenne sur les volumes digitaux
+(\RefFigure{fig:digitalSnow-curv}, au milieu) permet tout d'abord de
+caractériser le volume des grains de neige. En l'absence de gradient de
+température dans le manteau neigeux, les grains grossissent et s'arrondissent
+lentement (Effet de Kelvin). Cependant, en présence d'un gradient de
+température, les cristaux croissent suivant leurs axes cristallographiques
+privilégiés et forment des facettes. Nous pouvons également détecter ces
+facettes grâces à l'estimateur de singularité dont nous avons décrit dans ce
+chapitre. La \RefFigure{fig:digitalSnow-curv} en bas montre deux captures de
+microstructures de neige à différents moments. Il est alors immédiat que les
+grains de neige de gauche présentent plus de facettes que ceux de droite. De
+plus, l'estimation de la courbure permet de simuler certains méthamorphoses de
+neige : les zones convexes ont tendance à se sublimer tandis que la vapeur se
+condense dans les zones concaves.
 
 \section{Implémentations dans DGtal}%
 \label{sec:applications:dgtal}
@@ -92,11 +80,11 @@ Un des objectifs de \DGtal est de centraliser toutes les techniques dédiées à
 géométrie digitale (et domaines proches comme la topologie digitale, le
 traitement d'image, etc.) dans un même lieu, facilitant ainsi leur usage. Un des
 exemples le plus représentatif est la branche « estimateurs » de \DGtal :
-celle-ci comptabilise plusieurs estimateurs de quantités différentielles comme
+celle-ci comptabilise plusieurs estimateurs de quantités intégrales comme
 les tangentes, les normales, le périmètre, et dans notre cas la courbure. Dans
 notre processus de convergence asymptotique, nous avons besoin de discrétiser à
 plusieurs échelles des formes euclidiennes auxquelles nous savons en tout point
-la valeur de la quantité différentielle que nous estimons. Encore une fois,
+la valeur de la quantité intégrales que nous estimons. Encore une fois,
 \DGtal nous simplifie la tâche en nous proposant de générer des formes
 paramétriques et implicites de dimension 2 et 3 que nous pouvons discrétiser à
 plusieurs échelles, ainsi que la possibilité de charger et exporter des objets.
