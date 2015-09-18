@@ -49,7 +49,7 @@ d'isothermie et métamorphose du gradient de température).
 \end{figure}
 
 Dans des conditions polaires ou montagneuses, ces effets sont suivis par des
-contraintes mécaniques comme la compaction de la neige sous l'effet du poids des
+contraintes mécaniques comme le compactage de la neige sous l'effet du poids des
 couches supérieures de neige. En particulier, notre travail se concentre sur le
 développement de modèles numériques 3D à partir d'images pour simuler
 l'évolution de la forme de la microstructure de la neige au cours de son
@@ -65,7 +65,7 @@ de singularité dont nous avons décrit dans ce chapitre. La
 \RefFigure{fig:digitalSnow-curv} en bas montre deux captures de microstructures
 de neige à différents moments. Il est alors immédiat que les grains de neige de
 gauche présentent plus de facettes que ceux de droite. De plus, l'estimation de
-la courbure permet de simuler certains méthamorphoses de neige : les zones
+la courbure permet de simuler certains métamorphoses de neige : les zones
 convexes ont tendance à se sublimer tandis que la vapeur se condense dans les
 zones concaves. Notre rôle était d'apporter des estimateurs de courbure fiables
 (c'est à dire avec des preuves de convergence) mais également robuste au bruit
@@ -94,7 +94,7 @@ la valeur de la quantité intégrales que nous estimons. Encore une fois,
 paramétriques et implicites de dimension 2 et 3 que nous pouvons discrétiser à
 plusieurs échelles, ainsi que la possibilité de charger et exporter des objets.
 Ensuite, \DGtalTools (le projet annexe de \DGtal proposant des applications des
-algorithmes présents dans \DGtal) possède une plateforme de comparaison
+algorithmes présents dans \DGtal) possède une plate-forme de comparaison
 d'estimateurs permettant d'exporter les résultats : \texttt{2dLocalEstimators}
 et \texttt{3dLocalEstimators}. C'est grâce à ces outils que nous avons généré
 toutes les courbes de comparaison de ce document.
@@ -105,7 +105,7 @@ Khalimsky\footnote{Documentation du paquet « Topologie » :
 dans le \RefSection{sec:digitization}). Les cellules de Khalimsky sont définies
 dans un domaine de Khalimsky, \cad une grille cubique de dimension $n$.
 Plusieurs algorithmes d'extraction et de suivi de surface sont disponibles et
-adaptés à cette topologie. Concrétement, \DGtal peut nous fournir un itérateur
+adaptés à cette topologie. Concrètement, \DGtal peut nous fournir un itérateur
 de surfels de la surface nous permettant de la parcourir en profondeur ou en
 largeur de manière optimale, \cad en évitant autant que possible les
 déplacements non connexes. Cette propriété est très importante dans notre cas si
@@ -116,7 +116,7 @@ utilisant les informations de l'itération précédente. En effet, comme le mont
 la \RefFigure{fig:MovingKernel2D} en haut à gauche, si nous nous déplaçons à une
 distance $\delta$ inférieure au rayon de la sphère, nous calculons à nouveau une
 partie du résultat précédent. Afin d'éviter cette redondance de calcul, nous
-pouvons précalculer des masques de déplacement pour toutes les voisins
+pouvons pré-calculer des masques de déplacement pour toutes les voisins
 $0$-adjacents à un point (à droite sur la \RefFigure{fig:MovingKernel2D}).
 Ainsi, au lieu de dénombrer le nombre de points digitaux sur la sphère digitale
 entière, nous pouvons récupérer le dénombrement de l'itération (hachurée),
@@ -129,7 +129,7 @@ précédemment (\RefSection{sec:complexite}), le coût du calcul par élément d
 surface peut être réduit de $O\left(\left(\frac{R}{h}\right)^d\right)$ (taille du support complet) à
 $O\left(\left(\frac{R}{h}\right)^{d-1}\right)$. Pour être tout à fait juste, il faut également
 rajouter le coût initial du premier calcul obligatoire sur le support entier, et
-le coût supplémentaire au début pour précalculer les masques de déplacement,
+le coût supplémentaire au début pour pré-calculer les masques de déplacement,
 mais ceux-ci sont négligeable. Par exemple, pour une taille de support 2D entier
 de $\nombre{91893}$ éléments, l'optimisation construit de $8$ masques de
 déplacements supplémentaires d'environ $\nombre{450}$ éléments.

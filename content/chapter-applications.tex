@@ -67,7 +67,7 @@ remarquables de l'objet (par exemple le nez sur un visage, les bras et les
 jambes sur un corps) tandis que la détection de points caractéristiques extrait
 les discontinuités locales distinguables de son voisinage (par exemple les rides
 sur un visage). La première est plutôt une information visuelle alors que
-l'autre intègre des informations géométriques de l'objets. Nous nous
+l'autre intègre des informations géométriques de l’objet. Nous nous
 intéresserons ici qu'aux points caractéristiques.
 %
 % C'est là tout le problème lorsqu'on s'intéresse aux \emph{features} : la
@@ -158,7 +158,7 @@ convient de remplacer $f$ et $\theta$ par les valeurs du
                                           & $f$                 & $\theta$                \\ \midrule
       Crêtes de la surface                & $\PrincCurv{max}$   & $\PrincDir{max}$        \\
       Vallées de la surface               & $-\PrincCurv{min}$  & $\PrincDir{min}$        \\
-      Points d'inflections de la surface  & $|\vv_{max}|$       & $\vv_{max}/|\vv_{max}|$ \\ \bottomrule
+      Points d’inflexions de la surface  & $|\vv_{max}|$       & $\vv_{max}/|\vv_{max}|$ \\ \bottomrule
     \end{tabular}
   \end{center}
 \end{table}
@@ -749,13 +749,13 @@ laplacienne :
 où $B$ est la matrice orthogonale dans laquelle les colonnes $b_i$ sont les
 vecteurs propres de $L$ et $R = Diag\{\exp(|\mathcal{L}(i) - \mathcal{J}_n(i)
 \ast \mathcal{L}(i)|) : 1 \le f \le m\}$ la matrice diagonale dont les entrées
-sont l'exponentielles des éléments de $|\mathcal{L}(i) - \mathcal{J}_n(i) \ast
+sont l’exponentielle des éléments de $|\mathcal{L}(i) - \mathcal{J}_n(i) \ast
 \mathcal{L}(i)|$, avec $\mathcal{J}_n(i)$ un filtre local moyen.
 
 
 La carte de saillance $\mathcal{S}_i$ est alors obtenue en sommant $S$ le long
-de chaque ligne de la matrice, correspondant chacune à un vertice du maillage.
-L'aspect multi-échelle apparait en calculant ces cartes de saillances sur le
+de chaque ligne de la matrice, correspondant chacune à un sommet du maillage.
+L'aspect multi-échelle apparaît en calculant ces cartes de saillances sur le
 maillage auquel on aura fait varier le paramètre de lissage.
 
 

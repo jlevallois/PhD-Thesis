@@ -40,9 +40,9 @@ Les données discrètes prennent différentes formes, qui sont principalement li
 objets ou à leur utilisation. Elles peuvent être des nuages de points, des
 maillages triangulés, ou encore des données digitales. Les critères guidant les définitions des
 estimateurs sont différents et très liés à l'usage de la quantité différentielle :
-certains privilégeront la rapidité d'estimation en dépit de la qualité notamment
+certains privilégieront la rapidité d'estimation en dépit de la qualité notamment
 dans un enjeu d'utilisation en temps interactif ou réel, tandis que d'autres (et
-c'est notre cas) préfèreront garantir la qualité des résultats de l'estimation
+c'est notre cas) préféreront garantir la qualité des résultats de l'estimation
 en priorité.
 
 
@@ -184,7 +184,7 @@ la surface, mais pour l'ensemble $B$.
 
 
 Les auteurs (\nauthors{Cohen-Steiner}) proposent alors de calculer ces deux
-mesures dans le cas d'un maillage triangulé. Si $V$ est un polyhèdre dont
+mesures dans le cas d'un maillage triangulé. Si $V$ est un polyèdre dont
 l'ensemble de ses sommets est $P$ et l'ensemble d'arêtes est $E$. Alors, ils
 proposent de calculer les mesures de courbure gaussienne et moyenne en sommant
 des quantités :
@@ -234,7 +234,7 @@ sur $\Boundary T$ et est un homéomorphe de $\Boundary T$ vers $M$ ), et $K$ une
 
 Les deux principaux problèmes avec cette méthode sont son inadaptabilité face à
 des données digitales en ce qui concerne l'échantillonnage et les contraintes
-sur la topologie, et également le fait que la mesure se fait sur un ensemble de
+sur la topologie, et le fait que la mesure se fait sur un ensemble de
 points et non pas ponctuellement.
 %
 \paragraph{Invariants par intégration}
@@ -282,7 +282,7 @@ Dans le cas d'une surface, nous avons :
   &J_{B,n}(x,y) \EqDef \sum_{k=1}^{n} \left( \sum_{j=0}^{k} B_{k-j,j}x^{k-j}y^j \right) \,,
 \end{align}
 %
-où les développements tonqués de Taylor $J_{B,n}(x)$ et $J_{B,n}(x,y)$ sont les
+où les développements tronqués de Taylor $J_{B,n}(x)$ et $J_{B,n}(x,y)$ sont les
 $n$-jets. Il est à noter que le terme de jet osculateur désigne les $2$-jets.
 Ainsi, comme les $n$-jets contiennent des propriétés différentielles de la
 courbe/surface de l'ordre $n$, cela implique que toutes les quantités
@@ -319,9 +319,9 @@ principales de courbure $\PrincDir{1}$ et $\PrincDir{2}$). Alors :
 \end{align}
 %
 où $\PrincCurv{1}$ et $\PrincCurv{2}$ sont les courbures principales, $b_0$ et
-$b_3$ sont les dérivées directionelles de $\PrincCurv{1}$ et $\PrincCurv{2}$ le
+$b_3$ sont les dérivées directionnelles de $\PrincCurv{1}$ et $\PrincCurv{2}$ le
 long de leur ligne de courbure respective, et $b_1$ et $b_2$ sont les dérivées
-directionelles de $\PrincCurv{1}$ et $\PrincCurv{2}$ le long de l'autre ligne de
+directionnelles de $\PrincCurv{1}$ et $\PrincCurv{2}$ le long de l'autre ligne de
 courbure.
 %
 
@@ -516,7 +516,7 @@ Enfin, une approche très récente venant de la théorie de la mesure géométri
 utilise la théorie de \anglais{Varifolds} \cite{Almgren1965} pour concevoir une
 robuste estimation de la courbure moyenne \cite{Buet2014,Buet2015}. Cette
 théorie est suffisamment générique pour fonctionner sur des variétés lisses, des
-maillages discrèts, des nuages de points ainsi que sur des données digitales.
+maillages discrets, des nuages de points ainsi que sur des données digitales.
 Afin de mener à bien l'estimation géométrique, cette approche nécessite d'avoir
 une position et une approximation des normales. Si les deux prérequis
 convergent, alors la première variation régularisé de la mesure de Varifold
@@ -1540,7 +1540,7 @@ $\vx$ lorsque nous considérons des données digitales. Les seules informations
 dont nous disposons sont les points digitaux $\vxH$ de $\Bd{\Body{\DSh}{h}}$.
 Nous devons alors considérer l'erreur possible de positionnement de l'endroit où
 est estimé la courbure pour proposer des théorèmes de convergence
-asymptotiques.\\
+asymptotiques.
 %
 Nous devons alors injecter cette approximation dans le calcul d'aire et de
 volume, pour ensuite la diffuser aux calculs de courbures. Ainsi, nous pouvons
@@ -1649,7 +1649,8 @@ dans le cas général, alors nous obtenons $\alpha = \frac{\alpha'}{3} =
 \end{equation}
 %
 \end{proof}
-%
+
+
 De la même façon, en 3D pour la courbure moyenne, nous pouvons prouver la
 convergence asymptotique de l'estimateur $\MeanCurvH{R}$ sur le bord digital
 d'un objet suffisamment lisse :
@@ -1727,7 +1728,7 @@ savons que $\alpha'=1$ grâce à la relation $\vt \le \frac{\sqrt{3}}{2}h$, $\ga
 \end{equation}
 %
 \end{proof}
-%
+
 \subsection{Analyse digitale de la matrice de covariance, et
 relation aux courbures principales en 3D}
 \label{sec:ii-3d}
@@ -1769,7 +1770,7 @@ pouvons écrire :
 %
 \end{align}
 %
-Ainsi, l'\RefEquation{eq:MomentsOnUnitaryBall-conv} est le résultat de la
+Alors, l'\RefEquation{eq:MomentsOnUnitaryBall-conv} est le résultat de la
 convergence asymptotique des moments digitaux des sous-ensembles $\Ball{R}{\vx}
 \cap \Shape$ lorsque $R$ et $h$ décroissent.
 %
@@ -2126,7 +2127,8 @@ bord digital de la forme.
   \end{equation}
 %
 \end{proof}
-%
+
+
 Comme pour le calcul de la courbure en 2D ou courbure moyenne en 3D, afin d'obtenir un
 résultat de convergence asymptotique, nous devons placer notre estimateur
 digital sur le bord digital de la forme, ajoutant ainsi une erreur de positionnement.
@@ -2263,7 +2265,7 @@ nous allons nous servir des précédents lemmes.
   les rassemble toutes, nous obtenons le résultat du théorème.
   %
   \end{proof}
-%
+
 \subsubsection{Théorie de perturbation de matrices}
 %
 Nous venons de montrer que la matrice de covariance digitale tend vers la
@@ -2367,7 +2369,7 @@ intégration :
   \end{equation}
   %
 \end{proof}
-%
+
 Ces bornes d'erreurs peuvent être améliorées sur les
 voisinages où la courbure gaussienne n'est pas nulle. Alors, les constantes
 $\mu_i$ se rapprochent de $1.5$. De plus, une meilleure estimation de la
@@ -2631,7 +2633,8 @@ Il est à noter que $\vp \in \BdZ{\DigShape}$ implique que $h\vp \in
   conclure que son erreur est en $O(h^{\frac{1}{3}} \log^2 (\frac{1}{h}))$
   %
 \end{proof}
-%
+
+
 De ce fait, nous avons un estimateur digital de courbure qui converge, qui ne
 nécessite aucun paramètre de rayon. Le paramètre d'échelle $h$ est présent
 seulement pour déterminer l'unité utilisée pour mesurer les courbures comme
@@ -2988,6 +2991,8 @@ moins la moitié des longueurs des segments maximaux suivent les bornes de la
 \RefConjecture{conj:slice-mdss-3d}. De plus, calculer la moyenne de ces
 longueurs fournit une quantité stable et cohérente qui suit également les bornes
 de la conjecture.
+La \RefFigure{fig:bounds-length-MDSS-fig} confirme expérimentalement ces bornes.
+
 \begin{figure}[ht]{
   \begin{center}
     \includegraphics[height=6cm]{images/Curvature/Ellipsoid_Radius}
@@ -2995,8 +3000,6 @@ de la conjecture.
     \caption{Comportement asymptotique (en échelle logarithmique) de $h\rho'( \DigShape )$ sur l'objet \Ellipsoid.
     \label{fig:bounds-length-MDSS-fig}}
 \end{figure}
-
-La \RefFigure{fig:bounds-length-MDSS-fig} confirme expérimentalement ces bornes.
 
 
 Si nous supposons la \RefConjecture{conj:slice-mdss-3d}, nous pouvons prouver
@@ -3026,7 +3029,7 @@ courbure moyenne $\MeanCurvHS$}}
   même que pour le \RefTheorem{thm:curvature-estimator-2d-pf-conv}.
   %
 \end{proof}
-%
+
 \begin{observation}{\fakeTitle{Convergence asymptotique des estimateurs digitaux sans paramètre de courbures principales $\PrincCurvHS{1}$ et
 $\PrincCurvHS{2}$}}
   %
@@ -3079,7 +3082,7 @@ $\PrincCurvHS{2}$}}
   La démonstration pour $\PrincCurvHS{2}$ est similaire.
   %
 \end{proof}
-%
+
 \subsection{Estimateur digital local sans paramètre de courbures en 3D}
 %
 Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de la géométrie de la forme grâce aux longueurs des segments maximaux, et comme en 2D, nous ne pouvons pas espérer de convergence asymptotique à cause du comportement des segments maximaux les plus longs. Cependant, nous pouvons déjà les définir, et nous verrons dans la partie expérimentale du \RefSection{sec:comparaison-courbure} que nous obtenons des convergence.

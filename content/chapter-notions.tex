@@ -369,7 +369,7 @@ moyenne} $\MeanCurv(\vx)$ est définie comme étant :
 Si $\PrincCurv{a}$ et $\PrincCurv{b}$ sont \respp la \colorize{courbure
 maximale} $\PrincCurv{1}(\vx)$ et la \colorize{courbure minimale}
 $\PrincCurv{2}(\vx)$ dans toutes les directions du repère de Frenet au point
-$\vx$, alors nous pouvons définir la coubure gaussienne $\GaussCurv(\vx)$ comme
+$\vx$, alors nous pouvons définir la courbure gaussienne $\GaussCurv(\vx)$ comme
 étant :
 %
 \begin{equation}
@@ -493,7 +493,7 @@ dimension $d$.
 De ces points digitaux, nous pouvons ajouter des informations topologiques en
 considérant l'espace de grille cellulaire ou inter-pixels. L'idée est de plonger
 l'espace digital $\Z^n$ dans l'espace cubique cartésien afin de pouvoir
-représenter les éléments interpixels \cite{Kovalesvsky1989, Khalimsky1990,
+représenter les éléments inter-pixels \cite{Kovalesvsky1989, Khalimsky1990,
 Francon1991}, que nous nommerons \colorize{topologie de Khalimsky}. Ainsi :
 %
 \begin{itemize}
@@ -640,9 +640,9 @@ topologique de l'objet digital, \cad des sous-ensemble du plan discret $\Z^n$.
 
 
 
-En dimension 2 (\respp dimension 3), il s'agit de la région interpixels (\resp
-intervoxels) entre les pixels (\resp voxels) à l'intérieur de l'objet digital de
-ceux à l'extérieur. Plus concrétement, les surfaces digitales sont des ensembles
+En dimension 2 (\respp dimension 3), il s'agit de la région inter-pixels (\resp
+inter-voxels) entre les pixels (\resp voxels) à l'intérieur de l'objet digital de
+ceux à l'extérieur. Plus concrètement, les surfaces digitales sont des ensembles
 de surfels et de cellules de dimensions inférieures partageant un côté à
 l'intérieur de l'objet et un côté à l'extérieur (voir \cite{Herman1998,
 Udupa1994, Kong1992}). La \RefFigure{fig:frontier} illustre (\emph{figure du
@@ -820,7 +820,7 @@ $\partial\Body{\DSh}{h}$ et $\dS$ ont une distance de Hausdorff inférieure ou
 égale à $\frac{\sqrt{2}}{2}h$. De plus, la projection $\ProjX{\Shape}$ est
 continue sur $\R^d \setminus MA(\dS)$, donc également sur
 $\partial\Body{\DSh}{h}$ avec un $h$ adéquat. En dimension supérieure, nous
-pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}, qui metttent aussi
+pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}, qui mettent aussi
 en évidence l'équivalence des notions de reach et de
 par($R$)-régularité\footnote{correspond à des formes dont les normales ne
 s'intersectent pas entre elles lorsqu'elles sont représentés comme des segments
@@ -953,7 +953,7 @@ $\hat{\vx}$ de $\partial\Body{\DSh}{h}$.
 \end{definition}
 
 Lorsque nous implémentons un estimateur différentiel sur une surface digitale,
-l'estimation est donnée sur un élement de la surface combinatoire (une surfel ou
+l'estimation est donnée sur un élément de la surface combinatoire (une surfel ou
 un élément de dimension inférieure). Implicitement, nous estimons en un point
 $\hat{\vx}$ correspondant au centre du plongement géométrique du surfel. Nos
 preuves de convergences étant définies pour tout $\hat{\vx}$ de $\partial
