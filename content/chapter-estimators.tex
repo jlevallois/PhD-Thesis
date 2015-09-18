@@ -388,7 +388,7 @@ contient des informations sur la géométrie sous-jacente.
     \includegraphics[height=4cm]{images/Feature/VCM}
     \end{center}}
     \caption[Principe de \VCM.]{Principe de \VCM (Figure~2 de \cite{Merigot2011}). En noir : séparation des cellules de Voronoï, en orange : \comJeremy{longueur des directions des cellules} de Voronoï.
-      \label{fig:mellado-VCM}}
+      \label{fig:merigot-VCM-c}}
 \end{figure}
 
 Cela nécessite de calculer un matrice de covariance ($cov$) sur les cellules de
@@ -409,7 +409,7 @@ limitent à un voisinage de rayon $R$ :
     \begin{center}
     \includegraphics[height=6cm]{images/Feature/VCM_notations}
     \end{center}}
-    \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:mellado-multiscale}}
+    \caption[Notations de \VCM.]{Notations de \VCM (Figure~5 de \cite{Merigot2011}). La figure de gauche est sur un nuage de points tandis que celle de droite est sur une forme continue. \label{fig:VCM-multiscale-c}}
 \end{figure}
 
 Et, afin d'être plus résistant au bruit de Hausdorff, ils utilisent une
@@ -1209,7 +1209,7 @@ D'après le \RefLemma{lem:pottmann-3d}, tous ces estimateurs approchent la
 quantité espérée lorsque le rayon $R$ tend vers $0$ :
 %
 \begin{align}
-  \label{eq:pottmann-3d-princ}
+  \label{eq:pottmann-3d-princ-conv}
   \PrincCurvT{1}{R}(\Shape,\vx)& = \PrincCurv{1}(\Shape,\vx) + O(R)\,,\\
   \PrincCurvT{2}{R}(\Shape,\vx)& = \PrincCurv{2}(\Shape,\vx) + O(R)\,.%\\
   %\GaussCurvT{R}(\Shape,\vx)& = \GaussCurv(\Shape,\vx) + ???.
@@ -1672,7 +1672,7 @@ Notons $\vt \EqDef ||\vx-\vxH||_2$ la distance d'un point $\vxH$ de
 $\Bd{\Body{\DSh}{h}}$ à un point $\vx$ de $\dS$. En 3D, le
 \RefTheoremFake{7}{Pottmann2009} permet de quantifier cette erreur :
 %
-\begin{equation}\label{eq:volume-shift-error}
+\begin{equation}\label{eq:volume-shift-error-2}
   | V_r(\vxH) - V_r(\vx) | = R^2 \pi \vt (1 + O(R^2)+O(\vt)).
 \end{equation}
 %
@@ -1683,7 +1683,7 @@ pour $\vxH$ :
   | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vxH) | \le K_1 h^\gamma R^{3-\gamma},
 \end{equation}
 %
-ce qui implique, avec l'\RefEquation{eq:volume-shift-error} :
+ce qui implique, avec l'\RefEquation{eq:volume-shift-error-2} :
 %
 \begin{equation}\label{eq:shift-B-R-error-bound-3D}
   | \VolC(\DigF{\Ball{R}{\vxH} \cap \Shape}{h}, h) - V_R(\vx) |  \le K_1 h^\gamma R^{3-\gamma} +  R^2 \pi \vt (1 + O(R^2) + O(\vt)).
