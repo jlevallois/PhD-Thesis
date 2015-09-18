@@ -28,14 +28,13 @@ Le cadre de cette thèse, avec le \colorize{projet \digitalSnow}, est d'étudier
 les métamorphoses de neige difficilement observable à l'œil nu grâce à leur
 représentation digitale. Lors d'une chute de neige, les cristaux de glace
 s'accumulent sur le sol et forment un ensemble poreux d'air humide, de glace et
-d'eau. Cette neige se transforme avec le temps, en fonction des conditions
-météorologiques. L'enjeu ici est de comprendre comment évolue la micro-structure
-de la neige en fonction des conditions extérieures et des phénomènes intrasèques
-du matériau (tension de surface). Pour ce faire, nous récupérons des images
-digitales de dimension 3 de micro-échantillons de neige grâce à la
-microtomographie à rayons X et nous cherchons à extraire des quantités
-topologiques et géométriques (comme la courbure) afin de modéliser les
-propriétés physiques du matériau.
+d'eau. Cette neige se transforme avec le temps, l'enjeu ici est de comprendre
+comment évolue la micro-structure de la neige en fonction des conditions
+extérieures et des phénomènes intrasèques du matériau (tension de surface). Pour
+ce faire, nous récupérons des images digitales de dimension 3 de
+micro-échantillons de neige grâce à la microtomographie à rayons X et nous
+cherchons à extraire des quantités topologiques et géométriques (comme la
+courbure) afin de modéliser les propriétés physiques du matériau.
 
 La \colorize{\DigitalGeometry} tente alors d'apporter des outils mathématiques
 permettant d'exploiter pleinement ces données digitales. Ces outils proviennent
@@ -51,21 +50,22 @@ intrinsèquement dans la géométrie digitale, sans l’être par approximation 
 continu.
 
 La principale motivation est d'approcher au plus près la représentation digitale
-de l'objet de sa version euclidienne. Comment récupérer des informations sur
-l'objet réel étudié lorsque nous n'avons à notre disposition qu'une version
-approchée de celui-ci, sa version discrétisée ? Pouvons-nous garantir la qualité
-des quantités estimées sur les données digitales ? Après de rapides définitions
-des notions et outils de base utilisés en géométrie digitale dans le
-\RefChapitre{sec:notions}, nous proposons dans le \RefChapitre{sec:estimators}
-des estimateurs digitaux de courbure en dimension 2 et 3 (courbure moyenne,
-courbures principales) avec des preuves mathématiques garantissant la qualité
-des résultats (propriété de convergence asymptotique uniforme). Nous adapterons
-ces estimateurs dans ce même chapitre afin qu'ils ne nécessitent aucun
-paramètre. Ensuite, dans le \RefChapitre{sec:applications}, nous dérivons ces
-estimateurs de courbure afin de reconnaître les singularités d'un objet, en
-quelque sorte les arêtes de l'objet sous-jacent à sa représentation digitale.
-Enfin, nous conclurons et nous apporterons quelques perspectives résultant de
-ces travaux dans le \RefChapitre{sec:conclusion}.
+de l'objet de sa version euclidienne. Ainsi nous nous intéressons aux questions
+suivantes : comment récupérer des informations sur l'objet réel étudié lorsque
+nous n'avons à notre disposition qu'une version approchée de celui-ci, sa
+version discrétisée ? Pouvons-nous garantir la qualité des quantités estimées
+sur les données digitales ? Après de rapides définitions des notions et outils
+de base utilisés en géométrie digitale dans le \RefChapitre{sec:notions}, nous
+proposons dans le \RefChapitre{sec:estimators} des estimateurs digitaux de
+courbure en dimension 2 et 3 (courbure moyenne, courbures principales) avec des
+preuves mathématiques garantissant la qualité des résultats (propriété de
+convergence asymptotique uniforme). Nous adapterons ces estimateurs dans ce même
+chapitre afin qu'ils ne nécessitent aucun paramètre. Ensuite, dans le
+\RefChapitre{sec:applications}, nous dérivons ces estimateurs de courbure afin
+de reconnaître les singularités d'un objet, en quelque sorte les arêtes de
+l'objet sous-jacent à sa représentation digitale. Enfin, nous conclurons et nous
+apporterons quelques perspectives résultant de ces travaux dans le
+\RefChapitre{sec:conclusion}.
 %
 %
 %
