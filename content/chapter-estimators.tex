@@ -73,8 +73,8 @@ sens où ce dernier approxime suffisamment précisément la surface continue sou
     \begin{center}
       \includegraphics[width=10cm]{figures/OneRingNeighborhood}
     \end{center}
-    \caption[$1$-voisinage et $2$-voisinage.]{$1$-voisinage de valence $6$ et
-    $2$-voisinage de valence $5$.}
+    \caption{$1$-voisinage de valence $6$ et
+    $2$-voisinage de valence $5$ du sommet vert.}
     \label{fig:one-ring-neighborhood}
 \end{figure}
 
@@ -1269,7 +1269,24 @@ digitaux.
 
 \subsection{Analyse digitale de l'aire et du volume de la boule, et relation à la courbure}
 \label{sec:ii-2d}
-%
+
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/2d-area-2.tikz}
+  \end{center}
+  \caption
+  %
+  {Illustration de la dépendance du rayon pour une échelle $h$ donnée. Le disque de gauche
+  a un rayon de $3$ et celui de droite a un rayon de $1.5$, soit deux fois moins
+  que celui de droite. Le nombre de points digitaux suite à la discrétisation de
+  Gauss des disques avec un pas de $h=1$ est de $29$ pour le disque de gauche et
+  de $6$ pour le disque de droite. L'aire digitale estimée du disque de gauche
+  est alors de $1^2 \times 29 = 29$, l'aire digitale estimée du disque de droite
+  est de $1^2 \times 6 = 6$. Il est alors évident que $29 \ne 4 \times
+  6$ alors que $\pi \times 3^2 = 4 \times (\pi \times (1.5)^2)$.\label{fig:2d-area-2}}
+  %
+\end{figure}
+
 Nous souhaitons estimer la quantité $A_R(\vx) = \Area(\Ball{R}{\vx}\cap\Shape)$ de la
 \RefDefinition{def:Volume} au pas de discrétisation $h$, où $\Ball{R}{\vx}$ est une
 boule de rayon $R$ centrée au point $\vx$. Nous ne pouvons pas directement
@@ -1277,21 +1294,28 @@ utiliser les résultats des
 \RefEquations{eq:AreaByCountingConv}{eq:VolumeByCountingConv} pour estimer cette
 aire : le terme d'erreur en grand « O » cache le fait que la constante impliquée
 dépend de la taille de la forme, son échelle et sa courbure maximale. Un moyen
-simple de comprendre cet effet en estimant l'aire d'une forme $\Shape$ et
-d'estimer l'aire de la même forme doublée en taille (que nous nommerons
-$\Shape'$). Alors, il paraît évident que :
+simple de comprendre cet effet est d'estimer l'aire digitale d'une forme $\Shape$ et
+celle de la même forme doublée en taille (que nous nommerons
+$\Shape'$). Alors que pour des formes euclidiennes, nous avons :
 %
 \begin{equation}
-  2 \cdot \AreaC(\DSh,h) \ne \AreaC(\DigF{\Shape'}{h},h) \,,
+  4 \times \Area(\Shape) = \Area(\Shape') \,,
+\end{equation}
+%
+leurs aires digitales estimées ne suivent pas la même propriété :
+%
+\begin{equation}
+  4 \times \AreaC(\DSh,h) \ne \AreaC(\DigF{\Shape'}{h},h) \,,
 \end{equation}
 %
 la discrétisation de $\Shape'$ la rendant plus détaillée et donc son estimation
-plus précise. C'est un problème gênant avec les invariants par intégration car
-les boules impliquées ont un rayon $R$ qui doit tendre vers $0$ lorsque $h$ tend
-également vers $0$. Nous devons alors normaliser notre estimation d'aire et de
-volume pour que le terme d'erreur ne soit plus influencé par l'échelle de la
-boule. Nous estimons alors l'aire de l'intersection entre la forme et la boule
-de rayon $R$ en se ramenant à la boule unité :
+plus précise. C'est effet est illustré avec la \RefFigure{fig:2d-area-2}. C'est
+un problème gênant avec les invariants par intégration car les boules impliquées
+ont un rayon $R$ qui doit tendre vers $0$ lorsque $h$ tend également vers $0$.
+Nous devons alors normaliser notre estimation d'aire et de volume pour que le
+terme d'erreur ne soit plus influencé par l'échelle de la boule. Nous estimons
+alors l'aire de l'intersection entre la forme et la boule de rayon $R$ en se
+ramenant à la boule unité :
 %
 \begin{align}
   \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) & \EqDef h^2 \MCard\left( \left( \frac{1}{h} \cdot \left( \Ball{R}{\vx} \cap \Shape \right) \right) \cap \Z^2 \right), \\
@@ -1326,17 +1350,29 @@ l'\RefEquation{eq:Area_unitary_ball_shape} la relation :
   A_R(\vx) = \Area( \Ball{R}{\vx} \cap \Shape ) = R^2 \Area( \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R} \cdot \Shape),
 \end{equation}
 %
-nous obtenons :
+nous obtenons le théorème suivant :
 %
-\begin{equation}\label{eq:convergence-area-intersection}
-  | \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - A_R(\vx) | \le K_1 h^\beta R^{2-\beta}.
-\end{equation}
+\begin{theorem}{\fakeTitle{Convergence de l'estimation digitale de l'aire à l'intersection d'un forme et d'une boule}}
+  \label{thm:convergence-area-intersection}
+  %
+  Soit $\Shape$ une forme convexe finie de $\R^2$. Alors, \colorize{l'estimation
+  digitale de l'aire} au point $\vx \in \R^2$ à l'intersection de $\Shape$ et
+  d'une boule $\Ball{R}{\vx}$ de rayon $R$ centrée en $\vx$ converge vers son
+  aire euclidienne pour la discrétisation de Gauss au pas de discrétisation $h$,
+  avec $0 < h \le R \le R_0$. Plus précisement, nous avons :
+  %
+  \begin{equation}\label{eq:convergence-area-intersection}
+    | \AreaC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - A_R(\vx) | \le K_1 h^\beta R^{2-\beta} \,,
+  \end{equation}
+  %
+  où $K_1$ est une constante indépendante de $\Shape$.
+\end{theorem}
 %
 La convergence de la précédente relation tient du fait que $h \le R \le R_0$ et
 est valide quand $\vx$ est n'importe quel point de $\R^2$ (pas seulement un
 point de $\dS$). De plus, la constante $K_1$ est indépendante de la forme
-$\Shape$ (mais dépendante de $R_0$).\\
-%
+$\Shape$ (mais dépendante de $R_0$).
+
 Le même raisonnement est valide en dimension 3 : la courbure n'est alors pas
 définie dans le sous-ensemble $\BT \Ball{1}{\frac{1}{R} \cdot \vx} \cap \frac{1}{R}
 \cdot \dS$, qui tend vers le cercle unité lorsque $R \rightarrow 0$. L'erreur
@@ -1344,9 +1380,21 @@ introduite dans l'estimation de volume est alors le nombre de voxels intersecté
 ($\approx 2\pi/h$), ce qui est négligeable. La courbure maximale est également
 $1$ pour un rayon $R$ suffisamment petit. Nous obtenons alors :
 %
-\begin{equation}\label{eq:convergence-volume-intersection}
-  | \VolC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - V_R(\vx) | \le K_1 h^\gamma R^{3-\gamma}.
-\end{equation}
+\begin{theorem}{\fakeTitle{Convergence de l'estimation digitale du volume à l'intersection d'un forme et d'une boule}}
+  \label{thm:convergence-volume-intersection}
+  %
+  Soit $\Shape$ une forme convexe finie de $\R^3$. Alors, \colorize{l'estimation
+  digitale du volume} au point $\vx \in \R^3$ à l'intersection de $\Shape$ et
+  d'une boule $\Ball{R}{\vx}$ de rayon $R$ centrée en $\vx$ converge vers son
+  volume euclidien pour la discrétisation de Gauss au pas de discrétisation $h$,
+  avec $0 < h \le R \le R_0$. Plus précisement, nous avons :
+  %
+  \begin{equation}\label{eq:convergence-volume-intersection}
+    | \VolC(\DigF{\Ball{R}{\vx} \cap \Shape}{h}, h) - V_R(\vx) | \le K_1 h^\gamma R^{3-\gamma} \,,
+  \end{equation}
+  %
+  où $K_1$ est une constante indépendante de $\Shape$.
+\end{theorem}
 %
 \subsubsection{Estimateurs digitaux de courbure en 2D et de courbure moyenne en 3D par intégration}
 %
@@ -1362,9 +1410,10 @@ compter le nombre de points digitaux dans un voisinage du point d'intérêt :
   en tout point $\vx \in \R^2$ et pour le pas de discrétisation $h > 0$ comme :
   %
   \begin{equation}
-    \forall 0 < h < R,\quad \CurvH{R}(\DigShape,\vx,h) \EqDef \frac{3\pi}{2R} - \frac{3\AreaC(\Ball{R/h}{\vx/h} \cap \DigShape, h)}{R^3}\,.
+    \forall 0 < h < R,\quad \CurvH{R}(\DigShape,\vx,h) \EqDef \frac{3\pi}{2R} - \frac{3\AreaC(\Ball{R/h}{\vx/h} \cap \DigShape, h)}{R^3}\,,
   \end{equation}
   %
+  où $\frac{R}{h}$ est le rayon digital de la boule.
 \end{definition}
 %
 \begin{definition}{\fakeTitle{Estimateur digital de courbure moyenne en 3D par intégration}}\label{def:digital-3d-mean-curvature}
@@ -1382,24 +1431,24 @@ compter le nombre de points digitaux dans un voisinage du point d'intérêt :
 %
 Comme le montre la \RefFigure{fig:2d-curv-estimator}, ces estimateurs placent
 une boule de rayon euclidien $R$ autour du point d'intérêt $\vx$ et comptent le
-nombre de points digitaux de $\DigShape = \Body{\DSh}{h}$,
-de l'intersection de cette boule et de la forme. Un calcul linéaire simple est
-alors appliqué sur cette quantité afin d'approcher la courbure. De plus, comme
-le montre également la \RefFigure{fig:2d-curv-estimator}, nous pouvons supposer
-que si la discrétisation s'affine nous aurons une meilleure estimation de la
-courbure. Le prochain paragraphe va le démontrer.
+nombre de points digitaux de $\DigShape = \Body{\DSh}{h}$, de l'intersection de
+cette boule et de la forme. Un calcul linéaire simple est alors appliqué sur
+cette quantité afin d'approcher la courbure. L'intuition est, comme le montre
+également la \RefFigure{fig:2d-curv-estimator}, que si la discrétisation
+s'affine nous aurons une meilleure estimation de la courbure. Le prochain
+paragraphe va le démontrer.
 %
 \subsubsection{Convergence des estimateurs digitaux de courbure en 2D et de courbure moyenne en 3D par intégration}
 %
 Nous allons ici montrer que les estimateurs de courbure en 2D $\CurvH{R}$ et de
 courbure moyenne en 3D $\MeanCurvH{R}$ convergent vers la valeur espérée de
 courbure pour tous les points $\vx$ le long du bord $\dS$ de l'objet $\Shape$ si
-la forme respecte certaines contraintes.\\
+la forme respecte certaines contraintes.
 %
-\begin{theorem}{\fakeTitle{Convergence de l'estimateur digital de courbure en 2D $\CurvH{R}$ le long de $\dS$}}
+\begin{theorem}{\fakeTitle{Convergence de l'estimateur digital de courbure en 2D $\CurvH{R}$ le long de $\dS$ \cite{DGCI2013,CVIU2014}}}
   \label{thm:convergence-curv-2d}
   %
-  Soit $\Shape$ une forme convexe de $\R^2$ tel que son bord $\dS$ est $C^2$ et
+  Soit $\Shape$ une forme convexe de $\R^2$ telle que son bord $\dS$ est $C^2$ et
   sa courbure bornée. Alors, l'estimateur digital de courbure en 2D $\CurvH{R}$ en
   tout point $\vx$ de $\dS$ converge vers la courbure
   $\Curv(\Shape,\vx)$ de $\Shape$ au point $\vx$ pour la discrétisation de
@@ -1426,7 +1475,7 @@ la forme respecte certaines contraintes.\\
   \end{equation}
   %
   en utilisant la relation entre l'estimation digitale de l'aire et l'aire
-  euclidienne de l'\RefEquation{eq:convergence-area-intersection}, nous obtenons :
+  euclidienne du \RefTheorem{thm:convergence-area-intersection}, nous obtenons :
   %
   \begin{align}\label{eq-curvhat-error-bound-prelim}
     | \CurvH{R}(\DSh,\vx,h) - \Curv(\Shape,\vx) |
@@ -1475,10 +1524,10 @@ la forme respecte certaines contraintes.\\
 Nous obtenons des résultats similaires pour l'estimateur digital de courbure
 moyenne sur des formes en 3D :
 %
-\begin{theorem}{\fakeTitle{Convergence de l'estimateur digital de courbure moyenne en 3D $\MeanCurvH{R}$ le long de $\dS$}}
+\begin{theorem}{\fakeTitle{Convergence de l'estimateur digital de courbure moyenne en 3D $\MeanCurvH{R}$ le long de $\dS$ \cite{DGCI2013,CVIU2014}}}
   \label{thm:convergence-curv-3d}
   %
-  Soit $\Shape$ une forme convexe de $\R^3$ tel que son bord $\dS$ est $C^3$ et
+  Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\dS$ est $C^3$ et
   sa courbure bornée. Alors, l'estimateur digital de courbure moyenne en 3D
   $\MeanCurvH{R}$ en tout point $\vx$ de $\dS$ converge vers la
   courbure $\MeanCurv(\Shape,\vx)$ de $\Shape$ au point $\vx$ pour la
@@ -1507,7 +1556,7 @@ moyenne sur des formes en 3D :
   \end{equation}
   %
   en utilisant la relation entre l'estimation digitale du volume et le volume
-  euclidien de l'\RefEquation{eq:convergence-volume-intersection}, nous obtenons :
+  euclidien du \RefTheorem{thm:convergence-volume-intersection}, nous obtenons :
   %
   \begin{align}\label{eq-meancurvhat-error-bound-prelim}
     | \MeanCurvH{R}(\DSh,\vx,h) - \MeanCurv(\Shape,\vx) |
@@ -1554,23 +1603,41 @@ Lorsque nous traitons des bords des surfaces digitales, une nouvelle
 approximation intervient dû à la discrétisation. Le prochain paragraphe adaptera
 ces estimateurs sur des contours digitaux de surface.
 %
-\subsubsection{Convergence asymptotique pour des formes suffisamment lisses}
-%
+\subsubsection{Convergence asymptotique des estimateurs digitaux de courbure en
+2D et de courbure moyenne en 3D sur le bord des surfaces digitales}
+
+\begin{figure}[ht]
+  \begin{center}
+    \input{figures/tikz/2d-curv-estimator2.tikz}
+  \end{center}
+  \caption
+  %
+  {Illustration de la différence entre l'estimation digitale de courbure sur le
+  bord euclidien $\dS$ de l'objet $\Shape$ (\emph{à gauche}) et l'estimation
+  digitale de courbure sur le bord digital $\partial \Body{\DSh}{h}$ du
+  plongement euclidien $\Body{\DSh}{h}$ de la discrétisation de Gauss de
+  $\Shape$ (\emph{à droite}), au pas de discrétisation $h$. Nous pouvons
+  remarque que nous n'obtenons pas le même nombre de points digitaux à
+  l'intersection entre la boule et la
+  forme.\label{fig:2d-curv-estimator-xhat}}
+  %
+\end{figure}
+
 Comme nous venons de le dire, nous ne connaissons pas exactement la position de
 $\vx$ lorsque nous considérons des données digitales. Les seules informations
 dont nous disposons sont les points digitaux $\vxH$ de $\Bd{\Body{\DSh}{h}}$.
 Nous devons alors considérer l'erreur possible de positionnement de l'endroit où
 est estimé la courbure pour proposer des théorèmes de convergence
-asymptotiques.
+asymptotiques (voir la \RefFigure{fig:2d-curv-estimator-xhat}).
 %
 Nous devons alors injecter cette approximation dans le calcul d'aire et de
 volume, pour ensuite la diffuser aux calculs de courbures. Ainsi, nous pouvons
 prouver la convergence asymptotique des estimateurs digitaux de courbure sur le
 bord discrétisé d'un objet suffisamment lisse.
 %
-\begin{theorem} \label{thm:multigrid-convergence-curv}
+\begin{theorem}{\fakeTitle{\cite{DGCI2013,CVIU2014}}} \label{thm:multigrid-convergence-curv}
 %
-Soit $\Shape$ une forme convexe de $\R^2$ tel que son bord $\dS$ est $C^3$ à
+Soit $\Shape$ une forme convexe de $\R^2$ telle que son bord $\dS$ est $C^3$ à
 courbure bornée positive. Alors, l'estimateur digital de courbure $\CurvH{R}$ converge
 asymptotiquement vers la courbure $\Curv$ pour la discrétisation de Gauss sur
 des formes $\Shape$, avec une vitesse de convergence d'au moins
@@ -1676,9 +1743,9 @@ De la même façon, en 3D pour la courbure moyenne, nous pouvons prouver la
 convergence asymptotique de l'estimateur $\MeanCurvH{R}$ sur le bord digital
 d'un objet suffisamment lisse :
 %
-\begin{theorem} \label{thm:multigrid-convergence-curv-mean}
+\begin{theorem}{\fakeTitle{\cite{DGCI2013,CVIU2014}}} \label{thm:multigrid-convergence-curv-mean}
 %
-Soit $\Shape$ une forme convexe de $\R^3$ tel que son bord $\dS$ est $C^3$ à
+Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\dS$ est $C^3$ à
 courbure bornée positive. Alors, l'estimateur digital de courbure $\MeanCurvH{R}$ converge
 asymptotiquement vers la courbure $\MeanCurv$ pour la discrétisation de Gauss sur
 des formes $\Shape$, avec une vitesse de convergence d'au moins
@@ -2035,7 +2102,7 @@ suivant établit la convergence lorsque la matrice de covariance est calculée s
 le même point $\vy$, et le suivant établira sa convergence asymptotique sur le
 bord digital de la forme.
 %
-\begin{theorem}{\fakeTitle{Convergence de la matrice de covariance digitale}}
+\begin{theorem}{\fakeTitle{Convergence de la matrice de covariance digitale \cite{CVIU2014}}}
   \label{thm:conv-cov-matrix}
 %
   Soit $\Shape$ une forme convexe de $\R^3$ à reach positif, dont le bord est
@@ -2165,7 +2232,7 @@ digital sur le bord digital de la forme, ajoutant ainsi une erreur de positionne
 Cela équivaut à estimer les moments à une position $\vx + \vt$, et pour cela
 nous allons nous servir des précédents lemmes.
 %
-\begin{theorem}{\fakeTitle{Convergence asymptotique de la matrice de covariance digitale}}
+\begin{theorem}{\fakeTitle{Convergence asymptotique de la matrice de covariance digitale \cite{CVIU2014}}}
 \label{thm:multigrid-conv-cov-matrix}
 %
   Soit $\Shape$ une forme convexe de $\R^3$ à reach positif, dont le bord est
@@ -2343,10 +2410,10 @@ résultats de stabilité de la théorie de perturbation des matrices induisent l
 convergence asymptotique des estimateurs de courbures principales par
 intégration :
 %
-\begin{theorem}{\fakeTitle{Convergence asymptotique des estimateurs digitaux de courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$}}
+\begin{theorem}{\fakeTitle{Convergence asymptotique des estimateurs digitaux de courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ \cite{CVIU2014}}}
 \label{thm:multigrid-convergence-curv-k1k2}
 %
-  Soit $\Shape$ une forme convexe de $\R^3$ à reach positif tel que son bord
+  Soit $\Shape$ une forme convexe de $\R^3$ à reach positif telle que son bord
   $\Bd{X}$ est $C^3$ et peut être décomposée en nombre fini de parties monotones.
   Alors, pour la discrétisation de Gauss, les estimateurs digitaux de courbures
   principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ convergent
@@ -2419,7 +2486,7 @@ couvrent un plan. Cependant, nous pouvons écrire :
 \begin{theorem}{\fakeTitle{Convergence asymptotique des estimateurs digitaux de directions principales de courbure par intégration $\PrincDirH{1}{R}$ et $\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration \NormalDirH{R}}}
 \label{thm:multigrid-conv-principal-directions-and-normal}
   %
-  Soit $\Shape$ une forme convexe de $\R^3$ tel que son bord $\Bd{\Shape}$ a un
+  Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\Bd{\Shape}$ a un
   reach supérieur à $\rho$ et est $C^3$.
   %
   \\
@@ -2510,16 +2577,16 @@ du bleu (valeur minimale) au jaune (valeur maximale).
 \label{sec:curvature:parameter-free}
 %
 Dans ce paragraphe, nous allons proposer une version sans paramètre des
-estimateurs de courbure du \RefSection{sec:estimators:volume}. Dans le contexte
-de la convergence asymptotique, la notion d'échelle est explicitement donnée
-grâce au paramètre de discrétisation $h$. C'est d'ailleurs pour cela que nos
-rayons de boules doivent être en relation avec $h$ ($R$ est en
-$O(h^\frac{1}{3})$). Cependant, pour un objet digital donné, ce choix de rayon
-nécessite d'étudier au préalable la forme dont nous souhaitons estimer la
-courbure, et la qualité d'estimation dépend de ce paramètre. La
-\RefFigureN{fig:digital-II-octa-scale} montre le résultat de l'estimation de la
-courbure moyenne et de la courbure gaussienne avec différents rayons $R$ pour la
-forme \textsc{OctaFlower}.
+estimateurs de courbure du \RefSection{sec:estimators:volume}. Ces travaux ont
+été publiés dans \cite{DGCI2014}. Dans le contexte de la convergence
+asymptotique, la notion d'échelle est explicitement donnée grâce au paramètre de
+discrétisation $h$. C'est d'ailleurs pour cela que nos rayons de boules doivent
+être en relation avec $h$ ($R$ est en $O(h^\frac{1}{3})$). Cependant, pour un
+objet digital donné, ce choix de rayon nécessite d'étudier au préalable la forme
+dont nous souhaitons estimer la courbure, et la qualité d'estimation dépend de
+ce paramètre. La \RefFigureN{fig:digital-II-octa-scale} montre le résultat de
+l'estimation de la courbure moyenne et de la courbure gaussienne avec différents
+rayons $R$ pour la forme \textsc{OctaFlower}.
 
 \begin{figure}[ht]
 \begin{center}

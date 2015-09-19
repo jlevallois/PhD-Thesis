@@ -3,16 +3,44 @@
 \pagestyle{empty}
 \hfill
 \vfill
-\pdfbookmark[0]{Colophon}{Colophon}
-\section*{Colophon}
+\pdfbookmark[0]{Publications}{Publications}
+\section*{Publications}
+\bigskip
+% % Print your own papers.
+% \begin{refsection}
+% % If you print a bibliography within this section, only citations within this refsection will be printed.
+%
+% % Option 1: Make nocite for all of your papers.
+% % Options 2 would be a seperate file which contains all of your papers.
+% \nocite{DGCI2013}
+% \nocite{Coeurjolly2013Implementation}
+% \nocite{AFIG2013}
+% \nocite{CVIU2014}
+% \nocite{DGCI2014}
+% \nocite{SMI2015}
+% \nocite{PosterSIGGRAPH2015}
+% \nocite{ChapterIICurvature}
+%
+% \defbibnote{myPrenote}{
+%     Some words before I show you the list of my own papers.
+% }
+% \defbibnote{myPostnote}{
+%     A bunch of papers are still in print and not yet published.
+% }
+% \printbibliography[
+%     heading=bibintoc,
+%     title={NOPE},
+%     prenote=myPrenote,
+%     postnote=myPostnote
+% ]
+% \end{refsection}
 
-Thèse réalisée sous la direction du Directeur de Recherche CNRS David \textsc{Coeurjolly}\\
-et du Professeur Jacques-Olivier \textsc{Lachaud}.
+{%
+\setstretch{1.1}
+\renewcommand{\bibfont}{\normalfont\small}
+\setlength{\biblabelsep}{0pt}
+\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+\printbibliography[keyword=me]
+}
 
-Ces travaux ont été effectués à \textsc{Lyon} et \textsc{Chambéry} entre Mars 2012 et Septembre 2015\\
-au \textsc{Laboratoire d'InfoRmatique en Image et Systèmes d'information - LIRIS})\\% - Université de Lyon)\\
-et au \textsc{LAboratoire de MAthématiques - LAMA}\\
-dans le cadre de l'École Doctorale \textsc{InfoMaths}.
-
-
-\sayMyName - \emph{\thesisTitle}.
+\vfill

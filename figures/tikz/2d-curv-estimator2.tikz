@@ -1,0 +1,129 @@
+\begin{tikzpicture}[x=0.28cm,y=0.28cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kBlue}{rgb}{0.09,0.43,0.70}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % grids
+  \draw[help lines,step=1] (0,0) grid (20,10);
+  \draw[draw,thick,fill,color=kGreen,nearly transparent] (2.5,0) arc (180:0:7.5);
+  \draw[draw,thick,color=kGrey] (2.5,0) arc (180:0:7.5);
+
+  % dig points
+  \foreach \x/\y in { 3/0,4/0,5/0,6/0,7/0,8/0,9/0,10/0 }
+  {
+    \draw[draw,thick,fill,color=kGrey] (\x-0.1,\y) arc (180:0:0.1);
+    \draw[draw,thick,fill,color=kGrey] (20-\x-0.1,\y) arc (180:0:0.1);
+  };
+  \foreach \x/\y in { 3/1,4/1,5/1,6/1,7/1,8/1,9/1,10/1,
+                      3/2,4/2,5/2,6/2,7/2,8/2,9/2,10/2,
+                          4/3,5/3,6/3,7/3,8/3,9/3,10/3,
+                          4/4,5/4,6/4,7/4,8/4,9/4,10/4,
+                              5/5,6/5,7/5,8/5,9/5,10/5,
+                                  6/6,7/6,8/6,9/6,10/6,
+                                          8/7,9/7,10/7}
+  {
+    \draw[draw,thick,color=kGrey,fill] (\x,\y) circle (0.1);
+    \draw[draw,thick,color=kGrey,fill] (20-\x,\y) circle (0.1);
+  }
+
+  \node (px) at (6.8,6.8) {};
+  \draw[draw,thick,color=black,fill] (px) circle (0.1);
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (3);
+  \draw[draw,thick,color=kOrange] (px) circle (3);
+  \draw (px) node[above] {$\mathbf{x}$};
+  \foreach \x/\y in {5/5,6/4,6/5,6/6,7/4,7/5,7/6,8/5,8/6,8/7,9/5,9/6,9/7}
+    \draw[draw,thick,color=kBlue,fill] (\x,\y) circle (0.11);
+
+  \node at(2.5,-1) {$\Shape$~~};
+  \node[color=kGreen,fill,nearly transparent] at(4.5,-1) {\mbox{~~}};
+
+  \node at(8,-1) {$\dS$};
+  \draw[color=kGrey,thick] (9.5,-1) -- (10.5,-1);
+
+  \node at(15,-1) {$(h\cdot\DSh)$~~};
+  \draw[color=kGrey,fill] (19,-1) circle (0.5mm);
+
+  \draw[densely dotted,black] (0,10) -- (0,10.6);
+  \draw[densely dotted,black] (1,10) -- (1,10.6);
+  \draw[<->,black] (0,10.25) -- (1,10.25) node[midway,above] {$h$};
+\end{tikzpicture}
+\begin{tikzpicture}[x=0.28cm,y=0.28cm]
+
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kBlue}{rgb}{0.09,0.43,0.70}
+  \definecolor{kFakeGreen}{rgb}{0.75,0.89,0.75}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+
+  % QhZ
+  \foreach \x/\y in { 3/0,4/0,5/0,6/0,7/0,8/0,9/0,10/0 }
+  {
+       \draw[color=red!30!white,fill] (\x-0.5,\y) rectangle (\x+0.5,\y+0.5);
+       \draw[color=red!30!white,fill] (20-\x-0.5,\y) rectangle (20-\x+0.5,\y+0.5);
+  };
+  \foreach \x/\y in { 3/1,4/1,5/1,6/1,7/1,8/1,9/1,10/1,
+                      3/2,4/2,5/2,6/2,7/2,8/2,9/2,10/2,
+                          4/3,5/3,6/3,7/3,8/3,9/3,10/3,
+                          4/4,5/4,6/4,7/4,8/4,9/4,10/4,
+                              5/5,6/5,7/5,8/5,9/5,10/5,
+                                  6/6,7/6,8/6,9/6,10/6,
+                                          8/7,9/7,10/7}
+  {
+       \draw[color=red!30!white,fill] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+       \draw[color=red!30!white,fill] (20-\x-0.5,\y-0.5) rectangle (20-\x+0.5,\y+0.5);
+  };
+
+  % grids
+  \draw[help lines,step=1] (0,0) grid (20,10);
+
+  % dig points
+  \foreach \x/\y in { 3/0,4/0,5/0,6/0,7/0,8/0,9/0,10/0 }
+  {
+    \draw[draw,thick,fill,color=kGrey] (\x-0.1,\y) arc (180:0:0.1);
+    \draw[draw,thick,fill,color=kGrey] (20-\x-0.1,\y) arc (180:0:0.1);
+  };
+  \foreach \x/\y in { 3/1,4/1,5/1,6/1,7/1,8/1,9/1,10/1,
+                      3/2,4/2,5/2,6/2,7/2,8/2,9/2,10/2,
+                          4/3,5/3,6/3,7/3,8/3,9/3,10/3,
+                          4/4,5/4,6/4,7/4,8/4,9/4,10/4,
+                              5/5,6/5,7/5,8/5,9/5,10/5,
+                                  6/6,7/6,8/6,9/6,10/6,
+                                          8/7,9/7,10/7}
+  {
+    \draw[draw,thick,color=kGrey,fill] (\x,\y) circle (0.1);
+    \draw[draw,thick,color=kGrey,fill] (20-\x,\y) circle (0.1);
+  }
+
+  % \partial_h X
+  \draw[color=kGrey,thick] (2.5,0) -- (2.5,2.5) -- (3.5,2.5) -- (3.5,4.5) -- (4.5,4.5) -- (4.5,5.5) -- (5.5,5.5)
+                                   -- (5.5,6.5) -- (7.5,6.5)
+                                   -- (7.5,7.5) -- (12.5,7.5)
+                                   -- (12.5,6.5) -- (14.5,6.5)
+                                   -- (14.5,5.5) -- (15.5,5.5) -- (15.5,4.5) -- (16.5,4.5) -- (16.5,2.5) -- (17.5,2.5) -- (17.5,0);
+
+  % \hat{x}
+  \node (px) at (7,6.5) {};
+  \draw[draw,thick,color=black,fill] (px) circle (0.1);
+  \draw (px) node[above] {$\hat{\vx}$};
+
+
+  % \Ball
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (3);
+  \draw[draw,thick,color=kOrange] (px) circle (3);
+
+  % digital point inside ball
+  \foreach \x/\y in {5/5,6/4,6/5,6/6,7/4,7/5,7/6,8/4,8/5,8/6,8/7,9/5,9/6,9/7}
+    \draw[draw,thick,color=kBlue,fill] (\x,\y) circle (0.11);
+
+  \node at(4.5,-1) {$\Body{\DSh}{h}$~~};
+  \node[color=red!30!white,fill] at(8.5,-1) {\mbox{~~}};
+
+  \node at(14,-1) {$\partial \Body{\DSh}{h}$};
+  \draw[color=kGrey,thick] (18,-1) -- (19,-1);
+
+  \draw[densely dotted,black] (0,10) -- (0,10.6);
+  \draw[densely dotted,black] (1,10) -- (1,10.6);
+  \draw[<->,black] (0,10.25) -- (1,10.25) node[midway,above] {$h$};
+\end{tikzpicture}
