@@ -1520,7 +1520,7 @@ la forme respecte certaines contraintes.
   \end{align}
   %
 \end{proof}
-%
+
 Nous obtenons des résultats similaires pour l'estimateur digital de courbure
 moyenne sur des formes en 3D :
 %
@@ -1597,7 +1597,7 @@ moyenne sur des formes en 3D :
   \end{align}
   %
 \end{proof}
-%
+
 Cependant, ces théorèmes ne sont valides que pour tout point $\vx$ de $\dS$.
 Lorsque nous traitons des bords des surfaces digitales, une nouvelle
 approximation intervient dû à la discrétisation. Le prochain paragraphe adaptera
@@ -1630,10 +1630,12 @@ Nous devons alors considérer l'erreur possible de positionnement de l'endroit o
 est estimé la courbure pour proposer des théorèmes de convergence
 asymptotiques (voir la \RefFigure{fig:2d-curv-estimator-xhat}).
 %
-Nous devons alors injecter cette approximation dans le calcul d'aire et de
-volume, pour ensuite la diffuser aux calculs de courbures. Ainsi, nous pouvons
-prouver la convergence asymptotique des estimateurs digitaux de courbure sur le
-bord discrétisé d'un objet suffisamment lisse.
+Nous aurons besoin de la définition de la projection inverse
+(\RefDefinition{def:projection}), nous devons alors injecter cette approximation
+dans le calcul d'aire et de volume, pour ensuite la diffuser aux calculs de
+courbures. Ainsi, nous pouvons prouver la convergence asymptotique des
+estimateurs digitaux de courbure sur le bord discrétisé d'un objet suffisamment
+lisse.
 %
 \begin{theorem}{\fakeTitle{\cite{DGCI2013,CVIU2014}}} \label{thm:multigrid-convergence-curv}
 %
@@ -1945,7 +1947,7 @@ de la stabilité des moments face à des petits déplacements provoqués par la
 discrétisation, ainsi que de la théorie de perturbation de matrice.
 %
 \subsubsection{Propriétés des matrices de covariance et de moments}
-%
+
 Dans un premier temps, nous allons étudier les propriétés des matrices de
 covariance et des moments face aux perturbations. Nous pouvons
 établir l'invariance des matrices de covariances :
@@ -1963,8 +1965,8 @@ covariance et des moments face aux perturbations. Nous pouvons
 \begin{proof}
   La preuve est directe par additivité des moments géométriques.
 \end{proof}
-%
-Nous devons également étudier comment les moments sont perturbés par une erreur de positionnement de la boule :
+
+Nous devons également étudier comment les moments sont perturbés par une erreur de positionnement $\vt$ de la boule :
 %
 \begin{lemma} \label{lem:moments-ball-position-error}
 %
@@ -2092,7 +2094,11 @@ le fait que le $200$-moment est maximisé pour la boule :
 Les autres moments sont prouvés de la même façon.
 %
 \end{proof}
-%
+
+\noindent Dans le prochain paragraphe, nous allons injecter ces erreurs de
+positionnement des moments dans le calcul de la matrice de covariance afin de
+voir comment ils influent sur la convergence de la matrice.
+
 \subsubsection{Convergence asymptotique des matrices de covariances digitales}
 %
 Avec le \RefLemma{lem:covariance-translation-invariant} et le
@@ -2483,7 +2489,10 @@ principales sont égales. De ce fait, pour tous ces points, les deux valeurs
 propres de la matrice de covariance coïncident et leurs vecteurs propres
 couvrent un plan. Cependant, nous pouvons écrire :
 %
-\begin{theorem}{\fakeTitle{Convergence asymptotique des estimateurs digitaux de directions principales de courbure par intégration $\PrincDirH{1}{R}$ et $\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration \NormalDirH{R}}}
+\begin{theorem}{\fakeTitle{Convergence asymptotique des estimateurs digitaux de
+directions principales de courbure par intégration $\PrincDirH{1}{R}$ et
+$\PrincDirH{1}{R}$, et de l'estimateur digital des normales par intégration
+\NormalDirH{R} \cite{ChapterIICurvature}.}}
 \label{thm:multigrid-conv-principal-directions-and-normal}
   %
   Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\Bd{\Shape}$ a un
@@ -2611,26 +2620,32 @@ dans le \RefSection{sec:segments}.
 %
 %\subsection{Propriétés sur les segments maximaux}
 %
-\subsection{Estimateur digital sans paramètre de courbure en 2D}
-%
-Dans le \RefSection{sec:segments} nous avons rappelé les propriétés des longueurs
-des segments maximaux sur les bords d'objets digitaux
+\subsection{Estimateur digital de courbure sans paramètre en 2D}
+
+Dans le \RefSection{sec:segments} nous avons rappelé les propriétés des
+longueurs des segments maximaux sur les bords d'objets digitaux
 (\RefLemma{lem:law-length-MDSS}). Nous allons tirer parti de ces propriétés afin
 de définir notre nouvel estimateur de courbure sur des objets digitaux
 $\DigShape \subset \Z^2$. Pour faire simple, nous allons reprendre l'estimateur
 digital de courbure défini dans la \RefDefinition{def:digital-2d-curvature}.
 Celui-ci nécessite un rayon $R$ qui doit être en $O(h^{\frac{1}{3}})$ afin
 d'avoir une convergence asymptotique de la courbure. Nous allons exploiter les
-longueurs des segments maximaux afin de coller à cette
-borne\footnote{$L_D({\DigShape})$ est la longueur moyenne des segments maximaux
-sur $\DigShape$}. Définissons tout d'abord notre estimateur digital sans
-paramètre de courbure en 2D $\CurvHS$ :
+primitives digitales décritent dans le \RefSection{sec:segments}, en particulier
+des segments maximaux de droite digitale et des leurs lois asymptotiques.
+
+Nommons $L_D({\DigShape})$ la longueur moyenne des segments maximaux sur
+$\DigShape$ et $\rho(\DigShape) = L_D^2({\DigShape})$ le carré de cette
+longueur.  Alors, définissons notre estimateur digital de courbure sans
+paramètre en 2D $\CurvHS$ pour tout pointel $\vp \in \BdZ{\DigShape}$ (le
+\RefSection{sec:notions-base} introduit la notion de pointel et plus
+généralement la topologie de Khalimsky qui sera utilisée ici) :
 %
 \begin{definition}
   \label{def:curvature-estimator-2d-pf}
   %
-  Soit une forme $\DigShape \subset \Z^2$. L'estimateur digital sans paramètre
-  de courbure en 2D $\CurvHS$ au pointel $\vp \in \BdZ{\DigShape}$ est défini comme :
+  Soit une forme $\DigShape \subset \Z^2$. L'estimateur digital de courbure
+  sans paramètre en 2D $\CurvHS$ au pointel $\vp \in \BdZ{\DigShape}$ est défini
+  comme :
   %
   \begin{equation}
     \CurvHS( \DigShape, \vp) \EqDef \frac{3\pi}{2 \rho(\DigShape)} - \frac{3 A(\DigShape,\vp)}{{\rho(\DigShape)}^3}
@@ -2642,12 +2657,14 @@ paramètre de courbure en 2D $\CurvHS$ :
 \end{definition}
 %
 Pour paraphraser cette définition, nous devons dans un premier temps calculer la
-moyenne des longueurs des segments discret sur le bord de $\DigShape$. Nous
-élevons au carré cette longueur moyenne afin de donner $\rho$. Ainsi,
-l'estimateur $\CurvHS$ est une fonction du nombre de points digitaux de
-$\DigShape$ intersecté avec une boule de rayon $\rho$ centrée au point digital
-$\vp$. Cette version de l'estimateur de la
-\RefDefinition{def:digital-2d-curvature} est alors indépendant de l’échelle de la
+moyenne des longueurs des segments discret sur le bord $\BdZ{\DigShape}$ de
+$\DigShape$. Nous élevons au carré cette longueur moyenne afin de donner $\rho$.
+Ainsi, l'estimateur $\CurvHS$ est une fonction du nombre de points
+digitaux\footnote{c'est un abus de langage désignant le centre de la cellule de
+Khalimsky, c'est à dire le spel, d'après le choix de plongement dont nous avons
+parlé dans le \RefSection{sec:notions-base}.} de $\DigShape$ intersecté avec une
+boule de rayon $\rho$ centrée au pointel $\vp$. Cette version de l'estimateur de
+la \RefDefinition{def:digital-2d-curvature} s'adapte alors à l’échelle de la
 forme.
 
 
@@ -2660,17 +2677,17 @@ estimateur ne contient pas d'information d'échelle. De plus, pour $\DigShape =
 \RefLemma{lem:law-length-MDSS}) :
 %
 \begin{align}
-  \Theta(h^{-\frac{1}{3}}) \le L_D( \DigShape ) \le \Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right)) \\
-  \Theta(h^{-\frac{2}{3}}) \le L^2_D( \DigShape ) \le \Theta(h^{-\frac{2}{3}} \log^2 \left(\frac{1}{h}\right)) \\
-  \Theta(h^{\frac{1}{3}}) \le hL^2_D( \DigShape ) \le \Theta(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)) \label{eq:bounds-length-MDSS}.
+  \Theta(h^{-\frac{1}{3}}) \le L_D( \DigShape ) \le \Theta\left(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right)\right) \\
+  \Theta(h^{-\frac{2}{3}}) \le L^2_D( \DigShape ) \le \Theta\left(h^{-\frac{2}{3}} \log^2 \left(\frac{1}{h}\right)\right) \\
+  \Theta(h^{\frac{1}{3}}) \le hL^2_D( \DigShape ) \le \Theta\left(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) \label{eq:bounds-length-MDSS}.
 \end{align}
 %
 
 
 Ainsi, à l'exception du terme en $\log^2(\cdot)$, $h \rho(\DigShape)$ semble est
 un candidat parfait comme paramètre de rayon $R$, puisqu'il suit
-approximativement $\Theta(h^\frac{1}{3})$, pour obtenir un estimateur digital
-sans paramètre de courbure.
+approximativement $\Theta(h^\frac{1}{3})$, pour obtenir un estimateur digital de
+courbure sans paramètre.
 %
 \begin{theorem}{\fakeTitle{Convergence asymptotique de l'estimateur digital de courbure sans paramètre $\CurvHS$}}
 \label{thm:curvature-estimator-2d-pf-conv}
@@ -2726,7 +2743,7 @@ Il est à noter que $\vp \in \BdZ{\DigShape}$ implique que $h\vp \in
     \end{align}
     %
     Alors le terme d'erreur dominant de cette expression est $O(h^{\frac{1}{3}}
-    \log^2 (\frac{1}{h}))$
+    \log^2 (\frac{1}{h}))$.
     %
   \end{itemize}
   %
@@ -2758,12 +2775,14 @@ l'explique la \RefFigure{fig:2d-parameter-free-explained}.
 
 Nous utilisons un unique rayon pour estimer la courbure sur tout le bord de
 l'objet. En sachant que nous pouvons extraire des faisceaux de segments maximaux
-en chaque point du bord de l'objet, pouvons-nous adapter notre estimateur afin
-de la taille de la boule s'adapte localement à la géométrie de l'objet ? Le
-paragraphe suivant traite cette question.
-%
-\subsection{Estimateur digital local sans paramètre de courbure en 2D}
-%
+en chaque point du bord de l'objet, pouvons-nous modifier notre estimateur afin
+de la taille de la boule s'adapte localement à la géométrie de l'objet ? En
+étant adaptatif, nous pouvons espérer obtenir de meilleurs vitesse de
+convergence en moyenne (erreur en norme $l_2$) de l'estimateur. Le paragraphe
+suivant traite cette question.
+
+\subsection{Estimateur digital local de courbure sans paramètre en 2D}
+
 Nous allons noter $\rho(\DigShape,\vp)$ la longueur moyenne du faisceau de
 segments maximaux au point $\vp$ élevé au carré. Nous définissons alors une
 version locale de l'estimateur de la
@@ -2827,7 +2846,7 @@ cause de leur borne supérieur en $O(h^{-\frac{1}{2}})$ aucune convergence ne pe
 convergence asymptotique et nous pouvons observer que la version locale
 $\CurvHSL$ est plus performante que $\CurvHS$.
 %
-\subsection{Estimateur digital sans paramètre de courbures en 3D}
+\subsection{Estimateur digital de courbures sans paramètre en 3D}
 %
 Intéressons nous maintenant à la version en 3D de ces estimateurs sans paramètre.
 Nous devons adapter l'utilisation des longueurs des segments maximaux à des
@@ -2838,13 +2857,13 @@ maximaux.
 
 \begin{figure}[ht]
     \begin{center}
-      \includegraphics[width=6cm]{images/Curvature/ctopo3dSurfelCut}
+      \includegraphics[width=10cm]{images/Curvature/ctopo3dSurfelCut}
     \end{center}
-    \caption[Coupes sur un objet digital 3D.]{Coupes sur un objet digital 3D dans deux directions.}
+    \caption[Coupes sur un objet digital 3D.]{Coupes sur un objet digital 3D dans deux directions alignées sur les axes.}
     \label{fig:3d-dig-object-slices}
 \end{figure}
 
-Formalisons cela avec une proposition sur les variétés lisses :
+\noindent Formalisons cela avec une proposition sur les variétés lisses :
 %
 \begin{proposition}
 \label{prop:slices-3d}
@@ -2898,7 +2917,7 @@ Formalisons cela avec une proposition sur les variétés lisses :
 
       \put(33,35){$\textcolor{darkgreen}{\vec{\vt}(0)}$}
       \put(85,30){$\textcolor{darkgreen}{\vec{\vt}(0)}$}
-      \put(80,24){$\textcolor{black}{\vec{\vu}}$}
+      %\put(80,24){$\textcolor{black}{\vec{\vu}}$}
 
       \put(52,48){$\textcolor{gray}{\vec{\vx}_1}$}
       \put(51.5,44){$\textcolor{gray}{\vec{\vx}_2}$}
@@ -2973,13 +2992,13 @@ Formalisons cela avec une proposition sur les variétés lisses :
     %
   \end{equation}
   %
-  À nouveau, puisque  $|\Curv_\chi|$ est compris entre $\lbrack
+  À nouveau, puisque $|\Curv_\chi|$ est compris entre $\lbrack
   \min(|\PrincCurv{1}|,|\PrincCurv{2}|),
   \max(|\PrincCurv{1}|,|\PrincCurv{2}|)\rbrack$,  il est borné par $K$ et ainsi
   nous obtenons le résultat final.
   %
 \end{proof}
-%
+
 Nous allons définir une version sans paramètre de l'estimateur de courbure
 moyenne $\MeanCurvH{R}$ (voir \RefDefinition{def:digital-3d-mean-curvature}).
 Comme pour la version 2D sans paramètre, nous allons automatiquement calculer le
@@ -3013,7 +3032,7 @@ et la normale de la même manière :
   Soit $\DigShape$ une forme digitale de $\Z^3$, nous définissons les estimateurs
   digitaux sans paramètre de courbures principales $\PrincCurvHS{1}$ et
   $\PrincCurvHS{2}$, de directions principales de courbure $\PrincDirHS{1}$ et
-  $\PrincDirHS{2}$ et de normale $\NormalDirHS$ au point $\vp \in
+  $\PrincDirHS{2}$ et de normale $\NormalDirHS$ au pointel $\vp \in
   \BdZ{\DigShape}$ de $\DigShape$ comme :
   %
   \begin{align}
@@ -3098,7 +3117,7 @@ La \RefFigure{fig:bounds-length-MDSS-fig} confirme expérimentalement ces bornes
 
 \begin{figure}[ht]{
   \begin{center}
-    \includegraphics[height=6cm]{images/Curvature/Ellipsoid_Radius}
+    \includegraphics[height=8cm]{images/Curvature/Ellipsoid_Radius}
   \end{center}}
     \caption{Comportement asymptotique (en échelle logarithmique) de $h\rho'( \DigShape )$ sur l'objet \Ellipsoid.
     \label{fig:bounds-length-MDSS-fig}}
@@ -3110,8 +3129,8 @@ alors la convergence asymptotique des estimateurs digitaux sans paramètre de
 courbure moyenne $\MeanCurvHS$, courbures principales $\PrincCurvHS{1}$ et
 $\PrincCurvHS{2}$ au travers de ces deux observations :
 %
-\begin{observation}{\fakeTitle{Convergence asymptotique de l'estimateur digital sans paramètre de
-courbure moyenne $\MeanCurvHS$}}
+\begin{observation}{\fakeTitle{Convergence asymptotique de l'estimateur digital de
+courbure moyenne sans paramètre $\MeanCurvHS$}}
   %
   \label{obs:curvature-estimator-3d-mean-pf-conv}
   %
@@ -3186,7 +3205,7 @@ $\PrincCurvHS{2}$}}
   %
 \end{proof}
 
-\subsection{Estimateur digital local sans paramètre de courbures en 3D}
+\subsection{Estimateur digital local de courbures sans paramètre en 3D}
 %
 Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de la géométrie de la forme grâce aux longueurs des segments maximaux, et comme en 2D, nous ne pouvons pas espérer de convergence asymptotique à cause du comportement des segments maximaux les plus longs. Cependant, nous pouvons déjà les définir, et nous verrons dans la partie expérimentale du \RefSection{sec:comparaison-courbure} que nous obtenons des convergence.
 %
@@ -3238,41 +3257,50 @@ Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de
 
 \begin{figure}[ht]{
   \begin{center}
-    \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local}
+    % \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local}
     \includegraphics[width=.95\linewidth]{images/Curvature/ScaleSpace_Flower_Local_5}
   \end{center}}
   %
-  \caption[Rayons choisis par  $\CurvHSL$ et répartitions en 5 partitions.]{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
+  \caption{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
   l'objet \textsc{AccFlower} allant du bleu (valeur minimale) au jaune (valeur
   maximale). \emph{En abscisse :} position sur la surface de l'objet, \emph{en
   ordonnée :} différents rayons $R$.
   %
   \\
   %
-  \emph{En noir sur l'image du haut :} différents rayons choisis par
-  l'estimateur $\CurvHSL$ en fonction de la géométrie locale de la forme.
-  \emph{En noir sur l'image du bas :} $K = 5$ rayons choisis l'algorithme de
+  % \emph{En noir sur l'image du haut :} différents rayons choisis par
+  % l'estimateur $\CurvHSL$ en fonction de la géométrie locale de la forme.
+  \emph{En noir sur l'image :} $K = 5$ rayons choisis l'algorithme de
   $K$-moyenne avec les rayons de $\CurvHSL$.
   %
-  \label{fig:curvature-pfl-radii}.}
+  \label{fig:curvature-pfl-radii}}
   %
 \end{figure}
 
 Nous pouvons améliorer le temps de calcul des estimateurs qui s'adaptent à la
 géométrie locale du bord de l'objet $\CurvHSL$, $\MeanCurvHSL$ et autres. En
 effet, sur des objets à forte résolution (\cad $h$ petit), ces estimateurs sont
-très coûteux en temps. Nous proposons de limiter le nombre de rayons locaux à
-$K$ rayons. Cela aura pour conséquence la possibilité de pré-calculer les boules
-de différents rayons au préalable, au lieu de les recalculer localement pour
-chaque élément de surface. En effet, nos estimateurs par intégration sont
-optimisés lorsque nous nous déplaçons sur des éléments de surface adjacents avec
-le même rayon de boule. Cette optimisation est décrite en détail dans la partie «
-Implémentation » (\RefSection{sec:applications:dgtal}). Nous introduisons ici
-les variantes des $K$-moyennes (« \anglais{$K$-means} »), limitant ainsi le
-nombre de rayons de boule disponibles à $K$. Pour se faire, nous distribuons les
+très coûteux en temps car nous perdons l'optimisation du calcul incrémental dont
+nous parlerons dans la partie dédiée à la complexité et aux temps de calcul
+(\RefSection{sec:complexite}) et dans la partie implémentation
+(\RefSection{sec:applications:dgtal}). Pour donner l'intuition de la nécessité
+d'améliorer le temps de calcul, nous optimisons le calcul pour les déplacements
+$0$-adjacent en récupérant une partie du résultat de l'itération précédente,
+diminuant ainsi la complexité d'une dimension (passant de la taille de la boule à
+uniquement ses éléments de surface) et réduisant fortement le temps de calcul.
+Ici, la version locale des estimateurs sans paramètre respectent la contrainte
+de déplacement mais le changement local de rayon empêche de pré-calculer
+initialement les masques de déplacement. Ainsi, cela revient à calculer sur des
+boules entières à chaque itération. Nous proposons de limiter le nombre de
+rayons locaux à $K$ rayons. Cela aura pour conséquence la possibilité de
+pré-calculer les boules de différents rayons au préalable, au lieu de les
+recalculer localement pour chaque élément de surface. Nous introduisons ici les
+variantes des $K$-moyennes (« \anglais{$K$-means} »), limitant ainsi le nombre
+de rayons de boule disponibles à $K$. Pour se faire, nous distribuons les
 longueurs des segments maximaux dans $K$ partitions en minimisant la somme des
 carrés des différences des longueurs. La \RefFigure{fig:curvature-pfl-radii}
-montre le résultat de la répartition des rayons pour $K=5$.
+montre le résultat de la répartition des rayons pour $K=5$. À noter que la
+couverture tangentielle de la surface est très rapide.
 
 \begin{figure}[ht]{
   \begin{center}
@@ -3304,7 +3332,7 @@ Une comparaison complète de tous les estimateurs présentés dans cette section
 % \subsubsection{Estimation par aire de patch de surface}
 % \subsubsection{Estimation par aire de surface de sphère}
 
-\section{Comparaison des estimateurs de courbure}%
+\section{Analyse comparative des estimateurs de courbure}%
 \label{sec:comparaison-courbure}
 %
 Dans cette section, nous allons évaluer expérimentalement tous les estimateurs
@@ -3355,12 +3383,12 @@ de courbure présentés dans ce chapitre.
 
 Tous les estimateurs présentés ont été implémentés dans \DGtal \cite{DGtal}.
 Nous reviendrons plus tard sur l'aspect implémentation et optimisation de ces
-estimateurs (voir \RefSection{sec:applications:dgtal}). \DGtal est une librairie
-C++ open-source dédié aux outils de géométrie digitale. En plus de proposer nos
-estimateurs, cette librairie nous permet de construire des formes paramétriques
+estimateurs (voir \RefSection{sec:applications:dgtal}). \DGtal est une bibliothèque
+C++ open-source dédiée aux outils de géométrie digitale. En plus de proposer nos
+estimateurs, cette bibliothèque nous permet de construire des formes paramétriques
 ou implicites en dimension 2 et 3 pour n'importe quel pas de discrétisation $h$,
 s'inscrivant dans un processus d'évaluation de convergence asymptotique. De
-plus, plusieurs estimateurs de courbure de la littérature sont disponible,
+plus, plusieurs estimateurs de courbure de la littérature sont disponibles,
 rendant facile l'évaluation comparative. Le \RefTable{tab:shapes} et la
 \RefFigure{fig:illustrationShapes} présentent les formes continues considérés
 dans cette évaluation. Il est à noter que pour les estimateurs présentés dans ce
@@ -3375,14 +3403,15 @@ Pour l'ensemble des formes que nous analysons, nous allons comparer les valeurs
 de courbure estimées avec les valeurs euclidiennes attendues. Grâce à
 l'utilisation de courbes et surfaces paramétriques, nous connaissons en tout
 point du bord de la forme l'information de courbure, rendant ainsi la
-comparaison possible. Ainsi l'erreur entre la valeur estimée et la valeur
-euclidienne est alors calculée avec la norme $l_2$ et la norme $l_\infty$
+comparaison possible. Ainsi les vecteurs d'erreurs entre les valeurs estimées et les valeurs
+euclidiennes sont alors calculés avec la norme $l_2$ et la norme $l_\infty$
 (équivaut au pire cas).
 %
 Considérons $a$ comme l'ensemble des valeurs de courbure euclidienne du bord de
 l'objet, et $b$ l'ensemble des valeurs estimées, alors les normes $l_2$ (appelée
 norme moyenne) et $l_\infty$ (celle qui nous intéresse lorsque nous nous
-intéressons à la convergence asymptotique uniforme) se calculent comme suit :
+intéressons à la convergence asymptotique, comprendre convergence uniforme) se
+calculent comme suit :
 %
 \begin{align}
   &|| a - b ||_2 \EqDef \sqrt{(\sum_i(a_i - b_i)^2)} \quad &\text{(norme $l_2$)} \\
@@ -3395,7 +3424,7 @@ l'erreur $l_2$ ou $l_\infty$) afin de pouvoir comparer plus facilement les
 vitesses de convergence des estimateurs. À noter que pour chaque graphe le pas
 de discrétisation $h$ décroît (donc l'objet digital se raffine) de la droite
 vers la gauche. La pente nous informe alors sur la vitesse de convergence de
-l'estimateur. Plus la pente décroît rapidement, plus la vitesse de convergence
+l'estimateur. Plus la pente est forte, plus la vitesse de convergence
 est grande. Si elle ne décroît pas, alors nous pouvons dire
 qu'expérimentalement, l'estimateur ne converge pas.
 %
@@ -3407,16 +3436,18 @@ utilisé pour guider le rayon de la boule dans les preuves des
 %
 \paragraph{Choix de $\alpha = \frac{1}{3}$}
 %
-Dans ces théorèmes, nous avions démontré que choisir un rayon de boule en $R =
+Dans ces théorèmes, nous avons démontré que choisir un rayon de boule en $R =
 kh^\alpha$ avec $\alpha = \frac{1}{3}$ permettait de minimiser les termes
-d'erreurs et d'obtenir une convergence asymptotique en $O(h^\frac{1}{3})$ pour
+d'erreur et d'obtenir une convergence asymptotique en $O(h^\frac{1}{3})$ pour
 les estimateurs digitaux de courbure en 2D $\CurvH{R}$, de courbure moyenne
 $\MeanCurvH{R}$ et de courbures principales $\PrincCurvH{1}{R}$ et
 $\PrincCurvH{2}{R}$ en 3D par intégration. La première ligne des
 \RefFiguresTF{fig:curv-experiments-ellipse}{fig:curv-experiments-flower}{fig:curv-experiments-accflower}
-nous montre les vitesses de convergence asymptotique pour $5$ valeurs de $\alpha$
-différentes : $\frac{1}{2}$, $\frac{2}{5}$, $\frac{1}{3}$, $\frac{2}{7}$ et
-$\frac{1}{4}$.
+nous montre les vitesses de convergence asymptotique pour $5$ valeurs de
+$\alpha$ différentes : $\frac{1}{2}$, $\frac{2}{5}$, $\frac{1}{3}$,
+$\frac{2}{7}$ et $\frac{1}{4}$. L'enjeu du choix du $\alpha$ est également
+algorithmique, puisqu'il guide la taille du rayon, et donc influe sur le temps
+de calcul.
 
 
 Nous observons expérimentalement pour l'objet \Ellipse
@@ -3426,7 +3457,7 @@ suggéré dans la preuve du \RefTheorem{thm:multigrid-convergence-curv}, $\alpha
 \frac{1}{3}$ donne expérimentalement un comportement (en norme $l_\infty$) en
 $O(h^\frac{1}{3})$ (voir le \RefTable{tab:convergence-speed-alpha-2d} pour les
 vitesses de convergence observées). Le théorème est défini pour le cas général
-des formes convexes à bord $C^3$, mais comme précisé dans le théorème le terme
+des formes convexes à bord $C^3$, mais comme précisé dans le théorème, le terme
 d'erreur en grand « O » peut être amélioré si nous ajoutons des hypothèses sur
 la forme. Cela explique pourquoi de meilleures vitesses de convergence semblent
 être obtenues lorsque $\alpha = \frac{2}{7}$ et $\frac{1}{4}$. Nous pouvons
@@ -3438,7 +3469,11 @@ estimations.
 %
 \begin{table}[ht]
 \centering
-\caption{Vitesse de convergence observée de $\CurvH{R}$ en fonction du paramètre $\alpha$ avec $R=kh^\alpha$}
+%
+\caption{Vitesse de convergence observée de $\CurvH{R}$ en fonction du paramètre
+$\alpha$ avec $R=kh^\alpha$ sur l'objet \Ellipse, en utilisant de
+l'approximation aux moindres carré pour approcher les données.}
+%
 \label{tab:convergence-speed-alpha-2d}
 \begin{tabular}{@{}lr@{}}
 %\toprule
@@ -3456,7 +3491,7 @@ estimations.
 Nous avons fait également une évaluation de ce paramètre $\alpha$ sur des formes
 digitales 3D (voir \RefFigure{fig:curv-experiments-3D-alpha}) \RoundedCube et
 \Goursat pour les estimateurs de courbure moyenne $\MeanCurvH{R}$ et de
-courbures principales $\PrincCurv{1}{R}$ et $\PrincCurv{2}{R}$. Les preuves des
+courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$. Les preuves des
 \RefTheoremsDF{thm:multigrid-convergence-curv-mean}{thm:multigrid-convergence-curv-k1k2}
 ont statués à $\alpha = \frac{1}{3}$ afin de minimiser les termes d'erreurs et
 obtenir une convergence en $O(h^\frac{1}{3})$. Nous pouvons observer que pour les
@@ -3492,19 +3527,19 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       %
       \emph{Première ligne :} Illustration de l'objet \Ellipse et comparaison
       des vitesses de convergence asymptotique de l'estimateur $\CurvH{R}$ avec
-      différentes valeurs de $\alpha$ pour le rayon $R$ (avec $R=kh^\alpha$).
+      \colorize{différentes valeurs de $\alpha$} pour le rayon $R$ (avec $R=kh^\alpha$).
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de courbure en 2D de $\CurvH{R}$
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure} en 2D de $\CurvH{R}$
       (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}.
       %
       \\
       %
       \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
-      et $l_\infty$ (\emph{à droite}) d'estimation de courbure en 2D de $\CurvHS$,
+      et $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure} en 2D de $\CurvHS$,
       $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$ avec
       l'estimateur \MDCA \cite{Roussillon2011}.
       %
@@ -3539,19 +3574,19 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       %
       \emph{Première ligne :} Illustration de l'objet \Flower et comparaison
       des vitesses de convergence asymptotique de l'estimateur $\CurvH{R}$ avec
-      différentes valeurs de $\alpha$ pour le rayon $R$ (avec $R=kh^\alpha$).
+      \colorize{différentes valeurs de $\alpha$} pour le rayon $R$ (avec $R=kh^\alpha$).
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de courbure en 2D de $\CurvH{R}$
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure} en 2D de $\CurvH{R}$
       (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}.
       %
       \\
       %
       \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
-      et $l_\infty$ (\emph{à droite}) d'estimation de courbure en 2D de $\CurvHS$,
+      et $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure} en 2D de $\CurvHS$,
       $\CurvHSL$, $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$ avec
       l'estimateur \MDCA \cite{Roussillon2011}.
       %
@@ -3586,12 +3621,12 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       %
       \emph{Première ligne :} Illustration de l'objet \AccFlower et comparaison
       des vitesses de convergence asymptotique de l'estimateur $\CurvH{R}$ avec
-      différentes valeurs de $\alpha$ pour le rayon $R$ (avec $R=kh^\alpha$).
+      \colorize{différentes valeurs de $\alpha$} pour le rayon $R$ (avec $R=kh^\alpha$).
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de courbure en 2D de $\CurvH{R}$
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure} en 2D de $\CurvH{R}$
       (\II) avec les estimateurs \BC \cite{Esbelin2011}, \MDSS
       \cite{Coeurjolly2001,deVieilleville2007} et \MDCA \cite{Roussillon2011}.
       %
@@ -3628,7 +3663,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       %
       Comparaison des convergences asymptotiques des estimateurs $\MeanCurvH{R}$
       (\emph{première ligne}), $\PrincCurvH{1}{R}$ (\emph{seconde ligne}) et
-      $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \textbf{différentes valeurs de
+      $\PrincCurvH{2}{R}$ (\emph{troisième ligne}) avec \colorize{différentes valeurs de
       $\alpha$} pour le rayon $R$ ($R=kh^\alpha$) sur l'objet \RoundedCube et
       \Goursat. L'erreur est en $l_2$ pour la première colonne, et en $l_\infty$
       pour la seconde.
@@ -3663,20 +3698,20 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
     \caption{
       %
       \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure moyenne} de
       $\MeanCurvH{R}$ avec \JetFitting \cite{Cazals2005} sur l'objet \Sphere.
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{première courbure
       principale} de $\PrincCurvH{1}{R}$ avec \JetFitting \cite{Cazals2005} sur
       l'objet \Sphere.
       %
       \\
       %
       \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
-      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{seconde courbure
       principale} de $\PrincCurvH{2}{R}$ avec \JetFitting \cite{Cazals2005} sur
       l'objet \Sphere.
       %
@@ -3710,20 +3745,20 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
     \caption{
       %
       \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure moyenne} de
       $\MeanCurvH{R}$ avec \JetFitting \cite{Cazals2005} sur l'objet \RoundedCube.
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{première courbure
       principale} de $\PrincCurvH{1}{R}$ avec \JetFitting \cite{Cazals2005} sur
       l'objet \RoundedCube.
       %
       \\
       %
       \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
-      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{seconde courbure
       principale} de $\PrincCurvH{2}{R}$ avec \JetFitting \cite{Cazals2005} sur
       l'objet \RoundedCube.
       %
@@ -3757,20 +3792,20 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
     \caption{
       %
       \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure moyenne} de
       $\MeanCurvH{R}$ avec \JetFitting \cite{Cazals2005} sur l'objet \Goursat.
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{première courbure
       principale} de $\PrincCurvH{1}{R}$ avec \JetFitting \cite{Cazals2005} sur
       l'objet \Goursat.
       %
       \\
       %
       \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
-      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{seconde courbure
       principale} de $\PrincCurvH{2}{R}$ avec \JetFitting \cite{Cazals2005} sur
       l'objet \Goursat.
       %
@@ -3804,14 +3839,14 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
     \caption{
       %
       \emph{Première ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure moyenne} de
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure moyenne} de
       $\MeanCurvHS$, $\MeanCurvHSL$, $\MeanCurvHSLK{5}$, $\MeanCurvHSLK{10}$ et
       $\MeanCurvHSLK{50}$ sur l'objet \Ellipsoid.
       %
       \\
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{première courbure
+      $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{première courbure
       principale} de $\PrincCurvHS{1}$, $\PrincCurvHSL{1}$,
       $\PrincCurvHSLK{1}{5}$, $\PrincCurvHSLK{1}{10}$ et $\PrincCurvHSLK{1}{50}$
       sur l'objet \Ellipsoid.
@@ -3819,7 +3854,7 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
       \\
       %
       \emph{Troisième ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche})
-      et $l_\infty$ (\emph{à droite}) d'estimation de la \textbf{seconde courbure
+      et $l_\infty$ (\emph{à droite}) d'estimation de la \colorize{seconde courbure
       principale} de $\PrincCurvHS{2}$, $\PrincCurvHSL{2}$,
       $\PrincCurvHSLK{2}{5}$, $\PrincCurvHSLK{2}{10}$ et $\PrincCurvHSLK{2}{50}$
       sur l'objet \Ellipsoid.
@@ -3829,9 +3864,10 @@ meilleures vitesses de convergence peuvent être obtenues avec $\alpha =
   \end{center}
 \end{figure}
 
-Alors, expérimentalement, le choix de $\alpha = \frac{1}{3}$ est cohérent pour
-obtenir une vitesse de convergence des estimateurs $\CurvH{R}$, $\MeanCurvH{R}$,
-$\PrincCurvH{1}{R}$, $\PrincCurvH{2}{R}$ en $O(h^\frac{1}{3})$.
+\noindent Nous pouvons alors conclure qu'expérimentalement le choix de $\alpha =
+\frac{1}{3}$ est cohérent pour obtenir une vitesse de convergence des
+estimateurs $\CurvH{R}$, $\MeanCurvH{R}$, $\PrincCurvH{1}{R}$,
+$\PrincCurvH{2}{R}$ en $O(h^\frac{1}{3})$.
 %
 \paragraph{Convergence expérimentale des estimateurs digitaux de courbure en 2D}
 %
@@ -3843,7 +3879,7 @@ nous comparons l'estimateur digital de courbure par intégration $\CurvH{R}$
 \cite{Roussillon2011} (que nous avons décrit dans l'état de l'art,
 \RefSection{sec:estimators:SOTA}) avec les métriques d'erreurs $l_2$ et
 $l_\infty$. Sur ces formes non bruitées, nous observons que les vitesses de
-convergence en $l_\infty$ de notre estimateur est proche de l'estimateur \MDCA.
+convergence en $l_\infty$ de notre estimateur sont proches de l'estimateur \MDCA.
 Nous observons aussi que l'estimateur \BC converge mais avec des vitesses de
 convergence plus faibles. Nous noterons également que l'estimateur \MDSS
 n'affiche pas de convergence asymptotique expérimentalement sur nos données. En
@@ -3857,7 +3893,9 @@ convergence est plus faible sur les objets non convexes.
 
 Nous pouvons noter que les calculs de notre estimateur vont à des résolutions
 supérieures à ceux des autres estimateurs. La raison derrière cela est simple :
-dans notre implémentation de l'estimateur \BC dans \DGtal, la taille du masque
+dans notre implémentation de l'estimateur \BC dans \DGtal, la taille du
+masque\footnote{Dans notre implémentation dans \DGtal, nous utilisons comme
+taille de masque : $d / h^\frac{1}{3}$ où $d$ est le diamètre du contour.}
 devient trop important pour de petites valeurs de $h$, ce qui implique des
 problèmes de surcharge de la mémoire disponible. Pour l'estimateur \MDCA, la
 reconnaissance d'arcs circulaires dans \DGtal est guidé par un prédicat
@@ -3867,8 +3905,9 @@ des instabilités apparaissent (qui peuvent être corrigés en considérant des
 nombres entiers de précision arbitraire mais cela contrebalancerait avec des
 problèmes d'efficacité). Notre estimateur n'est pas sensible à cela. Pour notre
 expérimentation la plus fine, le pas de discrétisation est $h = 0.00017$, ce qui
-donne des formes digitales définies sur des domaines digitaux de $\nombre{235295}^2$. À
-cette échelle, le contour de l'objet \Ellipse contient $\nombre{648910}$ éléments.
+donne des formes digitales définies sur des domaines digitaux de
+$\nombre{235295}^2$. À cette échelle, le contour de l'objet \Ellipse contient
+$\nombre{648910}$ éléments.
 
 
 Sur la troisième ligne des
@@ -3887,39 +3926,41 @@ Nous avons également testé l'estimateur $\CurvHSL$ lorsque nous limitons le
 nombre de rayons disponibles avec l'approche des $K$-moyennes (voir
 \RefSection{sec:curvature:parameter-free:k-means}) pour $K = 5$, $10$ et $50$
 (nommés $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$). Ces tests ont été
-uniquement fait avec la métrique d'erreur $l_2$ car, comme nous l'avons
-expliqué, l'objectif principal de ces estimateurs n'est pas la convergence mais
-la diminution du temps de calcul par rapport à $\CurvHSL$. En effet, pour de
-petits pas de discrétisation $h$, $\CurvHSL$ est très consommateur de temps de
-calcul (nous devons créer une nouvelle boule digitale à chaque point). Ainsi,
-nous voulons analyser les erreurs que génère cette approximation. Nous
-remarquons alors que l'erreur $l_2$ de $\CurvHSL$ est inférieure à celles de
-$\CurvHS$ et $\CurvH{R}$, grâce à la nature adaptative de cet estimateur. Nous
-remarquons également de très bonnes précisions asymptotiques des résultats des
-estimateurs $\CurvHSLK{5}$, $\CurvHSLK{10}$ et $\CurvHSLK{50}$, même lorsque le
-nombre de partitions est faible.
+uniquement faits avec la métrique d'erreur $l_2$ car, comme nous l'avons
+expliqué, l'objectif principal de ces estimateurs n'est pas la convergence
+uniforme mais la diminution du temps de calcul par rapport à $\CurvHSL$. En
+effet, pour de petits pas de discrétisation $h$, $\CurvHSL$ est très
+consommateur de temps de calcul (nous devons créer une nouvelle boule digitale à
+chaque point). Ainsi, nous voulons analyser les erreurs que génère cette
+approximation. Nous remarquons alors que l'erreur $l_2$ de $\CurvHSL$ est
+inférieure à celles de $\CurvHS$ et $\CurvH{R}$, grâce à la nature adaptative de
+cet estimateur, ce qui était l'objectif visé. Nous remarquons également de très bonnes précisions
+asymptotiques des résultats des estimateurs $\CurvHSLK{5}$, $\CurvHSLK{10}$ et
+$\CurvHSLK{50}$, même lorsque le nombre de partitions est faible.
 %
 \paragraph{Convergence expérimentale des estimateurs digitaux de courbure en 3D}
 %
 Nous avons également comparé expérimentalement nos estimateurs digitaux de
-courbures moyenne $\MeanCurvH{R}$ et de courbures principales $\PrincCurvH{1}{R}$
-et $\PrincCurvH{2}{R}$ avec l'estimateur \JetFitting \cite{Cazals2005} décrit
-dans la \RefSection{sec:estimators:SOTA}, avec les métriques $l_2$ et $l_\infty$
-sur les objets \Sphere (\RefFigure{fig:curv-experiments-sphere}), \RoundedCube
+courbures moyenne $\MeanCurvH{R}$ et de courbures principales
+$\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ avec l'estimateur \JetFitting
+\cite{Cazals2005}\footnote{Nous utilisons le même voisinage que pour notre
+estimateur.} décrit dans la \RefSection{sec:estimators:SOTA}, avec les métriques
+$l_2$ et $l_\infty$ sur les objets \Sphere
+(\RefFigure{fig:curv-experiments-sphere}), \RoundedCube
 (\RefFigure{fig:curv-experiments-rounded}) et \Goursat
 (\RefFigure{fig:curv-experiments-goursat}). Nous observons que \JetFitting
 obtient de meilleurs résultats sur \Sphere pour la courbure moyenne et les
 courbures principales que nos estimateurs. Pour l'estimation de la courbure
 moyenne sur \RoundedCube et \Goursat, nous obtenons des vitesses de convergence
-similaires à \JetFitting avec des erreurs $l_\infty$ légèrement moins importantes
-avec notre estimateur. Pour les courbures principales sur ces objets, nos
-estimateurs obtiennent de bien meilleures vitesses de convergence que
-\JetFitting. Si nous regardons du côté des erreurs moyennes (métrique $l_2$),
-des comportements similaires sont observés. À noter que pour notre
+similaires à \JetFitting avec des erreurs $l_\infty$ légèrement moins
+importantes avec notre estimateur. Pour les courbures principales sur ces
+objets, nos estimateurs obtiennent de bien meilleures vitesses de convergence
+que \JetFitting. Si nous regardons du côté des erreurs moyennes (métrique
+$l_2$), des comportements similaires sont observés. À noter que pour notre
 expérimentation la plus fine, le pas de discrétisation était de $h = 0.04$, les
-formes digitales sont définies sur un domaine digital de $\nombre{500}^3$. À cette
-échelle, le bord de l'objet digital \RoundedCube contient $\nombre{1125222}$
-éléments.
+formes digitales sont définies sur un domaine digital de $\nombre{500}^3$. À
+cette échelle, le bord de l'objet digital \RoundedCube contient
+$\nombre{1125222}$ éléments.
 
 
 Comme en 2D, nous avons testé expérimentalement les versions sans paramètre de
@@ -3945,18 +3986,18 @@ données de plus en plus grandes afin d'en extraire un profil de temps de calcul
 
 
 Bien que nos estimateurs soient des estimateurs intégrants des volumes, ceux-ci
-sont comparables en complexité à des estimateurs surfaciques. Une implémentation
-basique calculerait une boule digitale, la centrerait sur le bord de l'objet
-digital à analyser, calculerait son intersection avec la forme à chaque élément
-de surface de l'objet. Nous obtiendrions une complexité en $O((R/h)^{d})$ par
-élément de surface, \cad la taille de la boule digitale au pas de
-discrétisation $h$. Cependant, nous pouvons optimiser cet algorithme en
-utilisant les avantages que nous offre la structure des surfaces digitales :
-si nous nous déplaçons sur des éléments de surfaces adjacents, une partie du
-calcul de l'intersection entre la boule et la forme sont alors déjà calculés à
+sont comparables en complexité à des estimateurs surfaciques. En effet, une
+implémentation naïve calculerait une boule digitale, la centrerait sur le bord
+de l'objet digital à analyser, calculerait son intersection avec la forme à
+chaque élément de surface de l'objet. Nous obtiendrions une complexité en
+$O((R/h)^{d})$ par élément de surface, \cad la taille de la boule digitale au
+pas de discrétisation $h$. Cependant, nous pouvons optimiser cet algorithme en
+utilisant les avantages que nous offre la structure des surfaces digitales : si
+nous nous déplaçons sur des éléments de surfaces adjacents, une partie du calcul
+de l'intersection entre la boule et la forme sont alors déjà calculés à
 l'itération précédente. Plus formellement, si nous nous déplaçons d'un point
-$\vx$ à un point $\vy$ par un vecteur de translation $\vec{\delta}$ (il y en a
-$8$ directions possibles en 2D, $26$ en 3D pour $||\vec{\delta}||_\infty = h$),
+$\vx$ à un point $\vy$ par un vecteur de translation $\vec{\delta}$ %(il y en a
+%$8$ directions possibles en 2D, $26$ en 3D pour $||\vec{\delta}||_\infty = h$),
 nous avons pour le calcul d'aire ou de volume :
 %
 \begin{align}
@@ -3977,7 +4018,7 @@ De la même manière, pour les moments :
 %
 Alors, si nous pré-calculons tous les supports de déplacement
 $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
-\Ball{R}{\mathbf{0}}}{h}$, la complexité de l'algorithme peut être réduite à
+\Ball{R}{\mathbf{0}}}{h}$ avec $||\vec{\delta}||_\infty = h$, la complexité de l'algorithme peut être réduite à
 $O((R/h)^{d-1})$. Le cas idéal est la traversée Hamiltonienne de la surface :
 seul le premier surfel a besoin de calculer l'intersection entre la boule
 entière et la forme, tous les autres surfels (du voisinage) n'auront à calculer
@@ -3987,16 +4028,16 @@ que les sous-supports $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=6cm]{graphs/Timing2D}
-    \includegraphics[width=6cm]{graphs/Timing2D_PF}\\
-    \includegraphics[width=6cm]{graphs/Timing3D}
+    \includegraphics[width=6.7cm]{graphs/Timing2D}
+    \includegraphics[width=6.7cm]{graphs/Timing2D_PF}\\
+    \includegraphics[width=6.7cm]{graphs/Timing3D}
     \caption{
       %
       Temps de calcul (en échelle logarithmique) en millisecondes pour les
-      estimateurs de courbure en 2D sur l'objet \Flower (\emph{en haut à gauche})
-      et des estimateurs de courbure moyenne en 3D sur l'objet \RoundedCube
+      estimateurs de \colorize{courbure} en 2D sur l'objet \Flower (\emph{en haut à gauche})
+      et des estimateurs de \colorize{courbure moyenne} en 3D sur l'objet \RoundedCube
       (\emph{en bas}). Temps de calcul en secondes pour les estimateurs de
-      courbure en 2D sans paramètre sur l'objet \Ellipse (\emph{en haut à droite}).
+      \colorize{courbure} en 2D sans paramètre sur l'objet \Ellipse (\emph{en haut à droite}).
       Les résultats ont été obtenus sur un ordinateur de travail Intel Xeon
       2.27GHz.
       %
@@ -4030,18 +4071,20 @@ Grâce à l'approche par intégration de volume de nos estimateurs, nous pouvons
 espérer une robustesse aux bruits et aux données aberrantes (\anglais{outliers}).
 
 
-Définissons dans un premier temps le modèle de bruit utilisé dans nos expérimentations.
-Nous utilisons le modèle de bruit \Kanungo \cite{Kanungo1996} sur les contours
-des objets digitaux. Ainsi, pour une taille de bruit $t \in [0,1]$, la
-probabilité qu'un point digital $\vp$ situé à une distance $dt(\vp)$ de $\dS$
-appartienne au contour bruité est $t^{1+dt(\vp)}$. Ainsi la majorité des
-perturbations se situe dans une zone d'épaisseur $\frac{2h}{1-t}$ autour du bord
-digital de la forme. Ce modèle de \Kanungo est dépendant du pas de
+Définissons dans un premier temps le modèle de bruit utilisé dans nos
+expérimentations. Nous utilisons le modèle de bruit \Kanungo \cite{Kanungo1996}
+sur les contours des objets digitaux. Ainsi, pour une taille de bruit $t \in
+[0,1]$, la probabilité qu'un point digital $\vp$ situé à une distance $dt(\vp)$
+de $\dS$ appartienne au contour bruité est $t^{1+dt(\vp)}$. Ainsi la majorité
+des perturbations se situe dans une zone d'épaisseur $\frac{2h}{1-t}$ autour du
+bord digital de la forme. Ce modèle de \Kanungo est dépendant du pas de
 discrétisation $h$, ainsi plus le pas de discrétisation est petit (donc l'objet
 de plus grande résolution), plus le bruit obtenu est faible. Ce comportement est
 idéal pour évaluer la stabilité des algorithmes en géométrie digitale
 \cite{Kerautret2012} puisque plus la résolution de l'objet digital augmente,
-plus il se rapproche de la forme sous-jacente.
+plus il se rapproche de la forme sous-jacente. Ce bruit est comparable au bruit
+d'acquisition d'un scanner, et est utilisé dans le domaine de l'analyse de
+documents.
 
 
 \begin{figure}[ht]
@@ -4068,9 +4111,9 @@ plus il se rapproche de la forme sous-jacente.
       surface.
       %
       \emph{Seconde ligne :} Comparaison des erreurs $l_2$ (\emph{à gauche}) et
-      $l_\infty$ (\emph{à droite}) d'estimation de \textbf{courbure} de
-      $\CurvH{R}$ avec \MDCA, \MDSS et \BC sur l'objet \Ellipse bruité avec
-      différents paramètre $t$ de bruit de \Kanungo.
+      $l_\infty$ (\emph{à droite}) d'estimation de \colorize{courbure} de
+      $\CurvH{R}$ (\II) avec \MDCA, \MDSS et \BC sur l'objet \Ellipse bruité avec
+      différents paramètres $t$ de bruit de \Kanungo.
       %
       }
       \label{fig:curv-experiments-ellipse-noise}
@@ -4109,11 +4152,11 @@ plus il se rapproche de la forme sous-jacente.
       surface.
       %
        Comparaison des erreurs $l_2$ (\emph{à gauche}) et $l_\infty$ (\emph{à
-       droite}) d'estimation de \textbf{courbure moyenne} de $\MeanCurvH{R}$
-       (\emph{seconde ligne}), de \textbf{première courbure principale} de
-       $\PrincCurvH{1}{R}$ (\emph{troisième ligne}) et de \textbf{seconde
+       droite}) d'estimation de \colorize{courbure moyenne} de $\MeanCurvH{R}$
+       (\emph{seconde ligne}), de \colorize{première courbure principale} de
+       $\PrincCurvH{1}{R}$ (\emph{troisième ligne}) et de \colorize{seconde
        courbure principale} de $\PrincCurvH{2}{R}$ (\emph{quatrième ligne}) avec
-       \JetFitting sur l'objet \RoundedCube bruité avec différents paramètre $t$
+       \JetFitting sur l'objet \RoundedCube bruité avec différents paramètres $t$
        de bruit de \Kanungo.
       %
       }
@@ -4148,11 +4191,11 @@ Nous avons présenté dans ce chapitre un ensemble d'estimateurs de courbure,
 courbure moyenne, courbures principales, directions principales de courbures et
 normale basés sur le principe d'intégration d'invariants sur des formes de
 dimension 2 et 3. Nous avons démontré que ces estimateurs convergent
-asymptotiquement pour une certaine catégorie de formes et nous avons explicité
-leurs vitesses de convergence. Nous avons également évalué expérimentalement ces
-estimateurs et observé que les vitesses de convergence respectent bien les
-vitesses attendues, et la comparaison avec les autres méthodes rend nos
-estimateurs très compétitifs, même en présence de bruit.
+asymptotiquement pour une certaine catégorie de formes continues et nous avons
+explicité leurs vitesses de convergence. Nous avons également évalué
+expérimentalement ces estimateurs et observé que les vitesses de convergence
+respectent bien les vitesses attendues, et la comparaison avec les autres
+méthodes rend nos estimateurs très compétitifs, même en présence de bruit.
 
 
 Ces estimateurs souffrent par contre de certaines limitations. La première et
@@ -4162,13 +4205,16 @@ simplement un approximation du bord de $\Shape$, comme c'est le cas pour les
 algorithmes fonctionnant sur les nuages de points par exemple.
 
 
-La seconde provient du paramètre $k$ guidant le rayon de la boule d'intégration
-($R=kh^\frac{1}{3}$) dans le contexte de la convergence asymptotique des
-estimateurs. Le choix du $k$ le plus optimal n'est pas évident, et est
-principalement lié aux bornes d'erreur de l'approximation de Taylor permettant
-d'extraire l'information de courbure qui ne sont pas explicites. L'intuition est
-que ce paramètre $k$ doit certainement dépendre de la dérivée des courbures
-maximales, mais cela reste à prouver.
+La seconde provient de la constante $k$ guidant le rayon de la boule
+d'intégration ($R=kh^\frac{1}{3}$) dans le contexte de la convergence
+asymptotique des estimateurs. Le choix du $k$ le plus optimal n'est pas évident,
+et est principalement lié aux bornes d'erreur de l'approximation de Taylor
+permettant d'extraire l'information de courbure qui ne sont pas explicites.
+L'intuition est que ce paramètre $k$ doit certainement dépendre de la dérivée
+des courbures maximales, mais cela reste à prouver. Ainsi, pour une forme
+donnée, nous pouvons chercher à optimiser cette constante afin d'avoir une
+erreur asymptotique plus faible mais celle-ci n'influera d'aucune sorte sur la
+vitesse de convergence.
 
 
 La troisième limitation est le temps de calcul sur de gros objets digitaux. Il
