@@ -474,17 +474,16 @@ des coordonnées réelles. Les \colorize{objets digitaux} $\DigShape \subset \Z^
 sont alors simplement définis comme des ensembles de points digitaux de
 dimension $d$.
 
-
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=14cm]{images/Notions/Pavages}
+    \input{figures/tikz/grid_pavage.tikz}
     \caption{Pavages 2D réguliers par carrés, hexagones et triangles (\RefFigureFake{1.1}{Coeurjolly2002}).\label{fig:pavages}}
   \end{center}
 \end{figure}
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=5cm]{images/Notions/Pavage_dual}
+    \input{figures/tikz/grid_pavage_dual.tikz}
     \caption{Dual du pavage 2D réguliers par carrés.\label{fig:pavage_dual}}
   \end{center}
 \end{figure}
@@ -510,17 +509,14 @@ Francon1991}, que nous nommerons \colorize{topologie de Khalimsky}. Ainsi :
   dimension 3).
 %
 \end{itemize}
-%
-
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=5cm]{images/Notions/notations_topo}
+    \input{figures/tikz/KhaCells.tikz}
     \caption{Illustration des $0$-cellules (pointels), $1$-cellules (lignels) et
     $2$-cellules (pixels).\label{fig:notations_topo}}
   \end{center}
 \end{figure}
-
 
 La \RefFigure{fig:notations_topo} illustre les pointels, lignels et pixels. Par
 convention, nous nommons les $n$-cellules les \colorize{spels} (un pixel en
@@ -577,8 +573,7 @@ pour $n=0$, les lignels pour $n=1$ en dimension 2).
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj4}
-    \includegraphics[width=6.8cm]{images/Notions/DiskWithAdj8}
+    \input{figures/tikz/voisinage_digital.tikz}
     \caption{Illustation du voisinage en dimension 2. \emph{À gauche :}
     $4$-connexité, \emph{à droite :} $8$-connexité.\label{fig:adjacence2d}}
   \end{center}
@@ -1155,10 +1150,9 @@ partir d'un contour digital.
 
 \begin{figure}[ht]{
     \begin{center}
-    %\includegraphics[width=6cm]{images/Notions/StandardDSS4bis}
-    \includegraphics[width=6cm]{images/Notions/StandardDSS4}
+    \input{figures/tikz/MDSS.tikz}
     \end{center}}
-    \caption{Segments digitaux.\label{fig:dss-figure}}
+    \caption{Segments de droites digitales (en rouge sur la figure).\label{fig:dss-figure}}
 \end{figure}
 
 % et étudier estimées et, grâce à leurs bonnes propriétés

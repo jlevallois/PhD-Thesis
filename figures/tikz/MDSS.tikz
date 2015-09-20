@@ -1,0 +1,14 @@
+\begin{tikzpicture}[x=0.6cm,y=0.6cm]
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+
+  \foreach \x/\y in { 0/0,1/0,2/0,3/0,3/1,4/1,5/1,5/2,6/2,7/2,7/1,7/0,8/0,8/-1 }
+  {
+    \draw[color=kGrey,fill, nearly transparent] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+    \draw[color=kGrey,fill] (\x,\y) circle (0.1);
+  }
+
+  \draw[color=kGrey,thick] (0,0) -- (3,0) -- (3,1) -- (5,1) -- (5,2) -- (7,2) -- (7,0) -- (8,0) -- (8,-1);
+
+  \draw[color=red,line width=0.2mm] (0,0) -- (6.7,2.7) -- (7.2,1.65) -- (0.5,-1) -- cycle;
+  \draw[color=red,line width=0.2mm] (7,2) -- (8.4,-0.8) -- (7.6,-1.2) -- (6.2,1.65) -- cycle;
+\end{tikzpicture}\quad

@@ -1,0 +1,240 @@
+%
+% Sometimes, Tikz is not the best choice ....
+%
+%
+%
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+
+  % Cells
+  \foreach \x/\y in {
+                                  3/1,4/1,5/1,6/1,7/1,
+                              2/2,3/2,4/2,5/2,6/2,7/2,8/2,
+                          1/3,2/3,3/3,4/3,5/3,6/3,7/3,8/3,9/3,
+                          1/4,2/4,3/4,4/4,5/4,6/4,7/4,8/4,9/4,
+                          1/5,2/5,3/5,4/5,5/5,6/5,7/5,8/5,9/5,
+                          1/6,2/6,3/6,4/6,5/6,6/6,7/6,8/6,9/6,
+                          1/7,2/7,3/7,4/7,5/7,6/7,7/7,8/7,9/7,
+                              2/8,3/8,4/8,5/8,6/8,7/8,8/8,
+                                  3/9,4/9,5/9,6/9,7/9
+                    }
+  {
+    \draw[color=red!30!white,fill] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+  }
+
+  % grids
+  \draw[help lines,step=0.5cm] (0,0) grid (10,10);
+
+  % points - connexity
+  \foreach \x/\y in {
+                                  3/2,4/2,5/2,6/2,7/2,
+                              2/3,3/3,4/3,5/3,6/3,7/3,8/3,
+                              2/4,3/4,4/4,5/4,6/4,7/4,8/4,
+                              2/5,3/5,4/5,5/5,6/5,7/5,8/5,
+                              2/6,3/6,4/6,5/6,6/6,7/6,8/6,
+                              2/7,3/7,4/7,5/7,6/7,7/7,8/7,
+                                  3/8,4/8,5/8,6/8,7/8
+                    }
+  {
+
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x-1,\y) -- (\x+1,\y);
+    \draw[color=kGrey,thick] (\x,\y-1) -- (\x,\y+1);
+  }
+
+  % border points - connexity
+  %% horizontal
+  \foreach \x/\y in {
+                                      4/1,5/1,6/1,
+                                      4/9,5/9,6/9
+                    }
+  {
+
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x-1,\y) -- (\x+1,\y);
+  }
+
+  %% vertical
+  \foreach \x/\y in {
+                              1/4,9/4,
+                              1/5,9/5,
+                              1/6,9/6
+                    }
+  {
+
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x,\y-1) -- (\x,\y+1);
+  }
+
+  %% Special points
+  \draw[color=kGrey,fill] (7,1) circle (0.5mm);
+  \draw[color=kGrey,fill] (8,2) circle (0.5mm);
+  \draw[color=kGrey,fill] (9,3) circle (0.5mm);
+  %\draw[color=kGrey,thick] (7,1) -- (9,3);
+
+  \draw[color=kGrey,fill] (7,9) circle (0.5mm);
+  \draw[color=kGrey,fill] (8,8) circle (0.5mm);
+  \draw[color=kGrey,fill] (9,7) circle (0.5mm);
+  %\draw[color=kGrey,thick] (7,9) -- (9,7);
+
+  \draw[color=kGrey,fill] (1,3) circle (0.5mm);
+  \draw[color=kGrey,fill] (2,2) circle (0.5mm);
+  \draw[color=kGrey,fill] (3,1) circle (0.5mm);
+  %\draw[color=kGrey,thick] (1,3) -- (3,1);
+
+  \draw[color=kGrey,fill] (1,7) circle (0.5mm);
+  \draw[color=kGrey,fill] (2,8) circle (0.5mm);
+  \draw[color=kGrey,fill] (3,9) circle (0.5mm);
+  %\draw[color=kGrey,thick] (1,7) -- (3,9);
+\end{tikzpicture}\quad
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+
+  % Cells
+  \foreach \x/\y in {
+                                  3/1,4/1,5/1,6/1,7/1,
+                              2/2,3/2,4/2,5/2,6/2,7/2,8/2,
+                          1/3,2/3,3/3,4/3,5/3,6/3,7/3,8/3,9/3,
+                          1/4,2/4,3/4,4/4,5/4,6/4,7/4,8/4,9/4,
+                          1/5,2/5,3/5,4/5,5/5,6/5,7/5,8/5,9/5,
+                          1/6,2/6,3/6,4/6,5/6,6/6,7/6,8/6,9/6,
+                          1/7,2/7,3/7,4/7,5/7,6/7,7/7,8/7,9/7,
+                              2/8,3/8,4/8,5/8,6/8,7/8,8/8,
+                                  3/9,4/9,5/9,6/9,7/9
+                    }
+  {
+    \draw[color=red!30!white,fill] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+  }
+
+  % grids
+  \draw[help lines,step=0.5cm] (0,0) grid (10,10);
+
+  % points - connexity
+  \foreach \x/\y in {
+                                      4/2,5/2,6/2,
+                                  3/3,4/3,5/3,6/3,7/3,
+                              2/4,3/4,4/4,5/4,6/4,7/4,8/4,
+                              2/5,3/5,4/5,5/5,6/5,7/5,8/5,
+                              2/6,3/6,4/6,5/6,6/6,7/6,8/6,
+                                  3/7,4/7,5/7,6/7,7/7,
+                                      4/8,5/8,6/8
+                    }
+  {
+
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x-1,\y) -- (\x+1,\y);
+    \draw[color=kGrey,thick] (\x,\y-1) -- (\x,\y+1);
+    \draw[color=kGrey,thick] (\x-0.5,\y-0.5) -- (\x+0.5,\y+0.5);
+    \draw[color=kGrey,thick] (\x-0.5,\y+0.5) -- (\x+0.5,\y-0.5);
+  }
+
+  % border points - connexity
+  %% horizontal
+  \foreach \x/\y in { 4/1,5/1,6/1 }
+  {
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x-1,\y) -- (\x+1,\y);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x-0.5,\y+0.5);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x+0.5,\y+0.5);
+  }
+  \foreach \x/\y in { 4/9,5/9,6/9 }
+  {
+
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x-1,\y) -- (\x+1,\y);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x-0.5,\y-0.5);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x+0.5,\y-0.5);
+  }
+
+  %% vertical
+  \foreach \x/\y in { 1/4,1/5,1/6 }
+  {
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x,\y-1) -- (\x,\y+1);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x+0.5,\y-0.5);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x+0.5,\y+0.5);
+  }
+  \foreach \x/\y in { 9/4,9/5,9/6 }
+  {
+
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,thick] (\x,\y-1) -- (\x,\y+1);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x-0.5,\y-0.5);
+    \draw[color=kGrey,thick] (\x,\y) -- (\x-0.5,\y+0.5);
+  }
+
+  %% Special points
+  \draw[color=kGrey,fill] (7,1) circle (0.5mm);
+  \draw[color=kGrey,fill] (8,2) circle (0.5mm);
+  \draw[color=kGrey,fill] (9,3) circle (0.5mm);
+  \draw[color=kGrey,thick] (7,1) -- (9,3);
+  \draw[color=kGrey,thick] (7,1) -- (6.5,1.5);
+  \draw[color=kGrey,thick] (8,2) -- (7.5,2.5);
+  \draw[color=kGrey,thick] (9,3) -- (8.5,3.5);
+
+  \draw[color=kGrey,fill] (7,9) circle (0.5mm);
+  \draw[color=kGrey,fill] (8,8) circle (0.5mm);
+  \draw[color=kGrey,fill] (9,7) circle (0.5mm);
+  \draw[color=kGrey,thick] (7,9) -- (9,7);
+  \draw[color=kGrey,thick] (7,9) -- (6.5,8.5);
+  \draw[color=kGrey,thick] (8,8) -- (7.5,7.5);
+  \draw[color=kGrey,thick] (9,7) -- (8.5,6.5);
+
+  \draw[color=kGrey,fill] (1,3) circle (0.5mm);
+  \draw[color=kGrey,fill] (2,2) circle (0.5mm);
+  \draw[color=kGrey,fill] (3,1) circle (0.5mm);
+  \draw[color=kGrey,thick] (1,3) -- (3,1);
+  \draw[color=kGrey,thick] (1,3) -- (1.5,3.5);
+  \draw[color=kGrey,thick] (2,2) -- (2.5,2.5);
+  \draw[color=kGrey,thick] (3,1) -- (3.5,1.5);
+
+  \draw[color=kGrey,fill] (1,7) circle (0.5mm);
+  \draw[color=kGrey,fill] (2,8) circle (0.5mm);
+  \draw[color=kGrey,fill] (3,9) circle (0.5mm);
+  \draw[color=kGrey,thick] (1,7) -- (3,9);
+  \draw[color=kGrey,thick] (1,7) -- (1.5,6.5);
+  \draw[color=kGrey,thick] (2,8) -- (2.5,7.5);
+  \draw[color=kGrey,thick] (3,9) -- (3.5,8.5);
+
+  \draw[color=kGrey,fill] (2,3) circle (0.5mm);
+  \draw[color=kGrey,fill] (3,2) circle (0.5mm);
+  \draw[color=kGrey,thick] (1.5,3.5) -- (3.5,1.5);
+  \draw[color=kGrey,thick] (2,3) -- (2.5,3.5);
+  \draw[color=kGrey,thick] (3,2) -- (3.5,2.5);
+  \draw[color=kGrey,thick] (3,2) -- (2,2);
+  \draw[color=kGrey,thick] (3,2) -- (3,1);
+  \draw[color=kGrey,thick] (2,3) -- (1,3);
+  \draw[color=kGrey,thick] (2,3) -- (2,2);
+
+  \draw[color=kGrey,fill] (2,7) circle (0.5mm);
+  \draw[color=kGrey,fill] (3,8) circle (0.5mm);
+  \draw[color=kGrey,thick] (2,7) -- (2.5,6.5);
+  \draw[color=kGrey,thick] (2,7) -- (2,8);
+  \draw[color=kGrey,thick] (2,7) -- (1,7);
+  \draw[color=kGrey,thick] (3.5,8.5) -- (1.5,6.5);
+  \draw[color=kGrey,thick] (3,8) -- (2,8);
+  \draw[color=kGrey,thick] (3,8) -- (3,9);
+  \draw[color=kGrey,thick] (3,8) -- (3.5,7.5);
+
+  \draw[color=kGrey,fill] (7,2) circle (0.5mm);
+  \draw[color=kGrey,fill] (8,3) circle (0.5mm);
+  \draw[color=kGrey,thick] (7,2) -- (6.5,2.5);
+  \draw[color=kGrey,thick] (7,2) -- (8,2);
+  \draw[color=kGrey,thick] (7,2) -- (7,1);
+  \draw[color=kGrey,thick] (8.5,3.5) -- (6.5,1.5);
+  \draw[color=kGrey,thick] (8,3) -- (8,2);
+  \draw[color=kGrey,thick] (8,3) -- (9,3);
+  \draw[color=kGrey,thick] (8,3) -- (7.5,3.5);
+
+  \draw[color=kGrey,fill] (7,8) circle (0.5mm);
+  \draw[color=kGrey,fill] (8,7) circle (0.5mm);
+  \draw[color=kGrey,thick] (7,8) -- (6.5,7.5);
+  \draw[color=kGrey,thick] (7,8) -- (7,9);
+  \draw[color=kGrey,thick] (7,8) -- (8,8);
+  \draw[color=kGrey,thick] (8.5,6.5) -- (6.5,8.5);
+  \draw[color=kGrey,thick] (8,7) -- (8,8);
+  \draw[color=kGrey,thick] (8,7) -- (9,7);
+  \draw[color=kGrey,thick] (8,7) -- (7.5,6.5);
+
+
+\end{tikzpicture}
