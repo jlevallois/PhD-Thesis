@@ -389,7 +389,7 @@ contient des informations sur la géométrie sous-jacente (voir la
 \end{figure}
 
 Cela nécessite de calculer un matrice de covariance ($cov$) sur les cellules de
-Voronoï ($Vor_K$) des points $\vp$ du bord de l'objet :
+Voronoï (${Vor}_K$) des points $\vp$ du bord de l'objet :
 %
 \begin{equation}
     cov(K,\vp) \EqDef \int_K (\vx - \vp)(\vx - \vp)^T d\vx .
@@ -399,7 +399,7 @@ Afin d'avoir une information locale de la variation de la forme, les auteurs se
 limitent à un voisinage de rayon $R$ (voir la \RefFigure{fig:VCM-multiscale-c}) :
 %
 \begin{equation}
-  \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov(Vor_K(\vp) \cap \Ball{R}{\vp}, \vp) .
+  \mathcal{V}_{K,R}(\{\vp\}) \EqDef cov({Vor}_K(\vp) \cap \Ball{R}{\vp}, \vp) .
 \end{equation}
 
 \begin{figure}[ht]{
@@ -420,7 +420,8 @@ version convoluée de \VCM grâce à une fonction indicatrice $\chi_r$
 où $\pi^K(\vx)$ est la projection de tout point $\vx$ vers le point le plus
 proche de $K$. $\chi_r$ peut être une fonction « Ball » ($\chi_r(\vp) = 1$ si
 $\vx$ appartient à $\Ball{r}{\mathbf{0}}$, $0$ sinon) ou encore une fonction «
-Hat » ($\chi_r(\vp) = max(0, r - ||\vp||^2)$).
+Hat » ($\chi_r(\vp) = max(0, r - ||\vp||^2)$). D'autres choix sont bien
+évidemment possible.
 %
 Alors, si $\vp$ est un point lisse de $K$, les valeurs propres de
 $\mathcal{V}_{K,R} \ast \chi_r$ sont proportionnelles à (respectivement) : $1$,
@@ -3041,7 +3042,7 @@ et la normale de la même manière :
       &\PrincDirHS{1}(\DigShape, \vp) &\EqDef \hat{\nu}^{*}_1 \\
       \PrincCurvHS{2}(\DigShape, \vp) &\EqDef \frac{6}{\pi (\rho'(\DigShape))^6}(\hat{\lambda}^{*}_1 - 3\hat{\lambda}^{*}_2) + \frac{8}{5 \rho'(\DigShape)},
       &\PrincDirHS{2}(\DigShape, \vp) &\EqDef \hat{\nu}^{*}_2\\
-      & &\NormalDirHS(\DigShape, \vp) &\EqDef\hat{\nu}^{*}_3\,,
+      & &\NormalDirHS(\DigShape, \vp) &\EqDef\hat{\nu}^{*}_3 \,,
       %
   \end{align}
   %
@@ -3097,7 +3098,7 @@ Supposons alors la conjecture suivante :
   %
   \begin{equation}
     %
-    \forall 0 < h \le h_0,\quad \Theta(h^{\frac{1}{3}}) \le h\rho'(\DigShape) \le \Theta(h^{\frac{1}{3}} \log^2 (\frac{1}{h})) .
+    \forall 0 < h \le h_0,\quad \Theta(h^{\frac{1}{3}}) \le h\rho'(\DigShape) \le \Theta(h^{\frac{1}{3}} \log^2 (\frac{1}{h})) \,.
     %
   \end{equation}
   %
@@ -3140,7 +3141,7 @@ courbure moyenne sans paramètre $\MeanCurvHS$}}
   %
   \begin{align}
     &\forall 0 < h \le h_0, \quad \forall \vx \in \dS, \quad \forall \vp \in \BdZ{\DigShape} \text{~avec~} \| h\vp -\vx\|_\infty \le h, \nonumber\\
-    &\left | \frac{1}{h}\MeanCurvHS(\DigShape,\vp) - \MeanCurv(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) .
+    &\left | \frac{1}{h}\MeanCurvHS(\DigShape,\vp) - \MeanCurv(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) \,.
     %
   \end{align}
   %
@@ -3162,9 +3163,9 @@ $\PrincCurvHS{2}$}}
   constante positive $h_0$, nous avons :
   %
   \begin{align}
-    &\forall 0 < h \le h_0, \quad \forall \vx \in \dS, \quad \forall \vp \in \BdZ{\DigShape} \text{~avec~} \| h\vp -\vx\|_\infty \le h, \nonumber\\
-    &\left | \frac{1}{h}\PrincCurvHS{1}(\DigShape,\vp) - \PrincCurv{1}(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) ,\\
-    &\left | \frac{1}{h}\PrincCurvHS{2}(\DigShape,\vp) - \PrincCurv{2}(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) .
+    &\forall 0 < h \le h_0, \quad \forall \vx \in \dS, \quad \forall \vp \in \BdZ{\DigShape} \text{~avec~} \| h\vp -\vx\|_\infty \le h , \nonumber\\
+    &\left | \frac{1}{h}\PrincCurvHS{1}(\DigShape,\vp) - \PrincCurv{1}(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right),\\
+    &\left | \frac{1}{h}\PrincCurvHS{2}(\DigShape,\vp) - \PrincCurv{2}(\Shape,\vx) \right| \le O\left( h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) \,.
     %
   \end{align}
   %
@@ -3188,7 +3189,7 @@ $\PrincCurvHS{2}$}}
       %
       |\frac{1}{h}\PrincCurvHS{1}(\DigShape, \vp) - \PrincCurv{1}(\Shape, \vx) | =  &| \PrincCurvH{1}{R}(\DSh,\hat{\vx},h) - \PrincCurv{1}(\Shape,\vx) |  \nonumber \\
       & \le O(R) + O( \frac{h}{R^2}) \\
-      & \le O\left(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) + O\left( \frac{h^{\frac{1}{3}}}{\log^4 (\frac{1}{h})} \right)
+      & \le O\left(h^{\frac{1}{3}} \log^2 \left(\frac{1}{h}\right)\right) + O\left( \frac{h^{\frac{1}{3}}}{\log^4 (\frac{1}{h})} \right) \,.
       %
     \end{align}
     %
@@ -3198,7 +3199,11 @@ $\PrincCurvHS{2}$}}
   \log^2 \left(\frac{1}{h}\right)\right)$. Nous avons alors :
   %
   \begin{equation}
-    \Theta(h^{\frac{1}{3}}) \le h{\rho'(\DigShape)} \le \Theta(h^{\frac{1}{3}} \log^2 (\frac{1}{h})) \Implies | \frac{1}{h}\PrincCurvHS{1}(\DigShape, \vp) - \PrincCurv{1}(\Shape, \vx) | \le O(h^{\frac{1}{3}} log^2({\frac{1}{h}})).
+    %
+    \Theta(h^{\frac{1}{3}}) \le h{\rho'(\DigShape)} \le \Theta(h^{\frac{1}{3}}
+    \log^2 (\frac{1}{h})) \Implies | \frac{1}{h}\PrincCurvHS{1}(\DigShape, \vp) -
+    \PrincCurv{1}(\Shape, \vx) | \le O(h^{\frac{1}{3}} log^2({\frac{1}{h}})) \,.
+    %
   \end{equation}
   %
   La démonstration pour $\PrincCurvHS{2}$ est similaire.
@@ -3206,8 +3211,13 @@ $\PrincCurvHS{2}$}}
 \end{proof}
 
 \subsection{Estimateur digital local de courbures sans paramètre en 3D}
-%
-Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de la géométrie de la forme grâce aux longueurs des segments maximaux, et comme en 2D, nous ne pouvons pas espérer de convergence asymptotique à cause du comportement des segments maximaux les plus longs. Cependant, nous pouvons déjà les définir, et nous verrons dans la partie expérimentale du \RefSection{sec:comparaison-courbure} que nous obtenons des convergence.
+
+Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de
+la géométrie de la forme grâce aux longueurs des segments maximaux, et comme en
+2D, nous ne pouvons pas espérer de convergence asymptotique à cause du
+comportement des segments maximaux les plus longs. Cependant, nous pouvons déjà
+les définir, et nous verrons dans la partie expérimentale du
+\RefSection{sec:comparaison-courbure} que nous obtenons des convergence.
 %
 \begin{definition}
   %
@@ -3217,7 +3227,7 @@ Comme en 2D, nous pouvons changer le rayon de la boule localement en fonction de
   %
   \begin{equation}
     %
-    \MeanCurvHSL( \DigShape, \vp ) \EqDef \frac{8}{3 {\rho'(\DigShape, \vp)}} - \frac{4 V_{{\rho'(\DigShape, \vp)}}(\DigShape, \vp)}{\pi{{\rho'(\DigShape, \vp)}}^4} ,
+    \MeanCurvHSL( \DigShape, \vp ) \EqDef \frac{8}{3 {\rho'(\DigShape, \vp)}} - \frac{4 V_{{\rho'(\DigShape, \vp)}}(\DigShape, \vp)}{\pi{{\rho'(\DigShape, \vp)}}^4} \,,
     %
     \label{def:curvature-estimator-3d-mean-pfl}
   \end{equation}
@@ -3308,15 +3318,24 @@ couverture tangentielle de la surface est très rapide.
     \includegraphics[height=4cm]{images/Curvature/Ellipsoid_Radius_2}
   \end{center}}
   %
-  \caption{Répartition du partitionnement du carré des longueurs des segments maximaux en utilisant l'algorithme de $K$-moyennes (avec $K=5$), sur le bord de l'objet \Flower et de l'objet \Ellipsoid
+  \caption{Répartition du partitionnement du carré des longueurs des segments
+  maximaux en utilisant l'algorithme de $K$-moyennes (avec $K=5$), sur le bord
+  de l'objet \Flower et de l'objet \Ellipsoid
   %
   \label{fig:curvature-pfl-map}.}
   %
 \end{figure}
 
-La \RefFigure{fig:curvature-pfl-map} montre la répartition de ces partitions sur deux objets : \Flower pour un objet 2D et \Ellipsoid en 3D.
+La \RefFigure{fig:curvature-pfl-map} montre la répartition de ces partitions sur
+deux objets : \Flower pour un objet 2D et \Ellipsoid en 3D.
 %
-Une comparaison complète de tous les estimateurs présentés dans cette section est disponible dans le \RefSection{sec:comparaison-courbure}. La \RefFigure{fig:mean-curv-different-scale} montre le résultat de l'estimateur digital local sans paramètre $\MeanCurvHSL$ sur des objets de différentes tailles. Nous pouvons alors voir que l'estimateur s'adapte parfaitement à la géométrie locale de la forme et affiche une cohérence de résultat quelque soit l'échelle de l'objet.
+Une comparaison complète de tous les estimateurs présentés dans cette section
+est disponible dans le \RefSection{sec:comparaison-courbure}. La
+\RefFigure{fig:mean-curv-different-scale} montre le résultat de l'estimateur
+digital local sans paramètre $\MeanCurvHSL$ sur des objets de différentes
+tailles. Nous pouvons alors voir que l'estimateur s'adapte parfaitement à la
+géométrie locale de la forme et affiche une cohérence de résultat quelque soit
+l'échelle de l'objet.
 
 \begin{figure}[ht]
 \begin{center}
@@ -3415,7 +3434,7 @@ calculent comme suit :
 %
 \begin{align}
   &|| a - b ||_2 \EqDef \sqrt{(\sum_i(a_i - b_i)^2)} \quad &\text{(norme $l_2$)} \\
-  &|| a - b ||_\infty \EqDef \max(|a - b|) \quad &\text{(norme $l_\infty$)}
+  &|| a - b ||_\infty \EqDef \max(|a - b|) \quad &\text{(norme $l_\infty$)} \,.
 \end{align}
 %
 Nous exportons les résultats sur des graphes dont les échelles sont
@@ -4004,7 +4023,7 @@ nous avons pour le calcul d'aire ou de volume :
   & \AreaC\left(\DSh \cap \Ball{R}{\vx + \vec{\delta}}, h\right) =
   \AreaC\left(\DSh \cap \Ball{R}{\vx}, h\right) \\
   &\quad + \AreaC\left(\DSh \cap (\Ball{R}{\vx + \vec{\delta}} \setminus \Ball{R}{\vx} ), h\right) \\
-  &\quad - \AreaC\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx + \vec{\delta}}),h\right) .
+  &\quad - \AreaC\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx + \vec{\delta}}),h\right) \,.
 \end{align}
 %
 De la même manière, pour les moments :
@@ -4013,7 +4032,7 @@ De la même manière, pour les moments :
   & \DMom{pqs}{h}\left(\DSh \cap \Ball{R}{\vx + \vec{\delta}}, h\right) =
   \DMom{pqs}{h}\left(\DSh \cap \Ball{R}{\vx}, h\right) \\
   &\quad + \DMom{pqs}{h}\left(\DSh \cap ( \Ball{R}{\vx+ \vec{\delta}} \setminus \Ball{R}{\vx} ), h\right)\\
-  &\quad - \DMom{pqs}{h}\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx+ \vec{\delta}} ), h\right) .
+  &\quad - \DMom{pqs}{h}\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx+ \vec{\delta}} ), h\right) \,.
 \end{align}
 %
 Alors, si nous pré-calculons tous les supports de déplacement
