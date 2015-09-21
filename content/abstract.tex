@@ -5,22 +5,32 @@
 \label{sec:abstract}
 \vspace*{-10mm}
 
-For several years, laboratories rely on scanners to capture the world around us,
-barely visible to the naked eye, with high accuracy. With the X-ray tomography,
-for example, we get a set of data organized on a regular grid, which we call
-digital data. Specifically, pixels in 2D and 3D voxel. These raw data need to be
-analyzed in order to exploit their fair value.
+3D image acquisition devices are now ubiquitous in many domains of science,
+including biomedical imaging, material science, or manufacturing. Most of these
+devices (MRI, scanner X, micro-tomography, confocal microscopy, PET scans)
+produce a set of data organized on a regular grid, which we call digital data,
+commonly called pixels in 2D images and voxels in 3D images. Properly processed,
+these data approach the geometry of imaged shapes, like organs in biomedical
+imagery or objects in engineering.
 
-In this thesis, we focus on extracting differential quantities as the curvature
-or the surface normal vectors of the object. These quantities are the basis of
-several applications such as surface reconstruction or objects comparison. We
-focus on the proof of convergence of these estimators, ensuring the quality of
-the results. More precisely, when the resolution of the discretization of the
-object increases, we want an estimation more accurate.
+In this thesis, we are interested in extracting the geometry of such digital
+data, and, more precisely, we focus on approaching geometrical differential
+quantities such as the curvature of these objects. These quantities are the
+critical ingredients of several applications like surface reconstruction or
+object recognition, matching or comparison. We focus on the proof of multigrid
+convergence of these estimators, which in turn guarantees the quality of
+estimations. More precisely, when the resolution of the acquisition device is
+increased, our geometric estimates are more accurate. Our method is based on
+integral invariants and on digital approximation of volumetric integrals.
 
-Finally, we present a surface classification method for extracting the features,
-again in the middle of several applications such as compression of objects. All
-these methods are applied to Snow Microstructures from X-ray tomography.
+Finally, we present a surface classification method, which analyzes digital data
+in a multiscale framework and classifies surface elements into three categories:
+smooth part, planar part, and singular part (tangent discontinuity). Such
+feature detection is used in several geometry pipelines, like mesh compression
+or object recognition. The stability to parameters and the robustness to noise
+are evaluated with respect to state-of-the-art methods. All our tools for
+analyzing digital data are applied to 3D X-ray tomography of snow
+microstructures and their relevance is evaluated and discussed.
 
 \vspace*{20mm}
 
@@ -28,23 +38,35 @@ these methods are applied to Snow Microstructures from X-ray tomography.
 \label{sec:abstract-french}
 \vspace*{5mm}
 
-Depuis plusieurs années, les laboratoires font appel à des scanners pour
-capturer le monde qui nous entoure, difficilement visible à l'œil nu, avec une
-grande précision. Avec la tomographie à rayons X par exemple, nous obtenons un
-ensemble de données organisées sur une grille régulière, que nous appellerons
-données digitales. Concrètement, des pixels en 2D et des voxels en 3D. Ces
-données brutes nécessitent d'être analysées afin de pouvoir les exploiter à leur
-juste valeur.
+Les appareils d'acquisition d'images 3D sont désormais omniprésent dans
+plusieurs domaines scientifiques, dont l'imagerie biomédicale, la science des
+matériaux ou encore l'industrie. La plupart de ces appareils (IRM, scanners à
+rayons X, micro-tomographes, microscopes confocal, PET scans) produisent un
+ensemble de données organisées sur une grille régulière que nous nommerons des
+données digitales, plus courament des pixels sur des images 2D et des voxels sur
+des images 3D. Lorsqu'elles sont bien récupérées ces données approchent la
+géométrie de la forme capturée, comme des organes en imagerie biomédicale ou des
+objets dans l'ingénierie.
 
-Dans cette thèse, nous nous intéressons à extraire des quantités différentielles
-comme la courbure ou encore les normales à la surface de l'objet. Ces quantités
-sont à la base de plusieurs applications comme la reconstruction de surface ou
-encore la comparaison d' objets. Nous nous focalisons sur la preuve de
-convergence de ces estimateurs, garantissant ainsi la qualité des résultats.
-Plus précisément, lorsque la résolution de la discrétisation de l'objet
-augmente, nous voulons des estimations de plus en plus précise.
+Dans cette thèse, nous nous sommes intéressés à l'extraction de la géométrie sur
+ces données digitales, et plus, précisement, nous nous concentrons à nous
+approcher des quantités geométriques différentielles comme la courbure de ces
+objets. Ces quantités sont les ingrédients critiques de plusieurs applications
+comme la reconstruction de surface ou la reconnaissance, la correspondance ou la
+comparaison de surfaces. Nous nous focalisons également sur les preuves de
+convergence asymptotique de ces estimateurs, qui garantissent en quelque sorte
+la qualité de l'estimation. Plus précisement, lorsque la résolution de
+l'appareil d'acquisition est augmenté, notre estimation géométrique est plus
+précise. Notre méthode est basée sur les invariants par intégration et sur
+l'approximation digitale des intégrations volumiques.
 
-Enfin, nous présentons une méthode de classification de la surface permettant
-d'extraire les zones caractéristiques, encore une fois au cœur de plusieurs
-applications comme la compression d'objets. Toutes ces méthodes sont appliquées à
-des microstructures de neige issues de tomographes à rayons X.
+Enfin, nous présentons une méthode de classification de la surface, qui analyse
+les données digitales dans un système à plusieurs échelles et classifie les
+éléments de surface en trois catégories : les parties lisses, les parties
+planes, et les parties singuières (discontinuité de la tangente). Ce genre de
+détection de points caractéristiques est utilisé dans plusieurs algorithmes
+géométriques, comme la compression de maillage ou la reconnaissance d'objet. La
+stabilité aux paramètres et la robustesse au bruit sont évaluées en fonction des
+méthodes de la littérature. Tous nos outils pour l'analyse de données digitales
+sont appliqués à des micro-structures de neige provenant d'un tomographe à
+rayons X, et leur intéret est évalué et discuté.
