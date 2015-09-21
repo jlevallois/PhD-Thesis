@@ -15,7 +15,7 @@ Recherches Météorologiques.
 
 L'objectif principal de ce projet est de fournir des outils efficaces pour
 étudier la métamorphose de la neige à partir d'images digitales 3D
-(\RefFigure{fig:digitalSnow-curv}, en haut) de
+(\RefFigureN{fig:digitalSnow-curv}, en haut) de
 %
 \begin{wrapfigure}[11]{r}[0.2cm]{4cm}
 	\includegraphics[width=4cm]{images/digitalSnow/YTEjpE}
@@ -33,21 +33,40 @@ décomposée en deux types : la métamorphose de la « neige humide » provoqué
 la présence d'eau liquide, la métamorphose de la « neige sèche » (métamorphose
 d'isothermie et métamorphose du gradient de température).
 
+\begin{figure}[ht]
+    \begin{center}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/SnowE2_DigitalData}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/SnowI08_DigitalData}\\
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/snowE2mean_0001}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/snowI08mean_0001}
+    \end{center}
+    \caption{\emph{Première ligne :} Micro-structures de neige.
+						 \emph{Seconde ligne :} Courbure moyenne sur ces échantillons de neige. La valeur de courbure va du bleu au jaune.
+						 \label{fig:digitalSnow-curv}}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/E2bis-prindir-bleu}
+		\includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/I08prindir}\\
+		\includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/E2bis-prindir-rouge}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6.7cm]{images/digitalSnow/I08prindir2}
+    \end{center}
+		%
+    \caption{Zoom sur les premières directions principales de courbure
+    (\emph{première ligne}) et secondes directions princpales de courbure
+    (\emph{seconde ligne}) sur des échantillons de neige.
+    \label{fig:digitalSnow-princdir}}
+		%
+\end{figure}
 
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/SnowE2_DigitalData}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/SnowI08_DigitalData}\\
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/snowE2mean_0001}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/snowI08mean_0001}\\
-    % \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08gaussian_0001}\\
-    \includegraphics[width=6cm]{images/digitalSnow/Snow_E2bis_II_scale}
-    \includegraphics[width=6cm]{images/digitalSnow/Snow_I08_II_scale}\\
+    \includegraphics[width=6.7cm]{images/digitalSnow/Snow_E2bis_II_scale}
+    \includegraphics[width=6.7cm]{images/digitalSnow/Snow_I08_II_scale}\\
     \end{center}}
-    \caption{\emph{Première ligne :} Micro-structures de neige.\\
-						 \emph{Seconde ligne :} Courbure moyenne sur ces échantillons de neige. La valeur de courbure va du bleu au jaune.\\
-						 \emph{Troisième ligne :} Détection de singularités (\emph{en rouge}), de parties $C^3$ (\emph{en bleu}) et de parties à courbure nulle (\emph{en vert}) sur ces échantillons de neige.\\
-      \label{fig:digitalSnow-curv}}
+    \caption{Détection de singularités (\emph{en rouge}), de parties $C^3$ (\emph{en bleu}) et de parties à courbure nulle (\emph{en vert}) sur les échantillons de neige.
+      \label{fig:digitalSnow-sing}}
 \end{figure}
 
 Dans des conditions polaires ou montagneuses, ces effets sont suivis par des
@@ -56,26 +75,27 @@ couches supérieures de neige. En particulier, notre travail se concentre sur le
 développement de modèles numériques 3D à partir d'images pour simuler
 l'évolution de la forme de la microstructure de la neige au cours de son
 métamorphisme. Le calcul de courbure moyenne sur les volumes digitaux
-(\RefFigure{fig:digitalSnow-curv}, au milieu) permet tout d'abord de
-caractériser le volume des grains de neige. En l'absence de gradient de
-température dans le manteau neigeux, les grains grossissent et s'arrondissent
-lentement, principalement guidé par un flot de courbure moyenne sur l'interface
-(Effet de Kelvin). Cependant, en présence d'un gradient de température, les
-cristaux croissent suivant leurs axes cristallographiques privilégiés et forment
-des facettes. Nous pouvons également détecter ces facettes grâces à l'estimateur
-de singularité dont nous avons décrit dans ce chapitre. La
-\RefFigure{fig:digitalSnow-curv} en bas montre deux captures de microstructures
-de neige à différents moments. Il est alors immédiat que les grains de neige de
+(\RefFigure{fig:digitalSnow-curv}, en bas) permet tout d'abord de caractériser
+le volume des grains de neige. En l'absence de gradient de température dans le
+manteau neigeux, les grains grossissent et s'arrondissent lentement,
+principalement guidé par un flot de courbure moyenne sur l'interface (Effet de
+Kelvin). Cependant, en présence d'un gradient de température, les cristaux
+croissent suivant leurs axes cristallographiques privilégiés et forment des
+facettes. Nous pouvons également détecter ces facettes grâces à l'estimateur de
+singularité dont nous avons décrit dans ce chapitre. La
+\RefFigure{fig:digitalSnow-sing} montre deux captures de microstructures de
+neige à différents moments. Il est alors immédiat que les grains de neige de
 gauche présentent plus de facettes que ceux de droite. De plus, l'estimation de
 la courbure permet de simuler certains métamorphoses de neige : les zones
 convexes ont tendance à se sublimer tandis que la vapeur se condense dans les
-zones concaves. Notre rôle était d'apporter des estimateurs de courbure fiables
-(c'est à dire avec des preuves de convergence), ce que nous avons fait avec les
-estimateurs décrits dans le \RefChapitre{sec:estimators}. Ces estimateurs sont
-actuellement utilisés et répondent aux attentes des partenaires du projet
-\digitalSnow, tout en étant robustes au bruit lié à l'acquisition par le
-tomographe à rayons X. Nous avons également proposé l'estimation de singularités
-permettant de détecter les facettes des grains de neige (voir le
+zones concaves. Notre rôle était d'apporter des estimateurs de courbure et de
+directions principales de courbure (\RefFigure{fig:digitalSnow-princdir})
+fiables (c'est à dire avec des preuves de convergence), ce que nous avons fait
+avec les estimateurs décrits dans le \RefChapitre{sec:estimators}. Ces
+estimateurs sont actuellement utilisés et répondent aux attentes des partenaires
+du projet \digitalSnow, tout en étant robustes au bruit lié à l'acquisition par
+le tomographe à rayons X. Nous avons également proposé l'estimation de
+singularités permettant de détecter les facettes des grains de neige (voir le
 \RefSection{sec:applications:feature}).
 
 \section{Implémentations dans DGtal}%
@@ -172,5 +192,8 @@ déplacements supplémentaires d'environ $\nombre{450}$ éléments.
 Tous les estimateurs de courbure et de singularité conçus pendant cette thèse et
 décris dans le \RefChapitre{sec:estimators} et ce chapitre ont été implémentés
 dans \DGtal et sont dès à présent disponible librement. Tous les résultats
-exposés dans ce document sont reproductibles directement avec les outils de \DGtal. Pour plus d'informations, se référer à la documentation de \DGtal\footnote{Documentation du paquet « Géométrie » :
-\url{http://liris.cnrs.fr/dgtal/doc/stable/packageGeometry.html}} et à \cite{Coeurjolly2013Implementation}.
+exposés dans ce document sont reproductibles directement avec les outils de
+\DGtal. Pour plus d'informations, se référer à la documentation de
+\DGtal\footnote{Documentation du paquet « Géométrie » :
+\url{http://liris.cnrs.fr/dgtal/doc/stable/packageGeometry.html}} et à
+\cite{Coeurjolly2013Implementation}.
