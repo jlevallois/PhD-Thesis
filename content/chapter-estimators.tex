@@ -1995,7 +1995,7 @@ Nous devons également étudier comment les moments sont perturbés par une erre
   \begin{center}
     \setlength{\tabcolsep}{0.0pt}
     \begin{tabular}{@{}c c@{}}
-      \begin{overpic}[width=5cm]{figures/momentsPerturbation}
+      \begin{overpic}[width=6.5cm]{figures/momentsPerturbation}
         \put(51,27){$\vx$}
         \put(40,40){$\vx+\vt$}
         \put(5,70){$\Ball{R}{\vx+\vt}$}
@@ -2004,7 +2004,7 @@ Nous devons également étudier comment les moments sont perturbés par une erre
         \put(22,18){\tiny$(\Ball{R}{\vx+\vt} \setminus \Ball{R}{\vx} )\cap \Shape$}
       \end{overpic}
       &
-      \begin{overpic}[width=5cm]{figures/momentsPerturbation2}
+      \begin{overpic}[width=6.5cm]{figures/momentsPerturbation2}
         \put(51,32){$\vx$}
         \put(40,45){$\vx+\vt$}
         \put(5,73){$\Ball{R}{\vx+\vt}$}
@@ -2822,13 +2822,10 @@ adapté localement à la géométrie de la forme.
   \caption{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
   l'objet \textsc{AccFlower} allant du bleu (valeur minimale) au jaune (valeur
   maximale). \emph{En abscisse :} position sur la surface de l'objet, \emph{en
-  ordonnée :} différents rayons $R$.
-  %
-  \\
-  %
-  \emph{En noir sur l'image du haut :} rayon choisi par l'estimateur $\CurvHS$.
-  \emph{En noir sur l'image du bas :} différents rayons choisis par l'estimateur
-  $\CurvHSL$ en fonction de la géométrie locale de la forme.
+  ordonnée :} différents rayons $R$. \emph{En noir sur l'image du haut :} rayon
+  choisi par l'estimateur $\CurvHS$. \emph{En noir sur l'image du bas :}
+  différents rayons choisis par l'estimateur $\CurvHSL$ en fonction de la
+  géométrie locale de la forme.
   %
   \label{fig:curvature-pf-radii}}
   %
@@ -3274,14 +3271,8 @@ les définir, et nous verrons dans la partie expérimentale du
   \caption{Valeur de courbure estimée en fonction du rayon $R$ sur le bord de
   l'objet \textsc{AccFlower} allant du bleu (valeur minimale) au jaune (valeur
   maximale). \emph{En abscisse :} position sur la surface de l'objet, \emph{en
-  ordonnée :} différents rayons $R$.
-  %
-  \\
-  %
-  % \emph{En noir sur l'image du haut :} différents rayons choisis par
-  % l'estimateur $\CurvHSL$ en fonction de la géométrie locale de la forme.
-  \emph{En noir sur l'image :} $K = 5$ rayons choisis l'algorithme de
-  $K$-moyenne avec les rayons de $\CurvHSL$.
+  ordonnée :} différents rayons $R$. \emph{En noir sur l'image :} $K = 5$ rayons
+  choisis l'algorithme de $K$-moyenne avec les rayons de $\CurvHSL$.
   %
   \label{fig:curvature-pfl-radii}}
   %
@@ -3956,16 +3947,18 @@ inférieure à celles de $\CurvHS$ et $\CurvH{R}$, grâce à la nature adaptativ
 cet estimateur, ce qui était l'objectif visé. Nous remarquons également de très bonnes précisions
 asymptotiques des résultats des estimateurs $\CurvHSLK{5}$, $\CurvHSLK{10}$ et
 $\CurvHSLK{50}$, même lorsque le nombre de partitions est faible.
-%
+
 \paragraph{Convergence expérimentale des estimateurs digitaux de courbure en 3D}
-%
-Nous avons également comparé expérimentalement nos estimateurs digitaux de
-courbures moyenne $\MeanCurvH{R}$ et de courbures principales
-$\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ avec l'estimateur \JetFitting
-\cite{Cazals2005}\footnote{Nous utilisons le même voisinage que pour notre
-estimateur.} décrit dans la \RefSection{sec:estimators:SOTA}, avec les métriques
-$l_2$ et $l_\infty$ sur les objets \Sphere
-(\RefFigure{fig:curv-experiments-sphere}), \RoundedCube
+
+Tout d'abord, la \RefFigure{fig:sexy-pic} montre le résultat de l'estimateur
+$\MeanCurvH{R}$ sur plusieurs objets courant de la littérature : \Bunny,
+\Armadillo, \Dragon, \Lucy et \AsianDragon. Nous avons également comparé
+expérimentalement nos estimateurs digitaux de courbures moyenne $\MeanCurvH{R}$
+et de courbures principales $\PrincCurvH{1}{R}$ et $\PrincCurvH{2}{R}$ avec
+l'estimateur \JetFitting \cite{Cazals2005}\footnote{Nous utilisons le même
+voisinage que pour notre estimateur.} décrit dans la
+\RefSection{sec:estimators:SOTA}, avec les métriques $l_2$ et $l_\infty$ sur les
+objets \Sphere (\RefFigure{fig:curv-experiments-sphere}), \RoundedCube
 (\RefFigure{fig:curv-experiments-rounded}) et \Goursat
 (\RefFigure{fig:curv-experiments-goursat}). Nous observons que \JetFitting
 obtient de meilleurs résultats sur \Sphere pour la courbure moyenne et les
@@ -3982,6 +3975,28 @@ cette échelle, le bord de l'objet digital \RoundedCube contient
 $\nombre{1125222}$ éléments.
 
 
+\begin{figure}[ht]{
+  \begin{center}
+      \includegraphics[width=6.7cm]{images/Curvature/ii_grid}
+      \includegraphics[width=6.7cm]{images/Curvature/ii_arma} \\
+      \includegraphics[width=6.7cm]{images/Curvature/ii_dragon512}
+      \includegraphics[width=6.7cm]{images/Curvature/ii_lucy} \\
+      \includegraphics[width=6.7cm]{images/Curvature/ii_xyz512}
+      \includegraphics[width=6.7cm]{images/Curvature/ii_xyzpindir1-large}
+  \end{center}
+      }
+      \caption{
+      %
+      Courbure moyenne estimée avec $\MeanCurvH{R}$ sur des objets courant de la
+      littérature (\Bunny, \Armadillo, \Dragon, \Lucy, \AsianDragon), avec
+      $R=15$. L'image en bas à droite représente les premières directions
+      principales de courbure estimées avec $\PrincDirH{1}{R}$ sur l'objet
+      \AsianDragon.
+      %
+      \label{fig:sexy-pic}}
+\end{figure}
+
+
 Comme en 2D, nous avons testé expérimentalement les versions sans paramètre de
 nos estimateurs de courbure moyenne et de courbures principales $\MeanCurvHS$,
 $\PrincCurvHS{1}$ et $\PrincCurvHS{2}$, ainsi que les variantes adaptant le
@@ -3994,10 +4009,10 @@ même lorsque le nombre de rayons possibles est bas. En ce qui concerne la vites
 de convergence de l'erreur $l_\infty$ des estimateurs $\MeanCurvHS$,
 $\PrincCurvHS{1}$ et $\PrincCurvHS{2}$, ceux-ci semblent expérimentalement
 suivre la vitesse espérée en $O(h^\frac{1}{3})$.
-%
+
 \paragraph{Complexité et temps de calcul}
 \label{sec:complexite}
-%
+
 Un des éléments qui peut être important dans le choix d'un estimateur est son
 temps de calcul. En fonction de l'utilisation que nous souhaitons en faire, il
 peut être judicieux de connaître le comportement d'un estimateur face à des
@@ -4082,14 +4097,12 @@ des temps de calcul de $\CurvHS$ et $\CurvH{R}$.
 En 3D, alors que les vitesses de convergence asymptotiques entre \JetFitting et
 nos estimateurs sont similaires, nous pouvons observer que nos estimateurs sont
 environ $10$ fois plus rapides que notre implémentation de \JetFitting (\CGal \cite{CGal}).
-%
+
 \subsection{Robustesse au bruit}
 \label{sec:kanungo-noise}
-%
+
 Grâce à l'approche par intégration de volume de nos estimateurs, nous pouvons
 espérer une robustesse aux bruits et aux données aberrantes (\anglais{outliers}).
-
-
 Définissons dans un premier temps le modèle de bruit utilisé dans nos
 expérimentations. Nous utilisons le modèle de bruit \Kanungo \cite{Kanungo1996}
 sur les contours des objets digitaux. Ainsi, pour une taille de bruit $t \in
@@ -4202,10 +4215,9 @@ d'une analyse en composante principale (\ACP) sur un ensemble de points, ce qui
 produit des statistiques robustes. En conclusion, expérimentalement, nos
 estimateurs semblent assez robuste au bruit de \Kanungo.
 
-%
 \section{Conclusion}
 \label{sec:estimators:conclusion}
-%
+
 Nous avons présenté dans ce chapitre un ensemble d'estimateurs de courbure,
 courbure moyenne, courbures principales, directions principales de courbures et
 normale basés sur le principe d'intégration d'invariants sur des formes de

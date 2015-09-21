@@ -1,6 +1,6 @@
 % !TEX root = ../main.tex
 %
-\section{Application dans digitalSnow}%
+\section{Application dans le contexte du projet \digitalSnow}%
 \label{sec:applications:digitalsnow}
 %
 Le projet \digitalSnow\footnote{ANR-11-BS02-009,
@@ -22,7 +22,7 @@ L'objectif principal de ce projet est de fournir des outils efficaces pour
 \end{wrapfigure}
 %
 micro-structures de neige acquises en utilisant des techniques de tomographie à
-rayons X (image de droite\footnote{Crédit image : laboratoire 3SR}). En effet,
+rayons X (image de droite\footnote{Crédit image : laboratoires 3SR / MétéoFrance / CEN - CNRM GAME}). En effet,
 lors d'une chute de neige, les cristaux de neige s'accumulent sur le sol et
 forment progressivement un milieu poreux complexe constitué d'air, de vapeur
 d'eau, de glace et parfois d'eau liquide. La quantité de ces composants et leur
@@ -36,13 +36,13 @@ d'isothermie et métamorphose du gradient de température).
 
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/SnowE2_DigitalData}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/SnowI08_DigitalData}\\
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowE2mean_0001}
-    \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08mean_0001}\\
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/SnowE2_DigitalData}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/SnowI08_DigitalData}\\
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/snowE2mean_0001}
+    \includegraphics[trim={17cm 0 13cm 0},clip,width=6cm]{images/digitalSnow/snowI08mean_0001}\\
     % \includegraphics[trim={17cm 0 13cm 0},clip,width=4.5cm]{images/digitalSnow/snowI08gaussian_0001}\\
-    \includegraphics[width=4.5cm]{images/digitalSnow/Snow_E2bis_II_scale}
-    \includegraphics[width=4.5cm]{images/digitalSnow/Snow_I08_II_scale}\\
+    \includegraphics[width=6cm]{images/digitalSnow/Snow_E2bis_II_scale}
+    \includegraphics[width=6cm]{images/digitalSnow/Snow_I08_II_scale}\\
     \end{center}}
     \caption{\emph{Première ligne :} Micro-structures de neige.\\
 						 \emph{Seconde ligne :} Courbure moyenne sur ces échantillons de neige. La valeur de courbure va du bleu au jaune.\\
@@ -70,8 +70,13 @@ gauche présentent plus de facettes que ceux de droite. De plus, l'estimation de
 la courbure permet de simuler certains métamorphoses de neige : les zones
 convexes ont tendance à se sublimer tandis que la vapeur se condense dans les
 zones concaves. Notre rôle était d'apporter des estimateurs de courbure fiables
-(c'est à dire avec des preuves de convergence) mais également robuste au bruit
-lié à l'acquisition par le tomographe à rayons X.
+(c'est à dire avec des preuves de convergence), ce que nous avons fait avec les
+estimateurs décrits dans le \RefChapitre{sec:estimators}. Ces estimateurs sont
+actuellement utilisés et répondent aux attentes des partenaires du projet
+\digitalSnow, tout en étant robustes au bruit lié à l'acquisition par le
+tomographe à rayons X. Nous avons également proposé l'estimation de singularités
+permettant de détecter les facettes des grains de neige (voir le
+\RefSection{sec:applications:feature}).
 
 \section{Implémentations dans DGtal}%
 \label{sec:applications:dgtal}
