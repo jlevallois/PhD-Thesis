@@ -20,6 +20,24 @@
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<!--MathJax-->
+	  <script type="text/x-mathjax-config">
+	    MathJax.Hub.Config({
+	      TeX: {
+	        extensions: ["color.js","tex2jax.js"],
+	        Macros: {
+	          Shape: 'X'
+	        },
+	        tex2jax: {
+	          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+	          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+	          processEscapes: true
+	        }
+	      },
+	      skipStartupTypeset: true
+	    });
+	  </script>
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -45,6 +63,14 @@
 					<h3>The HTML Presentation Framework</h3>
 					<p>
 						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						\(
+							%%%% If you see this, MathJax wasn't loaded ...
+							\definecolor{myred}{RGB}{231,76,60}
+							\definecolor{mygreen}{RGB}{38,166,115}
+							\definecolor{myblue}{RGB}{38,89,166}
+							\definecolor{mygrey}{RGB}{101,123,131}
+							\definecolor{mynormal}{RGB}{41,128,185}
+						 \)
 					</p>
 				</section>
 
@@ -399,7 +425,8 @@ Reveal.addEventListener( 'customevent', function() {
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+        	{ src: 'plugin/math/math.js', async: true }
 				]
 			});
 
