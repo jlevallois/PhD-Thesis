@@ -2561,6 +2561,11 @@
 				case 'c':
 					value.push( getSlidePastCount() + 1 );
 					break;
+				case 'h.v/t':
+					if( isVerticalSlide() && indexv > 0 ) value.push( (indexh + 1) + '.' + indexv );
+					else value.push( indexh + 1);
+					value.push( '/', getTotalSlidesLevelOne() );
+					break;
 				case 'c/t':
 					value.push( getSlidePastCount() + 1, '/', getTotalSlides() );
 					break;
@@ -3337,6 +3342,15 @@
 	function getTotalSlides() {
 
 		return dom.wrapper.querySelectorAll( SLIDES_SELECTOR + ':not(.stack)' ).length;
+
+	}
+
+	/**
+	 * Retrieves the total number of slides in first level in this presentation.
+	 */
+	function getTotalSlidesLevelOne() {
+
+		return dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ).length;
 
 	}
 
@@ -4578,6 +4592,8 @@
 		getIndices: getIndices,
 
 		getTotalSlides: getTotalSlides,
+
+		getTotalSlidesLevelOne:getTotalSlidesLevelOne,
 
 		// Returns the slide element at the specified index
 		getSlide: getSlide,
