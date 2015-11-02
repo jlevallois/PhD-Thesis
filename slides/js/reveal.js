@@ -27,6 +27,7 @@
 
 	var SLIDES_SELECTOR = '.slides section',
 		HORIZONTAL_SLIDES_SELECTOR = '.slides>section',
+		MENU_SLIDES_SELECTOR = '.slides>section[slide-title]',
 		VERTICAL_SLIDES_SELECTOR = '.slides>section.present>section',
 		HOME_SLIDE_SELECTOR = '.slides>section:first-of-type',
 
@@ -469,9 +470,17 @@
 		dom.slideNumber = createSingletonNode( dom.wrapper, 'div', 'slide-number', '' );
 
 		// Chapter name
-		dom.chapterName = createSingletonNode( dom.wrapper, 'div', 'chapterName', '' );
-		dom.chapterName.innerHTML = "TITRE";
-		dom.chapterName.style.marginLeft = "150px";
+		dom.chapterList = [];
+		var index_menu = 0;
+		toArray( dom.wrapper.querySelectorAll( SLIDES_SELECTOR ) ).forEach( function( hslide, h ) {
+			if( hslide.hasAttribute( 'slide-title' ) ) {
+				console.log(hslide.getAttribute("slide-title"));
+				console.log(index_menu);
+				dom.chapterList[index_menu] = createNode( dom.wrapper, 'div', 'chapterName', hslide.getAttribute("slide-title") );
+				dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
+				index_menu += 1;
+			}
+		} );
 
 		// Element containing notes that are visible to the audience
 		dom.speakerNotes = createSingletonNode( dom.wrapper, 'div', 'speaker-notes', null );
@@ -668,6 +677,22 @@
 		}
 
 		// If no node was found, create it now
+		var node = document.createElement( tagname );
+		node.classList.add( classname );
+		if( typeof innerHTML === 'string' ) {
+			node.innerHTML = innerHTML;
+		}
+		container.appendChild( node );
+
+		return node;
+
+	}
+
+	/**
+	 * Creates an HTML element and returns a reference to it.
+	 */
+	function createNode( container, tagname, classname, innerHTML ) {
+
 		var node = document.createElement( tagname );
 		node.classList.add( classname );
 		if( typeof innerHTML === 'string' ) {
@@ -2605,10 +2630,6 @@
 
 	}
 
-	function formatChapterName( name ) {
-		return name;
-	}
-
 	/**
 	 * Updates the state of all control/navigation arrows.
 	 */
@@ -3170,6 +3191,35 @@
 		// The number of past and total slides
 		var totalCount = getTotalSlides();
 		var pastCount = getSlidePastCount();
+
+		if( currentSlide ) {
+
+			var allFragments = currentSlide.querySelectorAll( '.fragment' );
+
+			// If there are fragments in the current slide those should be
+			// accounted for in the progress.
+			if( allFragments.length > 0 ) {
+				var visibleFragments = currentSlide.querySelectorAll( '.fragment.visible' );
+
+				// This value represents how big a portion of the slide progress
+				// that is made up by its fragments (0-1)
+				var fragmentWeight = 0.9;
+
+				// Add fragment progress to the past slide count
+				pastCount += ( visibleFragments.length / allFragments.length ) * fragmentWeight;
+			}
+
+		}
+
+		return pastCount / ( totalCount - 1 );
+
+	}
+
+	function getProgressTitle( slideNumber ) {
+
+		// The number of past and total slides
+		var totalCount = getTotalSlides();
+		var pastCount = slideNumber;
 
 		if( currentSlide ) {
 

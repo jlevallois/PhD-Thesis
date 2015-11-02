@@ -61,55 +61,71 @@
 			<section>
 				<h1 style="-webkit-hyphens:none;-moz-hyphens:none;hyphens:none;"><strong>Estimateurs différentiels</strong> en géométrie discrète:<br />
 					applications à l'analyse de <strong>surfaces digitales</strong></h1>
-					<h3>Jérémy Levallois<sup style="font-size:50%;">1,2</sup>, David Coeurjolly<sup style="font-size:50%;">1</sup>,<br/> and Jacques-Olivier Lachaud<sup style="font-size:50%;">2</sup></h3>
+					<h3>Jérémy Levallois</h3>
 					<p>
-						<small><sup>1-</sup>Université de Lyon, CNRS/LIRIS, UMR5205, F-69621, France<br />
-							<sup>2-</sup>Université de Savoie, CNRS/LAMA, UMR5127, F-73776, France</small>
-						</p>
-						<footer>
-							\(
-							%%%% If you see this, MathJax wasn't loaded ...
-							\definecolor{myred}{RGB}{231,76,60}
-							\definecolor{mygreen}{RGB}{38,166,115}
-							\definecolor{myblue}{RGB}{38,89,166}
-							\definecolor{mygrey}{RGB}{101,123,131}
-							\definecolor{mynormal}{RGB}{41,128,185}
-							\)
-							<img src="img/logo/logo_liris.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_lama.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_anr.svg" width="150" class="imgNoBorder" />
-						</footer>
-					</section>
+						<small>
+							Université de Lyon, CNRS/LIRIS, UMR5205, F-69621, France<br />
+							Université de Savoie, CNRS/LAMA, UMR5127, F-73776, France
+						</small>
+					</p>
+					<footer>
+						\(
+						%%%% If you see this, MathJax wasn't loaded ...
+						\definecolor{myred}{RGB}{231,76,60}
+						\definecolor{mygreen}{RGB}{38,166,115}
+						\definecolor{myblue}{RGB}{38,89,166}
+						\definecolor{mygrey}{RGB}{101,123,131}
+						\definecolor{mynormal}{RGB}{41,128,185}
+						\)
+						<img src="img/logo/logo_liris.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_lama.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_anr.svg" width="150" class="imgNoBorder" />
+					</footer>
+				</section>
 
-					<section>
-						<h2>Géométrie discrète ? Surfaces digitales ?</h2>
+				<section>
+					<h2>Géométrie discrète ? Surfaces digitales ?</h2>
+					<div style="float:left;height:550px;">
+						<img src="img/bunny-real.png" height="200px" class="imgNoBorder" style="margin-top:175px;" />
+					</div>
+					<div style="float:right;height:550px;display:inline-block;">
+						<img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points<br />
+						<img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé<br/>
+						<img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales
+					</div>
+				</section>
 
-						<div style="float:left;height:550px;"><img src="img/bunny-real.png" height="200px" class="imgNoBorder" style="margin-top:175px;" /></div>
-						<div style="float:right;height:550px;display:inline-block;"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points<br />
-							<img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé<br/>
-							<img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
+				<section>
+					<h2>Données digitales</h2>
+					<div style="float:left;">
+						<img src="img/Snow_NoColor.png" height="250" class="imgNoBorder" alt="Snow sans couleur" />
+					</div>
+					<div style="float:left;">
+						<img src="img/feature/OctaFlower_noise_zoom2.png" height="250" class="imgNoBorder" />
+					</div>
+					<div style="float:right;">
+						<ul style="font-size:75%;">
+							<li>Surface isotétique<br/>(ensemble de pixels/voxels)</li>
+							<li>bruit arithmétique</li>
+						</ul>
+					</div>
+					<p style="clear:both; text-align:center;">
+						<strong>Pourquoi utiliser des données digitales ?</strong>
+					</p>
 
-						</section>
+					<div style="float:left;font-size:90%;">
+						&#8594; Résultat direct de scanners (tomographie à rayons X)
+					</div>
+					<div style="float:left;font-size:90%;">
+						&#8594; Convergence asymptotique des quantités estimées
+					</div>
+				</section>
 
-						<section>
-							<h2>Données digitales</h2>
+				<section class="todo">
+					<h1>Curvature</h1>
+				</section>
 
-							<div style="float:left;"><img src="img/Snow_NoColor.png" height="250" class="imgNoBorder" alt="Snow sans couleur" /></div>
-							<div style="float:left;"><img src="img/feature/OctaFlower_noise_zoom2.png" height="250" class="imgNoBorder" /></div>
-							<div style="float:right;">
-								<ul style="font-size:75%;">
-									<li>Surface isotétique<br/>(ensemble de pixels/voxels)</li>
-									<li>bruit arithmétique</li>
-								</ul>
-							</div>
-
-							<p style="clear:both; text-align:center;"><strong>Pourquoi utiliser des données digitales ?</strong></p>
-
-							<div style="float:left;font-size:90%;">&#8594; Résultat direct de scanners (tomographie à rayons X)</div>
-							<div style="float:left;font-size:90%;">&#8594; Convergence asymptotique des quantités estimées</div>
-						</section>
-
-						<section title="Applications">
-							<h1>Applications</h1>
-						</section>
+				<section slide-title="Applications">
+					<h1>Applications</h1>
+				</section>
 
 						<section>
 							<h2>Détection de <strong>points caractéristiques</strong> sur des objets géométriques 3D</h2>
@@ -627,7 +643,7 @@
 								<section data-background="img/feature/Snow_I08_II_scale.png">
 								</section>
 
-								<section>
+								<section slide-title="Comparaison">
 									<section>
 										<h2>Comparisons</h2>
 
