@@ -468,6 +468,11 @@
 		// Slide number
 		dom.slideNumber = createSingletonNode( dom.wrapper, 'div', 'slide-number', '' );
 
+		// Chapter name
+		dom.chapterName = createSingletonNode( dom.wrapper, 'div', 'chapterName', '' );
+		dom.chapterName.innerHTML = "TITRE";
+		dom.chapterName.style.marginLeft = "150px";
+
 		// Element containing notes that are visible to the audience
 		dom.speakerNotes = createSingletonNode( dom.wrapper, 'div', 'speaker-notes', null );
 		dom.speakerNotes.setAttribute( 'data-prevent-swipe', '' );
@@ -2598,6 +2603,10 @@
 			return '<span class="slide-number-a">'+ a +'</span>';
 		}
 
+	}
+
+	function formatChapterName( name ) {
+		return name;
 	}
 
 	/**
