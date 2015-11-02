@@ -472,11 +472,12 @@
 		// Chapter name
 		dom.chapterList = [];
 		var index_menu = 0;
-		toArray( dom.wrapper.querySelectorAll( SLIDES_SELECTOR ) ).forEach( function( hslide, h ) {
+		toArray( dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ) ).forEach( function( hslide, h ) {
 			if( hslide.hasAttribute( 'slide-title' ) ) {
-				console.log(hslide.getAttribute("slide-title"));
-				console.log(index_menu);
 				dom.chapterList[index_menu] = createNode( dom.wrapper, 'div', 'chapterName', hslide.getAttribute("slide-title") );
+				var arrowImg = createNode( dom.wrapper, 'img', 'chapterArrow' );
+				arrowImg.setAttribute('src', 'img/misc/arrow.svg' );
+				arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
 				dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
 				index_menu += 1;
 			}
@@ -3162,7 +3163,7 @@
 					break mainLoop;
 				}
 
-				pastCount++;
+				// pastCount++;
 
 			}
 
@@ -3172,9 +3173,9 @@
 			}
 
 			// Don't count the wrapping section for vertical slides
-			if( horizontalSlide.classList.contains( 'stack' ) === false ) {
+			// if( horizontalSlide.classList.contains( 'stack' ) === false ) {
 				pastCount++;
-			}
+			// }
 
 		}
 
@@ -3189,27 +3190,27 @@
 	function getProgress() {
 
 		// The number of past and total slides
-		var totalCount = getTotalSlides();
+		var totalCount = getTotalSlidesLevelOne();
 		var pastCount = getSlidePastCount();
 
-		if( currentSlide ) {
-
-			var allFragments = currentSlide.querySelectorAll( '.fragment' );
-
-			// If there are fragments in the current slide those should be
-			// accounted for in the progress.
-			if( allFragments.length > 0 ) {
-				var visibleFragments = currentSlide.querySelectorAll( '.fragment.visible' );
-
-				// This value represents how big a portion of the slide progress
-				// that is made up by its fragments (0-1)
-				var fragmentWeight = 0.9;
-
-				// Add fragment progress to the past slide count
-				pastCount += ( visibleFragments.length / allFragments.length ) * fragmentWeight;
-			}
-
-		}
+		// if( currentSlide ) {
+		//
+		// 	var allFragments = currentSlide.querySelectorAll( '.fragment' );
+		//
+		// 	// If there are fragments in the current slide those should be
+		// 	// accounted for in the progress.
+		// 	if( allFragments.length > 0 ) {
+		// 		var visibleFragments = currentSlide.querySelectorAll( '.fragment.visible' );
+		//
+		// 		// This value represents how big a portion of the slide progress
+		// 		// that is made up by its fragments (0-1)
+		// 		var fragmentWeight = 0.9;
+		//
+		// 		// Add fragment progress to the past slide count
+		// 		pastCount += ( visibleFragments.length / allFragments.length ) * fragmentWeight;
+		// 	}
+		//
+		// }
 
 		return pastCount / ( totalCount - 1 );
 
@@ -3218,27 +3219,27 @@
 	function getProgressTitle( slideNumber ) {
 
 		// The number of past and total slides
-		var totalCount = getTotalSlides();
+		var totalCount = getTotalSlidesLevelOne();
 		var pastCount = slideNumber;
 
-		if( currentSlide ) {
-
-			var allFragments = currentSlide.querySelectorAll( '.fragment' );
-
-			// If there are fragments in the current slide those should be
-			// accounted for in the progress.
-			if( allFragments.length > 0 ) {
-				var visibleFragments = currentSlide.querySelectorAll( '.fragment.visible' );
-
-				// This value represents how big a portion of the slide progress
-				// that is made up by its fragments (0-1)
-				var fragmentWeight = 0.9;
-
-				// Add fragment progress to the past slide count
-				pastCount += ( visibleFragments.length / allFragments.length ) * fragmentWeight;
-			}
-
-		}
+		// if( currentSlide ) {
+		//
+		// 	var allFragments = currentSlide.querySelectorAll( '.fragment' );
+		//
+		// 	// If there are fragments in the current slide those should be
+		// 	// accounted for in the progress.
+		// 	if( allFragments.length > 0 ) {
+		// 		var visibleFragments = currentSlide.querySelectorAll( '.fragment.visible' );
+		//
+		// 		// This value represents how big a portion of the slide progress
+		// 		// that is made up by its fragments (0-1)
+		// 		var fragmentWeight = 0.9;
+		//
+		// 		// Add fragment progress to the past slide count
+		// 		pastCount += ( visibleFragments.length / allFragments.length ) * fragmentWeight;
+		// 	}
+		//
+		// }
 
 		return pastCount / ( totalCount - 1 );
 

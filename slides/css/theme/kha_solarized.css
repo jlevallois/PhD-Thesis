@@ -371,5 +371,11 @@ body {
    background-color: rgba(0, 0, 0, 0.6);
    padding: 5px; }
 
- .reveal .chapterName-delimiter {
-   margin: 0 4px; }
+ .reveal .chapterArrow {
+   position: fixed;
+   display: block;
+   opacity: 0.5;
+   bottom: 0px;
+   height: 8px;
+   z-index: 9;
+   font-size: 12px; }
