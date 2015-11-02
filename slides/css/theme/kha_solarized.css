@@ -3,7 +3,7 @@
  * Author: Jérémy Levallois
  */
 @import url(../../lib/font/league-gothic/league-gothic.css);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,700,300italic,700italic);
 /**
  * Solarized colors by Ethan Schoonover
  */
@@ -20,8 +20,8 @@ body {
 
 .reveal {
   font-family: "Lato", sans-serif;
-  font-size: 36px;
-  font-weight: normal;
+  font-size: 32px;
+  font-weight: 300;
   color: #657b83; }
 
 ::selection {
@@ -315,7 +315,7 @@ body {
  * DEBUG
  ********************************************/
  .present {
-   background-color: rgba(0,255,0,.2);
+   /*background-color: rgba(0,255,0,.2);*/
  }
 
 .todo {

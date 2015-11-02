@@ -1,179 +1,807 @@
 <!doctype html>
 <html lang="fr">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
 
-		<title>Estimateurs différentiels en géométrie discrète: applications à l'analyse de surfaces digitales - Jérémy Levallois</title>
+	<title>Estimateurs différentiels en géométrie discrète: applications à l'analyse de surfaces digitales - Jérémy Levallois</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/kha_solarized.css" id="theme">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/kha_solarized.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- Code syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!--MathJax-->
-	  <script type="text/x-mathjax-config">
-	    MathJax.Hub.Config({
-	      TeX: {
-	        extensions: ["color.js","tex2jax.js"],
-	        Macros: {
-	          Shape: 'X'
-	        },
-	        tex2jax: {
-	          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-	          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-	          processEscapes: true
-	        }
-	      },
-	      skipStartupTypeset: true
-	    });
-	  </script>
+	<!--MathJax-->
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+		TeX: {
+			extensions: ["color.js","tex2jax.js"],
+			Macros: {
+				Shape: 'X'
+			},
+			tex2jax: {
+				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+				displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+				processEscapes: true
+			}
+		},
+		skipStartupTypeset: true
+	});
+	</script>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement( 'link' );
+	link.rel = 'stylesheet';
+	link.type = 'text/css';
+	link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+	document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
 
-	<body>
+<body>
 
-		<div class="reveal">
+	<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1 style="-webkit-hyphens:none;-moz-hyphens:none;hyphens:none;"><strong>Estimateurs différentiels</strong> en géométrie discrète:<br />
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+				<h1 style="-webkit-hyphens:none;-moz-hyphens:none;hyphens:none;"><strong>Estimateurs différentiels</strong> en géométrie discrète:<br />
 					applications à l'analyse de <strong>surfaces digitales</strong></h1>
 					<h3>Jérémy Levallois<sup style="font-size:50%;">1,2</sup>, David Coeurjolly<sup style="font-size:50%;">1</sup>,<br/> and Jacques-Olivier Lachaud<sup style="font-size:50%;">2</sup></h3>
 					<p>
 						<small><sup>1-</sup>Université de Lyon, CNRS/LIRIS, UMR5205, F-69621, France<br />
-						<sup>2-</sup>Université de Savoie, CNRS/LAMA, UMR5127, F-73776, France</small>
-					</p>
-					<footer>
-						\(
+							<sup>2-</sup>Université de Savoie, CNRS/LAMA, UMR5127, F-73776, France</small>
+						</p>
+						<footer>
+							\(
 							%%%% If you see this, MathJax wasn't loaded ...
 							\definecolor{myred}{RGB}{231,76,60}
 							\definecolor{mygreen}{RGB}{38,166,115}
 							\definecolor{myblue}{RGB}{38,89,166}
 							\definecolor{mygrey}{RGB}{101,123,131}
 							\definecolor{mynormal}{RGB}{41,128,185}
-						 \)
-						<img src="img/logo/logo_liris.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_lama.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_anr.svg" width="150" class="imgNoBorder" />
-					</footer>
-				</section>
+							\)
+							<img src="img/logo/logo_liris.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_lama.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_anr.svg" width="150" class="imgNoBorder" />
+						</footer>
+					</section>
 
-				<section>
-					<h2>Géométrie discrète ? Surfaces digitales ?</h2>
+					<section>
+						<h2>Géométrie discrète ? Surfaces digitales ?</h2>
 
-					<div style="float:left;height:550px;"><img src="img/bunny-real.png" height="200px" class="imgNoBorder" style="margin-top:175px;" /></div>
-					<div style="float:right;height:550px;display:inline-block;"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points<br />
-					<img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé<br/>
-					<img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
+						<div style="float:left;height:550px;"><img src="img/bunny-real.png" height="200px" class="imgNoBorder" style="margin-top:175px;" /></div>
+						<div style="float:right;height:550px;display:inline-block;"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points<br />
+							<img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé<br/>
+							<img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
 
-				</section>
+						</section>
 
-				<section>
-					<h2>Données digitales</h2>
+						<section>
+							<h2>Données digitales</h2>
 
-					<div style="float:left;"><img src="img/Snow_NoColor.png" height="250" class="imgNoBorder" alt="Snow sans couleur" /></div>
-					<div style="float:left;"><img src="img/OctaFlower_noise_zoom2.png" height="250" class="imgNoBorder" /></div>
-					<div style="float:right;">
-						<ul style="font-size:75%;">
-							<li>Surface isotétique<br/>(ensemble de pixels/voxels)</li>
-							<li>bruit arithmétique</li>
-						</ul>
-					</div>
+							<div style="float:left;"><img src="img/Snow_NoColor.png" height="250" class="imgNoBorder" alt="Snow sans couleur" /></div>
+							<div style="float:left;"><img src="img/feature/OctaFlower_noise_zoom2.png" height="250" class="imgNoBorder" /></div>
+							<div style="float:right;">
+								<ul style="font-size:75%;">
+									<li>Surface isotétique<br/>(ensemble de pixels/voxels)</li>
+									<li>bruit arithmétique</li>
+								</ul>
+							</div>
 
-					<p style="clear:both; text-align:center;"><strong>Pourquoi utiliser des données digitales ?</strong></p>
+							<p style="clear:both; text-align:center;"><strong>Pourquoi utiliser des données digitales ?</strong></p>
 
-					<div style="float:left;font-size:90%;">&#8594; Résultat direct de scanners (tomographie à rayons X)</div>
-					<!--<div style="float:right;"><img src="img/Snow_mean.png" height="200" class="imgNoBorder" alt="Snow mean curv" /></div>-->
-					<div style="float:left;font-size:90%;">&#8594; Convergence asymptotique des quantités estimées</div>
-				</section>
+							<div style="float:left;font-size:90%;">&#8594; Résultat direct de scanners (tomographie à rayons X)</div>
+							<div style="float:left;font-size:90%;">&#8594; Convergence asymptotique des quantités estimées</div>
+						</section>
 
-				<section title="Applications">
-					<h1>Applications</h1>
-					<h2>Détection de <strong>points caractéristiques</strong> sur des objets géométriques 3D</h2>
-					<div style="text-align:center;" class="fragment" data-fragment-index="1">
-						<img src="img/feature/OctaFlower_512_Mellado_scale.png" width="150px" class="imgNoBorder" />
-						<img src="img/feature/OctaFlower_512_Moments_r_10_c1.png" width="150px" class="imgNoBorder" />
-						<img src="img/feature/OctaFlower_512_II_scale.png" width="150px" class="imgNoBorder" />
-						<img src="img/feature/OctaFlower_512_Pauly_scale.png" width="150px" class="imgNoBorder" />
-						<img src="img/feature/OctaFlower_512_Tensor_scale.png" width="150px" class="imgNoBorder" />
-						<img src="img/feature/OctaFlower_512_VCM_r_10.png" width="150px" class="imgNoBorder" />
-					</div>
-					<p style="text-align:center;" class="fragment" data-fragment-index="1">
-						Grande littérature <span class="fragment" data-fragment-index="2"> avec des définitions variées.</span>
-					</p>
+						<section title="Applications">
+							<h1>Applications</h1>
+						</section>
 
-					<span style="text-align:left;display:inline-block;vertical-align:middle;width:64%;" class="fragment" data-fragment-index="3">
-						Nous nous focalisons à détecter les <strong>singularités</strong>	<span style="text-align:left;" class="fragment" data-fragment-index="4"> qui doivent être préservées quelque-soit l'<strong>échelle</strong> <span class="fragment" data-fragment-index="5">ou le <strong>bruit</strong>.</span></span>
-					</span>
-					<span style="display:inline-block;vertical-align:middle;width:35%;"><img src="img/Figs/piecewisesmooth.svg" class="fragment imgNoBorder" data-fragment-index="3" /></span>
-				</section>
+						<section>
+							<h2>Détection de <strong>points caractéristiques</strong> sur des objets géométriques 3D</h2>
+							<div style="text-align:center;" class="fragment" data-fragment-index="1">
+								<img src="img/feature/OctaFlower_512_Mellado_scale.png" width="150px" class="imgNoBorder" />
+								<img src="img/feature/OctaFlower_512_Moments_r_10_c1.png" width="150px" class="imgNoBorder" />
+								<img src="img/feature/OctaFlower_512_II_scale.png" width="150px" class="imgNoBorder" />
+								<img src="img/feature/OctaFlower_512_Pauly_scale.png" width="150px" class="imgNoBorder" />
+								<img src="img/feature/OctaFlower_512_Tensor_scale.png" width="150px" class="imgNoBorder" />
+								<img src="img/feature/OctaFlower_512_VCM_r_10.png" width="150px" class="imgNoBorder" />
+							</div>
+							<p style="text-align:center;" class="fragment" data-fragment-index="1">
+								Grande littérature <span class="fragment" data-fragment-index="2"> avec des définitions variées.</span>
+							</p>
 
-				<section>
-					<h2>Objectifs</h2>
+							<span style="text-align:left;display:inline-block;vertical-align:middle;width:64%;" class="fragment" data-fragment-index="3">
+								Nous nous focalisons à détecter les <strong>singularités</strong>	<span style="text-align:left;" class="fragment" data-fragment-index="4"> qui doivent être préservées quelque-soit l'<strong>échelle</strong> <span class="fragment" data-fragment-index="5">ou le <strong>bruit</strong>.</span></span>
+							</span>
+							<span style="display:inline-block;vertical-align:middle;width:35%;"><img src="img/feature/piecewisesmooth.svg" class="fragment imgNoBorder" data-fragment-index="3" /></span>
+						</section>
 
-					<div style="text-align:left;">Extraction de <strong>points caractéristiques</strong> :
-					<ul>
-						<li>sur des données <strong>digitales</strong></li>
-						<li>avec une approche en <strong>espace d'échelle</strong> :<br/>
-							- robustesse au <strong>bruit</strong><br/>
-							- points caractéristiques <strong>indépendant de l'échelle</strong> utilisée</li>
+						<section>
+							<h2>Objectifs</h2>
+							<div style="text-align:left;">Extraction de <strong>points caractéristiques</strong> :
+								<ul>
+									<li>sur des données <strong>digitales</strong></li>
+									<li>avec une approche en <strong>espace d'échelle</strong> :<br/>
+										- robustesse au <strong>bruit</strong><br/>
+										- points caractéristiques <strong>indépendant de l'échelle</strong> utilisée</li>
 
-						<li>avec une interprétation <strong>géometrique et théorique</strong> du point caractéristique</li>
-					</ul></div>
+										<li>avec une interprétation <strong>géometrique et théorique</strong> du point caractéristique</li>
+									</ul></div>
+								</section>
 
-				</section>
+								<section>
+									<h2>(Selected) State of the Art</h2>
+									<p>
+										<table class="beautifulTable" style="font-size:70%;">
+											<thead>
+												<tr style="font-size:80%;text-align:center;">
+													<th style="text-align:left;">Name</th>
+													<th>Technique</th>
+													<th>Selection</th>
+													<th>Classification</th>
+													<th>Scale-Space</th>
+													<th>Usability for digital data</th>
+													<th width="75px"></th>
+												</tr>
+											</thead>
+											<tbody style="font-size:70%;">
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;">Moment Analysis<sup style="font-size:50%;"><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=1310277">[1]</a></sup></p>
+														<p style="font-size:90%;font-style:italic;">(Clarenz et al.)</p>
+													</td>
+													<td style="text-align:center;vertical-align:middle;height:70px;"><img src="img/Figs/moment_1.svg" class="imgNoBorder" style="margin:0;height:100%;" /><img src="img/Figs/moment_2.svg" class="imgNoBorder" style="margin:0;height:100%;" /></td>
+													<td style="vertical-align:middle;">Threshold</td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:right;vertical-align:middle;"><img src="img/feature/OctaFlower_512_Moments_r_10_c1.png" class="imgNoBorder" width="75px" style="margin:0;padding:0;vertical-align:middle;" /></td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;">VCM<sup style="font-size:50%;"><a href="http://dl.acm.org/citation.cfm?doid=1629255.1629257">[2]</a><a href="http://link.springer.com/chapter/10.1007%2F978-3-319-09955-2_12">[3]</a></sup></p>
+														<p style="font-size:90%;font-style:italic;">(Mérigot et al.)</p>
+													</td>
+													<td style="vertical-align:middle;">\[\frac{\lambda'_2}{\lambda'_1 + \lambda'_2 + \lambda'_3} \]</td>
+													<td style="vertical-align:middle;">Threshold</td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:right;vertical-align:middle;"><img src="img/feature/OctaFlower_512_VCM_r_10.png" class="imgNoBorder" width="75px" style="margin:0;padding:0;vertical-align:middle;" /></td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;">Sphere Fitting<sup style="font-size:50%;"><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1467-8659.2012.03174.x/abstract;jsessionid=9010BE330DBB8E54F33CCEE43D0F4F87.f03t04">[4]</a></sup></p>
+														<p style="font-size:90%;font-style:italic;">(Mellado et al.)</p>
+													</td>
+													<td style="text-align:center;vertical-align:middle;height:70px;"><img src="img/Figs/sphere_fitting.svg" class="imgNoBorder" style="margin:0;height:100%;" /></td>
+													<td style="vertical-align:middle;">Threshold</td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:right;vertical-align:middle;"><img src="img/feature/OctaFlower_512_Mellado_scale.png" class="imgNoBorder" width="75px" style="margin:0;padding:0;vertical-align:middle;" /></td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;">Surface Variation<sup style="font-size:50%;"><a href="http://onlinelibrary.wiley.com/doi/10.1111/1467-8659.00675/abstract;jsessionid=0AE966435BC376CA0708AAB20E201FBE.f01t02">[5]</a></sup></p>
+														<p style="font-size:90%;font-style:italic;">(Pauly et al.)</p>
+													</td>
+													<td style="vertical-align:middle;">\[\frac{\lambda_2}{\lambda_1 + \lambda_2 + \lambda_3} \]</td>
+													<td style="vertical-align:middle;">Threshold</td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:right;vertical-align:middle;"><img src="img/feature/OctaFlower_512_Pauly_scale.png" class="imgNoBorder" width="75px" style="margin:0;padding:0;vertical-align:middle;" /></td>
+												</tr>
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;">Tensor Voting<sup style="font-size:50%;"><a href="http://www.sciencedirect.com/science/article/pii/S1524070312000288">[6]</a></sup></p>
+														<p style="font-size:90%;font-style:italic;">(Park et al.)</p>
+													</td>
+													<td style="vertical-align:middle;">\[\frac{\lambda_3+\lambda_2}{\lambda_1} \]</td>
+													<td style="vertical-align:middle;">Threshold</td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:right;vertical-align:middle;"><img src="img/feature/OctaFlower_512_Tensor_scale.png" class="imgNoBorder" width="75px" style="margin:0;padding:0;vertical-align:middle;" /></td>
+												</tr>
 
-			</div>
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;"><strong style="color:#03A9F4;">Integral Invariant</strong></p>
+													</td>
+													<td style="text-align:center;vertical-align:middle;"><strong style="color:#03A9F4;">Scale-Space Curvature $\frac{d k}{d r}$</strong></td>
+													<td style="vertical-align:middle;"><strong style="color:#03A9F4;">Fitting</strong></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:right;vertical-align:middle;"><img src="img/feature/OctaFlower_512_II_scale.png" class="imgNoBorder" width="75px" style="margin:0;padding:0;vertical-align:middle;" /></td>
+												</tr>
 
-		</div>
+												<tr>
+													<td style="vertical-align:top;">
+														<p style="font-weight:bold;">Spectral approaches<sup style="font-size:50%;"><a href="http://dl.acm.org/citation.cfm?id=2530691">[7]</a></sup></p>
+														<p style="font-size:90%;font-style:italic;">(Song et al.)</p>
+													</td>
+													<td style="text-align:center;vertical-align:middle;">Laplacian eigenvalues</td>
+													<td style="vertical-align:middle;">Threshold</td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
+													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</p>
+								</section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+								<section>
+									<h2>Previously... Digital Curvature Estimators</h2>
 
-		<script>
+									<div class="box-green" data-title="Integral invariant based 2d curvature estimators" style="text-align:center;height:320px;"><br />
+										<p style="float:left;width:49%;margin-left:15px;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="380" height="200" style="-webkit-transform: scale(1.25); -moz-transform: scale(1.25); -ms-transform: scale(1.25); -o-transform: scale(1.25); transform: scale(1.25);">
+												<foreignobject x="0" y="20" width="100%" height="100%">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:center;"><img src="img/Figs/integral2D_2.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+													</body>
+												</foreignobject>
+												<foreignobject x="165" y="75" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">x</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="165" y="60" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(x\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="165" y="100" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(A_R(x)\)</div>
+													</body>
+												</foreignobject>
+											</svg>
+										</p>
+										<p style="float:right;width:49%;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="500" height="250" style="-webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); transform: scale(1.2);">
+												<foreignobject x="0" y="0" width="100%" height="100%">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:center;"><img src="img/Figs/notation.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+													</body>
+												</foreignobject>
+												<foreignobject x="200" y="92" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">x</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="200" y="82" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(x\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="195" y="110" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(\hat{x}\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="35" y="155" width="170" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(\partial\Shape\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="65" y="180" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(\hBd{h} X\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="200" y="145" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(h\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="230" y="130" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(\sharp_n\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="370" y="22" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(\Proj(\hat{x})\)</div>
+													</body>
+												</foreignobject>
+												<foreignobject x="125" y="20" width="150" height="150" style="color:#000000;">
+													<body xmlns="http://www.w3.org/1999/xhtml">
+														<div style="text-align:left;font-size: 50%;">\(B_{R_d}(\hat{x})\)</div>
+													</body>
+												</foreignobject>
+											</svg>
+										</p>
+									</div>
+									<p style="clear:both;font-size:70%;float:left;width:49%;">
+										Continuous : $ \tilde{\kappa}_{{{R}}}(x) := \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}A_R(x)}}{{{R}}^3} $
+									</p>
+									<p style="font-size:70%;float:right;width:49%;">
+										Digital : $\PCurvHat{{{R_d}}}(\hat{x}) := \frac{1}{h} ( \frac{3\pi}{2{{R_d}}} - \frac{3 {\color{myred}\sharp_n}}{{{R_d}}^3})$
+									</p>
+								</section>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				slideNumber: 'h.v/t',
-				history: true,
-				transition: 'none',
-				transitionSpeed: 'fast',
+								<section>
+									<h2>Previously... Uniform <strong>multigrid convergence</strong> of Digital Curvature Estimators</h2>
+									<div style="width:40%;float:left;">
+										<table class="beautifulTable" style="font-size:70%;">
+											<thead>
+												<tr>
+													<th>Dimension</th>
+													<th style="text-align:center;">With radius parameter<br/><span style="font-weight:normal;font-size:70%;">($R=kh^{1/3}$)</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td><strong style="color:inherit">2d</strong></td>
+													<td style="text-align:center;">$O(h^{1/3})$</td>
+												</tr>
+												<tr>
+													<td><strong style="color:inherit">3d mean</strong></td>
+													<td style="text-align:center;">$O(h^{1/3})$</td>
+												</tr>
+												<tr>
+													<td><strong style="color:inherit">3d principal</strong></td>
+													<td style="text-align:center;">$O(h^{1/3})$</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div style="width:59%;float:right;text-align:left;">
+										<img src="img/octa-mean_0001.png" class="imgNoBorder" width="250px" />
+										<img src="img/octa-gaussian_0001.png" class="imgNoBorder" width="250px" />
+									</div>
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true },
-        	{ src: 'plugin/math/math.js', async: true }
-				]
-			});
+									<div style="clear:both;width:40%;float:left;text-align:right;">
+										<img src="img/octa-normal-mini.png" class="imgNoBorder" width="250px" />
+									</div>
+									<div style="width:59%;float:right;text-align:left;">
+										<img src="img/octa-256-prindir1_0001.png" class="imgNoBorder" width="250px" />
+										<img src="img/octa-256-prindir2_0001.png" class="imgNoBorder" width="250px" />
 
-		</script>
+									</div>
+								</section>
 
-	</body>
-</html>
+								<section>
+									<h2>&#8680; Radius as <strong>Scale-Space</strong> parameter</h2>
+									<p style="width:100%; text-align:center;">
+										<img class="imgNoBorder" style="height:100px; margin-right:10px;" src="img/Flower.png" /><img class="imgNoBorder" style="width:800px;height:100px;" src="img/ScaleSpace_Flower_2.png" />
+									</p>
+									<div style="float:left;width:600px;">
+										<p style="width:100%; text-align:center;">
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_4.png" />
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_7.png" />
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_10.png" />
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_12.png" />
+										</p>
+										<p style="width:100%;padding-left:10%;padding-right:10%;text-align:center;font-size:70%;">
+											<span style="width:20%;text-align:center;float:left;">$R=4$</span>
+											<span style="width:20%;text-align:center;float:left;">$R=7$</span>
+											<span style="width:20%;text-align:center;float:left;">$R=10$</span>
+											<span style="width:20%;text-align:center;float:left;">$R=12$</span>
+										</p>
+										<p style="clear:both;width:100%; text-align:center;">
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_14.png" />
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_17.png" />
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_20.png" />
+											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_25.png" />
+										</p>
+										<p style="width:100%;padding-left:10%;padding-right:10%;text-align:center;font-size:70%;">
+											<span style="width:20%;text-align:center;float:left;">$R=14$</span>
+											<span style="width:20%;text-align:center;float:left;">$R=17$</span>
+											<span style="width:20%;text-align:center;float:left;">$R=20$</span>
+											<span style="width:20%;text-align:center;float:left;">$R=25$</span>
+										</p>
+									</div>
+									<div style="float:right;width:350px;vertical-align:middle;margin-top:100px;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="304" height="152" style="-webkit-transform: scale(1.3); -moz-transform: scale(1.3); -ms-transform: scale(1.3); -o-transform: scale(1.3); transform: scale(1.3);">
+											<foreignobject x="0" y="0" width="100%" height="100%">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:center;"><img src="img/Figs/II_kernels.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+												</body>
+											</foreignobject>
+											<foreignobject x="180" y="45" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 40%;">$x$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="100" y="110" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 40%;">$\Shape$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="200" y="65" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 40%;">$R{}_n$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="215" y="35" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 40%;">$R_1$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="207" y="43" width="10" height="10" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 40%;-ms-transform: rotate(90deg);-webkit-transform: rotate(90deg);transform: rotate(90deg);">$\ddots$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="230" y="5" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 40%;">$R_0$</div>
+												</body>
+											</foreignobject>
+										</svg>
+									</div>
+								</section>
+
+								<section>
+									<h2><strong>Scale-Space</strong> Curvature based Feature Estimator</h2>
+
+									<p>
+										<table class="beautifulTable" style="font-size:70%;">
+											<thead>
+												<tr>
+													<th></th>
+													<th>Curvature</th>
+
+													<th>Plot (in logscale)</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td style="text-align:center;">
+														<img src="img/Figs/II_kernels_smooth.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
+													</td>
+
+													<td style="font-size:70%;">
+														$\begin{eqnarray}
+														G_{X,x}(R) & := & {\color{myblue}\frac{3 \pi}{2 R} - \frac{3 A(R,x)}{R^3}} + {\color{mygrey}O(R)} \\
+														& := & {\color{myblue}\kappa_0} + {\color{mygrey}O(R)}
+														\end{eqnarray}$
+													</td>
+													<td style="font-size:70%;">
+														<img src="img/feature/smooth_II.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
+														<p>Intercept : $\kappa_0$</p>
+														<p>Slope : $0$</p>
+													</td>
+												</tr>
+												<tr>
+													<td style="text-align:center;">
+
+														<img src="img/feature/II_kernels_edge2.svg" class="imgNoBorder" height="150px" style="vertical-align:middle;" />
+													</td>
+
+													<td style="font-size:70%;">
+														$\begin{eqnarray}
+														G_{X,x}(R) & = & {\color{myred}\frac{3}{2} \frac{1}{R} ( \pi - \alpha_0 )}\\
+														& & + {\color{mygreen}\frac{\kappa_{-} + \kappa_{+}}{6}} + {\color{mygrey}O(R)}
+														\end{eqnarray}$
+													</td>
+													<td style="font-size:70%;">
+														<img src="img/feature/hard_II.svg" class="imgNoBorder" height="150px" style="vertical-align:middle;" />
+														<p>Intercept : depending to $\alpha_0$</p>
+														<p>Slope : $-1$</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</p>
+								</section>
+
+								<section>
+									<h2>Influence of digitization</h2>
+									<p style="font-size:80%;" >
+										For a <strong>constant radius <span style="font-size:80%;">$R$</span></strong>, there exists an <strong>infinity of curves</strong> which lead to the same digitization of $B_R(x)\cap \Shape$:
+									</p>
+									<div class="box" style="float:left;width:20%;height:210px;text-align:center;">
+										<img src="img/feature/II_kernels_flat.svg" class="imgNoBorder" height="120px" style="vertical-align:middle;" /><br/>
+										$\tilde{\kappa}(R) = 0$
+									</div>
+
+									<div style="float:right;text-align:center;width:75%;height:210px;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="500" height="250" style="-webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); transform: scale(1.2);">
+											<foreignobject x="0" y="0" width="100%" height="100%">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:center;"><img src="img/feature/minInterval_min2.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+												</body>
+											</foreignobject>
+											<foreignobject x="17" y="67" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 50%;">$h$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="290" y="20" width="150" height="150" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 50%;">$R$</div>
+												</body>
+											</foreignobject>
+											<foreignobject x="170" y="125" width="150" height="200" style="color:#000000;">
+												<body xmlns="http://www.w3.org/1999/xhtml">
+													<div style="text-align:left;font-size: 50%;">$1/\kappa{}_{max}$</div>
+												</body>
+											</foreignobject>
+										</svg>
+									</div>
+									<div style="clear:both;text-align:center;padding-left:160px;font-size:70%;">
+										\[ {\color{myred}\kappa_{max} = \frac{2h}{R^2 + h^2}} \]
+									</div>
+
+									<div class="box-green" data-title="" style="margin-top:50px;">
+										For fixed $h$, estimated values $\hat{\kappa}_R \le \kappa_{max}$ are considered as <strong style="color:#2ecc71">flat</strong> zone, or <strong style="color:#2ecc71">outliers</strong> (in the sense that doesn't capture the feature with current radius).
+									</div>
+								</section>
+
+								<section>
+									<h2>Influence of digitization</h2>
+									<div style="text-align:center;">
+										<img src="img/Graphs/Kmax_plot.svg" class="imgNoBorder" style="background-color:#fff" />
+									</div>
+									<p style="text-align:center;font-size:80%;">Slope : $-2$</p>
+								</section>
+
+								<section>
+									<h2>Scale-Space Analysis</h2>
+									<div style="float:left;width:60%;font-size:80%;">
+										For each point, for a range of radii:
+										<ol>
+											<li style="margin-bottom:10px;">
+												Plot the <strong style="color:inherit">scale-space curvature</strong> (abs: log of kernel radius, ord: log of mean curvature).
+											</li>
+											<li class="fragment" data-fragment-index="1" style="margin-bottom:10px;">
+												Remove all data is <strong style="color:inherit">below $\kappa_{max}$</strong> (we <strong style="color:inherit">can't determine</strong> if it is a <strong style="color:#2ecc71">flat region</strong> or too small radius to detect a feature).
+											</li>
+											<li class="fragment" data-fragment-index="3" style="margin-bottom:10px;">
+												Compute the <strong style="color:inherit">distance to models</strong><sup style="font-size:60%;">[1]</sup>.
+											</li>
+											<li class="fragment" data-fragment-index="4" style="margin-bottom:10px;">
+												We classify the point by choosing the minimal distance. <span class="fragment" data-fragment-index="5">Here we have a <strong style="color:#1E88E5">smooth surface</strong>...</span>
+											</li>
+										</ol>
+									</div>
+									<div style="float:right;width:39%;height:500px;position:relative;">
+										<div style="height:250px;position:absolute;top:0;left:0;"><img src="img/feature/Algo_Feature_1.svg" class="imgNoBorder" style="margin:0;background-color:#fff;" /></div>
+										<div style="height:250px;position:absolute;top:0;left:0;" class="fragment" data-fragment-index="1"><img src="img/feature/Algo_Feature_2.svg" class="imgNoBorder" style="margin:0;box-shadow:0 0 0px;background-color:#fff;" /></div>
+										<div style="height:250px;position:absolute;top:0;left:0;" class="fragment" data-fragment-index="2"><img src="img/feature/Algo_Feature_2_2.svg" class="imgNoBorder" style="margin:0;box-shadow:0 0 0px;background-color:#fff;" /></div>
+										<div style="height:250px;position:absolute;top:0;left:0;" class="fragment" data-fragment-index="3"><img src="img/feature/Algo_Feature_3.svg" class="imgNoBorder" style="margin:0;box-shadow:0 0 0px;background-color:#fff;" /></div>
+										<div style="height:250px;position:absolute;top:0;left:0;" class="fragment" data-fragment-index="5"><img src="img/feature/Algo_Feature_4.svg" class="imgNoBorder" style="margin:0;box-shadow:0 0 0px;background-color:#fff;" /></div>
+
+										<div style="height:250px;position:absolute;top:250px;left:0;" class="fragment" data-fragment-index="3"><img src="img/feature/Algo_Feature_Distance.svg" class="imgNoBorder" style="margin:0;box-shadow:0 0 0px;background-color:#fff;" /></div>
+										<div style="height:250px;position:absolute;top:250px;left:0;" class="fragment" data-fragment-index="4"><img src="img/feature/Algo_Feature_Distance_2.svg" class="imgNoBorder" style="margin:0;box-shadow:0 0 0px;background-color:#fff;" /></div>
+									</div>
+									<br />
+									<br />
+									<footer class="fragment" data-fragment-index="3" style="clear:both;font-size:60%;text-align:left;">[1]- with Least Square Linear Fitting<!-- + Incremental Linear Model Validation--></footer>
+								</section>
+
+								<section>
+									<h2>Experiments</h2>
+									<div style="text-align:center;">
+										<img src="img/feature/CubeSphere_II_scale.png" class="imgNoBorder" style="width:35%" />
+									</div>
+									<div style="float:left;width:30%;text-align:center;font-size:80%;" class="fragment">
+										Smooth<br />
+										<img src="img/feature/plot_cubesphere_smooth.svg" class="imgNoBorder" />
+									</div>
+									<div style="float:left;width:30%;text-align:center;font-size:80%;" class="fragment">
+										Edge<br />
+										<img src="img/feature/plot_cubesphere_edge.svg" class="imgNoBorder" />
+									</div>
+									<div style="float:left;width:30%;text-align:center;font-size:80%;" class="fragment">
+										Flat<br />
+										<img src="img/feature/plot_cubesphere_flat.svg" class="imgNoBorder" />
+									</div>
+								</section>
+
+								<section data-background="img/feature/OctaFlower_1024_II_scale.png">
+								</section>
+
+								<section data-background="img/feature/Fandisk_noise_II_scale.png">
+								</section>
+
+								<section data-background="img/feature/Fandisk_noise_II_scale_zoom.png">
+								</section>
+								<!--</section>-->
+
+								<section data-background="img/feature/Snow_E2bis_II_scale.png">
+								</section>
+								<section data-background="img/feature/Snow_I08_II_scale.png">
+								</section>
+
+								<section>
+									<section>
+										<h2>Comparisons</h2>
+
+										<p>
+											<table class="beautifulTable" style="font-size:70%;">
+												<thead>
+													<tr style="font-size:80%;">
+														<th colspan="2" style="text-align:center;" >Moment Analysis</th>
+														<th colspan="2" style="text-align:center;" >VCM</th>
+														<th rowspan="2" style="text-align:center;" >Sphere<br/>Fitting</th>
+														<th rowspan="2" style="text-align:center;" >Surface<br/>Variation</th>
+														<th rowspan="2" style="text-align:center;" >Tensor<br/>Voting</th>
+														<th rowspan="2" style="text-align:center;" >Our</th>
+													</tr>
+													<tr style="font-size:80%;text-align:center;">
+														<th style="text-align:center;" >$R_1$</th>
+														<th style="text-align:center;" >$R_2$</th>
+														<th style="text-align:center;" >$R_1$</th>
+														<th style="text-align:center;" >$R_2$</th>
+													</tr>
+												</thead>
+												<tbody style="font-size:70%;">
+													<tr>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_Moments_r_10_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_Moments_r_22_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_VCM_r_10.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_VCM_r_22.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_Mellado_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_Pauly_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_Tensor_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_II_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+													</tr>
+													<tr>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_Moments_r_10_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_Moments_r_22_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_VCM_r_10.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_VCM_r_22.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_Mellado_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_Pauly_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_Tensor_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/CubeSphere_noise_II_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+													</tr>
+													<tr>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_Moments_r_10_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_Moments_r_22_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_VCM_r_10.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_VCM_r_22.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_Mellado_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_Pauly_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_Tensor_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_II_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+													</tr>
+													<tr>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_Moments_r_10_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_Moments_r_22_c1.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_VCM_r_10.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_VCM_r_22.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_Mellado_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_Pauly_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_Tensor_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+														<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/OctaFlower_512_noise_II_scale.png" width="110px" class="imgNoBorder" style="margin:0px;" /></td>
+													</tr>
+												</tbody>
+											</table>
+										</p>
+									</section>
+									<section>
+										<h2>Comparisons</h2>
+										<table class="beautifulTable" style="font-size:70%;">
+											<thead>
+												<tr style="font-size:80%;">
+													<th colspan="2" style="text-align:center;" >Moment Analysis</th>
+													<th rowspan="2" style="text-align:center;" >Our</th>
+												</tr>
+												<tr style="font-size:80%;text-align:center;">
+													<th style="text-align:center;" >$R_1$</th>
+													<th style="text-align:center;" >$R_2$</th>
+												</tr>
+											</thead>
+											<tbody style="font-size:70%;">
+												<tr>
+													<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/SphereSphereSphere_Moments_r_10_c1.png" width="300px" class="imgNoBorder" style="margin:0px;" /></td>
+													<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/SphereSphereSphere_Moments_r_22_c1.png" width="300px" class="imgNoBorder" style="margin:0px;" /></td>
+													<td style="text-align:center;border-bottom: 0px;"><img src="img/feature/SphereSphereSphere_II_scale.png" width="300px" class="imgNoBorder" style="margin:0px;" /></td>
+												</tr>
+											</tbody>
+										</table>
+									</section>
+								</section>
+
+								<section>
+									<h2>Conclusion</h2>
+									<div style="text-align:left;margin-bottom:50px;">
+										<ul>
+											<li><strong>Robust</strong> / Stable feature estimation</li>
+											<li><strong>Classification</strong> into linear/smooth/singularities parts</li>
+											<li>... with some <strong>theoretical tools</strong> and <strong>geometrical interpretation</strong></li>
+										</ul>
+									</div>
+									<h2>Perspectives</h2>
+									<div style="text-align:left;">
+										<ul>
+											<li>Post-treatment</li>
+											<li>Theoretical proofs behind transitions of models</li>
+										</ul>
+									</div>
+								</section>
+
+								<section>
+									<section data-background="img/pattern.png">
+										<h1 style="color:#263238;">Thank you for your attention.</h1>
+										<h3 style="color:#263238;">Web: <a href="http://liris.cnrs.fr/jeremy.levallois">http://liris.cnrs.fr/jeremy.levallois</a></h3>
+										<h3 style="color:#263238;">GitHub: <a href="http://github.com/jlevallois">jlevallois</a></h3>
+										<h3 style="color:#263238;">Twitter: <a href="http://twitter.com/Karganys">@Karganys</a></h3>
+										<br />
+										<span style="display:inline-block;">
+											<span style="width:40%;display:inline-block;vertical-align:middle;"><a href="http://dgtal.org"><img src="img/DGtalLogo.png" width="400px" class="imgNoBorder" /></a></span>
+											<span style="color:#263238;width:59%;display:inline-block;vertical-align:middle;">This work will be available (soon) in the open-source library <a href="http://dgtal.org">DGtal</a></span>
+										</span>
+									</section>
+
+									<section>
+										<h2>Spectral Approaches</h2>
+
+										<p>
+											Two problems with digital data:<br />
+											<ul>
+												<li>Huge computationnal costs<br />
+													<img src="img/feature/OctaFlower_noise2.png" width="150px" style="float:left;margin-right:10px;" class="imgNoBorder" />
+													<div style="float:right; font-size:80%;"># Surfels : 1 740 509<br/>
+														Matrix size : 1 740 509 x 1 740 509</div>
+													</li>
+													<li style="clear:both;">
+														We need to correct the metric embedding<br />
+														<img src="img/feature/cubeIsoback_mini.png" width="150px" style="float:left;margin-right:10px;" class="imgNoBorder" />
+														<div style="float:right; font-size:80%;">Ellipsoidal effect with heat diffusion</div>
+													</li>
+												</ul>
+
+											</p>
+										</section>
+
+									</section>
+
+								</div>
+
+							</div>
+
+							<script src="lib/js/head.min.js"></script>
+							<script src="js/reveal.js"></script>
+
+							<script>
+
+							// Full list of configuration options available at:
+							// https://github.com/hakimel/reveal.js#configuration
+							Reveal.initialize({
+								slideNumber: 'h.v/t',
+								history: true,
+								transition: 'none',
+								transitionSpeed: 'fast',
+
+								// Optional reveal.js plugins
+								dependencies: [
+									{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+									{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+									{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+									{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+									{ src: 'plugin/zoom-js/zoom.js', async: true },
+									{ src: 'plugin/notes/notes.js', async: true },
+									{ src: 'plugin/math/math.js', async: true }
+								]
+							});
+
+							</script>
+
+						</body>
+						</html>
