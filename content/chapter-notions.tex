@@ -16,18 +16,18 @@ Dans ce chapitre, nous allons poser les définitions des éléments dont nous
 allons nous servir pour la suite de ce document. Cela comprend une introduction à
 la géométrie des surfaces et des formes continues (\RefSectionN{sec:geo-diff}) permettant
 de faire le lien entre la géométrie euclidienne et nos estimateurs digitaux, les
-notions de base de la géométrie digitale (\RefSectionN{sec:notions-base}) ainsi
+notions de base de la géométrie digitale (\RefSectionN{sec:notions-base}), ainsi
 que tout le processus formel permettant d'analyser le comportement d'un estimateur
 digital (\RefSectionN{sec:multigrid-convergence-estimator}). Enfin, nous verrons
 quelques primitives digitales que nous utiliserons par la suite, comme les
-segments de droite discrète maximaux (\RefSectionsN{sec:segments}{sec:aire-volume-moments}).
+segments de droite discrète maximaux (\RefSectionsN{sec:aire-volume-moments}{sec:segments}).
 % historique geo dis : http://www.citr.auckland.ac.nz/~rklette/talks/01_CP.pdf
 %
 \section{Notations}
 %
-Le \RefTable{tab:notations} montre la signification des notations utilisées dans
-ce manuscrit (sauf mention contraire). Chacune de ces notations sera introduite
-au cours des différents paragraphes.
+Le \RefTable{tab:notations} énonce les notations utilisées dans ce manuscrit et
+leur signification (sauf mention contraire). Chacune de ces notations sera
+introduite au cours des différents paragraphes.
 
 \begin{table}[ht]
   \centering
@@ -44,13 +44,13 @@ au cours des différents paragraphes.
     $\dS$         & Bord topologique de $\Shape$ & \RefSectionTable{sec:digitization} \\
     $\vx$         & Point de $\R^d$ & \RefSectionTable{sec:digitization} \\
     $x_i$         & $i$-ième coordonnée de $\vx$ avec $\vx=(x_1, \ldots, x_d)$ & \\%\RefSectionTable{sec:notions} \\
-    $\vx_i$       & $i$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n}$ & \\%\RefSectionTable{sec:notions} \\
+    $\vx_i$       & $(i+1)$-ième point d'une séquence. $(\vx_i)_{i=0 \cdots n-1}$ & \\%\RefSectionTable{sec:notions} \\
     $\Z^d$        & Espace en coordonnées entières de dimension $d$ & \RefSectionTable{sec:digitization} \\
     $\DigShape$   & Objet digital (partie de $\Z^d$) & \RefSectionTable{sec:digitization} \\
     $h$           & Pas de discrétisation pour la discrétisation de Gauss & \RefSectionTable{sec:digitization} \\
     $\DSh$        & Discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
     $\Body{\DSh}{h}$ & Plongement euclidien de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization} \\
-    $\partial\Body{\DigShape}{h}$ & Bord topologique du plongement euclidien de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization}\\
+    $\partial\Body{\DSh}{h}$ & Bord topologique du plongement euclidien de la discrétisation de Gauss de $\Shape$ sur une grille de pas $h$ & \RefSectionTable{sec:digitization}\\
     $\hat{\vx}$   & Points de $\partial\Body{\DigShape}{h}$ pour une forme $\DigShape$ & \RefSectionTable{sec:digitization} \\
 
 
@@ -74,7 +74,7 @@ au cours des différents paragraphes.
 La \colorize{géométrie des surfaces et des formes continues} est l'étude des
 surfaces comme graphes de fonctions. Nous allons dans un premier temps étudier
 la dérivabilité de ces fonctions (\colorize{classes de fonctions}). Ensuite,
-nous nous définirons des quantités intégrales décrivant la surface.
+nous définirons des quantités intégrales décrivant la surface.
 
 
 %
@@ -85,7 +85,7 @@ nous nous définirons des quantités intégrales décrivant la surface.
 \subsection{Classes de fonctions $C^1$, $C^2$, $C^d$}
 %
 Définissons les classes de fonctions $C^1$, $C^2$ ou plus généralement
-$C^d$, permettant de connaître le différentiabilité d'une fonction :
+$C^d$, permettant de connaître le différentiabilité d'une fonction.
 %
 \begin{definition}{\fakeTitle{Classe de fonction $C^1$}}
   %
@@ -119,7 +119,7 @@ Plus généralement, pour $d>2$, la classe de fonction $C^d$ est définie comme 
 %
 Nous nous intéressons aux quantités intégrales d'une forme $\Shape \subset
 \R^d$. Les quantités les plus directes sont probablement l'aire de la forme en
-dimension 2 ou son volume en dimension 3. Ce revient à calculer une double ou
+dimension 2 ou son volume en dimension 3. Cela revient à calculer une double ou
 triple intégrale de la forme suivante :
 %
 \begin{definition}{\fakeTitle{Aire d'une forme}}
@@ -146,20 +146,19 @@ triple intégrale de la forme suivante :
   %
 \end{definition}
 %
-Nous parlons également de mesure de $\Shape$ au sens de de Lebesgue. Nous
-reviendrons dessus dans le \RefSection{sec:aire-volume-moments}.
+Nous parlons également de mesure de $\Shape$ au sens de Lebesgue. Nous
+reviendrons sur ces définitions dans le cadre digital dans le \RefSection{sec:aire-volume-moments}.
 %
 \subsection{Moments géométriques}
 \label{sec:moments-geo}
 %
-Le concept mathématique des moments (\anglais{General moment theory}) a beaucoup
-été étudié depuis plusieurs années et trouve son champ d'application sans cesse
-augmenté. Plus particulièrement, les moments géométriques sont activement
-étudiés principalement la reconnaissance de formes (nous pouvons citer la revue
-de \cauthors{Trier}{Trier1996} pour la reconnaissance de caractères) et la
-reconstruction d'objets \cite{Ghorbel2005}. La première utilisation des moments
-en analyse d'images remonte à 1962 par \cauthor{Hu}{Hu1962} pour la
-reconnaissance de caractères.
+Le concept mathématique des moments (\anglais{General moment theory}) a été
+activement étudié depuis plusieurs années. Plus particulièrement, les moments
+géométriques ont montré leur intérêt dans la reconnaissance de formes (nous
+pouvons citer la revue de \cauthors{Trier}{Trier1996} pour la reconnaissance de
+caractères) et la reconstruction d'objets \cite{Ghorbel2005}. La première
+utilisation des moments en analyse d'images remonte à 1962 par
+\cauthor{Hu}{Hu1962} pour la reconnaissance de caractères.
 %
 % Les moments ont l'avantage d'être indépendant à l'échelle, la position et
 % l'orientation, en faisant un outil invariant robuste \cite{}.
@@ -218,8 +217,8 @@ géométriques pourrons nous servir pour l'estimation de quantités différentie
 %
 Nous nous intéressons maintenant à la courbure, un invariant géométrique des
 courbes et des surfaces. La courbure est une scalaire mesurant la déviation de
-la courbe par rapport au vecteur tangent. Cette quantité est énormément utilisée
-en \GeometryProcessing pour l'analyse et suivi de formes, entre autres. Nous
+la courbe par rapport au vecteur tangent. Cette quantité est très utilisée
+en \GeometryProcessing dans l'analyse et le suivi de formes, entre autres. Nous
 détaillerons cela dans le \RefChapitre{sec:estimators}.
 
 
@@ -242,7 +241,7 @@ dans un espace de dimension $2$ :
     %
 \end{align}
 %
-Alors la courbure de $f$ au point $\vx$ s'écrit comme la norme de la dérivée
+Alors la courbure de $f$ au point $x$ s'écrit comme la norme de la dérivée
 seconde :
 %
 \begin{equation}
@@ -251,7 +250,7 @@ seconde :
   %
 \end{equation}
 %
-Une autre façon de récupérer la courbure est de s'intéresser aux
+Une autre façon d'obtenir la courbure est de s'intéresser aux
 cercles osculateurs de la surface :
 %
 \begin{equation}
@@ -260,8 +259,8 @@ cercles osculateurs de la surface :
   %
 \end{equation}
 %
-où $r_o(x)$ est le rayon du cercle osculateur de la courbe $f$ au point $\vx$,
-\cad le cercle qui épouse géométriquement le mieux à la courbe $f$ en
+où $r_o(x)$ est le rayon du cercle osculateur de la courbe $f$ au point $x$,
+\cad le cercle qui épouse (géométriquement) le mieux la courbe $f$ en
 $x$ (voir \RefFigure{fig:curvature_osc}).
 
 \begin{figure}[ht]
@@ -281,12 +280,12 @@ forte.\label{fig:curvature_osc}}
 \end{figure}
 
 Usuellement, lorsque nous parlons de courbure, nous parlons de
-\colorize{courbure algébrique}. La distinction se fait dans le signe de la
-courbure. Les définitions précédentes donnent un scalaire positif, représentant
-la déviation de la courbe par rapport au vecteur tangent. Nous souhaitons
-obtenir des valeurs de courbure positives, négatives ou encore nulles. Les
-courbures algébriques sont alors signées. Cela implique par exemple de pouvoir
-obtenir des valeurs de $r_o$ négatives dans le cas d'une forme concave.
+\colorize{courbure algébrique}. Les définitions précédentes donnent un scalaire
+positif, représentant la déviation de la courbe par rapport au vecteur tangent.
+Nous souhaitons obtenir des valeurs de courbure positives, négatives ou encore
+nulles. Les courbures algébriques sont alors signées. Cela implique par exemple
+de pouvoir obtenir des valeurs de $r_o$ négatives dans le cas d'une forme
+concave.
 
 La courbure peut être également définie comme la dérivée de l'orientation du
 vecteur tangent. Si $\phi(x)$ est l'angle orienté entre le vecteur tangent
@@ -341,7 +340,7 @@ $\vec{t}(x)$ et une droite fixe, nous avons :
 
 En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend
 plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures
-principales. Nous allons détailler cela.
+principales. Nous allons détailler cela. %%TODO
 
 \begin{figure}[ht]{
     \begin{center}
