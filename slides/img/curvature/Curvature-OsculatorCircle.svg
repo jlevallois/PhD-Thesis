@@ -45,7 +45,7 @@
          id="path4151"
          d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
          style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:#333333;stroke-width:1pt;stroke-opacity:1"
-         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         transform="matrix(-0.4,0,0,-0.4,-4,0) translate(-3 -7) rotate(-45 0 0)"
          inkscape:connector-curvature="0" />
     </marker>
     <marker

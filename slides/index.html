@@ -26,7 +26,50 @@
 		TeX: {
 			extensions: ["color.js","tex2jax.js"],
 			Macros: {
-				Shape: 'X'
+				Shapes: '\\mathbb{X}',
+	          Shape: 'X',
+	          R: '\\mathbb{R}',
+	          Z: '\\mathbb{Z}',
+	          M: '\\mathcal{M}',
+	          T: '\\mathcal{T}',
+	          V: '\\mathcal{V}',
+	          E: '\\mathcal{E}',
+						vx: '\\mathbf{x}',
+						vp: '\\mathbf{p}',
+	          Area: '\\mathrm{Area}',
+	          Vol: '\\mathrm{Vol}',
+	          AreaC: '\\widehat{\\Area}',
+	          VolC: '\\widehat{\\Vol}',
+	          Dig: '\\mathtt{D}',
+	          DigF: ['\\Dig_{#2}(#1)',2],
+	          BT: ['\\partial #1',1],
+	          Bd: ['\\partial #1',1],
+	          dS: '\\BT X',
+	          DSh: '\\DigF{\\Shape}{h}',
+	          dD: '\\BT \\DSh',
+	          EqDef: ':=',
+	          hBd: ['\\partial_{#1}',1],
+	          Card: '\\mathrm{Card}',
+	          Proj: '\\pi_h^\\Shape',
+	          Implies: '\\Rightarrow',
+	          Curv: '\\kappa',
+	          CurvT: ['\\tilde{\\kappa}_{#1}',1],
+	          PCurvHat: ['\\hat{\\Curv}_{#1}',1],
+	          DCurvHat: ['\\hat{\\Curv}^D_{#1}',1],
+	          PMeanCurvHat: ['\\hat{H}_{#1}',1],
+	          PCurvHatStar: '\\hat{\\Curv}^{*}',
+	          PMeanCurvHatStar: '\\hat{H}^{*}',
+	          Ball: ['B_{#1}(#2)',2],
+	          Vect: ['\\overrightarrow{#1}',1],
+	          q: '\\kappa',
+	          estq: ['\\hat{\\kappa}_{#1}',1],
+	          speed: ['\\tau_{#1}',1],
+	          eabs: '\\epsilon_{abs}',
+	          erel: '\\epsilon_{rel}',
+	          eavgabs: '\\overline{\\epsilon}_{abs}',
+	          eavgrel: '\\overline{\\epsilon}_{rel}',
+	          DFr: ['\\Delta_{#1}',1],
+	          BdZ: ['Bd({#1})',1]
 			},
 			tex2jax: {
 				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -59,13 +102,13 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 			<section>
-				<h1 style="-webkit-hyphens:none;-moz-hyphens:none;hyphens:none;"><strong>Estimateurs différentiels</strong> en géométrie discrète:<br />
-					applications à l'analyse de <strong>surfaces digitales</strong></h1>
+				<h1 style="-webkit-hyphens:none;-moz-hyphens:none;hyphens:none;"><strong>Estimateurs différentiels</strong> en géométrie discrète :<br />
+					<div style="font-size:70%;">applications à l'analyse de <strong>surfaces digitales</strong><div></h1>
 					<h3>Jérémy Levallois</h3>
 					<p>
 						<small>
-							Université de Lyon, CNRS/LIRIS, UMR5205, F-69621, France<br />
-							Université de Savoie, CNRS/LAMA, UMR5127, F-73776, France
+							INSA de Lyon, CNRS/LIRIS, UMR5205, F-69621, France<br />
+							Université de Savoie Mont Blanc, CNRS/LAMA, UMR5127, F-73776, France
 						</small>
 					</p>
 					<footer>
@@ -77,6 +120,9 @@
 						\definecolor{mygrey}{RGB}{101,123,131}
 						\definecolor{mynormal}{RGB}{41,128,185}
 						\)
+						<div>
+							Thèse sous la direction de <br/>David Coeurjolly et Jacques-Olivier Lachaud
+						</div>
 						<img src="img/logo/logo_liris.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_lama.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_anr.svg" width="150" class="imgNoBorder" />
 					</footer>
 				</section>
@@ -87,9 +133,9 @@
 						<img src="img/bunny-real.png" height="200px" class="imgNoBorder" style="margin-top:175px;" />
 					</div>
 					<div style="float:right;height:550px;display:inline-block;">
-						<img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points<br />
-						<img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé<br/>
-						<img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales
+						<div class="fragment" data-fragment-index="1"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points</div>
+						<div class="fragment" data-fragment-index="2"><img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé</div>
+						<div class="fragment" data-fragment-index="3"><img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
 					</div>
 				</section>
 
@@ -99,11 +145,16 @@
 						<img src="img/Snow_NoColor.png" height="250" class="imgNoBorder" alt="Snow sans couleur" />
 					</div>
 					<div style="float:left;">
-						<img src="img/feature/OctaFlower_noise_zoom2.png" height="250" class="imgNoBorder" />
+						<img src="img/OctaFlower_noise_zoom2.png" height="250" class="imgNoBorder" />
 					</div>
 					<div style="float:right;">
+						<object data="img/curvature/digitizedShape.svg" height="250" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+					</div>
+					<div style="clear:both;float:left;">
 						<ul style="font-size:75%;">
-							<li>Surface isotétique<br/>(ensemble de pixels/voxels)</li>
+							<li>ensemble de pixels/voxels connexes</li>
 							<li>bruit arithmétique</li>
 						</ul>
 					</div>
@@ -119,8 +170,25 @@
 					</div>
 				</section>
 
-				<section slide-title="Courbure">
-					<h1>Estimation de la <strong>courbure</strong></h1>
+				<section>
+					<h2>Contexte : digitalSnow</h2>
+					<div style="float:left;height:400px;">
+						<img src="img/contexte/YTEjpE.jpg" height="335px" class="imgNoBorder" />
+						<div style="font-size:30%;font-style:italic;margin-top:-15px">
+							Tomographe à rayons X<br/>
+							3SR Lab et CEN/CNRM - GAME URA 1357/Météo-France - CNRS</div>
+					</div>
+					<div style="float:right;height:400px;display:inline-block;">
+						<img src="img/contexte/SnowE2_DigitalData.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
+						<img src="img/contexte/SnowE2_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
+						<br />
+						<img src="img/contexte/SnowI08_DigitalData.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
+						<img src="img/contexte/SnowI08_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
+					</div>
+				</section>
+
+				<section slide-title="Courbure" data-background="img/curvature/II_mean_xyz512.png">
+					<h1 style="background:rgba(255, 255, 255, 0.5);">Estimation de la <strong>courbure</strong></h1>
 				</section>
 
 				<section>
@@ -129,15 +197,39 @@
 				</section>
 
 				<section>
-					<h2>Slide II</h2>
-					<p class="noindent" >
-						<object data="img/curvature/2d-curv-estimator-1.svg" width="426.71211 " height="214.88937 " type="image/svg+xml">
-							<p>SVG-Viewer needed.</p>
-						</object>
-						<object data="img/curvature/2d-curv-estimator-2.svg" width="426.71211 " height="214.88937 " type="image/svg+xml">
-							<p>SVG-Viewer needed.</p>
-						</object>
-					</p>
+					<h2>Relation entre l'<strong>intégration volumique</strong> de la boule et la <strong>courbure</strong></h2>
+					<!-- <img src="img/curvature/integral2D_2.svg" height="250" class="imgNoBorder" /> -->
+					<p>
+							<svg xmlns="http://www.w3.org/2000/svg" width="380" height="200" style="-webkit-transform: scale(1.25); -moz-transform: scale(1.25); -ms-transform: scale(1.25); -o-transform: scale(1.25); transform: scale(1.25);">
+								<foreignobject x="0" y="0" width="100%" height="100%">
+									<body xmlns="http://www.w3.org/1999/xhtml">
+										<div style="text-align:center;"><img src="img/curvature/integral2D_2.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+									</body>
+								</foreignobject>
+								<foreignobject x="165" y="75" width="150" height="150" style="color:#000000;">
+									<body xmlns="http://www.w3.org/1999/xhtml">
+										<div style="text-align:left;font-size: 50%;">x</div>
+									</body>
+								</foreignobject>
+								<foreignobject x="165" y="60" width="150" height="150" style="color:#000000;">
+									<body xmlns="http://www.w3.org/1999/xhtml">
+										<div style="text-align:left;font-size: 50%;">\(\vx\)</div>
+									</body>
+								</foreignobject>
+								<foreignobject x="235" y="150" width="150" height="150" style="color:#000000;">
+									<body xmlns="http://www.w3.org/1999/xhtml">
+										<div style="text-align:left;font-size: 50%;">$A_R(\vx)$</div>
+									</body>
+								</foreignobject>
+							</svg>
+						</p>
+					<blockquote class="theorem" cite="" style="font-size:70%;">
+						\[ {\color{myred}A_R(\Shape,\vx)} \EqDef \int_{\Ball{R}{\vx}} \chi(\vp)d\vp \quad\quad
+						\tilde{\kappa}^{R}(\Shape,\vx) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}A_R(\Shape,\vx)}}{{{R}}^3} \]<br />
+
+						[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>] $\quad \tilde{\kappa}^{R}(\Shape,\vx) = {\kappa}^{R}(\Shape,\vx) + O(R) $
+					</blockquote>
+
 
 
 					<!-- <p style="float:left;width:49%;margin-left:15px;">
@@ -174,28 +266,36 @@
 					</blockquote> -->
 				</section>
 
-				<section class="todo">
-					<h1>Slide II expliqué</h1>
+				<section>
+					<h2>Slide II expliqué</h2>
+					<p class="noindent" >
+						<object data="img/curvature/2d-curv-estimator-1.svg" width="426.71211 " height="214.88937 " type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<object data="img/curvature/2d-curv-estimator-2.svg" width="426.71211 " height="214.88937 " type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+					</p>
 				</section>
 
 				<section class="todo">
-					<h1>Slide II convergence -> 3 erreurs</h1>
+					<h2>Slide II convergence -> 3 erreurs</h2>
 				</section>
 
 				<section class="todo">
-					<h1>Slide II moments</h1>
+					<h2>Slide II moments</h2>
 				</section>
 
 				<section class="todo">
-					<h1>Slide II resultats</h1>
+					<h2>Slide II resultats</h2>
 				</section>
 
 				<section class="todo">
-					<h1>Slide II comparaisons</h1>
+					<h2>Slide II comparaisons</h2>
 				</section>
 
 				<section class="todo">
-					<h1>Slide II avantage inconveniants</h1>
+					<h2>Slide II avantage inconveniants</h2>
 				</section>
 
 				<section slide-title="Applications">
@@ -256,7 +356,7 @@
 														<p style="font-weight:bold;">Moment Analysis<sup style="font-size:50%;"><a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=1310277">[1]</a></sup></p>
 														<p style="font-size:90%;font-style:italic;">(Clarenz et al.)</p>
 													</td>
-													<td style="text-align:center;vertical-align:middle;height:70px;"><img src="img/Figs/moment_1.svg" class="imgNoBorder" style="margin:0;height:100%;" /><img src="img/Figs/moment_2.svg" class="imgNoBorder" style="margin:0;height:100%;" /></td>
+													<td style="text-align:center;vertical-align:middle;height:70px;"><img src="img/feature/moment_1.svg" class="imgNoBorder" style="margin:0;height:100%;" /><img src="img/feature/moment_2.svg" class="imgNoBorder" style="margin:0;height:100%;" /></td>
 													<td style="vertical-align:middle;">Threshold</td>
 													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
 													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
@@ -280,7 +380,7 @@
 														<p style="font-weight:bold;">Sphere Fitting<sup style="font-size:50%;"><a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1467-8659.2012.03174.x/abstract;jsessionid=9010BE330DBB8E54F33CCEE43D0F4F87.f03t04">[4]</a></sup></p>
 														<p style="font-size:90%;font-style:italic;">(Mellado et al.)</p>
 													</td>
-													<td style="text-align:center;vertical-align:middle;height:70px;"><img src="img/Figs/sphere_fitting.svg" class="imgNoBorder" style="margin:0;height:100%;" /></td>
+													<td style="text-align:center;vertical-align:middle;height:70px;"><img src="img/feature/sphere_fitting.svg" class="imgNoBorder" style="margin:0;height:100%;" /></td>
 													<td style="vertical-align:middle;">Threshold</td>
 													<td style="text-align:center;"><img src="img/delete85.svg" class="imgNoBorder" width="20px" /></td>
 													<td style="text-align:center;"><img src="img/basic14.svg" class="imgNoBorder" width="20px" /></td>
@@ -349,7 +449,7 @@
 											<svg xmlns="http://www.w3.org/2000/svg" width="380" height="200" style="-webkit-transform: scale(1.25); -moz-transform: scale(1.25); -ms-transform: scale(1.25); -o-transform: scale(1.25); transform: scale(1.25);">
 												<foreignobject x="0" y="20" width="100%" height="100%">
 													<body xmlns="http://www.w3.org/1999/xhtml">
-														<div style="text-align:center;"><img src="img/Figs/integral2D_2.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+														<div style="text-align:center;"><img src="img/curvature/integral2D_2.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
 													</body>
 												</foreignobject>
 												<foreignobject x="165" y="75" width="150" height="150" style="color:#000000;">
@@ -373,7 +473,7 @@
 											<svg xmlns="http://www.w3.org/2000/svg" width="500" height="250" style="-webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); transform: scale(1.2);">
 												<foreignobject x="0" y="0" width="100%" height="100%">
 													<body xmlns="http://www.w3.org/1999/xhtml">
-														<div style="text-align:center;"><img src="img/Figs/notation.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+														<div style="text-align:center;"><img src="img/curvature/notation.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
 													</body>
 												</foreignobject>
 												<foreignobject x="200" y="92" width="150" height="150" style="color:#000000;">
@@ -459,16 +559,16 @@
 										</table>
 									</div>
 									<div style="width:59%;float:right;text-align:left;">
-										<img src="img/octa-mean_0001.png" class="imgNoBorder" width="250px" />
-										<img src="img/octa-gaussian_0001.png" class="imgNoBorder" width="250px" />
+										<img src="img/curvature/octa-mean_0001.png" class="imgNoBorder" width="250px" />
+										<img src="img/curvature/octa-gaussian_0001.png" class="imgNoBorder" width="250px" />
 									</div>
 
 									<div style="clear:both;width:40%;float:left;text-align:right;">
-										<img src="img/octa-normal-mini.png" class="imgNoBorder" width="250px" />
+										<img src="img/curvature/octa-normal-mini.png" class="imgNoBorder" width="250px" />
 									</div>
 									<div style="width:59%;float:right;text-align:left;">
-										<img src="img/octa-256-prindir1_0001.png" class="imgNoBorder" width="250px" />
-										<img src="img/octa-256-prindir2_0001.png" class="imgNoBorder" width="250px" />
+										<img src="img/curvature/octa-256-prindir1_0001.png" class="imgNoBorder" width="250px" />
+										<img src="img/curvature/octa-256-prindir2_0001.png" class="imgNoBorder" width="250px" />
 
 									</div>
 								</section>
@@ -476,7 +576,7 @@
 								<section>
 									<h2>&#8680; Radius as <strong>Scale-Space</strong> parameter</h2>
 									<p style="width:100%; text-align:center;">
-										<img class="imgNoBorder" style="height:100px; margin-right:10px;" src="img/Flower.png" /><img class="imgNoBorder" style="width:800px;height:100px;" src="img/ScaleSpace_Flower_2.png" />
+										<img class="imgNoBorder" style="height:100px; margin-right:10px;" src="img/Flower.png" /><img class="imgNoBorder" style="width:800px;height:100px;" src="img/feature/ScaleSpace_Flower_2.png" />
 									</p>
 									<div style="float:left;width:600px;">
 										<p style="width:100%; text-align:center;">
@@ -508,7 +608,7 @@
 										<svg xmlns="http://www.w3.org/2000/svg" width="304" height="152" style="-webkit-transform: scale(1.3); -moz-transform: scale(1.3); -ms-transform: scale(1.3); -o-transform: scale(1.3); transform: scale(1.3);">
 											<foreignobject x="0" y="0" width="100%" height="100%">
 												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:center;"><img src="img/Figs/II_kernels.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+													<div style="text-align:center;"><img src="img/feature/II_kernels.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
 												</body>
 											</foreignobject>
 											<foreignobject x="180" y="45" width="150" height="150" style="color:#000000;">
@@ -561,7 +661,7 @@
 											<tbody>
 												<tr>
 													<td style="text-align:center;">
-														<img src="img/Figs/II_kernels_smooth.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
+														<img src="img/feature/II_kernels_smooth.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
 													</td>
 
 													<td style="font-size:70%;">
@@ -571,7 +671,7 @@
 														\end{eqnarray}$
 													</td>
 													<td style="font-size:70%;">
-														<img src="img/feature/smooth_II.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
+														<img src="img/feature/plot_II_smooth.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
 														<p>Intercept : $\kappa_0$</p>
 														<p>Slope : $0$</p>
 													</td>
@@ -589,7 +689,7 @@
 														\end{eqnarray}$
 													</td>
 													<td style="font-size:70%;">
-														<img src="img/feature/hard_II.svg" class="imgNoBorder" height="150px" style="vertical-align:middle;" />
+														<img src="img/feature/plot_II_hard.svg" class="imgNoBorder" height="150px" style="vertical-align:middle;" />
 														<p>Intercept : depending to $\alpha_0$</p>
 														<p>Slope : $-1$</p>
 													</td>
@@ -645,7 +745,7 @@
 								<section>
 									<h2>Influence of digitization</h2>
 									<div style="text-align:center;">
-										<img src="img/Graphs/Kmax_plot.svg" class="imgNoBorder" style="background-color:#fff" />
+										<img src="img/feature/plot_II_Kmax.svg" class="imgNoBorder" style="background-color:#fff" />
 									</div>
 									<p style="text-align:center;font-size:80%;">Slope : $-2$</p>
 								</section>
@@ -835,7 +935,7 @@
 										<h3 style="color:#263238;">Twitter: <a href="http://twitter.com/Karganys">@Karganys</a></h3>
 										<br />
 										<span style="display:inline-block;">
-											<span style="width:40%;display:inline-block;vertical-align:middle;"><a href="http://dgtal.org"><img src="img/DGtalLogo.png" width="400px" class="imgNoBorder" /></a></span>
+											<span style="width:40%;display:inline-block;vertical-align:middle;"><a href="http://dgtal.org"><img src="img/logo/DGtalLogo.png" width="400px" class="imgNoBorder" /></a></span>
 											<span style="color:#263238;width:59%;display:inline-block;vertical-align:middle;">This work will be available (soon) in the open-source library <a href="http://dgtal.org">DGtal</a></span>
 										</span>
 									</section>

@@ -370,7 +370,7 @@ body {
    bottom: 8px;
    opacity: 0.5;
    z-index: 31;
-   font-size: 12px;
+   font-size: 18px;
    color: #fff;
    background-color: rgba(0, 0, 0, 0.6);
    padding: 5px; }
@@ -381,5 +381,9 @@ body {
    opacity: 0.5;
    bottom: 0px;
    height: 8px;
-   z-index: 9;
-   font-size: 12px; }
+   z-index: 9; }
+
+ .reveal .slide-number {
+   top: 10px;
+   bottom: auto;
+   font-size: 14px; }

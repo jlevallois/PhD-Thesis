@@ -14,9 +14,13 @@ var RevealMath = window.RevealMath || (function(){
 
 		MathJax.Hub.Config({
 			messageStyle: 'none',
+			Macros: {
+				Shape: 'X'
+			},
 			tex2jax: {
 				inlineMath: [['$','$'],['\\(','\\)']] ,
-				skipTags: ['script','noscript','style','textarea','pre']
+				skipTags: ['script','noscript','style','textarea','pre'] ,
+				displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
 			},
 			skipStartupTypeset: true
 		});
