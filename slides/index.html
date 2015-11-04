@@ -118,6 +118,7 @@
 						\definecolor{myred}{RGB}{231,76,60}
 						\definecolor{mygreen}{RGB}{38,166,115}
 						\definecolor{myblue}{RGB}{38,89,166}
+						\definecolor{myyellow}{RGB}{101,103,10}
 						\definecolor{mygrey}{RGB}{101,123,131}
 						\definecolor{mynormal}{RGB}{41,128,185}
 						\)
@@ -267,36 +268,203 @@
 						</object>
 					</p>
 					<div class="fragment" data-fragment-index="1" style="width:49%; float:left; display:block; font-size:70%;">
-						\( 12 \times 1^2 = 12 \)
+						\( \hat{\kappa}^{3}(\DigF{\Shape}{1},\vx,1) = \frac{3\pi}{2\times 3} - \frac{3 \times {\color{myred}12}}{3^3} \approx 0.237 \)
 					</div>
 					<div class="fragment" data-fragment-index="2" style="width:49%; float:right; display:block; font-size:70%;">
-						\( 50 \times (0.5)^2 = 12.5 \)
+						\( \hat{\kappa}^{3}(\DigF{\Shape}{0.5},\vx,0.5) = \frac{3\pi}{2 \times 3} - \frac{3 \times {\color{myred}12.5}}{3^3} \approx 0.182 \)
 					</div>
-					<br />
+					<div class="fragment" data-fragment-index="3" style="width:99.5%; clear:both; display:block; font-size:70%;">
+						\( {\kappa}(\Shape,\vx) = \frac{1}{7.5} \approx 0.133 \)
+					</div>
+
 					<blockquote class="example" cite="" style="font-size:70%;">
-						\[ \hat{\kappa}^{R}(\Shape,\vx) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}\AreaC(Y)}}{{{R}}^3} \quad\text{avec}\quad
+						\[ \hat{\kappa}^{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}\AreaC(Y)}}{{{R}}^3} \quad\text{avec}\quad
 						Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br />
 					</blockquote>
 				</section>
 
-				<section class="todo">
-					<h2>Slide II convergence -> 3 erreurs</h2>
+				<section>
+					<h2>Erreur de positionnement</h2>
+					<img src="img/curvature/digSurfCurv.png" class="imgNoBorder" />
+					<!-- <object data="img/curvature/2d-curv-estimator-3.svg" width="216.55264 " height="150.02493 " type="image/svg+xml"><p>SVG-Viewer needed.</p></object>
+					<object data="img/curvature/2d-curv-estimator-4.svg" width="216.55264 " height="150.02493 " type="image/svg+xml"><p>SVG-Viewer needed.</p></object> -->
+					<!-- <p>
+						<svg xmlns="http://www.w3.org/2000/svg" width="500" height="250" style="-webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); transform: scale(1.2);">
+							<foreignobject x="0" y="0" width="100%" height="100%">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:center;"><img src="img/curvature/notation.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
+								</body>
+							</foreignobject>
+							<foreignobject x="200" y="92" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">x</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="200" y="82" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(x\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="195" y="110" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(\hat{x}\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="35" y="155" width="170" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(\partial\Shape\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="65" y="180" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(\hBd{h} X\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="200" y="145" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(h\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="230" y="130" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(\sharp_n\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="370" y="22" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(\Proj(\hat{x})\)</div>
+								</body>
+							</foreignobject>
+							<foreignobject x="125" y="20" width="150" height="150" style="color:#000000;">
+								<body xmlns="http://www.w3.org/1999/xhtml">
+									<div style="text-align:left;font-size: 50%;">\(B_{R_d}(\hat{x})\)</div>
+								</body>
+							</foreignobject>
+						</svg>
+					</p> -->
+
+					<blockquote class="theorem" cite="" style="font-size:70%;">
+						[<a href="#">Lachaud</a>] $ \quad || \vx - \hat{\vx} ||_2 \le \frac{\sqrt{2}}{2}h = {\color{myyellow}O(h)}$<br />
+						<div class="fragment" data-fragment-index="1"><strong>Nous devons injecter cette erreur dans le calcul de l'intégration</strong></div>
+					</blockquote>
 				</section>
 
-				<section class="todo">
-					<h2>Slide II moments</h2>
+				<section>
+					<h2>Convergence asymptotique de l'estimation digitale de courbure</h2>
+
+					<blockquote class="theorem" cite="" style="font-size:70%;">
+						\[
+						\begin{split}
+            \forall \vx \in \partial \shape, \forall \hat{\vx} \in \hBd{h}X,
+	          \| \hat{x} -x\|_\infty \le h \Implies\\
+	           | \PCurvHat{r}(\DigF{X}{h},\hat{x},h) - \Curv(X,x) |
+	            =\quad & \color{myblue} O(h^\alpha) \color{mygrey}\\
+	            +\quad & \color{mygreen} O(h^{\beta-\alpha(1+\beta)}) \color{mygrey}\\
+	            +\quad & \color{myred} O(h^{\alpha'-2\alpha})+ O(h^{\alpha'}) + O(h^{2\alpha'-2\alpha}) \color{mygrey}
+	          \end{split}
+						\]<br />
+						\[
+						| \PCurvHat{r}(\DigF{X}{h},\hat{x},h) - \Curv(X,x) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
+						\]
+
+					</blockquote>
 				</section>
 
-				<section class="todo">
-					<h2>Slide II resultats</h2>
+				<section>
+					<h2>Slide rapide courbure moyenne</h2>
+					<div>dire que c'est la même chose</div>
+					<div>donner la formule + convergence</div>
 				</section>
 
-				<section class="todo">
+
+				<section>
+					<h2>Slide rapide directions principale</h2>
+					<div>dire que c'est la même démarche de preuve avec le calcul des moments</div>
+					<div>donner la formule + convergence</div>
+				</section>
+
+				<section>
+					<h2>Résultats</h2>
+
+					<div>
+						<img src="img/OctaFlower.png" class="imgNoBorder" width="250px" />
+						<img src="img/curvature/octa-mean_0001.png" class="imgNoBorder" width="250px" />
+						<img src="img/curvature/octa-gaussian_0001.png" class="imgNoBorder" width="250px" />
+					</div>
+
+					<div>
+						<img src="img/curvature/octa-normal-mini.png" class="imgNoBorder" width="250px" />
+						<img src="img/curvature/octa-256-prindir1_0001.png" class="imgNoBorder" width="250px" />
+						<img src="img/curvature/octa-256-prindir2_0001.png" class="imgNoBorder" width="250px" />
+
+					</div>
+				</section>
+
+				<section>
 					<h2>Slide II comparaisons</h2>
 				</section>
 
-				<section class="todo">
-					<h2>Slide II avantage inconveniants</h2>
+				<section>
+					<h2>Résultat sur forme bruitée</h2>
+				</section>
+
+				<section>
+					<h2>Slide resumé II</h2>
+					fonctionne sur des données digitales
+					estimateur unique pour 2d/3d moyenne / courbures principales
+					facile à mettre en oeuvre
+
+					convergence asymtotique uniforme en O(h^1/3)
+					robuste au bruit
+
+					necessite de <strong>choisir un rayon</strong>
+				</section>
+
+				<section>
+					<h2>Pourquoi <strong>ne voulons-nous pas</strong> de paramètres ?</h2>
+					<div style="float:left;width:600px;">
+						<p style="font-size:80%;">Comment choisir le rayon R ?</p>
+						<p style="width:100%; text-align:center;">
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_4.png" />
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_7.png" />
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_10.png" />
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_12.png" />
+						</p>
+						<p style="width:100%;padding-left:10%;padding-right:10%;text-align:center;font-size:70%;">
+							<span style="width:20%;text-align:center;float:left;">$R=4$</span>
+							<span style="width:20%;text-align:center;float:left;">$R=7$</span>
+							<span style="width:20%;text-align:center;float:left;">$R=10$</span>
+							<span style="width:20%;text-align:center;float:left;">$R=12$</span>
+						</p>
+						<p style="clear:both;width:100%; text-align:center;">
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_14.png" />
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_17.png" />
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_20.png" />
+							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_25.png" />
+						</p>
+						<p style="width:100%;padding-left:10%;padding-right:10%;text-align:center;font-size:70%;">
+							<span style="width:20%;text-align:center;float:left;">$R=14$</span>
+							<span style="width:20%;text-align:center;float:left;">$R=17$</span>
+							<span style="width:20%;text-align:center;float:left;">$R=20$</span>
+							<span style="width:20%;text-align:center;float:left;">$R=25$</span>
+						</p>
+					</div>
+					<div style="float:right;">
+						<p style="font-size:80%;">Comment connaître l'échelle ?</p>
+						<object data="img/curvature/2d-curv-estimator-7.svg" height="250" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object><br/>
+						<object data="img/curvature/2d-curv-estimator-8.svg" height="250" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+					</div>
+				</section>
+
+				<section><!-- slide-title="Sans paramètres">-->
+					<h2>Analyse des segments maximaux</h2>
+					<img src="img/curvature/2d-curv-estimator-21.svg" style="height:150px;" class="imgNoBorder" />
+					<img src="img/curvature/MDSS_ellipse_rotated.svg" style="height:150px;" class="imgNoBorder" />
+
 				</section>
 
 				<section slide-title="Applications">
@@ -442,7 +610,7 @@
 									</p>
 								</section>
 
-								<section>
+								<!-- <section>
 									<h2>Previously... Digital Curvature Estimators</h2>
 
 									<div class="box-green" data-title="Integral invariant based 2d curvature estimators" style="text-align:center;height:320px;"><br />
@@ -572,7 +740,7 @@
 										<img src="img/curvature/octa-256-prindir2_0001.png" class="imgNoBorder" width="250px" />
 
 									</div>
-								</section>
+								</section> -->
 
 								<section>
 									<h2>&#8680; Radius as <strong>Scale-Space</strong> parameter</h2>
@@ -926,6 +1094,21 @@
 											<li>Theoretical proofs behind transitions of models</li>
 										</ul>
 									</div>
+								</section>
+
+								<section>
+									<h2>Optimisation avec les masques</h2>
+									parler de l'optim avec les masques + graph temps de calcul
+								</section>
+
+								<section data-background="#DDDD44">
+									<h1>One more thing</h1>
+								</section>
+
+								<section>
+									<h2>ICTV</h2>
+									<p>demo ?<br/>
+									tableau comparaison temps de calcul/erreur CPU, CPU masque, FFT, GPU, GPU Hierarchique</p>
 								</section>
 
 								<section>

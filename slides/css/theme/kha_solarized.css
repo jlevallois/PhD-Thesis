@@ -319,7 +319,7 @@ body {
  * DEBUG
  ********************************************/
  .present {
-   background-color: rgba(0,255,0,.05);
+   /*background-color: rgba(0,255,0,.05);*/
  }
 
 .todo {
