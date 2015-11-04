@@ -368,7 +368,7 @@ body {
  .reveal .chapterName {
    position: fixed;
    display: block;
-   bottom: 8px;
+   bottom: 11px;
    opacity: 0.5;
    z-index: 31;
    font-size: 18px;
@@ -380,7 +380,7 @@ body {
    position: fixed;
    display: block;
    opacity: 0.5;
-   bottom: 0px;
+   bottom: 3px;
    height: 8px;
    z-index: 9; }
 
@@ -388,6 +388,12 @@ body {
    top: 10px;
    bottom: auto;
    font-size: 14px; }
+
+   /*********************************************
+    * PROGRESS BAR
+    *********************************************/
+   .reveal .progress {
+     height: 6px; }
 
  .reveal .one-more-thing {
    margin: 0 0 20px 0;
