@@ -45,6 +45,7 @@
 	          DigF: ['\\Dig_{#2}(#1)',2],
 	          BT: ['\\partial #1',1],
 	          Bd: ['\\partial #1',1],
+						Body: ['\\lbrack #1 \\rbrack_{#2}',2],
 	          dS: '\\BT X',
 	          DSh: '\\DigF{\\Shape}{h}',
 	          dD: '\\BT \\DSh',
@@ -105,7 +106,7 @@
 			<section>
 				<h1 style="-webkit-hyphens:none;-moz-hyphens:none;hyphens:none;"><strong>Estimateurs différentiels</strong> en géométrie discrète :<br />
 					<div style="font-size:70%;">applications à l'analyse de <strong>surfaces digitales</strong><div></h1>
-					<h3>Jérémy Levallois</h3>
+					<h3 style="margin-top:50px;">Jérémy Levallois</h3>
 					<p>
 						<small>
 							INSA de Lyon, CNRS/LIRIS, UMR5205, F-69621, France<br />
@@ -118,6 +119,7 @@
 						\definecolor{myred}{RGB}{231,76,60}
 						\definecolor{mygreen}{RGB}{38,166,115}
 						\definecolor{myblue}{RGB}{38,89,166}
+						\definecolor{mylightblue}{RGB}{104,171,216}
 						\definecolor{myyellow}{RGB}{101,103,10}
 						\definecolor{mygrey}{RGB}{101,123,131}
 						\definecolor{mynormal}{RGB}{41,128,185}
@@ -129,12 +131,21 @@
 					</footer>
 				</section>
 
-				<section>
+				<section slide-title="Contexte">
 					<h2>Géométrie discrète ? Surfaces digitales ?</h2>
-					<div style="float:left;height:550px;">
-						<img src="img/bunny-real.png" height="200px" class="imgNoBorder" style="margin-top:175px;" />
+
+					<div style="float:left;width:50%;margin-top:50px;">
+						Comment représenter un objet réel, numériquement ?
+						<br/>
+						<img src="img/bunny-real.png" height="200px" class="imgNoBorder" />
+						<br/>
+						<ul>
+							<li>Choix de modélisation</li>
+							<li>Choix imposé par la capture</li>
+						</ul>
 					</div>
-					<div style="float:right;height:550px;display:inline-block;">
+
+					<div style="float:right;width:49%;height:550px;display:inline-block;">
 						<div class="fragment" data-fragment-index="1"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points</div>
 						<div class="fragment" data-fragment-index="2"><img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé</div>
 						<div class="fragment" data-fragment-index="3"><img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
@@ -156,7 +167,7 @@
 					</div>
 					<div style="clear:both;float:left;">
 						<ul style="font-size:75%;">
-							<li>ensemble de pixels/voxels connexes</li>
+							<li>ensemble de pixels/voxels connexes de taille $h$</li>
 							<li>bruit arithmétique</li>
 						</ul>
 					</div>
@@ -165,7 +176,7 @@
 					</p>
 
 					<div style="float:left;font-size:90%;">
-						&#8594; Résultat direct de scanners (tomographie à rayons X)
+						&#8594; Résultat direct de scanners (micro-tomographie à rayons X, imagerie 2D, ...)
 					</div>
 					<div style="float:left;font-size:90%;">
 						&#8594; Convergence asymptotique des quantités estimées
@@ -174,13 +185,25 @@
 
 				<section>
 					<h2>Contexte : digitalSnow</h2>
+					<div style="float:left;width:34%;display:inline-block;font-size:70%;text-align:left;">
+						Extraire les micro-structures de neige de manière non invasive
+					</div>
+					<div style="float:right;width:65%;display:inline-block;font-size:70%;text-align:right;">
+						Simuler l'évolution de la neige en fonction des conditions extérieures et des phénomènes intrinsèques du matériau
+					</div>
 					<div style="float:left;height:400px;">
 						<img src="img/contexte/YTEjpE.jpg" height="335px" class="imgNoBorder" />
 						<div style="font-size:30%;font-style:italic;margin-top:-15px">
 							Tomographe à rayons X<br/>
 							3SR Lab et CEN/CNRM - GAME URA 1357/Météo-France - CNRS</div>
 					</div>
-					<div style="float:right;height:400px;display:inline-block;">
+					<div style="float:right;display:inline-block;">
+						<img src="img/contexte/schema-neige.png" height="350px" class="imgNoBorder" />
+					</div>
+					<div class="fragment" data-fragment-index="1" style="background-color:rgb(253, 246, 227);float:right;height:375px;width:65%;display:inline-block;margin-top:-375px;">
+						<!-- Cache -->
+					</div>
+					<div class="fragment" data-fragment-index="1" style="float:right;height:400px;display:inline-block;margin-top:-375px;">
 						<img src="img/contexte/SnowE2_DigitalData.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
 						<img src="img/contexte/SnowE2_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
 						<br />
@@ -189,13 +212,86 @@
 					</div>
 				</section>
 
+				<section>
+					<h2><strong>Convergence asymptotique</strong> d'estimateurs digitaux</h2>
+					<p style="text-align:left;"><strong>Processus de discrétisation</strong> : <br/>Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
+					<div>
+						<img src="img/contexte/multi-ellipse-0.png" width="24%" class="imgNoBorder" />
+						<img src="img/contexte/multi-ellipse-1.png" width="24%" class="imgNoBorder" />
+						<img src="img/contexte/multi-ellipse-2.png" width="24%" class="imgNoBorder" />
+						<img src="img/contexte/multi-ellipse-4.png" width="24%" class="imgNoBorder" />
+					</div>
+					<div style="display:block;width:25%;float:left;">
+						$\Shape \in \Shapes$
+					</div>
+					<div style="display:block;width:25%;float:left;">
+						$\DigF{\Shape}{1}$
+					</div>
+					<div style="display:block;width:25%;float:left;">
+						$\DigF{\Shape}{0.5}$
+					</div>
+					<div style="display:block;width:25%;float:left;">
+						$\DigF{\Shape}{0.25}$
+					</div>
+
+					<p>
+						<br />
+						<blockquote class="example" cite="" style="font-size:70%;">
+						Un estimateur géométrique $\hat{E}$ <strong>converge asymptotiquement</strong> pour $\Shapes$ vers la quantité géométrique $E$ si :<br/>
+						\[\forall \Shape \in \Shapes, \quad |\hat{E}(\DSh,h) - E(\Shape)| \le \tau_\Shape(h) \quad\text{avec}\quad \lim_{h \rightarrow 0}\tau_\Shape(h) = 0\]
+						</blockquote>
+					</p>
+				</section>
+
+				<section>
+					<h2><strong>Convergence asymptotique</strong> d'estimateurs digitaux</h2>
+					<p style="text-align:left;"><strong>Processus de discrétisation</strong> : <br/>Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
+					<div>
+						<object data="img/curvature/digitizedShape-0.svg" width="24%" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<object data="img/curvature/2d-curv-estimator-13.svg" width="24%" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<!-- <img src="img/contexte/multi-ellipse-0.png" width="24%" class="imgNoBorder" />
+						<img src="img/contexte/multi-ellipse-1.png" width="24%" class="imgNoBorder" />
+						<img src="img/contexte/multi-ellipse-2.png" width="24%" class="imgNoBorder" />
+						<img src="img/contexte/multi-ellipse-4.png" width="24%" class="imgNoBorder" /> -->
+					</div>
+					<div style="display:block;margin-left:25%;margin-top:-50px;width:25%;float:left;">
+						$\Shape \in \Shapes$<br/>
+						<span style="color:#FF9A08">&#8213;</span> $\dS$
+					</div>
+					<div style="display:block;margin-right:25%;margin-top:-50px;width:25%;float:left;">
+						&#149; $\quad h \cdot \DigF{\Shape}{h}$<br/>
+						<span style="color:#FF0000">&#8213;</span> $\quad\partial\Body{\DSh}{h}$
+					</div>
+
+					<p style="clear:both;">
+						<br />
+						<blockquote class="example" cite="" style="font-size:70%;">
+						Un estimateur géométrique <strong style="color:#68ABD8;">local</strong> $\hat{E}$ <strong>converge asymptotiquement</strong> pour $\Shapes$ vers la quantité géométrique $E$ <strong style="color:#68ABD8;">locale</strong> si :<br/>
+						\[\begin{align}
+								\forall \Shape \in \Shapes, {\color{mylightblue}\forall \vx \in \dS, \forall \hat{\vx} \in \partial\Body{\DSh}{h}} &\quad\text{avec}\quad {\color{mylightblue}||\vx - \hat{\vx}||_\infty \le h} \,, \\
+								|\hat{E}(\DSh,{\color{mylightblue}\hat{\vx}},h) - E(\Shape,{\color{mylightblue}\vx})| \le \tau_{\Shape,\vx}(h) &\quad\text{avec}\quad \lim_{h \rightarrow 0}\tau_{\Shape,\vx}(h) = 0
+						\end{align}\]
+						</blockquote>
+					</p>
+				</section>
+
 				<section slide-title="Courbure" data-background="img/curvature/II_mean_xyz512.png">
-					<h1 style="background:rgba(255, 255, 255, 0.5);">Estimation de la <strong>courbure</strong></h1>
+					<h1 class="chapterTitle">Estimation de la <strong>courbure</strong></h1>
 				</section>
 
 				<section>
 					<h2>Courbure</h2>
-					<img src="img/curvature/Curvature-OsculatorCircle.svg" height="250" class="imgNoBorder" />
+					<img src="img/curvature/Curvature-OsculatorCircle.svg" width="350px" class="imgNoBorder" />
+					<img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" width="350px" class="imgNoBorder" />
+				</section>
+
+				<section>
+					<h2>État de l'art (sélectionné)</h2>
+					+ difficulté de la donnée : on veut estimer des formes différentielles sur des objets pas différentiables -> intégrer
 				</section>
 
 				<section>
@@ -467,8 +563,8 @@
 
 				</section>
 
-				<section slide-title="Applications">
-					<h1>Applications</h1>
+				<section slide-title="Applications" data-background="img/feature/Fandisk_noise_II_scale_zoom.png">
+					<h1 class="chapterTitle">Applications</h1>
 				</section>
 
 						<section>
@@ -982,11 +1078,6 @@
 								</section>
 								<!--</section>-->
 
-								<section data-background="img/feature/Snow_E2bis_II_scale.png">
-								</section>
-								<section data-background="img/feature/Snow_I08_II_scale.png">
-								</section>
-
 								<section>
 									<section>
 										<h2>Comparisons</h2>
@@ -1078,7 +1169,28 @@
 									</section>
 								</section>
 
-								<section slide-title="Résultats digitalSnow">
+
+								<section slide-title="Résultats digitalSnow" data-background="img/curvature/E2bis-prindir-bleu.png">
+									<h1 class="chapterTitle">Résultats avec des <strong>microstructures de neige</strong></h1>
+								</section>
+
+								<section data-background="img/curvature/SnowE2_mean_0001.png">
+								</section>
+								<section data-background="img/curvature/snowI08gaussian_0001.png">
+								</section>
+								<section data-background="img/curvature/I08prindir.png">
+								</section>
+								<section data-background="img/curvature/I08prindir2.png">
+								</section>
+
+								<section data-background="img/feature/Snow_E2bis_II_scale.png">
+								</section>
+								<section data-background="img/feature/Snow_I08_II_scale.png">
+								</section>
+
+								<section slide-title="Implémentation">
+									<h2>Optimisation avec les masques</h2>
+									parler de l'optim avec les masques + graph temps de calcul
 								</section>
 
 								<section>
@@ -1099,10 +1211,7 @@
 									</div>
 								</section>
 
-								<section>
-									<h2>Optimisation avec les masques</h2>
-									parler de l'optim avec les masques + graph temps de calcul
-								</section>
+
 
 								<section data-background="#000">
 									<h1 class="one-more-thing">One more thing...</h1>

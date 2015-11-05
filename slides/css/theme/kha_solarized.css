@@ -384,6 +384,9 @@ body {
    height: 8px;
    z-index: 9; }
 
+ .reveal h1.chapterTitle {
+   background: rgba(255, 255, 255, 0.5); }
+
  .reveal .slide-number {
    top: 10px;
    bottom: auto;
