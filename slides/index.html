@@ -6,8 +6,8 @@
 
 	<title>Estimateurs différentiels en géométrie discrète: applications à l'analyse de surfaces digitales - Jérémy Levallois</title>
 
-	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-	<meta name="author" content="Hakim El Hattab">
+	<meta name="description" content="Estimateurs différentiels en géométrie discrète: applications à l'analyse de surfaces digitales - Jérémy Levallois">
+	<meta name="author" content="Jérémy Levallois">
 
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,6 +36,7 @@
 	          V: '\\mathcal{V}',
 	          E: '\\mathcal{E}',
 						vx: '\\mathbf{x}',
+						vn: '\\mathbf{n}',
 						vp: '\\mathbf{p}',
 	          Area: '\\mathrm{Area}',
 	          Vol: '\\mathrm{Vol}',
@@ -54,13 +55,13 @@
 	          Card: '\\mathrm{Card}',
 	          Proj: '\\pi_h^\\Shape',
 	          Implies: '\\Rightarrow',
-	          Curv: '\\kappa',
-	          CurvT: ['\\tilde{\\kappa}_{#1}',1],
-	          PCurvHat: ['\\hat{\\Curv}_{#1}',1],
-	          DCurvHat: ['\\hat{\\Curv}^D_{#1}',1],
-	          PMeanCurvHat: ['\\hat{H}_{#1}',1],
-	          PCurvHatStar: '\\hat{\\Curv}^{*}',
-	          PMeanCurvHatStar: '\\hat{H}^{*}',
+	          // Curv: '\\kappa',
+	          // CurvT: ['\\tilde{\\kappa}_{#1}',1],
+	          // PCurvHat: ['\\hat{\\Curv}_{#1}',1],
+	          // DCurvHat: ['\\hat{\\Curv}^D_{#1}',1],
+	          // PMeanCurvHat: ['\\hat{H}_{#1}',1],
+	          // PCurvHatStar: '\\hat{\\Curv}^{*}',
+	          // PMeanCurvHatStar: '\\hat{H}^{*}',
 	          Ball: ['B_{#1}(#2)',2],
 	          Vect: ['\\overrightarrow{#1}',1],
 	          q: '\\kappa',
@@ -71,7 +72,29 @@
 	          eavgabs: '\\overline{\\epsilon}_{abs}',
 	          eavgrel: '\\overline{\\epsilon}_{rel}',
 	          DFr: ['\\Delta_{#1}',1],
-	          BdZ: ['Bd({#1})',1]
+	          BdZ: ['Bd({#1})',1],
+
+
+						Curv:  '\\kappa',
+						MeanCurv:  'H',
+						GaussCurv:  'K',
+						PrincCurv:  ['\\kappa_{#1}',1],
+						PrincDir:  ['\\vw_{#1}',1],
+						NormalDir:  '\\vn',
+
+						CurvT:  ['\\tilde{\\Curv}^{#1}',1],
+						MeanCurvT:  ['\\tilde{\\MeanCurv}^{#1}',1],
+						GaussCurvT:  ['\\tilde{\\GaussCurv}^{#1}',1],
+						PrincCurvT:  ['\\tilde{\\PrincCurv{}}_{#1}^{#2}',2],
+						PrincDirT:  ['\\tilde{\\PrincDir{}}_{#1}^{#2}',2],
+						NormalDirT:  ['\\tilde{\\NormalDir}^{#1}',1],
+
+						CurvH:  ['\\hat{\\Curv}^{#1}',1],
+						MeanCurvH:  ['\\hat{\\MeanCurv}^{#1}',1],
+						GaussCurvH:  ['\\hat{\\GaussCurv}^{#1}',1],
+						PrincCurvH:  ['\\hat{\\PrincCurv{}}_{#1}^{#2}',2],
+						PrincDirH:  ['\\hat{\\PrincDir{}}_{#1}^{#2}',2],
+						NormalDirH:  ['\\hat{\\NormalDir}^{#1}',1],
 			},
 			tex2jax: {
 				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
@@ -118,7 +141,7 @@
 						%%%% If you see this, MathJax wasn't loaded ...
 						\definecolor{myred}{RGB}{231,76,60}
 						\definecolor{mygreen}{RGB}{38,166,115}
-						\definecolor{myblue}{RGB}{38,89,166}
+						\definecolor{myblue}{RGB}{23,110,179}
 						\definecolor{mylightblue}{RGB}{104,171,216}
 						\definecolor{myyellow}{RGB}{101,103,10}
 						\definecolor{mygrey}{RGB}{101,123,131}
@@ -146,8 +169,8 @@
 					</div>
 
 					<div style="float:right;width:49%;height:550px;display:inline-block;">
-						<div class="fragment" data-fragment-index="1"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points</div>
-						<div class="fragment" data-fragment-index="2"><img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé</div>
+						<div class="fragment" data-fragment-index="1"><img src="img/bunny-adaptatif.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Maillage triangulé</div>
+						<div class="fragment" data-fragment-index="2"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points</div>
 						<div class="fragment" data-fragment-index="3"><img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
 					</div>
 				</section>
@@ -205,10 +228,10 @@
 					</div>
 					<div class="fragment" data-fragment-index="1" style="float:right;height:400px;display:inline-block;margin-top:-375px;">
 						<img src="img/contexte/SnowE2_DigitalData.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
-						<img src="img/contexte/SnowE2_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
+						<img src="img/curvature/SnowE2_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
 						<br />
 						<img src="img/contexte/SnowI08_DigitalData.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
-						<img src="img/contexte/SnowI08_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
+						<img src="img/curvature/SnowI08_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
 					</div>
 				</section>
 
@@ -221,16 +244,16 @@
 						<img src="img/contexte/multi-ellipse-2.png" width="24%" class="imgNoBorder" />
 						<img src="img/contexte/multi-ellipse-4.png" width="24%" class="imgNoBorder" />
 					</div>
-					<div style="display:block;width:25%;float:left;">
+					<div style="display:block;width:25%;float:left;font-size:70%;">
 						$\Shape \in \Shapes$
 					</div>
-					<div style="display:block;width:25%;float:left;">
+					<div style="display:block;width:25%;float:left;font-size:70%;">
 						$\DigF{\Shape}{1}$
 					</div>
-					<div style="display:block;width:25%;float:left;">
+					<div style="display:block;width:25%;float:left;font-size:70%;">
 						$\DigF{\Shape}{0.5}$
 					</div>
-					<div style="display:block;width:25%;float:left;">
+					<div style="display:block;width:25%;float:left;font-size:70%;">
 						$\DigF{\Shape}{0.25}$
 					</div>
 
@@ -258,11 +281,11 @@
 						<img src="img/contexte/multi-ellipse-2.png" width="24%" class="imgNoBorder" />
 						<img src="img/contexte/multi-ellipse-4.png" width="24%" class="imgNoBorder" /> -->
 					</div>
-					<div style="display:block;margin-left:25%;margin-top:-50px;width:25%;float:left;">
+					<div style="display:block;margin-left:25%;margin-top:-35px;width:25%;float:left;font-size:70%;">
 						$\Shape \in \Shapes$<br/>
 						<span style="color:#FF9A08">&#8213;</span> $\dS$
 					</div>
-					<div style="display:block;margin-right:25%;margin-top:-50px;width:25%;float:left;">
+					<div style="display:block;margin-right:25%;margin-top:-35px;width:25%;float:left;font-size:70%;">
 						&#149; $\quad h \cdot \DigF{\Shape}{h}$<br/>
 						<span style="color:#FF0000">&#8213;</span> $\quad\partial\Body{\DSh}{h}$
 					</div>
@@ -284,14 +307,135 @@
 				</section>
 
 				<section>
-					<h2>Courbure</h2>
-					<img src="img/curvature/Curvature-OsculatorCircle.svg" width="350px" class="imgNoBorder" />
-					<img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" width="350px" class="imgNoBorder" />
+					<h2>Courbure d'une courbe</h2>
+
+					<p style="font-size:80%;text-align:left;">&#8594; <strong>Invariant géométrique</strong> des courbes et des surfaces, mesurant la déviation de la courbe (ou surface) par rapport au plan tangeant.</p>
+
+					<p style="font-size:60%;text-align:left;">
+						Soit $f(x)$ une courbe $C^2$ paramétrée par son abscisse curviligne dans un espace de dimension $2$ :
+						\[
+						\begin{align}
+								f : [0,1] &\rightarrow \R^2 \\
+								x &\rightarrow f(x)
+						\end{align}
+						\]
+					</p>
+
+					<blockquote class="example" cite="" style="font-size:60%;text-align:left;width:59%;float:left;">
+						La courbure de $f$ au point $x$ est la norme de la dérivée seconde :
+						\[
+							\Curv(x) = \left| \frac{d^2f}{dx^2} \right|
+						\]
+					</blockquote>
+					<div style="float:right;width:39%;display:block;">
+						<!-- empty -->
+					</div>
+
+					<blockquote class="example" cite="" style="clear:both;font-size:60%;text-align:left;width:59%;float:left;">
+						Soit $r_0(x)$ le rayon du cercle osculateur de $f$ au point $x$. La courbure de $f$ au point $x$ est l'inverse de $r_0$ :
+						\[
+						\begin{align}
+						    \Curv(x) = \frac{1}{r_0(x)}
+						\end{align}
+						\]
+					</blockquote>
+					<div style="float:right;width:39%;display:block;">
+						<img src="img/curvature/Curvature-OsculatorCircle.svg" width="50%" class="imgNoBorder" />
+					</div>
+
+					<blockquote class="example" cite="" style="clear:both;font-size:60%;text-align:left;width:59%;float:left;">
+						Soit $\phi(x)$ est l'angle orienté entre le vecteur tangent	$\vec{t}(x)$ et une droite fixe. La courbure de $f$ au point $x$ est la dérivée de l'orientation de $\vec{t}(x)$ :
+						\[
+						\begin{align}
+						    \Curv(x) = \frac{d\phi}{dx}
+						\end{align}
+						\]
+					</blockquote>
+					<div style="float:right;width:39%;display:block;">
+						<!-- empty -->
+					</div>
+
+					<!-- <img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" width="350px" class="imgNoBorder" /> -->
+				</section>
+
+				<section>
+					<h2>Courbure d'une surface</h2>
+
+					<p style="font-size:80%;text-align:left;">&#8594; <strong>Invariant géométrique</strong> des courbes et des surfaces, mesurant la déviation de la courbe (ou surface) par rapport au plan tangeant.</p>
+
+					<p style="font-size:60%;text-align:left;">
+						Considérons le <strong>repère de Frenet</strong> défini par la normale $\NormalDir$ et
+						deux vecteurs orthogonaux $\vec{t_1}$ et $\vec{t_2}$ du plan tangent au point
+						$\vx$ de la surface $\dS$ pour $\Shape \subset \R^3$. Dans ce repère, nous
+						considérons deux plans orthogonaux, $\Pi_1$ et $\Pi_2$, formant deux courbes 2D
+						$f_1$ et $f_2$ à l'intersection du plan et de la surface $\dS$.
+					</p>
+
+					<blockquote class="example" cite="" style="clear:both;font-size:60%;text-align:left;width:59%;float:left;">
+						Soit $\PrincCurv{a}(\Shape,\vx)$ la courbure de $f_1$ au	point $\vx$ et $\PrincCurv{b}(\Shape,\vx)$ la courbure de $f_2$ au point $\vx$. La <strong>courbure moyenne</strong> de $\Shape$ au point $\vx$ est :
+						\[
+						    \MeanCurv(\Shape,\vx) = \frac{\PrincCurv{a}(\Shape,\vx) + \PrincCurv{b}(\Shape,\vx)}{2}
+						\]
+					</blockquote>
+					<div style="float:right;width:39%;display:block;">
+						<img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" width="95%" class="imgNoBorder" />
+					</div>
+					<blockquote class="example" cite="" style="font-size:60%;text-align:left;width:59%;float:left;">
+						Si $\PrincCurv{a}(\Shape,\vx)$ et $\PrincCurv{b}(\Shape,\vx)$ sont respectivement la <strong>courbure
+						maximale</strong> $\PrincCurv{1}(\Shape,\vx)$ et la <strong>courbure minimale</strong>
+						$\PrincCurv{2}(\Shape,\vx)$ dans toutes les directions du repère de Frenet au point
+						$\vx$, alors la <strong>courbure gaussienne</strong> de $\Shape$ au point $\vx$ est :
+						\[
+						    \GaussCurv(\Shape,\vx) = \PrincCurv{1}(\Shape,\vx) \cdot \PrincCurv{2}(\Shape,\vx)
+						\]
+					</blockquote>
+
 				</section>
 
 				<section>
 					<h2>État de l'art (sélectionné)</h2>
-					+ difficulté de la donnée : on veut estimer des formes différentielles sur des objets pas différentiables -> intégrer
+					<div style="float:left;text-align:left;font-size:60%;width:30%;">
+						<ul>
+							<li><span style="font-size:130%;">Maillages triangulés :</span>
+								<ul>
+									<li>Estimateurs locaux (1- ou 2-voisinage) <span class="citation"><a href="#">[Surazhsky et al. 2003]</a><a href="#">[Gatzke, Grimm 2006]</a></span></li>
+									<li>Formule de Gauss-Bonnet <span class="citation"><a href="#">[Xu 2006]</a></span></li>
+									<li>Cycles normaux <span class="citation"><a href="#">[Cohen-Steiner, Morvan 2006]</a></span></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div style="margin-left:20px;float:left;text-align:left;font-size:60%;width:30%;">
+						<ul>
+							<li><span style="font-size:130%;">Nuages de points :</span>
+								<ul>
+									<li>Ajustement polynomial des jets osculateurs <span class="citation"><a href="#">[Cazals, Pouget 2005]</a></span></li>
+									<li>Mesure de covariance des cellules de Voronoï (VCM) <span class="citation"><a href="#">[Alliez et al. 2007]</a><a href="#">[Merigot et al. 2011]</a></span></li>
+									<li>Théorie des varifolds <span class="citation"><a href="#">[Buet 2014]</a><a href="#">[Buet et al. 2015]</a></span></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div style="margin-left:20px;float:left;text-align:left;font-size:60%;width:30%;">
+						<ul>
+							<li><span style="font-size:130%;">Surfaces digitales :</span>
+								<ul>
+									<li>Reconnaissance d'objets digitaux 2D (Segments, Arcs) <span class="citation"><a href="#">[Coeurjolly et al. 2001]</a><a href="#">[Roussillon et al. 2011]</a></span></li>
+									<li>Convolution binomiale <span class="citation"><a href="#">[Malgouyres et al. 2008]</a><a href="#">[Esbellin et al. 2011]</a></span></li>
+									<li>Ajustement polynomial <span class="citation"><a href="#">[Provot, Gérard 2014]</a></span></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+
+					<div style="clear:both;float:left;text-align:left;font-size:60%;width:60%;font-weight:bold;">
+						&#8594; précision de l'estimation dépend de la qualité du maillage ou du nuage de points<br />
+						&#8594; contraintes pour la convergence non compatibles avec des données digitales
+					</div>
+					<div style="margin-left:40px;float:left;text-align:left;font-size:60%;width:30%;font-weight:bold;">
+						&#8594; Aucun estimateur de courbure convergent en 3D
+					</div>
+					<p style="clear:both;margin-top:50px;">&#8594; difficulté de la donnée digitale : estimation des formes différentielles sur des objets non différentiables</p>
 				</section>
 
 				<section>
@@ -325,8 +469,50 @@
 						\[ {\color{myred}A_R(\Shape,\vx)} \EqDef \int_{\Ball{R}{\vx}} \chi(\vp)d\vp \quad\quad
 						\tilde{\kappa}^{R}(\Shape,\vx) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}A_R(\Shape,\vx)}}{{{R}}^3} \]<br />
 
-						[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>] $\quad \tilde{\kappa}^{R}(\Shape,\vx) = {\kappa}^{R}(\Shape,\vx) + {\color{myblue}O(R)} $
+						[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>] $\quad \tilde{\kappa}^{R}(\Shape,\vx) = {\kappa}^{R}(\Shape,\vx) + {\color{myred}O(R)} $
 					</blockquote>
+					<div class="fragment" data-fragment-index="1">
+						<strong>&#8594; Pas applicable directement aux données digitales</strong><br />
+						<span style="font-size:70%;">Quand $h \rightarrow 0$, $R \rightarrow +\infty$</span>
+					</div>
+				</section>
+
+				<section>
+					<h2>Adaptation aux données digitales</h2>
+
+					<p class="noindent" >
+						<blockquote cite="" style="text-align:left;font-size:60%;">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-0.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$A_R(\Shape,\vx) \rightarrow \AreaC(\Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h})$</span>
+						</blockquote>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="text-align:left;font-size:60%;">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object> +
+						<span style="vertical-align:middle;width:200px;" width="200">
+							[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>]
+						</span>
+						<span style="vertical-align:middle;margin-left:50px;">$\quad\CurvH{R}(\DSh,\vx,h)$</span>
+						</blockquote>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="text-align:left;font-size:60%;">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/main-4.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h)$</span>
+						</blockquote>
+					</p>
 				</section>
 
 				<section>
@@ -340,16 +526,16 @@
 						</object>
 					</p>
 					<div class="fragment" data-fragment-index="1" style="width:49%; float:left; display:block; font-size:70%;">
-						\( {\color{myred}\AreaC(Y)} = 12 \times 1^2 = 12 \)
+						\( \AreaC(Y) = 12 \times 1^2 = {\color{myblue}12} \)
 					</div>
 					<div class="fragment" data-fragment-index="2" style="width:49%; float:right; display:block; font-size:70%;">
-						\( {\color{myred}\AreaC(Y)} = 50 \times (0.5)^2 = 12.5 \)
+						\( \AreaC(Y) = 50 \times (0.5)^2 = {\color{myblue}12.5} \)
 					</div>
 					<br />
 					<blockquote class="theorem" cite="" style="font-size:70%;">
-						\[ {\color{myred}\AreaC(Y)} \EqDef h^2 \Card (Y) \quad\quad\text{avec}\quad
+						\[ {\color{myblue}\AreaC(Y)} \EqDef h^2 \Card (Y) \quad\quad\text{avec}\quad
 						Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br/>
-						[<a href="#">??</a>] $\quad \AreaC(Y) = A_R(\Shape,\vx) + {\color{mygreen}O(hR)} $
+						[<a href="#">??</a>] $\quad \AreaC(Y) = A_R(\Shape,\vx) + {\color{myblue}O(hR)} $
 					</blockquote>
 				</section>
 
@@ -364,83 +550,32 @@
 						</object>
 					</p>
 					<div class="fragment" data-fragment-index="1" style="width:49%; float:left; display:block; font-size:70%;">
-						\( \hat{\kappa}^{3}(\DigF{\Shape}{1},\vx,1) = \frac{3\pi}{2\times 3} - \frac{3 \times {\color{myred}12}}{3^3} \approx 0.237 \)
+						\( \hat{\kappa}^{3}(\DigF{\Shape}{1},\vx,1) = \frac{3\pi}{2\times 3} - \frac{3 \times {\color{myblue}12}}{3^3} \approx 0.237 \)
 					</div>
 					<div class="fragment" data-fragment-index="2" style="width:49%; float:right; display:block; font-size:70%;">
-						\( \hat{\kappa}^{3}(\DigF{\Shape}{0.5},\vx,0.5) = \frac{3\pi}{2 \times 3} - \frac{3 \times {\color{myred}12.5}}{3^3} \approx 0.182 \)
+						\( \hat{\kappa}^{3}(\DigF{\Shape}{0.5},\vx,0.5) = \frac{3\pi}{2 \times 3} - \frac{3 \times {\color{myblue}12.5}}{3^3} \approx 0.182 \)
 					</div>
 					<div class="fragment" data-fragment-index="3" style="width:99.5%; clear:both; display:block; font-size:70%;">
 						\( {\kappa}(\Shape,\vx) = \frac{1}{7.5} \approx 0.133 \)
 					</div>
 
 					<blockquote class="example" cite="" style="font-size:70%;">
-						\[ \hat{\kappa}^{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}\AreaC(Y)}}{{{R}}^3} \quad\text{avec}\quad
+						\[ \hat{\kappa}^{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myblue}\AreaC(Y)}}{{{R}}^3} \quad\text{avec}\quad
 						Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br />
 					</blockquote>
 				</section>
 
 				<section>
 					<h2>Erreur de positionnement</h2>
-					<img src="img/curvature/digSurfCurv.png" class="imgNoBorder" />
-					<!-- <object data="img/curvature/2d-curv-estimator-3.svg" width="216.55264 " height="150.02493 " type="image/svg+xml"><p>SVG-Viewer needed.</p></object>
-					<object data="img/curvature/2d-curv-estimator-4.svg" width="216.55264 " height="150.02493 " type="image/svg+xml"><p>SVG-Viewer needed.</p></object> -->
-					<!-- <p>
-						<svg xmlns="http://www.w3.org/2000/svg" width="500" height="250" style="-webkit-transform: scale(1.2); -moz-transform: scale(1.2); -ms-transform: scale(1.2); -o-transform: scale(1.2); transform: scale(1.2);">
-							<foreignobject x="0" y="0" width="100%" height="100%">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:center;"><img src="img/curvature/notation.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
-								</body>
-							</foreignobject>
-							<foreignobject x="200" y="92" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">x</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="200" y="82" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(x\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="195" y="110" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(\hat{x}\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="35" y="155" width="170" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(\partial\Shape\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="65" y="180" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(\hBd{h} X\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="200" y="145" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(h\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="230" y="130" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(\sharp_n\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="370" y="22" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(\Proj(\hat{x})\)</div>
-								</body>
-							</foreignobject>
-							<foreignobject x="125" y="20" width="150" height="150" style="color:#000000;">
-								<body xmlns="http://www.w3.org/1999/xhtml">
-									<div style="text-align:left;font-size: 50%;">\(B_{R_d}(\hat{x})\)</div>
-								</body>
-							</foreignobject>
-						</svg>
-					</p> -->
+					<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="300" type="image/svg+xml">
+						<p>SVG-Viewer needed.</p>
+					</object>
+					<object style="vertical-align:middle;" data="img/curvature/main-4.svg" width="300" type="image/svg+xml">
+						<p>SVG-Viewer needed.</p>
+					</object>
 
 					<blockquote class="theorem" cite="" style="font-size:70%;">
-						[<a href="#">Lachaud</a>] $ \quad || \vx - \hat{\vx} ||_2 \le \frac{\sqrt{2}}{2}h = {\color{myyellow}O(h)}$<br />
+						[<a href="#">Lachaud</a>] $ \quad || \vx - \hat{\vx} ||_2 \le \frac{\sqrt{2}}{2}h = {\color{mygreen}O(h^{\alpha'})}$<br />
 						<div class="fragment" data-fragment-index="1"><strong>Nous devons injecter cette erreur dans le calcul de l'intégration</strong></div>
 					</blockquote>
 				</section>
@@ -451,16 +586,16 @@
 					<blockquote class="theorem" cite="" style="font-size:70%;">
 						\[
 						\begin{split}
-            \forall \vx \in \partial \shape, \forall \hat{\vx} \in \hBd{h}X,
+            \forall \vx \in \partial\Shape, \forall \hat{\vx} \in \partial\Body{\DSh}{h},
 	          \| \hat{x} -x\|_\infty \le h \Implies\\
-	           | \PCurvHat{r}(\DigF{X}{h},\hat{x},h) - \Curv(X,x) |
-	            =\quad & \color{myblue} O(h^\alpha) \color{mygrey}\\
-	            +\quad & \color{mygreen} O(h^{\beta-\alpha(1+\beta)}) \color{mygrey}\\
-	            +\quad & \color{myred} O(h^{\alpha'-2\alpha})+ O(h^{\alpha'}) + O(h^{2\alpha'-2\alpha}) \color{mygrey}
+	           | \CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx) |
+	            =\quad & \color{myred} O(h^\alpha) \color{mygrey}\\
+	            +\quad & \color{myblue} O(h^{\beta-\alpha(1+\beta)}) \color{mygrey}\\
+	            +\quad & \color{mygreen} O(h^{\alpha'-2\alpha})+ O(h^{\alpha'}) + O(h^{2\alpha'-2\alpha}) \color{mygrey}
 	          \end{split}
 						\]<br />
 						\[
-						| \PCurvHat{r}(\DigF{X}{h},\hat{x},h) - \Curv(X,x) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
+						| \CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
 
 					</blockquote>
@@ -504,7 +639,7 @@
 					<h2>Résultat sur forme bruitée</h2>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h2>Slide resumé II</h2>
 					fonctionne sur des données digitales
 					estimateur unique pour 2d/3d moyenne / courbures principales
@@ -514,7 +649,7 @@
 					robuste au bruit
 
 					necessite de <strong>choisir un rayon</strong>
-				</section>
+				</section> -->
 
 				<section>
 					<h2>Pourquoi <strong>ne voulons-nous pas</strong> de paramètres ?</h2>
@@ -561,6 +696,25 @@
 					<img src="img/curvature/2d-curv-estimator-21.svg" style="height:150px;" class="imgNoBorder" />
 					<img src="img/curvature/MDSS_ellipse_rotated.svg" style="height:150px;" class="imgNoBorder" />
 
+				</section>
+
+				<section>
+					expliquer 3d
+				</section>
+
+				<section>
+					<h2>Résultat à différentes échelles</h2>
+					<h4>Calcul automatique, <strong>sans fournir de paramètre</strong> à l'estimateur</h4>
+
+					<img src="img/curvature/Bunny_64_mean.png" style="width:30%;" class="imgNoBorder" />
+					<img src="img/curvature/Bunny_128_mean.png" style="width:30%;" class="imgNoBorder" />
+					<img src="img/curvature/Bunny_256_mean.png" style="width:30%;" class="imgNoBorder" />
+
+					<div>
+					<span style="width:30%;display:inline-block;" />$[64^3]$</span>
+					<span style="width:30%;display:inline-block;" />$[128^3]$</span>
+					<span style="width:30%;display:inline-block;" />$[256^3]$</span>
+					</div>
 				</section>
 
 				<section slide-title="Applications" data-background="img/feature/Fandisk_noise_II_scale_zoom.png">

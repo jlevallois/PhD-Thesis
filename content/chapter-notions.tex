@@ -354,26 +354,26 @@ deux vecteurs orthogonaux $\vec{t_1}$ et $\vec{t_2}$ du plan tangent au point
 $\vx$ de la surface $\dS$ pour $\Shape \subset \R^3$. Dans ce repère, nous
 considérons deux plans orthogonaux, $\Pi_1$ et $\Pi_2$, formant deux courbes 2D
 $f_1$ et $f_2$ à l'intersection du plan et de la surface $\dS$ (voir
-\RefFigure{fig:wiki-surv}). Notons $\PrincCurv{a}(\vx)$ la courbure de $f_1$ au
-point $\vx$ et $\PrincCurv{b}(\vx)$ la courbure de $f_2$ au point $\vx$. Si
+\RefFigure{fig:wiki-surv}). Notons $\PrincCurv{a}(\Shape,\vx)$ la courbure de $f_1$ au
+point $\vx$ et $\PrincCurv{b}(\Shape,\vx)$ la courbure de $f_2$ au point $\vx$. Si
 $f_1$ et $f_2$ sont deux fois dérivables en $\vx$, alors la \colorize{courbure
-moyenne} $\MeanCurv(\vx)$ est définie comme étant :
+moyenne} $\MeanCurv(\Shape,\vx)$ est définie comme étant :
 %
 \begin{equation}
   %
-  \MeanCurv(\vx) = \frac{\PrincCurv{a}(\vx) + \PrincCurv{b}(\vx)}{2} \,.
+  \MeanCurv(\Shape,\vx) = \frac{\PrincCurv{a}(\Shape,\vx) + \PrincCurv{b}(\Shape,\vx)}{2} \,.
   %
 \end{equation}
 
-Si $\PrincCurv{a}$ et $\PrincCurv{b}$ sont \respp la \colorize{courbure
-maximale} $\PrincCurv{1}(\vx)$ et la \colorize{courbure minimale}
-$\PrincCurv{2}(\vx)$ dans toutes les directions du repère de Frenet au point
-$\vx$, alors nous pouvons définir la courbure gaussienne $\GaussCurv(\vx)$ comme
+Si $\PrincCurv{a}(\Shape,\vx)$ et $\PrincCurv{b}(\Shape,\vx)$ sont \respp la \colorize{courbure
+maximale} $\PrincCurv{1}(\Shape,\vx)$ et la \colorize{courbure minimale}
+$\PrincCurv{2}(\Shape,\vx)$ dans toutes les directions du repère de Frenet au point
+$\vx$, alors nous pouvons définir la courbure gaussienne $\GaussCurv(\Shape,\vx)$ comme
 étant :
 %
 \begin{equation}
   %
-  \GaussCurv(\vx) = \PrincCurv{1} \cdot \PrincCurv{2} \,.
+  \GaussCurv(\Shape,\vx) = \PrincCurv{1}(\Shape,\vx) \cdot \PrincCurv{2}(\Shape,\vx) \,.
   %
 \end{equation}
 
