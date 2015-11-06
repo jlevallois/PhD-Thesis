@@ -237,7 +237,7 @@
 
 				<section>
 					<h2><strong>Convergence asymptotique</strong> d'estimateurs digitaux</h2>
-					<p style="text-align:left;"><strong>Processus de discrétisation</strong> : <br/>Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
+					<p style="text-align:left;font-size:70%;"><strong>Processus de discrétisation</strong> : Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
 					<div>
 						<img src="img/contexte/multi-ellipse-0.png" width="24%" class="imgNoBorder" />
 						<img src="img/contexte/multi-ellipse-1.png" width="24%" class="imgNoBorder" />
@@ -268,7 +268,7 @@
 
 				<section>
 					<h2><strong>Convergence asymptotique</strong> d'estimateurs digitaux</h2>
-					<p style="text-align:left;"><strong>Processus de discrétisation</strong> : <br/>Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
+					<p style="text-align:left;font-size:70%;"><strong>Processus de discrétisation</strong> : Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
 					<div>
 						<object data="img/curvature/digitizedShape-0.svg" width="24%" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
@@ -302,7 +302,7 @@
 					</p>
 				</section>
 
-				<section slide-title="Courbure" data-background="img/curvature/II_mean_xyz512.png">
+				<section slide-title="Estimateurs de courbure" data-background="img/curvature/II_mean_xyz512.png">
 					<h1 class="chapterTitle">Estimation de la <strong>courbure</strong></h1>
 				</section>
 
@@ -332,18 +332,6 @@
 					</div>
 
 					<blockquote class="example" cite="" style="clear:both;font-size:60%;text-align:left;width:59%;float:left;">
-						Soit $r_0(x)$ le rayon du cercle osculateur de $f$ au point $x$. La courbure de $f$ au point $x$ est l'inverse de $r_0$ :
-						\[
-						\begin{align}
-						    \Curv(x) = \frac{1}{r_0(x)}
-						\end{align}
-						\]
-					</blockquote>
-					<div style="float:right;width:39%;display:block;">
-						<img src="img/curvature/Curvature-OsculatorCircle.svg" width="50%" class="imgNoBorder" />
-					</div>
-
-					<blockquote class="example" cite="" style="clear:both;font-size:60%;text-align:left;width:59%;float:left;">
 						Soit $\phi(x)$ est l'angle orienté entre le vecteur tangent	$\vec{t}(x)$ et une droite fixe. La courbure de $f$ au point $x$ est la dérivée de l'orientation de $\vec{t}(x)$ :
 						\[
 						\begin{align}
@@ -353,6 +341,18 @@
 					</blockquote>
 					<div style="float:right;width:39%;display:block;">
 						<!-- empty -->
+					</div>
+
+					<blockquote class="example" cite="" style="clear:both;font-size:60%;text-align:left;width:59%;float:left;">
+						Soit $r_0(x)$ le rayon du cercle osculateur de $f$ au point $x$. La courbure de $f$ au point $x$ est l'inverse de $r_0$ :
+						\[
+						\begin{align}
+						    \Curv(x) = \frac{1}{r_0(x)}
+						\end{align}
+						\]
+					</blockquote>
+					<div style="float:right;width:39%;display:block;">
+						<img src="img/curvature/Curvature-OsculatorCircle.svg" width="50%" class="imgNoBorder" />
 					</div>
 
 					<!-- <img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" width="350px" class="imgNoBorder" /> -->
@@ -469,7 +469,7 @@
 						\[ {\color{myred}A_R(\Shape,\vx)} \EqDef \int_{\Ball{R}{\vx}} \chi(\vp)d\vp \quad\quad
 						\tilde{\kappa}^{R}(\Shape,\vx) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myred}A_R(\Shape,\vx)}}{{{R}}^3} \]<br />
 
-						[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>] $\quad \tilde{\kappa}^{R}(\Shape,\vx) = {\kappa}^{R}(\Shape,\vx) + {\color{myred}O(R)} $
+						[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>] $\quad \CurvT{R}(\Shape,\vx) = \Curv(\Shape,\vx) + {\color{myred}O(R)} $
 					</blockquote>
 					<div class="fragment" data-fragment-index="1">
 						<strong>&#8594; Pas applicable directement aux données digitales</strong><br />
@@ -481,7 +481,7 @@
 					<h2>Adaptation aux données digitales</h2>
 
 					<p class="noindent" >
-						<blockquote cite="" style="text-align:left;font-size:60%;">
+						<blockquote cite="" style="text-align:left;font-size:60%;background: rgba(0, 0, 255, 0.05);">
 						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-0.svg" width="200" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object>&#8594;
@@ -492,7 +492,7 @@
 						</blockquote>
 					</p>
 					<p class="noindent" >
-						<blockquote cite="" style="text-align:left;font-size:60%;">
+						<blockquote cite="" style="text-align:left;font-size:60%;background: rgba(255, 0, 0, 0.05);">
 						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object> +
@@ -503,14 +503,14 @@
 						</blockquote>
 					</p>
 					<p class="noindent" >
-						<blockquote cite="" style="text-align:left;font-size:60%;">
+						<blockquote cite="" style="text-align:left;font-size:60%;background: rgba(0, 255, 0, 0.05);">
 						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object>&#8594;
 						<object style="vertical-align:middle;" data="img/curvature/main-4.svg" width="200" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object>
-						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h)$</span>
+						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h) \rightarrow \Curv(\Shape,\vx)$</span>
 						</blockquote>
 					</p>
 				</section>
@@ -532,7 +532,7 @@
 						\( \AreaC(Y) = 50 \times (0.5)^2 = {\color{myblue}12.5} \)
 					</div>
 					<br />
-					<blockquote class="theorem" cite="" style="font-size:70%;">
+					<blockquote cite="" style="font-size:70%;background: rgba(0, 0, 255, 0.05);">
 						\[ {\color{myblue}\AreaC(Y)} \EqDef h^2 \Card (Y) \quad\quad\text{avec}\quad
 						Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br/>
 						[<a href="#">??</a>] $\quad \AreaC(Y) = A_R(\Shape,\vx) + {\color{myblue}O(hR)} $
@@ -559,7 +559,7 @@
 						\( {\kappa}(\Shape,\vx) = \frac{1}{7.5} \approx 0.133 \)
 					</div>
 
-					<blockquote class="example" cite="" style="font-size:70%;">
+					<blockquote cite="" style="font-size:70%;background: rgba(255, 0, 0, 0.05);">
 						\[ \hat{\kappa}^{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myblue}\AreaC(Y)}}{{{R}}^3} \quad\text{avec}\quad
 						Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br />
 					</blockquote>
@@ -574,7 +574,7 @@
 						<p>SVG-Viewer needed.</p>
 					</object>
 
-					<blockquote class="theorem" cite="" style="font-size:70%;">
+					<blockquote cite="" style="font-size:70%;background: rgba(0, 255, 0, 0.05);">
 						[<a href="#">Lachaud</a>] $ \quad || \vx - \hat{\vx} ||_2 \le \frac{\sqrt{2}}{2}h = {\color{mygreen}O(h^{\alpha'})}$<br />
 						<div class="fragment" data-fragment-index="1"><strong>Nous devons injecter cette erreur dans le calcul de l'intégration</strong></div>
 					</blockquote>
@@ -632,11 +632,26 @@
 				</section>
 
 				<section>
-					<h2>Slide II comparaisons</h2>
+					<h2>Évaluation expérimentale</h2>
+					<div style="float:left;width:45%;">
+						<img src="img/curvature/Ellipse_Loo.svg" class="imgNoBorder" width="400px" />
+					</div>
+					<div style="float:right;width:50%;">
+						<img src="img/Ellipse.png" class="imgNoBorder" width="50px" />
+						<img src="img/AccFlower.png" class="imgNoBorder" width="50px" />
+						<img src="img/Flower.png" class="imgNoBorder" width="50px" /><br/>
+						<img src="img/Ellipsoid.png" class="imgNoBorder" width="50px" />
+						<img src="img/RoundedCube2.png" class="imgNoBorder" width="50px" />
+						<img src="img/BlobbyCube.png" class="imgNoBorder" width="50px" /><br/>
+						$\CurvH{R}$, $\MeanCurvH{R}$, $\PrincCurvH{1}{R}$, $\PrincCurvH{2}{R}$
+						<br/>
+						<div style="text-align:left;">
+							<strong>L'évaluation expérimentale complète est disponible dans le manuscrit</strong>
+						</div>
+					</div>
 				</section>
 
-				<section>
-					<h2>Résultat sur forme bruitée</h2>
+				<section data-background="img/curvature/ii_octa-noise.png">
 				</section>
 
 				<!-- <section>
@@ -695,11 +710,11 @@
 					<h2>Analyse des segments maximaux</h2>
 					<img src="img/curvature/2d-curv-estimator-21.svg" style="height:150px;" class="imgNoBorder" />
 					<img src="img/curvature/MDSS_ellipse_rotated.svg" style="height:150px;" class="imgNoBorder" />
-
+					<img src="img/curvature/flower5-1.png" style="height:150px;" class="imgNoBorder" />
 				</section>
 
 				<section>
-					expliquer 3d
+					<img src="img/curvature/ctopo3dSurfelCut.png" class="imgNoBorder" />
 				</section>
 
 				<section>
@@ -1156,9 +1171,9 @@
 										\[ {\color{myred}\kappa_{max} = \frac{2h}{R^2 + h^2}} \]
 									</div>
 
-									<div class="box-green" data-title="" style="margin-top:50px;">
+									<blockquote class="example" cite="" style="font-size:70%;">
 										For fixed $h$, estimated values $\hat{\kappa}_R \le \kappa_{max}$ are considered as <strong style="color:#2ecc71">flat</strong> zone, or <strong style="color:#2ecc71">outliers</strong> (in the sense that doesn't capture the feature with current radius).
-									</div>
+									</blockquote>
 								</section>
 
 								<section>
@@ -1325,7 +1340,7 @@
 
 
 								<section slide-title="Résultats digitalSnow" data-background="img/curvature/E2bis-prindir-bleu.png">
-									<h1 class="chapterTitle">Résultats avec des <strong>microstructures de neige</strong></h1>
+									<h1 class="chapterTitle">Résultats avec <strong>digitalSnow</strong></h1>
 								</section>
 
 								<section data-background="img/curvature/SnowE2_mean_0001.png">
@@ -1343,11 +1358,44 @@
 								</section>
 
 								<section slide-title="DGtal">
+									<!-- <h2>DGtal</h2> -->
+									<img src="img/logo/DGtalLogo.png" width="150px" class="imgNoBorder"/>
+									<p>Parler des outils disponibles<br/>
+									Grand variétés de formes (paramétriques, implicites, import de .vol)<br/>
+									Beaucoup d'estimateurs implémentés -> comparaison facile<br/>
+									Pipe avec d'autres librairies comme CGal
+								</p>
+
+									<strong>Tous les travaux présentés ici sont actuellement disponible sur Github librement</strong><br/>
+
 									<a href="https://github.com/you">
-										<img style="position: absolute; top: 0; right: 0; border: 0; width: 100px; height: 100px;" src="img/misc/forkme_right_red_aa0000.png" width="50px" alt="Fork me on GitHub">
+										Fork me on Github
+										<!-- <img style="position: absolute; top: 0; right: 0; border: 0; width: 100px; height: 100px;" src="img/misc/forkme_right_red_aa0000.png" width="50px" alt="Fork me on GitHub"> -->
 									</a>
-									<h2>Optimisation avec les masques</h2>
-									parler de l'optim avec les masques + graph temps de calcul
+								</section>
+
+								<section>
+									<h2><strong>Optimisation</strong> avec les masques</h2>
+									<div>
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask0.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask1.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask2.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask3.svg" width="100px" class="imgNoBorder" /><br/>
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask4.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask5.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask6.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask7.svg" width="100px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask8.svg" width="100px" class="imgNoBorder" />
+									</div>
+
+
+									<blockquote class="example" cite="" style="font-size:70%;text-align:left;">
+										<strong>Complexité :</strong><br/>
+										<ul>
+											<li>Sans optimisation : $O((R/h)^d)$</li>
+											<li>Sans optimisation : $O((R/h)^{d-1})$</li>
+										</ul>
+									</blockquote>
 								</section>
 
 								<section>
@@ -1370,9 +1418,9 @@
 
 
 
-								<section data-background="#000">
+								<!-- <section data-background="#000">
 									<h1 class="one-more-thing">One more thing...</h1>
-								</section>
+								</section> -->
 
 								<section>
 									<h2>ICTV</h2>
@@ -1380,7 +1428,11 @@
 									tableau comparaison temps de calcul/erreur CPU, CPU masque, FFT, GPU, GPU Hierarchique</p>
 								</section>
 
-								<section data-background-video="img/misc/video.mp4,video.webm">
+								<section>
+									<video width="800" controls>
+									  <source src="img/misc/video.mp4" type="video/mp4">
+									  Your browser does not support HTML5 video.
+									</video>
 								</section
 
 
