@@ -135,6 +135,7 @@ body {
 
 .reveal blockquote.theorem {
   background: rgba(255, 0, 0, 0.05); }
+
 .reveal blockquote.example {
   background: rgba(0, 255, 0, 0.05); }
 

@@ -1,0 +1,111 @@
+
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % grids
+  \draw[help lines,step=0.5cm] (0,0) grid (10,10);
+  % shape
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] plot[smooth cycle]
+            coordinates{(5,9.3) (8,8.5) (8.5,7.5) (7.5,6.5) (5,7.5) (4,7) (5,6) (8,4.5) (8.5,2.5) (7,1)
+                        (5,0.7) (2,1.5) (1.5,2.5) (2.5,3.5) (5,2.5) (6,3) (5,4) (2,5.5) (1.5,7.5) (3,9)} -- cycle;
+  % shape boundary
+  \draw[draw,thick,color=kOrange] plot[smooth cycle]
+            coordinates{(5,9.3) (8,8.5) (8.5,7.5) (7.5,6.5) (5,7.5) (4,7) (5,6) (8,4.5) (8.5,2.5) (7,1)
+                        (5,0.7) (2,1.5) (1.5,2.5) (2.5,3.5) (5,2.5) (6,3) (5,4) (2,5.5) (1.5,7.5) (3,9)} -- cycle;
+  % gauss digitization
+  \foreach \x/\y in {3/9,4/9,5/9,6/9,2/8,3/8,4/8,5/8,6/8,7/8,8/8,2/7,3/7,4/7,7/7,8/7,2/6,3/6,4/6,5/6,3/5,4/5,5/5} {
+    \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+    \draw[color=kGrey,fill] (10-\x,10-\y) circle (0.5mm);
+  };
+  % legend
+  \node at(0.5,-1) {$\Shape$};
+  \node[rectangle,fill,color=kOrange,nearly transparent] at(1.7,-1) {\mbox{~~}};
+  \node at(3.7,-1) {$\dS$};
+  \draw[draw,thick,color=kOrange] (4.2,-1) -- (5.3,-1);
+  \node at(7.8,-1) {$(h\cdot\DSh)$~~};
+  \draw[color=kGrey,fill] (9.7,-1) circle (0.5mm);
+  \draw[densely dotted,black] (0,10) -- (0,10.6);
+  \draw[densely dotted,black] (1,10) -- (1,10.6);
+  \draw[<->,black] (0,10.25) -- (1,10.25) node[midway,above] {$h$};
+\end{tikzpicture}
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % QhZ
+  \foreach \x/\y in {3/9,4/9,5/9,6/9,2/8,3/8,4/8,5/8,6/8,7/8,8/8,2/7,3/7,4/7,7/7,8/7,2/6,3/6,4/6,5/6,3/5,4/5,5/5} {
+    \draw[color=red!30!white,fill] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+    \draw[color=red!30!white,fill] (10-\x-0.5,10-\y-0.5) rectangle (10-\x+0.5,10-\y+0.5);
+  };
+  % \partial_h X
+  \draw[color=red,thick] (2.5,9.5) -- (6.5,9.5) -- (6.5,8.5) -- (8.5,8.5) -- (8.5,6.5) -- (6.5,6.5)
+                             -- (6.5,7.5) -- (4.5,7.5) -- (4.5,6.5) -- (5.5,6.5) -- (5.5,5.5) -- (7.5,5.5)
+                             -- (7.5,4.5) -- (8.5,4.5) -- (8.5,1.5) -- (7.5,1.5) -- (7.5,0.5) -- (3.5,0.5)
+                             -- (3.5,1.5) -- (1.5,1.5) -- (1.5,3.5) -- (3.5,3.5) -- (3.5,2.5) -- (5.5,2.5)
+                             -- (5.5,3.5) -- (4.5,3.5) -- (4.5,4.5) -- (2.5,4.5) -- (2.5,5.5) -- (1.5,5.5)
+                             -- (1.5,8.5) -- (2.5,8.5) -- cycle;
+  % grids
+  \draw[help lines,step=0.5cm] (0,0) grid (10,10);
+  \node at(2.5,-1) {$\Body{\DSh}{h}$~~};
+  \node[color=red!30!white,fill] at(4.5,-1) {\mbox{~~}};
+  \node at(7.2,-1) {$\Bd{\Body{\DSh}{h}}$}; %% := \partial \hCube{h} \GD{h}X$};
+  \draw[color=red,thick] (9,-1) -- (10,-1);
+  \draw[densely dotted,black] (0,10) -- (0,10.6);
+  \draw[densely dotted,black] (1,10) -- (1,10.6);
+  \draw[<->,black] (0,10.25) -- (1,10.25) node[midway,above] {$h$};
+\end{tikzpicture}
+\begin{tikzpicture}[x=0.5cm,y=0.5cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % QhZ
+  %\foreach \x/\y in %{3/9,4/9,5/9,6/9,2/8,3/8,4/8,5/8,6/8,7/8,8/8,2/7,3/7,4/7,7/7,8/7,2/6,3/6,4/6,5/6,3/5,4/5,5/5} {
+  %  \draw[color=blue!30!white,fill] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+  %  \draw[color=blue!30!white,fill] (10-\x-0.5,10-\y-0.5) rectangle (10-\x+0.5,10-\y+0.5);
+  %};
+
+  % grids
+  \draw[help lines,step=0.5cm] (0,0) grid (10,10);
+
+  % lignels
+  \draw[color=blue,thick] (2.5,9.5) -- (6.5,9.5) -- (6.5,8.5) -- (8.5,8.5) -- (8.5,6.5) -- (6.5,6.5)
+                             -- (6.5,7.5) -- (4.5,7.5) -- (4.5,6.5) -- (5.5,6.5) -- (5.5,5.5) -- (7.5,5.5)
+                             -- (7.5,4.5) -- (8.5,4.5) -- (8.5,1.5) -- (7.5,1.5) -- (7.5,0.5) -- (3.5,0.5)
+                             -- (3.5,1.5) -- (1.5,1.5) -- (1.5,3.5) -- (3.5,3.5) -- (3.5,2.5) -- (5.5,2.5)
+                             -- (5.5,3.5) -- (4.5,3.5) -- (4.5,4.5) -- (2.5,4.5) -- (2.5,5.5) -- (1.5,5.5)
+                             -- (1.5,8.5) -- (2.5,8.5) -- cycle;
+
+  % pointels
+  \foreach \x/\y in {1.5/1.5, 1.5/2.5, 1.5/3.5, 1.5/5.5, 1.5/6.5, 1.5/7.5, 1.5/8.5, 2.5/1.5, 2.5/3.5, 2.5/4.5, 2.5/5.5, 2.5/8.5, 2.5/9.5, 3.5/0.5, 3.5/1.5, 3.5/2.5, 3.5/3.5, 3.5/4.5, 3.5/9.5, 4.5/0.5, 4.5/2.5, 4.5/3.5, 4.5/4.5, 4.5/6.5, 4.5/7.5, 4.5/9.5}{
+    \draw[color=white,fill] (\x,\y) circle (0.7mm);
+    \draw[color=white,fill] (10-\x,10-\y) circle (0.7mm);
+    \draw[color=blue,fill] (\x,\y) circle (0.5mm);
+    \draw[color=blue,fill] (10-\x,10-\y) circle (0.5mm);
+  };
+
+
+   % gauss digitization
+   \foreach \x/\y in {3/9,4/9,5/9,6/9,2/8,3/8,4/8,5/8,6/8,7/8,8/8,2/7,3/7,4/7,7/7,8/7,2/6,3/6,4/6,5/6,3/5,4/5,5/5} {
+       \draw[color=kGrey,fill] (\x,\y) circle (0.5mm);
+       \draw[color=kGrey,fill] (10-\x,10-\y) circle (0.5mm);
+  };
+
+  \node at(2.5,-1) {pointels~~};
+  \draw[color=blue,fill] (4.5,-1) circle (0.5mm);% {\mbox{~~}};
+  \node at(7.2,-1) {lignels};
+  \draw[color=blue,thick] (9,-1) -- (9.75,-1);
+  \node at(8.2,-2) {$\DSh$~~};
+  \draw[color=kGrey,fill] (9.7,-2) circle (0.5mm);
+  \node at(2.3,-2) {$\DigBoundary{\DSh}~~\{$};
+  \node at(6.3,-2) {$\}$};
+  \node at(5.5,-2.3) {$,$};
+  \draw[draw,thick,color=blue] (4.65,-2) -- (5.3,-2);
+  \draw[color=blue,fill] (5.8,-2) circle (0.5mm);
+  \draw[densely dotted,black] (0,10) -- (0,10.6);
+  \draw[densely dotted,black] (1,10) -- (1,10.6);
+  \draw[<->,black] (0,10.25) -- (1,10.25) node[midway,above] {$1$};
+\end{tikzpicture}

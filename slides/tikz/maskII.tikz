@@ -1,0 +1,48 @@
+\begin{tikzpicture}[x=0.28cm,y=0.28cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % grids
+
+  \node (px) at (5.5,6) {};
+  \node (px2) at (6.5,6) {};
+  \node (px3) at (7.5,5.9) {};
+
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (4);
+  \draw[draw,thick,fill,color=kGreen,nearly transparent] (px2) circle (4);
+
+  \draw[pattern=north west lines, pattern color=red] (5.5,10) arc (90:-90:4);
+  \draw[pattern=north west lines, pattern color=red] (6.5,2) arc (270:90:4);
+
+  \draw[draw,thick,color=kOrange] (px) circle (4);
+  \draw[draw,thick,color=kGreen] (px2) circle (4);
+
+  \draw[draw,thick,color=black,fill] (px) circle (0.1);
+  \draw[draw,thick,color=black,fill] (px2) circle (0.1);
+  \draw (px) node[above] {\scriptsize$\mathbf{x}$};
+  \draw (px3) node[above] {\scriptsize$\mathbf{x} + \vec{\delta}$};
+\end{tikzpicture}
+%\begin{tikzpicture}[x=0.3cm,y=0.3cm]
+%  % colors
+%  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+%  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+%  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+%  % QhZ
+%  \foreach \x/\y in {3/9,4/9,5/9,6/9,2/8,3/8,4/8,5/8,6/8,7/8,8/8,2/7,3/7,4/7,7/7,8/7,2/6,3/6,4/6,5/6,3/5,4/5,5/5} {
+%    \draw[color=red!30!white,fill] (\x-0.5,\y-0.5) rectangle (\x+0.5,\y+0.5);
+%    \draw[color=red!30!white,fill] (10-\x-0.5,10-\y-0.5) rectangle (10-\x+0.5,10-\y+0.5);
+%  };
+%  % \partial_h X
+%  \draw[color=red,thick] (2.5,9.5) -- (6.5,9.5) -- (6.5,8.5) -- (8.5,8.5) -- (8.5,6.5) -- (6.5,6.5)
+%                             -- (6.5,7.5) -- (4.5,7.5) -- (4.5,6.5) -- (5.5,6.5) -- (5.5,5.5) -- (7.5,5.5)
+%                             -- (7.5,4.5) -- (8.5,4.5) -- (8.5,1.5) -- (7.5,1.5) -- (7.5,0.5) -- (3.5,0.5)
+%                             -- (3.5,1.5) -- (1.5,1.5) -- (1.5,3.5) -- (3.5,3.5) -- (3.5,2.5) -- (5.5,2.5)
+%                             -- (5.5,3.5) -- (4.5,3.5) -- (4.5,4.5) -- (2.5,4.5) -- (2.5,5.5) -- (1.5,5.5)
+%                             -- (1.5,8.5) -- (2.5,8.5) -- cycle;
+%  % grids
+%  \draw[help lines,step=0.3cm] (0,0) grid (10,10);
+%
+%  \draw[draw,thick,fill,color=kOrange,nearly transparent] (0,0) circle (2.5);
+%  \draw[draw,thick,fill,color=kGreen,nearly transparent] (0,0) circle (2.5);
+%\end{tikzpicture}

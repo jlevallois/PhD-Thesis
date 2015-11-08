@@ -1,0 +1,55 @@
+
+\begin{tikzpicture}[x=0.50cm,y=0.50cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  \definecolor{kRed}{rgb}{0.59,0.0,0.0}
+  % shape
+  \node (px) at (5,5) {};
+  \draw[draw,thick,fill,color=kGreen,nearly transparent] (0,0) arc (180:0:5);
+  \draw[draw,thick,color=kGrey] (0,0) arc (180:0:5);
+  % balls
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (3);
+  \draw[draw,thick,color=kOrange] (px) circle (3);
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (2);
+  \draw[draw,thick,color=kOrange] (px) circle (2);
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (1);
+  \draw[draw,thick,color=kOrange] (px) circle (1);
+  % barycenters
+  \node (b1) at (5,4.5) {};
+  \node (b2) at (5,4.1) {};
+  \node (b3) at (5,3.2) {};
+  \draw[draw,thick,color=kRed, fill] (b1) -- (b2);
+  \draw[draw,thick,color=kRed, fill] (b2) -- (b3);
+  \draw[draw,thick,color=kGrey,fill] (b1) circle (0.05);
+  \draw[draw,thick,color=kGrey,fill] (b2) circle (0.05);
+  \draw[draw,thick,color=kGrey,fill] (b3) circle (0.05);
+\end{tikzpicture}
+\begin{tikzpicture}[x=0.50cm,y=0.50cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  \definecolor{kRed}{rgb}{0.59,0.0,0.0}
+  % shape
+  \node (px) at (5,5) {};
+  \draw[draw,thick,fill,color=kGreen,nearly transparent] (0,0) -- (5,5) -- (10,0);
+  \draw[draw,thick,color=kGrey] (0,0) -- (5,5) -- (10,0);
+  % balls
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (3);
+  \draw[draw,thick,color=kOrange] (px) circle (3);
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (2);
+  \draw[draw,thick,color=kOrange] (px) circle (2);
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (1);
+  \draw[draw,thick,color=kOrange] (px) circle (1);
+  % barycenters
+  \node (b1) at (5,4.5) {};
+  \node (b2) at (5,3.9) {};
+  \node (b3) at (5,3.3) {};
+  \draw[draw,thick,color=kRed, fill] (b1) -- (b2);
+  \draw[draw,thick,color=kRed, fill] (b2) -- (b3);
+  \draw[draw,thick,color=kGrey,fill] (b1) circle (0.05);
+  \draw[draw,thick,color=kGrey,fill] (b2) circle (0.05);
+  \draw[draw,thick,color=kGrey,fill] (b3) circle (0.05);
+\end{tikzpicture}

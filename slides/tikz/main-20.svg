@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?> 
+<?xml-stylesheet href="main.css" type="text/css"?> 
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72.50061pt" height="64.53387pt" viewBox="11.55011 15.53348 72.50061 64.53387 "> 
+<g transform="translate(0, 80.06735 ) scale(1,-1) translate(0,-15.53348 )"> 
+
+<g> 
+ <g stroke="rgb(0.0%,0.0%,0.0%)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <g stroke-width="0.4pt"> 
+ <g> 
+ <g> 
+ <g> 
+ <g transform="matrix(1.0,0.0,0.0,1.0,43.81705,47.80042)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <text style="stroke:none" transform="scale(1,-1) translate(0.0,0)" text-anchor="middle"  font-size="10"> 
+</text> 
+</g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g> 
+ <g transform="matrix(1.0,0.0,0.0,1.0,51.78378,47.80042)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <text style="stroke:none" transform="scale(1,-1) translate(0.0,0)" text-anchor="middle"  font-size="10"> 
+</text> 
+</g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g> 
+ <g transform="matrix(1.0,0.0,0.0,1.0,59.75052,47.0037)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <text style="stroke:none" transform="scale(1,-1) translate(0.0,0)" text-anchor="middle"  font-size="10"> 
+</text> 
+</g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g stroke-width="0.8pt"> 
+ <g stroke="rgb(100.0%,58.99963%,0.0%)"> 
+ <g fill="rgb(100.0%,58.99963%,0.0%)"> 
+ <g stroke-opacity="0.25"> 
+ <g fill-opacity="0.25"> 
+ <path d=" M  43.81705 47.80042 M  75.68399 47.80042 C  75.68399 65.40027 61.4169 79.66736 43.81705 79.66736 C  26.2172 79.66736 11.9501 65.40027 11.9501 47.80042 C  11.9501 30.20056 26.2172 15.93347 43.81705 15.93347 C  61.4169 15.93347 75.68399 30.20056 75.68399 47.80042 Z M  43.81705 47.80042  " /> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g stroke-width="0.8pt"> 
+ <g stroke="rgb(0.0%,58.99963%,0.0%)"> 
+ <g fill="rgb(0.0%,58.99963%,0.0%)"> 
+ <g stroke-opacity="0.25"> 
+ <g fill-opacity="0.25"> 
+ <path d=" M  51.78378 47.80042 M  83.65073 47.80042 C  83.65073 65.40027 69.38364 79.66736 51.78378 79.66736 C  34.18393 79.66736 19.91684 65.40027 19.91684 47.80042 C  19.91684 30.20056 34.18393 15.93347 51.78378 15.93347 C  69.38364 15.93347 83.65073 30.20056 83.65073 47.80042 Z M  51.78378 47.80042  " /> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+  <pattern id="pgfpat4" patternUnits="userSpaceOnUse" width="3.0pt" height="3.0pt"/> <symbol id="pgfsym4"> <g> <g stroke-width="0.4pt"> <path d=" M  0.0 3.0 L  3.1 -0.1  " style="fill:none"/> </g> </g>  </symbol>  <pattern id="pgfupat1" xlink:href="#pgfpat4"> <g stroke="rgb(100.0%,0.0%,0.0%)" fill="rgb(100.0%,0.0%,0.0%)"> <use xlink:href="#pgfsym4"/> </g> </pattern> <g fill="url(#pgfupat1)"> 
+ <path d=" M  43.81705 79.66736 C  61.4169 79.66736 75.68399 65.40027 75.68399 47.80042 C  75.68399 30.20056 61.4169 15.93347 43.81705 15.93347  " /> 
+ </g> 
+ </g> 
+ <g> 
+  <pattern id="pgfupat2" xlink:href="#pgfpat4"> <g stroke="rgb(100.0%,0.0%,0.0%)" fill="rgb(100.0%,0.0%,0.0%)"> <use xlink:href="#pgfsym4"/> </g> </pattern> <g fill="url(#pgfupat2)"> 
+ <path d=" M  51.78378 15.93347 C  34.18393 15.93347 19.91684 30.20056 19.91684 47.80042 C  19.91684 65.40027 34.18393 79.66736 51.78378 79.66736  " /> 
+ </g> 
+ </g> 
+ <g> 
+ <g stroke-width="0.8pt"> 
+ <g stroke="rgb(100.0%,58.99963%,0.0%)"> 
+ <g fill="rgb(100.0%,58.99963%,0.0%)"> 
+ <path d=" M  43.81705 47.80042 M  75.68399 47.80042 C  75.68399 65.40027 61.4169 79.66736 43.81705 79.66736 C  26.2172 79.66736 11.9501 65.40027 11.9501 47.80042 C  11.9501 30.20056 26.2172 15.93347 43.81705 15.93347 C  61.4169 15.93347 75.68399 30.20056 75.68399 47.80042 Z M  43.81705 47.80042  " style="fill:none"/> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g stroke-width="0.8pt"> 
+ <g stroke="rgb(0.0%,58.99963%,0.0%)"> 
+ <g fill="rgb(0.0%,58.99963%,0.0%)"> 
+ <path d=" M  51.78378 47.80042 M  83.65073 47.80042 C  83.65073 65.40027 69.38364 79.66736 51.78378 79.66736 C  34.18393 79.66736 19.91684 65.40027 19.91684 47.80042 C  19.91684 30.20056 34.18393 15.93347 51.78378 15.93347 C  69.38364 15.93347 83.65073 30.20056 83.65073 47.80042 Z M  51.78378 47.80042  " style="fill:none"/> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g stroke-width="0.8pt"> 
+ <g stroke="rgb(0.0%,0.0%,0.0%)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <path d=" M  43.81705 47.80042 M  44.61375 47.80042 C  44.61375 48.24042 44.25705 48.59712 43.81705 48.59712 C  43.37704 48.59712 43.02034 48.24042 43.02034 47.80042 C  43.02034 47.36041 43.37704 47.00371 43.81705 47.00371 C  44.25705 47.00371 44.61375 47.36041 44.61375 47.80042 Z M  43.81705 47.80042  " /> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ <g> 
+ <g stroke-width="0.8pt"> 
+ <g stroke="rgb(0.0%,0.0%,0.0%)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <path d=" M  51.78378 47.80042 M  52.58049 47.80042 C  52.58049 48.24042 52.22379 48.59712 51.78378 48.59712 C  51.34378 48.59712 50.98708 48.24042 50.98708 47.80042 C  50.98708 47.36041 51.34378 47.00371 51.78378 47.00371 C  52.22379 47.00371 52.58049 47.36041 52.58049 47.80042 Z M  51.78378 47.80042  " /> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ <path d="  " style="fill:none"/> 
+ <g> 
+ <g> 
+ <g transform="matrix(1.0,0.0,0.0,1.0,41.42747,51.33339)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <text style="stroke:none" transform="scale(1,-1) translate(2.38957,0)" text-anchor="middle"  font-size="10"> 
+<tspan font-family="cmbx" font-size="7">x</tspan></text> 
+</g> 
+ </g> 
+ </g> 
+ </g> 
+ <path d="  " style="fill:none"/> 
+ <g> 
+ <g> 
+ <g transform="matrix(1.0,0.0,0.0,1.0,50.52623,51.37001)"> 
+ <g fill="rgb(0.0%,0.0%,0.0%)"> 
+ <text style="stroke:none" transform="scale(1,-1) translate(9.22429,0)" text-anchor="middle"  font-size="10"> 
+<tspan font-family="cmbx" font-size="7">x </tspan><tspan font-family="cmr" font-size="7">+</tspan> <img 
+src="main9x.png" alt="&#x20D7;
+&#x03B4;"  class="vec" ></text> 
+</g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+ </g> 
+                     </g> 
+</svg> 

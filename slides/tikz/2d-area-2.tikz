@@ -1,0 +1,27 @@
+
+\begin{tikzpicture}[x=0.50cm,y=0.50cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % grids
+  \draw[help lines,step=1] (0,0) grid (10,10);
+  \node (px) at (5,5) {};
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (3);
+  \draw[draw,thick,color=kOrange] (px) circle (3);
+  \foreach \x/\y in {2/5, 3/3, 3/4, 3/5, 3/6, 3/7, 4/3, 4/4, 4/5, 4/6, 4/7, 5/2, 5/3, 5/4, 5/5, 5/6, 5/7, 5/8, 6/3, 6/4, 6/5, 6/6, 6/7, 7/3, 7/4, 7/5, 7/6, 7/7, 8/5}
+    \draw[draw,thick,color=kGrey,fill] (\x,\y) circle (0.1);
+\end{tikzpicture}
+\begin{tikzpicture}[x=0.50cm,y=0.50cm]
+  % colors
+  \definecolor{kGreen}{rgb}{0.0,0.59,0.0}
+  \definecolor{kOrange}{rgb}{1.0,0.59,0.0}
+  \definecolor{kGrey}{rgb}{0.33,0.33,0.33}
+  % grids
+  \draw[help lines,step=1] (0,0) grid (10,10);
+  \node (px) at (5,5) {};
+  \draw[draw,thick,fill,color=kOrange,nearly transparent] (px) circle (1.5);
+  \draw[draw,thick,color=kOrange] (px) circle (1.5);
+  \foreach \x/\y in {4/4, 4/5, 4/6, 5/4, 5/5, 5/6, 6/4, 6/5, 6/6}
+    \draw[draw,thick,color=kGrey,fill] (\x,\y) circle (0.1);
+\end{tikzpicture}
