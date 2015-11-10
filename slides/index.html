@@ -331,44 +331,45 @@
 
 						<p style="font-size:80%;text-align:left;">&#8594; <strong>Invariant géométrique</strong> des courbes et des surfaces, mesurant la déviation de la courbe (ou surface) par rapport au plan tangeant.</p>
 
-						<div style="width:20%;float:left;">
-							<blockquote cite="" style="font-size:60%;text-align:left;">
+						<div>
+							<img src="img/curvature/Curvature-OsculatorCircle.svg" height="200px" class="imgNoBorder" />
+							<img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" height="200px" class="imgNoBorder" />
+							<!-- empty -->
+						</div>
+
+						<p>
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;">
 								\[
 									\Curv(x) = \left| \frac{d^2f}{dx^2} \right|
 								\]
 							</blockquote>
-							<blockquote cite="" style="clear:both;font-size:60%;text-align:left;">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;">
 								\[
 								\begin{align}
 								    \Curv(x) = \frac{d\phi}{dx}
 								\end{align}
 								\]
 							</blockquote>
-							<blockquote cite="" style="clear:both;font-size:60%;text-align:left;">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;">
 								\[
 								\begin{align}
 								    \Curv(x) = \frac{1}{r_0(x)}
 								\end{align}
 								\]
 							</blockquote>
-						</div>
-						<div style="float:left;width:42%;display:block;">
-							<img src="img/curvature/Curvature-OsculatorCircle.svg" width="41%" class="imgNoBorder" />
-							<img src="img/curvature/Minimal_surface_curvature_planes-fr.svg" width="57%" class="imgNoBorder" />
-							<!-- empty -->
-						</div>
-						<div style="width:37%;float:right;">
-							<blockquote cite="" style="font-size:55%;text-align:left;margin-left:-15px;margin-right:-15px;">
+						</p>
+						<p>
+							<blockquote cite="" style="clear:both;float:left;width:45%;font-size:60%;margin-left:10px;">
 								\[
 									\MeanCurv(\Shape,\vx) = \frac{\PrincCurv{a}(\Shape,\vx) + \PrincCurv{b}(\Shape,\vx)}{2}
 								\]
 							</blockquote>
-							<blockquote cite="" style="clear:both;font-size:55%;text-align:left;margin-left:-15px;margin-right:-15px;">
+							<blockquote cite="" style="float:left;width:45%;font-size:60%;margin-left:10px;">
 								\[
 								  \GaussCurv(\Shape,\vx) = \PrincCurv{1}(\Shape,\vx) \cdot \PrincCurv{2}(\Shape,\vx)
 								\]
 							</blockquote>
-						</div>
+						</p>
 					</section>
 
 					<section>
@@ -509,7 +510,7 @@
 				</section>
 
 				<section>
-					<h2>Contribution</h2>
+					<h2>Contributions</h2>
 
 					<table class="beautifulTable" style="font-size:70%;">
 						<thead>
@@ -602,7 +603,7 @@
 						</div>
 					</div>
 					<br/>
-					<p style="clear:both;text-align:left;font-size:70%;">Par approximation de Taylor de morceaux de la surface ($\Shapes^2-SC$) :</p>
+					<p style="clear:both;text-align:left;font-size:70%;">Par approximation de Taylor de morceaux de la surface ($\Shapes^{2-SC}$) :</p>
 					<blockquote class="theorem" cite="" style="clear:both;font-size:70%;">
 						\[
 							\tilde{\kappa}^{R}(\Shape,\vx) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{mydarkred}A_R(\Shape,\vx)}}{{{R}}^3}
@@ -763,13 +764,13 @@
 					<div class="fragment" data-fragment-index="1" style="font-size:80%;">
 						${\color{mygreen}|| \vx - \hat{\vx} ||_2 = O(h^{\alpha'})} \quad\quad\text{avec}\quad\alpha' \ge 1$
 					</div>
-					<div class="fragment" data-fragment-index="2" style="font-size:80%;"><strong>Nous devons injecter cette erreur dans le calcul de l'intégration</strong></div>
 				</section>
 
 				<section>
 					<h2>Convergence asymptotique de l'estimation digitale de courbure</h2>
 
 					<blockquote class="theorem" cite="" style="font-size:70%;width:100%;">
+						Soit $\Shape$ une forme convexe de $\R^2$ telle que son bord $\dS$ est $C^3$ à courbure bornée positive.
 						\[
 						\begin{split}
             \forall \vx \in \partial\Shape, \forall \hat{\vx} \in \partial\Body{\DSh}{h},
@@ -799,10 +800,11 @@
 						<img src="img/curvature/integral3D.svg" class="imgNoBorder" />
 					</div>
 					<div style="float:left;width:58%;">
-						<blockquote cite="" style="width:88%;font-size:70%;background: rgba(0, 0, 255, 0.05);">
-							\[ Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br/>
-							\[ {\color{myblue}\VolC(Y)} \EqDef h^3 \Card (Y) \]<br/>
-							\[ \MeanCurvH{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{8}{3{{R}}} - \frac{4 {\color{myblue}\VolC(Y)}}{\pi R^4} \]
+						<blockquote cite="" style="width:88%;font-size:70%;background: rgba(0, 0, 255, 0.05);text-align:left;">
+							Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\dS$ est $C^3$ à courbure bornée positive.<br/><br/>
+							$ Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} $<br/><br/>
+							$ {\color{myblue}\VolC(Y)} \EqDef h^3 \Card (Y) $<br/><br/>
+							$ \MeanCurvH{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{8}{3{{R}}} - \frac{4 {\color{myblue}\VolC(Y)}}{\pi R^4} $
 						</blockquote>
 					</div>
 
@@ -820,6 +822,7 @@
 					</div>
 					<div style="float:left;width:58%;">
 						<blockquote cite="" style="width:88%;font-size:70%;background: rgba(0, 0, 255, 0.05);text-align:left;">
+							Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\dS$ est $C^3$ à courbure bornée positive.<br/><br/>
 							$Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h}$<br/><br/>
 							${\color{myblue}\DMom{pqs}{h}(Y)} \EqDef h^{3+p+q+s} \sum y_1^{p} y_2^{r} y_3^{s}$
 						</blockquote>
@@ -956,6 +959,10 @@
 				</section>
 
 				<section data-background="img/curvature/ii_octa-noise.png">
+					<div class="fragment" data-fragment-index="1">
+						<img src="img/curvature/Ellipse_Noise_Loo.svg" width="400px" class="imgNoBorder" />
+						<img src="img/curvature/RoundedCube2_Noise_Mean_Loo.svg" width="400px" class="imgNoBorder" />
+					</div>
 				</section>
 
 				<section>
@@ -963,12 +970,12 @@
 					<p>
 						<ul>
 							<li>Estimateurs de courbures par <strong>intégration volumique</strong>, définis sur des <strong>données digitales</strong></li>
-							<li>En 2D comme en 3D (tenseur de courbure)</li>
-							<li>Facile à mettre en œuvre</li>
-							<li><strong>Convergent uniformément</strong>(théoriquement et expérimentalement) en $O(h^\frac{1}{3})$ quand $R = kh^\frac{1}{3}$</li>
-							<li><strong>Robuste</strong> au bruit</li>
-							<li><strong>Compétitif</strong> vis-à-vis de l'état de l'art</li>
-							<li>Nécessite <strong>un paramètre</strong> $R$...</li>
+							<li class="fragment" data-fragment-index="1">En 2D comme en 3D (tenseur de courbure)</li>
+							<li class="fragment" data-fragment-index="2">Facile à mettre en œuvre</li>
+							<li class="fragment" data-fragment-index="3"><strong>Convergent uniformément</strong>(théoriquement et expérimentalement) en $O(h^\frac{1}{3})$ quand $R = kh^\frac{1}{3}$</li>
+							<li class="fragment" data-fragment-index="4"><strong>Robuste</strong> au bruit</li>
+							<li class="fragment" data-fragment-index="5"><strong>Compétitif</strong> vis-à-vis de l'état de l'art</li>
+							<li class="fragment" data-fragment-index="6">Nécessite <strong>un paramètre</strong> $R$...</li>
 						</ul>
 					</p>
 				</section>
@@ -1016,7 +1023,14 @@
 				<section><!-- slide-title="Sans paramètres">-->
 					<h2>Analyse des segments maximaux</h2>
 					<div>
-						<img src="img/curvature/flower5-1.png" style="height:150px;" class="imgNoBorder" />
+						<img src="img/curvature/flower5-1.png" style="height:150px;margin:0;" class="imgNoBorder" />
+						<img src="img/curvature/flower5-2.png" style="height:150px;margin:0;" class="imgNoBorder" />
+						<img src="img/curvature/flower5-3.png" style="height:150px;margin:0;" class="imgNoBorder" />
+					</div>
+					<div>
+						<img src="img/curvature/flower5-1-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
+						<img src="img/curvature/flower5-2-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
+						<img src="img/curvature/flower5-3-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
 					</div>
 					<div style="font-size:70%;">
 						<ul>
@@ -1031,7 +1045,7 @@
 					</div>
 					<div class="fragment" data-fragment-index="1">
 						<br/>
-						<strong>&#8594; $L_D^2( {\DigShape} )$ comme rayon $R$</strong>
+						<strong>&#8594; $(L_D( {\DigShape} ))^2$ comme rayon $R$</strong>
 					</div>
 				</section>
 
@@ -1045,7 +1059,7 @@
 						<img src="img/curvature/ScaleSpace_Flower_Global.png" style="height:100px;" class="imgNoBorder" />
 						\[
 							\begin{align}
-								&\forall \vp \in Bd(\DigShape),\quad \rho(\DigShape) = L_D^2({\DigShape}),\\
+								&\forall \vp \in Bd(\DigShape),\quad \rho(\DigShape) = (L_D({\DigShape}))^2,\\
 								&\CurvHS(\DigShape,\vp) \EqDef \frac{3\pi}{2{\rho(\DigShape)}} - \frac{3 {\color{myblue} A(\DigShape,\vp)}}{{\rho(\DigShape)}^3} \quad\text{avec}\quad {\color{myblue}A(\DigShape,\vp)} = \Card(\Ball{\rho(\DigShape)}{\vp} \cap \DigShape
 							\end{align}
 						\]
@@ -1054,7 +1068,7 @@
 						<img src="img/curvature/ScaleSpace_Flower_Local.png" style="height:100px;" class="imgNoBorder" />
 						\[
 							\begin{align}
-								&\forall \vp \in Bd(\DigShape),\quad \rho(\DigShape,\vp) = L_D^2(\DigShape,\vp),\\
+								&\forall \vp \in Bd(\DigShape),\quad \rho(\DigShape,\vp) = (L_D(\DigShape,\vp))^2,\\
 								&\CurvHSL(\DigShape,\vp) \EqDef \frac{3\pi}{2{\rho(\DigShape,\vp)}} - \frac{3 {\color{myblue} A'(\DigShape,\vp)}}{{\rho(\DigShape,\vp)}^3} \quad\text{avec}\quad {\color{myblue}A'(\DigShape,\vp)} = \Card(\Ball{\rho(\DigShape,\vp)}{\vp} \cap \DigShape
 							\end{align}
 						\]
@@ -1063,14 +1077,15 @@
 					</div>
 
 				</section>
-				<section>
+				<!-- <section>
 					<h2>Et en <strong>3D</strong> ?</h2>
 					<h2 class="fragment" data-fragment-index="1">Aucun résultat théorique pour les plans discrets ...</h2>
 					<h2 class="fragment" data-fragment-index="2">... alors pourquoi ne pas utiliser les segments maximaux ?</h2>
-				</section>
+				</section> -->
 				<section>
-					<h2>Segments maximaux pour des objets 3D ?</h2>
-					<p>Les segments maximaux sont définis pour <strong>des formes 2D</strong>.</p>
+					<h2>Et pour des objets 3D ?</h2>
+					<p style="text-align:left;"><strong>Aucun résultat théorique</strong> pour les <strong>plans discrets 3D</strong>.</p>
+					<p style="text-align:left;">Les segments maximaux sont définis pour <strong>des formes 2D</strong>.</p>
 					<br />
 					<div style="float:left;width:40%;">
 						<img src="img/curvature/ctopo3dSurfelCut.png" class="imgNoBorder fragment" data-fragment-index="1" /></p>
@@ -1792,25 +1807,85 @@
 
 								<section slide-title="DGtal">
 									<!-- <h2>DGtal</h2> -->
-									<img src="img/logo/DGtalLogo.png" width="150px" class="imgNoBorder"/>
+									<div>
+										<a href="http://dgal.org"><img src="img/logo/DGtalLogo.png" width="150px" class="imgNoBorder" /></a><br/>
+										<em>Digital Geometry Tools and Algorithms</em>
+									</div>
 									<p>
-										Parler des outils disponibles<br/>
-										Grand variétés de formes (paramétriques, implicites, import de .vol)<br/>
-										Beaucoup d'estimateurs implémentés -> comparaison facile<br/>
-										Pipe avec d'autres librairies comme CGal
+										<ul style="font-size:70%;">
+											<li>Bibliothèque open-source en C++ avec une communauté active</li>
+											<li>Structures de données, algorithmes et outils pour la géométrie digitale (Espace de Khalimsky, parcours de surface, ...)</li>
+											<li>Grand variétés de formes (paramétriques, implicites, import d'objets, ...)</li>
+											<li>Nombreux estimateurs géométriques implémentés permettant la comparaison facile dans les mêmes conditions</li>
+											<li>Branchement avec la bibliothèque <a href="http://www.cgal.org">CGal</a></li>
+										</ul>
 									</p>
 
-									<strong>Tous les travaux présentés ici sont actuellement disponible sur Github librement</strong><br/>
+									<p>
+										Tous les travaux présentés ici sont <strong>disponibles librement</strong> sur :<br/>
+										<a href="https://github.com/DGtal-team/DGtal">
+											<img src="img/logo/github.png" class="imgNoBorder" width="200px" style="text-align:center;vertical-align:middle;"/><span style="color:#000;font-weight:bold;">/DGtal-team/DGtal/</span>
+										</a>
+									</p>
+								</section>
 
-									<a href="https://github.com/you">
-										Fork me on Github
-										<!-- <img style="position: absolute; top: 0; right: 0; border: 0; width: 100px; height: 100px;" src="img/misc/forkme_right_red_aa0000.png" width="50px" alt="Fork me on GitHub"> -->
-									</a>
+								<section>
+									<h2>Conclusion</h2>
+
+									<p>
+										<ul>
+											<li>
+												Estimateurs de courbures par <strong>intégration volumique</strong>, définis sur des <strong>données digitales, en 2D et en 3D</strong>, avec des preuves de convergence asymptotiques.
+												<span class="fragment" data-fragment-index="1" style="color:#268BD2">
+													C'est actuellement le seul en 3D.
+												</span>
+											</li>
+
+											<li class="fragment" data-fragment-index="2">
+												Variantes <strong>sans paramètre</strong> de ces estimateurs, avec preuve de convergence asymptotique en 2D.
+												<span class="fragment" data-fragment-index="3" style="color:#268BD2">
+													C'est actuellement le seul en 2D.
+												</span>
+											</li>
+
+											<li class="fragment" data-fragment-index="4">
+												<strong>Classifieur</strong> d'éléments de surface en parties linéaires / lisses / singularités.
+											</li>
+
+											<li class="fragment" data-fragment-index="5">
+												<strong>Compétitifs</strong> par rapport à l'état de l'art.
+											</li>
+
+											<li class="fragment" data-fragment-index="6">
+												<strong>Robustes</strong> au bruit.
+											</li>
+
+										</ul>
+									</p>
+								</section>
+
+								<section>
+									<h2>Perspectives</h2>
+									<p style="font-weight:bold;">À court terme</p>
+									<ul>
+										<li>Temps de calcul important pour de gros volumes. -> les diminuer avec des approches en transformée de Fourier</li>
+										<li>Theoretical proofs behind transitions of models</li>
+										<li>Objets multi échelle</li>
+									</ul>
+								</section>
+
+								<section>
+									<h2>Perspectives</h2>
+									<p style="font-weight:bold;">À long terme</p>
+									<ul>
+										<li>Améliorer la détection du bord de l'objet, permettant de réduire l'erreur de positionnement de $\hat{\vx}$.</li>
+										<li>Guider la reconstruction de surface grâce aux points caractéristiques.</li>
+									</ul>
 								</section>
 
 
 
-								<section>
+								<!-- <section>
 									<h2>Conclusion</h2>
 									<div style="text-align:left;margin-bottom:50px;">
 										<ul>
@@ -1826,21 +1901,21 @@
 											<li>Theoretical proofs behind transitions of models</li>
 										</ul>
 									</div>
-								</section>
-
-
-
-								<!-- <section data-background="#000">
-									<h1 class="one-more-thing">One more thing...</h1>
 								</section> -->
 
-								<section>
+
+
+								<section data-background="#000">
+									<h1 class="one-more-thing">One more thing...</h1>
+								</section>
+
+								<!-- <section>
 									<h2>ICTV</h2>
 									<p>demo ?<br/>
 									tableau comparaison temps de calcul/erreur CPU, CPU masque, FFT, GPU, GPU Hierarchique</p>
-								</section>
+								</section> -->
 
-								<section>
+								<section data-background="#000">
 									<video width="800" controls>
 									  <source src="img/misc/video.mp4" type="video/mp4">
 									  Your browser does not support HTML5 video.
