@@ -173,6 +173,10 @@
 						</div>
 						<img src="img/logo/logo_liris.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_lama.svg" width="150" class="imgNoBorder" /><img src="img/logo/logo_anr.svg" width="150" class="imgNoBorder" />
 					</footer>
+
+					<aside class="notes">
+        	Bonjour à tous. Je vais vous présenter mes travaux de thèse, effectués sous la direction de David Coeurjolly et Jacques-Olivier Lachaud, aux laboratoires LIRIS et LAMA. Ceux-ci traîtent des estimateurs différentiels en géométrie discrète, et nous allons voir des applications à l'analyse de surfaces digitales. Nous allons nous intéresser aux estimateurs de courbure, et aux estimateurs de courbure sans paramètre, ainsi qu'à la détection de points caractéristiques sur des surfaces digitales, pour ensuite les applications sur des données réelles dans le cadre du projet ANR digitalSnow. Nous reviendrons sur quelques détails d'implémentations avant de conclure. Mais tout d'abord, je parle de géométrie discrète, de surface digitale, de quoi parlons-nous ?
+    			</aside>
 				</section>
 
 				<section slide-title="Contexte">
@@ -194,6 +198,18 @@
 						<div class="fragment" data-fragment-index="2"><img src="img/bunny-points.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Nuage de points</div>
 						<div class="fragment" data-fragment-index="3"><img src="img/bunny-digital.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" /> Données digitales</div>
 					</div>
+
+					<aside class="notes">
+						La question qui se pose, c'est comment représenter numériquement un objet réel, comme ce lapin. Il existe plusieurs méthodes pour le faire, présentant chacun des avantages comme des inconvénients.
+
+						La première façon, probablement celle que vous connaissez tous, est de représenter notre objets comme un maillage triangulé, un ensemble de triangles possédant des propriétés topologiques. L'avantage est que cette structure de données est plutôt légère, nous obtenons la surface de notre objet, et les GPU ne gèrent que des triangles. Les deux principaux défauts sont qu'il n'y a pas d'information volumique (nous ne savons pas comment l'objet est à l'intérieur, nous n'avons que sa surface) et une approximation de la surface est présente.
+
+						La seconde, le nuage de points, est beaucoup utilisé pour sauvegarder numériquement des oeuvres d'art ou des bâtiment architecturaux, mais ne se limite pas qu'à ces utilisations. L'idée est de scanner l'objet à l'aide de laser et d'obtenir un ensemble de points se situant exactement à la surface de l'objet. Cet ensemble de point ne possède ni topologie ni données volumiques, mais garantissent (à une certaine précision) que chaque point est à la surface de l'objet.
+
+						Enfin, et c'est cette méthode que nous allons considérer par la suite, les données digitales définissent l'objet réel comme un ensemble de points digitaux sur un grille régulière. Nous possédons une topologie pour se déplacer sur la surface ainsi que des données volumiques, mais nous faisons une approximation dépendante de la taille de la grille.
+
+						Le choix du modèle utilisé dépend de deux choses : ce que nous attendons de la donnée, c'est à dire il faudra faire un choix parmis les avantages et inconvénients de chacun des modèles; mais également du choix du système de capture. Ces systèmes sont spécialisés dans un seul modèle, et généralement nous ne voulons pas introduire plus de biais en convertissant la données dans un autre modèle.
+					</aside>
 				</section>
 
 				<section>
@@ -225,6 +241,14 @@
 					<div style="float:left;font-size:90%;">
 						&#8594; Convergence asymptotique des quantités estimées
 					</div>
+
+					<aside class="notes">
+						Les données digitales donc. Concrétement, nous avons un ensemble de pixels en 2D ou de voxels en 3D, alignés dans une grille dont la taille de chaque élément est h, le pas de discrétisation. Chaque point digital nous informe s'il contient de la matière ou pas, c'est à dire s'il est contenu dans l'objet ou pas, c'est ce que vous voyez ici à droite. Comme je l'ai dit, la particularité de ces donnée est qu'il y tout le temps un bruit artihmétique sur la surface de l'objet, quelque soit la résolution de la grille. C'est l'effet d'escalier que nous voyons ici.
+
+						La question que nous pouvons nous poser, c'est pourquoi utiliser des données digitales alors ? Et bien déjà ce sont le résultat direct de certains scanners comme le micro tomographe à rayons X, mais aussi certains scanners en imagerie 2D afin de détecter des formes dans des images (parfois le résultat est en niveau de gris). Nous voulons exploiter ces données directement sans rajouter de biais supplémentaire.
+						Le deuxième point important, lorsque nous estimons des quantités sur des données digitales, nous cherchons à prouver la convergence asymptotique de la quantité estimée en fonction du pas de discrétisation. Je reviendrais là dessus un peu plus loin.
+						Enfin, il existe de nombreux algorithmes fonctionnant sur des données digitales que nous pouvons exploiter.
+					</aside>
 				</section>
 
 				<section>
@@ -238,7 +262,7 @@
 					<div style="float:left;height:400px;">
 						<img src="img/contexte/YTEjpE.jpg" height="335px" class="imgNoBorder" />
 						<div style="font-size:30%;font-style:italic;margin-top:-15px">
-							Tomographe à rayons X<br/>
+							microtomographe à rayons X<br/>
 							3SR Lab et CEN/CNRM - GAME URA 1357/Météo-France - CNRS</div>
 					</div>
 					<div style="float:right;display:inline-block;">
@@ -252,6 +276,12 @@
 						<img src="img/contexte/SnowI08_DigitalData.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
 						<img src="img/curvature/SnowI08_mean_0001.png" height="150px" class="imgNoBorder" style="vertical-align:middle;" />
 					</div>
+
+					<aside class="notes">
+						Ma thèse a été financée par l'ANR digitalSnow, en collaboration avec le CEN de MétéoFrance, le LIRIS et le LAMA. Le but de ce projet est d'étudier et de simuler l'évolution de la neige en fonction des conditions extérieures (la température, le taux d'humidité) mais également des phénomènes intrinsèques aux microstructures de neige. Comme souvent, quand nous ne comprennons pas un phénomène à l'échelle macroscopique, nous nous intéressons à l'étudier à l'échelle microscopique. Ainsi, les microstructures de neige ont tendance à varier geométriquement en fonction de certains paramètres. Une neige sèche (cad à faible teneur en eau liquide) a une représentation avec de nombreuses facettes tandis qu'une neige humide (à plus forte teneur en eau liquide) aura tendance à déplacer la matière afin de lisser ces facettes, c'est ce que nous voyons au milieu. Il apparait que la courbure moyenne rentre en jeu dans les équations physiques de l'évolution de ces microstructures.
+
+						Afin de pouvoir simuler ces transformations, nous avons besoin d'extraire les microstructures de neige sur des échantillons réels, à l'aide d'un micro tomographe à rayon X. L'idée pour faire simple, c'est d'envoyer des photons dans plusieurs directions sur l'échantillon de neige (la partie blanche au milieu), de compter pour chaque direction le nombre de photon résultant, et d'en déduire quand ils ont été absorbées par la matière. Cela nous permet de récupérer ce genre de données là, en blanc. Donc ici nous avons les microstructures de neige à deux moments différents. Le premier représente de la neige sèche, comprenant des facettes tandis que l'autre représente de la neige humide, et du déplacement de matière s'est opéré pour lisser ces facettes. À droite vous avez le résultat du calcul de courbure moyenne que nous proposons.
+					</aside>
 				</section>
 
 				<section>
@@ -283,6 +313,10 @@
 						\[\forall \Shape \in \Shapes, \quad |\hat{E}(\DSh,h) - E(\Shape)| \le \tau_\Shape(h) \quad\text{avec}\quad \lim_{h \rightarrow 0}\tau_\Shape(h) = 0\]
 						</blockquote>
 					</p>
+
+					<aside class="notes">
+						Comme je l'ai dit, nous cherchons à prouver la convergence de nos estimateurs, afin de garantir leur pérénité. En effet, nous voulons que la mesure que nous estimons tende vers la valeur euclidienne lorsque nous raffinons notre objet digital, c'est à dire lorsque le pas de discrétisation h tend vers 0. C'est à dire que si dans quelques années un nouveau scanner sort avec une résolution 2 fois meilleure, nous garantissons que notre estimateur va être meilleur sur ces données. Pour cela, pour une famille de formes, nous devons mathématiquement analyser l'erreur de l'estimateur afin d'en sortir un terme en O(h), avec h tend vers 0. Ici c'est pour des quantités globalement définis pour la forme, comme l'aire ou le volume, ...
+					</aside>
 				</section>
 
 				<section>
@@ -319,17 +353,24 @@
 						\end{align}\]
 						</blockquote>
 					</p>
+					<aside class="notes">
+						... et ici pour des quantités locales comme la normale, la courbure. La différence ici est que le calcul se fait sur le bord topologique digitale de la forme. L'erreur est dite uniforme quand elle est convergente pour tous les points de la forme. Donc on va comparer des valeurs sur les points x du bord de la forme euclidienne, en orange avec des valeurs estimées sur les points x chapeau sur le bord de la forme digitale, en rouge
+					</aside>
 				</section>
 
 				<section slide-title="Estimateurs de courbure" data-background="img/curvature/II_mean_xyz512.png">
 					<h1 class="chapterTitle">Estimation de la <strong>courbure</strong></h1>
+
+					<aside class="notes">
+						Intéressons nous à l'estimation de la courbure
+					</aside>
 				</section>
 
 				<section>
 					<section>
 						<h2>Courbure d'une courbe et d'une surface</h2>
 
-						<p style="font-size:80%;text-align:left;">&#8594; <strong>Invariant géométrique</strong> des courbes et des surfaces, mesurant la déviation de la courbe (ou surface) par rapport au plan tangeant.</p>
+						<p style="font-size:80%;text-align:left;">&#8594; <strong>Invariant géométrique</strong> des courbes et des surfaces, mesurant la déviation de la courbe (ou surface) par rapport au plan tangent.</p>
 
 						<div>
 							<img src="img/curvature/Curvature-OsculatorCircle.svg" height="200px" class="imgNoBorder" />
@@ -338,19 +379,19 @@
 						</div>
 
 						<p>
-							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="1">
 								\[
 									\Curv(x) = \left| \frac{d^2f}{dx^2} \right|
 								\]
 							</blockquote>
-							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="2">
 								\[
 								\begin{align}
 								    \Curv(x) = \frac{d\phi}{dx}
 								\end{align}
 								\]
 							</blockquote>
-							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="3">
 								\[
 								\begin{align}
 								    \Curv(x) = \frac{1}{r_0(x)}
@@ -359,17 +400,23 @@
 							</blockquote>
 						</p>
 						<p>
-							<blockquote cite="" style="clear:both;float:left;width:45%;font-size:60%;margin-left:10px;">
+							<blockquote cite="" style="clear:both;float:left;width:46%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="4">
 								\[
 									\MeanCurv(\Shape,\vx) = \frac{\PrincCurv{a}(\Shape,\vx) + \PrincCurv{b}(\Shape,\vx)}{2}
 								\]
 							</blockquote>
-							<blockquote cite="" style="float:left;width:45%;font-size:60%;margin-left:10px;">
+							<blockquote cite="" style="float:left;width:46%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="5">
 								\[
 								  \GaussCurv(\Shape,\vx) = \PrincCurv{1}(\Shape,\vx) \cdot \PrincCurv{2}(\Shape,\vx)
 								\]
 							</blockquote>
 						</p>
+
+						<aside class="notes">
+							La courbure est un invariant géométrique mesurant la déviation de la courbe ou de la surface par rapport au plan tangent. Sur des courbes nous pouvonst voir ça comme la dérivée seconde de celle-ci, comme la dérivée de l'angle entre le vecteur tangent et une droite fixe, ou encore (et c'est peut être plus visuel), comme l'inverse du rayon du cercle osculateur de la courbe.
+
+							Sur des surfaces, en tout point, on choisit deux plans orthogonaux, dans la direction de la normale de la surface. Ces plans définissent deux courbes sur lequelles nous pouvons calculer la courbure. Ainsi, la courbure moyenne H est définie comme la moyenne de ces deux courbures. Si les plans sont alignés dans les directions principales, alors nous pouvons définir la courbure gaussienne K comme le produit de ces deux courbures.
+						</aside>
 					</section>
 
 					<section>
@@ -460,8 +507,8 @@
 				</section>
 
 				<section>
-					<h2>État de l'art (sélectionné)</h2>
-					<p style="clear:both;margin-top:50px;">&#8594; difficulté : estimation des formes différentielles sur des objets non différentiables</p>
+					<h2>État de l'art (sélection)</h2>
+					<p style="clear:both;margin-top:50px;font-size:80%">&#8594; difficulté : estimation des formes différentielles sur des objets non différentiables</p>
 
 					<div style="float:left;text-align:left;font-size:60%;width:69%;">
 						<div class="fragment" fragment-data-index="1" style="width:49%;float:left;">
@@ -480,8 +527,8 @@
 								<li><span style="font-size:130%;">Nuages de points :</span>
 									<ul>
 										<li>Ajustement polynomial des jets osculateurs <span class="citation"><a href="#">[Cazals, Pouget 2005]</a></span></li>
-										<li>Mesure de covariance des cellules de Voronoï (VCM) <span class="citation"><a href="#">[Alliez et al. 2007]</a><a href="#">[Merigot et al. 2011]</a></span></li>
-										<li>Théorie des varifolds <span class="citation"><a href="#">[Buet 2014]</a><a href="#">[Buet et al. 2015]</a></span></li>
+										<!-- <li>Mesure de covariance des cellules de Voronoï (VCM) <span class="citation"><a href="#">[Alliez et al. 2007]</a><a href="#">[Merigot et al. 2011]</a></span></li>
+										<li>Théorie des varifolds <span class="citation"><a href="#">[Buet 2014]</a><a href="#">[Buet et al. 2015]</a></span></li> -->
 									</ul>
 								</li>
 							</ul>
@@ -507,6 +554,25 @@
 							&#8594; Aucun estimateur de courbure convergent en 3D
 						</div>
 					</div>
+					<div style="clear:both;font-size:60%;" class="fragment" fragment-data-index="5" >
+						<ul><li><span style="font-size:130%;">Génériques :</span>
+							<ul>
+							<li>Mesure de covariance des cellules de Voronoï (VCM) <span class="citation"><a href="#">[Alliez et al. 2007]</a><a href="#">[Merigot et al. 2011]</a><a href="#">[Cuel et al. 2014]</a></span></li>
+							<li>Théorie des varifolds <span class="citation"><a href="#">[Buet 2014]</a><a href="#">[Buet et al. 2015]</a></span></li>
+						</ul></li></ul>
+					</div>
+
+					<aside class="notes">
+						Il existe beaucoup de méthodes pour estimer la courbure. Ici nous nous intéressons qu'uniquement aux méthodes approchant la courbure mais sans garantis. La difficulté réside dans le fait d'estimer des quantités différentielles sur des objets non différentiables.
+
+						Sur des maillages triangulés, on va chercher à analyser localement les triangles pour en extraire la courbure.
+
+						Sur des nuages de points, on va plutôt chercher à approcher polynomialement la surface pour récupérer la courbure. Le problème, c'est que généralement la précision et les preuves de stabilité dépendent de la qualité et de l'échantillonnage du maillage ou du nuage de points. Certains acceptent du bruit mais généralement les contraintes sont loin de ce que nous avons avec des données digitales.
+
+						Sur des surfaces digitales, on va plutôt avoir tendance à reconnaître des objets digitaux sur le bord de l'objet, comme des segments ou des arcs de cercle. Le point est qu'actuellement, il n'existe aucun estimateur de courbure apportant des preuves de convergence en 3D.
+
+						A noter qu'il existe des méthodes qui possèdent des adaptations pour les trois types de données, comme VCM ou les varifolds. Quand pour VCM la preuve de convergence de la courbure sur des données digitales n'est pas si triviale que ça (la preuve est sur l'estimation des normales), la théorie des varifolds propose une analyse théorique qui nécessite cependant d'être exploré.
+					</aside>
 				</section>
 
 				<section>
@@ -567,6 +633,10 @@
 							</tr>
 						</tbody>
 					</table>
+
+					<aside class="notes">
+						Les contributions pour la partie estimation de courbure, ce dont je vais vous montrer dans les slides suivantes, peuvent se résumer dans ce tableau. Nous apportons des estimateurs de courbure 2D, courbure moyenne et courbures principales en 3D avec des preuves de convergence asymptotique uniforme théoriques ainsi qu'expérimentales. Ces estimateurs nécessitent un rayon de boule R, nous proposons également des variantes sans paramètre permettant de se passer de ce rayon. Si la convergence reste la même que pour la version avec paramètre expérimentalement, nous prouvons théoriquement la convergence pour la courbure 2D. En 3D, le "Non" n'est pas un non définitif, en fait la preuve de la convergence repose sur une supposition qu'il reste à prouver.
+					</aside>
 				</section>
 
 				<section>
@@ -614,6 +684,9 @@
 					<div class="fragment" data-fragment-index="1">
 						<strong>$R \rightarrow 0$ n'a pas de sens en géométrie digitale</strong>
 					</div>
+					<aside class="notes">
+						L'idée est simple. Il est connu depuis longtemps qu'il existe un lien entre la courbure et l'intersection entre une boule et le bord de la forme. Pottmann l'a formalisé dans sa publication en 2007. Ainsi, par approximation de Taylor par morceaux d'une surface C2 convexe, nous obtenons la relation entre la courbure k et l'aire de l'intersection entre la boule et la forme, A_R. Cette façon de calculer l'aire converge vers la valeur de courbure de l'objet en O(R), c'est à dire quand le rayon de la boule tend vers 0. Le problème, c'est que faire tendre le rayon vers 0 n'a pas de sens pour des données digitales puisqu'à un moment nous n'aurons plus assez de points digitaux, entraînant une augmentation de l'erreur d'estimation.
+					</aside>
 				</section>
 
 				<section>
@@ -652,6 +725,10 @@
 						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h) \rightarrow \Curv(\Shape,\vx)$</span>
 						</blockquote>
 					</p>
+
+					<aside class="notes">
+						Voici toutes les étapes que nous allons suivre pour obtenir une preuve de convergence sur ce type d'estimateur, avec des données digitales. Dans un premier temps, nous allons détailler l'erreur induite par l'estimation de l'aire sur des données digitales. Ensuite, nous allons l'ajouter à l'erreur d'estimation de la courbure avec l'aire de l'intersection de la boule et de la forme. Enfin, nous devons considérer une nouvelle source d'erreur : l'erreur de positionnement au bord de l'objet. Le but ici sera de borner ces trois sources d'erreurs.
+					</aside>
 				</section>
 
 				<section>
@@ -744,7 +821,7 @@
 								<span style="color:#FB443B">&#8213;</span> $\pi^\Shape_h(\hat{\vx})$
 						</div>
 						<div style="float:right;width:59%;text-align:left;">
-							<span style="font-size:80%;">Pour toute forme 2D $\Shape$ à reach positif, pour $0 < h \le \reach{\Shape}$, soit $\mathbf{n}(\Shape, \vx, l)$ le segment centré au point $\vx$, aligné le long de la normale au point $\vx$. Alors :
+							<span style="font-size:80%;">Pour toute forme 2D $\Shape$ à reach positif, pour $0 < h \le \reach{\Shape}$, soit $\mathbf{n}(\Shape, \vx, l)$ le segment centré au point $\vx$, aligné le long de la normale au point $\vx$, de longueur $2l$. Alors :
 							\[\begin{align}
 								\pi^\Shape_h : \partial\Body{\DSh}{h} &\rightarrow \dS \,,\\
 								\hat{\vx} &\mapsto \vx = \pi^\Shape_h(\hat{\vx}) \,,
@@ -762,8 +839,12 @@
 					</object>
 
 					<div class="fragment" data-fragment-index="1" style="font-size:80%;">
-						${\color{mygreen}|| \vx - \hat{\vx} ||_2 = O(h^{\alpha'})} \quad\quad\text{avec}\quad\alpha' \ge 1$
+						${\color{mygreen}|| \vx - \hat{\vx} ||_\infty = O(h^{\alpha'})} \quad\quad\text{avec}\quad\alpha' \ge 1$
 					</div>
+
+					<aside class="notes">
+						Enfin, nous devons considérer l'erreur de positionnement de la surface digitale vis à vis de la surface euclidienne. Ce biais est assez visible sur les figures du bas. Pour borner l'erreur, sans rentrer dans les détails, nous allons utiliser la propriété de la projection inverse qui garantis qu'il existe un point x qui est à une distance au maximum de v(2)h/2 de x chapeau. Alors, nous pouvons borner l'erreur de positionnement de la surface à O(h^\alpha'), avec alpha' = 1 dans notre cas ici. Si jamais nous utilisions une méthode permettant de mieux approcher la surface, nous pourrions optimiser cet alpha'
+					</aside>
 				</section>
 
 				<section>
@@ -792,6 +873,14 @@
 						| \CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
 					</blockquote>
+
+					<aside class="notes">
+						Dans ce récapitulatif, nous avons les trois sources d'erreurs qui rentrent en concurrence. En effet, nous pouvons voir que si le rayon R diminue d'un côté, l'erreur du second terme augmente.
+
+						Nous allons paramétrer le rayon à kh^alpha, k étant une constante, et nous allons chercher à minimiser l'erreur en jouant avec alpha. Et l'erreur globale est minimisée lorsque alpha = 1/3.
+
+						C'est à dire que, pour une forme convexe de R2 à bord C3 à courbure bornée positive, notre estimation de la courbure converge uniformément vers la coubure euclidienne avec une erreur en O(h^1/3) lorsque le rayon est kh^1/3, quand h tend vers 0 (c'est à dire que l'objet se raffine).
+					</aside>
 				</section>
 
 				<section>
@@ -1504,16 +1593,16 @@
 								</section>
 
 								<section>
-									<h2><strong>Scale-Space</strong> Curvature based Feature Estimator</h2>
+									<h2>Estimateur de points caractéristiques basé sur l'analyse de la courbure en <strong>espace d'échelle</strong></h2>
 
 									<p>
 										<table class="beautifulTable" style="font-size:70%;">
 											<thead>
 												<tr>
 													<th></th>
-													<th>Curvature</th>
+													<th>Courbure</th>
 
-													<th>Plot (in logscale)</th>
+													<th>Graphes (en échelle logarithmique)</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -1528,10 +1617,10 @@
 														& := & {\color{myblue}\kappa_0} + {\color{mygrey}O(R)}
 														\end{eqnarray}$
 													</td>
-													<td style="font-size:70%;">
-														<img src="img/feature/plot_II_smooth.svg" class="imgNoBorder" height="150px" style="text-align:center;vertical-align:middle;" />
-														<p>Intercept : $\kappa_0$</p>
-														<p>Slope : $0$</p>
+													<td style="font-size:70%;vertical-align:top;">
+														<img src="img/feature/plot_II_smooth.svg" class="imgNoBorder" height="150px" style="float:left;margin-right:15px;text-align:center;vertical-align:middle;" />
+														<p>Coefficient : $\kappa_0$</p>
+														<p>Pente : $0$</p>
 													</td>
 												</tr>
 												<tr>
@@ -1546,10 +1635,10 @@
 														& & + {\color{mygreen}\frac{\kappa_{-} + \kappa_{+}}{6}} + {\color{mygrey}O(R)}
 														\end{eqnarray}$
 													</td>
-													<td style="font-size:70%;">
-														<img src="img/feature/plot_II_hard.svg" class="imgNoBorder" height="150px" style="vertical-align:middle;" />
-														<p>Intercept : depending to $\alpha_0$</p>
-														<p>Slope : $-1$</p>
+													<td style="font-size:70%;vertical-align:top;">
+														<img src="img/feature/plot_II_hard.svg" class="imgNoBorder" height="150px" style="float:left;margin-right:15px;vertical-align:middle;" />
+														<p>Coefficient : dépendant de $\alpha_0$</p>
+														<p>Pente : $-1$</p>
 													</td>
 												</tr>
 											</tbody>
@@ -1558,7 +1647,7 @@
 								</section>
 
 								<section>
-									<h2>Influence of digitization</h2>
+									<h2>Influence de la discrétisation</h2>
 									<p style="font-size:80%;" >
 										For a <strong>constant radius <span style="font-size:80%;">$R$</span></strong>, there exists an <strong>infinity of curves</strong> which lead to the same digitization of $B_R(x)\cap \Shape$:
 									</p>
@@ -1598,6 +1687,10 @@
 									<blockquote class="example" cite="" style="font-size:70%;">
 										For fixed $h$, estimated values $\hat{\kappa}_R \le \kappa_{max}$ are considered as <strong style="color:#2ecc71">flat</strong> zone, or <strong style="color:#2ecc71">outliers</strong> (in the sense that doesn't capture the feature with current radius).
 									</blockquote>
+
+									<aside class="notes">
+										Si le pas de discrétisation est trop grossier, nous ne pouvons pas faire de distinction entre des parties plates et des parties faiblement courbées, c'est ce que nous voyons sur les courbes noires et grises. Nous pouvons quantifier la courbure limite au dessous de laquelle nous ne pouvons pas distinguer la géométrie locale, en fonction du rayon de la boule.
+									</aside>
 								</section>
 
 								<section>
