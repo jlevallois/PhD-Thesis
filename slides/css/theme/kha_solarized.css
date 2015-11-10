@@ -377,7 +377,7 @@ body {
    bottom: 11px;
    opacity: 0.5;
    z-index: 31;
-   font-size: 18px;
+   font-size: 24px;
    color: #fff;
    background-color: rgba(0, 0, 0, 0.6);
    padding: 5px; }
@@ -396,7 +396,7 @@ body {
  .reveal .slide-number {
    top: 10px;
    bottom: auto;
-   font-size: 14px; }
+   font-size: 24px; }
 
    /*********************************************
     * PROGRESS BAR

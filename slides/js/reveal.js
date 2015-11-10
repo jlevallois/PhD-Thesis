@@ -471,27 +471,33 @@
 
 		// Chapter name
 		dom.chapterList = [];
+		dom.chapterArrowList = [];
 		var index_menu = 0;
 		toArray( dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ) ).forEach( function( hslide, h ) {
 			if( hslide.hasAttribute( 'slide-title' ) ) {
 				dom.chapterList[index_menu] = createNode( dom.wrapper, 'div', 'chapterName', hslide.getAttribute("slide-title") );
-				var arrowImg = createNode( dom.wrapper, 'img', 'chapterArrow' );
+				dom.chapterArrowList[index_menu] = createNode( dom.wrapper, 'img', 'chapterArrow' );
 				if( hslide.hasAttribute( 'slide-title-position' ) ) {
 					if( hslide.getAttribute("slide-title-position") == "right" ) {
-						arrowImg.setAttribute('src', 'img/misc/arrow-right.svg' );
-						arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - 8 + 'px';
+						dom.chapterArrowList[index_menu].setAttribute('src', 'img/misc/arrow-right.svg' );
+						dom.chapterArrowList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - 8 + 'px';
 						dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - dom.chapterList[index_menu].offsetWidth + 'px';
 					}
 					else if( hslide.getAttribute("slide-title-position") == "middle" ) {
-						arrowImg.setAttribute('src', 'img/misc/arrow-middle.svg' );
-						arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - 8 + 'px';
+						dom.chapterArrowList[index_menu].setAttribute('src', 'img/misc/arrow-middle.svg' );
+						dom.chapterArrowList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - 8 + 'px';
 						dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - dom.chapterList[index_menu].offsetWidth/2 + 'px';
+					}
+					else {
+						dom.chapterArrowList[index_menu].setAttribute('src', 'img/misc/arrow-left.svg' );
+						dom.chapterArrowList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
+						dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
 					}
 
 				}
 				else {
-					arrowImg.setAttribute('src', 'img/misc/arrow-left.svg' );
-					arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
+					dom.chapterArrowList[index_menu].setAttribute('src', 'img/misc/arrow-left.svg' );
+					dom.chapterArrowList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
 					dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
 				}
 				index_menu += 1;
@@ -2577,6 +2583,23 @@
 
 			dom.progressbar.style.width = getProgress() * dom.wrapper.offsetWidth + 'px';
 
+		}
+
+		if( getSlidePastCount() == 0 ) {
+			for( var i = 0; i < dom.chapterList.length; i++ ) {
+				var chapterName = dom.chapterList[i];
+				var chapterArrow = dom.chapterArrowList[i];
+				chapterName.style.display = "none";
+				chapterArrow.style.display = "none";
+			}
+		}
+		else {
+			for( var i = 0; i < dom.chapterList.length; i++ ) {
+				var chapterName = dom.chapterList[i];
+				var chapterArrow = dom.chapterArrowList[i];
+				chapterName.style.display = "initial";
+				chapterArrow.style.display = "initial";
+			}
 		}
 
 	}
