@@ -476,9 +476,24 @@
 			if( hslide.hasAttribute( 'slide-title' ) ) {
 				dom.chapterList[index_menu] = createNode( dom.wrapper, 'div', 'chapterName', hslide.getAttribute("slide-title") );
 				var arrowImg = createNode( dom.wrapper, 'img', 'chapterArrow' );
-				arrowImg.setAttribute('src', 'img/misc/arrow.svg' );
-				arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
-				dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
+				if( hslide.hasAttribute( 'slide-title-position' ) ) {
+					if( hslide.getAttribute("slide-title-position") == "right" ) {
+						arrowImg.setAttribute('src', 'img/misc/arrow-right.svg' );
+						arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - 8 + 'px';
+						dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - dom.chapterList[index_menu].offsetWidth + 'px';
+					}
+					else if( hslide.getAttribute("slide-title-position") == "middle" ) {
+						arrowImg.setAttribute('src', 'img/misc/arrow-middle.svg' );
+						arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - 8 + 'px';
+						dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth - dom.chapterList[index_menu].offsetWidth/2 + 'px';
+					}
+
+				}
+				else {
+					arrowImg.setAttribute('src', 'img/misc/arrow-left.svg' );
+					arrowImg.style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
+					dom.chapterList[index_menu].style.marginLeft = getProgressTitle(h) * dom.wrapper.offsetWidth + 'px';
+				}
 				index_menu += 1;
 			}
 		} );
