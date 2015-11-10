@@ -243,12 +243,11 @@
 					</p>
 
 					<div style="font-size:70%;text-align:left;">
-						&#8594; Résultat direct de scanners (micro-tomographie à rayons X, appareils photo numérique, ...).<br/>
-						&#8594; De nombreux algorithmes sont définis sur ce type de données.<br/>
+						&#8594; Résultat direct de scanners (micro-tomographie à rayons X, appareil photo numérique, ...).<br/>
 						&#8594; Les calculs sont faits en arithmétique exacte.
 					</div>
 					<div style="font-size:75%;text-align:left;">
-						<strong>Avantage</strong> : Nous pouvons <strong>prouver</strong> le comportement des estimateurs.
+						<strong>Avantage</strong> : De <strong>nombreux algorithmes</strong> sont définis sur ce type de données, et nous pouvons <strong>prouver</strong> le comportement des estimateurs.
 					</div>
 
 					<aside class="notes">
@@ -363,6 +362,18 @@
 					</aside>
 				</section>
 
+				<section>
+					<h2>Plan</h2>
+					<div>
+						<ul>
+							<li>Estimation de la <strong>courbure</strong> en 2D et en 3D</li>
+							<li>Estimation <strong>sans paramètre de la courbure</strong> en 2D et en 3D</li>
+							<li>Estimation des <strong>points caractéristiques</strong></li>
+							<li>Résultats avec <strong>digitalSnow</strong></li>
+						</ul>
+					</div>
+				</section>
+
 				<section slide-title="Estimateurs de courbure" data-background="img/curvature/II_mean_xyz512.png">
 					<h1 class="chapterTitle">Estimation de la <strong>courbure</strong></h1>
 
@@ -384,19 +395,19 @@
 						</div>
 
 						<p>
-							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="1">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="example fragment" data-fragment-index="1">
 								\[
 									\Curv(x) = \left| \frac{d^2f}{dx^2} \right|
 								\]
 							</blockquote>
-							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="2">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="example fragment" data-fragment-index="2">
 								\[
 								\begin{align}
 								    \Curv(x) = \frac{d\phi}{dx}
 								\end{align}
 								\]
 							</blockquote>
-							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="3">
+							<blockquote cite="" style="float:left;width:30%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="example fragment" data-fragment-index="3">
 								\[
 								\begin{align}
 								    \Curv(x) = \frac{1}{r_0(x)}
@@ -405,12 +416,12 @@
 							</blockquote>
 						</p>
 						<p>
-							<blockquote cite="" style="clear:both;float:left;width:46%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="4">
+							<blockquote cite="" style="clear:both;float:left;width:46%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="example fragment" data-fragment-index="4">
 								\[
 									\MeanCurv(\Shape,\vx) = \frac{\PrincCurv{a}(\Shape,\vx) + \PrincCurv{b}(\Shape,\vx)}{2}
 								\]
 							</blockquote>
-							<blockquote cite="" style="float:left;width:46%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="fragment" data-fragment-index="5">
+							<blockquote cite="" style="float:left;width:46%;font-size:60%;margin-left:10px;height:60px;display:inline-block;" class="example fragment" data-fragment-index="5">
 								\[
 								  \GaussCurv(\Shape,\vx) = \PrincCurv{1}(\Shape,\vx) \cdot \PrincCurv{2}(\Shape,\vx)
 								\]
@@ -681,7 +692,7 @@
 								</foreignobject>
 							</svg>
 						</div>
-						<div style="float:right;width:29%;font-size:60%;text-align:left;">
+						<div style="float:right;width:29%;font-size:70%;text-align:left;">
 							<br />
 							${\color{mydarkred}A_R(\Shape,\vx)} \EqDef \int_{\Ball{R}{\vx}} \chi(\vp)d\vp$
 						</div>
@@ -696,7 +707,7 @@
 						[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>] $\quad \CurvT{R}(\Shape,\vx) = \Curv(\Shape,\vx) + {\color{mydarkred}O(R)} $
 					</blockquote>
 					<div class="fragment" data-fragment-index="1">
-						<strong>$R \rightarrow 0$ n'a pas de sens en géométrie digitale</strong>
+						<strong>$R \rightarrow 0$ n'a pas de sens en géométrie discrète</strong>
 					</div>
 					<aside class="notes">
 						L'idée est simple. Il est connu depuis longtemps qu'il existe un lien entre la courbure et l'intersection entre une boule et le bord de la forme. Pottmann l'a formalisé dans sa publication en 2007. Ainsi, par approximation de Taylor par morceaux d'une surface C2 convexe, nous obtenons la relation entre la courbure k et l'aire de l'intersection entre la boule et la forme, A_R. Cette façon de calculer l'aire converge vers la valeur de courbure de l'objet en O(R), c'est à dire quand le rayon de la boule tend vers 0. Le problème, c'est que faire tendre le rayon vers 0 n'a pas de sens pour des données digitales puisqu'à un moment nous n'aurons plus assez de points digitaux, entraînant une augmentation de l'erreur d'estimation.
@@ -749,7 +760,7 @@
 					<h2>Estimateur <strong>digital</strong> de l'<strong>aire</strong> par <strong>dénombrement</strong></h2>
 					<blockquote cite="" style="width:88%;font-size:70%;background: rgba(0, 0, 255, 0.05);">
 						\[ {\color{myblue}\AreaC(\DSh)} \EqDef h^2 \Card (\DSh) \]<br/>
-						[<a href="#">Gauss, Dirichlet</a>] $\quad \AreaC(Y) = \Area(\Shape) + {\color{myblue}O(h^\beta)}\quad\quad\text{avec}\quad
+						 $\quad \AreaC(Y) = \Area(\Shape) + {\color{myblue}O(h^\beta)}\quad\quad\text{avec}\quad
 						\beta \ge 1$
 					</blockquote>
 
@@ -763,7 +774,7 @@
 					</div>
 					<div style="float:right;width:37%;vertical-align:top;text-align:left;font-size:60%;">
 						<ul>
-							<li>$\beta = 1$ pour $\Shapes^C$ [<a href="#">Klette, Žunić 2000</a>]</li>
+							<li>$\beta = 1$ pour $\Shapes^C$ [<a href="#">Gauss, Dirichlet</a>]</li>
 							<li>$\beta = \frac{15}{11}-\epsilon$ pour $\Shapes^{3-SC}$ à courbure non nulle [<a href="#">Huxley 1990</a>]</li>
 						</ul>
 					</div>
@@ -796,8 +807,53 @@
 					<div class="fragment" data-fragment-index="3" style="font-size:70%;">
 						\( \color{myred} A_R(\Shape,\vx) \approx 12.9 \)
 					</div>
-					<br />
+				</section>
 
+				<section>
+					<h2>Adaptation aux données digitales - 1/3</h2>
+
+					<p class="noindent" >
+						<blockquote cite="" style="float:left;width:90%;text-align:left;font-size:60%;background: rgba(0, 0, 255, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-0.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$A_R(\Shape,\vx) \rightarrow \AreaC(\Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h})$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<img src="img/basic14.svg" class="imgNoBorder" />
+						</div>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="clear:both;float:left;width:90%;text-align:left;font-size:60%;background: rgba(255, 0, 0, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object> +
+						<span style="vertical-align:middle;width:200px;" width="200">
+							[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>]
+						</span>
+						<span style="vertical-align:middle;margin-left:50px;">$\quad\CurvH{R}(\DSh,\vx,h)$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<!-- <img src="img/basic14.svg" class="imgNoBorder" /> -->
+						</div>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="clear:both;float:left;width:90%;text-align:left;font-size:60%;background: rgba(0, 255, 0, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/main-4.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h) \rightarrow \Curv(\Shape,\vx)$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<!-- <img src="img/basic14.svg" class="imgNoBorder" /> -->
+						</div>
+					</p>
 				</section>
 
 				<section>
@@ -823,7 +879,53 @@
 					<div class="fragment" data-fragment-index="3" style="width:99.5%; clear:both; display:block; font-size:70%;">
 						\( \color{myred} {\kappa}(\Shape,\vx) = \frac{1}{7.5} \approx 0.133 \)
 					</div>
+				</section>
 
+				<section>
+					<h2>Adaptation aux données digitales - 2/3</h2>
+
+					<p class="noindent" >
+						<blockquote cite="" style="float:left;width:90%;text-align:left;font-size:60%;background: rgba(0, 0, 255, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-0.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$A_R(\Shape,\vx) \rightarrow \AreaC(\Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h})$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<img src="img/basic14.svg" class="imgNoBorder" />
+						</div>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="clear:both;float:left;width:90%;text-align:left;font-size:60%;background: rgba(255, 0, 0, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object> +
+						<span style="vertical-align:middle;width:200px;" width="200">
+							[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>]
+						</span>
+						<span style="vertical-align:middle;margin-left:50px;">$\quad\CurvH{R}(\DSh,\vx,h)$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<img src="img/basic14.svg" class="imgNoBorder" />
+						</div>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="clear:both;float:left;width:90%;text-align:left;font-size:60%;background: rgba(0, 255, 0, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/main-4.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h) \rightarrow \Curv(\Shape,\vx)$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<!-- <img src="img/basic14.svg" class="imgNoBorder" /> -->
+						</div>
+					</p>
 				</section>
 
 				<section>
@@ -841,7 +943,7 @@
 								\hat{\vx} &\mapsto \vx = \pi^\Shape_h(\hat{\vx}) \,,
 								\end{align}
 							\]
-							où $\vx$ est le seul point tel que $\hat{\vx} \in \mathbf{n}(\Shape,\vx, {\color{myred}\frac{\sqrt{2}}{2}h})$.</span>
+							où $\vx$ est le seul point tel que $\hat{\vx} \in \mathbf{n}\left(\Shape,\vx, {\color{myred}\frac{\sqrt{2}}{2}h}\right)$.</span>
 						</div>
 					</blockquote>
 
@@ -859,6 +961,53 @@
 					<aside class="notes">
 						Enfin, nous devons considérer l'erreur de positionnement de la surface digitale vis à vis de la surface euclidienne. Ce biais est assez visible sur les figures du bas. Pour borner l'erreur, sans rentrer dans les détails, nous allons utiliser la propriété de la projection inverse qui garantis qu'il existe un point x qui est à une distance au maximum de v(2)h/2 de x chapeau. Alors, nous pouvons borner l'erreur de positionnement de la surface à O(h^\alpha'), avec alpha' = 1 dans notre cas ici. Si jamais nous utilisions une méthode permettant de mieux approcher la surface, nous pourrions optimiser cet alpha'
 					</aside>
+				</section>
+
+				<section>
+					<h2>Adaptation aux données digitales - 3/3</h2>
+
+					<p class="noindent" >
+						<blockquote cite="" style="float:left;width:90%;text-align:left;font-size:60%;background: rgba(0, 0, 255, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-0.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$A_R(\Shape,\vx) \rightarrow \AreaC(\Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h})$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<img src="img/basic14.svg" class="imgNoBorder" />
+						</div>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="clear:both;float:left;width:90%;text-align:left;font-size:60%;background: rgba(255, 0, 0, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object> +
+						<span style="vertical-align:middle;width:200px;" width="200">
+							[<a href="http://www.sciencedirect.com/science/article/pii/S0167839607000842">Pottmann et al. 2007</a>]
+						</span>
+						<span style="vertical-align:middle;margin-left:50px;">$\quad\CurvH{R}(\DSh,\vx,h)$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<img src="img/basic14.svg" class="imgNoBorder" />
+						</div>
+					</p>
+					<p class="noindent" >
+						<blockquote cite="" style="clear:both;float:left;width:90%;text-align:left;font-size:60%;background: rgba(0, 255, 0, 0.05);">
+						<object style="vertical-align:middle;" data="img/curvature/2d-curv-estimator-1.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>&#8594;
+						<object style="vertical-align:middle;" data="img/curvature/main-4.svg" width="200" type="image/svg+xml">
+							<p>SVG-Viewer needed.</p>
+						</object>
+						<span style="vertical-align:middle;margin-left:50px;">$\CurvH{R}(\DSh,\hat{\vx},h) \rightarrow \Curv(\Shape,\vx)$</span>
+						</blockquote>
+						<div style="float:right;width:8%;">
+							<img src="img/basic14.svg" class="imgNoBorder" />
+						</div>
+					</p>
 				</section>
 
 				<section>
@@ -882,10 +1031,11 @@
 						&#8594; Paramétrer $R=kh^\alpha$ et trouver le $\alpha$ qui minimise les erreurs.
 					</p>
 
-					<blockquote class="theorem" cite="" style="font-size:80%;">
+					<blockquote class="theorem" cite="" style="font-size:80%;width:100%;text-align:right;">
 						\[ \color{myred}
-						| \CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
+						\left| \CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx) \right| \le O\left(h^\frac{1}{3}\right) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
+						<a href="#" class="citation">[Coeurjolly, Lachaud, Levallois 2013]</a>
 					</blockquote>
 
 					<aside class="notes">
@@ -899,11 +1049,11 @@
 
 				<section>
 					<h2>Estimateur digitale de la <strong>courbure moyenne</strong></h2>
-					<div style="float:left;width:40%;">
+					<div style="float:left;width:38%;">
 						<img src="img/curvature/integral3D.svg" class="imgNoBorder" />
 					</div>
-					<div style="float:left;width:58%;">
-						<blockquote cite="" style="width:88%;font-size:70%;background: rgba(0, 0, 255, 0.05);text-align:left;">
+					<div style="float:right;width:60%;">
+						<blockquote class="theorem" cite="" style="width:100%;font-size:70%;text-align:left;">
 							Soit $\Shape$ une forme convexe de $\R^3$ telle que son bord $\dS$ est $C^3$ à courbure bornée positive.<br/><br/>
 							$ Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} $<br/><br/>
 							$ {\color{myblue}\VolC(Y)} \EqDef h^3 \Card (Y) $<br/><br/>
@@ -911,10 +1061,11 @@
 						</blockquote>
 					</div>
 
-					<blockquote cite="" style="clear:both;width:88%;font-size:70%;background: rgba(255, 0, 0, 0.05);">
+					<blockquote class="theorem" cite="" style="clear:both;width:100%;font-size:80%;text-align:right;">
 						\[ \color{myred}
-						| \MeanCurvH{R}(\DSh,\hat{\vx},h) - \MeanCurv(\Shape,\vx) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
+						\left| \MeanCurvH{R}(\DSh,\hat{\vx},h) - \MeanCurv(\Shape,\vx) \right| \le O\left(h^\frac{1}{3}\right) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
+						<a href="#" class="citation">[Coeurjolly, Lachaud, Levallois 2014]</a>
 					</blockquote>
 				</section>
 
@@ -962,15 +1113,15 @@
 
 				<section>
 					<h2>Estimateurs digitaux des <strong>courbures principales</strong></h2>
-					<div style="float:left;width:40%;">
+					<div style="float:left;width:38%;">
 						<img src="img/curvature/integral3D.svg" class="imgNoBorder" />
 					</div>
-					<div style="float:left;width:58%;">
-						<blockquote cite="" style="width:88%;font-size:70%;background: rgba(0, 0, 255, 0.05);text-align:left;">
+					<div style="float:right;width:60%;">
+						<blockquote class="theorem" cite="" style="width:100%;font-size:70%;text-align:left;">
 							\[
 								\begin{align}
-									&\PrincCurvH{1}{R}(\DSh,\vx,h) \EqDef \frac{6}{\pi R^6}({\color{myblue}\hat{\lambda}_2} - 3{\color{myblue}\hat{\lambda}_1}) + \frac{8}{5R}\\
-									&\PrincCurvH{2}{R}(\DSh,\vx,h) \EqDef \frac{6}{\pi R^6}({\color{myblue}\hat{\lambda}_1} - 3{\color{myblue}\hat{\lambda}_2}) + \frac{8}{5R}\\
+									&\PrincCurvH{1}{R}(\DSh,\vx,h) \EqDef \frac{6}{\pi R^6}\left({\color{myblue}\hat{\lambda}_2} - 3{\color{myblue}\hat{\lambda}_1}\right) + \frac{8}{5R}\\
+									&\PrincCurvH{2}{R}(\DSh,\vx,h) \EqDef \frac{6}{\pi R^6}\left({\color{myblue}\hat{\lambda}_1} - 3{\color{myblue}\hat{\lambda}_2}\right) + \frac{8}{5R}\\
 									&\PrincDirH{1}{R}(\DSh,\vx,h) \EqDef {\color{myblue}\hat{\nu}_1}\\
 									&\PrincDirH{2}{R}(\DSh,\vx,h) \EqDef {\color{myblue}\hat{\nu}_2}\\
 									&\NormalDirH{R}(\DSh,\vx,h) \EqDef {\color{myblue}\hat{\nu}_3}
@@ -983,10 +1134,11 @@
 						</blockquote>
 					</div>
 
-					<blockquote cite="" style="clear:both;width:88%;font-size:70%;background: rgba(255, 0, 0, 0.05);">
+					<blockquote class="theorem" cite="" style="clear:both;text-align:right;width:100%;font-size:80%;">
 						\[ \color{myred}
-						| \PrincCurvH{i}{R}(\DSh,\hat{\vx},h) - \PrincCurv{i}(\Shape,\vx) | \le O(h^\frac{1}{3}) \quad\text{quand}\quad R=kh^\frac{1}{3}
+						\left| \PrincCurvH{i}{R}(\DSh,\hat{\vx},h) - \PrincCurv{i}(\Shape,\vx) \right| \le O\left(h^\frac{1}{3}\right) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
+						<a href="#" class="citation">[Coeurjolly, Lachaud, Levallois 2014]</a>
 					</blockquote>
 				</section>
 
@@ -1044,6 +1196,7 @@
 						  </tbody>
 						</table>
 
+
 						<!-- <img src="img/Ellipse.png" class="imgNoBorder" width="50px" />
 						<img src="img/AccFlower.png" class="imgNoBorder" width="50px" />
 						<img src="img/Flower.png" class="imgNoBorder" width="50px" /><br/>
@@ -1053,8 +1206,16 @@
 						$\CurvH{R}$, $\MeanCurvH{R}$, $\PrincCurvH{1}{R}$, $\PrincCurvH{2}{R}$
 						<br/> -->
 					</div>
-					<div style="clear:both;text-align:center;font-size:90%;">
-						<strong>L'évaluation expérimentale complète est disponible dans le manuscrit</strong>
+					<div style="float:right;text-align:left;font-size:70%;width:50%;">
+						Points analysés :<br/>
+						<ul>
+							<li>la qualité</li>
+							<li>la stabilité</li>
+							<li>le temps de calcul</li>
+						</ul>
+					</div>
+					<div style="clear:both;text-align:center;font-size:90%;margin-top:20px;">
+						<br/><strong>L'évaluation expérimentale complète est disponible dans le manuscrit</strong>
 					</div>
 				</section>
 				<section data-background="img/curvature/spam_expe/merged.png">
@@ -1070,10 +1231,47 @@
 
 				<section>
 					<h2>Résumons ...</h2>
+					<table class="beautifulTable" style="font-size:70%;">
+						<thead>
+							<tr>
+								<th>Nom</th>
+								<th>2D/3D</th>
+								<th>Paramètre</th>
+								<th>Convergence théorique</th>
+								<th>Convergence expérimentale</th>
+								<th>Déjà existant ?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div style="color:#3498db;">$\CurvH{R}$</div></td>
+								<td>2D</td>
+								<td><div style="color:#e74c3c;">$R$</div></td>
+								<td><span style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</span><span style="font-size:70%;"> quand $R=kh^\frac{1}{3}$</span></td>
+								<td><span style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</span><span style="font-size:70%;"> quand $R=kh^\frac{1}{3}$</span></td>
+								<td><div style="color:#268BD2;">Oui</div></td>
+							</tr>
+							<tr>
+								<td><div style="color:#3498db;">$\MeanCurvH{R}$</div></td>
+								<td>3D</td>
+								<td><div style="color:#e74c3c;">$R$</div></td>
+								<td><span style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</span><span style="font-size:70%;"> quand $R=kh^\frac{1}{3}$</span></td>
+								<td><span style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</span><span style="font-size:70%;"> quand $R=kh^\frac{1}{3}$</span></td>
+								<td><div style="color:#2ecc71;">Non</div></td>
+							</tr>
+							<tr>
+								<td><div style="color:#3498db;">$\PrincCurvH{i}{R}$</div></td>
+								<td>3D</td>
+								<td><div style="color:#e74c3c;">$R$</div></td>
+								<td><span style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</span><span style="font-size:70%;"> quand $R=kh^\frac{1}{3}$</span></td>
+								<td><span style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</span><span style="font-size:70%;"> quand $R=kh^\frac{1}{3}$</span></td>
+								<td><div style="color:#2ecc71;">Non</div></td>
+							</tr>
+						</tbody>
+					</table>
 					<p>
-						<ul>
-							<li>Estimateurs de courbures par <strong>intégration volumique</strong>, définis sur des <strong>données digitales</strong></li>
-							<li class="fragment" data-fragment-index="1">En 2D comme en 3D (tenseur de courbure)</li>
+						<ul style="font-size:70%;">
+							<li>Estimateurs de courbures 2D et 3D par <strong>intégration volumique</strong>, définis sur des <strong>données digitales</strong></li>
 							<li class="fragment" data-fragment-index="2">Facile à mettre en œuvre</li>
 							<li class="fragment" data-fragment-index="3"><strong>Convergent uniformément</strong>(théoriquement et expérimentalement) en $O(h^\frac{1}{3})$ quand $R = kh^\frac{1}{3}$</li>
 							<li class="fragment" data-fragment-index="4"><strong>Robuste</strong> au bruit</li>
@@ -1083,75 +1281,65 @@
 					</p>
 				</section>
 
-				<section slide-title="Estimateurs de courbure sans paramètre" slide-title-position="middle">
+				<section>
+				<section>
 					<h2>Pourquoi <strong>ne voulons-nous pas</strong> de paramètre ?</h2>
 					<div style="float:left;width:600px;">
 						<p style="font-size:80%;">Comment choisir le rayon R ?</p>
 						<p style="width:100%; text-align:center;">
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_4.png" />
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_7.png" />
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_10.png" />
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_12.png" />
+							<img class="imgNoBorder" style="width:15%;" src="img/feature/MeanAl_4.png" />
+							<img class="imgNoBorder" style="width:15%;" src="img/feature/MeanAl_10.png" />
+							<img class="imgNoBorder" style="width:15%;" src="img/feature/MeanAl_17.png" />
+							<img class="imgNoBorder" style="width:15%;" src="img/feature/MeanAl_25.png" />
 						</p>
-						<p style="width:100%;padding-left:10%;padding-right:10%;text-align:center;font-size:70%;">
-							<span style="width:20%;text-align:center;float:left;">$R=4$</span>
-							<span style="width:20%;text-align:center;float:left;">$R=7$</span>
-							<span style="width:20%;text-align:center;float:left;">$R=10$</span>
-							<span style="width:20%;text-align:center;float:left;">$R=12$</span>
-						</p>
-						<p style="clear:both;width:100%; text-align:center;">
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_14.png" />
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_17.png" />
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_20.png" />
-							<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_25.png" />
-						</p>
-						<p style="width:100%;padding-left:10%;padding-right:10%;text-align:center;font-size:70%;">
-							<span style="width:20%;text-align:center;float:left;">$R=14$</span>
-							<span style="width:20%;text-align:center;float:left;">$R=17$</span>
-							<span style="width:20%;text-align:center;float:left;">$R=20$</span>
-							<span style="width:20%;text-align:center;float:left;">$R=25$</span>
+						<p style="width:100%;padding-left:20%;padding-right:20%;margin-top:-20px;text-align:center;font-size:70%;">
+							<span style="width:15%;text-align:center;float:left;">$R=4$</span>
+							<span style="width:15%;text-align:center;float:left;">$R=10$</span>
+							<span style="width:15%;text-align:center;float:left;">$R=17$</span>
+							<span style="width:15%;text-align:center;float:left;">$R=25$</span>
 						</p>
 					</div>
 					<div style="float:right;">
 						<p style="font-size:80%;">Comment connaître l'échelle ?</p>
-						<object data="img/curvature/2d-curv-estimator-7.svg" height="250" type="image/svg+xml">
+						<object data="img/curvature/2d-curv-estimator-7.svg" height="150" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
-						</object><br/>
-						<object data="img/curvature/2d-curv-estimator-8.svg" height="250" type="image/svg+xml">
+						</object>
+						<object data="img/curvature/2d-curv-estimator-8.svg" height="150" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object>
 					</div>
+					<div style="clear:both;" class="fragment" data-fragment-index="1">
+						<strong>Analyse des segments maximaux</strong>
+					</div>
+					<div style="float:left;text-align:left;width:49%;" class="fragment" data-fragment-index="1">
+						<div>
+							<img src="img/curvature/flower5-1.png" style="height:150px;margin:0;" class="imgNoBorder" />
+							<img src="img/curvature/flower5-2.png" style="height:150px;margin:0;" class="imgNoBorder" />
+							<img src="img/curvature/flower5-3.png" style="height:150px;margin:0;" class="imgNoBorder" />
+						</div>
+						<div class="fragment" data-fragment-index="3" style="font-size:80%;">
+							<strong>&#8594; $(L_D( {\DigShape} ))^2$ comme rayon discret $R_d$</strong>
+						</div>
+						<!-- <div>
+							<img src="img/curvature/flower5-1-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
+							<img src="img/curvature/flower5-2-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
+							<img src="img/curvature/flower5-3-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
+						</div> -->
+					</div>
+					<div style="float:right;text-align:left; width:50%;" class="fragment" data-fragment-index="2">
+						<div style="font-size:70%;">
+							<ul>
+								<li>le <strong style="color:#268BD2">plus court des segments maximaux</strong> a une borne inférieure en $\Omega\left(h^{-\frac{1}{3}}\right)$</li>
+								<li>le <strong style="color:#268BD2">plus long des segments maximaux</strong> a une borne supérieure en $O\left(h^{-\frac{1}{2}}\right)$</li>
+								<li>la <strong style="color:#268BD2">longueur moyenne des segments maximaux</strong> $L_D({\DigShape})$ est bornée par :
+								\[
+									\Theta\left(h^{-\frac{1}{3}}\right) \le L_D\left( {\DigShape} \right) \le \Theta\left(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right)\right)
+								\]
+								</li>
+							</ul>
+						</div>
+					</div>
 				</section>
-
-				<section><!-- slide-title="Sans paramètres">-->
-					<h2>Analyse des segments maximaux</h2>
-					<div>
-						<img src="img/curvature/flower5-1.png" style="height:150px;margin:0;" class="imgNoBorder" />
-						<img src="img/curvature/flower5-2.png" style="height:150px;margin:0;" class="imgNoBorder" />
-						<img src="img/curvature/flower5-3.png" style="height:150px;margin:0;" class="imgNoBorder" />
-					</div>
-					<div>
-						<img src="img/curvature/flower5-1-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
-						<img src="img/curvature/flower5-2-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
-						<img src="img/curvature/flower5-3-zoom.png" style="height:150px;margin:0;" class="imgNoBorder" />
-					</div>
-					<div style="font-size:70%;">
-						<ul>
-							<li>le <strong>plus court des segments maximaux</strong> a une borne inférieure en $\Omega(h^{-\frac{1}{3}})$</li>
-							<li>le <strong>plus long des segments maximaux</strong> a une borne supérieure en $O(h^{-\frac{1}{2}})$</li>
-							<li>la <strong>longueur moyenne des segments maximaux</strong> $L_D({\DigShape})$, est bornée par :
-							\[
-								\Theta(h^{-\frac{1}{3}}) \le L_D( {\DigShape} ) \le \Theta(h^{-\frac{1}{3}} \log \left(\frac{1}{h}\right))
-							\]
-							</li>
-						</ul>
-					</div>
-					<div class="fragment" data-fragment-index="1">
-						<br/>
-						<strong>&#8594; $(L_D( {\DigShape} ))^2$ comme rayon $R$</strong>
-					</div>
-				</section>
-
 				<section>
 					<h2>Estimateurs de courbure <strong>sans paramètre</strong> avec les <strong>segments maximaux</strong></h2>
 					<div style="float:left;width:30%">
@@ -1175,16 +1363,9 @@
 								&\CurvHSL(\DigShape,\vp) \EqDef \frac{3\pi}{2{\rho(\DigShape,\vp)}} - \frac{3 {\color{myblue} A'(\DigShape,\vp)}}{{\rho(\DigShape,\vp)}^3} \quad\text{avec}\quad {\color{myblue}A'(\DigShape,\vp)} = \Card(\Ball{\rho(\DigShape,\vp)}{\vp} \cap \DigShape
 							\end{align}
 						\]
-						<!-- <img src="img/curvature/ScaleSpace_Flower_Local_5.png" style="height:100px;" class="imgNoBorder" /> -->
 						</p>
 					</div>
-
 				</section>
-				<!-- <section>
-					<h2>Et en <strong>3D</strong> ?</h2>
-					<h2 class="fragment" data-fragment-index="1">Aucun résultat théorique pour les plans discrets ...</h2>
-					<h2 class="fragment" data-fragment-index="2">... alors pourquoi ne pas utiliser les segments maximaux ?</h2>
-				</section> -->
 				<section>
 					<h2>Et pour des objets 3D ?</h2>
 					<p style="text-align:left;"><strong>Aucun résultat théorique</strong> pour les <strong>plans discrets 3D</strong>.</p>
@@ -1201,43 +1382,85 @@
 						</ul>
 					</div>
 				</section>
-
 				<section>
-					<section>
-						<p>Cela semble bon, mais nous devons vérifier quelques hypothèses :</p>
-						<ul>
-							<li>
-								<p>Bord lisse $C^3$<span class="fragment" style="color:#2ecc71;" data-fragment-index="1">: OK</span></p>
-							</li>
-							<li>
-								<p>Courbure bornée<span class="fragment" style="color:#2ecc71;" data-fragment-index="2"> : OK pour 2/3 coupes</span></p>
-							</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Théorème de Meusnier</h2>
-						<p>
-							At least two slices orthogonal to the axis are locally curves whose curvatures are bounded by $\sqrt{2K}$ in absolute value.
-						</p>
-					</section>
+					<p>Cela semble bon, mais nous devons vérifier quelques hypothèses :</p>
+					<ul>
+						<li>
+							<p>Bord lisse $C^3$<span class="fragment" style="color:#2ecc71;" data-fragment-index="1">: OK</span></p>
+						</li>
+						<li>
+							<p>Courbure bornée<span class="fragment" style="color:#2ecc71;" data-fragment-index="2"> : OK pour 2/3 coupes</span></p>
+						</li>
+					</ul>
 				</section>
+				<section>
+					<h2>Théorème de Meusnier</h2>
+					<p>
+						At least two slices orthogonal to the axis are locally curves whose curvatures are bounded by $\sqrt{2K}$ in absolute value.
+					</p>
+				</section>
+				</section>
+
+
 
 				<section>
 					<h2>Résultat à différentes échelles</h2>
-					<h4>Calcul automatique, <strong>sans fournir de paramètre</strong> à l'estimateur</h4>
+					<!-- <h4>Calcul automatique, <strong>sans fournir de paramètre</strong> à l'estimateur</h4> -->
 
-					<img src="img/curvature/Bunny_64_mean.png" style="width:30%;" class="imgNoBorder" />
-					<img src="img/curvature/Bunny_128_mean.png" style="width:30%;" class="imgNoBorder" />
-					<img src="img/curvature/Bunny_256_mean.png" style="width:30%;" class="imgNoBorder" />
+					<img src="img/curvature/Bunny_64_mean.png" style="width:25%;" class="imgNoBorder" />
+					<img src="img/curvature/Bunny_128_mean.png" style="width:25%;" class="imgNoBorder" />
+					<img src="img/curvature/Bunny_256_mean.png" style="width:25%;" class="imgNoBorder" />
 
-					<div>
-					<span style="width:30%;display:inline-block;" />$[64^3]$</span>
-					<span style="width:30%;display:inline-block;" />$[128^3]$</span>
-					<span style="width:30%;display:inline-block;" />$[256^3]$</span>
+					<div style="font-size:60%;">
+					<span style="width:25%;display:inline-block;" />$[64^3]$</span>
+					<span style="width:25%;display:inline-block;" />$[128^3]$</span>
+					<span style="width:25%;display:inline-block;" />$[256^3]$</span>
 					</div>
+
+					<table class="beautifulTable fragment" style="font-size:70%;" data-fragment-index="1">
+						<thead>
+							<tr>
+								<th>Nom</th>
+								<th>2D/3D</th>
+								<th>Paramètre</th>
+								<th>Convergence théorique</th>
+								<th>Convergence expérimentale</th>
+								<th>Déjà existant ?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div style="color:#3498db;">$\CurvHS$</div></td>
+								<td>2D</td>
+								<td><div style="color:#2ecc71;">Aucun</div></td>
+								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3} \log^2(h)\right)$</div></td>
+								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
+								<td><div style="color:#2ecc71;">Non</div></td>
+							</tr>
+							<tr>
+								<td><div style="color:#3498db;">$\MeanCurvHS$</div></td>
+								<td>3D</td>
+								<td><div style="color:#2ecc71;">Aucun</div></td>
+								<td><div style="color:#e74c3c;">Non*</div></td>
+								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
+								<td><div style="color:#2ecc71;">Non</div></td>
+							</tr>
+							<tr>
+								<td><div style="color:#3498db;">$\PrincCurvHS{i}$</div></td>
+								<td>3D</td>
+								<td><div style="color:#2ecc71;">Aucun</div></td>
+								<td><div style="color:#e74c3c;">Non*</div></td>
+								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
+								<td><div style="color:#2ecc71;">Non</div></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="fragment" data-fragment-index="1" style="font-size:70%;text-align:right;"><a href="#" class="citation">[Levallois, Coeurjolly, Lachaud 2014]</a></div>
+
+					<footer style="font-size:60%;text-align:left;margin-top:20px;" class="fragment" data-fragment-index="1"><span style="color:#e74c3c;">Non*</span> : La convergence en $O\left(h^\frac{1}{3} \log^2(h)\right)$ repose sur une supposition non prouvée actuellement.</footer>
 				</section>
 
-				<section slide-title="Détection de points caractéristiques" data-background="img/feature/Fandisk_noise_II_scale_zoom.png">
+				<section slide-title="Détection de points caractéristiques" slide-title-position="middle" data-background="img/feature/Fandisk_noise_II_scale_zoom.png">
 					<h1 class="chapterTitle">Applications</h1>
 				</section>
 
@@ -1633,7 +1856,7 @@
 													</td>
 													<td style="font-size:70%;vertical-align:top;">
 														<img src="img/feature/plot_II_smooth.svg" class="imgNoBorder" height="150px" style="float:left;margin-right:15px;text-align:center;vertical-align:middle;" />
-														<p>Coefficient : $\kappa_0$</p>
+														<p>Ordonné à l'origine : $\kappa_0$</p>
 														<p>Pente : $0$</p>
 													</td>
 												</tr>
@@ -1651,7 +1874,7 @@
 													</td>
 													<td style="font-size:70%;vertical-align:top;">
 														<img src="img/feature/plot_II_hard.svg" class="imgNoBorder" height="150px" style="float:left;margin-right:15px;vertical-align:middle;" />
-														<p>Coefficient : dépendant de $\alpha_0$</p>
+														<p>Ordonné à l'origine : dépendant de $\alpha_0$</p>
 														<p>Pente : $-1$</p>
 													</td>
 												</tr>
@@ -1663,11 +1886,10 @@
 								<section>
 									<h2>Influence de la discrétisation</h2>
 									<p style="font-size:80%;" >
-										For a <strong>constant radius <span style="font-size:80%;">$R$</span></strong>, there exists an <strong>infinity of curves</strong> which lead to the same digitization of $B_R(x)\cap \Shape$:
+										Pour un <strong>rayon constant <span style="font-size:80%;">$R$</span></strong>, il existe une <strong>infinité de courbes</strong> qui donnent la même discrétisation de $B_R(\vx)\cap \Shape$:
 									</p>
 									<div class="box" style="float:left;width:20%;height:210px;text-align:center;">
-										<img src="img/feature/II_kernels_flat.svg" class="imgNoBorder" height="120px" style="vertical-align:middle;" /><br/>
-										$\tilde{\kappa}(R) = 0$
+										<img src="img/feature/II_kernels_flat.svg" class="imgNoBorder" height="120px" style="vertical-align:middle;" />
 									</div>
 
 									<div style="float:right;text-align:center;width:75%;height:210px;">
@@ -1698,8 +1920,8 @@
 										\[ {\color{myred}\kappa_{max} = \frac{2h}{R^2 + h^2}} \]
 									</div>
 
-									<blockquote class="example" cite="" style="font-size:70%;">
-										For fixed $h$, estimated values $\hat{\kappa}_R \le \kappa_{max}$ are considered as <strong style="color:#2ecc71">flat</strong> zone, or <strong style="color:#2ecc71">outliers</strong> (in the sense that doesn't capture the feature with current radius).
+									<blockquote class="example" cite="" style="font-size:70%;width:100%;">
+										Pour un pas $h$ fixé, les valeurs estimées $\hat{\kappa}_R \le \kappa_{max}$ sont considérés comme des zones <strong style="color:#2ecc71">plates</strong>, ou des <strong style="color:#2ecc71">données abérantes</strong> (dans le sens où le rayon actuel ne permet pas de capturer la géométrie locale).
 									</blockquote>
 
 									<aside class="notes">
@@ -1708,29 +1930,29 @@
 								</section>
 
 								<section>
-									<h2>Influence of digitization</h2>
+									<h2>Influence de la discrétisation</h2>
 									<div style="text-align:center;">
 										<img src="img/feature/plot_II_Kmax.svg" class="imgNoBorder" style="background-color:#fff" />
 									</div>
-									<p style="text-align:center;font-size:80%;">Slope : $-2$</p>
+									<p style="text-align:center;font-size:80%;">Pente : $-2$</p>
 								</section>
 
 								<section>
-									<h2>Scale-Space Analysis</h2>
+									<h2>Analyse en espace d'échelle</h2>
 									<div style="float:left;width:60%;font-size:80%;">
-										For each point, for a range of radii:
+										<span style="text-decoration:underline;">Pour tous les points, pour un ensemble de rayons :</span>
 										<ol>
 											<li style="margin-bottom:10px;">
-												Plot the <strong style="color:inherit">scale-space curvature</strong> (abs: log of kernel radius, ord: log of mean curvature).
+												Afficher l'estimation de la <strong style="color:inherit">courbure en espace d'échelle</strong> avec le rayon comme paramètre (abcisse: log du rayon de la boule, ordonnée: log de la courbure moyenne).
 											</li>
 											<li class="fragment" data-fragment-index="1" style="margin-bottom:10px;">
-												Remove all data is <strong style="color:inherit">below $\kappa_{max}$</strong> (we <strong style="color:inherit">can't determine</strong> if it is a <strong style="color:#2ecc71">flat region</strong> or too small radius to detect a feature).
+												Supprimer toutes les valeurs <strong style="color:inherit">au dessous de $\kappa_{max}$</strong> (nous <strong style="color:inherit">ne pouvons pas déterminer</strong> si nous sommes sur une <strong style="color:#2ecc71">région plate</strong> ou que les rayons choisis sont trop petits pour détecter le point caractéristique).
 											</li>
 											<li class="fragment" data-fragment-index="3" style="margin-bottom:10px;">
-												Compute the <strong style="color:inherit">distance to models</strong><sup style="font-size:60%;">[1]</sup>.
+												Calculer les <strong style="color:inherit">distances aux trois modèles</strong><sup style="font-size:60%;">[1]</sup>.
 											</li>
 											<li class="fragment" data-fragment-index="4" style="margin-bottom:10px;">
-												We classify the point by choosing the minimal distance. <span class="fragment" data-fragment-index="5">Here we have a <strong style="color:#1E88E5">smooth surface</strong>...</span>
+												Nous classifions le point en choisissant la distance au modèle minimale. <span class="fragment" data-fragment-index="5">Dans notre exemple, nous sommes sur un point <strong style="color:#1E88E5">lisse</strong>...</span>
 											</li>
 										</ol>
 									</div>
@@ -1746,24 +1968,24 @@
 									</div>
 									<br />
 									<br />
-									<footer class="fragment" data-fragment-index="3" style="clear:both;font-size:60%;text-align:left;">[1]- with Least Square Linear Fitting<!-- + Incremental Linear Model Validation--></footer>
+									<footer class="fragment" data-fragment-index="3" style="clear:both;font-size:60%;text-align:left;">[1]- avec de l'ajustement aux moindres carrés<!-- + Incremental Linear Model Validation--></footer>
 								</section>
 
 								<section>
-									<h2>Experiments</h2>
+									<h2>Exemple des trois cas de figure</h2>
 									<div style="text-align:center;">
 										<img src="img/feature/CubeSphere_II_scale.png" class="imgNoBorder" style="width:35%" />
 									</div>
 									<div style="float:left;width:30%;text-align:center;font-size:80%;" class="fragment">
-										Smooth<br />
+										Lisse<br />
 										<img src="img/feature/plot_cubesphere_smooth.svg" class="imgNoBorder" />
 									</div>
 									<div style="float:left;width:30%;text-align:center;font-size:80%;" class="fragment">
-										Edge<br />
+										Singularité<br />
 										<img src="img/feature/plot_cubesphere_edge.svg" class="imgNoBorder" />
 									</div>
 									<div style="float:left;width:30%;text-align:center;font-size:80%;" class="fragment">
-										Flat<br />
+										Plat<br />
 										<img src="img/feature/plot_cubesphere_flat.svg" class="imgNoBorder" />
 									</div>
 								</section>
@@ -1780,7 +2002,7 @@
 
 								<section>
 									<section>
-										<h2>Comparisons</h2>
+										<h2>Comparaisons</h2>
 
 										<p>
 											<table class="beautifulTable" style="font-size:70%;">
@@ -1846,12 +2068,12 @@
 										</p>
 									</section>
 									<section>
-										<h2>Comparisons</h2>
+										<h2>Comparaisons</h2>
 										<table class="beautifulTable" style="font-size:70%;">
 											<thead>
 												<tr style="font-size:80%;">
 													<th colspan="2" style="text-align:center;" >Moment Analysis</th>
-													<th rowspan="2" style="text-align:center;" >Our</th>
+													<th rowspan="2" style="text-align:center;" >Notre méthode</th>
 												</tr>
 												<tr style="font-size:80%;text-align:center;">
 													<th style="text-align:center;" >$R_1$</th>
@@ -1916,15 +2138,15 @@
 									<!-- <h2>DGtal</h2> -->
 									<div>
 										<a href="http://dgal.org"><img src="img/logo/DGtalLogo.png" width="150px" class="imgNoBorder" /></a><br/>
-										<em>Digital Geometry Tools and Algorithms</em>
+										<em>Digital Geometry Tools and Algorithms - <a href="http://dgtal.org">http://dgtal.org</a></em>
 									</div>
 									<p>
 										<ul style="font-size:70%;">
 											<li>Bibliothèque open-source en C++ avec une communauté active</li>
-											<li>Structures de données, algorithmes et outils pour la géométrie digitale (Espace de Khalimsky, parcours de surface, ...)</li>
-											<li>Grand variétés de formes (paramétriques, implicites, import d'objets, ...)</li>
+											<li>Structures de données, algorithmes et outils pour la géométrie digitale (espace de Khalimsky, parcours de surface, ...)</li>
+											<li>Grande variété de formes (paramétriques, implicites, import d'objets, ...)</li>
 											<li>Nombreux estimateurs géométriques implémentés permettant la comparaison facile dans les mêmes conditions</li>
-											<li>Branchement avec la bibliothèque <a href="http://www.cgal.org">CGal</a></li>
+											<li>Liens avec la bibliothèque <a href="http://www.cgal.org">CGal</a></li>
 										</ul>
 									</p>
 
@@ -1944,23 +2166,23 @@
 											<li>
 												Estimateurs de courbures par <strong>intégration volumique</strong>, définis sur des <strong>données digitales, en 2D et en 3D</strong>, avec des preuves de convergence asymptotiques.
 												<span class="fragment" data-fragment-index="1" style="color:#268BD2">
-													C'est actuellement le seul en 3D.
+													C'est le seul estimateur prouvé en 3D.
 												</span>
 											</li>
 
 											<li class="fragment" data-fragment-index="2">
 												Variantes <strong>sans paramètre</strong> de ces estimateurs, avec preuve de convergence asymptotique en 2D.
 												<span class="fragment" data-fragment-index="3" style="color:#268BD2">
-													C'est actuellement le seul en 2D.
+													C'était un problème ouvert en géométrie discrète.
 												</span>
 											</li>
 
 											<li class="fragment" data-fragment-index="4">
-												<strong>Classifieur</strong> d'éléments de surface en parties linéaires / lisses / singularités.
+												<strong>Classification</strong> de tous les éléments de la surface en parties linéaires / lisses / singularités.
 											</li>
 
 											<li class="fragment" data-fragment-index="5">
-												<strong>Compétitifs</strong> par rapport à l'état de l'art.
+												Estimateurs <strong>très compétitifs</strong> par rapport à l'état de l'art. <span class="fragment" data-fragment-index="6" style="color:#268BD2">Aucun n'obtient d'aussi bons résultats.</span>
 											</li>
 
 											<li class="fragment" data-fragment-index="6">
@@ -1973,20 +2195,23 @@
 
 								<section>
 									<h2>Perspectives</h2>
-									<p style="font-weight:bold;">À court terme</p>
+									<!-- <p style="font-weight:bold;">À court terme</p> -->
 									<ul>
-										<li>Temps de calcul important pour de gros volumes. -> les diminuer avec des approches en transformée de Fourier</li>
-										<li>Theoretical proofs behind transitions of models</li>
-										<li>Objets multi échelle</li>
+										<li>Guider le choix du rayon pour l'estimation de la courbure avec les points caractéristiques, notamment proche des singularités.</li>
+										<li>Meilleure approximation du bord de l'objet, réduisant ainsi l'erreur de positionnement des estimateurs de courbure (terme dominant).</li>
+										<li>VCM</li>
+
+										<li><span style="float:right;width:29%"><img src="img/curvature/CriticalRadius.png" width="100px" class="imgNoBorder" /></span><span style="float:right;width:70%">Les occultations qui peuvent apparaître sur de fines structures tubulaires sont à considérer.</span>
+										</li>
 									</ul>
 								</section>
 
 								<section>
 									<h2>Perspectives</h2>
-									<p style="font-weight:bold;">À long terme</p>
+									<!-- <p style="font-weight:bold;">À long terme</p> -->
 									<ul>
-										<li>Améliorer la détection du bord de l'objet, permettant de réduire l'erreur de positionnement de $\hat{\vx}$.</li>
-										<li>Guider la reconstruction de surface grâce aux points caractéristiques.</li>
+										<li>Guider la reconstruction de surface avec les points caractéristiques.</li>
+										<li><span style="float:right;width:29%"><img src="img/feature/cos2levels.svg" width="250px" class="imgNoBorder" /></span><span style="float:right;width:70%">Analyser plus finement les transitions de modèles qui interviennent.</span>
 									</ul>
 								</section>
 
@@ -2029,7 +2254,62 @@
 									</video>
 								</section>
 
-								<section data-background="img/OctaFlower_noise_zoom2.png">
+								<section>
+									<table class="beautifulTable" style="font-size:70%;">
+										<thead>
+											<tr>
+												<th colspan="4" style="text-align:center;">Composition du jury</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">Pierre Alliez</td>
+												<td>Rapporteur</td>
+												<td>Directeur de Recherche INRIA</td>
+											</tr>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">Éric Andres</td>
+												<td>Rapporteur</td>
+												<td>Professeur</td>
+											</tr>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">Yan Gérard</td>
+												<td>Examinateur</td>
+												<td>Maître de Conférence</td>
+											</tr>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">Simon Masnou</td>
+												<td>Examinateur</td>
+												<td>Professeur</td>
+											</tr>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">Nicolas Passat</td>
+												<td>Examinateur</td>
+												<td>Professeur</td>
+											</tr>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">David Coeurjolly</td>
+												<td>Directeur de thèse</td>
+												<td>Directeur de Recherche CNRS</td>
+											</tr>
+											<tr>
+												<td>M.</td>
+												<td style="font-weight:bold;">Jacques-Olivier Lachaud</td>
+												<td>Directeur de thèse</td>
+												<td>Professeur</td>
+											</tr>
+										</tbody>
+									</table>
+
+								</section>
+
+								<!-- <section data-background="img/OctaFlower_noise_zoom2.png">
 									<h1 style="color:#263238;">Merci pour votre attention.</h1>
 									<h3 style="color:#263238;">Web: <a href="http://liris.cnrs.fr/jeremy.levallois">http://liris.cnrs.fr/jeremy.levallois</a></h3>
 									<h3 style="color:#263238;">GitHub: <a href="http://github.com/jlevallois">jlevallois</a></h3>
@@ -2039,7 +2319,7 @@
 										<span style="width:40%;display:inline-block;vertical-align:middle;"><a href="http://dgtal.org"><img src="img/logo/DGtalLogo.png" width="400px" class="imgNoBorder" /></a></span>
 										<span style="color:#263238;width:59%;display:inline-block;vertical-align:middle;">Tous les estimateurs présentés ici sont dès à présent disponible dans la bibliothèque open-source <a href="http://dgtal.org">DGtal</a></span>
 									</span>
-								</section>
+								</section> -->
 
 								</div>
 
