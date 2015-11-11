@@ -333,12 +333,33 @@
 					<h2><strong>Convergence asymptotique</strong> d'estimateurs digitaux</h2>
 					<p style="text-align:left;font-size:70%;"><strong>Processus de discrétisation</strong> : Forme $\Shape \subset \R^d$ vers une forme discrétisée $\DigF{\Shape}{h} = (\frac{1}{h} \cdot \Shape) \cap \Z^d$</p>
 					<div>
-						<object data="img/curvature/digitizedShape-0.svg" width="24%" type="image/svg+xml">
+						<!--<object data="img/curvature/digitizedShape-0.svg" width="24%" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object>
 						<object data="img/curvature/2d-curv-estimator-13.svg" width="24%" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
-						</object>
+						</object>-->
+
+						<div style="vertical-align:top;width:70%;margin-left:auto;margin-right:auto;display:inline-block;">
+							<div style="float:left;text-align:center;line-height:0;">
+								<div style="text-align:center;height:300px;width:300px;display:block;margin:0;padding:0;">
+									<img src="img/curvature/digitizedShape-0.svg" class="imgNoBorder" style="height:100%;" />
+								</div>
+								<div style="text-align:left;height:300px;width:300px;display:block;margin:0;padding:0;margin-top:-300px;color:#000;">
+									<span style="position:relative;left:60px;top:60px;text-align:left;font-size:60%;">$\vx$</span>
+									<span style="position:relative;left:57px;top:70px;text-align:left;font-size:60%;">$\times$</span>
+								</div>
+							</div>
+							<div style="float:left;text-align:center;line-height:0;">
+								<div style="text-align:center;height:300px;width:300px;display:block;margin:0;padding:0;">
+									<img src="img/curvature/2d-curv-estimator-13.svg" class="imgNoBorder" style="height:100%;" />
+								</div>
+								<div style="text-align:left;height:300px;width:300px;display:block;margin:0;padding:0;margin-top:-300px;color:#000;">
+									<span style="position:relative;left:50px;top:65px;text-align:left;font-size:60%;">$\hat{\vx}$</span>
+									<span style="position:relative;left:47px;top:70px;text-align:left;font-size:60%;">$\times$</span>
+								</div>
+							</div>
+						</div>
 						<!-- <img src="img/contexte/multi-ellipse-0.png" width="24%" class="imgNoBorder" />
 						<img src="img/contexte/multi-ellipse-1.png" width="24%" class="imgNoBorder" />
 						<img src="img/contexte/multi-ellipse-2.png" width="24%" class="imgNoBorder" />
@@ -647,7 +668,7 @@
 								<td><div style="color:#3498db;">$\MeanCurvHS$</div></td>
 								<td>3D</td>
 								<td><div style="color:#2ecc71;">Aucun</div></td>
-								<td><div style="color:#e74c3c;">Non*</div></td>
+								<td><div style="color:#e74c3c;">*</div></td>
 								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
 								<td><div style="color:#2ecc71;">Non</div></td>
 							</tr>
@@ -655,14 +676,14 @@
 								<td><div style="color:#3498db;">$\PrincCurvHS{i}$</div></td>
 								<td>3D</td>
 								<td><div style="color:#2ecc71;">Aucun</div></td>
-								<td><div style="color:#e74c3c;">Non*</div></td>
+								<td><div style="color:#e74c3c;">*</div></td>
 								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
 								<td><div style="color:#2ecc71;">Non</div></td>
 							</tr>
 						</tbody>
 					</table>
 
-					<footer style="font-size:60%;text-align:left;margin-top:30px;"><span style="color:#e74c3c;">Non*</span> : La convergence en $O\left(h^\frac{1}{3} \log^2(h)\right)$ repose sur une supposition non prouvée actuellement.</footer>
+					<footer style="font-size:60%;text-align:left;margin-top:30px;"><span style="color:#e74c3c;">*</span> : La convergence en $O\left(h^\frac{1}{3} \log^2(h)\right)$ repose sur une supposition non prouvée actuellement.</footer>
 
 					<aside class="notes">
 						Les contributions pour la partie estimation de courbure, ce dont je vais vous montrer dans les slides suivantes, peuvent se résumer dans ce tableau. Nous apportons des estimateurs de courbure 2D, courbure moyenne et courbures principales en 3D avec des preuves de convergence asymptotique uniforme théoriques ainsi qu'expérimentales. Ces estimateurs nécessitent un rayon de boule R, nous proposons également des variantes sans paramètre permettant de se passer de ce rayon. Si la convergence reste la même que pour la version avec paramètre expérimentalement, nous prouvons théoriquement la convergence pour la courbure 2D. En 3D, le "Non" n'est pas un non définitif, en fait la preuve de la convergence repose sur une supposition qu'il reste à prouver.
@@ -673,7 +694,7 @@
 					<h2>Relation entre l'<strong>intégration volumique</strong> de la boule et la <strong>courbure</strong></h2>
 					<!-- <img src="img/curvature/integral2D_2.svg" height="250" class="imgNoBorder" /> -->
 					<div>
-						<div style="float:left;width:70%;">
+						<!--<div style="float:left;width:70%;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="380" height="200" style="-webkit-transform: scale(1.25); -moz-transform: scale(1.25); -ms-transform: scale(1.25); -o-transform: scale(1.25); transform: scale(1.25);">
 								<foreignobject x="0" y="0" width="100%" height="100%">
 									<body xmlns="http://www.w3.org/1999/xhtml">
@@ -696,6 +717,30 @@
 									</body>
 								</foreignobject>
 							</svg>
+						</div>-->
+						<div style="vertical-align:top;margin-left:7%;">
+							<div style="float:left;text-align:center;line-height:0;margin-left:auto;margin-right:auto;width:50%;">
+								<div style="text-align:center;height:200px;width:378px;display:block;margin:0;padding:0;">
+									<img src="img/curvature/integral2D_2.svg" class="imgNoBorder" style="height:100%;" />
+								</div>
+								<div style="text-align:left;height:200px;width:378px;display:block;margin:0;padding:0;margin-top:-200px;color:#000;">
+									<span style="position:relative;left:95px;top:70px;text-align:left;font-size:60%;">$\vx$</span>
+								</div>
+							</div>
+							<div style="float:left;text-align:center;line-height:0;margin-left:auto;margin-right:auto;width:50%;">
+								<div style="text-align:center;height:200px;width:378px;display:block;margin:0;padding:0;">
+									<img src="img/curvature/2d-curv-estimator-2.svg" class="imgNoBorder" style="height:100%;" />
+								</div>
+								<div style="text-align:left;height:200px;width:378px;display:block;margin:0;padding:0;margin-top:-200px;color:#000;">
+									<span style="position:relative;left:95px;top:70px;text-align:left;font-size:60%;">$\vx$</span>
+								</div>
+							</div>
+							<!-- <object data="img/curvature/2d-curv-estimator-1.svg" height="214px" type="image/svg+xml">
+								<p>SVG-Viewer needed.</p>
+							</object>
+							<object data="img/curvature/2d-curv-estimator-2.svg" height="214px" type="image/svg+xml">
+								<p>SVG-Viewer needed.</p>
+							</object> -->
 						</div>
 						<div style="float:right;width:29%;font-size:70%;text-align:left;">
 							<br />
@@ -715,7 +760,7 @@
 						<strong>$R \rightarrow 0$ n'a pas de sens en géométrie discrète</strong>
 					</div>
 					<aside class="notes">
-						L'idée est simple. Il est connu depuis longtemps qu'il existe un lien entre la courbure et l'intersection entre une boule et le bord de la forme. Pottmann l'a formalisé dans sa publication en 2007. Ainsi, par approximation de Taylor par morceaux d'une surface C2 convexe, nous obtenons la relation entre la courbure k et l'aire de l'intersection entre la boule et la forme, A_R. Cette façon de calculer l'aire converge vers la valeur de courbure de l'objet en O(R), c'est à dire quand le rayon de la boule tend vers 0. Le problème, c'est que faire tendre le rayon vers 0 n'a pas de sens pour des données digitales puisqu'à un moment nous n'aurons plus assez de points digitaux, entraînant une augmentation de l'erreur d'estimation.
+						Rentrons dans le vif du sujet. Si nous centrons une boule sur le bord ...
 					</aside>
 				</section>
 
@@ -882,17 +927,33 @@
 				<section>
 					<h2>Estimateur <strong>digital</strong> de <strong>courbure</strong> par intégration volumique</h2>
 					<blockquote cite="" style="width:88%;font-size:70%;background: rgba(255, 0, 0, 0.05);">
-						\[ \hat{\kappa}^{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myblue}\AreaC(Y)}}{{{R}}^3} \quad\text{avec}\quad
+						\[ \hat{\kappa}^{R}(\DigF{\Shape}{h},\vx,h) \EqDef \frac{3\pi}{2{{R}}} - \frac{3 {\color{myblue}\AreaC(Y)}}{{{R}}^3} {\color{mydarkred}+O(R)} \quad\text{avec}\quad
 						Y = \Ball{R/h}{\vx/h} \cap \DigF{\Shape}{h} \]<br />
 					</blockquote>
-					<p class="noindent" >
-						<object data="img/curvature/2d-curv-estimator-1.svg" width="426.71211 " height="214.88937 " type="image/svg+xml">
+					<div style="vertical-align:top;margin-left:7%;">
+						<div style="float:left;text-align:center;line-height:0;margin-left:auto;margin-right:auto;width:50%;">
+							<div style="text-align:center;height:200px;width:378px;display:block;margin:0;padding:0;">
+								<img src="img/curvature/2d-curv-estimator-1.svg" class="imgNoBorder" style="height:100%;" />
+							</div>
+							<div style="text-align:left;height:200px;width:378px;display:block;margin:0;padding:0;margin-top:-200px;color:#000;">
+								<span style="position:relative;left:95px;top:70px;text-align:left;font-size:60%;">$\vx$</span>
+							</div>
+						</div>
+						<div style="float:left;text-align:center;line-height:0;margin-left:auto;margin-right:auto;width:50%;">
+							<div style="text-align:center;height:200px;width:378px;display:block;margin:0;padding:0;">
+								<img src="img/curvature/2d-curv-estimator-2.svg" class="imgNoBorder" style="height:100%;" />
+							</div>
+							<div style="text-align:left;height:200px;width:378px;display:block;margin:0;padding:0;margin-top:-200px;color:#000;">
+								<span style="position:relative;left:95px;top:70px;text-align:left;font-size:60%;">$\vx$</span>
+							</div>
+						</div>
+						<!-- <object data="img/curvature/2d-curv-estimator-1.svg" height="214px" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
 						</object>
-						<object data="img/curvature/2d-curv-estimator-2.svg" width="426.71211 " height="214.88937 " type="image/svg+xml">
+						<object data="img/curvature/2d-curv-estimator-2.svg" height="214px" type="image/svg+xml">
 							<p>SVG-Viewer needed.</p>
-						</object>
-					</p>
+						</object> -->
+					</div>
 					<div class="fragment" data-fragment-index="1" style="width:49%; float:left; display:block; font-size:70%;">
 						\( \hat{\kappa}^{3}(\DigF{\Shape}{1},\vx,1) = \frac{3\pi}{2\times 3} - \frac{3 \times {\color{myblue}12}}{3^3} \approx 0.237 \)
 					</div>
@@ -1058,7 +1119,7 @@
 						\[ \color{myred}
 						\left| \CurvH{R}(\DSh,\hat{\vx},h) - \Curv(\Shape,\vx) \right| \le O\left(h^\frac{1}{3}\right) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
-						<a href="#" class="citation">[Coeurjolly, Lachaud, Levallois 2013]</a>
+						<a href="#" class="citation">[DGCI 2013][CVIU 2014][AFIG 2014]</a>
 					</blockquote>
 
 					<aside class="notes">
@@ -1088,7 +1149,7 @@
 						\[ \color{myred}
 						\left| \MeanCurvH{R}(\DSh,\hat{\vx},h) - \MeanCurv(\Shape,\vx) \right| \le O\left(h^\frac{1}{3}\right) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
-						<a href="#" class="citation">[Coeurjolly, Lachaud, Levallois 2014]</a>
+						<a href="#" class="citation">[CVIU 2014][AFIG 2014]</a>
 					</blockquote>
 				</section>
 
@@ -1161,7 +1222,7 @@
 						\[ \color{myred}
 						\left| \PrincCurvH{i}{R}(\DSh,\hat{\vx},h) - \PrincCurv{i}(\Shape,\vx) \right| \le O\left(h^\frac{1}{3}\right) \quad\text{quand}\quad R=kh^\frac{1}{3}
 						\]
-						<a href="#" class="citation">[Coeurjolly, Lachaud, Levallois 2014]</a>
+						<a href="#" class="citation">[CVIU 2014][AFIG 2014]</a>
 					</blockquote>
 				</section>
 
@@ -1299,7 +1360,7 @@
 							<li class="fragment" data-fragment-index="2">Facile à mettre en œuvre</li>
 							<li class="fragment" data-fragment-index="3"><strong>Convergent uniformément</strong>(théoriquement et expérimentalement) en $O(h^\frac{1}{3})$ quand $R = kh^\frac{1}{3}$</li>
 							<li class="fragment" data-fragment-index="4"><strong>Robuste</strong> au bruit</li>
-							<li class="fragment" data-fragment-index="5"><strong>Compétitif</strong> vis-à-vis de l'état de l'art</li>
+							<li class="fragment" data-fragment-index="5"><strong>Très compétitif</strong> vis-à-vis de l'état de l'art</li>
 							<li class="fragment" data-fragment-index="6">Nécessite <strong>un paramètre</strong> $R$...</li>
 						</ul>
 					</p>
@@ -1466,7 +1527,7 @@
 								<td><div style="color:#3498db;">$\MeanCurvHS$</div></td>
 								<td>3D</td>
 								<td><div style="color:#2ecc71;">Aucun</div></td>
-								<td><div style="color:#e74c3c;">Non*</div></td>
+								<td><div style="color:#e74c3c;">*</div></td>
 								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
 								<td><div style="color:#2ecc71;">Non</div></td>
 							</tr>
@@ -1474,15 +1535,15 @@
 								<td><div style="color:#3498db;">$\PrincCurvHS{i}$</div></td>
 								<td>3D</td>
 								<td><div style="color:#2ecc71;">Aucun</div></td>
-								<td><div style="color:#e74c3c;">Non*</div></td>
+								<td><div style="color:#e74c3c;">*</div></td>
 								<td><div style="color:#2ecc71;">$O\left(h^\frac{1}{3}\right)$</div></td>
 								<td><div style="color:#2ecc71;">Non</div></td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="fragment" data-fragment-index="1" style="font-size:70%;text-align:right;"><a href="#" class="citation">[Levallois, Coeurjolly, Lachaud 2014]</a></div>
+					<div class="fragment" data-fragment-index="1" style="font-size:70%;text-align:right;"><a href="#" class="citation">[DGCI 2014]</a></div>
 
-					<footer style="font-size:60%;text-align:left;margin-top:20px;" class="fragment" data-fragment-index="1"><span style="color:#e74c3c;">Non*</span> : La convergence en $O\left(h^\frac{1}{3} \log^2(h)\right)$ repose sur une supposition non prouvée actuellement.</footer>
+					<footer style="font-size:60%;text-align:left;margin-top:20px;" class="fragment" data-fragment-index="1"><span style="color:#e74c3c;">*</span> : La convergence en $O\left(h^\frac{1}{3} \log^2(h)\right)$ repose sur une supposition non prouvée actuellement.</footer>
 				</section>
 
 				<section slide-title="Détection de points caractéristiques" slide-title-position="middle" data-background="img/feature/Fandisk_noise_II_scale_zoom.png">
@@ -1796,7 +1857,7 @@
 									<!-- <p style="width:100%; text-align:center;">
 										<img class="imgNoBorder" style="height:100px; margin-right:10px;" src="img/Flower.png" /><img class="imgNoBorder" style="width:800px;height:100px;" src="img/feature/ScaleSpace_Flower_2.png" />
 									</p> -->
-									<div style="float:left;width:600px;">
+									<div style="float:left;width:550px;">
 										<p style="width:100%; text-align:center;">
 											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_4.png" />
 											<img class="imgNoBorder" style="width:20%;" src="img/feature/MeanAl_7.png" />
@@ -1822,44 +1883,19 @@
 											<span style="width:20%;text-align:center;float:left;">$R=25$</span>
 										</p>
 									</div>
-									<div style="float:right;width:350px;vertical-align:middle;margin-top:100px;">
-										<svg xmlns="http://www.w3.org/2000/svg" width="304" height="152" style="-webkit-transform: scale(1.3); -moz-transform: scale(1.3); -ms-transform: scale(1.3); -o-transform: scale(1.3); transform: scale(1.3);">
-											<foreignobject x="0" y="0" width="100%" height="100%">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:center;"><img src="img/feature/II_kernels.svg" class="imgNoBorder"  style="width:100%;height:100%" /></div>
-												</body>
-											</foreignobject>
-											<foreignobject x="180" y="45" width="150" height="150" style="color:#000000;">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:left;font-size: 40%;">$x$</div>
-												</body>
-											</foreignobject>
-											<foreignobject x="100" y="110" width="150" height="150" style="color:#000000;">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:left;font-size: 40%;">$\Shape$</div>
-												</body>
-											</foreignobject>
-											<foreignobject x="200" y="65" width="150" height="150" style="color:#000000;">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:left;font-size: 40%;">$R{}_n$</div>
-												</body>
-											</foreignobject>
-											<foreignobject x="215" y="35" width="150" height="150" style="color:#000000;">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:left;font-size: 40%;">$R_1$</div>
-												</body>
-											</foreignobject>
-											<foreignobject x="207" y="43" width="10" height="10" style="color:#000000;">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:left;font-size: 40%;-ms-transform: rotate(90deg);-webkit-transform: rotate(90deg);transform: rotate(90deg);">$\ddots$</div>
-												</body>
-											</foreignobject>
-											<foreignobject x="230" y="5" width="150" height="150" style="color:#000000;">
-												<body xmlns="http://www.w3.org/1999/xhtml">
-													<div style="text-align:left;font-size: 40%;">$R_0$</div>
-												</body>
-											</foreignobject>
-										</svg>
+
+									<div style="float:right;vertical-align:top;">
+										<div style="text-align:center;line-height:0;	">
+											<div style="text-align:center;height:200px;width:378px;display:block;margin:0;padding:0;">
+												<img src="img/feature/II_kernels.svg" class="imgNoBorder" style="height:100%;" />
+											</div>
+											<div style="text-align:left;height:200px;width:378px;display:block;margin:0;padding:0;margin-top:-200px;color:#000;">
+												<span style="position:relative;left:215px;top:70px;text-align:left;font-size:60%;">$\vx$</span>
+												<span style="position:relative;left:225px;top:70px;text-align:left;font-size:60%;">$R_n$</span>
+												<span style="position:relative;left:225px;top:60px;text-align:left;font-size:60%;">$R_1$</span>
+												<span style="position:relative;left:225px;top:50px;text-align:left;font-size:60%;">$R_0$</span>
+											</div>
+										</div>
 									</div>
 								</section>
 
@@ -2003,7 +2039,7 @@
 									<br />
 									<br />
 									<footer class="fragment" data-fragment-index="3" style="clear:both;font-size:60%;text-align:left;">[1]- avec de l'ajustement aux moindres carrés<!-- + Incremental Linear Model Validation--></footer>
-									<div class="citation" style="clear:both;text-align:right;font-size:60%;"><a href="#">[Levallois, Coeurjolly, Lachaud 2015]</a></div>
+									<div class="citation" style="clear:both;text-align:right;font-size:60%;"><a href="#">[SMI 2015][SIGGRAPH Poster 2015]</a></div>
 								</section>
 
 								<section>
