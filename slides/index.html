@@ -36,6 +36,7 @@
 	          V: '\\mathcal{V}',
 	          E: '\\mathcal{E}',
 						vx: '\\mathbf{x}',
+						vy: '\\mathbf{y}',
 						vw: '\\mathbf{w}',
 						vn: '\\mathbf{n}',
 						vp: '\\mathbf{p}',
@@ -201,21 +202,15 @@
 
 					<aside class="notes">
 						La question qui se pose, c'est comment représenter numériquement un objet réel, comme ce lapin. Il existe plusieurs méthodes pour le faire, présentant chacun des avantages comme des inconvénients.
-
-						La première façon de représenter notre objet est le maillage triangulé, c'est à dire un ensemble de triangles. La structure de données posséde des propriétés topologiques permettant de se déplacer sur la surface de l'objet, par contre n'intègre pas d'information volumiques directement, c'est à dire que nous ne connaissons pas l'intérieur de l'objet.
-
-						Ensuite nous avons le nuage de points, un ensemble de points situés à la surface de l'objet. Comme pour le maillage triangulé, nous ne possédons pas d'informations volumique de l'objet, uniquement surfacique. Nous n'avons pas non plus de topologie à sa surface, les points n'étant pas reliés entre eux.
-
-						Enfin, il existe les données digitales, un ensemble de points à coordonnées entières. Cette structure de données possède des informations volumiques ainsi que de la topologie à la surface.
-
-						Le choix de ces représentations de données provient d'une première part des appareils de captures utilises : la tomographie à rayons X fournit des données digitales tandis que certains scanners laser donnent un nuage de points.
-						Le second point, c'est que ce choix de réprésentation de données dépend de ce que l'on veut faire de la donnée. Par exemple le maillage triangulé est parfaitement adapté pour de la visualisation 3D car la carte graphique attend des triangles.
-
-						<!-- est beaucoup utilisé pour sauvegarder numériquement des oeuvres d'art ou des bâtiment architecturaux, mais ne se limite pas qu'à ces utilisations. L'idée est de scanner l'objet à l'aide de laser et d'obtenir un ensemble de points se situant exactement à la surface de l'objet. Cet ensemble de point ne possède ni topologie ni données volumiques, mais garantissent (à une certaine précision) que chaque point est à la surface de l'objet.
-
-						Enfin, et c'est cette méthode que nous allons considérer par la suite, les données digitales définissent l'objet réel comme un ensemble de points digitaux sur un grille régulière. Nous possédons une topologie pour se déplacer sur la surface ainsi que des données volumiques, mais nous faisons une approximation dépendante de la taille de la grille.
-
-						Le choix du modèle utilisé dépend de deux choses : ce que nous attendons de la donnée, c'est à dire il faudra faire un choix parmis les avantages et inconvénients de chacun des modèles; mais également du choix du système de capture. Ces systèmes sont spécialisés dans un seul modèle, et généralement nous ne voulons pas introduire plus de biais en convertissant la données dans un autre modèle. -->
+						<br/>
+						Maillage -> ensemble de triangles. propriétés topologiques. pas d'information volumique directement.
+						<br/>
+						Nuage de points -> ensemble de points à la surface de l'objet. Pas de propriété topologiques, ni volumiques (directement).
+						<br/>
+						Données digitales -> ensemble de points à coordonnées entières. Information topologique et volumiques
+						<br/>
+						- dépent Appareils de captures utilisés : la tomographie à rayons X fournit des données digitales tandis que certains scanners laser donnent un nuage de points.
+						- dépent de l'utilisation que l'on veut faire de la donnée. Par exemple le maillage triangulé est parfaitement adapté pour de la visualisation 3D car la carte graphique attend des triangles.
 					</aside>
 				</section>
 
@@ -251,11 +246,11 @@
 					</div>
 
 					<aside class="notes">
-						Les données digitales donc. Concrétement, nous avons un ensemble de pixels en 2D ou de voxels en 3D, alignés dans une grille dont la taille de chaque élément est h, le pas de discrétisation. Chaque point digital nous informe s'il contient de la matière ou pas, c'est à dire s'il est contenu dans l'objet ou pas, c'est ce que vous voyez ici à droite. Comme je l'ai dit, la particularité de ces donnée est qu'il y tout le temps un bruit artihmétique sur la surface de l'objet, quelque soit la résolution de la grille. C'est l'effet d'escalier que nous voyons ici.
+						Coordonnées entières de Z² ou Z³
+						Chaque point désigne s'il est à l'intérieur de l'objet ou pas
+						Même avec un appareil de capture très performant, il ...
 
-						La question que nous pouvons nous poser, c'est pourquoi utiliser des données digitales alors ? Et bien déjà ce sont le résultat direct de certains scanners comme le micro tomographe à rayons X, mais aussi certains scanners en imagerie 2D afin de détecter des formes dans des images (parfois le résultat est en niveau de gris). Nous voulons exploiter ces données directement sans rajouter de biais supplémentaire.
-						Le deuxième point important, lorsque nous estimons des quantités sur des données digitales, nous cherchons à prouver la convergence asymptotique de la quantité estimée en fonction du pas de discrétisation. Je reviendrais là dessus un peu plus loin.
-						Enfin, il existe de nombreux algorithmes fonctionnant sur des données digitales que nous pouvons exploiter.
+						pleins d'outils et de propriétés qui sont définis sur des données digitales
 					</aside>
 				</section>
 
@@ -286,9 +281,19 @@
 					</div>
 
 					<aside class="notes">
-						Ma thèse a été financée par l'ANR digitalSnow, en collaboration avec le CEN de MétéoFrance, le LIRIS et le LAMA. Le but de ce projet est d'étudier et de simuler l'évolution de la neige en fonction des conditions extérieures (la température, le taux d'humidité) mais également des phénomènes intrinsèques aux microstructures de neige. Comme souvent, quand nous ne comprennons pas un phénomène à l'échelle macroscopique, nous nous intéressons à l'étudier à l'échelle microscopique. Ainsi, les microstructures de neige ont tendance à varier geométriquement en fonction de certains paramètres. Une neige sèche (cad à faible teneur en eau liquide) a une représentation avec de nombreuses facettes tandis qu'une neige humide (à plus forte teneur en eau liquide) aura tendance à déplacer la matière afin de lisser ces facettes, c'est ce que nous voyons au milieu. Il apparait que la courbure moyenne rentre en jeu dans les équations physiques de l'évolution de ces microstructures.
+						Ma thèse a été financée par l'ANR digitalSnow, CEN, LIRIS, LAMA<br/>
+						Comment la microstructure de neige évolue en fonction des condition extérieures et intrins...
+						Retrouver numériquement ce que l'on observe
+						Microtomographie à rayon X -> images digitales
+						Neige sèche fraiche -> facettes<br/>
+						La neige se transforme au cours du temps en fonction<br/>
+						Neige sèche plus vieille -> plus lisse lié à la tension de la surface
+						Simuler l'évolution de la neige à l'aide d'EDP, où la courbure moyenne rentre en compte.
+						-> fiable
 
-						Afin de pouvoir simuler ces transformations, nous avons besoin d'extraire les microstructures de neige sur des échantillons réels, à l'aide d'un micro tomographe à rayon X. L'idée pour faire simple, c'est d'envoyer des photons dans plusieurs directions sur l'échantillon de neige (la partie blanche au milieu), de compter pour chaque direction le nombre de photon résultant, et d'en déduire quand ils ont été absorbées par la matière. Cela nous permet de récupérer ce genre de données là, en blanc. Donc ici nous avons les microstructures de neige à deux moments différents. Le premier représente de la neige sèche, comprenant des facettes tandis que l'autre représente de la neige humide, et du déplacement de matière s'est opéré pour lisser ces facettes. À droite vous avez le résultat du calcul de courbure moyenne que nous proposons.
+						<!-- Ma thèse a été financée par l'ANR digitalSnow, en collaboration avec le CEN de MétéoFrance, le LIRIS et le LAMA. Le but de ce projet est d'étudier et de simuler l'évolution de la neige en fonction des conditions extérieures (la température, le taux d'humidité) mais également des phénomènes intrinsèques aux microstructures de neige. Comme souvent, quand nous ne comprennons pas un phénomène à l'échelle macroscopique, nous nous intéressons à l'étudier à l'échelle microscopique. Ainsi, les microstructures de neige ont tendance à varier geométriquement en fonction de certains paramètres. Une neige sèche (cad à faible teneur en eau liquide) a une représentation avec de nombreuses facettes tandis qu'une neige humide (à plus forte teneur en eau liquide) aura tendance à déplacer la matière afin de lisser ces facettes, c'est ce que nous voyons au milieu. Il apparait que la courbure moyenne rentre en jeu dans les équations physiques de l'évolution de ces microstructures.
+
+						Afin de pouvoir simuler ces transformations, nous avons besoin d'extraire les microstructures de neige sur des échantillons réels, à l'aide d'un micro tomographe à rayon X. L'idée pour faire simple, c'est d'envoyer des photons dans plusieurs directions sur l'échantillon de neige (la partie blanche au milieu), de compter pour chaque direction le nombre de photon résultant, et d'en déduire quand ils ont été absorbées par la matière. Cela nous permet de récupérer ce genre de données là, en blanc. Donc ici nous avons les microstructures de neige à deux moments différents. Le premier représente de la neige sèche, comprenant des facettes tandis que l'autre représente de la neige humide, et du déplacement de matière s'est opéré pour lisser ces facettes. À droite vous avez le résultat du calcul de courbure moyenne que nous proposons. -->
 					</aside>
 				</section>
 
@@ -1149,6 +1154,7 @@
 						<img src="img/OctaFlower.png" class="imgNoBorder" width="250px" />
 						<img src="img/curvature/octa-mean_0001.png" class="imgNoBorder" width="250px" />
 						<img src="img/curvature/octa-gaussian_0001.png" class="imgNoBorder" width="250px" />
+						<img src="img/YMTB6W.png" class="imgNoBorder" height="250px" width="10px" />
 					</div>
 
 					<div>
@@ -1410,6 +1416,7 @@
 					<img src="img/curvature/Bunny_64_mean.png" style="width:25%;" class="imgNoBorder" />
 					<img src="img/curvature/Bunny_128_mean.png" style="width:25%;" class="imgNoBorder" />
 					<img src="img/curvature/Bunny_256_mean.png" style="width:25%;" class="imgNoBorder" />
+					<img src="img/YMTB6W.png" class="imgNoBorder" height="250px" width="10px" />
 
 					<div style="font-size:60%;">
 					<span style="width:25%;display:inline-block;" />$[64^3]$</span>
@@ -1602,6 +1609,15 @@
 											</tbody>
 										</table>
 									</p>
+
+									<aside class="notes">
+										Ici nous n'avons sélectionné que les méthodes les plus représentatives de l'état de l'art.
+										Ce qu'il en résulte, c'est que :
+										deja premier point, beaucoup de méthodes fournissent un score, c'est à l'utilisateur de seuiller sur ce qu'il considère comme une feature
+										Ensuite, la majorité nécessitent des paramètres (pour le seuillage ou autre) qui implique que l'utilisateur analyse au préalable la forme.
+
+										Notre contribution ici ...
+									</aside>
 								</section>
 								<section>
 									<h2>Approches spectrales</h2>
@@ -1921,7 +1937,7 @@
 									</div>
 
 									<blockquote class="example" cite="" style="font-size:70%;width:100%;">
-										Pour un pas $h$ fixé, les valeurs estimées $\hat{\kappa}_R \le \kappa_{max}$ sont considérés comme des zones <strong style="color:#2ecc71">plates</strong>, ou des <strong style="color:#2ecc71">données abérantes</strong> (dans le sens où le rayon actuel ne permet pas de capturer la géométrie locale).
+										Pour un pas $h$ fixé, les valeurs estimées $\hat{\kappa}_R \le \kappa_{max}$ sont considérés comme des zones <strong style="color:#2ecc71">plates</strong>, ou des <strong style="color:#2ecc71">données aberrantes</strong> (dans le sens où le rayon actuel ne permet pas de capturer la géométrie locale).
 									</blockquote>
 
 									<aside class="notes">
@@ -1969,6 +1985,7 @@
 									<br />
 									<br />
 									<footer class="fragment" data-fragment-index="3" style="clear:both;font-size:60%;text-align:left;">[1]- avec de l'ajustement aux moindres carrés<!-- + Incremental Linear Model Validation--></footer>
+									<div class="citation" style="clear:both;text-align:right;font-size:60%;"><a href="#">[Levallois, Coeurjolly, Lachaud 2015]</a></div>
 								</section>
 
 								<section>
@@ -2097,8 +2114,16 @@
 								</section>
 
 								<section data-background="img/curvature/SnowE2_mean_0001.png">
+									<aside class="notes">
+										Très bon résultats sur des données réelles
+										( 3 266 650 éléments de surface )
+									</aside>
 								</section>
 								<section data-background="img/curvature/snowI08gaussian_0001.png">
+									<aside class="notes">
+										Surtout avec un gros volume de données
+										4 272 207 éléments de surface
+									</aside>
 								</section>
 								<section data-background="img/curvature/I08prindir.png">
 								</section>
@@ -2113,15 +2138,37 @@
 								<section>
 									<h2><strong>Optimisation</strong> avec les masques</h2>
 									<div>
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask0.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask1.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask2.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask3.svg" width="100px" class="imgNoBorder" /><br/>
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask4.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask5.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask6.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask7.svg" width="100px" class="imgNoBorder" />
-									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask8.svg" width="100px" class="imgNoBorder" />
+										<!-- OK multi echelle -->
+										<div style="float:left;text-align:center;line-height:0;margin-left:auto;margin-right:auto;width:50%;">
+											<div style="text-align:center;height:200px;width:378px;display:block;margin:0;padding:0;">
+												<img src="img/dgtal/masks.svg" class="imgNoBorder" style="height:100%;" />
+											</div>
+											<div style="text-align:left;height:200px;width:378px;display:block;margin:0;padding:0;margin-top:-200px;color:#000;">
+												<span style="position:relative;left:95px;top:70px;text-align:left;font-size:60%;">$\vx$</span>
+												<span style="position:relative;left:110px;top:50px;text-align:left;font-size:60%;">$\vy$</span>
+											</div>
+										</div>
+										<span style="float:left;text-align:left;width:49%;">
+											Exploiter l'additivité du volume et des moments
+											<span style="font-size:70%;">\[ \hat{E}(\Shape,\vy) = \hat{E}(\Shape,\vx) - A + B \]</span>
+										</span>
+
+										<div style="clear:both;"></div>
+
+
+
+
+									<br/>
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask0.svg" width="75px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask1.svg" width="75px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask2.svg" width="75px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask3.svg" width="75px" class="imgNoBorder" />
+									<!-- <br/> -->
+									<!-- <img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask4.svg" width="75px" class="imgNoBorder" /> -->
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask5.svg" width="75px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask6.svg" width="75px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask7.svg" width="75px" class="imgNoBorder" />
+									<img src="img/dgtal/testIntegralInvariantCurvatureEstimator-PartialMask8.svg" width="75px" class="imgNoBorder" />
 									</div>
 
 
@@ -2194,16 +2241,24 @@
 								</section>
 
 								<section>
+								<section>
 									<h2>Perspectives</h2>
 									<!-- <p style="font-weight:bold;">À court terme</p> -->
 									<ul>
 										<li>Guider le choix du rayon pour l'estimation de la courbure avec les points caractéristiques, notamment proche des singularités.</li>
 										<li>Meilleure approximation du bord de l'objet, réduisant ainsi l'erreur de positionnement des estimateurs de courbure (terme dominant).</li>
-										<li>VCM</li>
+										<li>Comparaison/couplage avec VCM</li>
 
 										<li><span style="float:right;width:29%"><img src="img/curvature/CriticalRadius.png" width="100px" class="imgNoBorder" /></span><span style="float:right;width:70%">Les occultations qui peuvent apparaître sur de fines structures tubulaires sont à considérer.</span>
 										</li>
 									</ul>
+								</section>
+								<section>
+									<h2>VCM</h2>
+									<img src="img/curvature/VCM.png" width="600px" class="imgNoBorder" />
+								</section>
+								</section>
+
 								</section>
 
 								<section>
