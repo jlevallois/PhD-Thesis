@@ -1,92 +1,207 @@
-<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
-<?xml-stylesheet href="2d-curv-estimator.css" type="text/css"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="159.5347pt" height="80.16734pt" viewBox="-0.09999 -0.4 159.5347 80.16734 ">
-<g transform="translate(0, 79.76735 ) scale(1,-1) translate(0,0.4 )">
-<g>
- <g stroke="rgb(0.0%,0.0%,0.0%)">
- <g fill="rgb(0.0%,0.0%,0.0%)">
- <g stroke-width="0.4pt">
- <g>
-
- <g>
- <g stroke-width="0.8pt">
- <g stroke="rgb(0.0%,58.99963%,0.0%)">
- <g fill="rgb(0.0%,58.99963%,0.0%)">
- <g stroke-opacity="0.25">
- <g fill-opacity="0.25">
- <path d=" M  19.91684 0.0 C  19.91684 32.99973 46.66763 59.75052 79.66736 59.75052 C  112.66708 59.75052 139.41788 32.99973 139.41788 0.0  " />
- </g>
- </g>
- </g>
- </g>
- </g>
- </g>
- <g>
- <g stroke-width="0.8pt">
- <g stroke="rgb(33.00018%,33.00018%,33.00018%)">
- <g fill="rgb(33.00018%,33.00018%,33.00018%)">
- <path d=" M  19.91684 0.0 C  19.91684 32.99973 46.66763 59.75052 79.66736 59.75052 C  112.66708 59.75052 139.41788 32.99973 139.41788 0.0  " style="fill:none"/>
- </g>
- </g>
- </g>
- </g>
- <g>
- <g>
- <g transform="matrix(1.0,0.0,0.0,1.0,43.81705,47.80042)">
- <g fill="rgb(0.0%,0.0%,0.0%)">
- <text style="stroke:none" transform="scale(1,-1) translate(0.0,0)" text-anchor="middle"  font-size="10">
-</text>
-</g>
- </g>
- </g>
- </g>
- <g>
- <g stroke-width="0.8pt">
- <g stroke="rgb(0.0%,0.0%,0.0%)">
- <g fill="rgb(0.0%,0.0%,0.0%)">
- <path d=" M  43.81705 47.80042 M  44.61375 47.80042 C  44.61375 48.24042 44.25705 48.59712 43.81705 48.59712 C  43.37704 48.59712 43.02034 48.24042 43.02034 47.80042 C  43.02034 47.36041 43.37704 47.00371 43.81705 47.00371 C  44.25705 47.00371 44.61375 47.36041 44.61375 47.80042 Z M  43.81705 47.80042  " />
- </g>
- </g>
- </g>
- </g>
- <g>
- <g stroke-width="0.8pt">
- <g stroke="rgb(100.0%,58.99963%,0.0%)">
- <g fill="rgb(100.0%,58.99963%,0.0%)">
- <g stroke-opacity="0.25">
- <g fill-opacity="0.25">
- <path d=" M  43.81705 47.80042 M  67.71725 47.80042 C  67.71725 61.0003 57.01694 71.70062 43.81705 71.70062 C  30.61716 71.70062 19.91684 61.0003 19.91684 47.80042 C  19.91684 34.60052 30.61716 23.9002 43.81705 23.9002 C  57.01694 23.9002 67.71725 34.60052 67.71725 47.80042 Z M  43.81705 47.80042  " />
- </g>
- </g>
- </g>
- </g>
- </g>
- </g>
- <g>
- <g stroke-width="0.8pt">
- <g stroke="rgb(100.0%,58.99963%,0.0%)">
- <g fill="rgb(100.0%,58.99963%,0.0%)">
- <path d=" M  43.81705 47.80042 M  67.71725 47.80042 C  67.71725 61.0003 57.01694 71.70062 43.81705 71.70062 C  30.61716 71.70062 19.91684 61.0003 19.91684 47.80042 C  19.91684 34.60052 30.61716 23.9002 43.81705 23.9002 C  57.01694 23.9002 67.71725 34.60052 67.71725 47.80042 Z M  43.81705 47.80042  " style="fill:none"/>
- </g>
- </g>
- </g>
- </g>
- <path d="  " style="fill:none"/>
- <g>
- <g>
- <g transform="matrix(1.0,0.0,0.0,1.0,40.78235,51.33339)">
- <g fill="rgb(0.0%,0.0%,0.0%)">
- <text style="stroke:none" transform="scale(1,-1) translate(3.0347,0)" text-anchor="middle"  font-size="10">
-<tspan font-family="cmbx" font-size="10">\(x\)</tspan></text>
-</g>
- </g>
- </g>
- </g>
- 
- </g>
- </g>
- </g>
- </g>
- </g>
-                                         </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="2d-curv-estimator.css" type="text/css"?><svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="159.5347pt"
+   height="80.16734pt"
+   viewBox="-0.09999 -0.4 159.5347 80.16734 "
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r"
+   sodipodi:docname="2d-curv-estimator-0.svg">
+  <metadata
+     id="metadata102">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs100" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1200"
+     inkscape:window-height="1868"
+     id="namedview98"
+     showgrid="false"
+     inkscape:zoom="6.8647573"
+     inkscape:cx="52.187992"
+     inkscape:cy="35.314786"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g14" />
+  <g
+     id="g6"
+     transform="matrix(1,0,0,-1,0,79.36735)">
+    <g
+       style="stroke:#000000"
+       id="g8">
+      <g
+         style="fill:#000000"
+         id="g10">
+        <g
+           style="stroke-width:0.4pt"
+           id="g12">
+          <g
+             id="g14">
+            <g
+               id="g16">
+              <g
+                 style="stroke-width:0.8pt"
+                 id="g18">
+                <g
+                   style="stroke:#009700"
+                   id="g20">
+                  <g
+                     style="fill:#009700"
+                     id="g22">
+                    <g
+                       style="stroke-opacity:0.25"
+                       id="g24">
+                      <g
+                         style="fill-opacity:0.25"
+                         id="g26">
+                        <path
+                           inkscape:connector-curvature="0"
+                           id="path28"
+                           d="m 19.91684,0 c 0,32.99973 26.75079,59.75052 59.75052,59.75052 32.99972,0 59.75052,-26.75079 59.75052,-59.75052" />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g
+               id="g30">
+              <g
+                 style="stroke-width:0.8pt"
+                 id="g32">
+                <g
+                   style="stroke:#545454"
+                   id="g34">
+                  <g
+                     style="fill:#545454"
+                     id="g36">
+                    <path
+                       inkscape:connector-curvature="0"
+                       id="path38"
+                       style="fill:none"
+                       d="m 19.91684,0 c 0,32.99973 26.75079,59.75052 59.75052,59.75052 32.99972,0 59.75052,-26.75079 59.75052,-59.75052" />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g
+               id="g40">
+              <g
+                 id="g42">
+                <g
+                   id="g44"
+                   transform="translate(43.81705,47.80042)">
+                  <g
+                     style="fill:#000000"
+                     id="g46">
+                    <text
+                       id="text48"
+                       font-size="10"
+                       transform="scale(1,-1)"
+                       style="font-size:10px;text-anchor:middle;stroke:none" />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g
+               id="g50">
+              <g
+                 style="stroke-width:0.8pt"
+                 id="g52">
+                <g
+                   style="stroke:#000000"
+                   id="g54">
+                  <g
+                     style="fill:#000000"
+                     id="g56">
+                    <path
+                       inkscape:connector-curvature="0"
+                       id="path58"
+                       d="m 43.81705,47.80042 m 0.7967,0 c 0,0.44 -0.3567,0.7967 -0.7967,0.7967 -0.44001,0 -0.79671,-0.3567 -0.79671,-0.7967 0,-0.44001 0.3567,-0.79671 0.79671,-0.79671 0.44,0 0.7967,0.3567 0.7967,0.79671 z m -0.7967,0" />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g
+               id="g60">
+              <g
+                 style="stroke-width:0.8pt"
+                 id="g62">
+                <g
+                   style="stroke:#ff9700"
+                   id="g64">
+                  <g
+                     style="fill:#ff9700"
+                     id="g66">
+                    <g
+                       style="stroke-opacity:0.25"
+                       id="g68">
+                      <g
+                         style="fill-opacity:0.25"
+                         id="g70">
+                        <path
+                           inkscape:connector-curvature="0"
+                           id="path72"
+                           d="m 43.81705,47.80042 m 23.9002,0 c 0,13.19988 -10.70031,23.9002 -23.9002,23.9002 -13.19989,0 -23.90021,-10.70032 -23.90021,-23.9002 0,-13.1999 10.70032,-23.90022 23.90021,-23.90022 13.19989,0 23.9002,10.70032 23.9002,23.90022 z m -23.9002,0" />
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g
+               id="g74">
+              <g
+                 style="stroke-width:0.8pt"
+                 id="g76">
+                <g
+                   style="stroke:#ff9700"
+                   id="g78">
+                  <g
+                     style="fill:#ff9700"
+                     id="g80">
+                    <path
+                       inkscape:connector-curvature="0"
+                       id="path82"
+                       style="fill:none"
+                       d="m 43.81705,47.80042 m 23.9002,0 c 0,13.19988 -10.70031,23.9002 -23.9002,23.9002 -13.19989,0 -23.90021,-10.70032 -23.90021,-23.9002 0,-13.1999 10.70032,-23.90022 23.90021,-23.90022 13.19989,0 23.9002,10.70032 23.9002,23.90022 z m -23.9002,0" />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <path
+               inkscape:connector-curvature="0"
+               id="path84"
+               style="fill:none"
+               d="" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>
