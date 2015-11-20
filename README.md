@@ -58,7 +58,7 @@ microstructures and their relevance is evaluated and discussed.
 - Experiments : All Source codes are available in [DGtal library](https://github.com/DGtal-team/DGtal/) and [DGtalTools](https://github.com/DGtal-team/DGtalTools/)
 
 ## License
-All this work is under [Creative Commons CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) license
+All this work is under [Creative Commons CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) license, see [LICENSE.md](https://github.com/jlevallois/PhD-Thesis/blob/master/LICENSE.md)
 
 ## This work has been done thanks to
 <img src="http://liris.cnrs.fr/jeremy.levallois/images/Liris-80.png" alt="LIRIS" />
