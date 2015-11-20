@@ -2,10 +2,22 @@
 
 This repository contains source files of my Ph.D. thesis ([/content](https://github.com/jlevallois/PhD-Thesis/tree/master/content)) and slides of my defence ([/slides](https://github.com/jlevallois/PhD-Thesis/tree/master/slides)).
 
+## Teaser
+
+**Input**
+
+<img src="http://liris.cnrs.fr/jeremy.levallois/Papers/Thesis/Slides/img/OctaFlower.png" width="35%" />
+<img src="http://liris.cnrs.fr/jeremy.levallois/Papers/Thesis/Slides/img/OctaFlower_noise_zoom2.png" width="62%" />
+
 **Mean curvature** (from blue to yellow)
 
 <img src="http://liris.cnrs.fr/jeremy.levallois/images/ii_dragon512.png" width="48%" />
 <img src="http://liris.cnrs.fr/jeremy.levallois/images/ii_octa-noise.png" width="48%" />
+
+**Principal directions**
+
+<img src="http://liris.cnrs.fr/jeremy.levallois/Papers/Thesis/Slides/img/curvature/octa-256-prindir1_0001.png" width="48%" />
+<img src="http://liris.cnrs.fr/jeremy.levallois/Papers/Thesis/Slides/img/curvature/octa-256-prindir2_0001.png" width="48%" />
 
 **Feature classification** (red: singularities, blue: smooth, green: flat)
 
