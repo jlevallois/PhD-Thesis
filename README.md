@@ -2,11 +2,11 @@
 
 This repository contains source files of my Ph.D. thesis ([/content](https://github.com/jlevallois/PhD-Thesis/tree/master/content)) and slides of my defence ([/slides](https://github.com/jlevallois/PhD-Thesis/tree/master/slides)).
 
-<img src="http://liris.cnrs.fr/jeremy.levallois/images/ii_dragon512.png" width="400px" />
-<img src="http://liris.cnrs.fr/jeremy.levallois/images/ii_octa-noise.png" width="400px" />
+<img src="http://liris.cnrs.fr/jeremy.levallois/images/ii_dragon512.png" style="width:48%; max-width:400px;" />
+<img src="http://liris.cnrs.fr/jeremy.levallois/images/ii_octa-noise.png" style="width:48%; max-width:400px;" />
 
-<img src="http://liris.cnrs.fr/jeremy.levallois/images/OctaFlower_1024_II_scale.png" width="400px" />
-<img src="http://liris.cnrs.fr/jeremy.levallois/images/Fandisk_noise_II_scale.png" width="400px" />
+<img src="http://liris.cnrs.fr/jeremy.levallois/images/OctaFlower_1024_II_scale.png" style="width:48%; max-width:400px;" />
+<img src="http://liris.cnrs.fr/jeremy.levallois/images/Fandisk_noise_II_scale.png" style="width:48%; max-width:400px;" />
 
 
 
