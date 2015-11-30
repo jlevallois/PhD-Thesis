@@ -3425,13 +3425,13 @@ hypothèses, comme les formes avec des parties non convexes.
 Pour l'ensemble des formes que nous analysons, nous allons comparer les valeurs
 de courbure estimées avec les valeurs euclidiennes attendues. Grâce à
 l'utilisation de courbes et surfaces paramétriques, nous connaissons en tout
-point du bord de la forme l'information de courbure, rendant ainsi la
+point du bord de la forme l'information de courbure, rendant la
 comparaison possible. Ainsi les vecteurs d'erreurs entre les valeurs estimées et les valeurs
 euclidiennes sont alors calculés avec la norme $l_2$ et la norme $l_\infty$
-(équivaut au pire cas).
+(équivalent au pire cas).
 %
 Considérons $a$ comme l'ensemble des valeurs de courbure euclidienne du bord de
-l'objet, et $b$ l'ensemble des valeurs estimées, alors les normes $l_2$ (appelée
+l'objet, et $b$ l'ensemble des valeurs estimées; alors les normes $l_2$ (appelée
 norme moyenne) et $l_\infty$ (celle qui nous intéresse lorsque nous nous
 intéressons à la convergence asymptotique, comprendre convergence uniforme) se
 calculent comme suit :
@@ -3444,7 +3444,7 @@ calculent comme suit :
 Nous exportons les résultats sur des graphes dont les échelles sont
 logarithmiques (avec en abscisse les pas de discrétisation $h$ et en ordonnée
 l'erreur $l_2$ ou $l_\infty$) afin de pouvoir comparer plus facilement les
-vitesses de convergence des estimateurs. À noter que pour chaque graphe le pas
+vitesses de convergence des estimateurs. Il est à noter que pour chaque graphe, le pas
 de discrétisation $h$ décroît (donc l'objet digital se raffine) de la droite
 vers la gauche. La pente nous informe alors sur la vitesse de convergence de
 l'estimateur. Plus la pente est forte, plus la vitesse de convergence
@@ -3468,7 +3468,7 @@ $\PrincCurvH{2}{R}$ en 3D par intégration. La première ligne des
 \RefFiguresTF{fig:curv-experiments-ellipse}{fig:curv-experiments-flower}{fig:curv-experiments-accflower}
 nous montre les vitesses de convergence asymptotique pour $5$ valeurs de
 $\alpha$ différentes : $\frac{1}{2}$, $\frac{2}{5}$, $\frac{1}{3}$,
-$\frac{2}{7}$ et $\frac{1}{4}$. L'enjeu du choix du $\alpha$ est également
+$\frac{2}{7}$ et $\frac{1}{4}$. L'enjeu du choix de $\alpha$ est également
 algorithmique, puisqu'il guide la taille du rayon, et donc influe sur le temps
 de calcul.
 
@@ -3907,7 +3907,7 @@ Nous observons aussi que l'estimateur \BC converge mais avec des vitesses de
 convergence plus faibles. Nous noterons également que l'estimateur \MDSS
 n'affiche pas de convergence asymptotique expérimentalement sur nos données. En
 considérant la norme $l_2$, nous pouvons observer que \BC fournit de meilleures
-vitesses de convergence que notre estimateur, notamment sur l'objet \Ellipse
+vitesses de convergence que notre estimateur, notamment sur l'objet \Ellipse,
 mais lorsque nous mettons en parallèle avec les graphes d'erreur $l_\infty$,
 nous pouvons voir que notre estimateur possède un meilleur comportement que \BC
 lorsque nous raffinons l'objet. D'ailleurs cette différence de vitesse de
@@ -3915,11 +3915,11 @@ convergence est plus faible sur les objets non convexes.
 
 
 Nous pouvons noter que les calculs de notre estimateur vont à des résolutions
-supérieures à ceux des autres estimateurs. La raison derrière cela est simple :
+supérieures à ceux des autres estimateurs. La raison est simple :
 dans notre implémentation de l'estimateur \BC dans \DGtal, la taille du
 masque\footnote{Dans notre implémentation dans \DGtal, nous utilisons comme
 taille de masque : $d / h^\frac{1}{3}$ où $d$ est le diamètre du contour.}
-devient trop important pour de petites valeurs de $h$, ce qui implique des
+devient trop importante pour de petites valeurs de $h$, ce qui implique des
 problèmes de surcharge de la mémoire disponible. Pour l'estimateur \MDCA, la
 reconnaissance d'arcs circulaires dans \DGtal est guidé par un prédicat
 géométrique basé sur le calcul du déterminant de coordonnées de points au carré.
@@ -3980,7 +3980,7 @@ moyenne sur \RoundedCube et \Goursat, nous obtenons des vitesses de convergence
 similaires à \JetFitting avec des erreurs $l_\infty$ légèrement moins
 importantes avec notre estimateur. Pour les courbures principales sur ces
 objets, nos estimateurs obtiennent de bien meilleures vitesses de convergence
-que \JetFitting. Si nous regardons du côté des erreurs moyennes (métrique
+que \JetFitting. Si nous regardons les erreurs moyennes (métrique
 $l_2$), des comportements similaires sont observés. À noter que pour notre
 expérimentation la plus fine, le pas de discrétisation était de $h = 0.04$, les
 formes digitales sont définies sur un domaine digital de $\nombre{500}^3$. À
@@ -4016,7 +4016,7 @@ $\PrincCurvHS{1}$ et $\PrincCurvHS{2}$, ainsi que les variantes adaptant le
 rayon $R$ localement en fonction de la géométrie locale de la forme
 $\MeanCurvHSL$, $\PrincCurvHSL{1}$ et $\PrincCurvHSL{2}$ et les versions
 utilisant les $K$-moyennes diminuant ainsi le temps de calcul (avec $K = 5$,
-$10$ et $50$). Le constat est le même qu'en 2D, la vitesse de convergence de
+$10$ et $50$). Le constat est le même qu'en 2D; la vitesse de convergence de
 l'erreur $l_2$ de ces estimateurs est bien en dessous de $O(h^\frac{1}{3})$,
 même lorsque le nombre de rayons possibles est bas. En ce qui concerne la vitesse
 de convergence de l'erreur $l_\infty$ des estimateurs $\MeanCurvHS$,
@@ -4032,7 +4032,7 @@ peut être judicieux de connaître le comportement d'un estimateur face à des
 données de plus en plus grandes afin d'en extraire un profil de temps de calcul.
 
 
-Bien que nos estimateurs soient des estimateurs intégrants des volumes, ceux-ci
+Bien que nos estimateurs soient des estimateurs intégrant des volumes, ceux-ci
 sont comparables en complexité à des estimateurs surfaciques. En effet, une
 implémentation naïve calculerait une boule digitale, la centrerait sur le bord
 de l'objet digital à analyser, calculerait son intersection avec la forme à
@@ -4063,10 +4063,10 @@ De la même manière, pour les moments :
   &\quad - \DMom{pqs}{h}\left(\DSh \cap ( \Ball{R}{\vx} \setminus \Ball{R}{\vx+ \vec{\delta}} ), h\right) \,.
 \end{align}
 %
-Alors, si nous pré-calculons tous les supports de déplacement
+Alors, si nous précalculons tous les supports de déplacement
 $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
 \Ball{R}{\mathbf{0}}}{h}$ avec $||\vec{\delta}||_\infty = h$, la complexité de l'algorithme peut être réduite à
-$O((R/h)^{d-1})$. Le cas idéal est la traversée Hamiltonienne de la surface :
+$O((R/h)^{d-1})$. Le cas idéal est la traversée hamiltonienne de la surface :
 seul le premier surfel a besoin de calculer l'intersection entre la boule
 entière et la forme, tous les autres surfels (du voisinage) n'auront à calculer
 que les sous-supports $\DigF{\Ball{R}{\mathbf{0} \pm \vec{\delta}} \setminus
@@ -4241,17 +4241,17 @@ expérimentalement ces estimateurs et observé que les vitesses de convergence
 respectent bien les vitesses attendues, et la comparaison avec les autres
 méthodes rend nos estimateurs très compétitifs, même en présence de bruit.
 
-
-Ces estimateurs souffrent par contre de certaines limitations. La première et
-probablement la plus grande limitation est la nécessité de connaître une
-approximation volumétrique de la forme $\Shape$. Nous ne pouvons pas utiliser
-simplement un approximation du bord de $\Shape$, comme c'est le cas pour les
-algorithmes fonctionnant sur les nuages de points par exemple.
+\comJeremy{Ces estimateurs souffrent par contre de certaines limitations. La première, et probablement la plus grande limitation vient du fait que nous intégrons des données volumiques sur la forme $\Shape$, et non surfaciques comme la plupart des autres méthodes, comme celles basées sur les nuages de points par exemple. Cela implique une plus grande complexité d'algorithme, mais également de pouvoir devoir quantifier ces données volumiques lorsqu'elles ne sont pas directes. Cependant, cela amène un certaine robustesse aux données bruitées. Nous verrons dans le \RefChapter{sec:applications:dgtal} que nous pouvons optimiser l'algorithme afin de se rapprocher de la complexité des méthodes surfaciques.}
+% Ces estimateurs souffrent par contre de certaines limitations. La première et
+% probablement la plus grande limitation est la nécessité de connaître une
+% approximation volumétrique de la forme $\Shape$. Nous ne pouvons pas utiliser
+% simplement un approximation du bord de $\Shape$, comme c'est le cas pour les
+% algorithmes fonctionnant sur les nuages de points par exemple.
 
 
 La seconde provient de la constante $k$ guidant le rayon de la boule
 d'intégration ($R=kh^\frac{1}{3}$) dans le contexte de la convergence
-asymptotique des estimateurs. Le choix du $k$ le plus optimal n'est pas évident,
+asymptotique des estimateurs. Le choix du $k$ optimal n'est pas évident,
 et est principalement lié aux bornes d'erreur de l'approximation de Taylor
 permettant d'extraire l'information de courbure qui ne sont pas explicites.
 L'intuition est que ce paramètre $k$ doit certainement dépendre de la dérivée
@@ -4262,16 +4262,16 @@ vitesse de convergence.
 
 
 La troisième limitation est le temps de calcul sur de gros objets digitaux. Il
-n'est pas rare d'avoir dans l'industrie des objets à analyser avec une grosse
+n'est pas rare d'avoir dans l'industrie des objets à analyser avec une haute
 résolution (par exemple $\nombre{1024}^3$) et le coût de l'estimation peut
-s'avérer un peu élevé pour certaines utilisations. Cependant, cette limitation
+s'avérer élevé pour certaines utilisations. Cependant, cette limitation
 est à mettre en parallèle avec le fait que nos estimateurs sont robustes au
 bruit, et c'est certainement le prix à payer (les approches de reconnaissances
-d'objets par exemple sont plus rapides, mais très sensibles au bruit comme nous
-l'avons montré). À noter que pour obtenir exactement les mêmes résultats avec
+d'objets par exemple sont plus rapides, mais très sensibles au bruit, comme nous
+l'avons montré). Il est à noter que pour obtenir exactement les mêmes résultats avec
 \BC et \II (\cad quand l'erreur d'estimation en norme $l_\infty$ par rapport à
 la vraie valeur de courbure est égale entre les deux estimateurs), \BC a besoin
-d'aller à une résolution de grille dix fois inférieure par rapport à notre
+d'aller à une résolution de grille dix fois supérieure par rapport à notre
 estimateur, comme le montre le \RefTable{tab:comp-BC-II}, avec le coût en temps
 de calcul qui en résulte.
 
@@ -4302,12 +4302,12 @@ maximaux afin de proposer des estimateurs de courbures en dimension 2 et 3 sans
 paramètre. En effet, les segments maximaux permettent d'extraire l'échelle de la
 forme digitale lorsque nous ne connaissons pas le pas de discrétisation $h$ pour
 une forme digitale donnée. De plus, les propriétés sur les longueurs des
-segments maximaux en font un de très bons candidats pour remplacer le rayon de
+segments maximaux en font de très bons candidats pour remplacer le rayon de
 la boule d'intégration des estimateurs de courbures précédents, les rendant
 ainsi sans paramètre.
 
 
-Nous avons alors définis deux approches d'estimateurs grâce à ces longueurs. Une
+Nous avons alors défini deux approches d'estimateurs grâce à ces longueurs. Une
 approche « globale », \cad que l'ensemble des longueurs des segments maximaux de
 la forme nous donnent un rayon global pour la sphère d'intégration. La
 convergence asymptotique des estimateurs dont le rayon est guidé par la longueur
@@ -4324,7 +4324,7 @@ dans notre évaluation expérimentale), comme les versions avec le paramètre de
 rayon.
 
 
-Une approche « locale », où le rayon de la sphère est adapté localement en
+Ensuite, nous avons défini une approche « locale », où le rayon de la sphère est adapté localement en
 fonction de la géométrie de la forme (en fonction des longueurs des segments
 maximaux). À cause de la borne d'erreur d'un cas pathologique des segments
 maximaux, nous ne pouvons espérer de preuves théoriques de convergence
@@ -4334,6 +4334,6 @@ globale ». La distinction se fait avec l'erreur moyenne, l'erreur de norme $l_2
 où ces estimateurs obtiennent de très bons résultats.
 
 
-La plus grosse limitation de ces méthodes sans paramètre est qu'elles sont très
+La principale limitation de ces méthodes sans paramètre est qu'elles sont très
 dépendantes de la qualité de discrétisation de l'objet digital, comme la plupart
 des estimateurs reconnaissant des primitives sur la surface digitale.
