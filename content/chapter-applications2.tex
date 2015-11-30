@@ -11,7 +11,7 @@
 %
 Le projet \digitalSnow\footnote{ANR-11-BS02-009,
 \url{http://liris.cnrs.fr/dsnow/}} est un projet de recherche financé par
-l'Agence Nationale de le Recherche qui regroupe trois laboratoires spécialisé
+l'Agence Nationale de la Recherche qui regroupe trois laboratoires spécialisés
 dans des domaines différents : le laboratoire d'informatique
 \textsc{\colorize{LIRIS}} de l'Université de Lyon, le laboratoire de
 mathématiques \textsc{\colorize{LAMA}} de l'Université de Savoie Mont-Blanc, et
@@ -33,7 +33,7 @@ lors d'une chute de neige, les cristaux de neige s'accumulent sur le sol et
 forment progressivement un milieu poreux complexe constitué d'air, de vapeur
 d'eau, de glace et parfois d'eau liquide. La quantité de ces composants et leur
 arrangement géométrique à l'échelle granulaire (micro-structure de neige) se
-transforme avec le temps en fonction des paramètres physiques de
+transforment avec le temps en fonction des paramètres physiques de
 l'environnement. Cette transformation est appelée la métamorphose, et peut être
 décomposée en deux types : la métamorphose de la « neige humide » provoqué par
 la présence d'eau liquide, la métamorphose de la « neige sèche » (métamorphose
@@ -88,7 +88,7 @@ principalement guidé par un flot de courbure moyenne sur l'interface (Effet de
 Kelvin). Cependant, en présence d'un gradient de température, les cristaux
 croissent suivant leurs axes cristallographiques privilégiés et forment des
 facettes. Nous pouvons également détecter ces facettes grâces à l'estimateur de
-singularité dont nous avons décrit dans ce chapitre. La
+singularité que nous avons décrit dans ce chapitre. La
 \RefFigure{fig:digitalSnow-sing} montre deux captures de microstructures de
 neige à différents moments. Il est alors immédiat que les grains de neige de
 gauche présentent plus de facettes que ceux de droite. De plus, l'estimation de
@@ -96,7 +96,7 @@ la courbure permet de simuler certains métamorphoses de neige : les zones
 convexes ont tendance à se sublimer tandis que la vapeur se condense dans les
 zones concaves. Notre rôle était d'apporter des estimateurs de courbure et de
 directions principales de courbure (\RefFigure{fig:digitalSnow-princdir})
-fiables (c'est à dire avec des preuves de convergence), ce que nous avons fait
+fiables (\cad avec des preuves de convergence), ce que nous avons fait
 avec les estimateurs décrits dans le \RefChapitre{sec:estimators}. Ces
 estimateurs sont actuellement utilisés et répondent aux attentes des partenaires
 du projet \digitalSnow, tout en étant robustes au bruit lié à l'acquisition par
@@ -141,7 +141,7 @@ Plusieurs algorithmes d'extraction et de suivi de surface sont disponibles et
 adaptés à cette topologie. Concrètement, \DGtal peut nous fournir un itérateur
 de surfels de la surface nous permettant de la parcourir en profondeur ou en
 largeur de manière optimale, \cad en évitant autant que possible les
-déplacements non connexes. Cette propriété est très importante dans notre cas si
+déplacements non connexes. Cette propriété est très importante dans notre cas, si
 nous voulons optimiser la complexité de notre estimation de la courbure. Comme
 nous l'avons dit dans le \RefSection{sec:complexite}, nous pouvons réduire le
 calcul de l'intégration volumique de la sphère avec la surface de l'objet en
@@ -164,7 +164,7 @@ $O\left(\left(\frac{R}{h}\right)^{d-1}\right)$. Pour être tout à fait juste, i
 rajouter le coût initial du premier calcul obligatoire sur le support entier, et
 le coût supplémentaire au début pour pré-calculer les masques de déplacement,
 mais ceux-ci sont négligeable. Par exemple, pour une taille de support 2D entier
-de $\nombre{91893}$ éléments, l'optimisation construit de $8$ masques de
+de $\nombre{91893}$ éléments, l'optimisation construit $8$ masques de
 déplacements supplémentaires d'environ $\nombre{450}$ éléments.
 
 \begin{figure}[th]
@@ -187,7 +187,7 @@ déplacements supplémentaires d'environ $\nombre{450}$ éléments.
   \includegraphics[width=2.5cm]{images/digitalSnow/testIntegralInvariantCurvatureEstimator-PartialMask5}}
   %
   \caption{Illustration de l'optimisation avec les masques partiels de la boule
-  2d  pour un pas de discrétisation $h$ donné. \textit{En haut à gauche :}
+  2D pour un pas de discrétisation $h$ donné. \textit{En haut à gauche :}
   Illustration du déplacement du support entier du point $\vx$ au point
   $\vx+\vec{\delta}$, \textit{en bas à gauche :} support 2D entier, \emph{sur la
   droite :} masques partiels de déplacement 0-adjacents.
@@ -196,8 +196,8 @@ déplacements supplémentaires d'environ $\nombre{450}$ éléments.
 \end{figure}
 
 Tous les estimateurs de courbure et de singularité conçus pendant cette thèse et
-décris dans le \RefChapitre{sec:estimators} et ce chapitre ont été mis en œuvre
-dans \DGtal et sont dès à présent disponible librement. Tous les résultats
+décrits dans le \RefChapitre{sec:estimators} et ce chapitre ont été mis en œuvre
+dans \DGtal et sont dès à présent disponibles librement. Tous les résultats
 exposés dans ce document sont reproductibles directement avec les outils de
 \DGtal. Pour plus d'informations, se référer à la documentation de
 \DGtal\footnote{Documentation du paquet « Géométrie » :
