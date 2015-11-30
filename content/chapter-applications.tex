@@ -60,7 +60,7 @@ utilisant, allant de la reconnaissance d'objets dans une scène \cite{Brown2005}
 de données \cite{Peng2010}, l'analyse de données médicales \cite{Lannister1996}
 ou bien archéologiques \cite{Mellado2013}. Plus récemment, la rapide
 démocratisation de systèmes d'acquisition 3D à bas coût comme la \emph{Microsoft
-Kinect} apporte un regain d'intérêt pour l'analyse de formes
+Kinect} amène un nouveau regain d'intérêt pour l'analyse de formes
 \cite{Janoch2013,KinectData}.
 %
 %% Parler de features globales (aire, volume, moments, D2 shape distributions) et locales ?
@@ -77,7 +77,7 @@ les bras et les jambes sur un corps) tandis que la détection de singularités
 extrait les discontinuités locales distinguables de son voisinage (par exemple
 les rides sur un visage). La première est plutôt une information visuelle alors
 que l'autre intègre des informations géométriques de l’objet. Nous nous
-intéresserons ici qu'aux singularités.
+intéresserons ici uniquement aux singularités.
 %
 % C'est là tout le problème lorsqu'on s'intéresse aux \emph{features} : la
 % définition varie en fonction des problématiques. Est-ce que c'est une propriété
@@ -133,8 +133,8 @@ comparerons ces estimateurs dans le
 \subsubsection{Méthodes « Ridges and Valleys »}%
 \label{sec:applications:feature:ridge}
 %
-Nous souhaitons caractériser les discontinuités du bord d'un objet, une méthode
-naturelle est de s'intéresser aux maximas et minimas locaux, nommés \respp «
+Nous souhaitons caractériser les discontinuités du bord d'un objet; une méthode
+naturelle est de s'intéresser aux maxima et minima locaux, nommés \respp «
 \emph{Ridge} » et « \emph{Valley} » (« Crête » et « Vallée » en français, car
 cette notion est assez similaire aux crêtes géographiques).
 %
@@ -186,7 +186,7 @@ nous pouvons alors détecter les discontinuités.
       \label{fig:ridges-valleys}}
 \end{figure}
 
-Ces techniques apportent une approche formelle à l'extraction de discontinuités,
+Ces techniques amènent une approche formelle à l'extraction de discontinuités,
 mais sont dépendantes de l'échelle à travers le seuillage. De plus, elles
 nécessitent d'avoir une estimation robuste de quantités différentielles d'ordre
 $3$. Lorsque la forme d'entrée est bruitée, ou dans le cadre de données
@@ -223,11 +223,12 @@ digitales, ces approches ne s'avèrent pas pertinentes.
 \subsubsection{Méthodes basées sur un voisinage surfacique}%
 \label{sec:applications:feature:patch}
 %
-Lorsque nous traitons des maillages ou les nuages de points, beaucoup
-d'approches se basent sur des quantités calculées par intégration sur des voisinages
-surfaciques de la surface. La caractéristique est déterminée en fonction d'un score
-évalué sur la géométrie de voisinages surfaciques centrés autour du point à
-considérer. Généralement, les voisinages sont simplement issus d'un noyau sphérique.
+Lorsque nous traitons les maillages ou les nuages de points, beaucoup
+d'approches se basent sur des quantités calculées par intégration sur des
+voisinages de la surface. La caractéristique est déterminée en fonction d'un
+score évalué sur la géométrie de voisinages surfaciques centrés autour du point à
+considérer. Généralement, les voisinages sont simplement issus d'un noyau
+sphérique.
 %  Nous allons en détailler quelques-unes
 % \cite{Pauly2003,Telea2004} utilisant l'Analyse en Composante Principale
 % (\emph{ACP}) sur le voisinage du point d’intérêt. Un score de zone
@@ -380,7 +381,7 @@ la précision du calcul par rapport à la robustesse au bruit. Le second
 estimateur, que nous utiliserons dans les expériences, produit des résultats
 légèrement meilleurs sur des données bruitées grâce au renforcement des valeurs
 propres de la matrice de covariance, liées à la normale et à la plus forte des
-courbure principale.
+courbures principales.
 %
 %\missingfigure{Moment : Donner des résultats avec $C^0$}
 
@@ -504,9 +505,9 @@ Cependant, ces méthodes sont très sensibles et ne produisent pas de résultats
 suffisamment robustes sur des données digitales.
 
 
-Plus concrètement, pour un voisinage donné \footnote{des contraintes de
+Plus concrètement, pour un voisinage donné \footnote{Des contraintes de
 connectivité et d'uniformité entrent en jeu, mais sont satisfaites sur une grille
-régulière digitale}, \cauthors{Park}{Park2012} accumulent dans une matrice les
+régulière digitale.}, \cauthors{Park}{Park2012} accumulent dans une matrice les
 tenseurs :
 %
 \begin{equation}
@@ -560,13 +561,13 @@ $\omega^-$ alors le point sera labellisé comme \NonFeature (en vert); si le
 poids est entre $\omega^-$ et $\omega^+$, nous allons regarder la variation du
 poids : si le poids est supérieure à $\tau$ fois le poids au rayon précédent,
 nous gardons le précédent poids. Cette dernière condition permet d'éliminer les
-résultats erronés dû au bruit par exemple, introduisant une forte
+résultats erronés dus au bruit par exemple, introduisant une forte
 variation. Ces points seront traités plus tard. Pour tous les autres points
 (donc ceux qui ne sont pas labellisés \Feature, \NonFeature ou avec une forte
 variation de poids), nous allons effectuer la même vérification à l'échelle
 supérieure. Enfin, pour tous les points restant non labellisés, un regroupement
 (\emph{clustering}) sera fait afin de traiter les regroupements de moins de
-$n_{min}$ points\footnote{dans leur article, les auteurs choisissent
+$n_{min}$ points\footnote{Dans leur article, les auteurs choisissent
 arbitrairement $n_{min}=10$, mais ajoutent que cette valeur peut varier en
 fonction de la densité de points.} comme \NonFeature, les autres regroupements
 comme \Feature.
@@ -599,15 +600,15 @@ zones caractéristiques multi-échelles. À nouveau, le paramètre d'espace d'é
 est la taille de voisinage.
 
 
-Dans leurs travaux, \cauthors{Mellado}{Mellado2012} proposent de faire
-approximer aux moindres carrés des sphères (\emph{least squares spherical
-fitting}) à la surface de l'objet, et d'en extraire un score de \emph{feature}
-sur chaque élément de la surface. Le paramètre d'espace d'échelle est la taille
-du voisinage à considérer dans l'approximation. En utilisant leurs notations,
-pour toutes les échelles $t$ ($t=R$ avec nos notations), ils font correspondre
-une hyper-sphère algébrique et la distance de décalage algébrique $\tau$ entre
-le point $\vp$ et la $0$-isosurface, la normale unité $\eta$ et la courbure
-(signée) $\kappa$ de l'hyper-sphère.
+Dans leurs travaux, \cauthors{Mellado}{Mellado2012} proposent d'approximer aux
+moindres carrés des sphères (\emph{least squares spherical fitting}) à la
+surface de l'objet, et d'en extraire un score de \emph{feature} sur chaque
+élément de la surface. Le paramètre d'espace d'échelle est la taille du
+voisinage à considérer dans l'approximation. En utilisant leurs notations, pour
+toutes les échelles $t$ ($t=R$ avec nos notations), ils font correspondre une
+hyper-sphère algébrique. Ils notent $\tau$ comme la distance de décalage
+algébrique entre le point $\vp$ et la $0$-isosurface, $\eta$ comme la normale
+unité et $\kappa$ comme la courbure (signée) de l'hyper-sphère.
 
 \begin{figure}[ht]{
     \begin{center}
@@ -671,8 +672,8 @@ artefacts apparaissent sur les singularités (voir le
 
 Le principal défaut de cette méthode est qu'elle ne fournit pas de quantité
 exploitable directement reliée à des quantités géométriques (comme la courbure
-par exemple). Expérimentalement la quantité permet de différencier les zones
-caractéristiques mais nous ne pouvons rien statuer d'un point de vue théorique.
+par exemple). Expérimentalement, la quantité permet de différencier les zones
+caractéristiques, mais ne repose sur aucune preuve théorique.
 
 \subsubsection{Méthodes basées sur de l'analyse spectrale}%
 \label{sec:applications:feature:spectral}
@@ -686,8 +687,7 @@ stables et distinguables de leur voisinage.
 \paragraph{Matrice laplacienne multi-échelle}
 %
 \cauthors{Song}{Song2014} se sont alors penchés sur l'analyse du spectre de la
-matrice laplacienne afin d'extraire des informations de saillance. Pour faire
-simple, la matrice laplacienne $L$ (de taille $n \times n$, $n$ étant le nombre
+matrice laplacienne afin d'extraire des informations de saillance. La matrice laplacienne $L$ (de taille $n \times n$, $n$ étant le nombre
 de sommets) est définie comme :
 %
 \begin{equation}
@@ -695,7 +695,7 @@ de sommets) est définie comme :
 \end{equation}
 %
 où $W$ est la matrice d’adjacence à laquelle nous incorporons des informations
-géométriques : entre les sommets, telle que :
+géométriques entre les sommets, telles que :
 %
 \begin{equation}
   A(i,j) =
@@ -867,7 +867,7 @@ espace-échelle de nos estimateurs, le paramètre étant le rayon de la boule.
 %
       \caption[Analyse en espace d'échelle de la courbure en fonction du rayon sur la forme digitale 2D de \Flower]
       {\emph{À gauche :} forme digitale 2D de \Flower. \emph{À droite :}
-      Association des valeurs de courbure sur le bord digital de la forme «
+      Association des valeurs de courbure sur le bord digital de la forme
       \Flower en utilisant la \RefDefinition{def:digital-2d-curvature} (abscisse) pour différentes
       tailles de boules $R$ (ordonnée, de haut en bas). Les couleurs correspondent
       aux valeurs de courbures: du bleu (courbure la plus petite) au jaune (courbure
@@ -959,7 +959,7 @@ $\dS$ :
   %
   Soit $\Shape$ une forme euclidienne de $\R^2$ (\respp $\R^3$) avec
   un bord $C^3$ par morceaux, et soit $\vx \in \dS$ une singularité. Alors, si
-  $\alpha_0$ est l'angle entre les deux demi-tangentes au point $\vx$ et que
+  $\alpha_0$ est l'angle entre les deux demi-tangentes au point $\vx$ et si
   $\Curv_{-}$ et $\Curv_{+}$ sont les courbures limites à gauche et à droite,
   nous avons:
   %
@@ -1070,7 +1070,7 @@ est donnée par la propriété suivante :
   %
   \begin{equation}
     \CurvMax(R,h) = \frac{2h}{R^2+h^2},
-    \quad\left(\text{\resp } \MeanCurvMax(R,h) = \frac{2h}{R^2+h^2}\right)\,.
+    \quad\left(\text{\resp~} \MeanCurvMax(R,h) = \frac{2h}{R^2+h^2}\right)\,.
   \end{equation}
   %
   \label{prop:minInterval}
@@ -1107,7 +1107,7 @@ sur la \RefFigure{fig:CubeSpherePlot_F_NoColor} en pointillés gris.
 
 Il apparaît alors clairement que le rayon $R$ (ou l'ensemble de rayons dans le
 cas d'une analyse en espace d'échelle) de la boule contrôle la \emph{taille} de
-la caractéristique qui sera détecté à cause des artefacts de discrétisation :
+la caractéristique qui sera détectée à cause des artefacts de discrétisation :
 une singularité trop petite avec un pas de discrétisation trop faible sera
 absorbé par les artefacts de discrétisation.
 
@@ -1152,7 +1152,7 @@ notre classification :
    \item nous pouvons détecter les zones à courbure nulle/« données incorrectes » en
          utilisant $\CurvMax$ ou $\MeanCurvMax$;
    \item lorsque les valeurs sont considérées comme « correctes », \cad dont les valeurs sont au dessus de
-         $\CurvMax$. Nous pouvons alors distinguer si nous sommes sur une surface
+         $\CurvMax$, nous pouvons alors distinguer si nous sommes sur une surface
          lisse ou sur des singularités lorsque $R$ décroît.
 \end{itemize}
 %
@@ -1269,10 +1269,11 @@ Nous allons désormais tester notre classificateur sur un jeu de données, en 2D
 
 
 Il est important de noter que le rayon maximal $R_0$ de notre intervalle de
-rayons de boule est relié à la plus petite courbure d'une région \featsmooth
-que nous souhaitons détecter. Autrement, d'après la
-\RefProperty{prop:minInterval}, notre estimateur classera avec erreur la zone
-comme une partie \featflat.
+rayons de boule est relié à la plus petite courbure d'une région \featsmooth que
+nous souhaitons détecter. Autrement, d'après la \RefProperty{prop:minInterval},
+notre estimateur classera avec erreur la zone comme une partie \featflat car les
+rayons utilisés ne permettent pas de détecter la géométrie locale de la forme
+discrétisée.
 %
 %\missingfigure{Montrer un exemple de feature avec un range de rayon trop petit}
 %
@@ -1324,10 +1325,10 @@ rayons.
 Dans cette section, nous allons comparer qualitativement différents estimateurs
 de points caractéristiques les plus représentatifs de l'état de l'art pouvant
 s'adapter sur des données digitales. Dans le cadre de notre comparaison, nous
-avons implémenté les estimateurs décris dans le
+avons mis en œuvre les estimateurs décrits dans le
 \RefSection{sec:applications:feature:SOTA} (voir le \RefTable{tab:feature-est}).
-Notre comparaison porte sur quatre objets digitaux, deux principalement
-utilisés dans le domaine : \Fandisk et \OctaFlower, et deux permettant de mettre
+Notre comparaison porte sur quatre objets digitaux; deux principalement
+utilisés dans le domaine : \Fandisk et \OctaFlower; et deux permettant de mettre
 en relief l'importance de l'échelle choisie dans les estimateurs : \SpheresUnion
 et \CubeSphere. Ces derniers comportent en effet plusieurs zones
 caractéristiques de différentes tailles (\RefTable{tab:feature-objects}).
@@ -1335,7 +1336,7 @@ caractéristiques de différentes tailles (\RefTable{tab:feature-objects}).
 
 \begin{table}[h]
   \begin{center}
-    \caption{Table des estimateurs de points caractéristiques utilisées pour la comparaison.}
+    \caption{Table des estimateurs de points caractéristiques utilisés pour la comparaison.}
     \label{tab:feature-est}
     \begin{tabular}{@{}lp{2cm}lp{1.2cm}l@{}}
       \toprule
@@ -1372,14 +1373,14 @@ caractéristiques de différentes tailles (\RefTable{tab:feature-objects}).
 Nous avons fait le choix d'étudier les paramètres des estimateurs au préalable
 afin qu'ils obtiennent de bons résultats sur des formes non bruitées\footnote{Le
 bruit utilisé est un bruit de \Kanungo, comme expliqué dans le
-\RefSection{sec:kanungo-noise}}. Afin de montrer l'importance de ces paramètres et
+\RefSection{sec:kanungo-noise}.}. Afin de montrer l'importance de ces paramètres et
 la nécessité d'étudier au préalable la forme pour certains estimateurs, nous
 utilisons exactement les mêmes paramètres sur les formes bruitées.
 
 
 Les \RefFigures{fig:feature-comparative}{fig:feature-comparative-2} montrent les
 résultats des estimateurs sur les formes parfaitement
-discrétisées\footnote{C'est-à-dire absence de bruit autre que la discrétisation}
+discrétisées\footnote{C'est-à-dire en l'absence de bruit autre que la discrétisation.}
 tandis que les
 \RefFiguresN{fig:feature-comparative-noise}{fig:feature-comparative-noise-2}
 montrent les résultats des estimateurs sur les formes bruitées. Les paramètres
@@ -1582,7 +1583,7 @@ lecture comme \CubeSphere ou \SpheresUnion.
 %
 La méthode de \nauthor{Clarenz} offre de très bons résultats. Comme espéré, les petits
 rayons détectent les petites régions non-lisses (en rouge-jaune, se référer à la
-carte des couleurs à droite des résultats) pendant que de gros rayons renforcent
+carte des couleurs à droite des résultats) pendant que d'importants rayons renforcent
 cette détection des régions non-lisses tout en considérant de petites zones
 lisses comme non-lisses comme le montre l'objet \SpheresUnion. Le choix
 des rayons --- et donc une étude à priori de la forme --- est alors important
@@ -1592,9 +1593,9 @@ semble assez robuste au bruit.
 \paragraph{}
 %
 La méthode de \nauthor{Mérigot} offre également de bons résultats sur des
-surfaces bruités et non bruités. Cependant cela nécessite trois paramètres qui
+surfaces bruitées et non bruitées. Cependant cela nécessite trois paramètres qui
 sont difficiles à déterminer pour une large catégorie de formes. Lorsque ceux-ci
-sont sur-évalués, les zones caractéristiques détectés englobent les zones
+sont sur-évalués, les zones caractéristiques détectées englobent les zones
 proches non pertinentes comme c'est le cas avec le choix de $R_2$ et $r_2$ sur
 la \RefFigure{fig:feature-comparative} par exemple.
 %
@@ -1618,7 +1619,7 @@ courbure de manière surfacique.
 %
 \paragraph{}
 %
-La méthode de \nauthors{Park} demande beaucoup (cinq) de paramètres pour être fonctionnelle. De
+La méthode de \nauthors{Park} demande beaucoup de paramètres pour être fonctionnelle. De
 nos expériences, $\omega^-$ et $\omega^+$ sont très dépendants de la géométrie de
 la forme et de ce que nous considérons comme des zones caractéristiques. Aux
 endroits de forte courbure, cette analyse détecte généralement les points
@@ -1628,7 +1629,7 @@ diédraux, des mauvaises classifications apparaissent (sur la sphère de
 paramètres $\omega^-$, $\omega^+$ et $\tau$, il ne détecte que les zones à très
 forte courbure. Dans les faits, pour avoir de meilleurs résultats sur des
 données bruitées, il faudrait changer les paramètres et donc étudier la forme à
-analyser. Nous pouvons cependant noter que cet méthode permet une
+analyser. Nous pouvons cependant noter que cette méthode permet une
 classification, contrairement aux autres.
 %
 \paragraph{}
@@ -1640,12 +1641,11 @@ bruit. Notre estimateur, en analysant la distance à tous les modèles linéaire
 comme décrit dans le \RefSection{sec:applications:feature:II:classification},
 permet de détecter et classifier les singularités (\featedge) des régions lisse
 (\featsmooth) et des zones à courbure nulle (\featflat) indépendamment de leur
-échelle. Ainsi, aucun paramètre mise à part l'ensemble de rayons ne sont requis
+échelle. Ainsi, aucun paramètre mis à part l'ensemble de rayons n'est requis
 (ce qui est également le cas pour les autres estimateurs comparés). Cependant,
 il est importer de noter que le rayon maximal $R_0$ de notre ensemble de rayons
 est relié à la plus petite courbure des régions lisses que nous souhaitons
-détecter. Autrement, d'après la \RefProperty{prop:minInterval}, notre estimateur
-classifiera avec erreur comme partie \featflat.
+détecter, comme nous l'avons vu précédemment.
 
 
 Des zones autour des singularités sont parfois classifiées avec erreur
@@ -1666,11 +1666,11 @@ leur état avant la transition si la distance est petite.
 Sur des objets bruités, notre classification continue de détecter avec
 pertinence les zones \featedge, \featsmooth et \featflat, mais des artefacts
 peuvent apparaître sur des régions lisses. Ceci est dû au fait que la fonction
-$\DigFeatDD$ n'est plus une droite, mais plutôt une polyline. Cet artefact peut
-être retiré soit par l'utilisation d'une meilleure distance aux modèles, soit
+$\DigFeatDD$ n'est plus une droite, mais plutôt une ligne polygonale. Cet artefact peut
+être considéré soit par l'utilisation d'une meilleure distance aux modèles, soit
 par suppression les petites régions \featedge (comme dans \cite{Park2012}). Il
 faut rappeler que nous présentons ici les résultats sans post-traitement de
-notre estimateur, il est alors clair que ces résultats peuvent être facilement
+notre estimateur; il est alors clair que ces résultats peuvent être facilement
 améliorés.
 %
 \subsection{Conclusion sur l'estimation de singularité}
@@ -1682,14 +1682,14 @@ bonnes propriétés mathématiques des estimateurs de courbure, propose de déte
 les parties non-$C^1$, les parties $C^3$ et les parties à courbure nulle sur la
 surface d'objets digitaux. Puisque l'approche proposée est basée sur des
 quantités locales différentielles à plusieurs échelles, la classification
-obtenue est localement adaptative et invariante à l'échelle (au sens où il
+obtenue est localement adaptative et invariante à l'échelle (au sens où elle
 capture les singularités à différentes échelles sur le même objet géométrique).
 
 
-Nous avons évalué expérimentalement notre détecteur avec des méthodes
+Nous avons évalué expérimentalement ce détecteur avec des méthodes
 représentatives de l'état de l'art et montré qu'il était très compétitif en
 arrivant à détecter des singularités même à des échelles différentes sans autre
-paramètre à choisir autre que l'ensemble de rayons. D'ailleurs cet ensemble de
+paramètre à choisir que l'ensemble de rayons. D'ailleurs, cet ensemble de
 rayons constitue une limitation. Comme le rayon maximal de cet ensemble est
 dépendant de la singularité maximale que nous souhaitons détecter, leur réglage
 peut être important.
@@ -1699,5 +1699,5 @@ Enfin, comme pour les estimateurs de courbure, notre estimateur est basé sur
 l'intégration volumique de la sphère et cette opération reste coûteuse et peut
 la rendre moins compétitive face à d'autres à échelle fixe. Cependant, notre
 méthode permet de détecter les singularités à plusieurs échelles ce qui est la
-principal défaillance des autres méthodes à échelle fixe.
+principale défaillance des autres méthodes à échelle fixe.
 \clearpage
