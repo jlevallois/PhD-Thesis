@@ -37,7 +37,8 @@
 \newcommand{\sayMyName}{J\'er\'emy Levallois\xspace}
 \newcommand{\thesisSubject}{pr\'epar\'ee au sein des laboratoires LIRIS et LAMA\xspace}
 \newcommand{\thesisDate}{12 novembre 2015\xspace}
-\newcommand{\thesisVersion}{version 0.2\xspace}
+\newcommand{\thesisVersion}{version 1.0\xspace}
+\newcommand{\thesisOrderNumber}{XXXX ISAL XXXX\xspace}
 
 \newcommand{\thesisFirstReviewer}{Pierre Alliez}
 % \newcommand{\thesisFirstReviewerUniversity}{\protect{INRIA Sophia-Antipolis}}
@@ -136,15 +137,16 @@
 \pagenumbering{roman}			% roman page numbing (invisible for empty page style)
 \pagestyle{empty}			% no header or footers
 \input{content/titlepages}		% INCLUDE: all titlepages
+\input{content/edpage}	 			% INCLUDE: Ecole Doctorale page
 \cleardoublepage
 
 \pagestyle{plain}			% display just page numbers
-\input{content/abstract}		% INCLUDE: the abstracts (english and german)
+\input{content/abstract}		% INCLUDE: the abstracts (english and french)
 \cleardoublepage
-%
-% \input{content/acknowledgement}         % INCLUDE: remerciements.
-% \cleardoublepage
-%
+
+\input{content/acknowledgement}      % INCLUDE: Annexe
+\cleardoublepage
+
 \setcounter{tocdepth}{2}		% define depth of toc
 \tableofcontents						% display table of contents
 \cleardoublepage
@@ -161,7 +163,7 @@
 \setcounter{secnumdepth}{3}					% set counter to 3 depth (subsubsection)
 \pagestyle{maincontentstyle}				% fancy header and footer
 \mtcsettitle{minitoc}{Sommaire}
-
+%
 \input{content/chapter-introduction}    % INCLUDE: Introduction et Contexte -- Géométrie digitale et projet digitalSnow
 \input{content/chapter-notions}         % INCLUDE: Notions et éléments de base de la géométrie digitale
 \input{content/chapter-estimators}      % INCLUDE: Estimateurs discrets
@@ -170,8 +172,7 @@
 \input{content/chapter-conclusion}      % INCLUDE: Conclusions et perspectives
 \cleardoublepage
 
-\input{content/acknowledgement}      % INCLUDE: Annexe
-\cleardoublepage
+
 
 % --------------------------
 % Back matter

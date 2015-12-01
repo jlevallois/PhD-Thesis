@@ -5,16 +5,160 @@
 %
 % This file and related figures are under Creative Commons CC BY-NC-SA 4.0
 % See <https://creativecommons.org/licenses/by-nc-sa/4.0/>
-%
-\pdfbookmark[0]{Annexe}{Annexe}
-\chapter*{Publications}
-\label{sec:annexe}
+
+%%% Liste des publications
+\pdfbookmark[0]{Publications}{Publications}
+\chapter*{Liste des publications}
+\label{sec:publications}
 \vspace*{-10mm}
 
-\Blindtext[2][2]
+\begin{refsegment}
 
-\chapter*{Communications}
+\nocite{DGCI2013,Coeurjolly2013Implementation,AFIG2013,CVIU2014,DGCI2014,SMI2015,PosterSIGGRAPH2015,ChapterIICurvature}
+\printbibliography[heading=none,segment=\therefsegment]
+
+\end{refsegment}
+\clearpage
+
+%%% Liste des communications
+
+\vspace*{22mm}
+\pdfbookmark[0]{Communications}{Communications}
+{\usekomafont{chapter}Communications}
 \label{sec:communications}
-\vspace*{-10mm}
+\vspace*{5mm}
 
-\Blindtext[2][2]
+{
+%%%%%%%%%%%%%%%%%%%%
+% List environment %
+%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\tabcolsep}{0pt}
+\newenvironment{entrylist}{%
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+  \end{tabular*}
+}
+% \renewcommand{\bfseries}{\headingfont\color{headercolor}}
+\newcommand{\entry}[4]{%
+  #1&\parbox[t]{11.8cm}{%
+    \textbf{#2}%
+    \hfill%
+    {\small #3}\\%
+    #4\vspace{\parsep}%
+  }\\}
+
+\begin{entrylist}
+%  \entry
+%    {since 2012}
+%    {Correspondant doctorant}
+%    {LIRIS}
+%    {}
+%  \entry
+%    {mar. 2012}
+%    {Réunion digitalSnow, Chambéry}
+%    {}
+%    {}
+%  \entry
+%    {apr. 2012}
+%    {GT GeoAlgo meeting, Cluny}
+%    {Géométrie Algorithmique}
+%    {}
+%  \entry
+%    {jun. 2012}
+%    {GT GeoDis meeting, Nantes}
+%    {Géométrie Discrète}
+%    {}
+  \entry
+    {oct. 2012}
+    {Réunion digitalSnow, Grenoble}
+    {}
+    {\emph{Présentation orale.}}
+%  \entry
+%    {nov. 2012}
+%    {AFIG 2012, Calais}
+%    {Association Française d'Informatique Graphique}
+%    {}
+%  \entry
+%    {jan. 2013}
+%    {GDR IM meeting, Lyon}
+%    {Informatique Mathématique}
+%    {}
+%  \entry
+%    {mar. 2013}
+%    {LIRIS PhD. Thesis event, Lyon}
+%    {LIRIS}
+%    {\emph{Member of the Executive Board.}}
+  \entry
+    {mar. 2013}
+    {DGCI 2013, Seville (Espagne)}
+    {Discrete Geometry for Computer Imagery}
+    {\emph{Présentation orale.}}
+%  \entry
+%    {apr. 2013}
+%    {École de jeunes chercheurs en Informatique-Mathématique, Perpignan}
+%    {}
+%    {}
+  \entry
+    {juil. 2013}
+    {Réunion digitalSnow, Lyon}
+    {}
+    {\emph{Présentation orale.}}
+  \entry
+    {nov. 2013}
+    {AFIG 2013, Limoges}
+    {Association Française d'Informatique Graphique}
+    {\emph{Présentation orale. Deuxième meilleur papier.}}
+  \entry
+    {nov. 2013}
+    {JIG 2013, Nancy}
+    {Journées Informatique et Géométrie}
+    {\emph{Présentation orale.}}
+%  \entry
+%    {nov. 2013}
+%    {Discrete curvature colloquium, Luminy}
+%    {}
+%    {}
+  \entry
+    {fév. 2014}
+    {Research event de Paris ACM SIGGRAPH, Paris}
+    {}
+    {\emph{Présentation orale.}}
+  \entry
+    {avr. 2014}
+    {Réunion LIMA2, Lyon}
+    {Loisirs et IMAges}
+    {\emph{Présentation orale courte et poster.}}
+%  \entry
+%    {jun. 2014}
+%    {EGSR 2014, Lyon}
+%    {Eurographics Symposium on Rendering}
+%    {\emph{Student volunteer.}}
+  \entry
+    {sep. 2014}
+    {DGCI 2014, Sienna (Italie)}
+    {Discrete Geometry for Computer Imagery}
+    {\emph{Présentation orale.}}
+  \entry
+    {nov. 2014}
+    {Réunion GT GeoDis, Reims}
+    {Reims Image}
+    {\emph{Présentation orale.}}
+  \entry
+    {fév. 2015}
+    {Réunion digitalSnow, Chambéry}
+    {}
+    {\emph{Présentation orale.}}
+  \entry
+    {juin 2015}
+    {SMI 2015, Lille}
+    {Shape Modeling International}
+    {\emph{Présentation orale.}}
+  \entry
+    {août 2015}
+    {SIGGRAPH 2015, Los Angeles (États-Unis d'Amérique)}
+    {}
+    {\emph{Présentation de poster.}}
+\end{entrylist}
+
+}
