@@ -1,4 +1,5 @@
 # PhD Thesis of Jérémy Levallois
+> Estimateurs différentiels en géométrie discrète : applications à l'analyse de surfaces digitales
 
 This repository contains source files of my Ph.D. thesis ([/content](https://github.com/jlevallois/PhD-Thesis/tree/master/content)) and slides of my defence ([/slides](https://github.com/jlevallois/PhD-Thesis/tree/master/slides)).
 
@@ -65,6 +66,18 @@ microstructures and their relevance is evaluated and discussed.
 
 ## Keywords
 *digital geometry; multigrid convergence; differential quantities; curvature; normal vector; estimators; integral invariants; feature; surface classification;*
+
+## Bibtex entry
+
+    @phdthesis{jlevallois_PhD,
+      author  = {Jérémy Levallois},
+      title   = {Estimateurs diff\'erentiels en g\'eom\'etrie discr\`ete : applications \`a l'analyse de surfaces digitales},
+      school  = {INSA-Lyon},
+      year    = 2015,
+      month   = 11
+    }
+
+> Jérémy Levallois. "Estimateurs différentiels en géométrie discrète : applications à l'analyse de surfaces digitales." PhD diss., INSA-Lyon, 2015.
 
 ## Tools used
 - Slides : based on [Reveal.js](https://github.com/hakimel/reveal.js/)
