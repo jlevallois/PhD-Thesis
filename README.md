@@ -77,7 +77,7 @@ microstructures and their relevance is evaluated and discussed.
       month   = 11
     }
 
-> Jérémy Levallois. "Estimateurs différentiels en géométrie discrète : applications à l'analyse de surfaces digitales." PhD diss., INSA-Lyon, 2015.
+> Jérémy Levallois. "*Estimateurs différentiels en géométrie discrète : applications à l'analyse de surfaces digitales.*" PhD thesis, INSA-Lyon, 11 2015.
 
 ## Tools used
 - Slides : based on [Reveal.js](https://github.com/hakimel/reveal.js/)
