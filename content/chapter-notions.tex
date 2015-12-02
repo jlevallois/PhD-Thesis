@@ -348,9 +348,17 @@ En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend
 plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures
 principales. \comJeremy{Ces différentes quantités permettent de qualifier précisement la courbure d'une surface}, nous allons les détailler.
 
-\begin{figure}[ht]{
+\begin{figure}[t]{\small
     \begin{center}
-    \includegraphics[width=8cm]{figures/Minimal_surface_curvature_planes-fr}
+      {\begin{overpic}[width=8cm]{figures/Minimal_surface_curvature_planes-fr}
+          \put(53,39){$\vx$}
+          \put(53,85){$\NormalDir$}
+          \put(68,85){$\Pi_1$}
+          \put(78,75){$\Pi_2$}
+          \put(80,20){$\dS$}
+          \put(63,49){$f_1$}
+          \put(65,25){$f_2$}
+      \end{overpic}}
     \end{center}}
     \caption{\comJeremy{Surface intersectée par le plan tangent et deux plans orthogonaux $\Pi_1$ et $\Pi_2$ dans la direction de la normale $\NormalDir$ au point $\vx$. Ces plans forment deux courbes 2D $f_1$ et $f_2$ (en rouge).}
     %
@@ -831,13 +839,15 @@ comme des segments de longueurs $2R$.}.
 
 \begin{figure}[t]{\small
     \begin{center}
-      {\begin{overpic}[width=8cm]{images/Notions/notation}
-          \put(43,23.5){$\hat{\vx}$}
-          \put(41,29){$\vx$}
-          \put(39,15){$h$}
-          \put(77,39){$\Proj(\hat{\vx})$}
-          \put(5,15){$\dS$}
-          \put(17,10){$\partial\Body{\DSh}{h}$}
+      {\begin{overpic}[width=8cm]{figures/notation}
+          \put(53,33){$\vx$}
+          \put(54.2,31.3){\tiny $\times$}
+          \put(54.6,29.5){\tiny $\times$}
+          \put(56,26.5){$\hat{\vx}$}
+          % \put(39,15){$h$}
+          \put(77,42){$\Proj(\hat{\vx})$}
+          \put(4,10){$\dS$}
+          \put(18.2,10.5){$\partial\Body{\DSh}{h}$}
       \end{overpic}}
     \end{center}}
     \caption{Projection inverse de tout point $\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des
@@ -1243,7 +1253,7 @@ convexes suffisamment lisses de dimension $2$.
 
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[height=6cm]{images/Notions/DCA}
+    \includegraphics[height=6cm]{figures/DCA}
     \end{center}}
     \caption[Arc de cercle digital.]{Arc de cercle digital (Figure~1.22 de \cite{Roussillon2009}).\label{fig:dca-figure}}
 \end{figure}
