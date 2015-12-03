@@ -69,10 +69,10 @@ microstructures and their relevance is evaluated and discussed.
 
 ## Bibtex entry
 
-    @phdthesis{jlevallois_PhD,
-      author  = {Jérémy Levallois},
-      title   = {Estimateurs diff\'erentiels en g\'eom\'etrie discr\`ete : applications \`a l'analyse de surfaces digitales},
-      school  = {INSA-Lyon},
+    @PHDTHESIS {jlevallois_PhD,
+      author  = "Levallois, J{\'e}r{\'e}my",
+      title   = "Estimateurs diff{\'e}rentiels en g{\'e}om{\'e}trie discr{\`e}te : applications {\`a} l'analyse de surfaces digitales",
+      school  = "INSA-Lyon",
       year    = 2015,
       month   = 11
     }
