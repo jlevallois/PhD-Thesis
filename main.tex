@@ -19,7 +19,7 @@
 	listof=totoc,				% include listof entries in toc
 	titlepage=on,				% own page for each title page
 	captions=tableabove,% display table captions above the float env
-	draft=false,					% value for draft version. Affiche une barre noire quand on mange la marge. DEBUG: change to false. Attention, enlève les liens du document.
+	draft=true,					% value for draft version. Affiche une barre noire quand on mange la marge. DEBUG: change to false. Attention, enlève les liens du document.
 ]{scrreprt}%
 
 \input{content/macros}
@@ -182,9 +182,7 @@
 \renewcommand{\bibfont}{\normalfont\small}
 \setlength{\biblabelsep}{0pt}
 \setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
-% \selectlanguage{english}
 \printbibliography
-% \selectlanguage{french}
 % \printbibliography[heading=subbibliography,title={Webseiten},type=online,prefixnumbers={@}]
 }
 \cleardoublepage
