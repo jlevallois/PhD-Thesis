@@ -650,8 +650,8 @@ singularités $f$ intégrant toutes les échelles :
 %
 Cette fonction permet de différencier les régions sans variations géométriques (en bleu sur
 la \RefFigure{fig:mellado-cubesphere}) de celles qui ont de hautes variations
-(en jaune)\footnote{$\tanh(\vx)$ est souvent utilisée pour renforcer des
-effets}.
+(en jaune)\footnote{$\tanh(\vx)$ est souvent utilisée pour renforcer les
+variations \comJeremy{tout en les bornant}.}.
 
 \begin{figure}[ht]{
   \begin{center}
@@ -1057,7 +1057,7 @@ valeur de $\Ball{R}{\vx} \cap \DSh$.
 
 Nous nous intéressons alors à déterminer l'ensemble de valeurs (réelles) de courbure au
 point $\vx$ qui correspondent à une zone à courbure nulle à cause de la discrétisation. La
-courbure maximale qui peut être mauvaisement interprétée comme une région à courbure nulle
+courbure maximale qui peut être incorrectement interprétée comme une région à courbure nulle
 est donnée par la propriété suivante :
 %
 \begin{property}
@@ -1243,7 +1243,7 @@ la distance est minimale pour le plus large ensemble de rayons.
 
 Plus formellement, nous définissons $l_{\gamma}$ le nombre de rayons dans
 l'intervalle $[R_0,R_n]$ pour lesquels la distance $e_\gamma$ au modèle de pente
-$\gamma$ (pour $\gamma$ compris dans $\{-2, -1, 0\}$) est minimale (comparé aux
+$\gamma$ (pour $\gamma$ compris dans $\{-2, -1, 0\}$) est minimale (comparée aux
 autres).
 
 
@@ -1340,7 +1340,7 @@ caractéristiques de différentes tailles (\RefTable{tab:feature-objects}).
     \label{tab:feature-est}
     \begin{tabular}{@{}lp{2cm}lp{1.2cm}l@{}}
       \toprule
-      Méthode & Paramètres & Classification & Espace d'Échelle & Robustesse     \\ \midrule
+      Méthode & Paramètres & Classification & Espace d'échelle & Robustesse     \\ \midrule
       \cauthors{Clarenz}{Telea2004}   & $R$, $\alpha$, $\beta$  & \multicolumn{1}{c}{\svgNope}   & \multicolumn{1}{c}{\svgNope}   & \multicolumn{1}{c}{\svgYes} \\
       \cauthors{Mérigot}{Merigot2011} & $R$, $r$, $T$           & \multicolumn{1}{c}{\svgNope}   & \multicolumn{1}{c}{\svgNope}   & \multicolumn{1}{c}{\svgYes} \\
       \cauthors{Mellado}{Mellado2012} & $r_{min}$, $r_{max}$    & \multicolumn{1}{c}{\svgNope}   & \multicolumn{1}{c}{\svgNope}   & \multicolumn{1}{c}{\svgYes} \\
@@ -1614,12 +1614,12 @@ détecteur est lié à la courbure de la forme. De plus, le choix du paramètre
 $\tau_{max}$ est assez dépendant de la géométrie de la forme à analyser puisque
 c'est cela qui va déterminer le seuil de courbure à partir de laquelle nous
 considérons que nous sommes sur des zones caractéristiques. Enfin, cet
-estimateur semble assez sensible au bruit puisqu'il récupère les informations de
+estimateur semble assez sensible au bruit puisqu'il collecte les informations de
 courbure de manière surfacique.
 %
 \paragraph{}
 %
-La méthode de \nauthors{Park} demande beaucoup de paramètres pour être fonctionnelle. De
+La méthode de \nauthors{Park} requiert beaucoup de paramètres pour être fonctionnelle. De
 nos expériences, $\omega^-$ et $\omega^+$ sont très dépendants de la géométrie de
 la forme et de ce que nous considérons comme des zones caractéristiques. Aux
 endroits de forte courbure, cette analyse détecte généralement les points

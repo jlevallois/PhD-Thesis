@@ -78,7 +78,7 @@ s'intéresser aux techniques d'estimation de courbure sur des maillages
 triangulés. Il existe une vaste famille de techniques en \ComputerGraphics et en
 \GeometryProcessing pour estimer les courbures moyennes et gaussiennes, et
 parfois même le tenseur de courbure entier. La plupart effectuent des analyses
-locales (\cad limitée au $1$-voisinage ou $2$-voisinage) de la forme. La
+locales (\cad limitées au $1$-voisinage ou $2$-voisinage) de la forme. La
 précision de l'estimation dépend fortement de la « qualité » du maillage (au
 sens où ce dernier approxime suffisamment précisément la surface continue sous-jacente).
 
@@ -304,10 +304,10 @@ dans les jets osculateurs.
 
 
 Le principe est simple : (1) collecter les $N$ voisins du point $\vp$, (2)
-résoudre l'ajustement polynomial, (3) récupérer les quantités différentielles.
+résoudre l'ajustement polynomial, (3) collecter les quantités différentielles.
 %
 %
-Pour la première étape, dans le cas d'un maillage, cela correspond à récupérer
+Pour la première étape, dans le cas d'un maillage, cela correspond à collecter
 les $N$ points voisins à $\vp$ en partant du $1$-voisinage puis en augmentant
 progressivement jusqu'à atteindre $N$ points.
 % Dans le cas d'un nuage de points,
@@ -339,7 +339,7 @@ courbure.
 
 
 %
-Enfin, en ayant recours à l'ajustement de polynômes, nous pouvons récupérer
+Enfin, en ayant recours à l'ajustement de polynômes, nous pouvons collecter
 les $n$-jets de la surface dans ce système de coordonnées. Nous calculons alors
 la base de Monge $(\PrincDir{1}, \PrincDir{2}, \NormalDir)$ afin d'en extraire
 les coefficients $\PrincCurv{1}$, $\PrincCurv{2}$, $b_0$, $b_1$, $b_2$, $b_3$,
@@ -676,7 +676,7 @@ prouvée à ce jour.
 
 Le principal avantage de ces deux méthodes est qu'elles ne nécessitent aucun
 paramètre. Cependant, ces méthodes de reconnaissance d'objets sont assez
-sensibles lorsque les données sont bruités. C'est ce que nous verrons dans la
+sensibles lorsque les données sont bruitées. C'est ce que nous verrons dans la
 section comparative (\RefSection{sec:comparaison-courbure}).
 %
 \paragraph{Convolutions binomiales}
@@ -974,7 +974,7 @@ En \GeometryProcessing, le calcul d'invariants par intégration a été largemen
 étudié dans le but de définir des estimateurs de quantités différentielles.
 \cauthors{Pottmann}{Pottmann2007,Pottmann2009} en ont d'ailleurs fait un
 panorama assez complet. L'idée principale de cette approche est de déplacer un support
-sur les points $\vx$ du bord $\dS$ d'une forme $\Shape$ et calculer
+sur les points $\vx$ du bord $\dS$ d'une forme $\Shape$ et de calculer
 l'intégrale de l'intersection entre $\Shape$ et ce support. Différents supports
 peuvent être considérés (sphère euclidienne, boule euclidienne, etc.) ainsi que
 différentes fonctions d'intégration (linéaire, gaussienne, etc.). Nous
@@ -3303,7 +3303,7 @@ nous parlerons dans la partie dédiée à la complexité et aux temps de calcul
 (\RefSection{sec:complexite}) et dans la partie implémentation
 (\RefSection{sec:applications:dgtal}). Pour donner l'intuition de la nécessité
 d'améliorer le temps de calcul, nous optimisons le calcul pour les déplacements
-$0$-adjacent en récupérant une partie du résultat de l'itération précédente,
+$0$-adjacent en réutilisant une partie du résultat de l'itération précédente,
 diminuant ainsi la complexité d'une dimension (passant de la taille de la boule à
 uniquement ses éléments de surface) et réduisant fortement le temps de calcul.
 Ici, la version locale des estimateurs sans paramètre respectent la contrainte
@@ -3408,7 +3408,7 @@ de courbure présentés dans ce chapitre.
   \label{fig:illustrationShapes}
 \end{figure}
 
-Tous les estimateurs présentés ont été implémentés dans \DGtal \cite{DGtal}.
+Tous les estimateurs présentés ont été mis en œuvre dans \DGtal \cite{DGtal}.
 Nous reviendrons plus tard sur la mise en œuvre et l'optimisation de ces
 estimateurs (voir \RefSection{sec:applications:dgtal}). \DGtal est une bibliothèque
 C++ open-source dédiée aux outils de géométrie digitale. En plus de proposer nos
@@ -4229,7 +4229,7 @@ robuste que l'estimateur \BC. En dimension 3, nous pouvons constater que nos
 estimateurs et l'approche de \JetFitting obtiennent des résultats plutôt
 stables. Ce n'est pas surprenant pour \JetFitting puisque cette approche dépend
 d'une analyse en composante principale (\ACP) sur un ensemble de points, ce qui
-produit des statistiques robustes. En conclusion, expérimentalement, nos
+est plutôt robuste. En conclusion, expérimentalement, nos
 estimateurs semblent assez robuste au bruit de \Kanungo.
 
 \section{Conclusion}
@@ -4299,7 +4299,7 @@ Taille de masque                                  & $\nombre{91336}$        & $\
 
 
 L'inconvénient avec les estimateurs précédents est que lorsque nous souhaitons
-récupérer la valeur de courbure pour un objet particulier, nous devons adapter
+collecter la valeur de courbure pour un objet particulier, nous devons adapter
 le rayon de la sphère en fonction de l'objet. Nous avons alors proposé
 d'analyser la géométrie de l'objet digital en amont à l'aide de segments
 maximaux afin de proposer des estimateurs de courbures en dimension 2 et 3 sans
