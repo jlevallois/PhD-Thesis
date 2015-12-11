@@ -348,7 +348,7 @@ En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend
 plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures
 principales. \comJeremy{Ces différentes quantités permettent de qualifier précisement la courbure d'une surface}, nous allons les détailler.
 
-\begin{figure}[t]{\small
+\begin{figure}[ht]{\small
     \begin{center}
       {\begin{overpic}[width=8cm]{figures/Minimal_surface_curvature_planes-fr}
           \put(53,39){$\vx$}
@@ -820,24 +820,33 @@ inverse} ou \anglais{back-projection} \cite{Lachaud2006HDR} :
 %
 \end{definition}
 %
-Le \RefLemmaFake{B.9}{Lachaud2006HDR} nous indique que la correspondance $\Proj$
-n'introduit aucune ambiguïté et est surjectif si $h < \Reach{\Shape}$ et si le
-bord de $\Shape$ est $C^3$-convexe, et le \RefLemmaFake{B.10}{Lachaud2006HDR}
-que cette correspondance est continue. La \RefFigure{fig:backproj} nous montre
-(en rouge) la projection de tout point $\hat{\vx} \in \partial\Body{\DSh}{h}$
-vers des points $\vx \in \dS$. Ainsi, \comJeremy{il existe une correspondance entre les
-points des bords $\partial\Body{\DSh}{h}$ et $\dS$ qui ont une distance de
-Hausdorff inférieure ou égale à $\frac{\sqrt{2}}{2}h$}. De plus, la projection
-$\Proj$ est continue sur $\R^d \setminus MA(\dS)$, donc également sur
-$\partial\Body{\DSh}{h}$ avec un $h$ adéquat. En dimension supérieure, nous
-pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}, qui mettent aussi
-en évidence l'équivalence des notions de reach et de
-par($R$)-régularité\footnote{Un ensemble par($R$)-régulier est un ensemble dont
-les normales ne s'intersectent pas entre elles lorsqu'elles sont représentées
-comme des segments de longueurs $2R$.}.
+\comJeremy{L'intuition de la preuve de cette définition est faite en 3 étapes
+dans \cite{Lachaud2006} : tout d'abord, le \RefLemmaFake{B.8}{Lachaud2006HDR}
+montre que si $\Shape$ est par($R$)-régulier\footnote{Un ensemble
+par($R$)-régulier est un ensemble dont les normales ne s'intersectent pas entre
+elles lorsqu'elles sont représentées comme des segments de longueurs $2R$.},
+alors, pour tout point $\vx$ de $\dS$, son segment normal
+$\NormalDir(\Shape,\vx,\frac{\sqrt{2}}{2}h)$ touche $\partial\Body{\DSh}{h}$ en
+au moins un point. Ensuite, le \RefLemmaFake{B.9}{Lachaud2006HDR} nous indique
+que tout point $\vx$ est distant de \emph{moins} de $\frac{\sqrt{2}}{2}h$ de
+$\partial\Body{\DSh}{h}$ (dans la direction de sa normale) et que tout point
+$\hat{\vx}$ est distant de \emph{moins} de $\frac{\sqrt{2}}{2}h$ de $\dS$.
+Enfin, le \RefLemmaFake{B.10}{Lachaud2006HDR} montre que la correspondance
+$\Proj$ n'introduit aucune ambiguïté et est surjective si $h < \Reach{\Shape}$
+et si le bord de $\Shape$ est $C^3$-convexe.}
+%
+La \RefFigure{fig:backproj} nous montre (en rouge) la projection de tout point
+$\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des points $\vx \in \dS$. Ainsi,
+\comJeremy{il existe une correspondance entre les points des bords
+$\partial\Body{\DSh}{h}$ et $\dS$ qui ont une distance de Hausdorff inférieure
+ou égale à $\frac{\sqrt{2}}{2}h$}. De plus, la projection $\Proj$ est continue
+sur $\R^d \setminus MA(\dS)$, donc également sur $\partial\Body{\DSh}{h}$ avec
+un $h$ adéquat. En dimension supérieure, nous pouvons citer les travaux de
+\cauthors{Lachaud}{Lachaud2015}, qui mettent aussi en évidence l'équivalence des
+notions de reach et de par($R$)-régularité.
 
 
-\begin{figure}[t]{\small
+\begin{figure}[ht]{\small
     \begin{center}
       {\begin{overpic}[width=8cm]{figures/notation}
           \put(53,33){$\vx$}
