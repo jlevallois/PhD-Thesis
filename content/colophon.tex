@@ -1,52 +1,94 @@
-% !TEX root = ../main.tex
-%
-% Copyright 2015
-% Jérémy Levallois <jeremy.levallois@gmail.com>
-%
-% This file and related figures are under Creative Commons CC BY-NC-SA 4.0
-% See <https://creativecommons.org/licenses/by-nc-sa/4.0/>
-%
-\pagestyle{empty}
-\hfill
-\vfill
-\pdfbookmark[0]{Publications}{Publications}
-\section*{Publications}
-\bigskip
-% % Print your own papers.
-% \begin{refsection}
-% % If you print a bibliography within this section, only citations within this refsection will be printed.
-%
-% % Option 1: Make nocite for all of your papers.
-% % Options 2 would be a seperate file which contains all of your papers.
-% \nocite{DGCI2013}
-% \nocite{Coeurjolly2013Implementation}
-% \nocite{AFIG2013}
-% \nocite{CVIU2014}
-% \nocite{DGCI2014}
-% \nocite{SMI2015}
-% \nocite{PosterSIGGRAPH2015}
-% \nocite{ChapterIICurvature}
-%
-% \defbibnote{myPrenote}{
-%     Some words before I show you the list of my own papers.
-% }
-% \defbibnote{myPostnote}{
-%     A bunch of papers are still in print and not yet published.
-% }
-% \printbibliography[
-%     heading=bibintoc,
-%     title={NOPE},
-%     prenote=myPrenote,
-%     postnote=myPostnote
-% ]
-% \end{refsection}
+\begin{figure*}[htbp]
+    % \centering
+    \hspace*{-2cm}
+    \includegraphics[trim=0cm 0cm 0cm 2.8cm, clip, width=1.30\textwidth]{gfx/ED.pdf} %% UGLY HACK because I don't want to rewrite by hand this unaesthetic document : http://www.insa-lyon.fr/sites/www.insa-lyon.fr/files/ecoles-doctorales_2011-2015_maj12102015.pdf
+\end{figure*}
 
-{%
-\setstretch{1.1}
-\renewcommand{\bibfont}{\normalfont\small}
-\setlength{\biblabelsep}{0pt}
-\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
-\printbibliography[keyword=me]
+\clearpage
+
+%% Folio administratif : http://www.insa-lyon.fr/sites/www.insa-lyon.fr/files/folio.doc
+\includegraphics[height=1.5cm]{gfx/Logo_INSALyon}
+
+{
+\begin{center}
+  \textsc{Folio administratif}\\
+  \textsc{Thèse soutenue devant l'Institut National des Sciences Appliquées de Lyon}
+\end{center}
+}
+\vfill
+
+{
+\setlength{\tabcolsep}{0pt}
+\newenvironment{entrylist}{%
+  \begin{tabular*}{\textwidth}{@{}p{.5\textwidth}l@{}}
+}{%
+  \end{tabular*}
+}
+% \renewcommand{\bfseries}{\headingfont\color{headercolor}}
+\newcommand{\entry}[2]{%
+  #1 & #2%
+  \\}
+\newcommand{\entryMerged}[1]{%
+  \multicolumn{2}{p{\textwidth}}{#1}%
+  \\}
+\newcommand{\entryEmpty}[0]{%
+  &%
+  \\}
+
+\begin{entrylist}
+  \entry
+    {\textsc{Nom :} Levallois}
+    {\textsc{Date de Soutenance :} 12/11/2015 }
+  \entry
+    {\textsc{Prénoms :} Jérémy, Nicolas}
+    {}
+  \entryEmpty
+  \entryMerged
+    {\textsc{Titre :} Estimateurs différentiels en géométrie discrète : applications à l'analyse de surfaces digitales}
+  \entryEmpty
+  \entry
+    {\textsc{Nature :} Doctorat}
+    {\textsc{Numéro d'ordre :} \thesisOrderNumber}
+  \entryMerged
+    {\textsc{École Doctorale :} InfoMaths ED 512}
+  \entryMerged
+    {\textsc{Spécialité :} Informatique}
+  \entryEmpty
+  \entryMerged
+    {\textsc{Résumé :} voir page \pageref{sec:abstract-french}}
+  \entryMerged
+    {\textsc{Mots-clés :} \emph{géométrie discrète; convergence asymptotique; quantités differentielles; courbure; normales; estimateurs; invariants par intégration; points caractéristiques; classification de surface;}}
+  \entryEmpty
+  \entryMerged
+    {\textsc{Laboratoire(s) de recherche :} LIRIS, LAMA}
+  \entryMerged
+    {\textsc{Directeur(s) de thèse :} \thesisFirstSupervisor, \thesisSecondSupervisor}
+  \entryMerged
+    {\textsc{Président de jury :} Nicolas Passat}
+  \entryMerged
+    {\textsc{Composition du jury :}}
+  \entry
+    {Nicolas Passat}
+    {Président du jury}
+  \entry
+    {Pierre Alliez}
+    {Rapporteur}
+  \entry
+    {Éric Andrès}
+    {Rapporteur}
+  \entry
+    {Yan Gérard}
+    {Examinateur}
+  \entry
+    {Simon Masnou}
+    {Examinateur}
+  \entry
+    {\thesisFirstSupervisor}
+    {Directeur de thèse}
+  \entry
+    {\thesisSecondSupervisor}
+    {Directeur de thèse}
+\end{entrylist}
 }
 
 \vfill

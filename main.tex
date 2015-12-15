@@ -137,7 +137,7 @@
 \pagenumbering{roman}			% roman page numbing (invisible for empty page style)
 \pagestyle{empty}			% no header or footers
 \input{content/titlepages}		% INCLUDE: all titlepages
-\input{content/edpage}	 			% INCLUDE: Ecole Doctorale page
+\input{content/colophon} 			% INCLUDE: Ecole Doctorale page
 \cleardoublepage
 
 \pagestyle{plain}			% display just page numbers
@@ -146,6 +146,10 @@
 
 \input{content/acknowledgement}      % INCLUDE: Annexe
 \cleardoublepage
+
+\input{content/greetings} 		% INCLUDE: remerciements
+\cleardoublepage
+
 
 \setcounter{tocdepth}{2}		% define depth of toc
 \tableofcontents						% display table of contents

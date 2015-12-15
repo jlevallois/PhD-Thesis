@@ -9,15 +9,15 @@
 \chapter{Conclusions et perspectives}
 \label{sec:conclusion}
 
-% \cleanchapterquote{
-% %
-% My name is Ozymandias, king of kings:\\Look on my works, Ye Mighty, and despair!
-% %
-% }{Walter \textsc{White}}{Breaking Bad}\footnote{Dans l'épisode, Walter \textsc{White} récite le poème Ozymandias de Percy Bysshe \textsc{Shelley}. Évidemment, aucun lien entre la citation et les travaux présentés ici ne doit être tiré.}
-% \cleanchapterquote{We have seen that computer programming is an art, because it
-% applies accumulated knowledge to the world, because it requires skill and
-% ingenuity, and especially because it produces objects of beauty.}{Jean-Claude
-% Vandamme}{Ma vie, mon œuvre.}
+\cleanchapterquote{
+%
+My name is Ozymandias, king of kings:\\
+Look on my works, Ye Mighty, and despair!
+%
+} {Bryan \textsc{Cranston} (\emph{Walter \textsc{White}})}{Breaking
+Bad}\footnote{Dans l'épisode, Walter \textsc{White} récite le poème Ozymandias
+de Percy Bysshe \textsc{Shelley}. Évidemment, aucun lien entre la citation et
+les travaux présentés ici ne doit être tiré.}
 
 Tout au long de cette thèse, nous avons abordé plusieurs approches pour analyser
 des contours d'objets digitaux dans l'objectif de les décrire. Nous nous sommes
@@ -78,6 +78,20 @@ avantageuse : la transformée et la transformée inverse de Fourier de l'objet e
 en $O(n^d \log n)$ (le produit est en $O(n^d)$), bien supérieur à notre
 algorithme actuel. En pratique, cette version très largement concurrentielle.
 
+Nous devons prendre en compte une
+%
+\begin{wrapfigure}[8]{r}[0.2cm]{4cm}
+	\includegraphics[width=4cm]{images/CriticalRadius}
+\end{wrapfigure}
+%
+considération lors de l'implémentation de ce type d'estimateurs : puisque nos
+estimateurs récoltent l'information volumique, il se peut que de le calcul de
+l'intégration soit biaisé par l'occultation d'une partie éloignée de l'objet. La
+figure sur le côté montre cet effet : si le rayon augmente, l'intégration
+volumique ne sera pas complète. Cela peut être gênant s'il n'est pas pris en
+compte et peut ainsi localement fausser les calculs de courbure. Détecter ces
+cas devrait améliorer les résultats pour une forme présentant ce genre de
+configuration à une échelle donnée.
 
 Une autre perspective serait le couplage de notre approche avec celles basées
 sur les cellules de Voronoï, plus particulièrement les méthodes de \VCMM
@@ -86,25 +100,12 @@ non pas de la forme elle même mais du cône normal. Ces approches sont
 assez complémentaires avec la nôtre et méritent de s'y intéresser.
 %En effet, \VCM a l'avantage de ne pas trop être perturbé sur des objets fins; cependant, des décallages peuvent apparaître sur des arrêtes franches; ce que notre méthode n
 
-
 De plus, il apparaît que l'erreur de positionnement entre le point digital et le
 point sur la surface euclidienne est un terme dominant. Des premiers résultats
 lorsque nous approchons mieux la surface sous-jacente montrent une amélioration de
 la qualité des résultats, et laissent espérer de meilleures vitesses de
 convergence asymptotique.
 
-Enfin, nous devons prendre en compte une
-%
-\begin{wrapfigure}[8]{r}[0.2cm]{4cm}
-	\includegraphics[width=4cm]{images/CriticalRadius}
-\end{wrapfigure}
-%
-considération lors de l'implémentation de ce type
-d'estimateurs : puisque nos estimateurs récoltent l'information volumique, il se
-peut que de le calcul de l'intégration soit biaisé par l'occultation d'une partie éloignée de l'objet. La figure sur le côté montre cet effet : si le rayon augmente, l'intégration volumique ne sera pas complète. Cela peut être
-gênant s'il n'est pas pris en compte et peut ainsi localement fausser les
-calculs de courbure. Détecter ces cas devrait améliorer les résultats pour une
-forme présentant ce genre de configuration à une échelle donnée.
 %
 \subsection*{Courbure sans paramètre}
 %

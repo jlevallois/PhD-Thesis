@@ -9,10 +9,9 @@
 \chapter{Applications}
 \label{sec:applications}
 
-% \cleanchapterquote{We have seen that computer programming is an art, because it
-% applies accumulated knowledge to the world, because it requires skill and
-% ingenuity, and especially because it produces objects of beauty.}{Jean-Claude
-% Vandamme}{Ma vie, mon œuvre.}
+\cleanchapterquote{[S'adressant à JD.] Ce n'est sans doute pas la réponse que tu
+attendais Joséphine, mais comme toujours, je m'en fiche !}{John C.
+\textsc{McGinley} (\emph{Dr. \textsc{Cox}})}{Scrubs.}
 
 \setcounter{minitocdepth}{3}
 \minitoc
@@ -1279,7 +1278,7 @@ discrétisée.
 %
 %\missingfigure{Robustesse de II feature}
 %
-L'autre avantage de notre classificateur est qu'il ne nécessite aucun paramètre
+L'avantage de notre classificateur est qu'il ne nécessite aucun paramètre
 autre que l'intervalle de rayons. De ce fait, il est alors simple de classer des
 zones quelle que soit la résolution de la forme. La \RefFigure{fig:feature-octa}
 nous montre le résultat de classification pour différentes résolutions de la
@@ -1689,15 +1688,16 @@ capture les singularités à différentes échelles sur le même objet géométr
 Nous avons évalué expérimentalement ce détecteur avec des méthodes
 représentatives de l'état de l'art et montré qu'il était très compétitif en
 arrivant à détecter des singularités même à des échelles différentes sans autre
-paramètre à choisir que l'ensemble de rayons. D'ailleurs, cet ensemble de
-rayons constitue une limitation. Comme le rayon maximal de cet ensemble est
-dépendant de la singularité maximale que nous souhaitons détecter, leur réglage
-peut être important.
+paramètre à choisir que l'ensemble de rayons. D'ailleurs, cet ensemble de rayons
+constitue une limitation. Comme nous l'avons expliqué dans le
+\RefSection{sec:applications:feature:II:kmax}, le rayon maximal de cet ensemble
+est dépendant de la singularité maximale que nous souhaitons détecter, leur
+réglage peut être important.
 
 
 Enfin, comme pour les estimateurs de courbure, notre estimateur est basé sur
-l'intégration volumique de la sphère et cette opération reste coûteuse et peut
-la rendre moins compétitive face à d'autres à échelle fixe. Cependant, notre
-méthode permet de détecter les singularités à plusieurs échelles ce qui est la
-principale défaillance des autres méthodes à échelle fixe.
-\clearpage
+l'intégration volumique de la sphère. Cette opération reste coûteuse et peut
+la rendre moins compétitive en terme de temps de calcul face à d'autres à
+échelle fixe. Cependant, notre méthode permet de détecter les singularités à
+plusieurs échelles ce qui est la principale défaillance des autres méthodes à
+échelle fixe, et est robuste au bruit. \clearpage
