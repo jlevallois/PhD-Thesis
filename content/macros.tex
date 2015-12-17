@@ -1,3 +1,10 @@
+%
+% Copyright 2015
+% Jérémy Levallois <jeremy.levallois@gmail.com>
+%
+% This file and related figures are under Creative Commons CC BY-NC-SA 4.0
+% See <https://creativecommons.org/licenses/by-nc-sa/4.0/>
+%
 \newtheorem{definition}{D\'efinition}[chapter]
 \newtheorem{theorem}{Th\'eor\`eme}[chapter]
 % \surroundwithmdframed[outerlinewidth=0.4pt,
@@ -76,6 +83,10 @@
 \newcommand{\RefTheoremFake}[2]{th\'eor\`eme~#1 de \cite{#2}}
 \newcommand{\Equ}[1]{\refPrePost{\'equation~}{#1}{}}
 \newcommand{\Implies}{\ensuremath{\Rightarrow}}
+\newlength{\textlarg}
+\newcommand{\barre}[1]{%
+   \settowidth{\textlarg}{#1}
+   #1\hspace{-\textlarg}\rule[0.5ex]{\textlarg}{0.5pt}}
 % such that
 \newcommand{\st}{\ensuremath{~|~}}
 
@@ -182,7 +193,8 @@
 %%Edit macros
 \newcommand{\com}[1]{\textcolor{red}{\emph{#1}}}
 \newcommand{\comDav}[1]{\textcolor{blue}{ #1}}
-\newcommand{\comJeremy}[1]{\textcolor[rgb]{0.26,0.73,0.06}{\emph{#1}}}
+% \newcommand{\comJeremy}[1]{\textcolor[rgb]{0.26,0.73,0.06}{\emph{#1}}}
+\newcommand{\comJeremy}[1]{#1}
 \newcommand{\todoJeremy}[1]{\todo[color=green!40,author=Jeremy]{#1}}
 \newcommand{\todoInlineJeremy}[1]{\todo[inline,color=green!40,author=Jeremy]{#1}}
 \newcommand{\comJaco}[1]{\textcolor{magenta}{#1}}

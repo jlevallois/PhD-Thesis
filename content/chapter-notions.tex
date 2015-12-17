@@ -1,9 +1,19 @@
-% !TEX root = ../thesis-example.tex
+% !TEX root = ../main.tex
+%
+% Copyright 2015
+% Jérémy Levallois <jeremy.levallois@gmail.com>
+%
+% This file and related figures are under Creative Commons CC BY-NC-SA 4.0
+% See <https://creativecommons.org/licenses/by-nc-sa/4.0/>
 %
 \chapter{Notions et éléments de la géométrie classique et de la géométrie digitale}
 \label{sec:notions}
 
-% \cleanchapterquote{We have seen that computer programming is an art, because it applies accumulated knowledge to the world, because it requires skill and ingenuity, and especially because it produces objects of beauty.}{Jean-Claude Vandamme}{Ma vie, mon œuvre.}
+\cleanchapterquote{[S'adressant à Arthur.] Des chefs de guerre, il y en a de
+toutes sortes. Des bons, des mauvais, des pleines cagettes il y en a. Mais une
+fois de temps en temps, il en sort un. Exceptionnel. Un héros. Une légende. [...]
+Tu sais ce que c'est, leur pouvoir secret ? Ils ne se battent que pour la
+dignité des faibles.}{Cæsar Imperator (\emph{Pierre \textsc{Mondy}})}{Kaamelott, Livre VI.}
 
 \setcounter{minitocdepth}{3}
 \minitoc
@@ -340,13 +350,23 @@ $\vec{t}(x)$ et une droite fixe, nous avons :
 
 En dimension 3, nous pouvons définir la courbure de la surface. Celle-ci prend
 plusieurs formes : la courbure moyenne, la courbure gaussienne et les courbures
-principales. Nous allons détailler cela. %%TODO
+principales. \comJeremy{Ces différentes quantités permettent de qualifier précisement la courbure d'une surface}, nous allons les détailler.
 
-\begin{figure}[ht]{
+\begin{figure}[ht]{\small
     \begin{center}
-    \includegraphics[width=8cm]{figures/Minimal_surface_curvature_planes-fr}
+      {\begin{overpic}[width=6.5cm]{figures/Minimal_surface_curvature_planes-fr}
+          \put(53,39){$\vx$}
+          \put(53,85){$\NormalDir$}
+          \put(68,85){$\Pi_1$}
+          \put(78,75){$\Pi_2$}
+          \put(80,20){$\dS$}
+          \put(63,49){$f_1$}
+          \put(65,25){$f_2$}
+      \end{overpic}}
     \end{center}}
-    \caption{Plans des courbures principales \cite{WikipediaCurv}.\label{fig:wiki-surv}}
+    \caption{\comJeremy{Surface intersectée par le plan tangent et deux plans orthogonaux $\Pi_1$ et $\Pi_2$ dans la direction de la normale $\NormalDir$ au point $\vx$. Ces plans forment deux courbes 2D $f_1$ et $f_2$ (en rouge).}
+    %
+    \cite{WikipediaCurv}.\label{fig:wiki-surv}}
 \end{figure}
 
 Considérons le \colorize{repère de Frenet} défini par la normale $\NormalDir$ et
@@ -412,13 +432,13 @@ Nous pouvons noter quelques particularités en dimension 3 :
 \end{itemize}
 %
 Le \RefTable{tab:courbure-particularities} et la
-\RefFigure{fig:curvature-figures} montre une classification des surfaces de
+\RefFigure{fig:curvature-figures} montrent une classification des surfaces de
 dimension 3 en fonction du signe de leur courbure moyenne et gaussienne.
 
 
 \begin{table}[ht]
 \centering
-\caption{Particularités des surfaces en fonction de leur courbures moyenne et gaussienne}
+\caption{Particularités des surfaces en fonction de leur courbures moyenne et gaussienne.}
 \label{tab:courbure-particularities}
 \begin{tabular}{@{}lccc@{}}
 \toprule
@@ -465,7 +485,7 @@ ou de l'espace en dimension $d > 2$. Plusieurs types de pavages réguliers
 existent (voir la \RefFigure{fig:pavages}), nous nous intéressons ici uniquement
 aux pavages discrets par carrés (ou des cubes en dimension supérieure). Les
 points digitaux (\colorize{pixels} en dimension 2, \colorize{voxels} en
-dimension 3) de ce pavage régulier isothétique (aligné sur les axes)  associés à
+dimension 3) de ce pavage régulier isothétique (aligné sur les axes) associés à
 cet espace sont des points de $\Z^d$ comme nous pouvons le voir avec le graphe
 dual de la \RefFigure{fig:pavage_dual}. Les coordonnées des points digitaux sont
 alors des nombres entiers, rendant les calculs plus simples et stables qu'avec
@@ -487,7 +507,7 @@ dimension $d$.
   \end{center}
 \end{figure}
 
-De ces points digitaux, nous pouvons ajouter des informations topologiques en
+Nous pouvons ajouter à ces points digitaux des informations topologiques en
 considérant l'espace de grille cellulaire ou inter-pixels. L'idée est de plonger
 l'espace digital $\Z^n$ dans l'espace cubique cartésien afin de pouvoir
 représenter les éléments inter-pixels \cite{Kovalesvsky1989, Khalimsky1990,
@@ -519,7 +539,7 @@ Francon1991}, que nous nommerons \colorize{topologie de Khalimsky}. Ainsi :
 
 La \RefFigure{fig:notations_topo} illustre les pointels, lignels et pixels. Par
 convention, nous nommons les $n$-cellules les \colorize{spels} (un pixel en
-dimension 2, un voxel en dimension 3), les $n-1$-cellules sont nommées les
+dimension 2, un voxel en dimension 3), les $(n-1)$-cellules sont nommées les
 \colorize{bels} ou \colorize{surfel} pour \anglais{surface elements} (un
 \colorize{lignel} en dimension 2, un \colorize{pixel} en dimension 3). Par
 convention, les points digitaux $\vp \in \Z^d$ sont plongés dans des
@@ -530,7 +550,7 @@ spels.
 % \subsection{Voisinages}
 % \label{sec:voisinage}
 %
-Grâce à ces définitions, cela nous amène directement aux questions de voisinage
+Ces définitions nous amènent directement aux questions de voisinage
 des points digitaux. La relation de voisinage est une notion importante pour la
 définition de notre objet digital. Le voisinage est défini en fonction de la
 \colorize{connexité} que possède une cellule digitale par rapport aux autres.
@@ -619,7 +639,7 @@ extraites comme le montre la \RefFigure{fig:connexite}.
   %
   {Illustration du nombre de composantes connexes en fonction de la connexité de
   l'espace digital. \emph{À gauche :} trois composantes connexes sont extraites
-  en $4$-connexité. \emph{À droite :} une seule composante connexe est extrait
+  en $4$-connexité. \emph{À droite :} une seule composante connexe est extraite
   en $8$-connexité.\label{fig:connexite}}
   %
 \end{figure}
@@ -634,12 +654,13 @@ topologique de l'objet digital, \cad des sous-ensemble du plan discret $\Z^n$.
 
 
 En dimension 2 (\respp dimension 3), il s'agit de la région inter-pixels (\resp
-inter-voxels) entre les pixels (\resp voxels) à l'intérieur de l'objet digital de
-ceux à l'extérieur. Plus concrètement, les surfaces digitales sont des ensembles
-de surfels et de cellules de dimensions inférieures partageant un côté à
-l'intérieur de l'objet et un côté à l'extérieur (voir \cite{Herman1998,
-Udupa1994, Kong1992}). La \RefFigure{fig:frontier} illustre (\emph{figure du
-bas, en bleu}) le bord topologique de $\DigShape$.
+inter-voxels) séparant les pixels (\resp voxels) à l'intérieur de l'objet
+digital de ceux à l'extérieur. Plus concrètement, les surfaces digitales sont
+des ensembles de surfels et de cellules de dimensions inférieures \comJeremy{possèdant un
+lien ($4$ ou $8$-connexité) avec un spel à l'intérieur de l'objet et un spel
+hors de l'objet} (voir \cite{Herman1998, Udupa1994, Kong1992}). La
+\RefFigure{fig:frontier} illustre (\emph{figure du bas, en bleu}) le bord
+topologique de $\DigShape$.
 
 % \begin{figure}[ht]
 %   \begin{center}
@@ -648,10 +669,10 @@ bas, en bleu}) le bord topologique de $\DigShape$.
 %   \caption{Illustration du bord topologique de $\DigShape$.\label{fig:dig-boundary}}
 % \end{figure}
 
-L'autre avantage de la topologie de Khalimsky que nous pouvons exploiter est le
-suivi de contour. En effet, grâce aux relations d'adjacence et à la définition
-de la topologie, les algorithmes d'extraction de surface par suivi sont très
-efficaces puisqu'il s'agit uniquement de résoudre un graphe de surfels.
+Nous pouvons exploiter la topologie de Khalimsky pour effectuer du suivi de
+contour. En effet, grâce aux relations d'adjacence et à la définition de la
+topologie, les algorithmes d'extraction de surface par suivi sont très efficaces
+puisqu'il s'agit uniquement de résoudre un graphe de surfels \cite{Lachaud1998ICIP,Lachaud2000129}.
 
 %
 \section{Discrétisation}
@@ -675,7 +696,7 @@ est :
 où $h \cdot \vp$ est le redimensionnement uniforme de $\vp$ par le facteur $h$.
 Ce facteur $h$ est important car les points digitaux sont des carrés (ou cubes)
 unitaires, et n'ont alors aucune information d'échelle permettant la
-correspondance vers les forme euclidienne. Par exemple, la
+correspondance vers les formes euclidiennes. Par exemple, la
 \RefFigure{fig:scale-digital} montre deux disques de rayons différents
 discrétisés à deux échelles $h$ différentes, donnant exactement la même
 discrétisation.
@@ -694,7 +715,7 @@ discrétisation.
   %
 \end{figure}
 
-Si $\vp \in \Z^d$, alors $\Q{\vp}$ désigne le cube unitaire de dimension $d$ de
+Si $\vp \in \Z^d$, alors $\Q{\vp}$ désigne le cube unitaire fermé de dimension $d$ de
 $\R^d$ centré au point $\vp$ et aligné sur les axes de $\Z^d$. Nous définissons
 le \colorize{$h$-cube}, \cad $\Q{\vp}$ mis à l'échelle par $h$, comme :
 %
@@ -716,7 +737,7 @@ $d$ appartenant à $\DigShape$, mis à l'échelle par le pas de discrétisation 
 
 
 Intéressons-nous désormais aux bords de ces objets. Nous verrons plus tard que
-certains estimateurs sont définis sur le bord de l'objet, il semble alors
+certains estimateurs sont définis sur le bord de l'objet; il semble alors
 important de l'étudier. Nous notons $\dS$ la \colorize{frontière} de $\Shape$,
 \cad son bord topologique (en orange foncé sur la \RefFigure{fig:frontier}).
 Nous pouvons également noter $\partial \Body{\DSh}{h}$ le bord topologique du
@@ -756,7 +777,7 @@ $\partial\Body{\DSh}{h}$ (en rouge foncé). La figure du bas de la
 \RefFigureN{fig:frontier} montre l'objet digital $\DigShape$ ($= \DSh$) que nous
 obtenons après la discrétisation de $\Shape$ dans l'espace de Khalimsky au pas
 de discrétisation $h$ (en gris). Ainsi, nous obtenons des points digitaux $\vp
-\in \Z^2$ dans une grille carré régulière unitaire. Nous pouvons extraire le
+\in \Z^2$ dans une grille carrée régulière unitaire. Nous pouvons extraire le
 bord $\DigBoundary{\DigShape}$ afin d'obtenir un ensemble de lignels et de
 pointels (en bleu).
 
@@ -790,11 +811,11 @@ inverse} ou \anglais{back-projection} \cite{Lachaud2006HDR} :
 %
   Pour tout forme 2D $\Shape$ à reach positif, pour $0 < h \le \Reach{\Shape}$,
   soit $\NormalDir(\Shape,\vx,l)$ le segment centré au point $\vx$, aligné le
-  long de la normale au point $\vx$ et de demi-longueur $l$ Alors la
+  long de la normale à $\Shape$ au point $\vx$ et de demi-longueur $l$ Alors la
   \colorize{projection inverse} $\Proj$ est définie comme :
   %
   \begin{align}
-    \Proj: \partial\Body{\DigShape}{h} &\rightarrow \dS, \nonumber \\
+    \Proj: \partial\Body{\DSh}{h} &\rightarrow \dS, \nonumber \\
     \hat{\vx} &\mapsto \vx=\Proj(\hat{\vx}) \,,
   \end{align}
   %
@@ -803,32 +824,43 @@ inverse} ou \anglais{back-projection} \cite{Lachaud2006HDR} :
 %
 \end{definition}
 %
-Le \RefLemmaFake{B.9}{Lachaud2006HDR} nous indique que la correspondance $\Proj$
-n'introduit aucune ambiguïté et est surjectif si $h < h_0$ et si le bord de
-$\Shape$ est $C^3$-convexe, et le \RefLemmaFake{B.10}{Lachaud2006HDR} que cette
-correspondance est continue. La \RefFigure{fig:backproj} nous montre (en rouge)
-la projection de tout point $\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des
-points $\vx \in \dS$. Alors, nous pouvons conclure que les bords
-$\partial\Body{\DSh}{h}$ et $\dS$ ont une distance de Hausdorff inférieure ou
-égale à $\frac{\sqrt{2}}{2}h$. De plus, la projection $\ProjX{\Shape}$ est
-continue sur $\R^d \setminus MA(\dS)$, donc également sur
-$\partial\Body{\DSh}{h}$ avec un $h$ adéquat. En dimension supérieure, nous
-pouvons citer les travaux de \cauthors{Lachaud}{Lachaud2015}, qui mettent aussi
-en évidence l'équivalence des notions de reach et de
-par($R$)-régularité\footnote{correspond à des formes dont les normales ne
-s'intersectent pas entre elles lorsqu'elles sont représentés comme des segments
-de longueurs $2R$}.
+\comJeremy{L'intuition de la preuve de cette définition est faite en 3 étapes
+dans \cite{Lachaud2006HDR} : tout d'abord, le \RefLemmaFake{B.8}{Lachaud2006HDR}
+montre que si $\Shape$ est par($R$)-régulier\footnote{Un ensemble
+par($R$)-régulier est un ensemble dont les normales ne s'intersectent pas entre
+elles lorsqu'elles sont représentées comme des segments de longueurs $2R$.},
+alors, pour tout point $\vx$ de $\dS$, son segment normal
+$\NormalDir(\Shape,\vx,\frac{\sqrt{2}}{2}h)$ touche $\partial\Body{\DSh}{h}$ en
+au moins un point. Ensuite, le \RefLemmaFake{B.9}{Lachaud2006HDR} nous indique
+que tout point $\vx$ est distant de \emph{moins} de $\frac{\sqrt{2}}{2}h$ de
+$\partial\Body{\DSh}{h}$ (dans la direction de sa normale) et que tout point
+$\hat{\vx}$ est distant de \emph{moins} de $\frac{\sqrt{2}}{2}h$ de $\dS$.
+Enfin, le \RefLemmaFake{B.10}{Lachaud2006HDR} montre que la correspondance
+$\Proj$ n'introduit aucune ambiguïté et est surjective si $h < \Reach{\Shape}$
+et si le bord de $\Shape$ est $C^3$-convexe.}
+%
+La \RefFigure{fig:backproj} nous montre (en rouge) la projection de tout point
+$\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des points $\vx \in \dS$. Ainsi,
+\comJeremy{il existe une correspondance entre les points des bords
+$\partial\Body{\DSh}{h}$ et $\dS$ qui ont une distance de Hausdorff inférieure
+ou égale à $\frac{\sqrt{2}}{2}h$}. De plus, la projection $\Proj$ est continue
+sur $\R^d \setminus MA(\dS)$, donc également sur $\partial\Body{\DSh}{h}$ avec
+un $h$ adéquat. En dimension supérieure, nous pouvons citer les travaux de
+\cauthors{Lachaud}{Lachaud2015}, qui mettent aussi en évidence l'équivalence des
+notions de reach et de par($R$)-régularité.
 
 
-\begin{figure}[t]{\small
+\begin{figure}[ht]{\small
     \begin{center}
-      {\begin{overpic}[width=8cm]{images/Notions/notation}
-          \put(43,23.5){$\hat{\vx}$}
-          \put(41,29){$\vx$}
-          \put(39,15){$h$}
-          \put(77,39){$\Proj(\hat{\vx})$}
-          \put(5,15){$\dS$}
-          \put(17,10){$\partial\Body{\DSh}{h}$}
+      {\begin{overpic}[width=8cm]{figures/notation}
+          \put(53,33){$\vx$}
+          \put(54.2,31.3){\tiny $\times$}
+          \put(54.6,29.5){\tiny $\times$}
+          \put(56,26.5){$\hat{\vx}$}
+          % \put(39,15){$h$}
+          \put(77,42){$\Proj(\hat{\vx})$}
+          \put(4,10){$\dS$}
+          \put(18.2,10.5){$\partial\Body{\DSh}{h}$}
       \end{overpic}}
     \end{center}}
     \caption{Projection inverse de tout point $\hat{\vx} \in \partial\Body{\DSh}{h}$ vers des
@@ -841,20 +873,21 @@ de longueurs $2R$}.
 Maintenant que le processus de discrétisation est défini, nous allons nous
 intéresser aux propriétés de convergence asymptotique des estimateurs de
 quantités géométriques. Tout d'abord, nous pouvons distinguer deux types de
-quantités géométriques : les quantités « locales » et les quantités « globales » :
+quantités géométriques : les quantités « locales » et les quantités « globales ».
 %
 \begin{definition}{\fakeTitle{Quantités géométriques locales et globales}}
   \label{def:global-quantity}
   %
   Une quantité géométrique est dite « locale » lorsqu'elle est définie
-  localement sur le bord de la forme. Une quantité géométrique est dite «
+  localement en un point de la forme. Une quantité géométrique est dite «
   globale » lorsqu'elle est associée à la forme toute entière.
   %
 \end{definition}
 %
-Il apparaît alors clairement que, par exemple, le volume d'une forme est une
-quantité géométrique « globale », tandis que la normale, la courbure ou encore
-la tangente en un point de sa surface sont des quantités géométriques dites « locales ».
+\comJeremy{Pour exemplifier cette définition, nous pouvons distinguer} le volume
+d'une forme qui est une quantité géométrique « globale », tandis que la normale,
+la courbure ou encore la tangente en un point de sa surface sont des quantités
+géométriques dites « locales ».
 
 
 Nous allons désormais définir la \colorize{convergence asymptotique
@@ -896,11 +929,12 @@ Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs
 \begin{definition}{\fakeTitle{Convergence asymptotique d'un estimateur digital de quantité géométrique globale}}
   \label{def:multigrid-convergence-global}
   %
-  Un estimateur digital de quantité géométrique globale $\hat{E}$ d'une quantité géométrique
-  $E$ \colorize{converge asymptotiquement} pour une famille de formes $\Shapes$ si
-  et seulement si pour toute forme $\Shape \in \Shapes$, il existe un pas de
-  discrétisation $h_0 > 0$ tel que l'estimation de $\hat{E}(\DSh,h)$
-  soit défini pour tout $0 < h < h_0$,
+  Un estimateur digital de quantité géométrique globale $\hat{E}$ d'une quantité
+  géométrique $E$ \colorize{converge asymptotiquement} pour une famille de
+  formes $\Shapes$ si et seulement si pour toute forme $\Shape \in \Shapes$, il
+  existe un pas de discrétisation $h_0 > 0$ tel que
+  %l'estimation de
+  $\hat{E}(\DSh,h)$ soit défini pour tout $0 < h < h_0$,
   %
   \begin{equation}
     | \hat{E}(\DSh,h) - E(\Shape) | \le \tau_{\Shape}(h) \,,
@@ -908,7 +942,7 @@ Alors, nous pouvons étudier la convergence asymptotique de ces estimateurs
   %
   où $\tau_{\Shape}: \R^{+*} \rightarrow \R^+$, désignant l'erreur d'estimation
   de la quantité géométrique pour le pas de discrétisation $h$, a une limite
-  nulle à $0$. Cette fonction définie la vitesse de convergence de $\hat{E}$
+  nulle à $0$. Cette fonction définit la vitesse de convergence de $\hat{E}$
   vers $E$ sur $\Shape$.
   %
 \end{definition}
@@ -945,12 +979,12 @@ $\hat{\vx}$ de $\partial\Body{\DSh}{h}$.
   %
 \end{definition}
 
-Lorsque nous implémentons un estimateur différentiel sur une surface digitale,
+Lorsque nous mettons en œuvre un estimateur différentiel sur une surface digitale,
 l'estimation est donnée sur un élément de la surface combinatoire (une surfel ou
 un élément de dimension inférieure). Implicitement, nous estimons en un point
 $\hat{\vx}$ correspondant au centre du plongement géométrique du surfel. Nos
-preuves de convergences étant définies pour tout $\hat{\vx}$ de $\partial
-\Body{\DSh}{h}$, ce type d'implémentation des estimateurs digitaux reste
+preuves de convergence étant définies pour tout $\hat{\vx}$ de $\partial
+\Body{\DSh}{h}$, ce type d'estimateurs digitaux reste
 parfaitement cohérent.
 
 Généralement, les vitesses de convergence des estimateurs étudiés seront de la
@@ -960,9 +994,12 @@ intéressons dans cette thèse à la \colorize{convergence asymptotique uniforme
 de nos estimateurs, en d'autres mots il s'agit l'erreur dans le pire des cas de
 nos estimateurs.
 
-Les preuves de convergences sont valides seulement pour des \colorize{familles d'objets}
-$\Shapes$. Ces familles d'objets font des hypothèses sur la formes, permettant
-alors de valider la convergence.
+Les preuves de convergence sont valides seulement pour des \colorize{familles
+d'objets} $\Shapes$. Ces familles d'objets font des hypothèses sur la forme,
+permettant alors de valider la convergence. Afin de simplifier la lecture, nous
+allons introduire des notations sur les familles de formes dont nous allons nous
+servir par la suite :
+%
 \begin{itemize}
   \item La famille de toutes les formes convexes finies du plan euclidien est noté $\Shape^{C}$;
   \item La famille de tous les ensembles convexes dont la bordure est $C^n$ à courbure positive est noté $\Shape^{n-SC}$;
@@ -1011,16 +1048,17 @@ Tangente & $\hat{\vT}^{\lambda-MST}$ et $\hat{\vT}^{MCMS}$ & Polygones & $O(h)$ 
 Tangente & $\hat{\vT}^{\lambda-MST}$ et $\hat{\vT}^{MCMS}$ & $\Shapes^{1-PW-SC}$ & ? & $O(h^\frac{2}{3})$ & \cite{deVieilleville2009} \\
 Tangente & $\hat{\vT}^{\lambda-MST}$ et $\hat{\vT}^{MCMS}$ & $\Shapes^{3-SC}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{2}{3})$ & \cite{Lachaud2006HDR} \\
 
-Tangente & $\hat{\vT}^{H1-0GD}$ & Polygones & ? & \svgNope & \cite{Coeurjolly_ChapEstimateur} \\
+Tangente & $\hat{\vT}^{H1-0GD}$ & Polygones & ? & Non & \cite{Coeurjolly_ChapEstimateur} \\
 Tangente & $\hat{\vT}^{H1-0GD}$ & $\Shapes^{1-PW-SC}$ & ? & $\approx O(h^\frac{2.5}{3})$ & \cite{deVieilleville2009} \\
 Tangente & $\hat{\vT}^{H1-0GD}$ & $\Shapes^{3-SC}$ & $O(h^\frac{1}{3})$ & $O(h^\frac{2.5}{3})$ & \cite{deVieilleville2009} \\
 
 \bottomrule
 \end{tabular}
 \end{table}
+%\svgNope\footnote{\cite{Coeurjolly_ChapEstimateur} a montré expérimentalement que cet estimateur ne converge pas sur des polygones.}
 
 Pour plus de détails, se référer à \cite{Coeurjolly_ChapEstimateur}. La
-convergence des estimateurs de courbure sera détaillé dans le chapitre suivant.
+convergence des estimateurs de courbure sera détaillée dans le chapitre suivant.
 Intéressons-nous dans le paragraphe suivant à l'estimation de l'aire, du volume
 et des moments géométriques.
 %
@@ -1029,8 +1067,8 @@ et des moments géométriques.
 %
 Nous avons vu dans le \RefSection{sec:geo-diff} certaines quantités
 intégrales, comme l'aire, le volume ou encore les moments. Ces quantités
-peuvent être très facilement estimées sur des surfaces
-digitales, le calcul intégral pouvant se limiter à compter des points digitaux.
+peuvent être très facilement estimées sur des objets
+discrets, le calcul intégral pouvant se limiter à compter des points digitaux.
 Nous allons ici détailler l'estimation digitale d'aire, de volume et des moments
 sur des surfaces digitales, ainsi que leurs convergences.
 %
@@ -1081,7 +1119,7 @@ $\gamma=\frac{243}{158}$ lorsque le bord est lisse ($\Shapes^{3-SC}$) \cite{Guo2
 %
 En dimension 2, les objets non convexes suivent les mêmes règles tant que
 $\Shape$ peut être exprimé comme une somme ou une différence de régions convexes
-bornées par des courbes fermées simples \cite{Huxley1996}. Ces résultats
+bornées par des courbes fermées simples \cite{Huxley1996}. Les résultats
 précédents restent valides chaque fois que le bord de la forme peut être
 décomposé en nombre fini de morceaux convexes (ou convexe $C^3$ à courbure non
 nulle pour les bornes améliorées).
@@ -1120,7 +1158,7 @@ convergence dépendante de l'ordre du moment $\sigma = p_1 + \cdots + p_d$ :
 %
 avec $\mu_{\sigma} \ge 1$ en dimension 2 et 3, pour $\sigma \le 2$.
 %(\todoJeremy{expliciter}).
-Cette borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle :
+Cette borne peut être améliorée lorsque la courbure gaussienne n'est pas nulle :
 \cauthors{Krätzel}{Kratzel1991} obtiennent $\mu_0=\frac{38}{25}-\epsilon$ et
 \cauthors{Müller}{Muller1999} obtiennent $\mu_0 = \frac{66}{43}-\epsilon$.
 %
@@ -1129,11 +1167,13 @@ Cette borne peut être améliorer lorsque la courbure gaussienne n'est pas nulle
 %
 Nous allons maintenant nous intéresser aux définitions de primitives digitales.
 La primitive la plus basique à reconnaître est sans nul doute la droite ou le
-segment de droite. Alors nous devons définir ce qu'une droite représente dans
-l'espace digital et ce n'est pas trivial à cause de la discrétisation de la
-forme. Définissons tout d'abord une \colorize{droite digitale standard} (ou
-droite $4$-connexe), et ainsi le \colorize{segment digital} (voir la
-\RefFigure{fig:dss-figure}) :
+segment de droite. Alors, nous devons définir ce qu'une droite représente dans
+l'espace digital. Cette tâche est nécessaire, la principale difficulté provient
+de la discrétisation de la forme : des effets d'escalier peuvent apparaître sur
+une surface plane par exemple, comme illustré dans la
+\RefFigure{fig:dss-figure}. Définissons tout d'abord une \colorize{droite
+digitale standard} (ou droite $4$-connexe), et ainsi le \colorize{segment
+digital} :
 %
 \begin{definition}{\fakeTitle{Droite digitale standard et segment digital (« \anglais{Standard Digital Straight Segment} ») \cite{Reveilles1991}}}
   \label{def:DSS}
@@ -1141,12 +1181,12 @@ droite $4$-connexe), et ainsi le \colorize{segment digital} (voir la
   L'ensemble de points $(p_1,p_2) \in \Z^2$ satisfaisant $\mu \le ap_1 - bp_2 <
   \mu + |a| + |b|$, avec $a$, $b$ et $\mu$ des nombres entiers, est appelé une
   \colorize{droite digitale standard} avec comme pente $a/b$ et comme décalage
-  $\mu$. Tout sous ensemble de pixels connectés d'une droite digitale standard
+  $\mu$. Tout sous-ensemble de pixels connectés d'une droite digitale standard
   est un \colorize{segment digital} (ou « \anglais{DSS} »).
 %
 \end{definition}
 %
-Cette droite est $4$-connexe, et en fait un candidat parfait pour être reconnu à
+Puisque cette droite est $4$-connexe, cela en fait un candidat parfait pour être reconnu à
 partir d'un contour digital.
 
 \begin{figure}[ht]{
@@ -1181,9 +1221,9 @@ maximaux} :
   %
   Plus formellement, $(\vp_i, \ldots, \vp_j)$ est un segment maximal sur $\BdZ{\DigShape}$ \ssi :
   \begin{itemize}
-    \item $(\vp_i, \ldots, \vp_j)$ est un DSS sur $\BdZ{\DigShape}$,
-    \item $(\vp_{i-1}, \ldots, \vp_j)$ n'est pas un DSS sur $\BdZ{\DigShape}$,
-    \item $(\vp_i, \ldots, \vp_{j+1})$ n'est pas un DSS sur $\BdZ{\DigShape}$,
+    \item $(\vp_i, \ldots, \vp_j)$ est un DSS sur $\BdZ{\DigShape}$;
+    \item $(\vp_{i-1}, \ldots, \vp_j)$ n'est pas un DSS sur $\BdZ{\DigShape}$;
+    \item $(\vp_i, \ldots, \vp_{j+1})$ n'est pas un DSS sur $\BdZ{\DigShape}$.
   \end{itemize}
   %
   Pour un pointel $\vp \in \BdZ{\DigShape}$ donné, le \emph{faisceau de segments maximaux} à $\vp$ est l'ensemble
@@ -1192,12 +1232,11 @@ maximaux} :
 \end{definition}
 
 
-Il parait alors essentiel d'étudier le comportement asymptotique de ces
-primitives afin de pouvoir les exploiter au sein d'estimateurs auxquels nous
-voulons prouver la convergence. \cauthors{Lachaud}{Lachaud2006HDR} et
-\cauthors{de Vieilleville}{deVieilleville2007} se sont alors intéressés aux
+Il paraît alors essentiel d'étudier le comportement asymptotique de ces
+primitives afin de pouvoir les exploiter. \cauthors{Lachaud}{Lachaud2006HDR} et
+\cauthors{de Vieilleville}{deVieilleville2007} se sont intéressés aux
 propriétés asymptotiques des longueurs des segments maximaux sur des formes
-convexe suffisamment lisse de dimension $2$ :
+convexes suffisamment lisses de dimension $2$.
 %
 \begin{lemma}{\fakeTitle{Lois asymptotiques des segments maximaux}}
   \label{lem:law-length-MDSS}
@@ -1228,7 +1267,7 @@ convexe suffisamment lisse de dimension $2$ :
 
 \begin{figure}[ht]{
     \begin{center}
-    \includegraphics[height=6cm]{images/Notions/DCA}
+    \includegraphics[height=6cm]{figures/DCA}
     \end{center}}
     \caption[Arc de cercle digital.]{Arc de cercle digital (Figure~1.22 de \cite{Roussillon2009}).\label{fig:dca-figure}}
 \end{figure}
@@ -1237,21 +1276,19 @@ convexe suffisamment lisse de dimension $2$ :
 L'arc de cercle est une autre primitive intéressante à étudier. En effet,
 puisque la courbure est l'inverse du rayon du cercle osculateur du bord d'un
 objet, le reconnaître permettrait d'approcher cette valeur. Définissons alors
-\colorize{l'arc de cercle digital} (voir la \RefFigure{fig:dca-figure}) :
+\colorize{l'arc de cercle digital} (voir la \RefFigure{fig:dca-figure}).
 %
 \begin{definition}{\fakeTitle{Arcs de cercle digitaux}}
   \label{def:digital-circular-arc}
   %
-  Soit $\Shape$ une forme convexe de $\R^2$, avec un champ de courbure continue.
-  Le contour digital $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ est un \colorize{arc de
-  cercle digital} (\anglais{DCA}) si et seulement s'il existe un cercle euclidien
-  qui sépare les points digitaux intérieurs à $\BdZ{\DigShape}$ des points digitaux
-  extérieurs de $\BdZ{\DigShape}$ (voir \RefFigure{fig:dca-figure}).
-  %
-  \\
-  %
-  Un arc de \colorize{cercle digital est maximal} (\anglais{MDCA}) si et seulement s'il ne
-  peut être étendu dans aucune direction.
+  Soit $\Shape$ une forme convexe de $\R^2$, avec un champ de courbure continu.
+  Le contour digital $\BdZ{\DigShape}$ pour $\DigShape = \DSh$ est un
+  \colorize{arc de cercle digital} (\anglais{DCA}) si et seulement s'il existe
+  un cercle euclidien qui sépare les points digitaux intérieurs à
+  $\BdZ{\DigShape}$ des points digitaux extérieurs de $\BdZ{\DigShape}$ (voir
+  \RefFigure{fig:dca-figure}). Un arc de \colorize{cercle digital est maximal}
+  (\anglais{MDCA}) si et seulement s'il ne peut être étendu dans aucune
+  direction.
   %
 \end{definition}
 
@@ -1263,7 +1300,7 @@ digitale.
     \begin{center}
     \includegraphics[width=13cm]{images/Notions/DCA2}
     \end{center}}
-    \caption[Arcs de cercle digitaux reconnus.]{Arcs de cercle digitaux reconnus sur une forme de dimension 2.\label{fig:dca-figure2}}
+    \caption[Arcs de cercle digitaux reconnus.]{Arcs de cercle digitaux (en rouge) reconnus sur une forme de dimension 2.\label{fig:dca-figure2}}
 \end{figure}
 
 
@@ -1274,8 +1311,8 @@ digital de courbure tirant parti des segments maximaux.
 %
 \section{Conclusion}
 %
-Nous avons dans ce chapitre posé les bases de la géométrie différentielle et de
-la géométrie digitale.  Ces bases vont nous permettre dans le chapitre suivant
-de définir formellement des estimateurs digitaux de courbures en dimension 2 et
+Nous avons rappelé dans ce chapitre les bases de la géométrie différentielle et de
+la géométrie digitale.  Ces bases vont nous permettre, dans le chapitre suivant,
+de définir formellement des estimateurs digitaux de courbure en dimensions 2 et
 3. De plus, la reconnaissance de primitives nous permettra d'adapter nos
 estimateurs en analysant au préalable la géométrie de la forme d'entrée.
