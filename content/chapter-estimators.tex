@@ -4255,14 +4255,18 @@ exemple. Cela implique une plus grande complexité d'algorithme, mais également
 de pouvoir quantifier ces données volumiques lorsqu'elles ne sont pas directes.
 Cependant, cela amène un certaine robustesse sur des données bruitées. Nous
 verrons dans le \RefChapitre{sec:applications:dgtal} que nous pouvons optimiser
-l'algorithme afin de se rapprocher de la complexité des méthodes surfaciques.}
+l'algorithme afin de se rapprocher de la complexité des méthodes surfaciques. De
+plus, \cauthors{Pottmann}{Pottmann2007,Pottmann2009} définissent des estimateurs
+surfaciques de courbure se basant sur le même principe de l'intersection d'une
+sphère et de la forme. Il serait intéressant de les définir sur des données
+digitales, ainsi de pouvoir les comparer -- théoriquement et expérimentalement --
+avec les variantes volumiques (ils seront très probablement plus sensibles au
+bruit sur la surface, pour une compléxité similaire).}
 % Ces estimateurs souffrent par contre de certaines limitations. La première et
 % probablement la plus grande limitation est la nécessité de connaître une
 % approximation volumétrique de la forme $\Shape$. Nous ne pouvons pas utiliser
 % simplement un approximation du bord de $\Shape$, comme c'est le cas pour les
 % algorithmes fonctionnant sur les nuages de points par exemple.
-
-%% TODO Parler de pottmann surfacique
 
 
 La seconde provient de la constante $k$ guidant le rayon de la boule
