@@ -512,7 +512,7 @@ des bins les plus votés, en moyennant les normales dans ces bins (voir la
 
 \comJeremy{Cette méthode possède cependant des inconvénients : nous obtenons un
 effet de regroupement par bin des résultats, de segmentation des données.} Cet
-effet estsurtout visible avec des données bruitées. Ensuite, les bins utilisés
+effet est surtout visible avec des données bruitées. Ensuite, les bins utilisés
 sont anisotropes. Les auteurs rectifient cela en proposant de calculer
 l’algorithme plusieurs fois en tournant aléatoirement la boule accumulatrice
 pour limiter cet effet. Expérimentalement, ils avancent que cet effet est
@@ -956,9 +956,16 @@ convergence asymptotique d'estimateurs ne nécessitant aucun paramètre représe
 toujours un défi (des résultats de convergence d'estimateurs sans paramètre ont
 été obtenus pour l'estimation de longueur \cite{Coeurjolly2004} et des normales
 \cite{deVieilleville2007}). Nous allons en proposer dans ce chapitre. Enfin, il
-n'existe aucun estimateur de courbure en dimension 3 dont les preuves de
-convergence asymptotique sont amenées \cite{Lenoir1997,Fourey2008}. Nous allons également
-\comJeremy{contribuer à ce besoin} dans ce chapitre.
+n'existe aucun estimateur de courbure en dimension 3 \comJeremy{dont la
+convergence asymptotique soit établie
+théoriquement~\cite{Lenoir1997,Fourey2008}. Nous allons proposer un nouvel
+estimateur de courbure 3D dans ce chapitre et établir des résultats de
+convergence asymptotique.}
+
+%% FIXME
+%% content/chapter-estimators.tex:971: Package varioref Error: \vref at page boundary 45-46 (may loop).
+%% content/chapter-estimators.tex:971: leading text: dans le \RefSection{sec:pottmann-principle}
+%% --------------
 
 \section{Estimation de courbure par intégration volumique locale d'une boule}
 \label{sec:estimators:volume}
